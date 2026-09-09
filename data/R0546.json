@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Oxygem/Kanmail",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Kanmail computes SHA-256 and compares it to the hash returned by the same backend response as the download link.",
+  "description": "SHA256 server-supplied from the same unauthenticated backend as the download; on macOS strips com.apple.quarantine after extracting, suppressing Gatekeeper's first-run signature check.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "2b8330b362dad5fbb48b93529dd1d40814b097b9"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Kanmail computes SHA-256 and compares it to the hash returned by the same backend response as the download link.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "SHA256 (same backend)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AI3.md",
+      "line": 38,
+      "text": "| Kanmail | https://github.com/Oxygem/Kanmail | 2b8330b / 2026-08-22 | Y | N (version *check* runs automatically on startup + every 24h via `EmailsApp.tsx`/`system.ts`, but download+install (`DoUpdate`) only fires when the user clicks \"Update Kanmail\") | Y | https (`https://backend.kanmail.io`, plain `net/http.Client`, no `InsecureSkipVerify` anywhere in the module — confirmed via grep) | N | hash only — SHA256 of the downloaded binary/zip is checked, but the expected hash is supplied by the **same unauthenticated backend response** that supplies the download link (not an independent/pinned source) | server-supplied/unpinned (hash comes from `backend.GetVersions()`, no separate trust anchor) | `internal/services/app.go:513-556` (`getUpdate()` calls `backend.GetVersions`), `:592-633` (`DoUpdate()` downloads via `client.Get(update.Link)`, computes SHA256, compares to `update.SHA256Sum` from the same response — `:626-627`), `:654-664` (macOS: `ditto -xk` extracts the update **then explicitly runs `xattr -d com.apple.quarantine`** on the new `.app`, removing the mark that would otherwise trigger a Gatekeeper signature/notarization re-check on next launch), `internal/backend/backend.go:12-51` (constants confirm `https://backend.kanmail.io`, no insecure TLS option), `frontend/src/components/emails/EmailsApp.tsx:46-57` (auto-check on mount + 24h interval), `frontend/src/components/emails/Filters.tsx:266-277` (`DoUpdate()` only called from an explicit \"Update Kanmail\" click) |"
+    }
+  ]
 }

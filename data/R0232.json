@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/alexrozanski/LlamaChat",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "LlamaChat uses Sparkle's SPUStandardUpdaterController and exposes a manual update check. The recovered source does not substantiate an application-pinned Sparkle EdDSA key; key configuration and released artifact verification remain unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Sparkle EdDSA pinned.",
   "limitations": [
-    "New default-branch snapshot rather than historical release re-verification; Sparkle runtime enforcement, application metadata, key configuration outside the cited project file, and released artifacts were not independently audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "2b1f04bc07ba17a1877ca96ed9f4d767b769e63e"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "LlamaChat uses Sparkle's SPUStandardUpdaterController and exposes a manual update check. The recovered source does not substantiate an application-pinned Sparkle EdDSA key; key configuration and released artifact verification remain unresolved.",
+    "limitations": [
+      "New default-branch snapshot rather than historical release re-verification; Sparkle runtime enforcement, application metadata, key configuration outside the cited project file, and released artifacts were not independently audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[Sparkle-EdDSA]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-O1.md",
+      "line": 29,
+      "text": "| LlamaChat | alexrozanski/LlamaChat | Swift/SwiftUI, macOS app, uses the Sparkle framework | Y | Y — `SPUStandardUpdaterController(startingUpdater: true, ...)` starts Sparkle's standard automatic-update lifecycle at launch, in addition to a manual \"Check for Updates\" action | Y (Sparkle downloads the update and, once verified, installs it — final install still requires the user to accept Sparkle's install prompt per Sparkle's standard UX) | https — `SUFeedURL` = `https://llamachat.app/api/appcast.xml` | Y — Sparkle appcast items are signed; the app embeds the corresponding public key for verification | signature — EdDSA/Ed25519, Sparkle's standard `SUPublicEDKey` scheme | embedded public key in `Info.plist` (`SUPublicEDKey`), not fetched over the network | `LlamaChat/Info.plist`: `SUFeedURL` = `https://llamachat.app/api/appcast.xml`; `SUPublicEDKey` = `kYcF5CTAVZ6ljL01giZNTfMtJCDUl/DUUQ5FsibYCx8=`; `LlamaChat/viewmodel/updates/CheckForUpdatesViewModel.swift:9` (`import Sparkle`); `:14-19` (`updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)`; `checkForUpdates()` → `updaterController.updater.checkForUpdates()`) |"
+    }
+  ]
 }

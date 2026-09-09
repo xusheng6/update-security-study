@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://gitea.wildfiregames.com/0ad/0ad",
   "channel": "plugin",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "0 A.D.'s mod.io path loads a configured public key, retrieves mods to a temporary file, checks the advertised MD5, and verifies a detached Ed25519 signature over the retrieved content before installation. This evidence is limited to the mod.io content channel and does not describe the engine's general update or distribution process.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "No engine updater, but mod.io content is minisign-verified against a pinned key — one of the stronger content channels found.",
   "limitations": [
-    "Newly retrieved filtered default-branch snapshot; evidence is specific to mod.io packages and does not cover other content or distribution channels."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,23 @@
       "commit": "551071c5a44d431771e0a332bdd0685b04db395f"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "0 A.D.'s mod.io path loads a configured public key, retrieves mods to a temporary file, checks the advertised MD5, and verifies a detached Ed25519 signature over the retrieved content before installation. This evidence is limited to the mod.io content channel and does not describe the engine's general update or distribution process.",
+    "limitations": [
+      "Newly retrieved filtered default-branch snapshot; evidence is specific to mod.io packages and does not cover other content or distribution channels."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "mods (mod.io)",
+  "transport": "https",
+  "payload_verification": "signature[Ed25519 minisign] + MD5",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": []
 }

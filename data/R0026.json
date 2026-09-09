@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/darktable-org/darktable",
   "channel": "data",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Darktable’s inspected retrieval code is the AI-model path: it fetches model release metadata, requires a SHA-256 digest, verifies the retrieved model archive, and only then processes it. This evidence concerns AI model data and does not classify darktable’s core application updater.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Only the AI-model downloader, not the core app.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
-    "The inspected source does not audit darktable’s core application updater or distribution packaging.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; The inspected source does not audit darktable’s core application updater or distribution packaging."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "45f12c61ab325c8e08e0493b1538b6240124f4a6"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Darktable’s inspected retrieval code is the AI-model path: it fetches model release metadata, requires a SHA-256 digest, verifies the retrieved model archive, and only then processes it. This evidence concerns AI model data and does not classify darktable’s core application updater.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
+      "The inspected source does not audit darktable’s core application updater or distribution packaging.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; The inspected source does not audit darktable’s core application updater or distribution packaging."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "models only",
+  "transport": "https",
+  "payload_verification": "SHA-256",
+  "trust_root": "server-TLS",
+  "original_evidence": [
+    {
+      "file": "batch-U2.md",
+      "line": 27,
+      "text": "| darktable | https://github.com/darktable-org/darktable | 970e38b / 2026-08-20 | N | N | N | n/a | n/a | n/a | n/a | No self-updater for the app binary (Flatpak/AppImage/distro-package distribution) — see side-channel note below for its AI-model downloader |"
+    }
+  ]
 }

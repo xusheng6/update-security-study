@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/telegramdesktop/tdesktop",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "This Telegram Desktop snapshot verifies update metadata with an embedded root Ed25519 key and manifest-controlled Ed25519/ES256 keys; release-channel coverage and restart installation behavior require separate evidence. The presence of this verifier does not by itself disprove an older RSA update path; release and caller mapping remain unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Auto downloads, verifies RSA-1024/SHA-1 vs PEM keys pinned in config.h, silently installs on restart. Weak crypto but pinned.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "80158983dba09d3bf5d96701f21473d6c34bf5f5"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "This Telegram Desktop snapshot verifies update metadata with an embedded root Ed25519 key and manifest-controlled Ed25519/ES256 keys; release-channel coverage and restart installation behavior require separate evidence. The presence of this verifier does not by itself disprove an older RSA update path; release and caller mapping remain unresolved.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (td.telegram.org)",
+  "payload_verification": "signature[RSA-1024/SHA-1]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-K3.md",
+      "line": 7,
+      "text": "| Telegram Desktop | telegramdesktop/tdesktop | Qt/C++ native | Y | auto (chk/dl/inst — installs silently on next app start, no click required beyond restart) | Y | https (QNetworkRequest to `https://td.telegram.org/current[N]`, default `AutoupdatePrefix`) | N (version-manifest is plain JSON, not signed itself) | signature (RSA-1024 + SHA-1, `RSA_verify(NID_sha1, ...)` over the whole compressed/LZMA update blob; SHA-1 digest of payload also checked before RSA verify) | pinned-in-binary (two PEM RSA public keys, `UpdatesPublicKey` / `UpdatesPublicBetaKey`, hardcoded literals) | `Telegram/SourceFiles/core/update_checker.cpp:369-405` (RSA verify, `hSigLen=128`⇒1024-bit key, `NID_sha1`); keys at `Telegram/SourceFiles/config.h:45-59`; default host `Telegram/SourceFiles/storage/localstorage.cpp:557` (`AutoupdatePrefix(\"https://td.telegram.org\")`); auto-install gate `Telegram/SourceFiles/core/sandbox.cpp:426-431` (`Core::checkReadyUpdate()` → `cSetRestartingUpdate(true)` → quits and launches updater without prompting if `cAutoUpdate()` is on, default) |"
+    }
+  ]
 }

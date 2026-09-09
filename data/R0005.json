@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/wesnoth/wesnoth",
   "channel": "plugin",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The add-on client has a downgrade path to cleartext and the install path has no completed hash check. The downloaded content is add-on WML/Lua executed in Wesnoth’s sandbox, so this supports a plugin/content D classification with a sandbox limitation.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "Add-on client silently downgrades to plaintext if the server lacks TLS; add-ons (Lua code) get no integrity check — an explicit '//#TODO: hash verification ???'. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,23 @@
       "commit": "480ebce0be117174ea692c69e08f7c315fa6cfba"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The add-on client has a downgrade path to cleartext and the install path has no completed hash check. The downloaded content is add-on WML/Lua executed in Wesnoth’s sandbox, so this supports a plugin/content D classification with a sandbox limitation.",
+    "limitations": [
+      "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "add-ons",
+  "transport": "opportunistic TLS → silent plaintext",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": []
 }

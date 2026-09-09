@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/jesseduffield/lazygit",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "lazygit’s updater checks build eligibility, the user’s update method and the configured check interval. These policy controls do not establish the original artifact-authentication or background-update claim.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "update.method:background = silent os.Rename onto the running binary, no hash/sig (only HTTP-200).",
   "limitations": [
-    "Newly retrieved source snapshot, not proof of original-release behavior.",
-    "The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified.",
-    "Newly retrieved source snapshot, not proof of original-release behavior.; The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "c07f4d381b90419583b7ce04f87379654d983ebc"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "lazygit’s updater checks build eligibility, the user’s update method and the configured check interval. These policy controls do not establish the original artifact-authentication or background-update claim.",
+    "limitations": [
+      "Newly retrieved source snapshot, not proof of original-release behavior.",
+      "The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified.",
+      "Newly retrieved source snapshot, not proof of original-release behavior.; The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validated)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-H5.md",
+      "line": 12,
+      "text": "| lazygit | github.com/jesseduffield/lazygit | Go (CLI/TUI) | Y | configurable: default `prompt` (asks before download+install); user can set `update.method: background` for fully automatic chk+dl+inst with no confirmation; disabled entirely on Windows and for non-official/non-`buildBinary` builds | Y | HTTPS (`github.com/jesseduffield/lazygit/releases/...`, Go `net/http` default client); TLS validation ENFORCED (no `InsecureSkipVerify` anywhere in repo) | N (no manifest at all — just GitHub Releases API `tag_name` JSON field and a HEAD request to check asset exists) | none — no hash, checksum, or signature check of the downloaded tarball/zip before extracting and replacing the running binary; only check is HTTP 200 status via `verifyResourceFound()` HEAD request | n/a (no signing key used) | pkg/updates/updates.go:47-69 (`getLatestVersionNumber()` GETs `RepoUrl+\"/releases/latest\"` for `tag_name`), :222-235 (`getBinaryUrl()` builds direct HTTPS download URL to release tarball/zip), :242-318 (`update()`/`downloadAndInstall()`: `http.Get(rawUrl)`, writes to temp file, `tar -zxf`, then `os.Rename(tempLazygitFilePath, binaryPath)` — overwrites running binary with NO hash/signature check), :320-329 (`verifyResourceFound` only HEAD-checks HTTP 200, not integrity), pkg/config/user_config.go:441-446 (`UpdateConfig.Method` enum prompt/background/never) and :983-986 (default `Method: \"prompt\"`, `Days: 14`), pkg/gui/controllers/helpers/update_helper.go:24-40 (`CheckForUpdateInBackground`: if `Method == \"background\"` calls `startUpdating` directly with no user confirmation, else shows confirm prompt), pkg/constants/links.go:22 (`RepoUrl: \"https://github.com/jesseduffield/lazygit\"`); negative grep for InsecureSkipVerify (verified 2026-08-19) |"
+    }
+  ]
 }

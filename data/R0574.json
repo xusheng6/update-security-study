@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/PabloVSouza/comic-universe",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: Electron updater disables differential/web installer behavior and uses the electron-updater release path; generated latest manifest SHA-512 is the available integrity mechanism and release signing settings are weak.",
+  "description": "electron-updater; Windows uses a CI-regenerated self-signed cert with a hardcoded password; falls back to unpinned hash.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "c753d5978b6afdf99741e2377a30a092f756c586"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: Electron updater disables differential/web installer behavior and uses the electron-updater release path; generated latest manifest SHA-512 is the available integrity mechanism and release signing settings are weak.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "sha512 (self-signed cert)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AK7.md",
+      "line": 17,
+      "text": "| comic-universe | https://github.com/PabloVSouza/comic-universe | c753d597 / 2025-10-07 | Y | Y (Linux only, auto-download+notify; Win/Mac: manual browser link only) | Y (Linux only) | https, TLS enforced (electron-updater/GitHub) | N (unsigned: mac `identity:null`,`notarize:false`; win uses a CI-regenerated **self-signed** cert, password `comicuniverse` hardcoded) | hash (sha512 in `latest-linux.yml`) | server-supplied/unpinned (yml hosted alongside the binary on the same GitHub release) | src/electron/utils/UpdateManager.ts:35-38,364-365; src/electron/windows/MainWindow.ts:64-100,120-134,238-245; electron-builder.yml (mac identity/notarize, win cscKeyPassword) |"
+    }
+  ]
 }

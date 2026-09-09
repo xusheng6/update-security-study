@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/bisq-network/bisq",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Bisq's retrieved desktop updater downloads a platform installer plus detached OpenPGP signatures and signer material from bisq.network and bundled resources. It matches the signing-key identifier to candidate keys and verifies the installer bytes with Bouncy Castle; the documented flow then leaves installation for the user.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Detached OpenPGP verified vs fingerprints hardcoded in client + bundled keys; downloads+verifies, manual install.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study release; the evidence does not independently establish release-server behavior or full-key fingerprint policy beyond the checked-in identifiers."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "3875ed43a9a6b35982b9042d22501b4fab194e5e"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Bisq's retrieved desktop updater downloads a platform installer plus detached OpenPGP signatures and signer material from bisq.network and bundled resources. It matches the signing-key identifier to candidate keys and verifies the installer bytes with Bouncy Castle; the documented flow then leaves installation for the user.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study release; the evidence does not independently establish release-server behavior or full-key fingerprint policy beyond the checked-in identifiers."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[OpenPGP]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-L1.md",
+      "line": 10,
+      "text": "| Bisq | github.com/bisq-network/bisq | Java/JavaFX desktop | Y | notify (P2P network \"update alert\" triggers a dialog; user must click Download; nothing runs unattended) | N (downloads installer + sig, PGP-verifies it, opens the OS Downloads folder, then shuts Bisq down so the user installs manually — explicitly \"a downloader and verifier, not an automatic installer\" per project docs) | https (bisq.network domain, OS trust store, standard TLS, no additional pinning) | N/A (no separate manifest; each installer ships with its own detached `.asc` signature; `signingkey.asc` names which signer fingerprint was used) | signature (detached OpenPGP/RSA signature, verified via BouncyCastle `PGPSignature.verify()`) | pinned-in-binary (hardcoded fingerprints `FINGER_PRINT_GABRIEL_BERNARD`/`FINGER_PRINT_ALEJANDRO_GARCIA`/`FINGER_PRINT_HENRIK_JANNSEN`, matched against bundled local key resources under `/keys/*.asc`; the same keys are also re-fetched from `https://bisq.network/pubkey/` as a redundant cross-check, not as the sole trust anchor) | docs/in-app-update-download.md:1-30; desktop/src/main/java/bisq/desktop/main/overlays/windows/downloadupdate/BisqInstaller.java:60-64 (pinned fingerprints+URLs), :148-211 (`verifySignature`), :284-316 (`getKeyFileDescriptors`/`getLocalKeyFileDescriptor` bundled resource keys) |"
+    }
+  ]
 }

@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Piwigo/Piwigo",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Core update downloads the zip in chunks and extracts it into the application; the flow only checks transfer/extraction results, not a cryptographic signature.",
+  "description": "Core self-update extracts a ZIP over HTTPS with only a 'file size > 0' check. PEM extension installer shares the gap.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "cb1a748553eb286865eeac8cb70bbaf75c376eb0"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Core update downloads the zip in chunks and extracts it into the application; the flow only checks transfer/extraction results, not a cryptographic signature.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "file-size only",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AI2.md",
+      "line": 26,
+      "text": "| Piwigo | https://github.com/Piwigo/Piwigo.git | cb1a748 / 2026-07-31 | Y | Y (admin-triggered, one click; also a scheduled notify-only version check) | Y | http+https mixed: core self-update fetches over `PHPWG_URL` (https, `fetchRemote()` uses curl with no `CURLOPT_SSL_VERIFYPEER`/`VERIFYHOST` override → TLS enforced by curl defaults); extension/PEM catalog config default (`PEM_URL`) is also https by default | none | payload integrity check is **filesize>0 only** — no hash, no signature | N/A (server-supplied zip, unauthenticated) | `admin/include/updates.class.php:502-645` (`updates::upgrade_to()`: downloads update zip in base64 chunks from `PHPWG_URL.'/download/dlcounter.php?code=...'`, writes to disk, then `PclZip::extract()` straight into `PHPWG_ROOT_PATH` — only check before/after is `filesize($filename)` truthy and per-file extract status, no hash/signature); `include/common.inc.php:219` (`PHPWG_URL = 'https://'+PHPWG_DOMAIN`); `admin/include/functions.php:2445-2515` (`fetchRemote()` curl, no TLS-disable flags found). **Side channel (score separately, C-equivalent):** plugin/theme \"PEM\" extension installer also downloads+extracts zips with the same no-signature model — `admin/include/plugins.class.php:655-671` (`extract_plugin_files` → `PclZip`), `admin/include/updates.class.php:273-372` (`get_server_extensions()` against `PEM_URL`). |"
+    }
+  ]
 }

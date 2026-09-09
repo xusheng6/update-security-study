@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/MesquiteProject/MesquiteCore",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "D",
-  "description": "Mesquite’s production manifest is HTTP, phone-home is enabled, and install downloads/unzips packages into the app directory without a package signature; the manifest can request scripts.",
+  "description": "Auto-populated installer flow; production manifest is plaintext HTTP, downloads unzip straight into the live app dir and can execute downloaded scripts, zero hash/signature. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "4a01994d5ee21ea48414d3cc42e3265f66c17372"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Mesquite’s production manifest is HTTP, phone-home is enabled, and install downloads/unzips packages into the app directory without a package signature; the manifest can request scripts.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "D",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "http",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AJ1.md",
+      "line": 22,
+      "text": "| Mesquite (MesquiteCore) | https://github.com/MesquiteProject/MesquiteCore | 4a01994 / 2026-04-09 | Y | Y (auto phone-home populates an \"Available to Install or Update\" menu at startup) | **Y** (user then clicks the menu item; downloaded zips are unzipped directly into the app directory, and downloaded scripts can be executed after a confirm dialog) | **http (plaintext) — active release manifest URL** | n/a | **none** | n/a | `Source/mesquite/minimal/Installer/Installer.java:142` `return \"http://www.mesquiteproject.org/noticesAndUpdates/updates.xml\";` (active; the `https://raw.githubusercontent.com/...` URLs at `:144`/`:150`/`:152` are for prerelease/debug builds only); `:85-98` doc comment describing per-package `url`/`treatment` (asis/unzip) tags in the manifest; `:454` `MesquiteFile.downloadURLContents(url, directoryLocation+downloadAs, ...)`; `:482`/`:495` `AlertDialog.query(..., \"Execute Script?\", \"The installer has downloaded the following script to execute...\")`; `Source/mesquite/lib/MesquiteModule.java:185-195` all phone-home/version/error-report URLs (`startup.mesquiteproject.org`, `error.mesquiteproject.org`, `mesquiteproject.org/pyMesquite*`) are plaintext `http://`; no hash/signature check anywhere in `Installer.java` |"
+    }
+  ]
 }

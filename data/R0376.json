@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/JanDeDobbeleer/oh-my-posh",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+  "description": "Self-replacing upgrade verifies an Ed25519 signature vs a pinned key (go:embed) + SHA-256.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "263fd423421c21be68911c1fb57fbc0e308475e8"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "Ed25519 + SHA-256",
+  "trust_root": "pubkey go:embed'd in binary",
+  "original_evidence": [
+    {
+      "file": "batch-Y7.md",
+      "line": 17,
+      "text": "| oh-my-posh | https://github.com/JanDeDobbeleer/oh-my-posh | 8be5a1370e4e30427c90c32cbed2995e4f5fac6a / 2026-08-18 | Y | Y (opt-in `--auto` flag, cache-interval gated) | Y | https (github.com or cdn.ohmyposh.dev) | Y — checksums.txt.sig | Ed25519 signature over checksums.txt + SHA-256 checksum match on the binary | pinned in binary — `//go:embed public_key.pem` compiled into the executable | src/cli/upgrade/verify.go:33-145 (downloads asset+checksums.txt+checksums.txt.sig, `ed25519.Verify` against embedded PEM pubkey, then SHA-256 match); src/cli/upgrade/install.go:17-89 (writes verified bytes to `.exe.new`, renames over the running executable — actually replaces+will-be-executed); src/runtime/http/client_default.go:12-23 (stock `http.Transport`, no `InsecureSkipVerify`, TLS validation enforced). SEPARATE DATA CHANNEL (stays N, not code): `oh-my-posh font install` downloads a font zip from a CDN with **no signature/hash check at all** (src/cli/font/font.go:30-47) — but font glyphs are data, not executable, per task rules. |"
+    }
+  ]
 }

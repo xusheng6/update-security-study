@@ -5,12 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/tom-james-watson/breaktimer-app",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "B",
-  "description": "Targeted source read supports the narrow recorded behavior: BreakTimer auto-checks and installs on macOS/Linux, while Windows is notify-only; Linux integrity relies on same-channel SHA-512 manifest and macOS adds OS signing.",
+  "description": "electron-updater; mac notarized, Linux verification is hash-from-yml (Windows notify-only).",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "The retained snapshot does not establish current released artifact behavior or independent release signing; external updater verification remains a gap where noted."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "b8156788e54e5f3f81cb6d232239bfcfb975bfd7"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports the narrow recorded behavior: BreakTimer auto-checks and installs on macOS/Linux, while Windows is notify-only; Linux integrity relies on same-channel SHA-512 manifest and macOS adds OS signing.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "The retained snapshot does not establish current released artifact behavior or independent release signing; external updater verification remains a gap where noted."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "B",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "sha512 + OS code-signing",
+  "trust_root": "electron-updater",
+  "original_evidence": [
+    {
+      "file": "batch-X5.md",
+      "line": 19,
+      "text": "| BreakTimer | https://github.com/tom-james-watson/breaktimer-app.git | 6678a08 / 2026-08-04 | Y | Y (mac/Linux); notify-only (Windows) | Y (mac/Linux) | https, TLS enforced (electron-updater default) | Y (GitHub Releases provider + latest.yml) | hash (sha512 in latest-*.yml) on Win/Linux; **mac additionally OS-codesigned + notarized** | server-supplied (GitHub Releases, unpinned) for hash/yml; OS keystore for mac/win code signing | `app/main/index.ts:4`: `import { autoUpdater } from \"electron-updater\"`; `:44-46`: `shouldAutoInstall()` returns true for mac/linux; `:59`: `autoUpdater.checkForUpdatesAndNotify()` (auto download+install) on those platforms; `:63-82`: Windows path is notify-only, `shell.openExternal(getDownloadUrl())`; `package.json` `build.mac`: `notarize:true, hardenedRuntime:true`; `build.publish`: `{provider:\"github\", owner:\"tom-james-watson\", repo:\"breaktimer-app\"}`. Note: electron-updater's Linux/generic verification is sha512-from-yml served alongside the same GitHub release, not an independently pinned signing key — weaker than the mac code-signing path. |"
+    }
+  ]
 }

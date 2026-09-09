@@ -5,12 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/simonw/datasette-app",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "B",
-  "description": "Targeted retained-source read supports the narrow primary updater classification: The app enables update-electron-app with an hourly interval, delegating artifact checks to the Electron/Squirrel update stack.",
+  "description": "Squirrel + OS code-signing, hourly auto-check.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in configuration.",
-    "Where electron-updater/Squirrel/install4j performs final verification, the external framework implementation is not vendored here."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "0369322103e655135af624319b626b21d3ec85c4"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow primary updater classification: The app enables update-electron-app with an hourly interval, delegating artifact checks to the Electron/Squirrel update stack.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in configuration.",
+      "Where electron-updater/Squirrel/install4j performs final verification, the external framework implementation is not vendored here."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "B",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "OS code-signing",
+  "trust_root": "update-electron-app / Squirrel",
+  "original_evidence": [
+    {
+      "file": "batch-AG8.md",
+      "line": 29,
+      "text": "| datasette-app | https://github.com/simonw/datasette-app.git | 0369322103e655135af624319b626b21d3ec85c4 / 2024-08-27 | Y | Y (checks hourly, auto-downloads in background) | Y (auto-downloads; user just clicks \"Restart\" to apply) | https (`update.electronjs.org` → GitHub Releases proxy), enforced | N (no separate manifest signature scheme) | OS code-signing (Squirrel.Mac / Squirrel.Windows verify against Apple codesign / Authenticode) | OS keystore (not pinned in binary) | `main.js:25-27` (`require(\"update-electron-app\")({updateInterval: \"1 hour\"})`); `package.json` dependency `update-electron-app@^2.0.1` |"
+    }
+  ]
 }

@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/LearnLift/MemoryLifter",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "D",
-  "description": "MemoryLifter checks and downloads its setup over HTTP by default and Process.Starts the downloaded installer without a hash/signature.",
+  "description": "Background update-check + installer download over plaintext HTTP; MemoryLifter-Setup.exe run via Process.Start() with zero verification. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "2c6c30a6fc574701c438dac565d9e24391ed311f"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "MemoryLifter checks and downloads its setup over HTTP by default and Process.Starts the downloaded installer without a hash/signature.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "D",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "http",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AM5.md",
+      "line": 14,
+      "text": "| MemoryLifter | https://github.com/LearnLift/MemoryLifter.git | 2c6c30a / 2017-04-12 | Y | Y | Y | **http (plaintext, no TLS at all)** | N | none | N/A (unpinned + plaintext HTTP) | `MemoryLifter/Program.cs:257` (version check `WebClient.DownloadString` over `http://services.memorylifter.com/...`); `MemoryLifter/app.config:225` (`UpdateVersionUrl` = `http://services.memorylifter.com/update/VersionHandler.ashx`); `MLifter.Updater/MLifterUpdateHandler.cs:42` (`downloadPath = \"http://services.memorylifter.com/update/program/\" + ver + \"/MemoryLifter-Setup.exe\"`); `:101` (`WebClient.DownloadFileAsync`); `:122` (`Process.Start(localPath)` on completion — no hash/signature check anywhere); `MLifter.Updater/UpdateForm.cs:49,109` (download begins automatically in `UpdateForm_Load`, no explicit \"yes\" confirmation) |"
+    }
+  ]
 }

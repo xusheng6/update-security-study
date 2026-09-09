@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/RPCS3/rpcs3",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "RPCS3’s inspected updater accepts JSON metadata only when the retrieval URL has the RPCS3 GitHub prefix, then checks the retrieved update’s expected size and SHA-256 before proceeding. No pinned key is visible in this flow; broader transport and release controls remain outside this review.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Hash + github.com allowlist over TLS-only; no pinned key.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
-    "The inspected code does not establish a cryptographic key pin or the trust guarantees of its downloader/metadata service.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; The inspected code does not establish a cryptographic key pin or the trust guarantees of its downloader/metadata service."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "065b490eb49ef815b5b6af2a58ae865ecbbab9ab"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "RPCS3’s inspected updater accepts JSON metadata only when the retrieval URL has the RPCS3 GitHub prefix, then checks the retrieved update’s expected size and SHA-256 before proceeding. No pinned key is visible in this flow; broader transport and release controls remain outside this review.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
+      "The inspected code does not establish a cryptographic key pin or the trust guarantees of its downloader/metadata service.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; The inspected code does not establish a cryptographic key pin or the trust guarantees of its downloader/metadata service."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "SHA-256 + size (JSON)",
+  "trust_root": "none",
+  "original_evidence": []
 }

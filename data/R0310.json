@@ -5,14 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/MatterHackers/MatterControl",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "MatterControl includes a platform-specific application updater using its MCWS service. The retained evidence does not establish the full transport or artifact-authentication policy.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Downloads + runs an installer over HTTPS with zero hash/signature.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout.",
-    "MCWSBaseUri's scheme and server-side release controls were not established.",
-    "Other platform installers and external OS validation were not audited.",
-    "Newly retrieved default-branch snapshot, not the original study checkout. MCWSBaseUri's scheme and server-side release controls were not established. Other platform installers and external OS validation were not audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "8b27fad2cdc7b18db2e81b7e1b4fdd15dad21147"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "MatterControl includes a platform-specific application updater using its MCWS service. The retained evidence does not establish the full transport or artifact-authentication policy.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout.",
+      "MCWSBaseUri's scheme and server-side release controls were not established.",
+      "Other platform installers and external OS validation were not audited.",
+      "Newly retrieved default-branch snapshot, not the original study checkout. MCWSBaseUri's scheme and server-side release controls were not established. Other platform installers and external OS validation were not audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-V6.md",
+      "line": 13,
+      "text": "| MatterControl | https://github.com/MatterHackers/MatterControl.git | 8b27fad2cdc7b18db2e81b7e1b4fdd15dad21147 / 2026-03-04 | Y | N (user must click \"Download Now\"; auto-install not forced) | Y | https, TLS validation not disabled anywhere in code (default .NET `WebClient`/`WebRequest`, no `ServerCertificateValidationCallback` override found) | N (no manifest — JSON API response with a bare build-token string) | none (installer .exe/.pkg/.deb downloaded via `WebClient.DownloadFileAsync` and directly `Process.Start()`'d — no hash, no signature check in-app) | server-supplied/unpinned (trusts `https://mattercontrol.appspot.com` JSON response + raw file bytes) | MatterControlLib/DialogPages/UpdateControlData.cs:271 (build download URL), :301 (DownloadFileAsync), :404-406 (Process.Start on unverified file); MatterControlLib/MatterControlApplication.cs:43-47 (MCWSBaseUri https) |"
+    }
+  ]
 }

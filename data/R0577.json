@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/mansuf/mangadex-downloader",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: The explicit update command queries GitHub releases and uses a SHA-256 value parsed from release metadata on the same origin.",
+  "description": "`--update` downloads+runs an installer; sha256 scraped from the same GitHub release body.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "a0c28102bcb3e18c478044cc08bdd82bc3d3a884"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: The explicit update command queries GitHub releases and uses a SHA-256 value parsed from release metadata on the same origin.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "sha256 (same release)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AK7.md",
+      "line": 25,
+      "text": "| mangadex-downloader | https://github.com/mansuf/mangadex-downloader | a0c28102 / 2026-02-07 | Y | N (only via explicit `--update`/`-U` CLI flag) | Y (frozen exe: downloads zip, extracts, then runs a generated `install.bat` via `os.system`; non-frozen: `pip install -U`) | https (api.github.com) | N | hash (sha256) | server-supplied/unpinned — expected hash is regex-parsed out of the **GitHub release body text**, i.e. same origin/trust domain as the artifact itself | mangadex_downloader/update.py:68-95,142-215; mangadex_downloader/cli/args_parser.py:87-91 |"
+    }
+  ]
 }

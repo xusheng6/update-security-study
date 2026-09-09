@@ -5,12 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/lensapp/lens",
   "channel": "unresolved",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Withdraw the original security classification for this record. The retained Lens source snapshot does not provide auditable updater integration or verification evidence for the recorded SHA512 and notarization claim. The retained evidence is insufficient to support the original full claim.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater SHA512 + notarization. (Lens core is now closed-source.)",
   "limitations": [
-    "The newly retrieved checkout is not the original study checkout and does not expose the claimed updater implementation for review.",
-    "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,24 @@
       "commit": "01a4a9856e05e2f6ca2f49530f0efd8d7339235e"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Withdraw the original security classification for this record. The retained Lens source snapshot does not provide auditable updater integration or verification evidence for the recorded SHA512 and notarization claim. The retained evidence is insufficient to support the original full claim.",
+    "limitations": [
+      "The newly retrieved checkout is not the original study checkout and does not expose the claimed updater implementation for review.",
+      "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "hash + macOS notarization",
+  "trust_root": "OS-trust-store",
+  "original_evidence": []
 }

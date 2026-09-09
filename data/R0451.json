@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/arendst/Tasmota",
   "channel": "firmware",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The OTA branch flashes firmware; ESP8266 uses the plaintext client and the optional ESP32 HTTPS mode is documented insecure. This is firmware scope, not a primary app updater.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "Plaintext HTTP is the default/mainstream OTA path on ESP8266 (HTTPS is opt-in build flag); no payload authentication. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "76a450080ccb0f8e71518a73cc5fbec45d7a1556"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The OTA branch flashes firmware; ESP8266 uses the plaintext client and the optional ESP32 HTTPS mode is documented insecure. This is firmware scope, not a primary app updater.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "http",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AC6.md",
+      "line": 29,
+      "text": "| Tasmota | https://github.com/arendst/Tasmota | 03d9c93 / 2026-08-20 | Y | Y (auto-OTA on interval optional; user-triggered via web UI/MQTT common) | Y | **Plaintext HTTP by default** on ESP8266 and any ESP32 build without `USE_WEBCLIENT_HTTPS`: uses plain `WiFiClient` (no TLS at all) via `ESPhttpUpdate.update()`; TLS (`HTTPClientLight`) is only used when the optional `USE_WEBCLIENT_HTTPS` build flag is enabled | N | NONE — Arduino `Update` library only does a self-consistency check of the flashed image; no cryptographic signature verification of the firmware against any pinned key in the code reviewed | N/A | tasmota/tasmota_support/support_tasmota.ino:1494-1512 (`#if ESP32 && USE_WEBCLIENT_HTTPS ... HTTPClientLight ... #else WiFiClient OTAclient; ESPhttpUpdate.update(OTAclient, full_ota_url, version); #endif`) — the `#else` (plain HTTP, no TLS) is the default/mainstream path since `USE_WEBCLIENT_HTTPS` is an opt-in flag |"
+    }
+  ]
 }

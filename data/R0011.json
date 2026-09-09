@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/mumble-voip/mumble",
   "channel": "plugin",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The reviewed Mumble evidence concerns its plugin update channel. It does not establish the complete plugin authentication policy or verify the separate primary-application updater claim.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "PluginUpdater calls installer.install() with no hash/signature (the main-app updater does Authenticode).",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
-    "No conclusion is made about Qt’s TLS implementation or the separate main-app updater/AuthentiCode path.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; No conclusion is made about Qt’s TLS implementation or the separate main-app updater/AuthentiCode path."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "6d05b026f27b20ba5c26513fba09e1ccf9905b33"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The reviewed Mumble evidence concerns its plugin update channel. It does not establish the complete plugin authentication policy or verify the separate primary-application updater claim.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
+      "No conclusion is made about Qt’s TLS implementation or the separate main-app updater/AuthentiCode path.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; No conclusion is made about Qt’s TLS implementation or the separate main-app updater/AuthentiCode path."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validated)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-U8.md",
+      "line": 56,
+      "text": "| Mumble | `Mumble (app)` / `Mumble (plugins)` | Main app: Tier B, Windows snapshot builds only — HTTPS-fetched installer verified via `WinVerifyTrust` (Authenticode) before launch, revocation checking disabled (`WTD_REVOKE_NONE`); release builds / non-Windows: N. **Separately, confirmed by direct source read**: Mumble's **plugin auto-updater** (`src/mumble/PluginUpdater.cpp`) downloads a native `.so`/`.dll` from a URL supplied by the plugin itself (`plugin->getUpdateDownloadURL()`), not forced to HTTPS, and hands it straight to `PluginInstaller::install()` with **no hash/signature check anywhere in `PluginInstaller.cpp`**. It does require a user click in a confirmation dialog (`PluginUpdater::promptAndUpdate()`, `exec() == QDialog::Accepted`) before downloading — not fully silent — but the app gives the user zero cryptographic assurance either way. Content-as-code side channel, Tier C-equivalent. Evidence: PluginUpdater.cpp:66-94,355-388; PluginInstaller.cpp (no verify/hash/signature references). |"
+    }
+  ]
 }

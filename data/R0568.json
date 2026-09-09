@@ -5,13 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/pyenv/pyenv",
   "channel": "package-manager",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "pyenv’s python-build helper verifies supplied checksums, including SHA-256 values in versioned python-build definitions, and returns failure on mismatch.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "python-build verifies SHA-256 checksums pinned in the shipped version definitions, aborts on mismatch.",
   "limitations": [
-    "Source-at-commit evidence only; release signing for toolchain archives is outside this review.",
-    "The claim is limited to checksum enforcement and does not establish a publisher signature.",
-    "Primary classification remains UNRESOLVED under the evidence-review instruction; retained source is commit-scoped and does not establish all released or external framework behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "234a87e400245f6d1a265948e54aa2a84cb4ba84"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "pyenv’s python-build helper verifies supplied checksums, including SHA-256 values in versioned python-build definitions, and returns failure on mismatch.",
+    "limitations": [
+      "Source-at-commit evidence only; release signing for toolchain archives is outside this review.",
+      "The claim is limited to checksum enforcement and does not establish a publisher signature.",
+      "Primary classification remains UNRESOLVED under the evidence-review instruction; retained source is commit-scoped and does not establish all released or external framework behavior."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "SHA-256 pinned in repo",
+  "trust_root": "checksums in python-build definitions",
+  "original_evidence": [
+    {
+      "file": "batch-AK4.md",
+      "line": 19,
+      "text": "| pyenv | https://github.com/pyenv/pyenv.git | 234a87e / 2026-08-16 | Y | N | Y | https (`www.python.org/ftp`), TLS enforced | N | **hash (SHA256)**, pinned in versioned repo source | pinned-in-repo (git-shipped definition files) | `pyenv/plugins/python-build/bin/python-build:363-396` `verify_checksum()`; e.g. `pyenv/plugins/python-build/share/python-build/3.12.0` — `install_package \"Python-3.12.0\" \"https://www.python.org/ftp/python/3.12.0/Python-3.12.0.tar.xz#795c34f4...` — checksum embedded in the definition file shipped with the clone, not fetched at runtime. python-build (and pyenv-binary, same pattern — see `pyenv/plugins/pyenv-binary/libexec/pyenv-binary-generate-installer:95-127`) are vendored plugins, so pyenv itself ships install capability. |"
+    }
+  ]
 }

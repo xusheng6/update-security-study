@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/simple64/simple64",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected simple64 build includes an optional application updater with a separate helper. Helper authentication and the full artifact-verification policy are not established by the retained review.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Downloads+runs a separate simple64-updater binary with zero verification; wipes+overwrites install dir with a ZIP.",
   "limitations": [
-    "New default-branch snapshot at the recorded commit; the separate simple64-updater repository and its own implementation were not part of this source checkout."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "d8c969c7b932e3d76e6a25549d76348839dbaefd"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected simple64 build includes an optional application updater with a separate helper. Helper authentication and the full artifact-verification policy are not established by the retained review.",
+    "limitations": [
+      "New default-branch snapshot at the recorded commit; the separate simple64-updater repository and its own implementation were not part of this source checkout."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validated)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-I1.md",
+      "line": 11,
+      "text": "| simple64 | github.com/simple64/simple64 (+ github.com/simple64/simple64-updater) | Qt desktop GUI wrapping Mupen64Plus | Y | **auto chk** (background check via `QNetworkAccessManager` on the GitHub Releases API, disable-able via `SIMPLE64_DISABLE_UPDATER` env var, Windows/Linux only — `#ifndef __APPLE__`) + user confirms Yes/No, then **auto dl/inst**: once confirmed, no further prompts | Y — downloads a separate native executable `simple64-updater`/`simple64-updater.exe` from GitHub Releases, writes it to a `QTemporaryDir`, `chmod`s it executable (`ReadOwner\\|WriteOwner\\|ExeOwner`), and launches it detached (`QProcess::startDetached`) while the main app quits; the launched **`simple64-updater`** (separate Go/Fyne binary) then itself downloads a ZIP of the new `simple64` release, wipes the install directory of `.exe`/`.dll` files, and extracts the ZIP over it, then relaunches `simple64-gui` | HTTPS (`api.github.com` for the version check; `github.com/simple64/simple64-updater/releases/latest/download/...` for the updater binary; `api.github.com/repos/simple64/simple64/releases/latest` + asset `browser_download_url` inside `simple64-updater`) via Qt `QNetworkAccessManager` (redirect policy `NoLessSafeRedirectPolicy`, no downgrade) and Go's `net/http`/`retryablehttp` (no `InsecureSkipVerify` found) — TLS validation enforced in both stages | N (plain GitHub Releases API JSON, unsigned) | **none** — the downloaded `simple64-updater` executable is chmod'd and run with zero hash/signature check; the ZIP it subsequently downloads and extracts over the install directory is likewise never hashed or signature-checked before files are overwritten and the app relaunched | N/A | `simple64-gui/mainwindow.cpp:338-352` (`updateApp`, auto-check, `SIMPLE64_DISABLE_UPDATER`), `:404-429` (`updateDownloadFinished` — writes executable perms, `QProcess::startDetached`, `QCoreApplication::quit()`), `:431-461` (`updateReplyFinished` — Yes/No prompt, `NoLessSafeRedirectPolicy`, updater URL); `simple64-updater/simple64-updater.go:57-127` (`determineLatestRelease`/`downloadRelease`, no hash check), `:143-193` (`extractZip`, no verification), `:231-256` (`main` relaunches `simple64-gui`) |"
+    }
+  ]
 }

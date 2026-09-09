@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/chevereto/chevereto",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "D",
-  "description": "The self-upgrader disables both peer and host verification, extracts the ZIP over the live root, and runs the post-upgrade CLI. Admin authentication gates triggering but not payload authenticity.",
+  "description": "Admin self-updater sets CURLOPT_SSL_VERIFYPEER=0/VERIFYHOST=0, zero payload verification, extracts over the live app root, executes via passthru() — unauthenticated RCE. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "900094d8035693a29a26c5240527dbfd6dcfacb2"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The self-upgrader disables both peer and host verification, extracts the ZIP over the live root, and runs the post-upgrade CLI. Admin authentication gates triggering but not payload authenticity.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "D",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validation off)",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AI2.md",
+      "line": 33,
+      "text": "| Chevereto (OSS/AGPL edition) | https://github.com/chevereto/chevereto.git | 900094d / 2026-08-20 | Y | Y (admin clicks \"Upgrade now\" in dashboard, then the whole download+extract+DB-migrate flow runs unattended) | **Y — full download + ZIP extract of the live application root, then executes the extracted PHP** | **https URL but TLS certificate validation explicitly DISABLED** | none | **none — no hash, no signature, nothing** | N/A (no verification exists at all) | `app/upgrading.php:253-254` (`curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);` inside the shared `curl()` helper used by the updater); `app/upgrading.php:41` (`ZIP_BALL = 'https://chevereto.com/api/download/%tag%'`); `app/upgrading.php:356-392` (`downloadAction()` streams the zip straight to `chevereto.zip`, only checks HTTP 200 — **no hash/signature check of any kind**); `app/upgrading.php:394-434` (`extractAction()` → `ZipArchive::extractTo($pathTo)` extracts directly over the live app root `PATH_APP`/`..`); `app/upgrading.php:214-218` (after extraction, `passthru($rootDir.'/app/bin/cli -C update')` executes the freshly-extracted code); `app/legacy/routes/dashboard.php:90-125` (admin-triggered entry point `dashboard/upgrade`, generates a random token stored server-side and checked with `hash_equals` — this only gates *who can trigger* the upgrade, it does nothing to authenticate *what gets downloaded*). |"
+    }
+  ]
 }

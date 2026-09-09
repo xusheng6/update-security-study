@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/sumatrapdfreader/sumatrapdf",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "SumatraPDF reads release metadata from its HTTPS update-check URL and selects installer or portable URLs by architecture; the reviewed flow does not show hash or Authenticode validation before offering the retrieved installer.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "Auto check/dl, manual install.",
   "limitations": [
-    "Newly retrieved default-branch snapshot; not historical release re-verification.",
-    "External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown.",
-    "Newly retrieved default-branch snapshot; not historical release re-verification.; External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "770d5999a2385b40d6444b043852a6960509e5e9"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "SumatraPDF reads release metadata from its HTTPS update-check URL and selects installer or portable URLs by architecture; the reviewed flow does not show hash or Authenticode validation before offering the retrieved installer.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot; not historical release re-verification.",
+      "External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown.",
+      "Newly retrieved default-branch snapshot; not historical release re-verification.; External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "OS-code-signing (Authenticode)",
+  "trust_root": "OS-trust-store",
+  "original_evidence": []
 }

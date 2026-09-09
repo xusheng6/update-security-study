@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/getAlby/hub",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The recovered Alby Hub source does not substantiate its claimed GPG/SHA-256 release updater or `--skip-verify` option; release update verification remains unresolved from this snapshot.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "GPG-signed manifest (keys in-repo) + SHA256; manual, --skip-verify opt-out.",
   "limitations": [
-    "New default-branch snapshot rather than historical release re-verification; no auditable release updater, GPG key material, manifest path, or skip-verification option was found in the inspected source, and external packaging scripts/artifacts were not independently recovered."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "6a6d2d89c8acc3e246f24abcf1111d4b331f7493"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The recovered Alby Hub source does not substantiate its claimed GPG/SHA-256 release updater or `--skip-verify` option; release update verification remains unresolved from this snapshot.",
+    "limitations": [
+      "New default-branch snapshot rather than historical release re-verification; no auditable release updater, GPG key material, manifest path, or skip-verification option was found in the inspected source, and external packaging scripts/artifacts were not independently recovered."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[GPG] + SHA256",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-O4.md",
+      "line": 14,
+      "text": "| Alby Hub (self-hosted Lightning node/NWC service) | github.com/getAlby/hub | Go backend + React/TS frontend, distributed as tarball or Docker image | Y | N (user-initiated: in-app \"Update Available\" banner links out; actual update requires manually running `scripts/*/update.sh`, no scheduled/background auto-update job found) | Y (`update.sh` downloads a new release tarball and, unless `--skip-verify`, invokes `verify.sh` before extracting over the running install) | HTTPS — `ALBYHUB_URL=\"https://getalby.com/install/hub/server-linux-x86_64.tar.bz2\"`; manifest/signature at `https://getalby.com/install/hub/manifest.txt` and `manifest.txt.asc` | Y — single-signer GPG-signed manifest (`manifest.txt.asc` over `manifest.txt`), not a multisig/N-of-M scheme like LND | signature (GPG detached sig via `gpg --batch --verify manifest.txt.asc manifest.txt`) + hash-from-manifest (SHA-256 per-file entry looked up in `manifest.txt`, compared with `sha256sum`) | GPG public keys shipped in-repo at `scripts/keys/rolznz.asc` and `scripts/keys/im-adithya.asc`; per `scripts/keys/README.md` a single verified signer's key produces the release's `manifest.txt.asc`. Scripts call `gpg --batch --verify` assuming the key is already imported into the user's keyring — no automatic key-import/pinning step found in `install.sh`/`update.sh`, so first-run trust establishment is left to the user (TOFU via manually importing the `.asc` file from the repo). `--skip-verify` flag bypasses all of this. In-app UI update check is detection-only: `frontend/src/components/Banner.tsx:52-56` links to `https://getalby.com/update/hub?version=...`, no auto-download. | `scripts/linux-x86_64/update.sh` (`ALBYHUB_URL=...`, `wget -q \"$ALBYHUB_URL\"`, `./verify.sh ...`, `tar -xf ...`); `scripts/verify.sh:1-4,25-56` (`MANIFEST_URL`, `SIGNATURE_URL`, `gpg --batch --verify`, sha256sum compare); `scripts/keys/README.md`; `frontend/src/components/Banner.tsx:52-56` |"
+    }
+  ]
 }

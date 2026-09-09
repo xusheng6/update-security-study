@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/linearmouse/linearmouse",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "LinearMouse uses Sparkle's standard updater with a weekly appcast check and optional beta channel; the checked snapshot does not establish the updater trust key or permit a TLS-only verification conclusion.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Sparkle with no SUPublicEDKey — TLS-only.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "No checked source establishes the production Sparkle signing/trust configuration; the absence of SUPublicEDKey is not treated as proof of TLS-only acceptance.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout. No checked source establishes the production Sparkle signing/trust configuration; the absence of SUPublicEDKey is not treated as proof of TLS-only acceptance."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "5525bfd8d920b2214db9bc039824b117af165ae6"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "LinearMouse uses Sparkle's standard updater with a weekly appcast check and optional beta channel; the checked snapshot does not establish the updater trust key or permit a TLS-only verification conclusion.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "No checked source establishes the production Sparkle signing/trust configuration; the absence of SUPublicEDKey is not treated as proof of TLS-only acceptance.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout. No checked source establishes the production Sparkle signing/trust configuration; the absence of SUPublicEDKey is not treated as proof of TLS-only acceptance."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (linearmouse.app)",
+  "payload_verification": "none (Sparkle, no key)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-K1.md",
+      "line": 15,
+      "text": "| LinearMouse | linearmouse/linearmouse | Sparkle | Y | chk: user-toggleable, `SUScheduledCheckInterval`=604800s (7 days) when enabled; dl/inst: Sparkle standard prompt | Y | https (`https://linearmouse.app/appcast.xml`) | **NONE** — no `SUPublicEDKey`/`SUPublicDSAKey` in Info.plist or repo | none | none | LinearMouse/Info.plist:33-36; LinearMouse/UI/CheckForUpdatesView.swift:14-75 |"
+    }
+  ]
 }

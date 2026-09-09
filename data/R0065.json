@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/bitwarden/clients",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Bitwarden disables Linux AppImage updates and excludes Windows Store or portable builds, then delegates eligible checks to electron-updater; the cited source does not show SHA512, Authenticode, or notarization verification.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater; SHA512 + Authenticode/notarization.",
   "limitations": [
-    "Newly retrieved default-branch snapshot; not historical release re-verification.",
-    "External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown.",
-    "Newly retrieved default-branch snapshot; not historical release re-verification.; External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "39fa7f6d536961599eccb7e4e810a8ccc853ca36"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Bitwarden disables Linux AppImage updates and excludes Windows Store or portable builds, then delegates eligible checks to electron-updater; the cited source does not show SHA512, Authenticode, or notarization verification.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot; not historical release re-verification.",
+      "External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown.",
+      "Newly retrieved default-branch snapshot; not historical release re-verification.; External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (artifacts.bitwarden.com)",
+  "payload_verification": "hash + OS-code-signing",
+  "trust_root": "OS-trust-store",
+  "original_evidence": [
+    {
+      "file": "batch-G3.md",
+      "line": 10,
+      "text": "| bitwarden/clients (desktop) | bitwarden/clients | Electron (electron-builder + electron-updater) | Y | auto (chk/dl/inst) by default — `autoUpdater.autoDownload` defaults true except during a manual \"check now\" (set false, re-enabled after); auto-installs via `quitAndInstall` after user confirms restart prompt | Y | https; publish provider `generic` at `https://artifacts.bitwarden.com/desktop`; no `rejectUnauthorized:false` / TLS-bypass code found in the desktop app source (validation=default-enforced, electron-updater default HTTPS behavior) | scheme[SHA512 in `latest.yml`/`latest-mac.yml`/`latest-linux.yml`] over HTTPS (generic provider — manifest itself only protected by TLS, no separate detached signature) | hash-from-manifest (SHA512 in electron-builder update metadata) + OS-code-signing (Windows: `signtoolOptions`/Authenticode via `sign.js`; macOS: `hardenedRuntime`, notarization implied by entitlements — enforced by electron-updater/Squirrel.Mac at apply time) | server-TLS for manifest delivery; OS-trust-store for code-signature checks (Authenticode CA on Win, Apple Developer ID CA on Mac) | apps/desktop/electron-builder.json:27-30 (`publish.provider=generic`, `url=https://artifacts.bitwarden.com/desktop`), :93-100 (win `signtoolOptions`, `publisherName`); apps/desktop/src/main/updater.main.ts:151,158 (`autoUpdater.autoDownload=false` only for manual \"withFeedback\" checks, reset back true at :162), :83 (`autoUpdater.downloadUpdate()`), :234 (`autoUpdater.quitAndInstall(true,true)`) |"
+    }
+  ]
 }

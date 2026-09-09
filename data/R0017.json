@@ -5,15 +5,31 @@
   "historical_tier": "C",
   "project_url": "",
   "channel": "unresolved",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Withdraw the original security classification. Historical Ryujinx updater source and release identity are not retained.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Abandonware in real time — GitHub org DMCA'd 2024; ships a no-payload-verify updater.",
   "limitations": [
-    "No retained checkout or verified source archive is available. Do not infer updater behavior or current project status from the prior report.",
-    "Historical Ryujinx updater source and release identity are not retained. Reinstating the original classification requires that missing evidence."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Withdraw the original security classification. Historical Ryujinx updater source and release identity are not retained.",
+    "limitations": [
+      "No retained checkout or verified source archive is available. Do not infer updater behavior or current project status from the prior report.",
+      "Historical Ryujinx updater source and release identity are not retained. Reinstating the original classification requires that missing evidence."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": []
 }

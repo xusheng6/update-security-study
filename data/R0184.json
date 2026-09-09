@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/siyuan-note/siyuan",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "SiYuan's Go updater selects a platform release package, downloads it, and requires a matching SHA-256 checksum before marking the package ready; this source review does not characterize any later installer or platform signature checks.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Custom Electron+Go updater, auto-chk/dl; SHA-256 checksum-only.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "The source establishes the Go package checksum gate but does not prove that no later installer or platform signature control exists.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout. The source establishes the Go package checksum gate but does not prove that no later installer or platform signature control exists."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "44a6c212a994c7ba8129fc38b001a9ab58957c6f"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "SiYuan's Go updater selects a platform release package, downloads it, and requires a matching SHA-256 checksum before marking the package ready; this source review does not characterize any later installer or platform signature checks.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "The source establishes the Go package checksum gate but does not prove that no later installer or platform signature control exists.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout. The source establishes the Go package checksum gate but does not prove that no later installer or platform signature control exists."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validated)",
+  "payload_verification": "hash (SHA256, no sig)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-K4.md",
+      "line": 10,
+      "text": "| SiYuan | siyuan-note/siyuan | Electron shell + Go kernel (custom updater, no electron-updater/Squirrel) | Y | auto-check + auto-download in background; install requires user confirmation (`confirmDialog`) on app exit, or is skipped if user declines | Y | HTTPS — `req` client with `.DisableInsecureSkipVerify()` explicitly set (TLS verified) | N — checksum source is a plain JSON field (`checksums` map from b3log \"Rhy\" cloud API) or GitHub Releases API asset `digest` / an unsigned `SHA256SUMS.txt` manifest file; none of these are cryptographically signed | hash-from-manifest (SHA-256) | none (no crypto key/signature; only SHA-256 string comparison against value returned by b3log's Rhy API or GitHub Releases API/asset digest/SHA256SUMS.txt) | kernel/model/updater.go:44,73,90-104,136-185 (auto dl + sha256 verify in `downloadInstallPkg`); kernel/model/updater_release.go:138-148,190-201,363-416 (checksum sourced from unsigned API JSON / GH asset digest / SHA256SUMS.txt); app/electron/main.js:654-687 (`launchUpdateInstallPackage` spawns/opens the downloaded installer on quit); app/src/dialog/processSystem.ts:239-244 (`confirmDialog` gates install) |"
+    }
+  ]
 }

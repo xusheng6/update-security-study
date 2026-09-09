@@ -5,13 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/SmartBear/soapui",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "SoapUI’s retained updater uses HTTP update descriptors and delegates update handling to install4j; the install4j verification and released signing boundary are not shown in this checkout.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "Update descriptor fetched over plaintext HTTP, then install4j downloads+installs+relaunches. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and current upstream behavior remain unverified.",
-    "The install4j runtime verifier and signing configuration were not vendored.",
-    "Primary classification remains UNRESOLVED under the evidence-review instruction; retained source is commit-scoped and does not establish all released or external framework behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "452bc1778ca85310549beb43c2ad4670cc89d7ae"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "SoapUI’s retained updater uses HTTP update descriptors and delegates update handling to install4j; the install4j verification and released signing boundary are not shown in this checkout.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and current upstream behavior remain unverified.",
+      "The install4j runtime verifier and signing configuration were not vendored.",
+      "Primary classification remains UNRESOLVED under the evidence-review instruction; retained source is commit-scoped and does not establish all released or external framework behavior."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "http",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AH1.md",
+      "line": 24,
+      "text": "| SoapUI (open-source edition) | https://github.com/SmartBear/soapui.git | 452bc17 / 2026-06-08 | Y | N (auto-check on by default, but shows a confirmation dialog before installing — user must click \"Update\") | **Y** (via install4j's `ApplicationLauncher`, which downloads+installs and restarts the app) | **plaintext HTTP** — update descriptor fetched from `http://dl.eviware.com/version-update/soapui-updates-os.xml` | N (update descriptor is unauthenticated XML over HTTP) | none visible in this repo — actual download/verification is delegated to the closed-source install4j runtime, invoked via `ApplicationLauncher.launchApplication` | unknown / not pinned in this repo (install4j internal, closed-source) | soapui/soapui/src/main/java/com/eviware/soapui/autoupdate/SoapUISystemProperties.java:24 (HTTP URL), .../DefaultSoapUICore.java:355 (auto-check default true), .../Install4jSoapUIUpdateProvider.java:139-161 (download+relaunch) |"
+    }
+  ]
 }

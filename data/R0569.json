@@ -5,13 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/rvm/rvm",
   "channel": "package-manager",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "RVM uses versioned MD5 and SHA-512 checksum databases for Ruby archive validation. The full original statement also covers URL-check and Rubinius/self-update exceptions that are not established by this bounded evidence.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Ruby binary checksums pinned in the repo DB, enforced by default. Caveats: a URL-check helper uses curl --insecure; Rubinius/self-update paths are weaker.",
   "limitations": [
-    "The retained source covers installer checksum enforcement, not release signing.",
-    "The Rubinius fallback and separate self-updater key retrieval are outside the pinned-checksum observation.",
-    "The retained source covers installer checksum enforcement, not release signing. The Rubinius fallback and separate self-updater key retrieval are outside the pinned-checksum observation."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "75462eae90440459c6468897ac7c267eba9d9b68"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "RVM uses versioned MD5 and SHA-512 checksum databases for Ruby archive validation. The full original statement also covers URL-check and Rubinius/self-update exceptions that are not established by this bounded evidence.",
+    "limitations": [
+      "The retained source covers installer checksum enforcement, not release signing.",
+      "The Rubinius fallback and separate self-updater key retrieval are outside the pinned-checksum observation.",
+      "The retained source covers installer checksum enforcement, not release signing. The Rubinius fallback and separate self-updater key retrieval are outside the pinned-checksum observation."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "MD5+SHA512 pinned in repo",
+  "trust_root": "config/md5, config/sha512 DB",
+  "original_evidence": [
+    {
+      "file": "batch-AK4.md",
+      "line": 21,
+      "text": "| rvm | https://github.com/rvm/rvm.git | 75462ea / 2026-07-30 | Y | N | Y | https, TLS enforced for the actual archive download; **but** a HEAD \"does this URL exist\" helper hardcodes `curl --insecure` unconditionally | N | **hash (MD5+SHA512)**, pinned in versioned repo source by default; enforced (install fails if no checksum found and `rvm_verify_downloads_flag` default=1); Rubinius binaries are the one exception — their checksum is fetched from the *same* host over HTTPS at runtime | pinned-in-repo (`rvm/config/md5`,`rvm/config/sha512`, git-shipped) for the default path; server-supplied/same-endpoint for the Rubinius-only fallback | `rvm/scripts/functions/checksum` (whole file, esp. `__rvm_checksum_read:197-214` reading `rvm_path/config/md5`\\|`sha512`, then `:217-230` HTTP fallback only for `*rubinius*` URLs); `rvm/scripts/fetch:28-30` fails if no checksum found and verify flag on; `:222-227` `rvm_fail` + delete archive on mismatch; `rvm/scripts/functions/utility:288` `__rvm_curl --silent --insecure --location --list-only --head` (unconditional, existence-check only — main `fetch_command` at `rvm/scripts/fetch:21` has no `--insecure`). Separately, RVM's own self-updater (`rvm/binscripts/rvm-installer:397-461`) verifies a PGP `.asc` signature but the signing keys are fetched from `hkp://keyserver.ubuntu.com` or `https://rvm.io/mpapis.asc` — **not pinned** in the repo (`:426-431`). |"
+    }
+  ]
 }

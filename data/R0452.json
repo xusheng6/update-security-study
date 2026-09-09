@@ -5,14 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/RetroBat-Official/RetroBat",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The retained RetroBat source snapshot records an HTTP retrobat_binaries_url in build.ini, but the updater and no-check-certificate logic are not available as readable source here. The claimed cross-script TLS behavior is withheld pending an auditable updater implementation or historical source matching the studied release.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "wget --no-check-certificate disables TLS validation across its update scripts. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "The checkout contains shipped updater-related binaries but no auditable source body for their network and verification behavior.",
-    "The retained commit may not match the historical release studied.",
-    "The HTTP build URL alone does not establish released updater behavior.",
-    "The checkout contains shipped updater-related binaries but no auditable source body for their network and verification behavior. The retained commit may not match the historical release studied. The HTTP build URL alone does not establish released updater behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "9761d47af5902410f020164163a7b27a6facc38b"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained RetroBat source snapshot records an HTTP retrobat_binaries_url in build.ini, but the updater and no-check-certificate logic are not available as readable source here. The claimed cross-script TLS behavior is withheld pending an auditable updater implementation or historical source matching the studied release.",
+    "limitations": [
+      "The checkout contains shipped updater-related binaries but no auditable source body for their network and verification behavior.",
+      "The retained commit may not match the historical release studied.",
+      "The HTTP build URL alone does not establish released updater behavior.",
+      "The checkout contains shipped updater-related binaries but no auditable source body for their network and verification behavior. The retained commit may not match the historical release studied. The HTTP build URL alone does not establish released updater behavior."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validation off)",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AC8.md",
+      "line": 13,
+      "text": "| RetroBat | https://github.com/RetroBat-Official/retrobat-setup.git (updater logic) | 4eb2ed0 / 2025-08-13 | Y | Y (menu-driven, EmulationStation \"check/update\" flow) | Y | **https but TLS cert validation DISABLED** | N | hash (SHA256) — but sourced from the same untrusted channel | server-supplied, unpinned, over broken TLS | `system/scripts/shared-variables.cmd:115`: `wget --no-check-certificate ... %installroot_url%/repo/...` (installroot_url=https://www.retrobat.ovh); `system/scripts/es-update.cmd.old:130-131`: downloads package + `.sha256.txt` both via `wget --no-check-certificate`; `:check_hash` (lines 192-234) compares SHA256 against the co-downloaded (also-insecure) hash file, then `:files_copy` xcopies the extracted update over the live install. Current shipped `rb_updater`/`rb_launcher` modules are closed-source binaries not present in the source repo, so this is the last-visible-in-source implementation of the mechanism (renamed `.old` but structurally unchanged per `upgrade.xml` action log) |"
+    }
+  ]
 }

@@ -5,12 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/nirzaf/MicroSIP-3.19.27-src",
   "channel": "primary",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "N",
-  "description": "Inspected update path prompts and hands a URL to the shell handler; it does not establish in-app installer execution.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "Version-check + redirect URL over plaintext HTTP, no signature; opens via ShellExecute. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Imported from completed SOURCE-REVIEW-BATCH-1.md; retained snapshot only.",
-    "Current releases, canonical provenance, and paths outside inspected behavior are not independently established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "f074cedc837eded39d0aba5a344c49f0222929ae"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Inspected update path prompts and hands a URL to the shell handler; it does not establish in-app installer execution.",
+    "limitations": [
+      "Imported from completed SOURCE-REVIEW-BATCH-1.md; retained snapshot only.",
+      "Current releases, canonical provenance, and paths outside inspected behavior are not independently established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "N",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "notify",
+  "transport": "http",
+  "payload_verification": "—",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AD1.md",
+      "line": 12,
+      "text": "| MicroSIP | https://github.com/nirzaf/MicroSIP-3.19.27-src (community archive of official 3.19.27 source; upstream has no public repo) | f074ced / 2020-03-12 | Y | Y (interval combobox: daily/monthly/quarterly/never, checked from mainDlg on startup/timer) | N (prompts MessageBox \"Update Available\" then `OpenURL()` → `ShellExecute` opens URL in default browser; user must manually download/run) | **HTTP — plaintext, not TLS at all** | N | none (crude version compare via `inet_addr()` IP-trick on unauthenticated HTTP text body; server-supplied URL/version/notes trusted verbatim) | server-supplied/unpinned (no key of any kind) | mainDlg.cpp:4487-4495 (`url = _T(\"http://update.microsip.org/softphone-update.txt\")`), mainDlg.cpp:4498-4539 (`OnUpdateCheckerLoaded`, opens `url` from response body on user click Yes), global.cpp:282-287 (`OpenURL` → `rundll32.exe url.dll,FileProtocolHandler`) |"
+    }
+  ]
 }

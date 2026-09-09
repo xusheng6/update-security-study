@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/martinrotter/textosaurus",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "D",
-  "description": "Textosaurus ignores TLS errors through the updater network manager and ShellExecutes the downloaded Windows installer without a hash/signature.",
+  "description": "Self-updater ShellExecutes an installer with no hash/signature, and BaseNetworkAccessManager::onSslErrors() calls ignoreSslErrors() unconditionally — a plain self-signed-cert MITM (no CDN compromise) = RCE. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "ad410b75d69173306bd9c81ca51b3a4531305d09"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Textosaurus ignores TLS errors through the updater network manager and ShellExecutes the downloaded Windows installer without a hash/signature.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "D",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validation off)",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AJ8.md",
+      "line": 25,
+      "text": "| Textosaurus | https://github.com/martinrotter/textosaurus | ad410b75d691 / 2023-08-01 | Y | N (manual, user-initiated via Help>Check for updates dialog) | Y | https, but TLS validation is DISABLED in code (see evidence) | N (no manifest signature — plain GitHub Releases JSON) | none (no hash/signature check of downloaded installer before execution) | none — installer file is trusted purely because it came from the GitHub Releases API response, unpinned | `src/libtextosaurus/definitions/definitions.h:43` manifest = `https://api.github.com/repos/martinrotter/textosaurus/releases`; `src/libtextosaurus/common/miscellaneous/systemfactory.cpp:58-104` checkForUpdates()/parseUpdatesFile() take `browser_download_url` straight from JSON; `src/libtextosaurus/common/network-web/basenetworkaccessmanager.cpp:48-58` `onSslErrors()` unconditionally calls `reply->ignoreSslErrors(error)` for **every** request made through `BaseNetworkAccessManager`/`SilentNetworkAccessManager` (used by `Downloader`, which fetches both the release manifest and the installer file); `src/libtextosaurus/saurus/gui/dialogs/formupdate.cpp:123-151` saves downloaded bytes straight to a temp file with **no hash/signature check**; `formupdate.cpp:216-232` on Windows calls `ShellExecute()` directly on the downloaded `.exe` |"
+    }
+  ]
 }

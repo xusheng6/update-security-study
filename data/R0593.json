@@ -5,13 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/block/goose",
   "channel": "mixed",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The reviewed Goose CLI computes an archive SHA-256, retrieves GitHub artifact attestations, and verifies them against the embedded Sigstore production trust root, GitHub Actions issuer, and expected workflow before accepting the archive. The desktop fallback is a separate channel and is not covered by this CLI evidence.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "`goose update` verifies GitHub Artifact Attestations (Sigstore SLSA provenance) vs a build-time-compiled trust root, fails closed. (Desktop app is B electron-updater, C-equiv JSON fallback.)",
   "limitations": [
-    "Desktop raw-API fallback behavior has different controls and is not merged into this CLI conclusion.",
-    "Current released desktop artifact behavior is not established.",
-    "Desktop raw-API fallback behavior has different controls and is not merged into this CLI conclusion. Current released desktop artifact behavior is not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,36 @@
       "commit": "8d844eecbdfd65626a881c9e8784ae8dc6093f1d"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The reviewed Goose CLI computes an archive SHA-256, retrieves GitHub artifact attestations, and verifies them against the embedded Sigstore production trust root, GitHub Actions issuer, and expected workflow before accepting the archive. The desktop fallback is a separate channel and is not covered by this CLI evidence.",
+    "limitations": [
+      "Desktop raw-API fallback behavior has different controls and is not merged into this CLI conclusion.",
+      "Current released desktop artifact behavior is not established.",
+      "Desktop raw-API fallback behavior has different controls and is not merged into this CLI conclusion. Current released desktop artifact behavior is not established."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "Sigstore SLSA provenance",
+  "trust_root": "trust root compiled into binary",
+  "original_evidence": [
+    {
+      "file": "batch-AM1.md",
+      "line": 18,
+      "text": "| Goose (block/goose desktop) | https://github.com/block/goose.git | 8d844ee / 2026-08-21 | Y | Y (electron-updater `autoDownload=true`, `autoInstallOnAppQuit=true`; checked 5s after startup, no confirmation needed to download or install-on-quit) | Y | https (GitHub release provider; `api.github.com` fallback; TLS enforced, no disabling found) | Y on primary path (electron-updater generates a signed `latest-mac.yml` w/ SHA512, checked against the app's own Apple code signature via Squirrel.Mac at install time) | hash + OS code signature (primary path); **none** on the GitHub-API fallback path | OS keystore (Apple code-signing, verified by macOS at update-apply time) for primary path; N/A — unpinned, unauthenticated for fallback path | ui/desktop/package.json:77 (`electron-updater`); ui/desktop/src/utils/autoUpdater.ts:358-427 (feed=github provider, `autoDownload`/`autoInstallOnAppQuit` both `true`), :670-687 (`update-downloaded` → notification, click installs via `quitAndInstall`); ui/desktop/src/utils/githubUpdater.ts:33 (`api.github.com/repos/aaif-goose/goose/releases/latest`), :161-283 (`downloadUpdate` — raw HTTPS zip fetch, **no** hash/signature check, saved to `~/Downloads`, requires manual drag-replace) |"
+    },
+    {
+      "file": "batch-AM1.md",
+      "line": 19,
+      "text": "| Goose (block/goose CLI, `goose update`) | https://github.com/block/goose.git | 8d844ee / 2026-08-21 | Y | N (explicit `goose update [--canary]` command; not run automatically) | Y | https (github.com/releases/download for archive; api.github.com for Sigstore attestations; TLS enforced, no InsecureSkipVerify/danger_accept_invalid_certs found) | N (no separate signed manifest — the release archive itself is the attested artifact) | **signature** — SLSA build provenance verified via Sigstore: local SHA-256 of the downloaded archive is checked against GitHub Artifact Attestations (Sigstore bundles from Rekor/Fulcio), including a workflow-identity match (must be `.github/workflows/release.yml` or `canary.yml` in `aaif-goose/goose`); fails closed (aborts install) if no valid attestation is found | **pinned-in-binary** — `sigstore_verify::trust_root::SIGSTORE_PRODUCTION_TRUSTED_ROOT` (Sigstore's production Fulcio CA + Rekor log public keys) is a build-time-embedded constant compiled into the `goose` binary, not fetched at runtime | crates/goose-cli/src/commands/update.rs:7-9 (`use sigstore_verify::trust_root::{TrustedRoot, SIGSTORE_PRODUCTION_TRUSTED_ROOT}`), :236-287 (`verify_provenance`: computes SHA-256 of downloaded bytes, fetches attestation bundles from `api.github.com/repos/aaif-goose/goose/attestations/sha256:{digest}`, verifies each bundle via `sigstore_verify::verify(...)` against the embedded trusted root + `GITHUB_ACTIONS_ISSUER` + expected workflow path, returns `Err` — \"refusing to install unverifiable update\" — if none pass), :294-330 (`update()`: HTTPS GET of `github.com/aaif-goose/goose/releases/download/{tag}/{asset}`, then calls `verify_provenance` **before** extraction and aborts on failure), :414-467 (tar/zip extraction hardened against path traversal and symlink escape), :520-583 (`replace_binary` — atomic rename-then-copy with rollback), :977-984 (test asserts `verify_provenance` \"must fail closed when provenance cannot be verified\") |"
+    }
+  ]
 }

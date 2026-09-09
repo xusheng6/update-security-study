@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Mudlet/Mudlet",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: The primary updater calls downloadRelease with checksum enforcement enabled; the checksum is obtained from the GitHub release channel.",
+  "description": "dblsqd updater verifies a SHA-256 and refuses unverified installs by default (well-engineered), but the checksum comes from the same GitHub Releases endpoint with no pinned key. Package manager loads Lua/XML with zero verification.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "a7cf7a2dbb929dd8b310491e38c86c4d446fec7d"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: The primary updater calls downloadRelease with checksum enforcement enabled; the checksum is obtained from the GitHub release channel.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "SHA-256 (same endpoint)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AK1.md",
+      "line": 18,
+      "text": "| Mudlet | https://github.com/Mudlet/Mudlet.git | a7cf7a2dbb92 / 2026-08-22 | Y | Y (opt-in toggle, on by default per `dblsqd::UpdateDialog::autoDownloadEnabled(true, ...)`) | Y | https (GitHub Releases API + release assets; `QNetworkRequest::RedirectPolicyAttribute` set to `NoLessSafeRedirectPolicy`, no TLS-verification-disable found) | N/A (no code-signed manifest; GitHub Releases JSON is unsigned) | **hash (SHA256)** — required by default (`requireChecksums=true`); download is rejected if no checksum published or if it fails to match | server-supplied/unpinned — the SHA256SUMS file is fetched from the *same* GitHub Releases endpoint as the binary itself (no separate signing key, no pinned public key in the binary) | `src/updater.cpp:324` `feed->downloadRelease(release, /*requireChecksums=*/true)`; `src/updater/Feed.cpp:222-228` refuses to install if no checksums; `src/updater/Feed.cpp:271-318` `fetchChecksums()`; `src/updater/Feed.cpp:492-509` computes `QCryptographicHash::Sha256` over the downloaded file and rejects on mismatch |"
+    }
+  ]
 }

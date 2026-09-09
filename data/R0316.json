@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/koreader/koreader-base",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "D",
-  "description": "The retained OTA manager uses plaintext HTTP and compares the archive to a manifest-supplied digest; installation hands the update to the device restart path. The digest is not an independent signature or trust root.",
+  "description": "All 5 OTA mirrors are plain http (no TLS in the update stack); payload hash from the same unauthenticated manifest; re-execs into the downloaded .tar.xz. MITM/CDN of any host = RCE, often elevated on jailbroken e-readers. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -21,7 +21,29 @@
       "commit": "8aa7b93d7c0e02bb730060aae1e489e7cbcccc2d"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained OTA manager uses plaintext HTTP and compares the archive to a manifest-supplied digest; installation hands the update to the device restart path. The digest is not an independent signature or trust root.",
+    "limitations": [
+      "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "D",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "http",
+  "payload_verification": "hash from plaintext manifest",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-V7.md",
+      "line": 12,
+      "text": "| KOReader | https://github.com/koreader/koreader.git (+ submodule https://github.com/koreader/koreader-base.git) | fbc4392 / 2026-08-20 | Y | Y (silent periodic check; download/install needs a confirm click) | Y | **http (plaintext, no TLS at all — LuaSocket `http.request`, not https)** | N | hash-only (SHA-family digest via `Hashoir`, sourced from the *same* unauthenticated plaintext manifest) | server-supplied/unpinned (hash lives in the JSON manifest fetched from the same `http://` OTA host) | `frontend/ui/otamanager.lua:27-37` (all `ota_servers` are `http://…`), `frontend/ui/otamanager.lua:113-130` (`socket.http` GET, \"link\" OTA path), `koreader-base/ffi/downloader.lua:1-70` (LuaSocket, no TLS wrapper), `koreader-base/ffi/kotasync.lua:596-604` (`entry.xz_hash ~= hashoir:hexdigest()` — integrity only, no signature), `frontend/device/generic/device.lua:504-524` (`Device:install()` → `UIManager:quit(85)`, launcher re-execs into the unpacked update on next start) |"
+    }
+  ]
 }

@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/flipperdevices/qFlipper",
   "channel": "firmware",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "QFlipper’s update registry validates the structure of firmware channel metadata. Firmware recovery and device-side validation are separate boundaries; the reviewed host code does not establish the full firmware-authentication policy.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "HTTPS enforced, but firmware has no signature/hash check — only DFU-format magic bytes.",
   "limitations": [
-    "New default-branch snapshot rather than the original study checkout; device-side firmware validation, release metadata provenance, and channels outside the reviewed registry/install path were not independently audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "1d26683ff5b751f219a4e40443b7c8355eb39469"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "QFlipper’s update registry validates the structure of firmware channel metadata. Firmware recovery and device-side validation are separate boundaries; the reviewed host code does not establish the full firmware-authentication policy.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study checkout; device-side firmware validation, release metadata provenance, and channels outside the reviewed registry/install path were not independently audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none (DFU magic only)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-Z7.md",
+      "line": 19,
+      "text": "| QFlipper | https://github.com/flipperdevices/qFlipper | 1d26683 / 2024-06-11 | Y | Y (periodic background channel check) | Y (downloads + DFU-flashes firmware to Flipper Zero) | https, cert validation enforced (no ignoreSslErrors/setPeerVerifyMode/VerifyNone found) | N | none — only DFU container magic-byte format checks and device-side MD5 (storage integrity, not authenticity) | none/unpinned | backend/applicationbackend.cpp:37 (`https://update.flipperzero.one/firmware/directory.json`); backend/updateregistry.cpp:20-79 (JSON channel parsing, no signature field); dfu/dfusefile.cpp:25,56,79,93 (\"signature\" = DfuSe format magic bytes only, not crypto) |"
+    }
+  ]
 }

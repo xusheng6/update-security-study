@@ -5,14 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/Jigsaw-Code/outline-client",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Outline Client’s own Electron source schedules application-update checks. Manager build settings are a different component and cannot establish Client’s signature-enforcement policy.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater with code-signature verification.",
   "limitations": [
-    "The retained repository contains multiple Outline applications; the cited evidence is from client/electron/index.ts and supports the Outline Client scope. The separate server_manager application must not be substituted for this client claim.",
-    "The signing plugin delegates to external build infrastructure and does not expose the certificate identity or runtime verification policy here.",
-    "This is a newly retrieved snapshot and does not establish historical released-artifact signing or notarization.",
-    "The retained repository contains multiple Outline applications; the cited updater is the server_manager Electron application, so the original 'Outline Client' label needs this scope boundary. The signing plugin delegates to external build infrastructure and does not expose the certificate identity or runtime verification policy here. This is a newly retrieved snapshot and does not establish historical released-artifact signing or notarization."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,37 @@
       "commit": "a8ef172c90ad94dc703bca975f3baf46ed7dbfda"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Outline Client’s own Electron source schedules application-update checks. Manager build settings are a different component and cannot establish Client’s signature-enforcement policy.",
+    "limitations": [
+      "The retained repository contains multiple Outline applications; the cited evidence is from client/electron/index.ts and supports the Outline Client scope. The separate server_manager application must not be substituted for this client claim.",
+      "The signing plugin delegates to external build infrastructure and does not expose the certificate identity or runtime verification policy here.",
+      "This is a newly retrieved snapshot and does not establish historical released-artifact signing or notarization.",
+      "The retained repository contains multiple Outline applications; the cited updater is the server_manager Electron application, so the original 'Outline Client' label needs this scope boundary. The signing plugin delegates to external build infrastructure and does not expose the certificate identity or runtime verification policy here. This is a newly retrieved snapshot and does not establish historical released-artifact signing or notarization."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "sha512 + OS code-signing",
+  "trust_root": "electron-updater",
+  "original_evidence": [
+    {
+      "file": "batch-AC4.md",
+      "line": 12,
+      "text": "| Outline | https://github.com/outline/outline | 0f8f69d / 2026-08-19 | Y | N | N (notify-only) | https (Docker Hub API, TLS enforced) | n/a | n/a | n/a | `server/utils/getInstallationInfo.ts:20-56` — `getVersionInfo()` fetches Docker Hub tag list, computes `versionsBehind`, never downloads/executes anything |"
+    },
+    {
+      "file": "batch-W6.md",
+      "line": 31,
+      "text": "| Outline Client (desktop, Electron) | https://github.com/Jigsaw-Code/outline-client | a95893d / 2026-08-04 | Y | Y (periodic 6h + on-launch check via `electron-updater`) | Y | https (electron-updater default GitHub-releases provider; no publish override found to alter this) | Y | signature (electron-updater's built-in code-signature verification of the downloaded installer against the running app's signer, Authenticode/macOS codesign) | OS keystore (electron-updater `verifyUpdateCodeSignature`) | `client/package.json:48` (`\"electron-updater\": \"^5.0.5\"`), `client/electron/index.ts:34` (`import {autoUpdater} from 'electron-updater'`), `:442-443` (`autoUpdater.checkForUpdates()`), `:498-500` (periodic `setInterval(checkForUpdates, 6*60*60*1000)`), `:617-620` (`update-downloaded` → notifies renderer to prompt restart), `client/electron/electron-builder.json` (no custom `publish`/signature-bypass config) |"
+    }
+  ]
 }

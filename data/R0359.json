@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/NickvisionApps/Parabolic",
   "channel": "data",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Parabolic delegates yt-dlp component updates to an external UpdaterService. The provider hash source and dependency verification policy remain unestablished.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "SHA-256 present but sourced from the same GitHub endpoint being trusted — not pinned.",
   "limitations": [
-    "The delegated UpdaterService implementation and release metadata path were not present in the inspected source subtree, so SHA-256 provenance and comparison cannot be confirmed; the retained snapshot is newly retrieved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "1118e6a3abbf5ffc1f764c4c9781f98d4c0482d4"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Parabolic delegates yt-dlp component updates to an external UpdaterService. The provider hash source and dependency verification policy remain unestablished.",
+    "limitations": [
+      "The delegated UpdaterService implementation and release metadata path were not present in the inspected source subtree, so SHA-256 provenance and comparison cannot be confirmed; the retained snapshot is newly retrieved."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "SHA-256 (server-supplied)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-X4.md",
+      "line": 10,
+      "text": "| Parabolic (yt-dlp GUI) | https://github.com/NickvisionApps/Parabolic | 1118e6a / 2026-06-29 (shared lib: https://github.com/NickvisionApps/Desktop, c55d4f1 / 2026-05-24) | Y | N (checks automatically on launch, notifies; download requires user click) | Y (downloads yt-dlp/deno binaries and the Windows installer, executes them) | https via .NET HttpClient, default validation, no `ServerCertificateCustomValidationCallback` bypass found anywhere in Parabolic or the Nickvision.Desktop shared lib | N | hash (SHA256) | server-supplied/unpinned — hash comes from GitHub API's `digest` field on the same release asset, fetched over the same channel being verified | Nickvision.Parabolic.Shared/Services/YtdlpExecutableService.cs:565-589 (DownloadUpdateAsync → chmod +x, no re-exec confirmation shown but binary becomes live); Nickvision-Desktop/Nickvision.Desktop/Application/UpdaterService.cs:83-158 (SHA256 compare against `assetWithDigest.Digest` from GitHub API), :188-235 (WindowsApplicationUpdateAsync downloads setup.exe via same hash-checked path then `Process.Start(Verb=\"open\")`) |"
+    }
+  ]
 }

@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/sylpheed-mail/sylpheed",
   "channel": "plugin",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The source supports a plaintext manifest feeding the Windows plugin-updater handoff. The extraction implementation is external to this checkout, so the assessment is limited to the transport and handoff control.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "Version manifest over plaintext HTTP; plugin-update path downloads a server-supplied URL and unzips into the install dir with no hash/sig. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,23 @@
       "commit": "c47d366a3c2340464b1851f99d6a04ce3a6c17fd"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The source supports a plaintext manifest feeding the Windows plugin-updater handoff. The extraction implementation is external to this checkout, so the assessment is limited to the transport and handoff control.",
+    "limitations": [
+      "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "http (plaintext)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": []
 }

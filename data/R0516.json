@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/nosmokingbandit/Watcher3",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The zip updater downloads and extracts the branch archive to overwrite files; verification is absent in this flow.",
+  "description": "Unsigned tarball download-extract-overwrite (CouchPotato lineage).",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "0217e75158b563bdefc8e01c3be7620008cf3977"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The zip updater downloads and extracts the branch archive to overwrite files; verification is absent in this flow.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AG7.md",
+      "line": 18,
+      "text": "| Watcher3 | https://github.com/nosmokingbandit/Watcher3 | 0217e75 / 2018-10-04 (repo appears unmaintained/stale — last commit 2018) | Y | Y (opt-in, `installupdates`, default `false`) | Y | http/https — code uses `Url.open()` wrapper; TLS verification controlled by `Server.verifyssl` config, **default `true`** in `core/base_config.cfg:347`, but helper falls back to `verify=False` if key absent (`core/helpers.py:79`) | N | none — no hash/signature check on downloaded ZIP | server-supplied/unpinned (GitHub archive ZIP for branch, no pinning) | `core/version.py:440-521` (`ZipUpdater.execute_update` — downloads `{GIT_URL}/archive/{branch}.zip` via `Url.open`, extracts with `zipfile`, overwrites files, no verification); `core/version.py:55-68` (`installupdates` gate, fully automatic when enabled); `core/helpers.py:61-81` (`Url.open`, `verify=verifySSL` with insecure fallback default); `core/base_config.cfg:332-347` (`checkupdates:true, installupdates:false, verifyssl:true` defaults) |"
+    }
+  ]
 }

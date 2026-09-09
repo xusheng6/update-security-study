@@ -5,16 +5,38 @@
   "historical_tier": "A",
   "project_url": "https://github.com/repetier/Repetier-Host-Mac",
   "channel": "unresolved",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Withdraw the original security classification. The primary Repetier-Host product is not established by the available Mac-variant substitute.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "macOS Sparkle DSA-signed vs bundled dsa_pub.pem; appcast over plain HTTP (signature carries integrity).",
   "limitations": [
-    "The public Repetier-Host repository locator returned repository-not-found; the retained provenance explicitly distinguishes the unavailable primary Windows/.NET product from Repetier-Host-Mac.",
-    "The primary Repetier-Host product is not established by the available Mac-variant substitute. Reinstating the original classification requires that missing evidence."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
   "classification_certified": false,
-  "project_link_basis": "Recorded repository in original batch report; not a new upstream verification."
+  "project_link_basis": "Recorded repository in original batch report; not a new upstream verification.",
+  "later_review_audit": {
+    "description": "Withdraw the original security classification. The primary Repetier-Host product is not established by the available Mac-variant substitute.",
+    "limitations": [
+      "The public Repetier-Host repository locator returned repository-not-found; the retained provenance explicitly distinguishes the unavailable primary Windows/.NET product from Repetier-Host-Mac.",
+      "The primary Repetier-Host product is not established by the available Mac-variant substitute. Reinstating the original classification requires that missing evidence."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "http (appcast)",
+  "payload_verification": "signature[Sparkle-DSA]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-J1.md",
+      "line": 14,
+      "text": "| Repetier-Host | No public source for the primary Windows/.NET Repetier-Host (closed-source, distributed only as a compiled binary from repetier.com; not present under github.com/repetier). Public substitute analyzed: github.com/repetier/Repetier-Host-Mac (Cocoa/Obj-C macOS port) | Cocoa/Objective-C (macOS) + bundled `Sparkle.framework` | Y (Repetier-Host-Mac only, via Sparkle) | check: automatic periodic Sparkle check + notify. download/install: automatic — Sparkle downloads the signed update package and installs/relaunches | Y (Sparkle downloads and installs/executes the update package after passing its signature check) | Feed is **HTTP, not HTTPS**: `SUFeedURL = http://www.repetier.com/updates/rhm/rhm-appcast.xml`; the enclosure/download URL is read from that HTTP-fetched appcast XML | Y (appcast enclosure signed; classic Sparkle DSA signature scheme, `SUPublicDSAKeyFile` configured) | signature (DSA — Sparkle framework's classic update-package signature verification) | bundled public key file inside the app bundle: `RepetierHost/RepetierHost/dsa_pub.pem`, referenced via Info.plist key `SUPublicDSAKeyFile` | RepetierHost/RepetierHost/RepetierHost-Info.plist (\"SUFeedURL\" = \"http://www.repetier.com/updates/rhm/rhm-appcast.xml\"; \"SUPublicDSAKeyFile\" = \"dsa_pub.pem\"); RepetierHost/RepetierHost/dsa_pub.pem (bundled DSA public key present in repo, confirmed via raw fetch); RepetierHost/Sparkle.framework/* (vendored, prebuilt binary framework — not built from source in this repo) |"
+    }
+  ]
 }

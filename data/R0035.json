@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/astral-sh/uv",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The source confirms a primary self-update control flow and an official installer path, but it does not establish payload hash or signature verification. The official path executes the downloaded installer after HTTP status handling; the custom path is delegated to AxoUpdater. This supports a narrow C observation about self-update delivery, with verification unresolved.",
+  "description": "`uv self update` downloads an installer script and executes it directly — no hash or signature anywhere (via axoupdater).",
   "limitations": [
-    "Newly retrieved snapshot at the recorded commit, not historical release verification.",
-    "AxoUpdater implementation and its installer/runtime verification are external dependencies not inspected here.",
-    "The official installer script itself is downloaded as a payload; no in-repo cryptographic verification is visible in the cited functions."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "be95707d6e99d2bcb12ec1bd555d24143887ec75"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The source confirms a primary self-update control flow and an official installer path, but it does not establish payload hash or signature verification. The official path executes the downloaded installer after HTTP status handling; the custom path is delegated to AxoUpdater. This supports a narrow C observation about self-update delivery, with verification unresolved.",
+    "limitations": [
+      "Newly retrieved snapshot at the recorded commit, not historical release verification.",
+      "AxoUpdater implementation and its installer/runtime verification are external dependencies not inspected here.",
+      "The official installer script itself is downloaded as a payload; no in-repo cryptographic verification is visible in the cited functions."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "self-update",
+  "transport": "https (validated)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": []
 }

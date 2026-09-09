@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/FilenCloudDienste/filen-desktop",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The Windows builder configuration sets verifyUpdateCodeSignature to false despite Azure signing settings. Linux verification, generated manifests, and the macOS framework's runtime enforcement remain unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "macOS Squirrel.Mac (B), but package.json sets verifyUpdateCodeSignature:false on Windows and Linux has no verification — both fall back to a sha512 from the same CDN.",
   "limitations": [
-    "New default-branch snapshot; this review did not audit generated latest files, released artifacts, Linux verification, or the external Squirrel/electron-updater implementation."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "370514d797d5deee0a1d5002f50c3eca87811809"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The Windows builder configuration sets verifyUpdateCodeSignature to false despite Azure signing settings. Linux verification, generated manifests, and the macOS framework's runtime enforcement remain unresolved.",
+    "limitations": [
+      "New default-branch snapshot; this review did not audit generated latest files, released artifacts, Linux verification, or the external Squirrel/electron-updater implementation."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "sha512 (code-sig check off on Win)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AA7.md",
+      "line": 22,
+      "text": "| Filen Desktop | https://github.com/FilenCloudDienste/filen-desktop | 370514d797d5 / 2026-07-21 | Y | Y | Y | https (cdn.filen.io, generic electron-updater feed); TLS enforced, no disabling found on update path | N (YAML manifest served plaintext-over-HTTPS from same CDN, not independently signed) | hash (sha512, from manifest) on Win/Linux; OS code-signing (Squirrel.Mac, mandatory) on macOS | macOS: OS keystore (Apple code sign, enforced by Squirrel.Mac, cannot be disabled). Win/Linux: server-supplied hash only, unpinned | src/lib/updater.ts:1-16 (electron-updater setup); package.json:142 (`\"verifyUpdateCodeSignature\": false` — explicitly disables electron-updater's Authenticode check on Windows); package.json:112-116,160-165 (`https://cdn.filen.io/@filen/desktop/release/latest/`) |"
+    }
+  ]
 }

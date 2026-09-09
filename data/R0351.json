@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/memospot/memospot",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+  "description": "Tauri updater, minisign signature vs a pinned key compiled into the binary.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "a5fa2839ec3865cc7ee84cf088be6694048209af"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "Ed25519 (minisign)",
+  "trust_root": "pubkey compiled into binary (Tauri.toml)",
+  "original_evidence": [
+    {
+      "file": "batch-X7.md",
+      "line": 30,
+      "text": "| Memospot | https://github.com/memospot/memospot.git | 5b4aeb8fd0f / 2026-08-15 | Y | Y (auto-downloads after a confirm dialog, then installs+restarts) | Y | https (GitHub Releases: `latest.json` + artifact) | Y (Tauri updater manifest is minisign-signed) | signature (Ed25519 via minisign) | **pinned-in-binary** (`pubkey` embedded in `Tauri.toml`, compiled into the binary) | `crates/memospot/src/updater.rs:99-176` (`update()`: `check()` → confirm dialog → `download_and_install()` → `app.restart()`); `crates/memospot/Tauri.toml:70-75` (`[plugins.updater] pubkey = \"...minisign public key...\"`, `endpoints = [\"https://github.com/memospot/memospot/releases/latest/download/latest.json\"]`) |"
+    }
+  ]
 }

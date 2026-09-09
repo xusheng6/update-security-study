@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/nukeop/nuclear",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+  "description": "Tauri updater, minisign signature vs pinned key (independent of OS signing); auto-install opt-in. NOTE: separate plugin marketplace runs jsdelivr/GitHub zips via new Function() with no verification — a content-as-code RCE surface beside the safe updater.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,34 @@
       "commit": "590383262b0c5a86dfcf9c9526d9760b0db7c2bb"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "Ed25519 (minisign)",
+  "trust_root": "pubkey pinned in tauri.conf.json",
+  "original_evidence": [
+    {
+      "file": "batch-S3.md",
+      "line": 16,
+      "text": "| Nuclear | https://github.com/nukeop/nuclear.git | 274f4074122f51c4b66714a29420c4100b7cc25a (2026-08-16) | Y | Y (opt-in setting) | Y | https, TLS enforced | N (manifest JSON itself unsigned, but each artifact entry inside it carries a detached signature) | Ed25519 (minisign) signature verified by `tauri-plugin-updater` against pinned pubkey before install | **pinned in binary** — pubkey embedded in `tauri.conf.json`, compiled into app | `packages/player/src-tauri/tauri.conf.json:64-70` (`plugins.updater.pubkey=...`, endpoint `https://github.com/nukeop/nuclear/releases/latest/download/latest.json`); `packages/player/package.json` `\"@tauri-apps/plugin-updater\":\"~2.10.0\"`; `packages/player/src/stores/updaterStore.ts:36-65` (check → optional auto `downloadAndInstall()` gated by `core.updates.autoInstall`) |"
+    },
+    {
+      "file": "batch-S3.md",
+      "line": 29,
+      "text": "| Nuclear | **A** | Tauri updater with Ed25519 (minisign) signature verified against a pubkey pinned in `tauri.conf.json`, independent of OS code-signing (macOS build is even ad-hoc/unnotarized). Auto-install is opt-in. |"
+    }
+  ]
 }

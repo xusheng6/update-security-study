@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Koenkk/zigbee2mqtt",
   "channel": "firmware",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In the inspected Zigbee2MQTT OTA extension, update checks and updates can use a supplied URL or locally written hex image and are delegated to zigbee-herdsman; this source snapshot does not establish the dependency's transport or firmware-signature enforcement.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Device-firmware OTA (via zigbee-herdsman) server-TLS-only, no independent payload authentication.",
   "limitations": [
-    "New default-branch snapshot, not the historical Zigbee2MQTT release.",
-    "zigbee-herdsman implementation, firmware catalogs, transport configuration, and device-side signature checks were not reviewed; no absence of authentication is inferred.",
-    "New default-branch snapshot, not the historical Zigbee2MQTT release. zigbee-herdsman implementation, firmware catalogs, transport configuration, and device-side signature checks were not reviewed; no absence of authentication is inferred."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,36 @@
       "commit": "3c3d8c1a71cabb31f1b97ad268681dd3f747ce19"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In the inspected Zigbee2MQTT OTA extension, update checks and updates can use a supplied URL or locally written hex image and are delegated to zigbee-herdsman; this source snapshot does not establish the dependency's transport or firmware-signature enforcement.",
+    "limitations": [
+      "New default-branch snapshot, not the historical Zigbee2MQTT release.",
+      "zigbee-herdsman implementation, firmware catalogs, transport configuration, and device-side signature checks were not reviewed; no absence of authentication is inferred.",
+      "New default-branch snapshot, not the historical Zigbee2MQTT release. zigbee-herdsman implementation, firmware catalogs, transport configuration, and device-side signature checks were not reviewed; no absence of authentication is inferred."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AC6.md",
+      "line": 27,
+      "text": "| Zigbee2MQTT (app itself) | https://github.com/Koenkk/zigbee2mqtt | fcbb7ff / 2026-08-01 | N (no self-updater for the Node.js app; manual npm/docker upgrade) | N | N | N/A | N/A | N/A | N/A | negative census: no autoUpdater/checkForUpdate hits outside otaUpdate.ts (device OTA, separate channel below); lib/extension/otaUpdate.ts itself contains no fetch/http code, delegates entirely to zigbee-herdsman |"
+    },
+    {
+      "file": "batch-AC6.md",
+      "line": 28,
+      "text": "| Zigbee2MQTT device-firmware OTA (content channel, via zigbee-herdsman dependency) | https://github.com/Koenkk/zigbee-herdsman | b3e89bd / 2026-08-16 | Y | Y (auto OTA check/apply configurable) | Y (downloads and flashes firmware to Zigbee devices) | https (`fetch()`, default Node TLS, not disabled) to raw.githubusercontent.com | N | optional sha512 hash — but the hash itself comes from the SAME index.json fetched from the SAME GitHub-hosted source as the firmware, i.e. hash-from-same-endpoint (not an independently pinned signature) | unpinned / GitHub-repo-supplied (Koenkk/zigbee-OTA index.json) | src/controller/helpers/ota.ts:55-56 (`ZIGBEE_OTA_LATEST_URL = \"https://raw.githubusercontent.com/Koenkk/zigbee-OTA/master/index.json\"`); :96 (`fetch(pageUrl)`); :106-119 (`validateFirmware`: optional `sha512` compared via `crypto.createHash`); :127 (`fetchFirmware` → `fetch(url)`) |"
+    }
+  ]
 }

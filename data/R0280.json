@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/lapce/lapce",
   "channel": "mixed",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Lapce has separate application and plugin update channels. The original assertion that the application fetches a checksum is not substantiated by the reviewed module; a complete publisher-authentication assessment remains unresolved for both channels.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Fetches update payload/checksum over HTTPS from the same endpoint — no independent signature. Plugin registry also unverified.",
   "limitations": [
-    "New default-branch snapshot rather than historical release re-verification; updater caller/restart policy, GitHub release metadata, plugin service controls, archive provenance, and shipped artifact behavior were not independently audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "b604d57de4a820006d335a3be0d7583eb8fab558"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Lapce has separate application and plugin update channels. The original assertion that the application fetches a checksum is not substantiated by the reviewed module; a complete publisher-authentication assessment remains unresolved for both channels.",
+    "limitations": [
+      "New default-branch snapshot rather than historical release re-verification; updater caller/restart policy, GitHub release metadata, plugin service controls, archive provenance, and shipped artifact behavior were not independently audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "checksum same endpoint",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-U4.md",
+      "line": 12,
+      "text": "| lapce | lapce/lapce | c9e4c3394803 / 2026-04-03 | Y | N (check auto, install manual) | Y | https, TLS enforced Y | N | none | NA | lapce-app/src/update.rs:22-53 (GitHub API check), :55-86 (download_release, no checksum); window_tab.rs:1349-1383 (extract+restart) |"
+    }
+  ]
 }

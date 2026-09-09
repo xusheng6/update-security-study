@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/superhighfives/pika",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In Pika's Sparkle build, Info.plist enables automatic checks, points to https://superhighfives.com/releases/pika, and embeds SUPublicEDKey. The Sparkle AppDelegate path sets that feed and calls SUUpdater.shared().checkForUpdates; the reviewed source supports a configured EdDSA update trust key for this build variant.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Sparkle 2 EdDSA pinned.",
   "limitations": [
-    "New default-branch snapshot rather than historical release re-verification; Sparkle framework enforcement, feed contents, and shipped artifact signatures were not independently audited, and the evidence applies to TARGET_SPARKLE rather than the MAS variant."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "4edac16a005a8410b7ec1832a8827451269b8d5f"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In Pika's Sparkle build, Info.plist enables automatic checks, points to https://superhighfives.com/releases/pika, and embeds SUPublicEDKey. The Sparkle AppDelegate path sets that feed and calls SUUpdater.shared().checkForUpdates; the reviewed source supports a configured EdDSA update trust key for this build variant.",
+    "limitations": [
+      "New default-branch snapshot rather than historical release re-verification; Sparkle framework enforcement, feed contents, and shipped artifact signatures were not independently audited, and the evidence applies to TARGET_SPARKLE rather than the MAS variant."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[Sparkle-EdDSA]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-N2.md",
+      "line": 10,
+      "text": "| Pika | https://github.com/superhighfives/pika | Sparkle 2 | Y | Y (`SUEnableAutomaticChecks=true`; no `SUAllowsAutomaticUpdates` override so default Sparkle prompt-before-install behavior applies) | Y | https | TLS-only | signature[EdDSA] | pinned-in-binary (Sparkle-EdDSA) | `Pika/Info.plist:56-61` — `SUEnableAutomaticChecks=true`, `SUFeedURL=https://superhighfives.com/releases/pika`, `SUPublicEDKey=+hHTCW8zfGxSQeowmFxlZzE4N/fxolLQRpA7zLlzBvk=`. |"
+    }
+  ]
 }

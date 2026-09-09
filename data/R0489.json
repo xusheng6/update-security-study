@@ -5,12 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/MayGo/tockler",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "B",
-  "description": "Targeted retained-source read supports the narrow primary updater classification: Tockler performs packaged-build update checks through electron-updater and restricts auto-update support to selected packaged targets; release verification is delegated to electron-updater/OS signing.",
+  "description": "electron-updater + code signing.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in configuration.",
-    "Where electron-updater/Squirrel/install4j performs final verification, the external framework implementation is not vendored here."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "96b6d49e5dde127a2ca62aa931284a5a38c145a8"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow primary updater classification: Tockler performs packaged-build update checks through electron-updater and restricts auto-update support to selected packaged targets; release verification is delegated to electron-updater/OS signing.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in configuration.",
+      "Where electron-updater/Squirrel/install4j performs final verification, the external framework implementation is not vendored here."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "B",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "sha512 + OS code-signing",
+  "trust_root": "electron-updater",
+  "original_evidence": [
+    {
+      "file": "batch-AE6.md",
+      "line": 22,
+      "text": "| Tockler | https://github.com/MayGo/tockler | 96b6d49e5dde127a2ca62aa931284a5a38c145a8 (2025-06-21) | Y | Y (auto-download disabled by default flag, but auto-check + prompted download; downloads happen automatically once user approves or on macOS DMG builds) | Y | https (GitHub Releases via electron-updater) | Y | electron-updater default (macOS: Apple code signature verified by Squirrel.Mac/DMG; Windows: NSIS installer, code-signed via CI secrets) | OS code-signing (Apple notarization cert + Authenticode via `CSC_LINK`/`CSC_KEY_PASSWORD`/`APPLE_ID` CI secrets) — standard electron-updater trust model, not a pinned app-level key | `electron/src/app/app-updater.ts:1-213` (autoUpdater config, `checkForUpdates`/`downloadUpdate`); `electron/electron-builder.yml` (`publish: [github]`, `mac.hardenedRuntime: true`, `electronUpdaterCompatibility`); `.github/workflows/build.yml:197-199` (`CSC_LINK`, `CSC_KEY_PASSWORD`, `APPLE_ID`) |"
+    }
+  ]
 }

@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/yt-dlp/yt-dlp",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "yt-dlp’s updater compares the selected artifact’s SHA-256 with its SHA2-256SUMS entry when available. It restricts automatic restart when checksum metadata is unavailable. This supports the checksum control, not independent authentication of the checksum manifest.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "-U self-replaces; verifies SHA256 from SHA2-256SUMS (good) but no signature/pinned key.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; release metadata may change.",
-    "A repository public.key exists, but this updater body does not use it.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; release metadata may change.; A repository public.key exists, but this updater body does not use it."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "bbc809a1161d3bfca51fa36f59dda35556ee85a0"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "yt-dlp’s updater compares the selected artifact’s SHA-256 with its SHA2-256SUMS entry when available. It restricts automatic restart when checksum metadata is unavailable. This supports the checksum control, not independent authentication of the checksum manifest.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; release metadata may change.",
+      "A repository public.key exists, but this updater body does not use it.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; release metadata may change.; A repository public.key exists, but this updater body does not use it."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "self-update",
+  "transport": "https (validated)",
+  "payload_verification": "hash (SHA256SUMS, unsigned)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-I5.md",
+      "line": 7,
+      "text": "| yt-dlp | github.com/yt-dlp/yt-dlp | Python CLI | Y | manual trigger (`-U`/`--update`); once invoked, chk+dl+inst run automatically | Y (replaces its own running executable/zip) | https (github.com, api.github.com); TLS enforced (CERT_REQUIRED default, only disabled via explicit user flag `--no-check-certificate`) | N (SHA2-256SUMS file is a plain unsigned text file) | hash-from-manifest (SHA256, compared against `SHA2-256SUMS` release asset) | N/A (hash only, no signature; sums fetched over HTTPS from same GitHub release) | yt_dlp/update.py:320 (download URL), :464 (fetch SHA2-256SUMS), :536 (`hashlib.sha256(newcontent).hexdigest() != update_info.checksum`), :535 (`_block_restart` if no checksum available); yt_dlp/networking/_helper.py:110 (`ssl.CERT_REQUIRED if verify else ssl.CERT_NONE`) |"
+    }
+  ]
 }

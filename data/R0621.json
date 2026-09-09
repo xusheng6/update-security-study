@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/makerbot/s3g",
   "channel": "firmware",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The retained s3g source confirms firmware metadata/download and flashing are HTTP/no-verification channels, but the auto-update constructor fetches metadata only; flashing is explicit caller action.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "Firmware auto-fetched over plaintext http://firmware.makerbot.com with zero verification, then flashed to the MCU via avrdude on init (default on). [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,23 @@
       "commit": "d7991b8ba85502222c99852a6bb29c68d2dd63ef"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained s3g source confirms firmware metadata/download and flashing are HTTP/no-verification channels, but the auto-update constructor fetches metadata only; flashing is explicit caller action.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "http",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": []
 }

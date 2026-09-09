@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/owncloud/client",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The recovered ownCloud source confirms a scheduled updater and apply path but no payload-authentication check in the inspected Windows updater hook; this supports the recorded narrow C classification.",
+  "description": "Zero payload verification before running msiexec — worst-in-class Tier C.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; historical release/build behavior may differ.",
-    "Repository origin and commit were checked against the candidate metadata; this source is project-associated but does not establish the original study release checkout."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,24 @@
       "commit": "303063b691c6a79986364e8c68f428bffd8d944f"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The recovered ownCloud source confirms a scheduled updater and apply path but no payload-authentication check in the inspected Windows updater hook; this supports the recorded narrow C classification.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; historical release/build behavior may differ.",
+      "Repository origin and commit were checked against the candidate metadata; this source is project-associated but does not establish the original study release checkout."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validated)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": []
 }

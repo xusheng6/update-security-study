@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/2dust/v2rayN",
   "channel": "mixed",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "v2rayN manages distinct GUI, core and geographic-data update channels. The inspected component updater does not establish the report’s blanket verification-policy assertion across all three.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "GUI + cores + geo files, zero verification anywhere.",
   "limitations": [
-    "New default-branch snapshot, not the original study checkout or a release artifact.",
-    "Inspected methods do not establish repository-wide absence of verification or external enforcement.",
-    "New default-branch snapshot, not the original study checkout or a release artifact. Inspected methods do not establish repository-wide absence of verification or external enforcement."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "3d50d9f82c993d58dd3eedfcdeaf2af5b98a7146"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "v2rayN manages distinct GUI, core and geographic-data update channels. The inspected component updater does not establish the report’s blanket verification-policy assertion across all three.",
+    "limitations": [
+      "New default-branch snapshot, not the original study checkout or a release artifact.",
+      "Inspected methods do not establish repository-wide absence of verification or external enforcement.",
+      "New default-branch snapshot, not the original study checkout or a release artifact. Inspected methods do not establish repository-wide absence of verification or external enforcement."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-W6.md",
+      "line": 24,
+      "text": "| v2rayN | https://github.com/2dust/v2rayN | 14e27f3 / 2026-08-20 | Y | N (manual \"check update\" button; download+install then automatic) | Y (updates the GUI app itself, proxy cores [Xray/sing-box/etc.], **and** geosite/geoip data files) | https (GitHub releases / redirect chase), no TLS bypass found in `DownloadService.cs` | N | **none** — no sha256/checksum/signature check anywhere in the update path | n/a | `v2rayN/ServiceLib/Services/UpdateService.cs:1-200` (`CheckUpdateGuiN`, `CheckUpdateCore`, `UpdateGeoFileAll` — no verify calls at all, confirmed via grep for sha256/checksum/signature/gpg = 0 hits), `v2rayN/AmazTool/UpgradeApp.cs:1-125` (`Upgrade()`: kills running process, `ZipFile.OpenRead`, extracts straight over the app's own exe path with no verification), `v2rayN/ServiceLib/Common/Utils.cs:821-824` (`UpgradeAppExists` locates `AmazTool` helper) |"
+    }
+  ]
 }

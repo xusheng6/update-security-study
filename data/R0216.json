@@ -5,16 +5,32 @@
   "historical_tier": "A",
   "project_url": "https://apphousekitchen.com/",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Withdraw the original security classification. AlDente Pro updater key configuration is not established by retained proprietary-distribution metadata.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Sparkle EdDSA (closed binary; presumed pinned).",
   "limitations": [
-    "No public source repository or verified application archive was established from the official product page; no in-binary key configuration is retained.",
-    "AlDente Pro updater key configuration is not established by retained proprietary-distribution metadata. Reinstating the original classification requires that missing evidence."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
   "classification_certified": false,
-  "project_link_basis": "Official product website checked on 2026-09-08."
+  "project_link_basis": "Official product website checked on 2026-09-08.",
+  "later_review_audit": {
+    "description": "Withdraw the original security classification. AlDente Pro updater key configuration is not established by retained proprietary-distribution metadata.",
+    "limitations": [
+      "No public source repository or verified application archive was established from the official product page; no in-binary key configuration is retained.",
+      "AlDente Pro updater key configuration is not established by retained proprietary-distribution metadata. Reinstating the original classification requires that missing evidence."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[Sparkle-EdDSA]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": []
 }

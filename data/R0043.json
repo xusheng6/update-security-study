@@ -5,14 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/jitsi/jitsi-meet-electron",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Withdraw the original security classification for this record. Jitsi Meet Electron uses electron-updater at startup for non-MAS builds; this source review confirms update orchestration but does not independently verify Authenticode or notarization enforcement. The retained evidence is insufficient to support the original full claim.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater default; Authenticode/notarization.",
   "limitations": [
-    "The original Authenticode/notarization portion is not auditable from the application source reviewed; electron-updater/platform enforcement was not independently inspected.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
-    "The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot.",
-    "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,26 @@
       "commit": "e4f639b88658977d7822d98e6f52b0185958dcca"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Withdraw the original security classification for this record. Jitsi Meet Electron uses electron-updater at startup for non-MAS builds; this source review confirms update orchestration but does not independently verify Authenticode or notarization enforcement. The retained evidence is insufficient to support the original full claim.",
+    "limitations": [
+      "The original Authenticode/notarization portion is not auditable from the application source reviewed; electron-updater/platform enforcement was not independently inspected.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+      "The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot.",
+      "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "hash + OS-code-signing",
+  "trust_root": "OS-trust-store",
+  "original_evidence": []
 }

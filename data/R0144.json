@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/LIJI32/SameBoy",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "SameBoy's macOS updater uses an HTTPS version response and does not show an artifact hash or signature check in the reviewed update path; the broader installation and release-signing boundary remains outside this evidence.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Unsigned version|url manifest → downloads ZIP, swaps over running bundle, STRIPS com.apple.quarantine recursively + chowns as root. No hash/sig.",
   "limitations": [
-    "New default-branch snapshot at the recorded commit, not the original study release; the remote manifest and released ZIP signing state were not independently audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "213a12ce93d66b105a113debd9396306066a7cfc"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "SameBoy's macOS updater uses an HTTPS version response and does not show an artifact hash or signature check in the reviewed update path; the broader installation and release-signing boundary remains outside this evidence.",
+    "limitations": [
+      "New default-branch snapshot at the recorded commit, not the original study release; the remote manifest and released ZIP signing state were not independently audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validated)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-I1.md",
+      "line": 15,
+      "text": "| SameBoy (macOS) | github.com/LIJI32/SameBoy | Cocoa (Objective-C) macOS app | Y | **auto chk** (opt-in prompt on first launch — \"Should SameBoy check for updates when launched?\" — defaults the setting from the user's answer, `GBAutoUpdatesEnabled`) + **manual dl/inst** (user clicks \"Yes\"/\"Install\" in the update dialog to trigger download and, separately, install) | **Y — confirmed.** `installUpdate:` downloads a ZIP via `NSURLSession downloadTaskWithURL:` from a URL returned by the (unsigned) version-check response, shells out to `/usr/bin/unzip` via `NSTask` to extract it, then `performUpgrade` moves the extracted `SameBoy.app/Contents` directory over the running app bundle's own `Contents`, **explicitly strips the `com.apple.quarantine` extended attribute recursively from the entire bundle** (\"so we don't have to escape translocation\"), and relaunches via `execl(...,\"--update-launch\",...)`. If GateKeeper is on or the bundle isn't writable, it acquires root via the legacy `AuthorizationExecuteWithPrivileges` API and `chown -R`s the bundle to the current user first | HTTPS (`#define UPDATE_SERVER \"https://sameboy.github.io\"`, GitHub Pages) via `NSURLSession`; no `ignoreSslErrors`/custom trust-evaluation delegate found — TLS validation appears enforced | N — `checkForUpdates` GETs `UPDATE_SERVER/latest_version`, a plain-text response parsed as `\"<version>|<url>\"` split on `\\|`; no signature over this manifest | **none** — repo-wide grep for `SecStaticCodeCheckValidity`, `CC_SHA*`, `codesign`, `SecCode`, `SHA256`, `checksum` in `Cocoa/GBApp.m` returns zero matches; the downloaded ZIP/app bundle is never hashed or code-signature-checked before being installed and the quarantine flag is affirmatively removed | N/A (no key exists — no signature scheme is used at all) | `Cocoa/GBApp.m:14` (`#define UPDATE_SERVER \"https://sameboy.github.io\"`); `:447-467` (`checkForUpdates`, unsigned `\"ver|url\"` manifest); `:533-620` (`installUpdate:` — `NSURLSession downloadTaskWithURL:_updateURL`, `/usr/bin/unzip` via `NSTask`, `AuthorizationExecuteWithPrivileges`/`chown -R` for GateKeeper/write-access); `:622-684` (`performUpgrade` — swaps `Contents`, then `removexattr(bundlePath.UTF8String, \"com.apple.quarantine\", 0)` recursively over every file in the bundle, then `execl(...)` relaunch) |"
+    }
+  ]
 }

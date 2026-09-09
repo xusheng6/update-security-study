@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/NixOS/nix",
   "channel": "unresolved",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected Nix script installs content already bundled in a local distribution. It is not evidence for the historical bootstrap acquisition path or its authentication policy.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "HTTPS by default but zero payload verification before unpacking a privileged package-manager tarball; doesn't reject an http:// override.",
   "limitations": [
-    "New default-branch snapshot, not the historical Nix bootstrap revision under study.",
-    "The historical bootstrap launcher, release tarball acquisition, and any source or release-side signatures were not present in the reviewed implementation path; this is a project-specific missing-evidence disposition.",
-    "New default-branch snapshot, not the historical Nix bootstrap revision under study. The historical bootstrap launcher, release tarball acquisition, and any source or release-side signatures were not present in the reviewed implementation path; this is a project-specific missing-evidence disposition."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "0765ffa540e2adfda7b69efafdbac821ebc48034"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected Nix script installs content already bundled in a local distribution. It is not evidence for the historical bootstrap acquisition path or its authentication policy.",
+    "limitations": [
+      "New default-branch snapshot, not the historical Nix bootstrap revision under study.",
+      "The historical bootstrap launcher, release tarball acquisition, and any source or release-side signatures were not present in the reviewed implementation path; this is a project-specific missing-evidence disposition.",
+      "New default-branch snapshot, not the historical Nix bootstrap revision under study. The historical bootstrap launcher, release tarball acquisition, and any source or release-side signatures were not present in the reviewed implementation path; this is a project-specific missing-evidence disposition."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AD5.md",
+      "line": 19,
+      "text": "| Nix installer (DeterminateSystems/nix-installer) | https://github.com/DeterminateSystems/nix-installer.git | 4132ad07a15ee7d88c096ac7172b7afb2672866b / 2026-08-19 | Y | Y (single run, but downloads+installs+activates unattended) | Y | https by default (build-time `NIX_TARBALL_URL = \"https://releases.nixos.org/nix/nix-2.35.2/...\"`, flake.nix:37); **runtime code also accepts plain `http://` if a user overrides the URL** (`src/action/base/fetch_and_unpack_nix.rs:41-44,120-121`, no rejection of `http` scheme); TLS validation not disabled anywhere found (no InsecureSkipVerify/danger_accept_invalid) | N | **none** — downloaded `.tar.xz` is piped straight into `tar`/`xz` unpack with zero hash or signature check | n/a (no key at all) | `src/action/base/fetch_and_unpack_nix.rs:117-172` (fetch via reqwest → `res.bytes()` → `XzDecoder`/`tar::Archive::unpack`, no digest/signature check anywhere in path); confirmed via repo-wide grep for gpg/signature/sha256/checksum in `src/` = 0 hits. Note: the alternate `DeterminateNix` distribution is embedded at compile time (`include_bytes!`) so it has no runtime download step (`src/distribution.rs:33-51`) |"
+    }
+  ]
 }

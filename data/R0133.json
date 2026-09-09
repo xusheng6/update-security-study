@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/DavidoTek/ProtonUp-Qt",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "ProtonUp-Qt’s compatibility-tool retrieves use a shared helper with progress and cancellation handling. The original provider-wide checksum assertion remains unresolved; it requires the relevant tool module’s integrity policy.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Fetches a checksum URL but never checks it — verification in name only.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "f9c46b81435350620dc2da3da99a249666fed929"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "ProtonUp-Qt’s compatibility-tool retrieves use a shared helper with progress and cancellation handling. The original provider-wide checksum assertion remains unresolved; it requires the relevant tool module’s integrity policy.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "components",
+  "transport": "https (validated)",
+  "payload_verification": "none (dead checksum)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-I2.md",
+      "line": 8,
+      "text": "| ProtonUp-Qt | github.com/DavidoTek/ProtonUp-Qt | PySide6/Qt, Python, Flatpak/AppImage/AUR | N (app self-update — none found); Y (Proton-GE/Wine-GE compat tool downloader = content-as-code) | manual (user clicks Install for a specific compat-tool release) | Y — downloads Proton-GE/Wine-GE tarballs from GitHub/GitLab/Codeberg release assets and extracts them for use by Steam/Lutris/Heroic | HTTPS (GitHub/GitLab/Codeberg release APIs, `browser_download_url`); TLS enforced (default `requests`, no verify=False found) | N | **none** — a checksum-file URL is fetched and stored (`values['checksum']`) but is never read or compared against the downloaded bytes anywhere in the codebase (dead/unused field) | N/A | `pupgui2/util.py:700-740` (`fetch_project_release_data` stores checksum URL, never consumed); `pupgui2/networkutil.py:1-98` (`download_file` has no hash/signature check) |"
+    }
+  ]
 }

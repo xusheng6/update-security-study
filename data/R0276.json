@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/VCVRack/Rack",
   "channel": "plugin",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "VCV Rack plugin sync downloads the .vcvplugin package without a subsequent hash/signature verification call.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "App update notify-only, but plugin-library sync auto-downloads + loads native .vcvplugin packages over HTTPS with zero hash/signature (content-as-code RCE).",
   "limitations": [
-    "Newly retrieved source snapshot at the recorded commit; this is not historical release re-verification. Released artifact behavior and external framework enforcement remain unverified.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "061ccf63c1758599396ac1bb10d47345d9d34076"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "VCV Rack plugin sync downloads the .vcvplugin package without a subsequent hash/signature verification call.",
+    "limitations": [
+      "Newly retrieved source snapshot at the recorded commit; this is not historical release re-verification. Released artifact behavior and external framework enforcement remain unverified.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-U1.md",
+      "line": 14,
+      "text": "| VCV Rack | https://github.com/VCVRack/Rack.git | 061ccf6 / 2025-11-04 | Y (app, notify-only) / Y (plugin-content channel, auto-download) | app: N (opens browser only) / content: Y (once logged in, \"sync updates\" auto-downloads all outdated plugins) | app: **N** — only opens the download page in the system browser; content: **Y** — downloads and installs `.vcvplugin` packages (native code loaded into the process) with **no hash/signature check found** | https, cert validation enforced via libcurl `CURLOPT_SSL_VERIFYPEER = settings::verifyHttpsCerts` (default `true`, user-toggleable) | no | **none** for downloaded plugin packages (no checksum/signature verification located in `syncUpdate()`) | n/a | `include/library.hpp` (`checkAppUpdate`, `syncUpdate`); `src/library.cpp:67-104` (app-update check → browser only), `:350-395` (`syncUpdate` downloads `.vcvplugin` via `network::requestDownload`, no verification call); `src/app/MenuBar.cpp:1035-1037` (`system::openBrowser`); `src/network.cpp:44` (`CURLOPT_SSL_VERIFYPEER`); `src/settings.cpp:67` (default true) |"
+    }
+  ]
 }

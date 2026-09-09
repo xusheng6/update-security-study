@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/athensresearch/athens",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The confirmation handler downloads the update, while update-downloaded immediately calls quitAndInstall.",
+  "description": "electron-updater auto-install; macOS notarized (B), but Windows/Linux have no signing cert — unsigned sha512 from the same GitHub release (C). Likely unmaintained.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement remain unverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "b463a97a0d28cbc0a29bec55feebcbe54c20de54"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The confirmation handler downloads the update, while update-downloaded immediately calls quitAndInstall.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement remain unverified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "sha512 (unsigned on Win/Linux)",
+  "trust_root": "electron-updater",
+  "original_evidence": [
+    {
+      "file": "batch-AF2.md",
+      "line": 22,
+      "text": "| Athens | https://github.com/athensresearch/athens | b463a97 / 2022-12-12 (repo appears unmaintained — last commit 2022) | Y | Y (auto-check on startup + polling; download is user-confirmed via IPC, but install auto-fires as soon as download completes) | Y | https via electron-updater's GitHub provider; no TLS-disabling code found | manifest (`latest*.yml`) itself unsigned — plain electron-builder auto-update metadata | macOS: OS code-signature check by Squirrel.Mac (electron-updater validates the downloaded update's code signature/Team ID against the running app before applying) — enforced. Windows/Linux: sha512 hash from the same unpinned `latest.yml`/`latest-linux.yml`, no signature. | macOS: OS keystore (Apple Developer ID, via CI notarization). Windows/Linux: server-supplied/unpinned hash. | `src/cljs/athens/main/core.cljs:5,29-34` (electron-updater import; `autoDownload=false`, `autoInstallOnAppQuit=false`, `AUTO_UPDATE` default `true`); `:185-192` (`autoUpdater.checkForUpdates` called automatically on Electron `app \"ready\"`); `:161-168` (`ipcMain \"confirm-update\"` → `autoUpdater.downloadUpdate()`, the only user gate); `:155-158` (`\"update-downloaded\"` → `autoUpdater.quitAndInstall()` fires immediately, no further confirmation); `package.json:67-100` (`build.publish.provider=\"github\"`, `mac.afterSign=\"electron-builder-notarize\"`, `hardenedRuntime=true`; **no** `win.certificateFile`/codeSign block present); `.github/workflows/build.yml:170` (matrix includes `windows-latest`) and `:200` (only a *\"macOS code signing certificate\"* secret referenced — no Windows Authenticode signing found in CI). |"
+    }
+  ]
 }

@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/koodo-reader/koodo-reader",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The Windows updater checks only executable permission before spawning the downloaded installer.",
+  "description": "Custom Windows updater; 'verification' is just an executable-bit check (fs.accessSync X_OK), no crypto, then spawns the installer.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement remain unverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "9bb3ec647c8390329dbc8a3134875f82a701c168"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The Windows updater checks only executable permission before spawning the downloaded installer.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement remain unverified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "exec-bit check only",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AF1.md",
+      "line": 25,
+      "text": "| Koodo Reader | https://github.com/koodo-reader/koodo-reader.git | 9bb3ec6 / 2026-08-23 | Y (Windows only; macOS/Linux notify-only → opens download webpage externally) | Y (auto version-check on app mount via `checkStableUpdate`/`checkDeveloperUpdate`; the download+install step itself is 1-click, then fully automatic — app quits and silently spawns the installer) | Y (Windows) | https (`dl.koodoreader.com`), TLS enforced (raw Node `https.get`; elsewhere in the same file `rejectUnauthorized: true` is set explicitly for other requests — no disabled-validation code found anywhere) | N (plain JSON version-info response, not a signed manifest) | **None.** `electron-builder`'s config declares a GitHub `publish` provider (which could support `electron-updater`'s signed/checksummed auto-update), but the app never imports `electron-updater`/`autoUpdater` — a fully custom Windows updater downloads `Koodo-Reader-{version}-{arch}.exe` over HTTPS and \"verifies\" it only by checking the executable-permission bit (`fs.accessSync(path, fs.constants.X_OK)`) — not a cryptographic check of any kind — then spawns it directly and quits | N/A — no cryptographic verification performed (only a POSIX executable-bit check) | `main.js:1351` `ipcMain.handle(\"update-win-app\", …)`; `:1359` hardcoded `https://dl.koodoreader.com/v${version}/...exe`; `:1384-1391` fake \"verification\" (comment: \"验证文件可执行性\" / \"verify file executability\"); `:1397-1403` `spawn(updateExePath, {detached:true, shell:true})` from `app.once(\"will-quit\")`; `src/components/dialogs/updateDialog/component.tsx:36-45` auto-check on mount; `:187` Windows click → `ipcRenderer.invoke(\"update-win-app\", …)`; unused declared provider: `package.json` `build.publish{provider:\"github\", owner/repo:koodo-reader/koodo-reader}`; TLS not globally disabled: `main.js:1850,1977` `rejectUnauthorized: true` elsewhere |"
+    }
+  ]
 }

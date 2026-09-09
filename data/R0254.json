@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/mylar3/mylar3",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The recovered updater downloads a GitHub tarball with requests verify=True and extracts it for replacement, but no independent signature/hash check is shown; this supports a narrow C classification rather than D.",
+  "description": "AUTO_UPDATE autonomously downloads a tarball and extracts it over the live program dir, no hash/sig.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot rather than the original study checkout; it does not certify current releases."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "cdc94a44425b6f3f9cdb9b6e5f9d88ae2fee3316"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The recovered updater downloads a GitHub tarball with requests verify=True and extracts it for replacement, but no independent signature/hash check is shown; this supports a narrow C classification rather than D.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot rather than the original study checkout; it does not certify current releases."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validated)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-P2.md",
+      "line": 8,
+      "text": "| Mylar3 | https://github.com/mylar3/mylar3 | Python (CherryPy web app, typically deployed from a live git checkout or Docker image) | Y | Y — `mylar.SIGNAL = 'update'` is set automatically whenever `checkGithub()` (run at startup if `CHECK_GITHUB_ON_STARTUP`, and periodically) finds `COMMITS_BEHIND >= 1` **and** `CONFIG.AUTO_UPDATE` is enabled; the app then self-triggers a shutdown-and-update cycle with no further user confirmation | Y — for non-git (\"source\"/tarball) installs, `versioncheck.update()` downloads `https://github.com/{git_user}/mylar/tarball/{branch}` and extracts it directly over the running program directory (`os.renames` overwriting live `.py` files), which are then loaded/executed on the next process start; for git-checkout installs it instead runs `git pull origin {branch}` (delegating integrity to git/HTTPS transport, no additional check) | https (`requests.get(..., verify=True, ...)` to `api.github.com` for version/commit checks; `https://github.com/{user}/mylar/tarball/{branch}` for the actual update download; TLS cert verification is explicitly enabled but there is no payload authentication beyond that) | N (no signed release manifest of any kind) | none — the downloaded tarball is extracted and its files are moved directly into the live program directory with no hash or signature check of any kind before being placed into service | N/A | mylar/versioncheck.py:287-348 (`checkGithub` — GitHub API commit/compare calls, sets `mylar.SIGNAL='update'` when `COMMITS_BEHIND>=1` and `AUTO_UPDATE` is True); versioncheck.py:350-425 (`update()` — git-install branch runs `git pull`; non-git branch downloads tarball via `requests.get(tar_download_url, verify=True, stream=True)`, `tarfile.extractall`, then `os.renames` each file over the live `PROG_DIR` tree, no checksum/signature check); mylar/__init__.py:1659-1671 (`shutdown(update=True)` → calls `versioncheck.update()`); versionload():473-500 (startup auto-check wiring, `CHECK_GITHUB_ON_STARTUP`/`AUTO_UPDATE` config flags) |"
+    }
+  ]
 }

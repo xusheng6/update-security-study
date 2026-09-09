@@ -5,12 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/kevinhermawan/Ollamac",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "B",
-  "description": "Targeted retained-source read supports the narrow primary updater behavior: Sparkle feed metadata includes a compiled SUPublicEDKey, while the app starts SPUStandardUpdaterController at launch; the primary updater therefore has a pinned EdDSA trust root.",
+  "description": "Sparkle EdDSA + notarization.",
   "limitations": [
-    "The retained snapshot does not establish all released artifact signing and deployment details of the current upstream release.",
-    "Framework-delegated verification behavior depends on the packaged updater and release configuration."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "7c6bc45238838a7b80c785335203efceef95e4f2"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow primary updater behavior: Sparkle feed metadata includes a compiled SUPublicEDKey, while the app starts SPUStandardUpdaterController at launch; the primary updater therefore has a pinned EdDSA trust root.",
+    "limitations": [
+      "The retained snapshot does not establish all released artifact signing and deployment details of the current upstream release.",
+      "Framework-delegated verification behavior depends on the packaged updater and release configuration."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "B",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "EdDSA + OS code-signing",
+  "trust_root": "Sparkle EdDSA pinned",
+  "original_evidence": [
+    {
+      "file": "batch-AE1.md",
+      "line": 21,
+      "text": "| Ollamac | https://github.com/kevinhermawan/Ollamac | 7c6bc45 / 2025-03-06 | Y (Sparkle) | Y (`SPUStandardUpdaterController(startingUpdater: true)`) | Y | https (`raw.githubusercontent.com/.../appcast.xml`, TLS enforced) | appcast items carry per-item EdDSA sig | signature (Sparkle EdDSA) | **pinned-in-binary** (`SUPublicEDKey` in Info.plist, compiled into app) | `Ollamac/Resources/Info.plist:9-11`, `Ollamac/App/OllamacApp.swift:37-38,78` |"
+    }
+  ]
 }

@@ -5,12 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/notepad-plus-plus/notepad-plus-plus",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "B",
-  "description": "Targeted source read supports the narrow recorded behavior: Notepad++ gates launching gup.exe on a signed-binary check; the verifier uses WinVerifyTrust and compares the signer identity/key ID pinned in source.",
+  "description": "Launches gup.exe only after an Authenticode check pinned to a hardcoded certificate key-id/subject. (winGup installer's own verification unaudited.)",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "The retained snapshot does not establish current released artifact behavior or independent release signing; external updater verification remains a gap where noted."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "26afde31ce015b9e459cc80b5f49ddcf3c74d6eb"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports the narrow recorded behavior: Notepad++ gates launching gup.exe on a signed-binary check; the verifier uses WinVerifyTrust and compares the signer identity/key ID pinned in source.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "The retained snapshot does not establish current released artifact behavior or independent release signing; external updater verification remains a gap where noted."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "B",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "Authenticode (pinned cert id)",
+  "trust_root": "hardcoded cert key-id/subject",
+  "original_evidence": [
+    {
+      "file": "batch-X7.md",
+      "line": 27,
+      "text": "| Notepad++ | https://github.com/notepad-plus-plus/notepad-plus-plus.git | a6c46fd4cb0 / 2026-08-20 | Y | Y (prompts, then launches updater automatically) | Y | https (`INFO_URL = https://notepad-plus-plus.org/update/getDownloadUrl.php`) | n/a (URL response, not a signed manifest) | signature (Authenticode, pinned cert identity) | **pinned-in-binary** (hardcoded key-id/subject/display-name, checked before every launch of the updater component) | `PowerEditor/src/resource.h:33` (INFO_URL); `PowerEditor/src/winmain.cpp:817-829` (`SecurityGuard::checkModule(updaterFullPath, nm_gup)` gates launching `gup.exe`); `PowerEditor/src/MISC/Common/verifySignedfile.cpp:130-395` (`verifySignedBinary`: `WinVerifyTrust` + compares `_signer_display_name`/`_signer_subject`/`_signer_key_id`); `PowerEditor/src/MISC/Common/verifySignedfile.h:75-77` (`_signer_key_id = L\"CC0D94922CDA3A18A7D286138525AF9C3942E9E7\"`) |"
+    }
+  ]
 }

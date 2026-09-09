@@ -5,13 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/miranda-ng/miranda-ng",
   "channel": "mixed",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected Miranda NG update component includes a supplied CRC32 check. The retained review does not establish the full transport policy, affected update scope, or original execution-impact conclusion.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "PluginUpdater replaces the running .exe gated only by a CRC32 — and cert validation is off by default, so a plain MitM works. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
-    "The inspected source does not by itself prove transport behavior for every request or the historical study release.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; The inspected source does not by itself prove transport behavior for every request or the historical study release."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "311dd5a57e3c2c77d24d8a28ab61f50cf72e3650"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected Miranda NG update component includes a supplied CRC32 check. The retained review does not establish the full transport policy, affected update scope, or original execution-impact conclusion.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
+      "The inspected source does not by itself prove transport behavior for every request or the historical study release.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; The inspected source does not by itself prove transport behavior for every request or the historical study release."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https, validation OFF by default (NLValidateSSL=0)",
+  "payload_verification": "CRC32",
+  "trust_root": "none",
+  "original_evidence": []
 }

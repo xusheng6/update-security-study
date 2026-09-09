@@ -5,12 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/AstroImageJ/astroimagej",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "Targeted retained-source read supports the narrow Tier A behavior for this primary application updater: AstroImageJ computes the downloaded file hash, parses the detached Sigstore bundle, and verifies it with a Fulcio identity constraint pinned to the repository workflow.",
+  "description": "Updater checks SHA-256 and verifies a Sigstore keyless signature bound to a hardcoded GitHub Actions workflow identity — survives a compromised download server. (Dead legacy plaintext-HTTP updater exists but is unwired.)",
   "limitations": [
-    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in pinned key/configuration.",
-    "Framework verification depends on the packaged updater implementation where the application delegates to Sparkle or tauri-plugin-updater."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "6b307a63590654113a4ca63956decd2ae240cf84"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow Tier A behavior for this primary application updater: AstroImageJ computes the downloaded file hash, parses the detached Sigstore bundle, and verifies it with a Fulcio identity constraint pinned to the repository workflow.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in pinned key/configuration.",
+      "Framework verification depends on the packaged updater implementation where the application delegates to Sparkle or tauri-plugin-updater."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "SHA-256 + Sigstore keyless signature",
+  "trust_root": "Sigstore trust root + pinned GH Actions identity",
+  "original_evidence": [
+    {
+      "file": "batch-AK8.md",
+      "line": 16,
+      "text": "| AstroImageJ | https://github.com/AstroImageJ/astroimagej.git | 6b307a63590654113a4ca63956decd2ae240cf84 / 2026-08-21 | Y | Y (check) / N (install needs click) | Y | https, TLS enforced (default Java HttpClient, no trust-all override found) | Y (detached Sigstore signature bundle per release asset) | hash (SHA-256) **and** signature (Sigstore keyless/Fulcio, verified via `dev.sigstore.KeylessVerifier`) | pinned-in-source cert-identity constraint + Sigstore's bundled public trust root (`sigstorePublicDefaults()`) — not server-supplied | Astronomy_/src/main/java/Astronomy/AstroImageJUpdaterV6.java:75 (`CERTIFICATE_IDENTITY = \"https://github.com/AstroImageJ/astroimagej/.github/workflows/publish.yml@refs/heads/master\"`), :330-397 (`downloadAndComputeHash` — SHA-256 check then Sigstore `verifier.verify(hash, bundle, options)`), :246-325 (writes installer to temp, spawns OS-specific elevator script + installer process, then `System.exit(0)` so the installer runs) |"
+    }
+  ]
 }

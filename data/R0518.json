@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/SickChill/SickChill",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "SickChill invokes pip install -U for the application; no application-level hash or signature pin is supplied.",
+  "description": "Delegates to pip install -U — trust root is PyPI TLS, no signing.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "e1f8475ded8dd77662fad3ba9488740133ca8ce1"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "SickChill invokes pip install -U for the application; no application-level hash or signature pin is supplied.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AG7.md",
+      "line": 20,
+      "text": "| SickChill | https://github.com/SickChill/SickChill | e1f8475 / 2026-08-10 | Y | Y (opt-in, `AUTO_UPDATE`, default `False`) | Y (delegates to `pip install -U`, which itself fetches+executes arbitrary build/setup code from PyPI) | https to pypi.org / package index (pip's own TLS, no overrides found in this path) | N/A (pip has no code-signing for sdists/wheels by default) | none in-app — trust is entirely pip/PyPI's TLS + package integrity (no extra hash pinning, `--trusted-host`/hash-pinning options are commented out) | server-supplied/unpinned (PyPI resolves package + version) | `sickchill/update_manager/pip.py:30-32` (`get_newest_version` queries `pypi.org/pypi/sickchill/json`); `sickchill/update_manager/pip.py:64-144` (`update()`/`pip_install()` — runs `sys.executable -m pip install -U sickchill` via `subprocess.Popen`, `--trusted-host` lines commented out at 109-110); `sickchill/settings.py:69` (`AUTO_UPDATE = False` default); `sickchill/update_manager/runner.py:32` (auto-install gate) |"
+    }
+  ]
 }

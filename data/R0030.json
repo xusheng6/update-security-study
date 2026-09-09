@@ -5,14 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/zed-industries/zed",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected Zed source includes an application update channel. The retained review does not establish its complete artifact-authentication or release-signing policy.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "No payload verification visible in the auto-update path.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
-    "The generic crates/http_client GitHub helper has digest branches, but this primary auto-update path uses its own download_release function and does not establish that helper as the primary caller.",
-    "No conclusion is made about the lower HTTP client’s TLS validation or release signing.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; The generic crates/http_client GitHub helper has digest branches, but this primary auto-update path uses its own download_release function and does not establish that helper as the primary caller.; No conclusion is made about the lower HTTP client’s TLS validation or release signing."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,26 @@
       "commit": "5a9b9558db01a6b906cec2fb70a797affdc58cdd"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected Zed source includes an application update channel. The retained review does not establish its complete artifact-authentication or release-signing policy.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
+      "The generic crates/http_client GitHub helper has digest branches, but this primary auto-update path uses its own download_release function and does not establish that helper as the primary caller.",
+      "No conclusion is made about the lower HTTP client’s TLS validation or release signing.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; The generic crates/http_client GitHub helper has digest branches, but this primary auto-update path uses its own download_release function and does not establish that helper as the primary caller.; No conclusion is made about the lower HTTP client’s TLS validation or release signing."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none (visible)",
+  "trust_root": "server-TLS",
+  "original_evidence": []
 }

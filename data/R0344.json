@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Cockatrice/Cockatrice",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Cockatrice downloads the release asset to a temporary file without checksum verification before launching it.",
+  "description": "HTTPS to GitHub API, but downloads and QProcess::startDetached()s the installer with zero hash/signature.",
   "limitations": [
-    "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "fb482f037e70685ffc59cd39595955667a869c5e"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Cockatrice downloads the release asset to a temporary file without checksum verification before launching it.",
+    "limitations": [
+      "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-W3.md",
+      "line": 20,
+      "text": "| Cockatrice | https://github.com/Cockatrice/Cockatrice | 74a454552a0c / 2026-08-21 | Y | N (user clicks \"Update\") | Y | https (`api.github.com`, `github.com` release assets; no SSL verify disabling found in client update path) | N | none (GitHub does not sign release assets; no in-app hash/sig check) | none | `cockatrice/src/client/network/update/client/release_channel.cpp:19-21` (hardcoded `STABLERELEASE_URL=\"https://api.github.com/repos/Cockatrice/Cockatrice/releases/latest\"`); `cockatrice/src/client/network/update/client/update_downloader.cpp:10-60` (downloads asset, saves to temp, no checksum); `cockatrice/src/interface/widgets/dialogs/dlg_update.cpp:221-243` (`QProcess::startDetached()` on the downloaded installer with no verification) |"
+    }
+  ]
 }

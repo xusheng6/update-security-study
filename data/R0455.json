@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/jitsi/jitsi",
   "channel": "mixed",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Jitsi’s macOS update integration uses Sparkle, while Windows uses a separate update service. Framework enforcement and Windows artifact authentication require separate evidence; a single cross-platform trust classification is unsupported.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "macOS is A (Sparkle DSA pinned); Windows hand-rolled Java updater has HTTPS but no payload verification before executing the installer.",
   "limitations": [
-    "New default-branch snapshot, not the historical Jitsi release under study.",
-    "Sparkle framework verification and the Windows setup program's own controls were not audited; the result describes only the Jitsi-side integration and download method.",
-    "New default-branch snapshot, not the historical Jitsi release under study. Sparkle framework verification and the Windows setup program's own controls were not audited; the result describes only the Jitsi-side integration and download method."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "7bde4ffebc9621d558ebb9953370395cba24f83c"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Jitsi’s macOS update integration uses Sparkle, while Windows uses a separate update service. Framework enforcement and Windows artifact authentication require separate evidence; a single cross-platform trust classification is unsupported.",
+    "limitations": [
+      "New default-branch snapshot, not the historical Jitsi release under study.",
+      "Sparkle framework verification and the Windows setup program's own controls were not audited; the result describes only the Jitsi-side integration and download method.",
+      "New default-branch snapshot, not the historical Jitsi release under study. Sparkle framework verification and the Windows setup program's own controls were not audited; the result describes only the Jitsi-side integration and download method."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none (Windows)",
+  "trust_root": "Sparkle DSA pinned (mac only)",
+  "original_evidence": [
+    {
+      "file": "batch-AD1.md",
+      "line": 16,
+      "text": "| Jitsi (SIP Communicator / Jitsi Desktop) | https://github.com/jitsi/jitsi | 7bde4ff / 2026-05-25 | Y (per-platform: Mac=Sparkle, Windows=custom Java updater) | Y (Mac: `SUScheduledCheckInterval`=86400s; Windows: interval/menu-triggered) | Y (Mac: Sparkle installs DMG; Windows: `FileUtils.download()` setup.exe then `new ProcessBuilder(command).start()`) | HTTPS both paths (`https://download.jitsi.org/...`); TLS enforced via Jitsi's own `CertificateVerificationService`/custom TrustManager (hostname check moved into the trust manager, not disabled) | **Mac = Y** (Sparkle appcast `sparkle:dsaSignature` enclosure attr); **Windows = N** (plain key=value `.properties` file, no signature field) | **Mac = DSA signature verified by Sparkle** against `SUPublicDSAKeyFile` bundled in app; **Windows = none** (no hash/sig check before executing downloaded setup.exe) | **Mac = pinned-in-binary** (`Contents/Resources/sparkle_dsa_pub.pem` shipped inside app bundle); **Windows = none/unpinned** | resources/install/mac/Info.plist (`SUPublicDSAKeyFile`, `SUFeedURL`), resources/install/src/mac/dist/Jitsi.app/Contents/Resources/sparkle_dsa_pub.pem, modules/plugin/update/src/main/java/.../UpdateServiceImpl.java:769-816 (download+`ProcessBuilder` exec, no verification), modules/service/httputil/src/main/java/.../HttpUtils.java:407-441 |"
+    }
+  ]
 }

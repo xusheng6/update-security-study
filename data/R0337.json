@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/MatsuriDayo/nekoray",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Nekoray downloads the GitHub release asset and its updater extracts/moves it over the running files without verification.",
+  "description": "HTTPS-only, zero payload verification — extracts a release zip directly over the running binary/DLLs.",
   "limitations": [
-    "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "adef6cd4af7dffc77235c524086f3dc4100d8457"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Nekoray downloads the GitHub release asset and its updater extracts/moves it over the running files without verification.",
+    "limitations": [
+      "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-W6.md",
+      "line": 22,
+      "text": "| nekoray | https://github.com/MatsuriDayo/nekoray | adef6cd / 2024-12-12 | Y | N (manual \"check for update\" action; download step then automatic) | Y | https (`api.github.com`, `browser_download_url`), no InsecureSkipVerify seen in the Go http client used | N | **none** | n/a | `go/grpc_server/update.go:19-115` (`Update()`: GETs `https://api.github.com/repos/MatsuriDayo/nekoray/releases`, downloads asset zip to `../nekoray.zip`, zero hash/sig check), `go/cmd/updater/updater.go:1-79` (`Updater()`: `extract.Zip`, then `Mv(\"./nekoray_update/nekoray\",\"./\")` overwriting the running binary/DLLs, no verification at any step) |"
+    }
+  ]
 }

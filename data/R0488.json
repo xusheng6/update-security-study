@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Qalculate/qalculate-gtk",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The updater downloads the release archive with curl and extracts/copies it without a digest or signature check.",
+  "description": "Self-contained Linux build (AUTO_UPDATE) fetches an unsigned manifest, curls the archive, and cp -f's the new binary over the running one with zero verification. Distro builds don't compile this path (N).",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement remain unverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "5393c17cc1975b21ed046e5519862df8df757b56"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The updater downloads the release archive with curl and extracts/copies it without a digest or signature check.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement remain unverified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AE5.md",
+      "line": 14,
+      "text": "| Qalculate! (qalculate-gtk) | https://github.com/Qalculate/qalculate-gtk.git | 5393c17 / 2026-07-19 | Y (build-variant only) | N (user must click \"OK\" to accept update) | Y | https, TLS enforced (no verify-disable flags found) | N | none — no hash/signature check on downloaded tarball | N/A (unauthenticated) | qalculate-gtk/src/mainwindow.cc:606-693 (`auto_update()`), mainwindow.cc:696-758 (`check_for_new_version`), data/pkg/selfcontained-binary.patch:31 (`#define AUTO_UPDATE 1`) |"
+    }
+  ]
 }

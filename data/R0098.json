@@ -5,13 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/ONLYOFFICE/desktop-apps",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "ONLYOFFICE’s inspected macOS desktop-apps target embeds a Sparkle EdDSA public key and wires its update menu to SUUpdater. The source supports this target’s configured trust key; shipped artifacts, other architectures and framework enforcement remain separate evidence requirements.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "mac Sparkle path is fully signed (Linux path is Tier D).",
   "limitations": [
-    "Pinned source or archive snapshot, not independent verification of the original release artifact.",
-    "Configuration and integration observations do not certify every framework control or platform.",
-    "Pinned source or archive snapshot, not independent verification of the original release artifact.; Configuration and integration observations do not certify every framework control or platform."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "8f452c7f703b795dcc09012ba6517df4ca47f9bc"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "ONLYOFFICE’s inspected macOS desktop-apps target embeds a Sparkle EdDSA public key and wires its update menu to SUUpdater. The source supports this target’s configured trust key; shipped artifacts, other architectures and framework enforcement remain separate evidence requirements.",
+    "limitations": [
+      "Pinned source or archive snapshot, not independent verification of the original release artifact.",
+      "Configuration and integration observations do not certify every framework control or platform.",
+      "Pinned source or archive snapshot, not independent verification of the original release artifact.; Configuration and integration observations do not certify every framework control or platform."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[Sparkle-EdDSA]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": []
 }

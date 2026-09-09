@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/RocketChat/Rocket.Chat.Electron",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Rocket.Chat Electron enables electron-builder’s Windows update-code-signature verification and uses electron-updater for the check/retrieval/install flow; coverage of other platforms and released artifacts remains outside this source snapshot.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "verifyUpdateCodeSignature explicitly true.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
-    "The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "729869a62172012d96700e4228c4ecff4fcb8aaf"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Rocket.Chat Electron enables electron-builder’s Windows update-code-signature verification and uses electron-updater for the check/retrieval/install flow; coverage of other platforms and released artifacts remains outside this source snapshot.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+      "The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "hash + OS-code-signing",
+  "trust_root": "OS-trust-store",
+  "original_evidence": [
+    {
+      "file": "batch-N2.md",
+      "line": 13,
+      "text": "| Rocket | No public source repository exists (`matthewpalmer/Rocket` is not a real code repo — only `matthewpalmer.github.io/rocket` marketing site; a third-party repo `alifeg/Rocket-For-Mac` contains only a promotional README with affiliate download links, not actual source) | Sparkle (confirmed via live appcast; app itself closed-source) | Y | unknown (no public source; Homebrew cask sets `auto_updates true`) | Y | https | TLS-only | **mixed by era**: older releases (build ≤59, hosted on `dl.devmate.com`) shipped with **no signature at all**; current releases (build ≥61, current cask version 1.9.5/build 88, hosted on `macrelease.matthewpalmer.net`) carry signature[EdDSA] | Sparkle-EdDSA (presumed pinned-in-binary for current builds; unconfirmed — no public source); **none** for the older unsigned builds | Live appcast `https://macrelease.matthewpalmer.net/distribution/appcasts/rocket.xml` (fetched via WebFetch): item \"v59 / 1.5.1\" enclosure `https://dl.devmate.com/net.matthewpalmer.Rocket/59/.../Rocket-59.zip` has no signature attribute; item \"v53/1.5\" likewise unsigned; item \"v61/1.6\" enclosure `https://macrelease.matthewpalmer.net/distribution/appcasts/Rocket-61.dmg` carries `sparkle:edSignature=\"NrXDaRUmVjMguq2b4B1UKJXjRMojCFg9oJJCBLnFhi2i/ckybO4mH1RlPqiMaGwbaJuTVxGhys/jaKLOaVE8Dw==\"`. Homebrew cask `Casks/r/rocket.rb`: `url` template `https://macrelease.matthewpalmer.net/distribution/appcasts/Rocket-#{version}.dmg`, livecheck strategy `:sparkle` against `https://macrelease.matthewpalmer.net/distribution/appcasts/rocket.xml`, `auto_updates true`. |"
+    }
+  ]
 }

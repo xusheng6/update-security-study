@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/TheSpaghettiDetective/moonraker-obico",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The retained moonraker-obico configuration delegates maintenance to Moonraker's git_repo update-manager with an HTTPS GitHub origin. The dependency's repository-update and commit-authentication policy remains unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Updates via Moonraker update_manager git_repo (git pull, no commit signing).",
   "limitations": [
-    "Newly recovered default-branch snapshot, not historical release re-verification.",
-    "Moonraker's git_repo implementation and any commit-signature controls are external to this checkout; no conclusion is made about their absence.",
-    "Newly recovered default-branch snapshot, not historical release re-verification. Moonraker's git_repo implementation and any commit-signature controls are external to this checkout; no conclusion is made about their absence."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "343be225c40eedab86a8c0518eefdc809d374800"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained moonraker-obico configuration delegates maintenance to Moonraker's git_repo update-manager with an HTTPS GitHub origin. The dependency's repository-update and commit-authentication policy remains unresolved.",
+    "limitations": [
+      "Newly recovered default-branch snapshot, not historical release re-verification.",
+      "Moonraker's git_repo implementation and any commit-signature controls are external to this checkout; no conclusion is made about their absence.",
+      "Newly recovered default-branch snapshot, not historical release re-verification. Moonraker's git_repo implementation and any commit-signature controls are external to this checkout; no conclusion is made about their absence."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AN7.md",
+      "line": 10,
+      "text": "| moonraker-obico | https://github.com/TheSpaghettiDetective/moonraker-obico.git | 343be22 / 2026-06-01 | Y | Y (if user enables Moonraker's auto-update) | Y | https | N (no GPG-signed commits required) | none (git commit trust only, no hash/signature check) | server-supplied/unpinned (GitHub over TLS via git) | `moonraker-obico-update.cfg.sample:2-4` declares `type: git_repo`, `origin: https://github.com/TheSpaghettiDetective/moonraker-obico.git` — update is executed by Moonraker's `update_manager` (git fetch+pull, already covered separately as \"moonraker\"), then the systemd service is restarted (`install.sh` sets up `ExecStart=...python3 -m moonraker_obico.app`). Own `install.sh:134-136` `update()` function only re-installs pip deps, does not itself fetch. Side note: `scripts/webcam_capture` type local snapshot fetch uses `verify=False` at `moonraker_obico/webcam_capture.py:32` (local LAN, not update path). |"
+    }
+  ]
 }

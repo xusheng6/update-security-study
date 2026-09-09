@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Unvanquished/updater",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Unvanquished has a platform-specific updater-maintenance channel with archive structure checks. The reviewed evidence does not establish publisher authentication for that channel.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Updater self-replaces its running binary from a GitHub zip with no verification (game content over BitTorrent SHA1).",
   "limitations": [
-    "New default-branch snapshot rather than the original study release; the reviewed implementation does not establish cryptographic updater-archive authentication, and no game-content verification conclusion is made."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,39 @@
       "commit": "06ce270259b758c8c8188e3ae192b2ecebc94f2f"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Unvanquished has a platform-specific updater-maintenance channel with archive structure checks. The reviewed evidence does not establish publisher authentication for that channel.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study release; the reviewed implementation does not establish cryptographic updater-archive authentication, and no game-content verification conclusion is made."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-O8.md",
+      "line": 21,
+      "text": "| Unvanquished — updater self-update (HIGH INTEREST) | github.com/Unvanquished/updater | Y | **Y automatic when server requests it** — `startUpdaterUpdate()` is invoked as a relaunch action initiated by the update flow, not gated on a separate user click in the code shown | **Y** — downloads a zip from GitHub Releases, extracts it, and **overwrites the running updater's own executable file on disk** (`current` renamed to `.bak`, new file renamed over `current`), then presumably relaunches | **HTTPS** — `UPDATER_BASE_URL = \"https://github.com/Unvanquished/updater/releases/download\"`; downloaded via `aria2`, which is given a `ca-certificate` bundle path (standard TLS verification, no pinning beyond the system/bundled CA store) | N | **none** — `aria2`'s `check-integrity: true` option is set globally at session init, but no checksum or metalink is supplied for the updater-self-update URI, so it has no effect for this download; no hash/signature check appears anywhere in `updateUpdater()` | n/a | unvanquished-updater/qmldownloader.cpp:26 (`UPDATER_BASE_URL(\"https://github.com/Unvanquished/updater/releases/download\")`); :202-206 (`startUpdaterUpdate` builds `url` and calls `worker_->addUpdaterUri(url.toStdString())`); unvanquished-updater/downloadworker.cpp:41-45 (`addUpdaterUri`), :78-88 (`DOWNLOADING_UPDATER` branch → `Sys::updateUpdater(files[0].path, connectUrl_)`); unvanquished-updater/linux.cpp:203-234 (`updateUpdater()`: `QFile::rename(current, backup)` → `JlCompress::extractDir(updaterArchive, ...)` → `QFile::rename(out[0], current)` — no checksum/signature check at any step); unvanquished-updater/ariadownloader.cpp:47-51 (`check-integrity: true` set, but no per-download hash supplied here) | This is a self-replacing native executable with literally no integrity check beyond \"it came from a github.com HTTPS connection\" — same class of gap as Airshipper, but arguably worse since it overwrites the currently-running trusted binary in place. |"
+    },
+    {
+      "file": "batch-O8.md",
+      "line": 22,
+      "text": "| Unvanquished — game content via BitTorrent (HIGH INTEREST) | github.com/Unvanquished/updater | Y | Y automatic once a profile/install is started | **Y** — installs the full game (including native engine executables later launched to play) | **HTTPS bootstrap, then BitTorrent** — `.torrent` file fetched from `https://cdn.unvanquished.net/current.torrent`; actual game-data pieces then transferred over the BitTorrent protocol (peer connections are not TLS) | N (the `.torrent` file itself carries no separate cryptographic signature beyond the HTTPS session that delivered it) | **hash-from-manifest** — genuinely meaningful here: BitTorrent's built-in per-piece SHA-1 hashes (embedded in the `.torrent`, verified automatically by `aria2` via `check-integrity: true`) protect each downloaded piece against tampering by any individual peer | the `.torrent` file's own embedded piece hashes; ultimate trust root is the TLS session to `cdn.unvanquished.net` that delivered that `.torrent` | unvanquished-updater/qmldownloader.cpp:169 (`worker_->addTorrent(\"https://cdn.unvanquished.net/current.torrent\")`); unvanquished-updater/ariadownloader.cpp:48 (`check-integrity: true`); unvanquished-updater/downloadworker.cpp:64-67 (`EVENT_ON_BT_DOWNLOAD_COMPLETE` → `extractUpdate()`) | The strongest scheme in this batch's Unvanquished findings — per-piece SHA-1 verification is real, not self-referential in the same trivial way as the Q3-family checksum pattern, because BitTorrent's protocol structurally prevents a single malicious peer from substituting bad data. But the whole chain still roots in one HTTPS fetch of one `.torrent` file with no additional signature, and SHA-1 is a weakened (collision-prone) hash by modern standards. |"
+    },
+    {
+      "file": "batch-O8.md",
+      "line": 23,
+      "text": "| Unvanquished — in-engine dpk/pak download (asset channel) | github.com/DaemonEngine/Daemon (pulled as `Unvanquished/Unvanquished`'s `daemon` submodule) | Y (per-connection asset fetch, like id-Tech \"pure server\" pattern) | Y automatic on connecting to a server referencing paks the client lacks | **Y** — dpk/pak archives can contain compiled `sgame`/`cgame` game-logic modules built as NaCl (`.nexe`) sandboxed native code, auto-loaded and executed by the engine's `VirtualMachine` after download | HTTP or HTTPS, **server-chosen** (`dl_source`/remote URL supplied by the connecting server via `DL_BeginDownload`); libcurl used with no `CURLOPT_SSL_VERIFYPEER` override found | N | **hash-from-manifest, self-referential** — a 32-bit CRC32-style \"checksum\" is embedded directly in the `.dpk` filename (`name_version_checksum.dpk`), computed as `crc32(0, per-file-crc32s...)` over the archive's contents, and checked on load; the checksum, filename, and file all originate from the same server/pak source | none independent (checksum is part of the pak's own naming convention, not signed by a separate authority) | src/common/FileSystem.cpp:1344-1361 (`realChecksum = crc32(0, Z_NULL, 0); ... realChecksum = crc32(*realChecksum, &crc, sizeof(crc));`), :1403-1413 (`if(expectedChecksum && realChecksum != *expectedChecksum) { SetErrorCodeFilesystem(err, filesystem_error::wrong_pak_checksum, ...); }`); src/engine/client/dl_main.cpp:172 (`CURLOPT_URL`), :304-337 (`DL_BeginDownload` — `remoteName` is server-controlled); src/engine/framework/VirtualMachine.cpp:331-352 (`name + \"-amd64.nexe\"` — NaCl sandboxed native-code VM modules loaded by name) | Same self-referential-checksum limitation as OpenArena/Warsow's pak systems, but notable because unlike those games' pure-data map assets, Unvanquished's paks can legitimately carry compiled (sandboxed) game-logic code, raising the stakes of the missing independent verification somewhat — mitigated by the NaCl sandbox, which is itself a real security boundary around whatever code executes. |"
+    }
+  ]
 }

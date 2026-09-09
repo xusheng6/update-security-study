@@ -5,12 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/aonez/Keka",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The retained Keka repository snapshot contains web text stating that the web version uses Sparkle to check for and download updates. It does not contain the macOS application updater implementation or release configuration needed to substantiate Sparkle version, transport, or key-pinning details.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "Sparkle 2.0.0 per docs; app source closed, key pinning unconfirmed.",
   "limitations": [
-    "The newly retrieved default-branch snapshot does not include the macOS application source or a release archive; the claimed Sparkle version, feed, key pinning, and artifact behavior require a matching app checkout or auditable release artifact.",
-    "A matching macOS application checkout or auditable release artifact could establish the claimed version, feed, and trust controls; none is retained here."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,24 @@
       "commit": "f6600891ccc6751f5bb2aaef765e7431329e8b1f"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained Keka repository snapshot contains web text stating that the web version uses Sparkle to check for and download updates. It does not contain the macOS application updater implementation or release configuration needed to substantiate Sparkle version, transport, or key-pinning details.",
+    "limitations": [
+      "The newly retrieved default-branch snapshot does not include the macOS application source or a release archive; the claimed Sparkle version, feed, key pinning, and artifact behavior require a matching app checkout or auditable release artifact.",
+      "A matching macOS application checkout or auditable release artifact could establish the claimed version, feed, and trust controls; none is retained here."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "Sparkle (unconfirmed)",
+  "trust_root": "Sparkle 2 (source closed)",
+  "original_evidence": []
 }

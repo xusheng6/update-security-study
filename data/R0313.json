@@ -5,14 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Arksine/moonraker",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Moonraker has separate Git and archive deployment channels. The retained evidence does not establish their complete publisher-authentication policies or support the original impact and deployment-prevalence conclusions.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "The update engine behind the Klipper stack — neither git-based nor zip-based deploy paths verify payload authenticity. Single point of compromise for a large 3D-printer-host install base.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout.",
-    "No claim is made here about all deploy classes, release-era behavior, or publisher signing outside the cited paths.",
-    "The source does not substantiate the asserted population size or single-point-of-compromise conclusion.",
-    "Newly retrieved default-branch snapshot, not the original study checkout. No claim is made here about all deploy classes, release-era behavior, or publisher signing outside the cited paths. The source does not substantiate the asserted population size or single-point-of-compromise conclusion."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "985c1d0bbeb90bc057d34a232c9dc3b05e0c6c8d"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Moonraker has separate Git and archive deployment channels. The retained evidence does not establish their complete publisher-authentication policies or support the original impact and deployment-prevalence conclusions.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout.",
+      "No claim is made here about all deploy classes, release-era behavior, or publisher signing outside the cited paths.",
+      "The source does not substantiate the asserted population size or single-point-of-compromise conclusion.",
+      "Newly retrieved default-branch snapshot, not the original study checkout. No claim is made here about all deploy classes, release-era behavior, or publisher signing outside the cited paths. The source does not substantiate the asserted population size or single-point-of-compromise conclusion."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-V6.md",
+      "line": 21,
+      "text": "| Moonraker | https://github.com/Arksine/moonraker.git | d5ee17128bb88434aacdab90c2e9e990e2b64e4a / 2026-06-29 | Y | N (`enable_auto_refresh` defaults to `False`; actual install is triggered via `/machine/update/*` API, normally from a \"Update\" button in Mainsail/Fluidd/KlipperScreen) | Y | https (git+https for git_deploy; GitHub Releases `browser_download_url` for net_deploy, resolves to objects.githubusercontent.com). No TLS bypass found (`verify=False`/`CERT_NONE` grep clean). | N | none — **`git_deploy.py`**: plain `git fetch`/`git checkout`, no GPG signature verification of commits/tags, `_verify_repo()` only checks repo integrity/dirtiness, not authenticity. **`net_deploy.py`**: downloads release zip assets straight from `browser_download_url` and extracts them — zero checksum or signature check anywhere in the file | server-supplied/unpinned (github.com identity only) | moonraker/components/update_manager/net_deploy.py:293/482 (`browser_download_url`), :437 (`client.download_file`, no checksum arg); moonraker/components/update_manager/update_manager.py:77 (`enable_auto_refresh` default False); moonraker/components/update_manager/git_deploy.py (git clone/pull, `_verify_repo` is integrity-only) — **Moonraker's update_manager is the actual update engine for the entire Klipper ecosystem (Klipper, Moonraker itself, Mainsail, Fluidd, KlipperScreen, and any configured \"client\" app) and has no cryptographic authenticity check on any of it** |"
+    }
+  ]
 }

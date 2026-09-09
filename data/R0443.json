@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/koush/scrypted",
   "channel": "plugin",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Scrypted includes a custom registry-based plugin installation channel. The retained review does not establish its complete integrity policy or justify the original project-wide authentication classification.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Custom plugin installer skips even the npm-registry integrity hash a stock npm install would check.",
   "limitations": [
-    "New default-branch snapshot, not the historical Scrypted release.",
-    "The registry's own metadata/integrity semantics, external plugin package contents, and alternate installation paths were not reviewed; this does not establish a project-wide absence of verification.",
-    "New default-branch snapshot, not the historical Scrypted release. The registry's own metadata/integrity semantics, external plugin package contents, and alternate installation paths were not reviewed; this does not establish a project-wide absence of verification."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,36 @@
       "commit": "d37684666588d922caf79296246ed6f8598de632"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Scrypted includes a custom registry-based plugin installation channel. The retained review does not establish its complete integrity policy or justify the original project-wide authentication classification.",
+    "limitations": [
+      "New default-branch snapshot, not the historical Scrypted release.",
+      "The registry's own metadata/integrity semantics, external plugin package contents, and alternate installation paths were not reviewed; this does not establish a project-wide absence of verification.",
+      "New default-branch snapshot, not the historical Scrypted release. The registry's own metadata/integrity semantics, external plugin package contents, and alternate installation paths were not reviewed; this does not establish a project-wide absence of verification."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AC6.md",
+      "line": 30,
+      "text": "| Scrypted (core) | https://github.com/koush/scrypted | 06c989b / 2026-08-20 | N (no self-updater for the server itself found in source) | N | N | N/A | N/A | N/A | N/A | negative census: no checkForUpdate/selfUpdate/npm-install-g-@scrypted hits in server/src |"
+    },
+    {
+      "file": "batch-AC6.md",
+      "line": 31,
+      "text": "| Scrypted plugin installer (content channel) | (same repo) | 06c989b / 2026-08-20 | Y | Y (auto-update option for plugins) | Y | https to registry.npmjs.org (`httpFetch`, default Node TLS via `https.request`, `rejectUnauthorized` left `undefined`⇒enforced — cert validation NOT disabled for this path, unlike the cluster/media paths in the same codebase which do set `rejectUnauthorized:false` elsewhere) | N | **NONE** — notably weaker than plain `npm install`: the code downloads the npm tarball directly and extracts `dist/plugin.zip` WITHOUT ever checking the `dist.shasum`/`dist.integrity` field that the npm registry metadata provides (npm CLI itself would verify this; Scrypted's custom installer skips it) | unpinned / npm registry-supplied (and unused even so) | server/src/runtime.ts:543-596 (`installNpm`: `httpFetch` tarball from `registry.versions[version].dist.tarball`, tar-parses it, loads `package/dist/plugin.zip` directly — no shasum/integrity check anywhere in this function) |"
+    }
+  ]
 }

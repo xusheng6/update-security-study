@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/naotaka/ClipMenu",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports the narrow recorded behavior: ClipMenu configures a bundled Sparkle DSA key but uses an HTTP appcast feed, leaving transport/authenticity scope unresolved.",
+  "description": "Sparkle appcast over plain HTTP, but SUPublicDSAKeyFile pins/enforces the payload DSA signature — MitM can't forge it. Dead since 2014. [Opus-verified]",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "The retained snapshot does not establish current released artifact behavior or independent release signing."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,35 @@
       "commit": "e98e513cec38af2655fa07eb59bf11cdb9cc8a85"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports the narrow recorded behavior: ClipMenu configures a bundled Sparkle DSA key but uses an HTTP appcast feed, leaving transport/authenticity scope unresolved.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "The retained snapshot does not establish current released artifact behavior or independent release signing."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "http",
+  "payload_verification": "DSA signature (transport broken)",
+  "trust_root": "pinned DSA (undermined)",
+  "original_evidence": [
+    {
+      "file": "batch-Z5.md",
+      "line": 19,
+      "text": "| ClipMenu (macOS, naotaka) | https://github.com/naotaka/ClipMenu | e98e513cec38 / 2014-10-20 | Y | Y (Sparkle) | Y | **http (plaintext), not https** | Y (Sparkle 1.x DSA-signed enclosure) | signature (DSA) | pinned-in-binary (`dsa_pub.pem` bundled) | `Info.plist:46-51` — `SUFeedURL=http://feeds.feedburner.com/clipmenu-appcast`, `SUPreReleaseFeedURL=http://...`, `SUPublicDSAKeyFile=dsa_pub.pem`; key file at `resource/dsa_pub.pem`; appcast generator `script/generate_appcast.py` |"
+    },
+    {
+      "file": "batch-Z5.md",
+      "line": 20,
+      "text": "| clipmenu (Linux, cdown) | https://github.com/cdown/clipmenu | e0ec3bc6608e / 2026-04-03 | N | - | - | - | - | - | - | negative census clean (C daemon + dmenu/rofi frontend, distro-distributed) |"
+    }
+  ]
 }

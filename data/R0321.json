@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/gitbutlerapp/gitbutler",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+  "description": "Tauri updater, minisign pubkey pinned.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "cd42cf4ed546c3e82240395883c55827e918a344"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "Ed25519 (minisign)",
+  "trust_root": "pubkey pinned in tauri.conf.json",
+  "original_evidence": [
+    {
+      "file": "batch-W4.md",
+      "line": 17,
+      "text": "| GitButler | https://github.com/gitbutlerapp/gitbutler.git | 505372c485 / 2026-08-20 | Y | Y (auto-checks on startup) | Y | https (`app.gitbutler.com`) | Y | **minisign signature** verified by Tauri updater plugin | pinned-in-binary (base64 minisign pubkey embedded in `tauri.conf.json`, consistent across release/nightly configs) | crates/gitbutler-tauri/tauri.conf.json:44-50 (`plugins.updater.endpoints`+`pubkey`), same in tauri.conf.release.json:19-24 and tauri.conf.nightly.json:19-24; apps/desktop/src/lib/updater/updater.ts:105 (auto `checkUpdate()`), :142-169 (`downloadAndInstall`→`update.install()`) |"
+    }
+  ]
 }

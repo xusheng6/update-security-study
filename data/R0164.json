@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/morpheus65535/bazarr",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Bazarr checks GitHub releases and selects a bazarr.zip asset; the reviewed source does not independently establish archive verification or the complete live-install restart path.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Auto-update ON by default (6h); unzips GitHub zip over live install, restarts. No hash/sig.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "da73aeaf5e4d89ad86c8d559d3abd0e4129b24b2"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Bazarr checks GitHub releases and selects a bazarr.zip asset; the reviewed source does not independently establish archive verification or the complete live-install restart path.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-J6.md",
+      "line": 13,
+      "text": "| Bazarr | morpheus65535/bazarr | Python (Flask + APScheduler) | Y | chk/dl/inst fully automatic — `settings.general.auto_update` defaults to `True`, `check_if_new_update` runs on a 6-hour APScheduler interval with no user interaction | Y (downloads `bazarr.zip` from a GitHub release asset and unzips it directly over the running install tree, then calls `webserver.restart()` — this loads unreviewed/unverified Python source into the running app) | https, `https://api.github.com/repos/morpheus65535/Bazarr/releases` and the release's `browser_download_url` (GitHub-hosted); TLS validation enforced by default — plain `requests.get(...)` calls with no `verify=False` anywhere in check_update.py | no (GitHub Releases API JSON is unsigned) | none — no hash, checksum, or signature check anywhere in `download_release`/`apply_update` before files are extracted over the install directory | n/a | bazarr/app/check_update.py:30 (`url_releases = 'https://api.github.com/repos/morpheus65535/Bazarr/releases...'`), :121-137 (`download_release`, plain `requests.get`, no integrity check), :140-207 (`apply_update`, unzip straight into `bazarr_dir` then `webserver.restart()`); bazarr/app/config.py:97 (`'general.auto_update', default=True`); bazarr/app/scheduler.py:283-285 (`check_if_new_update` on 6h interval when `auto_update` true) |"
+    }
+  ]
 }

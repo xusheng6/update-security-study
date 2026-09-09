@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/standardnotes/app",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Withdraw the original security classification for this record. Standard Notes enables electron-updater retrieval and install-on-quit only when the stored auto-update preference is enabled, then offers Install Later or Quit and Install; publisher pinning and notarization are not shown in this source. The retained evidence is insufficient to support the original full claim.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater; publisherName pinned, macOS notarized.",
   "limitations": [
-    "Newly retrieved default-branch snapshot; not historical release re-verification.",
-    "External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown.",
-    "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "9601d2df9972e2ee9af3f011f047208415d087b2"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Withdraw the original security classification for this record. Standard Notes enables electron-updater retrieval and install-on-quit only when the stored auto-update preference is enabled, then offers Install Later or Quit and Install; publisher pinning and notarization are not shown in this source. The retained evidence is insufficient to support the original full claim.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot; not historical release re-verification.",
+      "External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown.",
+      "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "hash + OS-code-signing",
+  "trust_root": "OS-trust-store",
+  "original_evidence": []
 }

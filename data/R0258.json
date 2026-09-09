@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/gao-sun/eul",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "eul provides an optional application update workflow using a separate bundled helper. The reviewed wrapper does not establish the helper’s full artifact-authentication or product-signing policy.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Opt-in auto-update downloads a zip and replaces the running app, no signature/checksum (default is notify).",
   "limitations": [
-    "New default-branch snapshot rather than the original study release; helper implementation, package signing, and release-side artifact controls were not independently reviewed."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "b5c3bd0a5be2679ca7e22da676be5ac73e300f4a"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "eul provides an optional application update workflow using a separate bundled helper. The reviewed wrapper does not establish the helper’s full artifact-authentication or product-signing policy.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study release; helper implementation, package signing, and release-side artifact controls were not independently reviewed."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "opt-in",
+  "transport": "https (GitHub)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-Q1.md",
+      "line": 22,
+      "text": "| eul | github.com/gao-sun/eul | none (custom in-house checker/replacer, not Sparkle) | **Y** | opt-in / conditional (default preference is notify-only; user can enable unattended auto-update) | **Y** (only when user has opted into the `autoUpdate` preference) | https | NA (plain GitHub Releases API JSON, unsigned) | **none** (no signature/checksum verification anywhere on the update path) | n/a (no verification performed) | `eul/eul/Store/PreferenceStore.swift:18-22` `enum UpgradeMethod { case none, showInStatusBar, autoUpdate }`, `:65` default `upgradeMethod = .showInStatusBar` (notify-only by default), `:107` `URL(string: \"https://api.github.com/repos/\\(repo)/releases/latest\")`, `:120-121` `if self.upgradeMethod == .autoUpdate { AutoUpdate.run() }`; `eul/eul/Utilities/AutoUpdate.swift:68` `https://github.com/gao-sun/eul/releases/latest/download/eul.app.zip`, `:116` `shell(\"unzip -oq \\(zipUrl.path) ...\")` (no signature/hash check), `:49-53` `NSWorkspace.shared.open(tempSelfUpdateUrl, options: .default, configuration: [.arguments: arguments])`; `eul/SelfUpdate/AppDelegate.swift:53-56` `removeItem(at: appUrl)` then `copyItem(at: newAppUrl, to: appUrl)` (old app overwritten with the unverified downloaded one), `:63` `NSWorkspace.shared.open(appUrl)`. |"
+    }
+  ]
 }

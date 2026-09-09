@@ -5,12 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/Clipy/Clipy",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+  "description": "Sparkle 2, EdDSA key pinned; auto-check on by default.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ.",
-    "The retained snapshot exposes Sparkle configuration and dependency source but no separate application utility file at the prior locator."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "91a1a4e11a594a7b98280df9b60331b65f27306d"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ.",
+      "The retained snapshot exposes Sparkle configuration and dependency source but no separate application utility file at the prior locator."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "EdDSA signature",
+  "trust_root": "Sparkle key pinned in Info.plist",
+  "original_evidence": [
+    {
+      "file": "batch-Z5.md",
+      "line": 13,
+      "text": "| Clipy | https://github.com/Clipy/Clipy | d84fccbe1db0 / 2026-08-15 | Y | Y (default on, daily) | Y | https, TLS enforced (no disabled validation found) | Y (Sparkle 2 appcast, EdDSA-signed enclosure) | signature (EdDSA) | **pinned-in-binary** (`SUPublicEDKey` in Info.plist) | `Clipy/Supporting Files/Info.plist:35-40` (SUFeedURL=https://clipy-app.com/appcast.xml, SUPublicEDKey=IxLVywb2t...), `Clipy/Sources/Dependencies/Sparkle.swift:31-56`, `Clipy/Sources/Utility/CPYUtilities.swift:74-75` (defaults: auto-check=true, interval=86400) |"
+    }
+  ]
 }

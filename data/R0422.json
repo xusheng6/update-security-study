@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/TryGhost/Ghost-CLI",
   "channel": "package-manager",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected Ghost CLI delegates application package updates to npm and documents reliance on npm integrity checking. Independent publisher authentication and the historical npm trust configuration were not established by this review.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "ghost update via npm pack — integrity is an unpinned npm-registry-supplied hash.",
   "limitations": [
-    "New default-branch snapshot; npm registry metadata and released package provenance were not independently audited, and no independent Ghost publisher signature or key pin was found in the reviewed CLI path.",
-    "npm registry metadata, released package provenance, and any publisher-signing policy outside the CLI checkout were not independently audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,45 @@
       "commit": "fd54dc835a9e4f871509d60186ab8a74bd6ec3ff"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected Ghost CLI delegates application package updates to npm and documents reliance on npm integrity checking. Independent publisher authentication and the historical npm trust configuration were not established by this review.",
+    "limitations": [
+      "New default-branch snapshot; npm registry metadata and released package provenance were not independently audited, and no independent Ghost publisher signature or key pin was found in the reviewed CLI path.",
+      "npm registry metadata, released package provenance, and any publisher-signing policy outside the CLI checkout were not independently audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "npm-registry hash (unpinned)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AB4.md",
+      "line": 17,
+      "text": "| Ghost (Ghost-CLI) | https://github.com/TryGhost/Ghost-CLI.git | 16771b7d / 2026-08-20 | Y (`ghost update`) | N (manual CLI command) | Y | https (npm registry, TLS enforced by npm client defaults) | N | hash-only, via `npm pack`'s built-in tarball integrity check against npm registry metadata | server-supplied/unpinned (npm registry) | `lib/commands/update.js:146-159` (`downloadAndUpdate`→`installDependencies`); `lib/tasks/install-dependencies.js:22-56` (`npmPack()`: `execa('npm',['pack','ghost@'+version,...])`, comment at line 23-25 states \"npm pack... verifies the integrity hash... for us\" — that hash comes from the same npm registry response, not an independently pinned key) |"
+    },
+    {
+      "file": "batch-H8.md",
+      "line": 16,
+      "text": "| Ghostty | https://github.com/ghostty-org/ghostty | Zig core + Swift/AppKit (macOS app); GTK4 (Linux) | Y — macOS build only, via the Sparkle framework. Linux/GTK build has no in-app updater (distro/package-manager only; grep of `src/apprt/gtk/**` found no update-check code) | chk: manual by default — `SUEnableAutomaticChecks=false` in Info.plist force-disables `automaticallyChecksForUpdates`/`automaticallyDownloadsUpdates` regardless of the app's own `auto-update` config option; user must invoke \"Check for Updates\" manually. (A config-driven auto chk/dl code path exists but is currently short-circuited off by the plist flag.) | Y — once the user approves an update in the UI, Sparkle downloads and installs the package and relaunches the app | https — appcast feed URLs `https://tip.files.ghostty.org/appcast.xml` and `https://release.files.ghostty.org/appcast.xml`; TLS handled by Sparkle/URLSession defaults, no ATS exceptions or cert-bypass code found in `macos/` | N (the appcast XML itself is fetched over plain HTTPS with no outer signature; integrity of the file list/versions relies on TLS) | signature (EdDSA / Ed25519) — Sparkle verifies each release enclosure's `edSignature` before installing | Embedded public key baked into the app bundle at build time: `SUPublicEDKey` = `wsNcGf5hirwtdXMVnYoxRIX/SqZQLMOsYlD3q3imeok=` in `macos/Ghostty-Info.plist` | macos/Ghostty-Info.plist:107-110 (`SUEnableAutomaticChecks`=false, `SUPublicEDKey`); macos/Sources/App/AppDelegate.swift:768-788 (sync logic: plist flag overrides user config); macos/Sources/Features/Update/UpdateDelegate.swift:14-15 (feed URLs per channel); macos/Sources/Features/Update/UpdateController.swift, UpdateDriver.swift, UpdateViewModel.swift (Sparkle `SPUStandardUpdaterController`/`SUAppcastItem` usage). |"
+    },
+    {
+      "file": "batch-I4.md",
+      "line": 22,
+      "text": "| Ghostwriter | https://github.com/KDE/ghostwriter | native Qt/C++ (KDE) | N | N/A | N/A | N/A | N/A | N/A | N/A | Exhaustive negative grep of full depth-1 clone across `*.cpp/*.h/*.qml/CMakeLists.txt`; zero matches for update/updater/sparkle/appcast keywords. Distributed via KDE Gears / distro packages / Flatpak / Microsoft Store only, no in-app self-update. |"
+    },
+    {
+      "file": "batch-X2.md",
+      "line": 18,
+      "text": "| Ghostfolio | https://github.com/ghostfolio/ghostfolio.git | 7a2ba0d8d665c2bd58a4ca04fb44a66e190bad0c / 2026-08-20 | N | N | N | n/a | n/a | n/a | n/a | negative census: no updater/self-update code in Angular+NestJS app; self-hosted Docker deploy, no desktop wrapper found |"
+    }
+  ]
 }

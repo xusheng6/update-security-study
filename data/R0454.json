@@ -5,13 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/bazelbuild/bazelisk",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Bazelisk includes detached-signature verification with an embedded Bazel release key for designated official release channels. Other configured channels differ; the evidence does not support one authentication classification for every source.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Default Bazel downloads GPG-signature-verified vs a pinned pubkey. Caveat: --last_green/fork builds set verifySignature=false.",
   "limitations": [
-    "New default-branch snapshot, not the historical Bazelisk revision under study.",
-    "The review establishes the Bazelisk call-site policy and embedded-key check, but not release-server key custody or the authenticity of the remote signature itself.",
-    "New default-branch snapshot, not the historical Bazelisk revision under study. The review establishes the Bazelisk call-site policy and embedded-key check, but not release-server key custody or the authenticity of the remote signature itself."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "5a7ff3892fdbd05672e6b8e60f139e05b2b76940"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Bazelisk includes detached-signature verification with an embedded Bazel release key for designated official release channels. Other configured channels differ; the evidence does not support one authentication classification for every source.",
+    "limitations": [
+      "New default-branch snapshot, not the historical Bazelisk revision under study.",
+      "The review establishes the Bazelisk call-site policy and embedded-key check, but not release-server key custody or the authenticity of the remote signature itself.",
+      "New default-branch snapshot, not the historical Bazelisk revision under study. The review establishes the Bazelisk call-site policy and embedded-key check, but not release-server key custody or the authenticity of the remote signature itself."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "GPG signature",
+  "trust_root": "pubkey go:embed (bazel-release.pub.gpg)",
+  "original_evidence": [
+    {
+      "file": "batch-AD5.md",
+      "line": 11,
+      "text": "| Bazelisk (bazelbuild/bazelisk) | https://github.com/bazelbuild/bazelisk.git | 5a7ff3892fdbd05672e6b8e60f139e05b2b76940 / 2026-04-27 | Y | Y | Y | https, TLS enforced (Go `http.DefaultTransport`, no InsecureSkipVerify found) | Y (release/rolling path only) | GPG detached signature (`.sig`) checked with `openpgp.CheckDetachedSignature` for the **default** LTS-release and rolling-release download paths | **pinned in binary** — `//go:embed bazel-release.pub.gpg` embedded public key (`httputil/httputil.go:45`) | `httputil/httputil.go:196-283` (DownloadBinary + verifySignature); call sites: `repositories/gcs.go:199` (DownloadLTS, verify=true, default path for a normal `USE_BAZEL_VERSION`), `repositories/gcs.go:277` (DownloadRolling, verify=true); **but** `repositories/gcs.go:228` (DownloadAtCommit/`--last_green`, verify=false) and `repositories/github.go:94` (fork-hosted Bazel binaries, verify=false) skip verification entirely; `core/repositories.go:31` wires `CreateRepositories(gcs, gitHub, gcs, gcs, true)` so LTS=gcs(verified) is the default |"
+    }
+  ]
 }

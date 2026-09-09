@@ -5,12 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/SelfControlApp/selfcontrol",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "Targeted retained-source read supports the narrow Tier A behavior for this primary application updater: Sparkle is configured for automatic checks over HTTPS and names a bundled dsa_pub.pem as SUPublicDSAKeyFile; the retained checkout also contains that key file.",
+  "description": "Sparkle with pinned DSA key.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in pinned key/configuration.",
-    "Framework verification depends on the packaged updater implementation where the application delegates to Sparkle or tauri-plugin-updater."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "34774c413013f903dce00c4f5cb17bc8d3a3c273"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow Tier A behavior for this primary application updater: Sparkle is configured for automatic checks over HTTPS and names a bundled dsa_pub.pem as SUPublicDSAKeyFile; the retained checkout also contains that key file.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in pinned key/configuration.",
+      "Framework verification depends on the packaged updater implementation where the application delegates to Sparkle or tauri-plugin-updater."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "DSA signature",
+  "trust_root": "Sparkle dsa_pub.pem pinned in bundle",
+  "original_evidence": [
+    {
+      "file": "batch-AE6.md",
+      "line": 23,
+      "text": "| SelfControl | https://github.com/SelfControlApp/selfcontrol | 34774c413013f903dce00c4f5cb17bc8d3a3c273 (2025-11-29) | Y | Y (`SUEnableAutomaticChecks=true`) | Y | https (`SUFeedURL=https://selfcontrolapp.com/appcast.xml`) | Y (Sparkle 1.24 DSA appcast signing) | signature (Sparkle legacy DSA signature over the update payload, verified against a key file bundled in the app) | **pinned in binary** — `dsa_pub.pem` shipped inside the app bundle (`Resources`), referenced via `SUPublicDSAKeyFile` | `Info.plist:63-70` (`SUEnableAutomaticChecks`, `SUFeedURL`, `SUPublicDSAKeyFile=dsa_pub.pem`); `./dsa_pub.pem` present at repo root; `Sparkle.framework/Versions/A/...` vendored (Sparkle 1.24.0) |"
+    }
+  ]
 }

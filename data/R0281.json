@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/adobe/brackets",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In the reviewed Brackets snapshot, extension registry data is periodically downloaded and the extension download helper writes a successful HTTP response to a temporary file; this source review does not establish an independent payload signature or the complete release channel.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "HTTPS update payload with no independent signature; extension registry unverified.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study release.",
-    "The cited implementation does not establish registry URL transport, release artifact signing, or the separate application updater.",
-    "Newly retrieved default-branch snapshot, not the original study release. The cited implementation does not establish registry URL transport, release artifact signing, or the separate application updater."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "d55ac606ac44e7169dbeaf959c9ed47dac6a6b9a"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In the reviewed Brackets snapshot, extension registry data is periodically downloaded and the extension download helper writes a successful HTTP response to a temporary file; this source review does not establish an independent payload signature or the complete release channel.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study release.",
+      "The cited implementation does not establish registry URL transport, release artifact signing, or the separate application updater.",
+      "Newly retrieved default-branch snapshot, not the original study release. The cited implementation does not establish registry URL transport, release artifact signing, or the separate application updater."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "checksum same endpoint",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-U4.md",
+      "line": 17,
+      "text": "| brackets | adobe/brackets | d55ac606ac44 / 2021-03-18 (archived) | Y | N (24h auto-check, manual install) | Y | https, TLS enforced Y | N | hash (SHA-256) | server-supplied (same feed as download URL) | src/extensions/default/AutoUpdate/node/AutoUpdateDomain.js:128-146 (validateChecksum), :272-281 (downloadInstaller); src/config.json:26 |"
+    }
+  ]
 }

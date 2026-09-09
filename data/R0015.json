@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/JosefNemec/Playnite",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The recovered Playnite updater consumes a manifest checksum in the application update path; the source does not show an authenticated manifest or an invoked Authenticode check for the downloaded update, supporting C.",
+  "description": "MD5 from an unsigned manifest; a full Authenticode class exists but is never called on the update path.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; historical release/build behavior may differ.",
-    "Repository origin and commit were checked against the candidate metadata; this source is project-associated but does not establish the original study release checkout."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,24 @@
       "commit": "98c09dd6a16369feaa34c9661bc20b47566d76b1"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The recovered Playnite updater consumes a manifest checksum in the application update path; the source does not show an authenticated manifest or an invoked Authenticode check for the downloaded update, supporting C.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; historical release/build behavior may differ.",
+      "Repository origin and commit were checked against the candidate metadata; this source is project-associated but does not establish the original study release checkout."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (dev cfg http)",
+  "payload_verification": "MD5",
+  "trust_root": "none",
+  "original_evidence": []
 }

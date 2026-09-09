@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/grafana/grafana",
   "channel": "plugin",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The core updater fetches only a version JSON and sets a notification flag; it does not download or execute Grafana binaries.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Plugin catalog has real OpenPGP-signed manifest + per-file SHA-256, but the verifying key is fetched unpinned from grafana.com by default (only A-equiv if an operator disables dynamic key retrieval). Core self-update notify-only.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,34 @@
       "commit": "45a80328c0dd976720af0366efcad0787762b142"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The core updater fetches only a version JSON and sets a notification flag; it does not download or execute Grafana binaries.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "OpenPGP + SHA-256 (key unpinned)",
+  "trust_root": "key fetched from grafana.com by default",
+  "original_evidence": [
+    {
+      "file": "batch-AI5.md",
+      "line": 11,
+      "text": "| Grafana (core) | https://github.com/grafana/grafana | 45a80328c0dd976720af0366efcad0787762b142 / 2026-08-22 | Y (notify-only) | N | N | https, TLS enforced | N/A | N/A (version-string compare only) | N/A | `pkg/services/updatemanager/grafana.go:23,92-137` fetches `https://grafana.com/api/grafana/versions/stable`, sets `hasUpdate` flag; UI banner only (`public/app/core/components/Footer/Footer.tsx:79`); no binary ever downloaded/executed. |"
+    },
+    {
+      "file": "batch-AI5.md",
+      "line": 12,
+      "text": "| **Grafana — plugin catalog** (side channel, code-as-content) | same repo | same | Y | N by default (experimental `pluginsAutoUpdate` flag defaults false) | Y | https; TLS enforced by default (`InsecureSkipVerify` only via explicit non-default flag) | Y — OpenPGP clearsigned MANIFEST.txt | Y — SHA-256 per-file hash check + zip checksum from API | **server-supplied/unpinned by default** — keys fetched live from `grafana.com/api/plugins/ci/keys`, cached 10 days; falls back to a single hardcoded PGP key in binary only if operator sets `public_key_retrieval_disabled=true` (non-default) | `pkg/plugins/manager/signature/manifest.go:41-108,250-282,355-373`; `pkg/services/pluginsintegration/keyretriever/dynamic/dynamic_retriever.go:119`; `pkg/services/pluginsintegration/keyretriever/retriever.go:17-24`; `pkg/setting/setting_plugins.go:151,154`; fallback pinned key `pkg/plugins/manager/signature/statickey/static_retriever.go:10-11`; unsigned-plugin block `pkg/plugins/manager/signature/authorizer.go:22-37`; TLS flag `pkg/plugins/repo/client.go:33-41,291` |"
+    }
+  ]
 }

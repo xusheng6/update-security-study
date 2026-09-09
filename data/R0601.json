@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/continuedev/continue",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: CLI update service defaults to automatic update and invokes npm global installation without a source-level hash or signature check.",
+  "description": "Silent npm i -g, no verification.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "5522c6f44ca0ac3528b37244818fbfa39b5af470"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: CLI update service defaults to automatic update and invokes npm global installation without a source-level hash or signature check.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AM1.md",
+      "line": 8,
+      "text": "| Continue (CLI) | https://github.com/continuedev/continue.git | 5522c6f / 2026-07-20 | Y | Y (default true, silent) | Y | https (api.continue.dev, registry via npm CLI) | N | none (npm registry TLS only; no signature/hash check in Continue's own code) | N/A — unpinned | extensions/cli/src/services/UpdateService.ts:20-22 (autoUpdate:true, isAutoUpdate:true defaults), :44-98 (checkAndAutoUpdate calls performUpdate automatically when update available), :148 (`npm i -g @continuedev/cli` via execAsync, no confirmation), extensions/cli/src/version.ts:42 (GET https://api.continue.dev/cn/info) |"
+    }
+  ]
 }

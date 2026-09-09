@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/PrismLauncher/PrismLauncher",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The recovered PrismLauncher updater downloads and extracts the selected release archive; the inspected Windows/Linux path does not show an independent checksum or signature verification, supporting C. macOS Sparkle is a separate channel.",
+  "description": "Unsigned JSON manifest; archive extracted immediately with no checksum. (macOS Sparkle path = A.)",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; historical release/build behavior may differ.",
-    "Repository origin and commit were checked against the candidate metadata; this source is project-associated but does not establish the original study release checkout."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,24 @@
       "commit": "7b81e7c852a8d36c9b27c255639d5569dcc52204"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The recovered PrismLauncher updater downloads and extracts the selected release archive; the inspected Windows/Linux path does not show an independent checksum or signature verification, supporting C. macOS Sparkle is a separate channel.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; historical release/build behavior may differ.",
+      "Repository origin and commit were checked against the candidate metadata; this source is project-associated but does not establish the original study release checkout."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": []
 }

@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/fhem/fhem-mirror",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "D",
-  "description": "The shared HTTP helper defaults SSL verification off; the update module inherits that default and checks only attacker-channel byte length before writing Perl modules.",
+  "description": "SSL_verify_mode=0 disabled by default in HttpUtils.pm; zero payload authentication. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "536089979aa79ef092ebebbb5befc34a1e6f845f"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The shared HTTP helper defaults SSL verification off; the update module inherits that default and checks only attacker-channel byte length before writing Perl modules.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "D",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validation off)",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AC6.md",
+      "line": 32,
+      "text": "| FHEM | https://github.com/fhem/fhem-mirror | f422756 / 2026-08-21 | Y | Y (`update` command; can be scheduled via `checktime`/cron notify) | Y | **HTTPS with TLS certificate validation DISABLED BY DEFAULT** — `SSL_verify_mode` is forced to `0` (SSL_VERIFY_NONE) unless the caller explicitly passes `sslargs.SSL_verify_mode`, and the update module (98_update.pm) never sets `sslargs` | N | NONE — the `controls_fhem.txt` manifest only records per-file timestamp + byte length (`UPD <ts> <len> <file>`), not a cryptographic hash; length-check can even be disabled via `updateNoFileCheck` attribute | N/A | fhem/FHEM/HttpUtils.pm:648-649 (`$par{SSL_verify_mode} = 0 if(!$hash->{sslargs} || !defined($hash->{sslargs}{SSL_verify_mode}));`); fhem/FHEM/98_update.pm:280-298 (control-file format is `UPD/CRE <ts> <len> <file>`, no hash field); fhem/FHEM/98_update.pm:111 (default source `https://fhem.de/fhemupdate/controls_fhem.txt`) |"
+    }
+  ]
 }

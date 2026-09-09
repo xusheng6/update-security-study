@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/visualboyadvance-m/visualboyadvance-m",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: WinSparkle points to an HTTPS appcast, with an HTTP fallback in the NO_HTTPS build; no public signing key is configured in this wrapper path.",
+  "description": "WinSparkle/Sparkle auto-updater; macOS EdDSA-pinning line is commented out and Windows never calls any key API — no payload verification enforced. CDN compromise = RCE.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "830bb0772b0fb1f00667f47bdae513e4148951f3"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: WinSparkle points to an HTTPS appcast, with an HTTP fallback in the NO_HTTPS build; no public signing key is configured in this wrapper path.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none (key commented out)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AJ3.md",
+      "line": 21,
+      "text": "| VisualBoyAdvance-M | https://github.com/visualboyadvance-m/visualboyadvance-m | 830bb077 / 2026-08-23 | Y | Y | Y | https (Windows fallback to http on pre-Vista only) | N (no manifest signature scheme; appcast is plain XML over HTTPS) | none enforced (EdDSA pinning present in code but commented out) | unpinned / not configured | Win: `src/wx/autoupdater/wxmsw/autoupdater.cpp:15-19` — WinSparkle points at `https://data.visualboyadvance-m.org/appcast.xml` (falls back to plain `http://` for `_WIN32_WINNT < 0x0600`, same file lines 12-17); `winsparkle-wrapper.h` exposes no `win_sparkle_set_public_key`/DSA API call anywhere in the wrapper or its call sites — no signature key is ever configured, so WinSparkle performs no payload signature check, only HTTPS transport. macOS: `src/wx/CMakeLists.txt:1606` fetches the Sparkle framework itself via `FetchContent` (pinned SHA256, fine) but `src/wx/CMakeLists.txt:1636` — `#set(CCS7 defaults write ... Info.plist SUPublicEDKey -string \"${PUBLIC_KEY}\")` — **the line that would set the pinned EdDSA public key is commented out**, and the corresponding `add_custom_command` invocation of `${CCS7}` is also commented out (line 1642). `autoupdater.cpp` (macOS) just calls `addAppcastURL(\"https://data.visualboyadvance-m.org/appcast.xml\")` with no key material. Net effect: downloaded update .zip/.dmg is fetched over HTTPS and auto-installed with no cryptographic payload verification pinned in the app — a compromise of `data.visualboyadvance-m.org` or its CDN/TLS chain is sufficient for RCE (Sparkle's fallback matching-code-signature check may still apply on macOS via Apple code-signing, but that is not configured/verified in-repo, and Windows has no equivalent fallback at all). |"
+    }
+  ]
 }

@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/cloudflare/cloudflared",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "cloudflared compares a downloaded file hash with the checksum supplied by the same update response; no signature key is used.",
+  "description": "Background auto-updater checks a checksum, but it's server-supplied from the same JSON response as the download URL.",
   "limitations": [
-    "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "2253eeeb25a44a713a4b60b8ba1e1b3f377d1a0f"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "cloudflared compares a downloaded file hash with the checksum supplied by the same update response; no signature key is used.",
+    "limitations": [
+      "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "checksum (same endpoint)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-W7.md",
+      "line": 18,
+      "text": "| cloudflared | https://github.com/cloudflare/cloudflared | 733bfb9 / 2026-08-14 | Y | Y (background `AutoUpdater` ticks every 24h by default when running as a service, not from a shell/Windows/package-manager install) | Y | https, TLS validation enforced (default `http.Client`, no `InsecureSkipVerify` found in updater code) | no | hash only — SHA checksum compared against `v.checksum`, but that checksum is delivered in the *same* JSON checkin response as the download URL, from the *same* server (`update.argotunnel.com`) | server-supplied/unpinned (checksum comes from `update.argotunnel.com` JSON response, not a signature against any pinned key) | `cmd/cloudflared/updater/update.go:24-34` (`UpdateURL = \"https://update.argotunnel.com\"`), `cmd/cloudflared/updater/update.go:202-276` (`AutoUpdater.Run`, ticks every `DefaultCheckUpdateFreq = 24h`, enabled unless Windows/package-manager-install/interactive-shell), `cmd/cloudflared/updater/workers_service.go:24-30` (`VersionResponse.Checksum` field from JSON checkin), `cmd/cloudflared/updater/workers_update.go:83-113` (`Apply()` downloads, computes `cliutil.FileChecksum`, compares to server-supplied `v.checksum` — no signature check) |"
+    }
+  ]
 }

@@ -5,11 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/files-community/Files",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Files supports Store updates and a sideload path using fixed HTTPS .appinstaller URLs. The sideload service compares the manifest package/version and delegates installation to Windows PackageManager; lifecycle code invokes update checks at startup and periodically. Windows Authenticode enforcement is an OS/package-deployment boundary outside this source review.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "Store + sideload .appinstaller; MSIX install OS-Authenticode-gated, auto on launch.",
   "limitations": [
-    "New default-branch snapshot rather than historical release re-verification; Windows Store/package deployment signature enforcement, shipped MSIX metadata, and exact startup timing were not independently audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,34 @@
       "commit": "aee62adcb99c62049381fd5c8112b6ed5fe004a1"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Files supports Store updates and a sideload path using fixed HTTPS .appinstaller URLs. The sideload service compares the manifest package/version and delegates installation to Windows PackageManager; lifecycle code invokes update checks at startup and periodically. Windows Authenticode enforcement is an OS/package-deployment boundary outside this source review.",
+    "limitations": [
+      "New default-branch snapshot rather than historical release re-verification; Windows Store/package deployment signature enforcement, shipped MSIX metadata, and exact startup timing were not independently audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (cdn.files.community)",
+  "payload_verification": "OS-code-signing (MSIX Authenticode)",
+  "trust_root": "OS-trust-store",
+  "original_evidence": [
+    {
+      "file": "batch-O6.md",
+      "line": 7,
+      "text": "| Files (Store channel) | github.com/files-community/Files | WinUI 3, packaged MSIX | Y (`StoreUpdateService`, selected via DI when packaged and Store-associated) | Y — `AppLifecycleHelper.CheckAppUpdate()` runs automatically on every app launch (`App.xaml.cs:365`) and calls `CheckForUpdatesAsync()` + `DownloadMandatoryUpdatesAsync()` unconditionally; mandatory Store updates auto-download after a forced consent dialog, optional updates require the user to click Update in UI (`DownloadUpdatesAsync()`) | Y (`RequestDownloadAndInstallStorePackageUpdatesAsync`) | HTTPS, entirely inside the Windows Store client stack (`Windows.Services.Store.StoreContext`) — Files never talks to a URL itself | n/a (Store service, not a document manifest) | OS-code-signing — Microsoft Store re-signs/validates all packages via AppX Deployment Service before install; no app-level hash/signature check exists in this path | Microsoft Store signing infrastructure (root of trust is Windows' built-in trusted-app/Store certificates) | src/Files.App/Services/App/AppUpdateStoreService.cs:191 (`_storeContext ??= await Task.Run(StoreContext.GetDefault)`), :195 (`GetAppAndOptionalStorePackageUpdatesAsync`), :158 (`RequestDownloadAndInstallStorePackageUpdatesAsync`); src/Files.App/Helpers/Application/AppLifecycleHelper.cs:171-176 (`CheckAppUpdate`); src/Files.App/App.xaml.cs:365 |"
+    },
+    {
+      "file": "batch-O6.md",
+      "line": 8,
+      "text": "| Files (Sideload/AppInstaller channel) | github.com/files-community/Files | WinUI 3, packaged MSIX via `.appinstaller` | Y (`SideloadUpdateService`) | Y for the version-check (runs on every launch via `CheckAppUpdate()`); download/install (`ApplyPackageUpdateAsync`) is user-triggered from UI, not silent | Y — `PackageManager.AddPackageByAppInstallerFileAsync` downloads and installs the MSIX package described by the `.appinstaller` XML | HTTPS — hardcoded URLs `https://cdn.files.community/files/stable/Files.Package.appinstaller` and `.../preview/...`; fetched with plain `HttpClient.GetStreamAsync` (default TLS cert validation, no pinning/overrides found) | N — the `.appinstaller` XML itself carries no signature; only package name + version fields are read (`XDocument.LoadAsync`) | OS-code-signing — `AddPackageByAppInstallerFileAsync` is a Windows AppX Deployment API that refuses to install any MSIX package whose Authenticode signature doesn't chain to a trusted publisher cert; Files' own code performs no hash/signature check itself | Publisher certificate embedded in the MSIX package's `AppxManifest`, validated by Windows against the local trusted-people/trusted-publisher cert store (external to the app) | src/Files.App/Services/App/AppUpdateSideloadService.cs:19-20 (URL consts), :90 (`_client.GetStreamAsync`), :215-217 (`new Uri(...)` → `AddPackageByAppInstallerFileAsync`) |"
+    }
+  ]
 }

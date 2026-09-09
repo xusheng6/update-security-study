@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/alberthier/git-webui",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The default-enabled auto-update runs git pull and re-execs without a GPG/signature validation step.",
+  "description": "auto_update() runs git pull then os.execl re-execs — enabled by default by the installer, zero commit verification.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "dee7c192b2ec063cf638c3ec6e99589812b9d231"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The default-enabled auto-update runs git pull and re-execs without a GPG/signature validation step.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AH3.md",
+      "line": 23,
+      "text": "| git-webui | https://github.com/alberthier/git-webui.git | dee7c19 / 2017-11-10 | Y | Y (default) | Y | https, TLS enforced (plain `git pull`, no bypass found) | N | none | server-supplied/unpinned (trusts whatever `origin` remote points to) | `src/libexec/git-core/git-webui:219-240` (`auto_update()`: `git pull` then `os.execl(sys.executable, ...)` re-exec, no GPG check); `install/installer.sh:38-40` (clones via https, then `git config --global --replace-all webui.autoupdate true` — **auto-update ON by default** for anyone using the official installer) |"
+    }
+  ]
 }

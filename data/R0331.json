@@ -5,14 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/qishibo/AnotherRedisDesktopManager",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "AnotherRedisDesktopManager integrates an application updater and packaging hooks. The retained evidence does not establish the original Windows or macOS signing classification.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "macOS genuinely notarized (B); Windows release has zero signing secrets — unsigned NSIS relying only on a same-channel SHA-512 (C leg).",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "No retained release artifact, notarization record, or CI secret audit was available to substantiate the platform-specific publication assertions.",
-    "The updater dependency's manifest and signature enforcement were not independently verified from this repository.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout. No retained release artifact, notarization record, or CI secret audit was available to substantiate the platform-specific publication assertions. The updater dependency's manifest and signature enforcement were not independently verified from this repository."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "c149855106628babcdfb7675a8e7ba9434d2492a"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "AnotherRedisDesktopManager integrates an application updater and packaging hooks. The retained evidence does not establish the original Windows or macOS signing classification.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "No retained release artifact, notarization record, or CI secret audit was available to substantiate the platform-specific publication assertions.",
+      "The updater dependency's manifest and signature enforcement were not independently verified from this repository.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout. No retained release artifact, notarization record, or CI secret audit was available to substantiate the platform-specific publication assertions. The updater dependency's manifest and signature enforcement were not independently verified from this repository."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "OS code-signing (mac) / sha512 only (Win)",
+  "trust_root": "electron-updater",
+  "original_evidence": [
+    {
+      "file": "batch-W4.md",
+      "line": 13,
+      "text": "| Another Redis Desktop Manager | https://github.com/qishibo/AnotherRedisDesktopManager.git | c149855106 / 2026-08-20 | Y | N (user confirms via dialog) | Y | https (GitHub Releases via electron-updater) | mac: Y (notarized) / win: N (unsigned) | mac: OS code-signing (Squirrel.Mac); win: hash only from `latest.yml` on same GitHub Releases channel | mac: real Apple notarization (teamId 68JN8DV835, CSC_LINK+APPLEID CI secrets); win: **no signing secrets configured at all** | pack/electron/update.js:1-52 (`electron-updater` `checkForUpdates()`→user click→`downloadUpdate()`); pack/electron/package.json:14-70 (`afterSign: notarize.js`); .github/workflows/build_mac.yml:14-25 (real `CSC_LINK`/`APPLEID` secrets); .github/workflows/build_windows.yml (publish job has **zero** signing env vars — Windows NSIS installer ships unsigned) |"
+    }
+  ]
 }

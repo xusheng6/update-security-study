@@ -5,12 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/CropGeeks/tablet",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "B",
-  "description": "Targeted retained-source read supports the narrow primary updater classification: Tablet's install4j updater uses HTTPS update descriptors and runs a startup check; installer project configuration enables macOS and Windows code signing.",
+  "description": "install4j auto-updater over HTTPS, OS-code-signed payload.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in configuration.",
-    "Where electron-updater/Squirrel/install4j performs final verification, the external framework implementation is not vendored here."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "2804f6e5d65c2cbbd7ac183fbe8fd83a853c70a1"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow primary updater classification: Tablet's install4j updater uses HTTPS update descriptors and runs a startup check; installer project configuration enables macOS and Windows code signing.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in configuration.",
+      "Where electron-updater/Squirrel/install4j performs final verification, the external framework implementation is not vendored here."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "B",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "OS code-signing",
+  "trust_root": "install4j (Apple Dev ID + Authenticode)",
+  "original_evidence": [
+    {
+      "file": "batch-AJ1.md",
+      "line": 16,
+      "text": "| Tablet | https://github.com/CropGeeks/tablet | 2804f6e / 2023-06-14 | Y | Y (auto-checks every startup) but download/install gated on user accepting an `UpdateAlertComponent` dialog | Y (after user accepts) | https; no disabled-validation code found | not confirmed | **OS code signing** (mac + Windows Authenticode via install4j) | OS keystore | `src/tablet/gui/Tablet.java:71-79` `Install4j i4j = new Install4j(...); i4j.setURLs(\"https://bioinf.hutton.ac.uk/tablet/installers/updates.xml\", ...); i4j.doStartUpCheck(Tablet.class);` called from `main()`; `installer/Tablet.install4j:10` `<codeSigning macEnabled=\"true\" macPkcs12File=\"../keys/apple_cert.p12\" windowsEnabled=\"true\" windowsPkcs12File=\"../keys/OS201306044993.pfx\">`; `:529-531` `CheckForUpdateAction` with `url=https://bioinf.hutton.ac.uk/tablet/installers/updates.xml`; `:126` `UpdateAlertComponent` (user-facing, not silent) |"
+    }
+  ]
 }

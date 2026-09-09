@@ -5,13 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/transmission/transmission",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Transmission’s macOS bundle metadata configures an EdDSA public key and HTTPS Sparkle appcast. This supports the checked-in key configuration, not independent certification of Sparkle enforcement or historical releases.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "macOS Sparkle EdDSA pinned.",
   "limitations": [
-    "Pinned source or archive snapshot, not independent verification of the original release artifact.",
-    "Configuration and integration observations do not certify every framework control or platform.",
-    "Pinned source or archive snapshot, not independent verification of the original release artifact.; Configuration and integration observations do not certify every framework control or platform."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,46 @@
       "commit": "48835c6660a7a3730b5a122bb7b88909997addbe"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Transmission’s macOS bundle metadata configures an EdDSA public key and HTTPS Sparkle appcast. This supports the checked-in key configuration, not independent certification of Sparkle enforcement or historical releases.",
+    "limitations": [
+      "Pinned source or archive snapshot, not independent verification of the original release artifact.",
+      "Configuration and integration observations do not certify every framework control or platform.",
+      "Pinned source or archive snapshot, not independent verification of the original release artifact.; Configuration and integration observations do not certify every framework control or platform."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[Sparkle-EdDSA]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-AN3.md",
+      "line": 9,
+      "text": "| transmission-remote-gtk | https://github.com/transmission-remote-gtk/transmission-remote-gtk.git | 9b1c650c 2026-07-26 | N | N | N | n/a | n/a | n/a | n/a | negative census: no sparkle/appcast/self_update/api.github.com hits anywhere in repo |"
+    },
+    {
+      "file": "batch-AN3.md",
+      "line": 20,
+      "text": "| transmission-control | https://github.com/mveinot/transmission-control.git | 015c3615 2026-08-13 | Y (check only) | N | N (notify-only, opens browser) | https | n/a | n/a | n/a | `updatechecker.cpp:42` queries `https://api.github.com/repos/%1/%2/releases/latest`; `updatecheckcontroller.cpp:61,92` `QDesktopServices::openUrl(releaseUrl)` — never downloads/executes an update itself |"
+    },
+    {
+      "file": "batch-V2.md",
+      "line": 16,
+      "text": "| Transmission Remote GUI (transgui) | https://github.com/transmission-remote-gui/transgui | e47d82b / 2026-08-20 | Y | N (opt-in `cbCheckNewVersion`, default off; interval configurable) | N (notify-only) | https (raw.githubusercontent.com) | N | none | none | `about.pas:203` `FHttp.HTTPMethod('GET','https://raw.githubusercontent.com/transmission-remote-gui/transgui/master/VERSION.txt')` to get latest version string; `about.pas:161-167` on newer version just shows a dialog then `OpenURL('https://github.com/transmission-remote-gui/transgui/releases')` — opens system browser, never downloads/runs a binary itself. (Also has `DownloadGeoIpDatabase`/`acUpdateBlocklistExecute` — data-file downloads, not code, stays N.) |"
+    },
+    {
+      "file": "batch-V2.md",
+      "line": 20,
+      "text": "| Transmission Remote CLI | https://github.com/fagga/transmission-remote-cli | 1e412a2 / 2017-01-15 | N | N | N | n/a | n/a | n/a | n/a | Python/curses RPC client for Transmission daemon; no updater code; last commit 2017, effectively unmaintained. |"
+    }
+  ]
 }

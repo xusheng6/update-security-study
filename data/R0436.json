@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/home-assistant/supervisor",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The reviewed Supervisor code validates a repository configuration before updating its Git-backed store and pulls selected Docker images with repository, version, platform, and optional registry-credential parameters; it does not establish the historical add-on payload trust classification.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Supervisor add-on/OTA store installs add-ons server-TLS-only with no pinned/authenticated payload.",
   "limitations": [
-    "New default-branch Supervisor snapshot, not the historical add-on release. The complete add-on/OTA path, image provenance policy, and release-specific enforcement remain unverified.",
-    "The snapshot is a new Supervisor default branch, not the historical add-on release; the complete add-on/OTA path, image provenance policy, and release-specific enforcement remain unverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,35 @@
       "commit": "0a7aa2240500ca49b5f35ab283d407967f730f14"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The reviewed Supervisor code validates a repository configuration before updating its Git-backed store and pulls selected Docker images with repository, version, platform, and optional registry-credential parameters; it does not establish the historical add-on payload trust classification.",
+    "limitations": [
+      "New default-branch Supervisor snapshot, not the historical add-on release. The complete add-on/OTA path, image provenance policy, and release-specific enforcement remain unverified.",
+      "The snapshot is a new Supervisor default branch, not the historical add-on release; the complete add-on/OTA path, image provenance policy, and release-specific enforcement remain unverified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AC6.md",
+      "line": 15,
+      "text": "| Home Assistant Core | https://github.com/home-assistant/core | e9737b72 / 2026-08-20 | N (core pip/docker install has no self-updater; relies on OS/pip/docker) | N | N | N/A | N/A | N/A | N/A | homeassistant/components/update/__init__.py (generic entity platform only, no self-download path) |"
+    },
+    {
+      "file": "batch-AC6.md",
+      "line": 16,
+      "text": "| Home Assistant Supervisor (add-on store, content channel for HAOS/Supervised installs) | https://github.com/home-assistant/supervisor | f148020 / 2026-08-20 | Y | Y (auto-update option per add-on/core/OS) | Y | https (Docker registry pull by tag; git clone of add-on repos over https) — cert validation NOT disabled anywhere found | N (no Docker Content Trust / cosign / notary invoked) | none — relies on registry TLS only, image pulled by tag not digest | server-supplied/unpinned (whatever registry serves for the tag) | supervisor/docker/interface.py:274-403 (install() pulls by tag, no digest/signature check); supervisor/store/git.py:1-80 (GitPython clone of add-on repos, no commit signature verification) |"
+    }
+  ]
 }

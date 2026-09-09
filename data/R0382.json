@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/thsa/datawarrior",
   "channel": "mixed",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "DataWarrior’s updater compares update JARs with MD5 values supplied by its metadata. Its plugin channel is separate; these observations do not establish independent publisher authentication or every automatic-update setting.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "HTTPS, but 'verification' is an MD5 supplied by the same server as the jar; auto-loaded via URLClassLoader every launch, Automatic mode skips confirmation.",
   "limitations": [
-    "New default-branch snapshot rather than the original study checkout; the server response and release process were not independently verified, and the source does not show an independent signature or pinned-key control in this path."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "772596aa790bcfba867476adf9bd4d4b125f10f5"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "DataWarrior’s updater compares update JARs with MD5 values supplied by its metadata. Its plugin channel is separate; these observations do not establish independent publisher authentication or every automatic-update setting.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study checkout; the server response and release process were not independently verified, and the source does not show an independent signature or pinned-key control in this path."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "MD5 (same server)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-Y4.md",
+      "line": 21,
+      "text": "| DataWarrior | https://github.com/thsa/datawarrior | 772596aa7 (2026-08-20) | Y | Y-by-default-mode-\"Ask\" (auto-checks + prompts every startup, `getPostInstallInfoAndHandleUpdates`); a user-selectable \"Automatic\" preference (`PREFERENCES_UPDATE_MODE_AUTO`) skips the prompt and downloads+installs-on-next-launch unattended | **Y** — `downloadJarFile()` fetches a full replacement `datawarrior_vXX.XX.XX.jar`; `DataWarriorLauncher` auto-loads and executes the newest one on **every subsequent launch**. The identical mechanism is reused for a \"trusted plugins\" channel (content-as-code side channel, same flaw) | https (`URL1=\"https://dwversion.openmolecules.org\"`, `URL2=\"https://dwversion.datawarrior.org\"`, `DEFAULT_UPDATE_URL=\"https://openmolecules.org/datawarrior/update\"`); no TLS-bypass code found; the per-update `sourceURL` is taken verbatim from the HTTPS-fetched server response with no re-validation | N (plain Java `Properties` key/value response, no signature) | **hash-from-same-endpoint only** — MD5 (`PROPERTY_AUTO_UPDATE_MD5SUM`) is supplied by the very same HTTPS response that supplies the download URL; no independent/pinned signature | server-supplied/unpinned (the MD5 comes from the same origin being trusted — endpoint compromise defeats it) | `src/com/actelion/research/datawarrior/help/DEUpdateHandler.java:55-58` (server URLs), `:123-170` (background thread runs every launch), `:264-329` (`handleUpdate`, Ask vs Automatic mode), `:331-446` (`downloadJarFile`, MD5-only check at `:406-416`), `:448-506` (`handleTrustesPlugins` — same MD5-from-server pattern for plugin jars), `src/org/openmolecules/datawarrior/launcher/DataWarriorLauncher.java:43-54` (picks newest downloaded jar), `:85-94` (`URLClassLoader` loads it and invokes `main()` on every launch, no further check) |"
+    }
+  ]
 }

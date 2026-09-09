@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/massCodeIO/massCode",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In the reviewed massCode updater module, electron-updater is configured with automatic download disabled and installation-on-quit enabled; checks run on startup and periodically, with a confirmation path for downloads. The source review does not establish effective SHA-512 or macOS notarization enforcement for released artifacts.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater, mac notarized (a rejectUnauthorized:false toggle exists but only in the HTTP-testing feature, not the updater).",
   "limitations": [
-    "The snapshot does not establish released artifact signing or notarization.",
-    "electron-updater internals are not vendored in the application source.",
-    "The snapshot does not establish released artifact signing or notarization. electron-updater internals are not vendored in the application source."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "9db02cb2c9ff85fd9f3b435fdfc426284d84d87c"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In the reviewed massCode updater module, electron-updater is configured with automatic download disabled and installation-on-quit enabled; checks run on startup and periodically, with a confirmation path for downloads. The source review does not establish effective SHA-512 or macOS notarization enforcement for released artifacts.",
+    "limitations": [
+      "The snapshot does not establish released artifact signing or notarization.",
+      "electron-updater internals are not vendored in the application source.",
+      "The snapshot does not establish released artifact signing or notarization. electron-updater internals are not vendored in the application source."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "sha512 + OS code-signing",
+  "trust_root": "electron-updater (notarized)",
+  "original_evidence": [
+    {
+      "file": "batch-AL3.md",
+      "line": 23,
+      "text": "| massCode | https://github.com/massCodeIO/massCode | 9db02cb / 2026-08-17 | Y | Y (auto-download when same-major + user pref `updates.autoUpdate`; else notify-only) | Y | https, TLS enforced (no `rejectUnauthorized:false` on the update path — see note) | Y (electron-builder `latest.yml`/`latest-mac.yml` w/ SHA512) | hash (SHA512 in `latest*.yml`) + OS code signature (mac `notarize:true`, hardened runtime; win nsis/portable built by electron-builder, presumably Authenticode-signed by CI) | OS keystore (Gatekeeper/notarization ticket, Windows Authenticode cert chain) — not a key pinned in the massCode binary itself | `src/main/updates/index.ts:1-139` (`autoUpdater` from `electron-updater`, `checkForUpdates`/`downloadUpdate`/`quitAndInstall`); `electron-builder.json` (`publish.provider\":\"github\",\"owner\":\"massCodeIO\"`, `mac.notarize:true`) |"
+    }
+  ]
 }

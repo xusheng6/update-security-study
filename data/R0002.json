@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/cemu-project/Cemu",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "D",
-  "description": "The in-app updater disables certificate verification for both metadata and payload, extracts the update, and relaunches the resulting executable. No payload signature/hash check is visible in the updater body.",
+  "description": "Uses https URLs but explicitly disables cert validation, then extracts and CreateProcessW's the binary. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,23 @@
       "commit": "5ead58008dd984f614e2cb38bd9cb69bd77fd1bb"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The in-app updater disables certificate verification for both metadata and payload, extracts the update, and relaunches the resulting executable. No payload signature/hash check is visible in the updater body.",
+    "limitations": [
+      "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "D",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https, VERIFYPEER=0",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": []
 }

@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/rcaelers/workrave",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+  "description": "Windows builds verify an Ed25519 signature pinned in the binary, plus Authenticode + sigstore cert-transparency, download URL allowlisted.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "cedd367ec5697226999e74d7861e3ecf493e96a3"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "Ed25519 signature",
+  "trust_root": "key pinned in binary (+ sigstore CT)",
+  "original_evidence": [
+    {
+      "file": "batch-X5.md",
+      "line": 12,
+      "text": "| Workrave | https://github.com/rcaelers/workrave.git | 8acff78 / 2026-08-18 | Y | Y (Windows builds only) | Y (Windows) | https, TLS enforced | Y | signature (Ed25519) + Authenticode + sigstore cert-transparency, layered | **pinned in binary** (Ed25519 pubkey hardcoded) + OS Authenticode | `ui/app/toolkits/qt/AutoUpdater.cc:57`: appcast `https://appcast.workrave.org/v1.12-qt/appcast.xml`; `:59`: `updater->set_signature_verification_key(\"MCowBQYDK2VwAyEAZ1I+iYYFpFMPcSj15BnHl6x7uow2CdxT0t2BmUzMGXk=\")` (pinned Ed25519 SPKI); `:88-92`: `pre_download_validation_callback` restricts download URL to `https://github.com/rcaelers/workrave/`; `:100-111`: `pre_install_validation_callback` requires Authenticode `is_signed && is_valid && subject_name==\"Rob Caelers\"`; `:114-119`: sigstore bundle validated against `oidc_issuer==\"https://github.com/login/oauth\"` + `subject_email==\"rob.caelers@gmail.com\"`. Uses own \"unfold\" auto-update library. Feature gated by `WITH_AUTO_UPDATE` CMake option, scoped inside `if(WIN32)` block (`CMakeLists.txt:1063-1066,1077`) — i.e. implemented and wired for official Windows releases; mirrored in GTK toolkit (`ui/app/toolkits/gtkmm/AutoUpdater.cc`). No plaintext/disabled-TLS found repo-wide. |"
+    }
+  ]
 }

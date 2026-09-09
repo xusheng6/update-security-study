@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/theotherp/nzbhydra2",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The release asset is downloaded to the update directory and the process exits for wrapper installation without a hash/signature check.",
+  "description": "HTTPS, but zero payload signature/hash — origin compromise = RCE.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "3c174ed4e68ad134b2c174d668bf6dcc3fa06f2c"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The release asset is downloaded to the update directory and the process exits for wrapper installation without a hash/signature check.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AG7.md",
+      "line": 11,
+      "text": "| NZBHydra2 | https://github.com/theotherp/nzbhydra2 | 3c174ed / 2026-08-14 | Y | Y (opt-in, `isUpdateAutomatically`) | Y | https, TLS enforced by default (per-host toggle `verifySsl`/`verifySslDisabledFor`, default enabled) | N | none (no hash/sig check on release ZIP asset) | server-supplied/unpinned (GitHub Releases API JSON dictates asset URL) | `core/src/main/java/org/nzbhydra/update/UpdateManager.java:322-376` (downloads GitHub release asset via `webAccess.downloadToFile`, no checksum/signature check before shutdown+extract); `core/src/main/java/org/nzbhydra/update/AutomaticUpdater.java:28-40` (auto-install gate); `other/wrapper/nzbhydra2wrapperPy3.py:175-225` (external wrapper unzips update ZIP over running install, no verification); `core/src/main/java/org/nzbhydra/webaccess/Ssl.java:100-114` (TLS verification state logic, default ENABLED) |"
+    }
+  ]
 }

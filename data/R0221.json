@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Comfy-Org/ComfyUI",
   "channel": "plugin",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected ComfyUI core treats Manager as a separate package and provides enablement and custom-node policy controls. Manager-specific URL, transport and verification claims cannot be established from that core implementation.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "ComfyUI-Manager git-clones arbitrary URLs (accepts http, TLS can be off) and auto-executes; only defense a hardcoded malware blacklist.",
   "limitations": [
-    "New default-branch snapshot rather than historical release re-verification; the separate comfyui-manager package was not present in this checkout, so its repository URL handling, HTTP/TLS behavior, verification, blacklist, and install/update flow cannot be audited here."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,39 @@
       "commit": "d03a2430e1e7e2e7f9b520b65c0db6ded9683891"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected ComfyUI core treats Manager as a separate package and provides enablement and custom-node policy controls. Manager-specific URL, transport and verification claims cannot be established from that core implementation.",
+    "limitations": [
+      "New default-branch snapshot rather than historical release re-verification; the separate comfyui-manager package was not present in this checkout, so its repository URL handling, HTTP/TLS behavior, verification, blacklist, and install/update flow cannot be audited here."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "nodes",
+  "transport": "http/https (TLS-disable-able)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-N1.md",
+      "line": 22,
+      "text": "| ComfyUI (app self-update) | comfyanonymous/ComfyUI | Python (aiohttp server, portable Windows build) | Y (Windows-portable \"update.py\" only; not present for pip/git users) | N — user must double-click `update_comfyui.bat`/`update_comfyui_stable.bat`; no background/scheduled check | Y — `git pull`/merge of arbitrary upstream commits, then auto `pip install -r requirements.txt` from the pulled tree, then optionally self-replaces its own `update.py` and re-executes | git protocol over whatever the configured `origin` remote uses (typically https://github.com/...); TLS only, no extra validation | N — no signed commit/tag/manifest check at all | none — plain `git fetch`+fast-forward merge to latest `origin/master` or latest `v*` tag; no hash/signature check of the resulting tree or of `requirements.txt` before `pip install` | n/a (no verifying key used) | `.ci/update_windows/update.py:8-153` (git pull/merge, self-update copy, `pip install -r repo_req_path`); `.ci/update_windows/update_comfyui.bat` (manual entry point) |"
+    },
+    {
+      "file": "batch-N1.md",
+      "line": 23,
+      "text": "| ComfyUI (frontend package fetch, opt-in) | comfyanonymous/ComfyUI | Python + GitHub Releases API | N (only activated via explicit `--front-end-version owner/repo@version` CLI flag; default path just uses the pinned pip package `comfyui-frontend-package`) | N | Y — downloads `dist.zip` release asset over HTTPS and `zipfile.extractall()`s it into `web_custom_versions/`, then serves it as the web UI (JS executed in the browser) | HTTPS via `requests.get()` to `api.github.com` and the release asset URL | N | none — no checksum/signature check of `dist.zip` before extraction, relies solely on TLS to github.com | n/a | `app/frontend_management.py:127-202` (`release_url`, `download_release_asset_zip`), `app/frontend_management.py:374-415` (`init_frontend_unsafe`) |"
+    },
+    {
+      "file": "batch-N1.md",
+      "line": 24,
+      "text": "| ComfyUI-Manager (custom-node channel) | Comfy-Org/ComfyUI-Manager (ComfyUI extension) | Python, installed as a ComfyUI custom node | Y — is itself the update/install mechanism for third-party \"custom nodes\" (content-as-code) | Partial — install/update of a given node is user-initiated via UI/API, but once triggered runs unattended: clone → auto pip-install `requirements.txt` → auto-run `install.py`, no per-package confirmation | Y (by design) — `git.Repo.clone_from()` / `git fetch`+merge to add or update a node's git repo, or `manager_downloader` fetches a zip from `registry.comfy.org`(CNR)/GitHub, extracts it, then unconditionally executes the node's `install.py` and pip-installs its `requirements.txt` | HTTP or HTTPS accepted — `is_valid_url()` only checks `urlparse` has scheme+netloc (or SSH syntax), does not require `https`; TLS verification can even be globally disabled via a `bypass_ssl` config flag (default off) | N — `custom-node-list.json`/`extension-node-map.json`/CNR registry responses are plain JSON over HTTP(S), not signed | none — no `hashlib`/`sha256`/signature check anywhere in `manager_core.py`/`cnr_utils.py`; sole \"security\" control is a hard-coded post-hoc blacklist (`security_check.py`) of previously-discovered malicious packages (e.g. ComfyUI_LLMVISION, lolMiner, compromised `ultralytics`/`litellm` pip releases) that only detects after install | n/a — no signing key used anywhere in the flow | `glob/manager_core.py:924-954` (`execute_install_script` auto pip-install + auto-run `install.py`); `glob/manager_core.py:1345-1385` (`repo_install`, git clone); `glob/manager_core.py:2286-2296` (`is_valid_url`, http allowed, no TLS enforcement); `glob/cnr_utils.py:166-193` (registry fetch, `verify=not bypass_ssl`); `glob/security_check.py:1-171` (blacklist-only, post-hoc) |"
+    }
+  ]
 }

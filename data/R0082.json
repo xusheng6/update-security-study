@@ -5,13 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/restic/restic",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "restic’s self-update verifier embeds an OpenPGP public key, verifies signed checksum data, and compares the selected archive hash before acceptance.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "GPG-signed SHA256SUMS, key embedded in the Go binary.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.",
-    "The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.; The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "ba802d42b7294c98b62c16d1157ea3e80820c019"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "restic’s self-update verifier embeds an OpenPGP public key, verifies signed checksum data, and compares the selected archive hash before acceptance.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.",
+      "The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.; The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "self-update",
+  "transport": "https",
+  "payload_verification": "signature[GPG] + hash",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-P5.md",
+      "line": 9,
+      "text": "| **restic-browser** (github.com/emuell/restic-browser, Tauri) | **N** (confirmed negative) | n/a | n/a | n/a | n/a | n/a | n/a | Negative-grep confirmed: no `tauri-plugin-updater` in `restic-browser/src-tauri/Cargo.toml` (only `tauri-plugin-window-state`, `tauri-plugin-fs`, `tauri-plugin-dialog`, `tauri-plugin-cli` present) or `restic-browser/package.json` (only `@tauri-apps/plugin-dialog`, `@tauri-apps/plugin-fs`); `restic-browser/src-tauri/tauri.conf.json:39-85` `\"plugins\"` block contains only `\"cli\"`, no `\"updater\"` key/pubkey; repo-wide grep for `updater`/`pubkey`/`public key` returns zero hits outside these checked files |"
+    }
+  ]
 }

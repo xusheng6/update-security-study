@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/netdata/netdata",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Netdata includes scheduled update maintenance and SHA-256 comparison against release checksum metadata. The default activation, installation-user policy, and complete publisher-authentication classification remain unestablished.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "AUTO_UPDATE=1 by default, daily timer; fetches installer and runs it as ROOT; SHA256 from unsigned sha256sums.txt, no GPG.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "The source shows scheduling mechanisms and checksum validation but does not establish that AUTO_UPDATE=1 is enabled by default on every install or that no other package/signature control exists.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout. The source shows scheduling mechanisms and checksum validation but does not establish that AUTO_UPDATE=1 is enabled by default on every install or that no other package/signature control exists."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "84eabf83dd5f125e9d37bb5b39c4957e969acd93"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Netdata includes scheduled update maintenance and SHA-256 comparison against release checksum metadata. The default activation, installation-user policy, and complete publisher-authentication classification remain unestablished.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "The source shows scheduling mechanisms and checksum validation but does not establish that AUTO_UPDATE=1 is enabled by default on every install or that no other package/signature control exists.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout. The source shows scheduling mechanisms and checksum validation but does not establish that AUTO_UPDATE=1 is enabled by default on every install or that no other package/signature control exists."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub/repo.netdata.cloud)",
+  "payload_verification": "hash (SHA256, unsigned manifest)",
+  "trust_root": "none",
+  "original_evidence": []
 }

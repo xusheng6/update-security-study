@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/crater-invoice/crater",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "D",
-  "description": "Crater’s admin updater uses Guzzle verify=false, downloads the archive, extracts it over the Laravel root, and has no package signature/hash.",
+  "description": "Verbatim port of Akaunting's updater: Guzzle verify=>false, extracts a ZIP over the live app with no hash/signature. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "05d5ce26fdd8d9466009163444e944259bc0cc2a"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Crater’s admin updater uses Guzzle verify=false, downloads the archive, extracts it over the Laravel root, and has no package signature/hash.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "D",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validation off)",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AI8.md",
+      "line": 16,
+      "text": "| Crater | https://github.com/crater-invoice/crater | 05d5ce26 / 2023-02-19 (stale, last commit 2023) | Y | N (admin-triggered via UI: download → unzip → copyFiles → migrate, each a separate authorized HTTP endpoint) | Y | https, **TLS validation explicitly DISABLED** | N | none | server-supplied, unpinned | `app/Space/SiteApi.php:14` `$client = new Client(['verify' => false, 'base_uri' => config('crater.base_url').'/']);` (Guzzle `verify=>false` disables cert validation); `config/crater.php:49` `'base_url' => 'https://craterapp.com'`; download+extract-over-app in `app/Space/Updater.php` (`download()` writes zip via `getRemote()`, `unzip()` extracts with `ZipArchive`, `copyFiles()` does `File::copyDirectory($temp_extract_dir.'/Crater', base_path())` — no hash/signature check anywhere in `Updater.php`); admin gating via `authorize('manage update app')` in `app/Http/Controllers/V1/Admin/Update/UpdateController.php` |"
+    }
+  ]
 }

@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/denoland/deno",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The retained updater body supports a primary self-update path, but integrity behavior depends on the path: full archive verification is conditional on a supplied checksum, whereas delta updates perform downloaded same-channel SHA-256 comparisons. No signing-key verification appears in the inspected updater body.",
+  "description": "`deno upgrade` self-replaces; SHA-256 from the same release host, no pinned signature.",
   "limitations": [
-    "Newly retrieved snapshot at the recorded commit, not historical release verification.",
-    "The inspected body does not establish how an operator controls release-host content or whether all callers supply upgrade_flags.checksum.",
-    "TLS/client behavior is outside these updater functions."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "83bb8d5780505d0b4f30c089680ce98b0e7a4770"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained updater body supports a primary self-update path, but integrity behavior depends on the path: full archive verification is conditional on a supplied checksum, whereas delta updates perform downloaded same-channel SHA-256 comparisons. No signing-key verification appears in the inspected updater body.",
+    "limitations": [
+      "Newly retrieved snapshot at the recorded commit, not historical release verification.",
+      "The inspected body does not establish how an operator controls release-host content or whether all callers supply upgrade_flags.checksum.",
+      "TLS/client behavior is outside these updater functions."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "self-update",
+  "transport": "https (validated)",
+  "payload_verification": "hash (same host)",
+  "trust_root": "none",
+  "original_evidence": []
 }

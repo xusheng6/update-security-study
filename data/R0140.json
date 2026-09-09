@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/ankitects/anki",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Anki compares the streamed installer SHA-256 against the GitHub asset digest before accepting it.",
+  "description": "User-triggered dl+auto-exec installer (msiexec/open); add-on channel installs Python code with no verification.",
   "limitations": [
-    "Newly retrieved/recovered source snapshot; this is not historical source re-verification. Released artifact behavior and external framework enforcement remain unverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "5edc31694f07487266bb8c4725508f6c5f5c198d"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Anki compares the streamed installer SHA-256 against the GitHub asset digest before accepting it.",
+    "limitations": [
+      "Newly retrieved/recovered source snapshot; this is not historical source re-verification. Released artifact behavior and external framework enforcement remain unverified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validated)",
+  "payload_verification": "hash (SHA256 from GitHub digest)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-I4.md",
+      "line": 21,
+      "text": "| Anki | https://github.com/ankitects/anki | Qt (PyQt/PySide, `aqt`) + Rust backend (`rslib`) | Y | Two independent paths. (a) Background startup check against AnkiWeb: automatic silent check, **notify-only** (shows message box, opens external browser to download page) — gated by a user preference that is on by default. (b) User-initiated \"Check for Updates\" menu action against GitHub Releases: chk+dl automatic once triggered, then **install automatic after a single user confirm click**. | Y (path b only) — on Windows, `msiexec /i <downloaded .msi>` is launched via `subprocess.Popen`; on macOS, `open <downloaded .dmg>` is launched (mounts/opens the disk image, user still drags the app — not a silent install, but the app does programmatically execute `open` on the fetched artifact). Path (a) never downloads or executes anything itself — it hands off to the OS browser. | https — `https://ankiweb.net/svc/desktop/check-for-update` (AnkiWeb path) and `https://api.github.com/repos/ankitects/anki/releases[/latest]` + asset `browser_download_url` (GitHub path). TLS validation enforced by default: the Rust `reqwest` client is built with no cert-bypass flags anywhere in `web_client()`; the Python `anki.httpclient.HttpClient` defaults `verify = True` and is only ever set to `False` via an explicit opt-in environment variable `ANKI_NOVERIFYSSL` (not default). | N — the GitHub Releases JSON returned by `api.github.com` is a plain, unsigned API response; authenticity rests entirely on TLS to `api.github.com`, not on any manifest signature. | hash-from-manifest — a SHA-256 checksum is read out of the GitHub API asset's `digest` field (`sha256:<hex>`) and compared against the SHA-256 the Rust code computes while streaming the downloaded file; on mismatch the file is deleted and the update aborted. OS code-signing (Authenticode/codesign) of the installer likely also applies at install time but is not itself checked by Anki's own updater code. | plain SHA-256 digest taken from GitHub's own (unsigned) API metadata delivered over TLS — not a signature verified against any embedded/pinned public key | `rslib/src/backend/ankiweb.rs:16-18` (`service_url` → `https://ankiweb.net/svc/{service}`), `:48-50` (`check_for_update` → POST `desktop/check-for-update`); `qt/aqt/update.py:20-62` (`check_for_update()`, notify-only via `openLink`/message box), `:65-87` (`prompt_to_update` opens `aqt.appWebsiteDownloadSection` in browser); `qt/aqt/main.py:1520-1524` (`setup_auto_update` gated by `aqt.mw.pm.check_for_updates()`), `:1340-1355` (`on_check_for_updates` menu action, GitHub path); `rslib/src/backend/github.rs:26-27` (`ALL_RELEASES_URL`/`LATEST_RELEASE_URL` = `api.github.com/repos/ankitects/anki/releases...`), `:92-121` (parses `tag_name`/`assets[].browser_download_url`/`assets[].digest` → `sha256:` split), `:126-157` (`download_release`); `rslib/src/updates.rs:67-112` (`download_file`: streams to disk, SHA-256 over chunks, `:103-109` checksum compare, `AnkiError::InvalidChecksum` on mismatch); `rslib/src/backend/mod.rs:176-183` (`web_client()` — `Client::builder().http1_only().build()`, no cert-validation bypass); `pylib/anki/httpclient.py:35` (`verify = True` default), `:94-96` (`ANKI_NOVERIFYSSL` opt-in only); `qt/aqt/package.py:17-42` (`download_github_update_and_install` — `msiexec /i` on Windows, `open` on macOS, then `mw.app.quit()`). **Addon-download channel (separate from the software-update path, same trust boundary):** `qt/aqt/addons.py:1109-1136` (`download_addon` fetches from `https://ankiweb.net/shared/download/{id}` — base URL at `qt/aqt/__init__.py:85`, `appShared = \"https://ankiweb.net/shared/\"`) and `:1195-1219` (`download_and_install_addon` installs the returned zip as arbitrary executable Python code) with **no hash or signature verification of the add-on payload at all** — only an HTTP 200 status and a `content-disposition` header are checked before installing. |"
+    }
+  ]
 }

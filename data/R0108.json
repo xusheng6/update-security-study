@@ -5,13 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/openscad/openscad",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "OpenSCAD’s macOS updater wraps Sparkle and its bundle template names a DSA public-key file and the files.openscad.org appcast. This is a configured trust-key observation for the inspected snapshot.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "macOS Sparkle with a legacy DSA key in-repo; feed at files.openscad.org.",
   "limitations": [
-    "Newly retrieved source snapshot, not proof of original-release behavior.",
-    "The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified.",
-    "Newly retrieved source snapshot, not proof of original-release behavior.; The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "bff981a04e26d5d4722302b59c74759cdfe39d52"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "OpenSCAD’s macOS updater wraps Sparkle and its bundle template names a DSA public-key file and the files.openscad.org appcast. This is a configured trust-key observation for the inspected snapshot.",
+    "limitations": [
+      "Newly retrieved source snapshot, not proof of original-release behavior.",
+      "The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified.",
+      "Newly retrieved source snapshot, not proof of original-release behavior.; The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "mac",
+  "transport": "https",
+  "payload_verification": "signature[Sparkle-DSA legacy]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-G3.md",
+      "line": 13,
+      "text": "| openscad/openscad | openscad/openscad | C++/Qt | Y (macOS only, `OPENSCAD_UPDATER` build flag; Sparkle framework) | auto chk configurable (`automaticallyChecksForUpdates`), download/install handled entirely inside the Sparkle framework (not in this repo) | Y (on macOS, via Sparkle) | https feed: `https://files.openscad.org/appcast[-snapshots].xml`; TLS handling is inside the vendored Sparkle framework, not this repo (validation=unknown-external, standard Sparkle default is enforced HTTPS) | signature[Sparkle legacy DSA] — Info.plist declares `SUPublicDSAKeyFile=dsa_pub.pem` (older Sparkle 1.x DSA scheme, not the newer EdDSA scheme), and `dsa_pub.pem` is present in-repo | signature[Sparkle DSA] enforced by the Sparkle framework at install time using the bundled public key | pinned-in-binary (`dsa_pub.pem` shipped inside the app bundle, referenced by `SUPublicDSAKeyFile`) | Info.plist.in:105-108 (`SUPublicDSAKeyFile=dsa_pub.pem`, `SUFeedURL=https://files.openscad.org/appcast.xml`); dsa_pub.pem (present at repo root); src/gui/SparkleAutoUpdater.mm:76-81 (`updateFeed()` builds `https://files.openscad.org/appcast%@.xml`, `[d->updater setFeedURL:...]`); src/gui/AutoUpdater.cc:7 (`#ifdef OPENSCAD_UPDATER` gate — non-mac builds have no updater UI) |"
+    }
+  ]
 }

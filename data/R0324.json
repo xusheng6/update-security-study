@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/clash-verge-rev/clash-verge-rev",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+  "description": "Tauri updater, minisign pinned, enforced across GFW-mirror endpoints + GitHub.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "dd7b032cb107d5cc5cb16eac78936cdbf97bcef2"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "Ed25519 (minisign)",
+  "trust_root": "pubkey pinned in tauri.conf.json",
+  "original_evidence": [
+    {
+      "file": "batch-W6.md",
+      "line": 25,
+      "text": "| Clash Verge Rev | https://github.com/clash-verge-rev/clash-verge-rev | e71cf0e / 2026-08-20 | Y | Y (Tauri updater plugin, periodic + manual) | Y | https (3 endpoints, 2 of which are third-party GFW-circumvention proxy mirrors `update.hwdns.net`/`gh-proxy.org` fronting the real GitHub URL) | Y | signature (minisign/Ed25519, Tauri built-in updater) | **pinned-in-binary** (`pubkey` embedded in `tauri.conf.json`, compiled into the app at build time; verified regardless of which of the 3 mirror endpoints served the update manifest) | `src-tauri/tauri.conf.json:33-43` (`plugins.updater.pubkey` + `endpoints` array) |"
+    }
+  ]
 }

@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://gitlab.com/tinyMediaManager/tinyMediaManager",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "tinyMediaManager uses Getdown metadata/resource verification and automatically installs verified resources; the digest source is the same appbase.",
+  "description": "Getdown hash-only, no signing cert.",
   "limitations": [
-    "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "39e8d16399159a029bdd0bc6753120cbed3fe57f"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "tinyMediaManager uses Getdown metadata/resource verification and automatically installs verified resources; the digest source is the same appbase.",
+    "limitations": [
+      "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "hash only (Getdown)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-X4.md",
+      "line": 12,
+      "text": "| tinyMediaManager | https://gitlab.com/tinyMediaManager/tinyMediaManager (NOTE: github.com/tinyMediaManager/tinyMediaManager is a stale GitHub-Pages placeholder, not the real project) | 339f053 / 2026-08-20 | Y | Y (UpdaterTask runs automatically at startup / CLI startup, downloads+installs without prompting until final \"restart now?\" dialog) | Y (downloads jars/native libs/JRE via Getdown library, installs over program dir, offers restart) | https (appbase = https://release.tinymediamanager.org/v5/build/), transport handled by internal `Url` HTTP client wrapping OkHttp — no disabled-validation code found | N (no digest2.txt / signing certificate configured in getdown.txt or AppBundler) | hash (digest.txt entries via Getdown library) | server-supplied/unpinned — digest.txt is fetched from the same appbase HTTPS endpoint being updated; no code-signing certificate pinning configured | AppBundler/getdown.txt:1-2 (appbase, no signer config); src/main/java/org/tinymediamanager/updater/UpdaterTask.java:73-151 (app.verifyMetadata/verifyResources via Getdown, auto-downloads, auto-installs `resource.install(true)`, then restarts) |"
+    }
+  ]
 }

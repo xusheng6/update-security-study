@@ -5,14 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/psi-plus/psi-plus-snapshots",
   "channel": "plugin",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Psi+'s reviewed CMake configuration leaves USE_SPARKLE off by default. When enabled for Apple builds, the project creates a Sparkle SUUpdater, sets its feed URL, and checks in the background; the reviewed integration contains no visible pinned Sparkle public-key setting. Framework and released-artifact verification remain unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Sparkle wired up but no key pinned; off by default.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "The reviewed project source does not establish Sparkle framework version, release feed contents, or independent release signing.",
-    "No build or execution was performed.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout. The reviewed project source does not establish Sparkle framework version, release feed contents, or independent release signing. No build or execution was performed."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "7da714e765456ca76b5952ca678b16270cc5ac31"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Psi+'s reviewed CMake configuration leaves USE_SPARKLE off by default. When enabled for Apple builds, the project creates a Sparkle SUUpdater, sets its feed URL, and checks in the background; the reviewed integration contains no visible pinned Sparkle public-key setting. Framework and released-artifact verification remain unresolved.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "The reviewed project source does not establish Sparkle framework version, release feed contents, or independent release signing.",
+      "No build or execution was performed.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout. The reviewed project source does not establish Sparkle framework version, release feed contents, or independent release signing. No build or execution was performed."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none (no key pinned)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-U8.md",
+      "line": 23,
+      "text": "| Psi+ | https://github.com/psi-plus/psi-plus-snapshots | d58b29d / 2026-08-20 | Y (mac only, opt-in) | Y if enabled (`auto-update.check-on-startup`) | Y (mac only, via Sparkle, when `USE_SPARKLE=ON`) | https (feed `psi-im.org/appcast/psi-mac.xml`, system TLS, no bypass found) | not configured in tree | none found in tree — `SUPublicEDKey`/`SUPublicDSAKey` absent from `mac/Info.plist.in`, so Sparkle's mandatory signature pinning isn't wired up in this source tree | none pinned in repo | src/psicon.cpp:464-468; src/AutoUpdater/SparkleAutoUpdater.mm:1-31; src/applicationinfo.cpp:49; mac/Info.plist.in; CMakeLists.txt:105 (`USE_SPARKLE` OFF by default) |"
+    }
+  ]
 }

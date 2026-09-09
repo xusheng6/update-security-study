@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/exelban/stats",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Stats' custom macOS updater validates the mounted Stats.app with strict code-signature checks and requires its signing Team ID to match the running app before staging installation. A signed manifest or separate artifact digest is not established by this source review.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "Custom updater; no manifest sig, but validates the DMG's code-signing Team-ID vs running app before executing.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; historical release behavior is not reverified.",
-    "The reviewed source establishes the application-side Team-ID and OS code-signature boundary, but not a signed manifest or separate payload digest.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; historical release behavior is not reverified. The reviewed source establishes the application-side Team-ID and OS code-signature boundary, but not a signed manifest or separate payload digest."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "60e65d1454c647d9592550447757e509b01d5ebb"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Stats' custom macOS updater validates the mounted Stats.app with strict code-signature checks and requires its signing Team ID to match the running app before staging installation. A signed manifest or separate artifact digest is not established by this source review.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; historical release behavior is not reverified.",
+      "The reviewed source establishes the application-side Team-ID and OS code-signature boundary, but not a signed manifest or separate payload digest.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; historical release behavior is not reverified. The reviewed source establishes the application-side Team-ID and OS code-signature boundary, but not a signed manifest or separate payload digest."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "OS-code-signing (Team-ID match)",
+  "trust_root": "OS-trust-store",
+  "original_evidence": [
+    {
+      "file": "batch-K1.md",
+      "line": 10,
+      "text": "| Stats | exelban/stats | Custom (not Sparkle) | Y | chk: auto, silent, on launch/periodic; dl/inst: manual — user must click the update notification to trigger download+install | Y (downloads a DMG, mounts it, and runs a bundled `updater.sh` shell script, elevating via `AuthorizationExecuteWithPrivileges` if the app dir isn't writable) | https (GitHub REST API `api.github.com`, and self-hosted `https://api.mac-stats.com`) | TLS-only (no cryptographic appcast/manifest signature — plain JSON over HTTPS) | OS-code-signing (`SecStaticCodeCheckValidity` + Team ID match between running app and mounted DMG before running the updater script — not a Sparkle-style detached signature) | none (no pinned EdDSA/DSA key; trust is TLS + Apple code-signing Team ID comparison at install time) | Kit/plugins/Updater.swift:64-67,169-320 (URLs, install/validateAppSignature/teamID); Stats/AppDelegate.swift:25,205-206; Stats/helpers.swift:147-184 |"
+    }
+  ]
 }

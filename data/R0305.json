@@ -5,14 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/ProtonMail/WebClients",
   "channel": "mixed",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected Proton Pass desktop session pins proton.me and subdomains to configured SPKI SHA-256 hashes; Windows updates use a native MSIX path and macOS uses Electron autoUpdater. Artifact-signing enforcement remains unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "SPKI TLS cert-pinning for the proton.me update domain on top of Squirrel.Mac/MSIX code-signing. Strong transport, but payload trust rests on OS signing (B not A).",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout.",
-    "Native MSIX updater, Electron updater internals, artifacts, and signing configuration were not audited.",
-    "Not every update host or trust control is established.",
-    "Newly retrieved default-branch snapshot, not the original study checkout. Native MSIX updater, Electron updater internals, artifacts, and signing configuration were not audited. Not every update host or trust control is established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "01ef302942ffbd2baf0c346289d4d790d6b6d28a"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected Proton Pass desktop session pins proton.me and subdomains to configured SPKI SHA-256 hashes; Windows updates use a native MSIX path and macOS uses Electron autoUpdater. Artifact-signing enforcement remains unresolved.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout.",
+      "Native MSIX updater, Electron updater internals, artifacts, and signing configuration were not audited.",
+      "Not every update host or trust control is established.",
+      "Newly retrieved default-branch snapshot, not the original study checkout. Native MSIX updater, Electron updater internals, artifacts, and signing configuration were not audited. Not every update host or trust control is established."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https (SPKI-pinned)",
+  "payload_verification": "OS code-signing",
+  "trust_root": "Squirrel.Mac / MSIX (+ SPKI cert pinning on proton.me)",
+  "original_evidence": [
+    {
+      "file": "batch-V3.md",
+      "line": 24,
+      "text": "| Proton Pass (desktop, OSS) | https://github.com/ProtonMail/WebClients.git (subdir `applications/pass-desktop`) | e80dee4 2026-08-20 | Y | Y (hourly `setInterval`, plus on launch) | Y | https, TLS validation enforced **AND pinned**: custom `certificateVerifyProc` does SPKI public-key-hash pinning for `proton.me` (and subdomains) on top of normal chain validation, rejecting on mismatch | N (JSON manifests `version.json`/`RELEASES.json` over HTTPS only, not separately signed) | macOS: Electron `autoUpdater` (Squirrel.Mac) — code-signing/notarization checked by the OS updater framework. Windows: native Rust binding calls Windows `PackageManager.AddPackageByUriAsync` to install an MSIX package — OS-enforced Authenticode/MSIX signature validation. No app-level pinned payload signature (no A-tier crypto) beyond these OS mechanisms | OS keystore / Apple code-signing (mac) and Windows Trusted-Publisher store (win) — not an app-pinned key | src/tls.ts:9-14,25-52 (SPKI pin list + verifyProc); src/lib/updater/updater.ts:1,154-161 (macOS `autoUpdater.setFeedURL`/`checkForUpdates`), :127-151 (Windows `msix_updater.installUpdate`); native/napi/src/updater.rs:22-45 (`PackageManager.AddPackageByUriAsync`); src/lib/updater/store.ts:10-13 (`https://proton.me/download/...` — same domain as the TLS pin) |"
+    }
+  ]
 }

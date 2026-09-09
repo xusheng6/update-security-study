@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/threema-ch/threema-desktop",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Threema downloads an installer and same-server sha256 file; the source does not show an independent signature.",
+  "description": "Strong SPKI cert-pinning on the update transport, but payload check is an unsigned sha256 from the same server — no independent signing key.",
   "limitations": [
-    "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "1430c5f558fd4f8838125259028e5694f762bf17"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Threema downloads an installer and same-server sha256 file; the source does not show an independent signature.",
+    "limitations": [
+      "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (SPKI-pinned)",
+  "payload_verification": "sha256 (same server)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-X6.md",
+      "line": 14,
+      "text": "| Threema Desktop | https://github.com/threema-ch/threema-desktop | 9ae421c / 2026-07-16 | Y | N (manual: shows prompt dialog, requires user \"confirmed\" click before download; Linux is always manual-only) | Y | https, TLS enforced **with certificate pinning** (SPKI/HPKP-style) covering `*.threema.ch` (includes `releases.threema.ch`, the update host) — real MITM/rogue-CA protection on the transport, but note a **separate test-mock file** does set `rejectUnauthorized:false` (test-only, not in the shipped update path) | N (JSON `latest-version-*.json`, unsigned) | hash only — downloads a `.sha256` file from the **same unauthenticated server**, no signature on binary or checksum | server-supplied/unpinned for the payload itself (TLS-pinned channel, but no independent signing key protects the binary/hash — compromise of releases.threema.ch or its cert-pinned infra = RCE) | apps/desktop/src/common/dom/update/index.ts:158-215 (`_check`, fetches `latest-version-*.json`), :220-264 (`_download`, fetches installer + `.sha256`, no verification of the hash against the file shown); apps/desktop/config/vite.config.ts:130,353-370 (`UPDATE_SERVER_URL=https://releases.threema.ch/desktop/`, pins for `*.threema.ch`); apps/desktop/src/electron/tls-cert-verifier.ts:118-234 (pin enforcement); apps/desktop/src/electron/electron-main.ts:657-659 (`restart-and-install-update` just exits with a code; no in-JS signature check before hand-off); apps/desktop/src/test/playwright/mocks/onprem-provisioning-server/client.ts:36 (`rejectUnauthorized:false`, test-only) |"
+    }
+  ]
 }

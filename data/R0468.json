@@ -5,12 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/toggl-open-source/toggldesktop",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "Targeted retained-source read supports the narrow Tier A behavior for this primary application updater: Toggl's macOS Sparkle updater enables automatic checks, uses an HTTPS appcast, and names the bundled dsa_pub.pem trust root.",
+  "description": "macOS Sparkle DSA pinned; Windows/Linux have no updater.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in pinned key/configuration.",
-    "Framework verification depends on the packaged updater implementation where the application delegates to Sparkle or tauri-plugin-updater."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "013038304ee8e9154db4a45fb642716956cf153b"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow Tier A behavior for this primary application updater: Toggl's macOS Sparkle updater enables automatic checks, uses an HTTPS appcast, and names the bundled dsa_pub.pem trust root.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in pinned key/configuration.",
+      "Framework verification depends on the packaged updater implementation where the application delegates to Sparkle or tauri-plugin-updater."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "DSA signature",
+  "trust_root": "Sparkle DSA pinned (mac)",
+  "original_evidence": [
+    {
+      "file": "batch-AE6.md",
+      "line": 29,
+      "text": "| Toggl Track Desktop (toggldesktop) | https://github.com/toggl-open-source/toggldesktop | 013038304ee8e9154db4a45fb642716956cf153b (2023-06-22) | Y (macOS only) | Y (`setAutomaticallyDownloadsUpdates:YES`) | Y (macOS) | https (`SUFeedURL=https://assets.toggl.com/installers/darwin_stable_appcast.xml`) | Y (Sparkle DSA appcast signing) | signature (Sparkle legacy DSA), key **pinned in binary** via `dsa_pub.pem` shipped in `Resources` | pinned-in-binary (`SUPublicDSAKeyFile=dsa_pub.pem`) | `src/ui/osx/TogglDesktop/Supporting Files/TogglDesktop-Info.plist:78-83` (`SUEnableAutomaticChecks`, `SUFeedURL`, `SUPublicDSAKeyFile`); `src/ui/osx/TogglDesktop/Resources/dsa_pub.pem` present; `src/ui/osx/TogglDesktop/App/AppDelegate.m:281,292-293` (`setAutomaticallyDownloadsUpdates:YES`, `checkForUpdatesInBackground`). **Windows/Linux builds have no self-updater found** (`grep` for WinSparkle/Squirrel/AppImageUpdate/zsync across `src/ui/windows` and repo root returned nothing) — those platforms are N. |"
+    }
+  ]
 }

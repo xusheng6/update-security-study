@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Serial-Studio/Serial-Studio",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: QSimpleUpdater installs the update through its downloader; no hash or signature check is implemented in the updater library.",
+  "description": "QSimpleUpdater downloads+opens the installer with zero hash/signature. ExtensionManager plugin channel also unverified.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "881775e242c9c5e71505b0745e26080802ffd50d"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: QSimpleUpdater installs the update through its downloader; no hash or signature check is implemented in the updater library.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AL7.md",
+      "line": 25,
+      "text": "| Serial-Studio (CoolTerm-alt sub) | https://github.com/Serial-Studio/Serial-Studio | 881775e242c9c5e71505b0745e26080802ffd50d / 2026-08-22 | Y | Y (auto-checks via QSimpleUpdater notifyOnUpdate) | Y | https (raw.githubusercontent.com manifest; github.com/releases installer) | N | **none** — QSimpleUpdater performs no hash/signature check anywhere | none / unpinned | CMakeLists.txt:200 (PROJECT_APPCAST), app/src/Misc/ModuleManager.cpp:540-562 (configureUpdater), lib/QSimpleUpdater/src/Downloader.cpp:261-290 (installUpdate → QDesktopServices::openUrl, no hash/sig check in whole QSimpleUpdater/src/) |"
+    }
+  ]
 }

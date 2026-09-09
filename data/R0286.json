@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/shadps4-emu/shadps4-qtlauncher",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "shadps4-qtlauncher provides the launcher’s application-update workflow, with platform-specific installation handling. The reviewed source does not certify the original complete artifact-authentication or execution-impact claim.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Official Qt companion to shadPS4 (32k★) does the actual updating — zero integrity verification on release zips before extract+relaunch.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study release.",
-    "This is a source observation about the launcher path; it does not test released artifacts or downstream shadPS4 updates.",
-    "Newly retrieved default-branch snapshot, not the original study release. This is a source observation about the launcher path; it does not test released artifacts or downstream shadPS4 updates."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "bf2c711d3e508671fe9b6b417355defff1fb6237"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "shadps4-qtlauncher provides the launcher’s application-update workflow, with platform-specific installation handling. The reviewed source does not certify the original complete artifact-authentication or execution-impact claim.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study release.",
+      "This is a source observation about the launcher path; it does not test released artifacts or downstream shadPS4 updates.",
+      "Newly retrieved default-branch snapshot, not the original study release. This is a source observation about the launcher path; it does not test released artifacts or downstream shadPS4 updates."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-U5.md",
+      "line": 25,
+      "text": "| shadps4-qtlauncher | https://github.com/shadps4-emu/shadps4-qtlauncher | a30486c / 2026-08-18 | Y | Y (prompt on startup, opt-in checkbox) | Y | https, TLS default (Qt `QNetworkAccessManager`, no `ignoreSslErrors`/insecure config found) | N | **none** — no hash, no signature on the downloaded zip at all | n/a (no verification exists) | src/qt_gui/check_update.cpp:48 (GitHub Releases API), 346-407 (`DownloadUpdate` writes zip straight to disk, no hash check), 409-601 (`Install()` generates and runs a PowerShell/bash script that extracts the zip and relaunches the new binary with no verification step) |"
+    }
+  ]
 }

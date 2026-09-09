@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/husonlab/megan-ce",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "MEGAN’s updater uses an HTTPS program URL and install4j update descriptor; signing configuration and runtime verification are outside this checkout.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "install4j updater, HTTPS, menu-triggered, but code-signing config not vendored in-repo — payload trust unconfirmed.",
   "limitations": [
-    "Source-at-commit snapshot; current release packaging remains unverified.",
-    "The install4j signing configuration and runtime verifier are outside this checkout.",
-    "Primary classification remains UNRESOLVED under the evidence-review instruction; retained source is commit-scoped and does not establish all released or external framework behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "9b365235a2ff542e75be1081ac1888e886a4e019"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "MEGAN’s updater uses an HTTPS program URL and install4j update descriptor; signing configuration and runtime verification are outside this checkout.",
+    "limitations": [
+      "Source-at-commit snapshot; current release packaging remains unverified.",
+      "The install4j signing configuration and runtime verifier are outside this checkout.",
+      "Primary classification remains UNRESOLVED under the evidence-review instruction; retained source is commit-scoped and does not establish all released or external framework behavior."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none (unconfirmed signing)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AJ1.md",
+      "line": 26,
+      "text": "| MEGAN (Community Edition) | https://github.com/husonlab/megan-ce | 9b36523 / 2024-06-27 | Y | N (menu command \"Check For Updates...\") | Y (install4j `UpdateChecker` + `ApplicationLauncher.launchApplicationInProcess` hands off to a separate install4j updater app which downloads and installs) | https (`programURL` is https; no disabled-validation code found in this repo) | not confirmed | not confirmed — this repo does not vendor the install4j project file, so code-signing config (unlike IGB/Tablet, where it's visible in-repo) can't be verified from source alone | server-supplied/unpinned (unconfirmed) | `src/megan/main/CheckForUpdate.java:37` `public static final String programURL = \"https://software-ab.cs.uni-tuebingen.de/download/megan6\";`; `:44-46` builds `url = programURL + \"/updates.xml\"`; `:50` `UpdateChecker.getUpdateDescriptor(url, ...)`; `:66-73` `ApplicationLauncher.launchApplicationInProcess(updaterApplicationId, ...)`; only call site is the menu command `src/megan/commands/show/ShowCheckForUpdateCommand.java:38` (`NAME = \"Check For Updates...\"`), `:83` `CheckForUpdate.apply();` |"
+    }
+  ]
 }

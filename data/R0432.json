@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/gephi/gephi",
   "channel": "unresolved",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The recovered Gephi source snapshot documents visualization update scheduling; it does not establish the historical binary's module transport, JAR-signature verification, or TOFU trust policy.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "HTTPS + jar-signed NetBeans modules, but trust is TOFU, not pinned in the original binary.",
   "limitations": [
-    "The available source is a newly retrieved default-branch snapshot, but the cited visualization component is the wrong scope for the updater claim; NetBeans updater implementation and released module-signing behavior remain unverified.",
-    "The snapshot is a newly retrieved default branch rather than the original study binary or release source; the historical NetBeans updater and released module-signing behavior remain unverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "a4c957bd825a03ac071914185996c700fe76c7e6"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The recovered Gephi source snapshot documents visualization update scheduling; it does not establish the historical binary's module transport, JAR-signature verification, or TOFU trust policy.",
+    "limitations": [
+      "The available source is a newly retrieved default-branch snapshot, but the cited visualization component is the wrong scope for the updater claim; NetBeans updater implementation and released module-signing behavior remain unverified.",
+      "The snapshot is a newly retrieved default branch rather than the original study binary or release source; the historical NetBeans updater and released module-signing behavior remain unverified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "jar-signed (TOFU)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AC3.md",
+      "line": 17,
+      "text": "| Gephi | https://github.com/gephi/gephi | 664cc87189cf297d1eb1be797e39bea4b913865d / 2026-08-19 | Y | Y (NetBeans Platform autoupdate-services) | Y (installs .nbm module jars) | https (raw.githubusercontent.com/gephi/gephi/gh-pages/.../autoupdate/updates.xml) | N (plain XML index) | signature (jar-signed .nbm modules via maven-jarsigner-plugin + keystore.ks) | server-supplied/TOFU (NetBeans autoupdate trusts a module cert on first install, then silently trusts same-cert updates; not pinned into the originally-distributed binary) | pom.xml:176-178 (update-center URLs); pom.xml:884-885,1190-1199 (jarsigner/keystore config); modules/application/pom.xml:571-572 |"
+    }
+  ]
 }

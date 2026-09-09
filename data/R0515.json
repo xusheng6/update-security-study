@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Notifiarr/notifiarr",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The updater accepts any URL beginning with http and proceeds to replace the executable; no payload integrity check is performed here.",
+  "description": "Auto-updater only checks the download URL starts with 'http' (not https), overwrites the running exe, restarts — no hash/signature.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "2ccf39d0e46f30640f5ea1cd77e55ab1323e48c4"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The updater accepts any URL beginning with http and proceeds to replace the executable; no payload integrity check is performed here.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AG7.md",
+      "line": 17,
+      "text": "| Notifiarr | https://github.com/Notifiarr/notifiarr | 2ccf39d / 2026-08-20 | Y | Y (opt-in via `auto_update` config, default `\"off\"`; Windows-only) | Y | https (GitHub Releases API + `browser_download_url`, default `http.Client{}` — TLS enforced, no InsecureSkipVerify on this path); URL scheme itself only checked for `http` prefix, not `https` | N | none — no checksum/signature verification of downloaded exe/zip/gz/bz2 | server-supplied/unpinned (GitHub release asset URL, or \"Unstable\" channel URL from Notifiarr's own site) | `pkg/update/update.go:108-148` (`NowWithContext`/`replaceFile`/`writeFile` — downloads to temp file, no hash check, `os.Rename`s over the running executable); `pkg/update/update.go:121` (only validates `strings.HasPrefix(update.URL, \"http\")`, not https); `pkg/triggers/autoupdate/autoupdate.go:133-188` (`checkAndUpdate`/`updateNow` — fully automatic download+replace+restart on a timer when enabled, Windows-only per line 139-141/54-55); `pkg/configfile/template.go:68` (default `auto_update = \"off\"`) |"
+    }
+  ]
 }

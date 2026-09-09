@@ -5,11 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/beekeeper-studio/beekeeper-studio",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Beekeeper Studio integrates electron-updater with automatic downloading disabled and an explicit download action. Dependency hash enforcement and macOS signing remain unestablished by this application-source review.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "SHA512 manifest + macOS code-signing.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not original study checkout; framework internals and release-specific signing remain unverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,23 @@
       "commit": "1986478ccc6505a9e809c5d526fc9236083648f0"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Beekeeper Studio integrates electron-updater with automatic downloading disabled and an explicit download action. Dependency hash enforcement and macOS signing remain unestablished by this application-source review.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not original study checkout; framework internals and release-specific signing remain unverified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "hash + OS-code-signing (mac)",
+  "trust_root": "OS-trust-store",
+  "original_evidence": []
 }

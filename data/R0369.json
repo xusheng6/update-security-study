@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Vysp3r/ProtonPlus",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "ProtonPlus’s archive validator checks file type, available size metadata and an available provider-supplied digest. Digest verification is conditional on that metadata being present; independent publisher authentication remains unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "HTTPS compat-tool downloads; digest verification is optional and silently skipped when the release API omits it.",
   "limitations": [
-    "The release-source, asset transport, and artifact verification implementation was not connected to the reviewed manager/workflow bodies; the new snapshot is not the original study release."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "78786695e6a4c000452498fa407710ba8a8360e2"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "ProtonPlus’s archive validator checks file type, available size metadata and an available provider-supplied digest. Digest verification is conditional on that metadata being present; independent publisher authentication remains unresolved.",
+    "limitations": [
+      "The release-source, asset transport, and artifact verification implementation was not connected to the reviewed manager/workflow bodies; the new snapshot is not the original study release."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "digest (optional)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-X8.md",
+      "line": 15,
+      "text": "| ProtonPlus | github.com/Vysp3r/ProtonPlus | b148751b / 2026-08-15 | N (self, Flathub-only) | N/A | Y (compat-tool channel: Proton-GE/Wine-GE/DXVK/VKD3D/etc.) | HTTPS via `Soup.Session` (`src/utils/web.vala`), no insecure/ssl-strict-false flags found | N/A | Digest (md5/sha1/sha256/sha384/sha512) IF the release API supplies one — `archive_matches_asset()` treats `asset.digest==\"\"` as automatically matching/verified (`src/services/archive-workflow-support.vala:148-190`), so verification is silently skipped whenever the provider omits the field | Same GitHub/GitLab/Codeberg release-API response that supplies the download URL (same-origin, not independent) | `src/models/providers/definitions/proton.vala:8`; `src/services/archive-workflow-support.vala:148-220`; `src/providers/sources/github-compatible-release-parser.vala:78` |"
+    }
+  ]
 }

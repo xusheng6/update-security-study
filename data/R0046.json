@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/zulip/zulip-desktop",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Zulip Desktop checks for updates with electron-updater, asks the user before applying a retrieved update, and does not expose an independent publisher-signature verifier in the inspected module.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater default.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
-    "The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "228ac2ba2913e88512dfbcf307a6af7cc9a02b1f"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Zulip Desktop checks for updates with electron-updater, asks the user before applying a retrieved update, and does not expose an independent publisher-signature verifier in the inspected module.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+      "The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "hash + OS-code-signing",
+  "trust_root": "OS-trust-store",
+  "original_evidence": [
+    {
+      "file": "batch-U8.md",
+      "line": 57,
+      "text": "| Zulip Desktop | `zulip-desktop` | Tier B (mac/win) via default electron-updater code-sign, no override found; Linux is notify-only (N). |"
+    }
+  ]
 }

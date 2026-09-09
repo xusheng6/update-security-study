@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/dbeaver/dbeaver",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The inspected DBeaver source supports a narrow primary C observation: a version-selected installer is downloaded to a temporary file and later executed by platform-specific launch code after user confirmation. No hash or signature verification is present in this control flow; the HTTP/TLS and version descriptor parsing helpers are separate boundaries.",
+  "description": "Unsigned version.xml; installer downloaded and directly Runtime.exec'd with no hash/signature.",
   "limitations": [
-    "Newly retrieved snapshot at the recorded commit, not historical release verification.",
-    "WebUtils.downloadRemoteFile and VersionDescriptor source/transport behavior were not used to infer cryptographic guarantees.",
-    "The cited path covers Windows/macOS installer execution; Linux falls back to the download page."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "b59edd36ff94abfea48f5151a5ea10b3791137f0"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected DBeaver source supports a narrow primary C observation: a version-selected installer is downloaded to a temporary file and later executed by platform-specific launch code after user confirmation. No hash or signature verification is present in this control flow; the HTTP/TLS and version descriptor parsing helpers are separate boundaries.",
+    "limitations": [
+      "Newly retrieved snapshot at the recorded commit, not historical release verification.",
+      "WebUtils.downloadRemoteFile and VersionDescriptor source/transport behavior were not used to infer cryptographic guarantees.",
+      "The cited path covers Windows/macOS installer execution; Linux falls back to the download page."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validated)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": []
 }

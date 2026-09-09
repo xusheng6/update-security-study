@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/ente-io/ente",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Ente’s desktop updater disables automatic retrieval at setup, checks once per day, filters out non-new and skipped or muted versions, and retrieves a selected update; this file does not establish Azure Trusted Signing or notarization enforcement.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "Azure Trusted Signing / notarization.",
   "limitations": [
-    "Newly retrieved default-branch snapshot; not historical release re-verification.",
-    "External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown.",
-    "Newly retrieved default-branch snapshot; not historical release re-verification.; External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "d28c3462e70bf63f8323700ce77797237a0fd1b4"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Ente’s desktop updater disables automatic retrieval at setup, checks once per day, filters out non-new and skipped or muted versions, and retrieves a selected update; this file does not establish Azure Trusted Signing or notarization enforcement.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot; not historical release re-verification.",
+      "External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown.",
+      "Newly retrieved default-branch snapshot; not historical release re-verification.; External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "hash + OS-code-signing",
+  "trust_root": "OS-trust-store",
+  "original_evidence": []
 }

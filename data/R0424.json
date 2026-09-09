@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/sillsdev/FieldWorks",
   "channel": "primary",
-  "review_status": "Detailed recheck",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Tier C remains appropriate for the narrow Windows updater behavior: background metadata checking and installer download occur over configured HTTPS, selected EXE/MSP files are retained, and the local installer is later handed to ProcRunner without an application-level artifact verifier. The word silent is contradicted by the Yes/No installation dialog, so that part requires correction. The lack of a check in this application path cannot establish a release-wide absence of signing or hashing, and it does not justify changing the tier on that basis.",
+  "description": "Full silent auto-update: background check → download over HTTPS → .exe/.msp executed via ProcRunner, no hash/signature anywhere.",
   "limitations": [
-    "Snapshot is commit 251843173cac81f20b89261c9802a503ba745620 from a newly retrieved default branch, not the original study checkout.",
-    "The source does not independently verify historical or current release artifact signatures, hashes, or server-side metadata authenticity.",
-    "FLEx Bridge has separate prompting and installer handling; this audit does not generalize the regular FieldWorks path to every product component."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "251843173cac81f20b89261c9802a503ba745620"
     }
   ],
-  "review_basis": "deep-source-recheck",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Tier C remains appropriate for the narrow Windows updater behavior: background metadata checking and installer download occur over configured HTTPS, selected EXE/MSP files are retained, and the local installer is later handed to ProcRunner without an application-level artifact verifier. The word silent is contradicted by the Yes/No installation dialog, so that part requires correction. The lack of a check in this application path cannot establish a release-wide absence of signing or hashing, and it does not justify changing the tier on that basis.",
+    "limitations": [
+      "Snapshot is commit 251843173cac81f20b89261c9802a503ba745620 from a newly retrieved default branch, not the original study checkout.",
+      "The source does not independently verify historical or current release artifact signatures, hashes, or server-side metadata authenticity.",
+      "FLEx Bridge has separate prompting and installer handling; this audit does not generalize the regular FieldWorks path to every product component."
+    ],
+    "review_status": "Detailed recheck",
+    "review_basis": "deep-source-recheck",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AB5.md",
+      "line": 21,
+      "text": "| **FieldWorks (FLEx)** | https://github.com/sillsdev/FieldWorks | 6f72671 / 2026-08-20 | **Y** | **Y** (background check + background download; install requires a Yes/No dialog but no further download step) | **Y** | https — `downloads.languagetechnology.org/fieldworks/UpdateInfo*.xml` (+ S3 bucket listing for nightly) | N (plain XML bucket listing, no signature field) | **none** — no hash, no Authenticode check before execution | N/A — trust is TLS-only, server-supplied file list | Src/Common/FwUtils/FwUpdater.cs:123-167 (fetch UpdateInfo.xml/S3 listing over https), :182-194 (`DownloadClient`/`WebClient` fetch installer, no checksum), :576-603 (`InstallDownloadedUpdate` → `Process.Start(installerRunner, ...)` runs the downloaded `.exe`/`.msp` with no signature verification); Src/Common/FwUtils/DownloadClient.cs:41-175 (plain `HttpWebRequest`, no cert pinning, no hash check) |"
+    }
+  ]
 }

@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/MacPass/MacPass",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports the narrow recorded behavior: MacPass configures a Sparkle feed but the retained source contains no SUPublicEDKey or SUPublicDSAKey, leaving payload signature verification unconfigured.",
+  "description": "Sparkle 2.6.4 with HTTPS appcast but no SUPublicEDKey/SUPublicDSAKey set anywhere.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "The retained snapshot does not establish current released artifact behavior or independent release signing.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "6d10dd2703234625f8bd1c04b63cbde854edad23"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports the narrow recorded behavior: MacPass configures a Sparkle feed but the retained source contains no SUPublicEDKey or SUPublicDSAKey, leaving payload signature verification unconfigured.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "The retained snapshot does not establish current released artifact behavior or independent release signing.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-V3.md",
+      "line": 14,
+      "text": "| MacPass | https://github.com/MacPass/MacPass.git | eb4a554 2025-05-07 | Y | Y (SUEnableAutomaticChecks unless disabled) | Y | https (SUFeedURL), TLS enforced (no disabling found) | N (appcast XML over HTTPS only) | none — no `SUPublicEDKey`/`SUPublicDSAKey` anywhere in repo; relies only on Sparkle 2.6.4's default handling | server-supplied/unpinned | MacPass/MacPass-Info.plist:96-97 (SUFeedURL, no SUPublicEDKey key present anywhere in repo — grepped) |"
+    }
+  ]
 }

@@ -5,17 +5,39 @@
   "historical_tier": "C",
   "project_url": "https://github.com/httpie/desktop",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "HTTPie Desktop documents continuous auto-updates; the claimed sha512-only and unverified-manifest behavior remains unresolved from the available implementation source.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Closed source; electron-updater sha512-only manifest (unverified).",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
-    "Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
   "classification_certified": false,
-  "project_link_basis": "Recorded repository in original batch report; not a new upstream verification."
+  "project_link_basis": "Recorded repository in original batch report; not a new upstream verification.",
+  "later_review_audit": {
+    "description": "HTTPie Desktop documents continuous auto-updates; the claimed sha512-only and unverified-manifest behavior remains unresolved from the available implementation source.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+      "Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "hash (SHA512)",
+  "trust_root": "server-TLS",
+  "original_evidence": [
+    {
+      "file": "batch-I8.md",
+      "line": 13,
+      "text": "| HTTPie Desktop | httpie/desktop | Electron (source closed — repo publishes releases only) | Y (per README claim; implementation not independently verifiable, closed source) | chk/dl/inst: automatic per README (\"The app continuously auto-updates after the initial installation\") — underlying code not public | Y (implied; unverifiable) | https via GitHub Releases (github.com/httpie/desktop/releases); TLS enforcement unknown (no source available) | N (latest.yml is plain YAML, sha512 field only, no detached signature asset found) | hash-from-manifest (sha512 in latest.yml, confirmed by direct fetch); OS-code-signing status not verifiable from public source | unknown (closed source) | README.md (\"continuously auto-updates\" line); `gh api repos/httpie/desktop/releases/latest` asset list for v2025.2.0 (latest.yml, latest-mac.yml, latest-linux.yml, latest-linux-arm64.yml, *.blockmap, HTTPie-Setup-2025.2.0.exe — standard electron-builder/electron-updater artifact set); fetched content of `https://github.com/httpie/desktop/releases/download/v2025.2.0/latest.yml` shows `sha512:` hash field only |"
+    }
+  ]
 }

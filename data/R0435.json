@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/owenthereal/upterm",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected upterm application upgrade command delegates installation to go-update. The dependency authentication policy was not reviewed, so the original zero-verification classification is unsupported.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "upterm upgrade (go-update) fetches the GitHub release over HTTPS with zero payload verification, overwrites the live binary.",
   "limitations": [
-    "Newly retrieved default-branch source, not the original released binary. go-update dependency implementation and release-side signatures/checksums were not reviewed; the original zero-verification assertion is not established.",
-    "This is newly retrieved default-branch source rather than the original released binary; go-update behavior and release-side signatures or checksums were not reviewed."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "3f56c8d0d18725c411880ee4d16556462f3fb947"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected upterm application upgrade command delegates installation to go-update. The dependency authentication policy was not reviewed, so the original zero-verification classification is unsupported.",
+    "limitations": [
+      "Newly retrieved default-branch source, not the original released binary. go-update dependency implementation and release-side signatures/checksums were not reviewed; the original zero-verification assertion is not established.",
+      "This is newly retrieved default-branch source rather than the original released binary; go-update behavior and release-side signatures or checksums were not reviewed."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AC5.md",
+      "line": 25,
+      "text": "| upterm | https://github.com/owenthereal/upterm | 1a8b11e / 2026-07-12 | **Y** | N (manual `upterm upgrade` subcommand) | Y (replaces the running binary; executed on next launch) | https, TLS validation NOT disabled anywhere (no `InsecureSkipVerify`/custom `tls.Config` found in upterm or its `github.com/tj/go-update` dependency — default Go `net/http` client used) | N (no manifest signing; release metadata comes straight from unauthenticated GitHub REST API JSON) | **none** — tarball asset is downloaded via plain `http.Get(a.URL)` and unpacked/installed with zero hash or signature check | n/a (no verifying key exists at all) | `cmd/upterm/command/upgrade.go:44-98` builds an `update.Manager` (github.com/tj/go-update v2.2.4), calls `m.LatestReleases()` → GitHub API `GetLatestRelease`, finds an OS/arch tarball asset (`FindTarballWithVersion`, lines 112-122), downloads it (`a.DownloadProxy`) and calls `m.Install(tarball)` (line 96); dependency source `github.com/tj/go-update@update.go:148-187` (`DownloadProxy`: plain `http.Get`, no checksum) and `update.go:106-113` (`Install`→`InstallTo` at lines 57-103: unpacks tarball with `unpackit.Unpack`, `os.Chmod(bin,0755)`, then `os.Rename` over the live binary — no signature/hash check anywhere in the library) |"
+    }
+  ]
 }

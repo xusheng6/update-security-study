@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/FreshRSS/FreshRSS",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: Admin update fetches an HTTPS update script with TLS checks, then requires the downloaded PHP; no hash/signature verification is applied.",
+  "description": "Self-updater downloads a raw PHP script from update.freshrss.org with no signature/hash and require()s it; git path does git reset --hard, no commit signing.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "95842d81c1b8ab673389544f072559aeb8cd7591"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: Admin update fetches an HTTPS update script with TLS checks, then requires the downloaded PHP; no hash/signature verification is applied.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AN2.md",
+      "line": 9,
+      "text": "| FreshRSS | https://github.com/FreshRSS/FreshRSS.git | 95842d8 / 2026-08-21 | Y | N (admin must click \"Check for updates\" then \"Apply\") | Y | https, TLS validation ENFORCED (`CURLOPT_SSL_VERIFYPEER`=true, `CURLOPT_SSL_VERIFYHOST`=2) for the non-git path; git path uses plain `git fetch`/`git reset --hard` over whatever remote is configured | N | none (raw `UPDATE <version>\\n<script>` body is `file_put_contents`'d then `require`'d and executed as PHP — no hash/signature check; git path has no GPG-signed-commit verification) | server-supplied/unpinned (`https://update.freshrss.org`, config `auto_update_url`) | app/Controllers/updateController.php:216-292 (curl download of update script, TLS enforced), :295-357 (`require UPDATE_FILENAME; do_post_update()/apply_update()` — executes downloaded PHP), :101-128 (`gitPull()`: `exec('git fetch --prune')` + `exec('git reset --hard FETCH_HEAD')`), config.default.php:23 (`auto_update_url` default) |"
+    }
+  ]
 }

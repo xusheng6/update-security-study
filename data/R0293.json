@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/toeverything/AFFiNE",
   "channel": "plugin",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "AFFiNE's reviewed updater integration configures an update feed, checks for updates, and downloads automatically when its setting permits; it records the update-ready event for installation. The reviewed application code does not independently establish SHA-512 or OS code-signing enforcement, which remain delegated or unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater, sha512 + OS code-signing enforced.",
   "limitations": [
-    "The checkout is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "The WindowsUpdater implementation, electron-updater internals, generated manifests, release assets, and OS signing enforcement were not established by this file.",
-    "The checkout is a newly retrieved default-branch snapshot, not the original study checkout. The WindowsUpdater implementation, electron-updater internals, generated manifests, release assets, and OS signing enforcement were not established by this file."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "62c38b95bab1dd006e90b1e5e5adda12771245f2"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "AFFiNE's reviewed updater integration configures an update feed, checks for updates, and downloads automatically when its setting permits; it records the update-ready event for installation. The reviewed application code does not independently establish SHA-512 or OS code-signing enforcement, which remain delegated or unresolved.",
+    "limitations": [
+      "The checkout is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "The WindowsUpdater implementation, electron-updater internals, generated manifests, release assets, and OS signing enforcement were not established by this file.",
+      "The checkout is a newly retrieved default-branch snapshot, not the original study checkout. The WindowsUpdater implementation, electron-updater internals, generated manifests, release assets, and OS signing enforcement were not established by this file."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "sha512 + OS code-signing",
+  "trust_root": "electron-updater",
+  "original_evidence": [
+    {
+      "file": "batch-U7.md",
+      "line": 11,
+      "text": "| AFFiNE | https://github.com/toeverything/AFFiNE.git | 3feb17c / 2026-08-21 | Y | Y (auto-download on update-available by default config) | Y | https (custom feed `affine.pro/api/worker/releases` → GitHub release assets), TLS enforced | no (latest.yml, unsigned) | hash (sha512 in latest.yml) + OS code-sign check (electron-updater default, not overridden) | OS keystore (Authenticode/codesign) | packages/frontend/apps/electron/src/main/updater/electron-updater.ts:30 (autoDownloadUpdate default true) & :86 (auto-download on update-available); affine-update-provider.ts (custom GitHub-releases provider); windows-updater.ts (no verifyUpdateCodeSignature override) |"
+    }
+  ]
 }

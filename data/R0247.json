@@ -5,11 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/wavetermdev/waveterm",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In the reviewed Wave Terminal snapshot, the builder enables update files for all channels and derives Windows signing configuration from a code-signing certificate environment value; the runtime reads app-update.yml for its update channel. Release-specific signing and platform enforcement remain unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater auto-default; sha512 + Authenticode/notarization (Linux hash-only).",
   "limitations": [
-    "New default-branch snapshot rather than the original study release; no release artifact, notarization record, or Linux verification implementation was inspected."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "a4447c1563b2df285ab89e76c82f91e1a1a49c1e"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In the reviewed Wave Terminal snapshot, the builder enables update files for all channels and derives Windows signing configuration from a code-signing certificate environment value; the runtime reads app-update.yml for its update channel. Release-specific signing and platform enforcement remain unresolved.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study release; no release artifact, notarization record, or Linux verification implementation was inspected."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (dl.waveterm.dev)",
+  "payload_verification": "hash + OS-code-signing",
+  "trust_root": "OS-trust-store",
+  "original_evidence": [
+    {
+      "file": "batch-P3.md",
+      "line": 13,
+      "text": "| Wave Terminal | github.com/wavetermdev/waveterm | **Y** — bundled `electron-updater` v6.6 | **Y automatic by default** — `autoupdate:enabled` defaults to `true`; background check runs on app start and every ~10 min while `intervalms` (default 3,600,000 ms = 1 hr) has elapsed; install-on-quit defaults to `true` (`autoupdate:installonquit: true`) | **Y** — `autoUpdater.checkForUpdates()` downloads the new build automatically on `update-available`; once `update-downloaded` fires, the app installs and relaunches via `autoUpdater.quitAndInstall()`, either on user click (\"Restart\") or automatically at quit if `autoInstallOnAppQuit` is set | **HTTPS**, generic electron-builder provider: `publish: { provider: \"generic\", url: \"https://dl.waveterm.dev/releases-w2\" }`; TLS certificate validation is the default (no overrides found) | **N** — the `latest*.yml` update manifest fetched from `dl.waveterm.dev` is plain YAML with no separate detached signature; its authenticity rests solely on the HTTPS/TLS session to that host | **hash-from-manifest (sha512, embedded in the manifest) + OS-code-signing** — electron-updater's standard behavior: the manifest YAML carries a sha512 of the installer/package which is checked post-download; additionally on Windows the NSIS installer is Authenticode-signed (`signtoolOptions` with `publisherName: \"Command Line Inc\"`, cert-hash from `SM_CODE_SIGNING_CERT_SHA1_HASH`) and electron-updater's default `verifyUpdateCodeSignature` checks the publisher name matches; on macOS the app/zip is expected to be code-signed/notarized (Squirrel.Mac requires matching Team ID) — no equivalent OS-signing gate exists for the Linux artifacts (deb/rpm/AppImage/snap/pacman), which fall back to the sha512-in-manifest check alone | HTTPS server identity of `dl.waveterm.dev` (manifest integrity/authenticity) for all platforms; additionally the \"Command Line Inc\" code-signing certificate (Windows Authenticode; Apple Developer ID for macOS notarization) as the OS-level trust root on Windows/macOS | emain/updater.ts:5 (`import { autoUpdater } from \"electron-updater\";`); emain/updater.ts:58 (`autoUpdater.autoInstallOnAppQuit = settings[\"autoupdate:installonquit\"];`); emain/updater.ts:63 (`autoUpdater.allowDowngrade = false;`); emain/updater.ts:126-134 (`start()` — sets 600000ms poll `setInterval`, calls `checkForUpdates(false)`); emain/updater.ts:160 (`const result = await autoUpdater.checkForUpdates();`); emain/updater.ts:203-209 (`installUpdate()` → `autoUpdater.quitAndInstall();`); electron-builder.config.cjs:120-123 (`publish: { provider: \"generic\", url: \"https://dl.waveterm.dev/releases-w2\" }`); electron-builder.config.cjs:98-106 (Windows `signtoolOptions`); package.json:92 (`\"electron-updater\": \"^6.6\"`); pkg/wconfig/defaultconfig/settings.json (fetched via GitHub raw, 2026-08-20): `\"autoupdate:enabled\": true, \"autoupdate:installonquit\": true, \"autoupdate:intervalms\": 3600000` | Only terminal in this batch with a real self-update mechanism. The scheme is the standard, reasonably solid `electron-updater` generic-provider pattern (HTTPS transport + sha512 manifest hash + OS code-signing on Win/macOS); its weakest point is the Linux artifact channel, where the only integrity gate is the sha512 hash embedded in a manifest that itself has no independent signature — full trust chain there reduces to \"TLS to dl.waveterm.dev\". |"
+    }
+  ]
 }

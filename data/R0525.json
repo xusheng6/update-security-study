@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/yhat/rodeo",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "D",
-  "description": "The Electron updater constructs a plaintext HTTP feed URL and hands it to Squirrel’s download/install flow. The retained source does not show an independent application signature policy in this path.",
+  "description": "Electron autoUpdater feed URL is plaintext http://bareback.s.yhat.com. Abandoned 2017. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "aa1929b1596d1161cd81c930603636a929462ea3"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The Electron updater constructs a plaintext HTTP feed URL and hands it to Squirrel’s download/install flow. The retained source does not show an independent application signature policy in this path.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "D",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "http",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AG8.md",
+      "line": 30,
+      "text": "| rodeo | https://github.com/yhat/rodeo.git | aa1929b1596d1161cd81c930603636a929462ea3 / 2017-01-03 | Y | N (wired to an IPC/menu \"check for updates\" action; no auto-invocation on `app.on('ready')` found) | Y (Squirrel `autoUpdater` downloads + `quitAndInstall()`) | **plaintext HTTP** — `getUpdateUrl()` returns `http://bareback.s.yhat.com/update/{platform}/{version}` (not https!) | N | relies on Squirrel platform code-signing nominally, but delivered over unauthenticated HTTP so feed/redirect/payload can be tampered with in transit | OS keystore (nominal), moot given broken transport | `src/node/services/updater.js:24-32` (`getUpdateUrl`, plaintext `http://` feed host), `:59-60` (`setFeedURL`/`checkForUpdates`), `:71` (`quitAndInstall`) |"
+    }
+  ]
 }

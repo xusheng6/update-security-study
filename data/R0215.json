@@ -5,16 +5,38 @@
   "historical_tier": "A",
   "project_url": "https://matthewpalmer.net/rocket/",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Withdraw the original security classification. Rocket appcast signatures do not establish the key pinned in the corresponding application release.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "EdDSA-signed from v61+ (pre-v61 shipped unsigned).",
   "limitations": [
-    "No public source checkout or verified application archive is retained; documentary appcast/cask records do not establish in-binary key configuration or complete historical release behavior.",
-    "Rocket appcast signatures do not establish the key pinned in the corresponding application release. Reinstating the original classification requires that missing evidence."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
   "classification_certified": false,
-  "project_link_basis": "Official product website checked on 2026-09-08."
+  "project_link_basis": "Official product website checked on 2026-09-08.",
+  "later_review_audit": {
+    "description": "Withdraw the original security classification. Rocket appcast signatures do not establish the key pinned in the corresponding application release.",
+    "limitations": [
+      "No public source checkout or verified application archive is retained; documentary appcast/cask records do not establish in-binary key configuration or complete historical release behavior.",
+      "Rocket appcast signatures do not establish the key pinned in the corresponding application release. Reinstating the original classification requires that missing evidence."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[Sparkle-EdDSA]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-N2.md",
+      "line": 13,
+      "text": "| Rocket | No public source repository exists (`matthewpalmer/Rocket` is not a real code repo — only `matthewpalmer.github.io/rocket` marketing site; a third-party repo `alifeg/Rocket-For-Mac` contains only a promotional README with affiliate download links, not actual source) | Sparkle (confirmed via live appcast; app itself closed-source) | Y | unknown (no public source; Homebrew cask sets `auto_updates true`) | Y | https | TLS-only | **mixed by era**: older releases (build ≤59, hosted on `dl.devmate.com`) shipped with **no signature at all**; current releases (build ≥61, current cask version 1.9.5/build 88, hosted on `macrelease.matthewpalmer.net`) carry signature[EdDSA] | Sparkle-EdDSA (presumed pinned-in-binary for current builds; unconfirmed — no public source); **none** for the older unsigned builds | Live appcast `https://macrelease.matthewpalmer.net/distribution/appcasts/rocket.xml` (fetched via WebFetch): item \"v59 / 1.5.1\" enclosure `https://dl.devmate.com/net.matthewpalmer.Rocket/59/.../Rocket-59.zip` has no signature attribute; item \"v53/1.5\" likewise unsigned; item \"v61/1.6\" enclosure `https://macrelease.matthewpalmer.net/distribution/appcasts/Rocket-61.dmg` carries `sparkle:edSignature=\"NrXDaRUmVjMguq2b4B1UKJXjRMojCFg9oJJCBLnFhi2i/ckybO4mH1RlPqiMaGwbaJuTVxGhys/jaKLOaVE8Dw==\"`. Homebrew cask `Casks/r/rocket.rb`: `url` template `https://macrelease.matthewpalmer.net/distribution/appcasts/Rocket-#{version}.dmg`, livecheck strategy `:sparkle` against `https://macrelease.matthewpalmer.net/distribution/appcasts/rocket.xml`, `auto_updates true`. |"
+    }
+  ]
 }

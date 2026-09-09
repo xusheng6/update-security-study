@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/paulpacifico/shutter-encoder",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports the narrow recorded behavior: Shutter Encoder executes the downloaded installer/archive after user confirmation without hash or signature verification.",
+  "description": "HTTPS-only, zero payload verification; on Windows the downloaded installer is directly ProcessBuilder-executed.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "The retained snapshot does not establish current released artifact behavior or independent release signing."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "33880b058664431bdc48811ff604235107adb04d"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports the narrow recorded behavior: Shutter Encoder executes the downloaded installer/archive after user confirmation without hash or signature verification.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "The retained snapshot does not establish current released artifact behavior or independent release signing."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-Y5.md",
+      "line": 9,
+      "text": "| Shutter Encoder | https://github.com/paulpacifico/shutter-encoder | e8b7e8b 2026-08-20 | Y | N (user must click Yes on 2 dialogs) | **Y** | https, TLS enforced (default `java.net.URL`/Jsoup, no disabling found) | N | **none** | none (raw HTTP body of the download page trusted) | `src/shutterencoder/ui/others/Update.java:236-260` (scrape shutterencoder.com HTML for version+link), `:409` (`HTTPDownload` fetches installer/zip), `:419-422` (Windows: `new ProcessBuilder(appPath).start()` **directly executes the downloaded .exe with zero hash/signature check**), `:425` (Mac/Linux/portable: `Desktop.getDesktop().open(appPath)` launches installer/AppImage/dmg) |"
+    }
+  ]
 }

@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/BALL-Project/ball",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Windows Sparkle setup registers the appcast URL and initializes WinSparkle, but no public-key registration call appears in this control flow.",
+  "description": "WinSparkle Ed25519 pipeline exists but the Windows code never calls win_sparkle_set_eddsa_public_key() — ships live with auto-download+execute and no signature enforcement. Endpoint compromise = RCE (macOS leg inert).",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "54e7895fc6b64e50a71cadc2a18b915755f17bbf"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Windows Sparkle setup registers the appcast URL and initializes WinSparkle, but no public-key registration call appears in this control flow.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none (Win key unset)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AG3.md",
+      "line": 17,
+      "text": "| BALLView | https://github.com/BALL-Project/ball.git | 54e7895 / 2026-06-15 | **Y (Windows: live); macOS: present in source but not compiled in for this build state** | Y | Y | https (`https://ball-project.github.io/ball/appcast-{windows,macos}.xml`), TLS validation not disabled anywhere in repo | Appcast items carry `sparkle:edSignature` (Ed25519) placeholders inserted by `scripts/publish_appcast.py` at release time | **Broken on Windows: `win_sparkle_set_eddsa_public_key()` is never called anywhere in the codebase**, so WinSparkle initializes and runs background update checks/downloads with no public key registered — the Ed25519 signature carried in the appcast is never verified. macOS side (`sparkle_bridge.mm`) relies on `SUPublicEDKey` in `Info.plist`, which the release workflow explicitly leaves absent for the current v1.7.0 tag (Sparkle.xcframework isn't vendored in-repo either, so `BALL_HAS_SPARKLE` is OFF for this checkout — macOS auto-update is currently dormant, not shipping) | **none registered at runtime (Windows)** — key is generated/stored as a CI secret and injected only into the appcast signer (`scripts/publish_appcast.py`), never into the client via `win_sparkle_set_eddsa_public_key()` | `source/APPLICATIONS/BALLVIEW/main.C:397-401` (Windows: `win_sparkle_set_appcast_url(...)` + `win_sparkle_init()` called, no key-set call anywhere in file or repo — confirmed via repo-wide grep for `win_sparkle_set_eddsa_public_key`); `vcpkg.json:30` (`winsparkle` is an **unconditional** manifest dependency, so every Windows CI/release build links it — `source/APPLICATIONS/BALLVIEW/CMakeLists.txt:114-129` finds it via `find_package(unofficial-winsparkle CONFIG QUIET)` with no gating); `packaging/appcast/appcast-windows.xml`; macOS gate at `.github/workflows/release.yml:107-155` (explicitly ships v1.7.0 \"WITHOUT auto-update infrastructure\" when the Ed25519 secret is unset — a real, if slightly saving, guard that Windows lacks) |"
+    }
+  ]
 }

@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/openclonk/openclonk",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The update downloads a server-provided package and passes it to ApplyUpdate, which extracts and executes the update program without an integrity verifier.",
+  "description": "Daily HTTPS update check, but the downloaded .ocu/installer has zero signature check and is run elevated via ShellExecute(...,'runas',...) / execl. Arguably D.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "36de799544af0459014ea088867fe263779a8bdd"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The update downloads a server-provided package and passes it to ApplyUpdate, which extracts and executes the update program without an integrity verifier.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AI4.md",
+      "line": 24,
+      "text": "| OpenClonk | https://github.com/openclonk/openclonk.git | 36de799544af0459014ea088867fe263779a8bdd / 2026-04-28 | Y | Y (auto-checks once/day: `Config.Network.LastUpdateTime`, `src/gui/C4UpdateDlg.cpp:305-309`; download+apply requires one user Yes/No prompt) | Y | https for the version-check query (`Config.Network.UpdateServerAddress` default `https://www.openclonk.org/update/`, `src/config/C4Config.cpp:189`); actual package download URL comes from the **server's response** and is used mostly as-is — `DoUpdate()` only strips a literal `\"http://\"` prefix (`src/gui/C4UpdateDlg.cpp:164`, a no-op for https URLs) — no CURLOPT_SSL_VERIFYPEER/VERIFYHOST override anywhere in `src/network/C4HTTP.cpp` (default cert validation applies whenever https is actually used) | N | **none** — downloaded `.ocu` update package or installer executable is extracted/run directly with **zero hash or signature check** | N/A (no verifying key exists at all) | `src/gui/C4UpdateDlg.cpp:151-176` (`DoUpdate`: download via `C4DownloadDlg::DownloadFile`, then `ApplyUpdate`); `:178-293` (`ApplyUpdate`: extracts update program from the unverified `.ocu` via c4group and **executes it — on Windows via `ShellExecute(..., L\"runas\", ...)`, i.e. runs the downloaded update program elevated/as-admin with no integrity check**; on POSIX, `execl()`s it directly); `:302-382` (`CheckForUpdates`, HTTPS version-check query, `strQuery` at line 321). |"
+    }
+  ]
 }

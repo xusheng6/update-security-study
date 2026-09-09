@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/beyond-all-reason/bar-lobby",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The Electron updater sets autoInstallOnAppQuit true and delegates artifact checking to electron-updater.",
+  "description": "electron-updater, but Windows NSIS build is unsigned; engine-binary downloader fetches an MD5 it never checks.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "036118a5ddf72d30a29a56768fa54bba6e78c352"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The Electron updater sets autoInstallOnAppQuit true and delegates artifact checking to electron-updater.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "sha512 (unsigned build)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AI4.md",
+      "line": 19,
+      "text": "| Beyond All Reason (bar-lobby / BeyondAllReason.exe) | https://github.com/beyond-all-reason/bar-lobby.git | 036118a5ddf72d30a29a56768fa54bba6e78c352 / 2026-08-21 | Y | Y-ish (auto-checks; download/install gated behind explicit UI action, but `autoInstallOnAppQuit=true` installs without further confirmation once downloaded) | Y | https (github.com Releases feed via electron-updater; no TLS overrides found in `src/`) | N — no `CSC_LINK`/`certificateFile` found in `electron-builder.ts` or CI workflows; Windows NSIS build appears **unsigned**, so this is not OS-code-signing-gated as initially assumed | hash (electron-updater's built-in sha512 check vs `latest.yml`) | server-supplied/unpinned (same GitHub Releases artifact set that serves the payload) | `electron-builder.ts:9-30`, `src/main/content/auto-updater.ts:20-32,109-115`, `package.json:96` (`electron-updater ^6.8.3`) — corrected/refined by dedicated sub-agent pass, see full section below. |"
+    }
+  ]
 }

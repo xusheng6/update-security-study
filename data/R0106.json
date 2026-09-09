@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/mountain-loop/yaak",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Yaak's release configuration supplies the Tauri updater with an HTTPS update endpoint and a minisign public key; the application updater checks, retrieves, and installs through the Tauri updater path. The reviewed updater module contains no API-client danger_accept_invalid_certs setting, and signature enforcement is delegated to the Tauri updater dependency.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Tauri updater with a pinned minisign pubkey (its danger_accept_invalid_certs is a separate API-client toggle, not the updater).",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; cryptographic enforcement is implemented by the Tauri updater dependency and was not independently audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,23 @@
       "commit": "d2d4b80a094b23b53c65b83e4ae42df53f51fbd1"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Yaak's release configuration supplies the Tauri updater with an HTTPS update endpoint and a minisign public key; the application updater checks, retrieves, and installs through the Tauri updater path. The reviewed updater module contains no API-client danger_accept_invalid_certs setting, and signature enforcement is delegated to the Tauri updater dependency.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; cryptographic enforcement is implemented by the Tauri updater dependency and was not independently audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[minisign/Ed25519]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": []
 }

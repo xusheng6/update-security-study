@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/ZeroK-RTS/Zero-K-Infrastructure",
   "channel": "mixed",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The retained lobby downloader disables certificate validation and uses HTTP engine/content sources; the primary app update path is notify-only. This supports a content/engine channel, not a complete primary tier.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "App updater notify-only (plaintext http). Content channel (rapid): auto-downloads+loads Lua widgets/gadgets AND the engine binary over a plaintext-http master with ServicePointManager cert validation disabled process-wide. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "48f6f09bc1d0266f204026580671ce867f75d6bd"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained lobby downloader disables certificate validation and uses HTTP engine/content sources; the primary app update path is notify-only. This supports a content/engine channel, not a complete primary tier.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "http (validation off)",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AI4.md",
+      "line": 18,
+      "text": "| Zero-K (Zero-K-Infrastructure / Zero-K.exe) | https://github.com/ZeroK-RTS/Zero-K-Infrastructure.git | 48f6f09bc1d0266f204026580671ce867f75d6bd / 2026-05-11 | Y | N (notify-only: version-string check auto-runs at startup over plain HTTP; on mismatch only pops a MessageBox / \"restart to apply\" banner — never auto-downloads/replaces the native exe) | N | http (`http://zero-k.info/lobby/Zero-K.version.txt` — plain HTTP, `GlobalConst.cs:68,84`; N/A TLS question since no TLS is used at all) | N | none | N/A | `Shared/PlasmaShared/SelfUpdater.cs:15-54`, `Shared/PlasmaShared/GlobalConst.cs:68,84`, `ChobbyLauncher/Chobbyla.cs:71-75`, `ZeroKLobby/Program.cs:347-353` — corrected/refined by dedicated sub-agent pass, see full section below. |"
+    }
+  ]
 }

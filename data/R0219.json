@@ -5,11 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/4ian/GDevelop",
   "channel": "mixed",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "GDevelop's desktop app uses electron-updater, while the reviewed extension-store context prefetches registry metadata and carries each extension's URL and version into its installation/update state. This snapshot does not establish an artifact hash or signature check in that application context; delegated service and dependency controls remain unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater. Extension/Asset store channel has no hash/sig.",
   "limitations": [
-    "New default-branch snapshot rather than historical release re-verification; the extension-store service, downloaded artifact format, and delegated dependency enforcement were not audited, so a repository-wide absence of hash/signature controls is not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,34 @@
       "commit": "9e123021a9c712c7cfa9073e7083eab1a7cde59d"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "GDevelop's desktop app uses electron-updater, while the reviewed extension-store context prefetches registry metadata and carries each extension's URL and version into its installation/update state. This snapshot does not establish an artifact hash or signature check in that application context; delegated service and dependency controls remain unresolved.",
+    "limitations": [
+      "New default-branch snapshot rather than historical release re-verification; the extension-store service, downloaded artifact format, and delegated dependency enforcement were not audited, so a repository-wide absence of hash/signature controls is not established."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "hash + OS-code-signing",
+  "trust_root": "OS-trust-store",
+  "original_evidence": [
+    {
+      "file": "batch-N8.md",
+      "line": 9,
+      "text": "| GDevelop (Electron app updater) | github.com/4ian/GDevelop | Electron (electron-updater 6.3.9) | Y | Y (`autoUpdater.checkForUpdatesAndNotify()` with `autoDownload=true`, invoked from renderer via IPC, also runs on a background schedule) | Y (downloads installer, `autoUpdater.quitAndInstall()` installs and relaunches) | HTTPS via GitHub Releases (`publish: [{provider: \"github\"}]`) | Partial — electron-builder auto-generates `latest*.yml` with per-artifact SHA-512, fetched over HTTPS; no separate detached cryptographic signature on that manifest itself | hash-from-manifest (SHA-512, electron-builder-generated) + OS-code-signing (Windows Authenticode via signtool; macOS hardenedRuntime + entitlements + notarization) | Windows: cert referenced by `GD_SIGNTOOL_SUBJECT_NAME`/`GD_SIGNTOOL_THUMBPRINT` env vars (external signtool); macOS: Apple Developer ID cert used by `afterSign` notarization script | newIDE/electron-app/app/main.js:12 (`require('electron-updater').autoUpdater`), :741-742 (`autoUpdater.autoDownload = true; autoUpdater.checkForUpdatesAndNotify()`), :757 (`autoUpdater.quitAndInstall()`); newIDE/electron-app/electron-builder-config.js:11 (`publish:[{provider:'github'}]`), win.signtoolOptions / mac.hardenedRuntime block |"
+    },
+    {
+      "file": "batch-N8.md",
+      "line": 10,
+      "text": "| GDevelop (Extension Store / Asset Store content channel) | github.com/4ian/GDevelop | Electron/React IDE | Y (content channel: extensions are JSON event-graphs compiled/executed by GDevelop's JS runtime; assets are mostly images/sounds) | N (user searches/installs manually) | Y (extensions); assets are largely non-executable media | HTTPS (`api.gdevelop.io/asset`, `api.gdevelop.io` extension registry, `asset-resources.gdevelop.io`, `private-assets.gdevelop.io`, etc. — all hardcoded https) | N | none found — no hash/signature check in install code, relies solely on HTTPS transport trust to GDevelop's own API/CDN | n/a | newIDE/app/src/Utils/GDevelopServices/ApiConfigs.js (all `https://` base URLs); newIDE/app/src/AssetStore/ExtensionStore/InstallExtension.js (fetches registry JSON directly, no hash field/check); newIDE/app/src/AssetStore/InstallAsset.js (no hash check in `installResource`) |"
+    }
+  ]
 }

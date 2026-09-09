@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/botg/FileZilla3",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "FileZilla’s updater uses an embedded root certificate for update metadata, then retrieves the selected installer and verifies its exact size and SHA-512 against parsed update metadata before retaining it. The inspected source does not establish the complete trust behavior of the subsequent HTTP path.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Manifest fetch is cert-pinned, but the installer-download leg force-trusts ANY certificate.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
-    "The external HTTP trust implementation and the authority of the metadata endpoint were not independently audited.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; The external HTTP trust implementation and the authority of the metadata endpoint were not independently audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "ab8ed7a547ecdd6dd3582977621e9215f0855a9d"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "FileZilla’s updater uses an embedded root certificate for update metadata, then retrieves the selected installer and verifies its exact size and SHA-512 against parsed update metadata before retaining it. The inspected source does not establish the complete trust behavior of the subsequent HTTP path.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
+      "The external HTTP trust implementation and the authority of the metadata endpoint were not independently audited.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; The external HTTP trust implementation and the authority of the metadata endpoint were not independently audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (CA-pinned manifest)",
+  "payload_verification": "SHA-512-from-manifest",
+  "trust_root": "pinned CA (asymmetric)",
+  "original_evidence": []
 }

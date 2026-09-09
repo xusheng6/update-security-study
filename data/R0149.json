@@ -5,11 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/flawiddsouza/Restfox",
   "channel": "mixed",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Restfox exposes update-electron-app from its Electron main process and configures GitHub publishing. Its Forge packaging configuration specifies a macOS Developer ID identity and notarytool notarization, while Windows uses the Squirrel maker; the checked source does not establish whether released Windows artifacts are signed.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "update-electron-app; macOS Developer-ID signed (Windows unsigned).",
   "limitations": [
-    "New default-branch snapshot at the recorded commit; update-electron-app internals and released artifact signatures were not independently audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "e8e158e8de297a2fec0259169e45e647fb989446"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Restfox exposes update-electron-app from its Electron main process and configures GitHub publishing. Its Forge packaging configuration specifies a macOS Developer ID identity and notarytool notarization, while Windows uses the Squirrel maker; the checked source does not establish whether released Windows artifacts are signed.",
+    "limitations": [
+      "New default-branch snapshot at the recorded commit; update-electron-app internals and released artifact signatures were not independently audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "OS-code-signing (Squirrel, mac)",
+  "trust_root": "OS-trust-store",
+  "original_evidence": [
+    {
+      "file": "batch-I8.md",
+      "line": 15,
+      "text": "| Restfox | flawiddsouza/Restfox | Electron (electron-forge + `update-electron-app`) | Y | chk/dl/inst: automatic — `update-electron-app` wraps Electron's built-in `autoUpdater` (Squirrel), default periodic check + auto-download + notify, install on quit/restart; invoked automatically on renderer mount unless user sets `disableAutoUpdate` flag | Y | https, default `update-electron-app` host (update.electronjs.org, proxies to GitHub releases); no custom host/TLS-bypass found in source | N (no separate signed manifest found; Squirrel-based feed) | OS-code-signing enforced on macOS via Squirrel.Mac (`osxSign` identity + `osxNotarize` configured); **Windows — no certificateFile/signing config found**, so Squirrel.Windows update payload is likely unsigned/unverified | Apple Developer ID Application cert \"Athanasios Plastiras (Y46L589C5C)\" for mac (via Apple trust chain/notarization); none identified for Windows | packages/electron/forge.config.js (`osxSign.identity`, `osxNotarize`, `makers:['@electron-forge/maker-squirrel', ...]`, `publishers:['@electron-forge/publisher-github']`); packages/electron/src/app.js:10 (`require('update-electron-app')`), :221-224 (ipc handler calling `updateElectronApp()`); packages/ui/src/App.vue:438-442 (auto-invoked on component mount unless `disableAutoUpdate` flag set) |"
+    }
+  ]
 }

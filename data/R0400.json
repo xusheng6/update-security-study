@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/espruino/EspruinoWebIDE",
   "channel": "firmware",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The IDE source shows firmware URL handling, download, and flashing. The companion EspruinoTools board-JSON source is outside this checkout, so the full URL/trust claim remains incomplete.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "Firmware flasher defaults to plaintext HTTP unless the IDE page itself is HTTPS. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "fffc1b20d7e517a93afc10b7c85989477c0f497c"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The IDE source shows firmware URL handling, download, and flashing. The companion EspruinoTools board-JSON source is outside this checkout, so the full URL/trust claim remains incomplete.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "http",
+  "payload_verification": "—",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-Z7.md",
+      "line": 15,
+      "text": "| Espruino Web IDE | https://github.com/espruino/EspruinoWebIDE | fffc1b2 / 2026-08-18 | N (self, nw.js app) | N | Y (flashes firmware to connected board) | **http** by default (upgrades to https only if IDE page itself is served over https) | N | none found in flasher path | server-supplied/unpinned | js/core/menuFlasher.js:187-190 (`if (window.location.protocol==\"https:\" && data.binary_url starts \"http:\") upgrade to https` — i.e. no upgrade under default nw.js/local context); no sha256/checksum/signature check found around `getBinaryURL`/flash write path |"
+    }
+  ]
 }

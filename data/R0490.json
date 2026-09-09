@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/ActivityWatch/activitywatch",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The updater pubkey is an empty string in committed configuration, so no pinned verification key is present.",
+  "description": "New aw-tauri UI ships a wired auto-install updater whose client config has an empty verification pubkey — payload verification defeated. (Legacy aw-qt is N.)",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement remain unverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "ce5838296004605c9b8edcecad128e64e2718e31"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The updater pubkey is an empty string in committed configuration, so no pinned verification key is present.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement remain unverified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none (empty pubkey)",
+  "trust_root": "— (Tauri key empty)",
+  "original_evidence": [
+    {
+      "file": "batch-AE6.md",
+      "line": 20,
+      "text": "| ActivityWatch (aw-tauri component) | https://github.com/ActivityWatch/activitywatch (submodule https://github.com/activitywatch/aw-tauri) | activitywatch@ce5838296004605c9b8edcecad128e64e2718e31 (2026-08-22); aw-tauri@f70bcdf913db3e1648b99ba459538469f744cd26 | Y | Y (default) | Y | https (GitHub Releases + tauri-plugin-updater over reqwest/TLS; no disabled-validation code found) | Y (attempted — release CI signs artifacts w/ minisign key when `TAURI_SIGNING_PRIVATE_KEY` secret set, `includeUpdaterJson`/`createUpdaterArtifacts` toggled accordingly) | signature (Ed25519/minisign via tauri-plugin-updater) — **but the verifying pubkey shipped in the client config is an empty string** | **none pinned** — `plugins.updater.pubkey` is `\"\"` in the committed/shipped `tauri.conf.json`; no CI step patches in a real pubkey (only `createUpdaterArtifacts` flag is patched) | `aw-tauri/src-tauri/tauri.conf.json:25` (`\"pubkey\": \"\"`); `aw-tauri/src-tauri/src/lib.rs:864` (`tauri_plugin_updater::Builder::new().build()`); `lib.rs:1095-1096` (`handle.updater()` → `.check().await`); `lib.rs:691` (`download_and_install`); `lib.rs:378-383,449` (`auto_download` defaults `true`); `.github/workflows/release.yml:86-111` and `build.yml:90-107` (signing key wired into CI, pubkey never patched) |"
+    }
+  ]
 }

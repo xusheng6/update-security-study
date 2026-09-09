@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/rustic-rs/rustic",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In the reviewed rustic snapshot, self-update is compiled behind the self-update feature; enabled builds configure the rustic GitHub backend and call its release.update method, while builds without the feature report that package-manager updating is required. Verification performed inside the delegated dependency is unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "`self-update` (feature-gated out of default build) overwrites binary, never calls verify APIs.",
   "limitations": [
-    "New default-branch snapshot rather than the original study release; delegated self_update verification behavior and release-specific controls were not inspected."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "143d073f6039fcf29b64191ceb36c926744b6fe4"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In the reviewed rustic snapshot, self-update is compiled behind the self-update feature; enabled builds configure the rustic GitHub backend and call its release.update method, while builds without the feature report that package-manager updating is required. Verification performed inside the delegated dependency is unresolved.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study release; delegated self_update verification behavior and release-specific controls were not inspected."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "self-update",
+  "transport": "https (validated)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-P5.md",
+      "line": 7,
+      "text": "| **rustic** (github.com/rustic-rs/rustic) | Y | N (manual `rustic self-update` subcommand; feature-gated, not in default build) | Y (downloads GitHub release binary/archive and replaces the running executable in place) | https (GitHub API + release-asset download via `reqwest` w/ `rustls`, standard TLS cert validation; no cert pinning) | unknown/no (no separate signed manifest — release metadata comes straight from GitHub Releases API) | none observed (rustic invokes the `self_update` crate's default GitHub backend flow and never calls the crate's optional `.verifying_keys()`/checksum APIs) | n/a (no verifying key configured) | `rustic/src/commands/self_update.rs:31-58` (self_update::backends::github::Update, `release.update()`); `rustic/Cargo.toml:36` (`self-update = [\"dep:self_update\",\"dep:semver\"]`, opt-in feature); `rustic/Cargo.toml:125` (`self_update = \"0.44.0\"`, features `rustls`,`reqwest`) |"
+    }
+  ]
 }

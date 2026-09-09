@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/mautic/mautic",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Mautic fetches the update package over the default HTTP client and writes it to cache; extraction is performed later without a cryptographic payload check.",
+  "description": "mautic:update:apply downloads from api.github.com, no payload verification (--force only checks compatibility).",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "6c4d2341195374cca882fa9852747270b01223aa"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Mautic fetches the update package over the default HTTP client and writes it to cache; extraction is performed later without a cryptographic payload check.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AI1.md",
+      "line": 19,
+      "text": "| Mautic | https://github.com/mautic/mautic.git | 6c4d2341195374cca882fa9852747270b01223aa / 2026-08-21 | Y (`mautic:update:apply` CLI command / admin-panel \"Check for updates\") | N (requires interactive confirmation unless `--force`; not scheduled) | Y | https, TLS validation **enforced** (default Guzzle client, no `verify=>false` found) | N | none | none — trust rests on TLS to `api.github.com` (default `system_update_url`), unpinned | `app/bundles/CoreBundle/Helper/UpdateHelper.php:294` fetches release list from `system_update_url` (default `https://api.github.com/repos/mautic/mautic/releases`, `Config/config.php:719`); `:47-76` `fetchPackage()` downloads the zip via Guzzle and `file_put_contents`; `app/bundles/CoreBundle/Update/Step/InstallNewFilesStep.php:44-58` extracts it straight over the install with `ZipArchive::extractTo()`. No `md5`/`sha`/`checksum`/`signature` string appears anywhere under `app/bundles/CoreBundle/Update/` or `Release/Metadata.php` — the `--force` flag documented as \"bypasses the verification check\" only skips the interactive confirmation / pre-update compatibility checks (PHP version, disk space, etc.), not a cryptographic check. |"
+    }
+  ]
 }

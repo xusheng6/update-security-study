@@ -5,14 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/keybase/client",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Keybase’s inspected updater includes detached saltpack signature verification with an allowed signing-key list and a required SHA-256 digest. Deployed key values and release provenance remain outside this snapshot review.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "saltpack detached signature verified vs KIDs baked into the binary, plus a pinned CA cert for the update channel.",
   "limitations": [
-    "New default-branch snapshot, not historical release re-verification.",
-    "Exact production signing KIDs and CA bytes are not established by these spans.",
-    "Source controls do not certify deployed artifacts.",
-    "New default-branch snapshot, not historical release re-verification. Exact production signing KIDs and CA bytes are not established by these spans. Source controls do not certify deployed artifacts."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "0d1eb6015cd73aac93f1cd4534de5b488f77d7c1"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Keybase’s inspected updater includes detached saltpack signature verification with an allowed signing-key list and a required SHA-256 digest. Deployed key values and release provenance remain outside this snapshot review.",
+    "limitations": [
+      "New default-branch snapshot, not historical release re-verification.",
+      "Exact production signing KIDs and CA bytes are not established by these spans.",
+      "Source controls do not certify deployed artifacts.",
+      "New default-branch snapshot, not historical release re-verification. Exact production signing KIDs and CA bytes are not established by these spans. Source controls do not certify deployed artifacts."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "saltpack signature",
+  "trust_root": "pinned KIDs in binary + pinned CA cert",
+  "original_evidence": [
+    {
+      "file": "batch-X6.md",
+      "line": 11,
+      "text": "| Keybase (Desktop client) | https://github.com/keybase/client | 463c4ce / 2026-08-20 | Y | Y (auto-update defaults true when unset) | Y | https, TLS enforced, **pinned CA cert** (`libkb.APICA`) via custom `x509.CertPool`, MinVersion TLS1.2, no disabled-validation flags found | N (manifest JSON itself unsigned; only asset digest+signature fields inside it) | hash (digest) **and** signature — saltpack detached signature verified over the downloaded asset | **pinned-in-binary**: hardcoded map of valid saltpack signing KIDs (`validCodeSigningKIDs`) checked in `Verify()` | go/updater/updater.go:172-179,233-239 (verify+digest flow); go/updater/keybase/context.go:16-24 (pinned KIDs), :137-139 (`Verify` calls `saltpack.VerifyDetachedFileAtPath`); go/updater/keybase/https.go:16-37 (pinned CA, TLS1.2 min); go/updater/keybase/context.go:55-58 (https:// endpoints) |"
+    }
+  ]
 }

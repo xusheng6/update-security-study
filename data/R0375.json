@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/franciscoBSalgueiro/en-croissant",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+  "description": "Tauri updater, minisign signature vs pinned key.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "218ada16354cd8014839fee028386ecac29e05e0"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "Ed25519 (minisign)",
+  "trust_root": "pubkey pinned in tauri.conf.json",
+  "original_evidence": [
+    {
+      "file": "batch-Y6.md",
+      "line": 33,
+      "text": "| En Croissant | https://github.com/franciscoBSalgueiro/en-croissant | 9654961 / 2026-04-20 | Y | N (user must click \"yes\" to install) | **Y** | https (`https://www.encroissant.org/updates`), Tauri default → enforced | **Y** | **signature** — Tauri updater plugin verifies a minisign/ed25519 signature before install | **pinned in binary** — `tauri.conf.json` `plugins.updater.pubkey` (base64 minisign pubkey) compiled into the app | `src-tauri/tauri.conf.json` (`updater.pubkey`, `updater.endpoints`); `src-tauri/Cargo.toml:64` `tauri-plugin-updater = \"2.10.0\"`; `src-tauri/src/main.rs:241`; `src/App.tsx:119-134` (`check()` → confirm dialog → `update.downloadAndInstall()`) |"
+    }
+  ]
 }

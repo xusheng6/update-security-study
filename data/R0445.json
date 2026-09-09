@@ -5,14 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/enzo1982/freac",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected fre:ac Windows integration delegates updates to eUpdate.dll and requests user confirmation. The external updater’s authentication policy and key configuration remain unestablished.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Windows eUpdate auto-install; verification lives in an external closed-source eUpdate.dll with no evidence of key pinning.",
   "limitations": [
-    "eUpdate.dll implementation, trust roots, and payload verification are outside this checkout.",
-    "This newly retrieved default-branch snapshot is not the historical study revision.",
-    "The source does not certify current released Windows artifacts.",
-    "eUpdate.dll implementation, trust roots, and payload verification are outside this checkout. This newly retrieved default-branch snapshot is not the historical study revision. The source does not certify current released Windows artifacts."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "8b83a5b092aa58e62ede3ff94f87b42bf730b28e"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected fre:ac Windows integration delegates updates to eUpdate.dll and requests user confirmation. The external updater’s authentication policy and key configuration remain unestablished.",
+    "limitations": [
+      "eUpdate.dll implementation, trust roots, and payload verification are outside this checkout.",
+      "This newly retrieved default-branch snapshot is not the historical study revision.",
+      "The source does not certify current released Windows artifacts.",
+      "eUpdate.dll implementation, trust roots, and payload verification are outside this checkout. This newly retrieved default-branch snapshot is not the historical study revision. The source does not certify current released Windows artifacts."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "external DLL (unclear)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AC7.md",
+      "line": 11,
+      "text": "| fre:ac | https://github.com/enzo1982/freac.git | 486aa93 / 2026-08-20 | Y | Y (opt-in, asked at 2nd startup) | Y | https (feed XML) | unknown (external DLL) | unknown — verification logic lives in closed-source `eUpdate.dll`, not in this repo | server-supplied/unpinned (not verifiable from source) | src/jobs/other/checkforupdates.cpp:70-113 (Windows-only `ex_eUpdate_*` calls into `eUpdate.dll`); src/freac.cpp:81-83 (`updatePath = \"https://www.freac.org/eUpdate/eUpdate.xml\"`); src/dllinterfaces.cpp:29-45 (dynamic-loads `eUpdate.dll`, calls `eUpdate_AutomaticUpdate`) |"
+    }
+  ]
 }

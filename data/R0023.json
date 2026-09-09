@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/winscp/winscp",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "WinSCP’s inspected updater supplies an embedded root certificate for its update request, obtains URL/size/SHA-256 metadata, and rejects the retrieved installer on size or SHA-256 mismatch before writing it to the automatic-update path. The source does not establish payload signing-key verification.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Pins a public root CA, not a payload-signing key — still domain-dependent (any cert under that root passes).",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
-    "The lower HTTP certificate matching implementation and release signing process were not audited.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; The lower HTTP certificate matching implementation and release signing process were not audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "e9b1860006623907e1eec616309fb40b6b5ce7f0"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "WinSCP’s inspected updater supplies an embedded root certificate for its update request, obtains URL/size/SHA-256 metadata, and rejects the retrieved installer on size or SHA-256 mismatch before writing it to the automatic-update path. The source does not establish payload signing-key verification.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
+      "The lower HTTP certificate matching implementation and release signing process were not audited.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; The lower HTTP certificate matching implementation and release signing process were not audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https + pinned root CA",
+  "payload_verification": "SHA-256-from-manifest",
+  "trust_root": "pinned root CA",
+  "original_evidence": []
 }

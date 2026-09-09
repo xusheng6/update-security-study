@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/jordanbaird/Ice",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Ice configures Sparkle with an HTTPS appcast and a pinned SUPublicEDKey; its UpdatesManager starts the standard updater and exposes automatic and manual update checks. Runtime signature enforcement is delegated to Sparkle, and this snapshot does not reverify the historical release.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Sparkle EdDSA pinned.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; Sparkle's dependency-level verifier and historical release artifact signing were not independently reverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "11edd39115f3f43a83ae114b5348df6a0e1741cf"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Ice configures Sparkle with an HTTPS appcast and a pinned SUPublicEDKey; its UpdatesManager starts the standard updater and exposes automatic and manual update checks. Runtime signature enforcement is delegated to Sparkle, and this snapshot does not reverify the historical release.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; Sparkle's dependency-level verifier and historical release artifact signing were not independently reverified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[Sparkle-EdDSA]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-K1.md",
+      "line": 11,
+      "text": "| Ice | jordanbaird/Ice | Sparkle | Y | chk/dl: both user-toggleable (`automaticallyChecksForUpdates` / `automaticallyDownloadsUpdates`) | Y | https (`https://jordanbaird.github.io/ice-releases/appcast.xml`) | Sparkle-EdDSA (no DSA) | signature[EdDSA] | pinned-in-binary | Ice/Info.plist:5-8; Ice/Updates/UpdatesManager.swift:34-51; Ice/Settings/SettingsPanes/AboutSettingsPane.swift:113,121 |"
+    }
+  ]
 }

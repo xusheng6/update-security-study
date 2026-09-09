@@ -5,13 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://chromium.googlesource.com/chromium/src",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Chromium's updater defaults enable CUP and CRX3 publisher-proof handling; the inspected Chromium source does not independently establish the CUP verification algorithm or an end-to-end compromised-CDN guarantee.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "CUP ECDSA-signs the protocol so updates authenticate even against a compromised TLS/CDN. Gold standard.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; the inspected tree does not contain the delegated update-client CUP verification implementation or release-specific Chromium build configuration.",
-    "The source shows the Chromium updater framework and defaults, not that every Chromium-based product uses these defaults.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; the inspected tree does not contain the delegated update-client CUP verification implementation or release-specific Chromium build configuration.; The source shows the Chromium updater framework and defaults, not that every Chromium-based product uses these defaults."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "531b1a2c79bb07f68744d6c99ba8accac1339521"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Chromium's updater defaults enable CUP and CRX3 publisher-proof handling; the inspected Chromium source does not independently establish the CUP verification algorithm or an end-to-end compromised-CDN guarantee.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; the inspected tree does not contain the delegated update-client CUP verification implementation or release-specific Chromium build configuration.",
+      "The source shows the Chromium updater framework and defaults, not that every Chromium-based product uses these defaults.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; the inspected tree does not contain the delegated update-client CUP verification implementation or release-specific Chromium build configuration.; The source shows the Chromium updater framework and defaults, not that every Chromium-based product uses these defaults."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https + CUP",
+  "payload_verification": "CRX3 + CUP",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-R3.md",
+      "line": 50,
+      "text": "| **Chromium B.S.U.** | https://github.com/BenJuan26/chromium-bsu.git (fork of `git.code.sf.net/p/chromium-bsu/code`) | c0c36bb (2025-08-28) | N | N/A | N | N/A | N/A | N/A | N/A | Negative grep census across `src/` for all update keywords — zero hits. Repo-wide search for `curl`/`CURLOPT`/`socket(`/`WinHTTP` in `src/` found **zero** networking-client code of any kind. Only `http` string found repo-wide is static About/credits-screen text, `src/MenuGL.cpp:49` (`\"download Chromium B. S. U. at http://chromium-bsu.sf.net/\"`), a hardcoded UI label, never fetched or parsed as a URL by the program. |"
+    }
+  ]
 }

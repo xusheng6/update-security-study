@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/zaproxy/zaproxy",
   "channel": "plugin",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In the reviewed ZAP add-on path, each add-on entry supplies a URL and an algorithm-qualified hash through ZapVersions.xml; the downloader computes that digest and only marks a matching file validated before installation. This is an integrity check tied to the retrieved manifest, not evidence that the manifest or its transport is cryptographically signed.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Add-on marketplace: JARs verified by SHA256 from the same unsigned manifest that gives the URL.",
   "limitations": [
-    "New default-branch snapshot rather than historical release re-verification; the reviewed source does not establish authentication or signing of ZapVersions.xml, and external release artifacts were not inspected."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "9d1970a436b1b189bfb588fc88864c80d9baf6a5"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In the reviewed ZAP add-on path, each add-on entry supplies a URL and an algorithm-qualified hash through ZapVersions.xml; the downloader computes that digest and only marks a matching file validated before installation. This is an integrity check tied to the retrieved manifest, not evidence that the manifest or its transport is cryptographically signed.",
+    "limitations": [
+      "New default-branch snapshot rather than historical release re-verification; the reviewed source does not establish authentication or signing of ZapVersions.xml, and external release artifacts were not inspected."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "hash (SHA256, unsigned manifest)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-M2.md",
+      "line": 9,
+      "text": "| OWASP ZAP | github.com/zaproxy/zaproxy | Java (add-on marketplace via `ExtensionAutoUpdate`) | Y — full add-on marketplace/updater | chk: auto by default (`CHECK_ADDON_UPDATES` default **true**, throttled to once/day); dl/inst: **manual by default** (`INSTALL_ADDON_UPDATES` default **false**, `DOWNLOAD_NEW_RELEASE` default **false**) — user-configurable to fully automatic | Y — downloads `.zap` add-on JARs and loads them into the running JVM (`AddOnLoader`/`AddOnClassLoader`) | https (manifest + add-on package URLs; e.g. GitHub Releases URLs as seen in the shipped add-ons list); scheme not enforced in code, relies on URL supplied by manifest | no — manifest (ZapVersions.xml-style config) is plain XML/HTTP response, not independently signed | hash-from-manifest — SHA-256 (or other algo) embedded as `\"<ALGORITHM>:<HASH>\"` string inside each add-on's manifest entry, computed over the downloaded file and compared post-download | none — the \"trusted\" hash comes from the same unsigned manifest/transport as the payload itself (no independent signing key / root of trust) | `zap/src/main/java/org/zaproxy/zap/extension/autoupdate/Downloader.java:82-128` (`validateHashDownload`, SHA compare); `zap/src/main/java/org/zaproxy/zap/control/AddOn.java:594,1601` (`hash` field sourced from manifest entry); `zap/src/main/java/org/zaproxy/zap/extension/autoupdate/OptionsParamCheckForUpdates.java:43-57,82-83` (default flags); `zap/src/main/main-add-ons.yml:12-25` (example manifest entries: `url:` + `hash: \"SHA-256:...\"`) |"
+    }
+  ]
 }

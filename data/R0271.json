@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/jeffvli/feishin",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Feishin configures electron-updater with automatic download/install behavior; artifact integrity is the standard sha512 manifest flow.",
+  "description": "electron-updater with sha512, auto-install on Win/Linux — but the OS code-signing trust anchor is missing (macOS ad-hoc/unnotarized, no Windows signing certs). Degrades from Tier B to server-TLS-only.",
   "limitations": [
-    "Newly retrieved source snapshot at the recorded commit; this is not historical release re-verification. Released artifact behavior and external framework enforcement remain unverified.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,40 @@
       "commit": "af6542ac4f6f0ed5aa6f5c8ce602201970be8821"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Feishin configures electron-updater with automatic download/install behavior; artifact integrity is the standard sha512 manifest flow.",
+    "limitations": [
+      "Newly retrieved source snapshot at the recorded commit; this is not historical release re-verification. Released artifact behavior and external framework enforcement remain unverified.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "sha512 manifest only",
+  "trust_root": "— (OS-signing anchor absent)",
+  "original_evidence": [
+    {
+      "file": "batch-G2.md",
+      "line": 7,
+      "text": "| Feishin | github.com/jeffvli/feishin | Electron (electron-updater) | Y | auto (chk/dl/inst) — `autoDownload=true`, `autoInstallOnAppQuit=true`, `autoRunAppAfterInstall=true` on the default \"latest\" GitHub channel; alpha/beta channels probe first then switch to full auto | Y | https — GitHub Releases (`provider: github`) for latest/beta channel; alpha channel uses a separate S3-style endpoint `https://feishin-nightly-bucket.jeffvli.org` (provider: s3, generic HTTPS host). No TLS-bypass code found (no `rejectUnauthorized:false` grep hit) → validation=enforced (default Node/electron-updater HTTPS) | HTTPS-only (GitHub Releases API/CDN over TLS; no separate manifest signature scheme) | hash-from-manifest — electron-updater's standard flow validates downloaded installer against the `sha512` field in the auto-generated `latest.yml`/`latest-mac.yml` fetched alongside the installer; on Windows/macOS the installer itself normally carries OS code-signing which electron-updater additionally checks (`verifyUpdateCodeSignature`, not explicitly disabled in this repo's config) | server-TLS (manifest fetched over HTTPS from GitHub) + OS-code-signing (Authenticode/Apple notarization) for the executable, per electron-updater defaults | src/main/index.ts:24,59-63,85-95,105-124,223-341 (electron-updater config, autoDownload/autoInstallOnAppQuit/autoRunAppAfterInstall, GITHUB_UPDATER_CONFIG, ALPHA_UPDATER_CONFIG); electron-builder.yml:70-75 (publish: provider github); package.json:113 (electron-updater dep); src/renderer/hooks/use-github-releases.ts (separate GitHub REST polling just for in-app \"new version\" banner, https://api.github.com) |"
+    },
+    {
+      "file": "batch-S3.md",
+      "line": 17,
+      "text": "| Feishin | https://github.com/jeffvli/feishin.git | 4929f0edf9df2ed2c486b7b6c97066fdba93d200 (2026-08-19) | Y | Y (Win/Linux); notify-only on macOS | Y (Win/Linux); N (macOS) | https (GitHub Releases + S3 `feishin-nightly-bucket.jeffvli.org` for alpha channel); no TLS-disable code found | N (`latest.yml`/`latest-mac.yml` are plain YAML over HTTPS, not signed) | sha512 hash in manifest (electron-updater default) — **but no OS code-signing configured to back it** | intended OS cert store (Authenticode/notarization); **actual: none** — `electron-builder.yml:33-46` sets `mac.identity: '-'` (ad-hoc) and `notarize: false`; CI workflows reference only `GH_TOKEN`, no `CSC_LINK`/`CSC_KEY_PASSWORD` (Windows also unsigned) | `package.json:113` `\"electron-updater\":\"^6.8.9\"`; `electron-builder.yml:33-46`; `src/main/index.ts:24,105-125,247-263` (AppImageUpdater/MacUpdater/NsisUpdater, `autoInstallOnAppQuit=true`, `autoRunAppAfterInstall=true`); `src/renderer/update-available-dialog.tsx:64-74` (macOS link-only) |"
+    },
+    {
+      "file": "batch-S3.md",
+      "line": 30,
+      "text": "| Feishin | **C** | Textbook electron-updater flow (sha512 manifest hash, auto-download/install on Win/Linux) but the OS code-signing trust anchor that's supposed to back it is absent — mac build is ad-hoc-signed/unnotarized and CI has no Windows signing cert either. A compromised release channel + regenerated manifest hash would be sufficient for RCE; downgraded from typical Tier B. |"
+    }
+  ]
 }

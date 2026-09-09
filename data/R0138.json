@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://gitlab.com/es-de/emulationstation-de",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "ES-DE’s application updater compares retrieved content MD5 with its package metadata and rejects a mismatch. The checksum observation does not establish an independently authenticated manifest.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Auto-check, MD5 from unsigned manifest.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
-    "Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "7245736f46d889e3e589d1cc2b2a47cbbcc8d436"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "ES-DE’s application updater compares retrieved content MD5 with its package metadata and rejects a mismatch. The checksum observation does not establish an independently authenticated manifest.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+      "Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validated)",
+  "payload_verification": "hash (MD5)",
+  "trust_root": "none",
+  "original_evidence": []
 }

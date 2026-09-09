@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/SteamDeckHomebrew/decky-loader",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Decky Loader selects a release channel and schedules periodic update checks. The original detailed privilege and verification-bypass claims remain unresolved; the primary and plugin channels require separate evidence.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Privileged self-update with zero verification; PR builds from unauthenticated nightly.link; plugin SHA256 bypassable with an empty hash.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
-    "Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "1ea69d315a49376e32f1fba46ffa7d028eed8046"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Decky Loader selects a release channel and schedules periodic update checks. The original detailed privilege and verification-bypass claims remain unresolved; the primary and plugin channels require separate evidence.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+      "Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes (privileged)",
+  "transport": "https (nightly.link unauth for PR)",
+  "payload_verification": "none / bypassable",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-I2.md",
+      "line": 18,
+      "text": "| Decky Loader | github.com/SteamDeckHomebrew/decky-loader | Python (aiohttp) backend + React/TS frontend, systemd service on SteamOS | Y — **both** self-update of the loader binary **and** a plugin store install/update flow (high interest: content-as-code) | self-update: **auto check** (every 6h + on demand) / **manual** download+install (user clicks \"Update\"; once triggered it downloads, installs, and restarts the service with no further confirmation). Plugin installs: manual, but user only confirms name/version — not the payload itself | Y — self-update downloads `PluginLoader`/`PluginLoader.exe` and the systemd service restarts to execute it (Linux binary is `chmod 777`'d); plugin store downloads ZIPs containing an arbitrary `main.py` that is imported and executed, plus optional extra \"remote_binary\" executables | HTTPS throughout (`api.github.com`, `plugins.deckbrew.xyz`, `nightly.link`); TLS enforced via `ssl.create_default_context(cafile=certifi.where())` — no `verify=False`/insecure override found | N (GitHub Releases API JSON / plugin-store JSON, unsigned) | **Mixed, and inconsistent:** self-update (`do_update`/`download_decky_binary`) — **NONE**, binary written straight from a GitHub release asset URL with no hash/signature check at all. \"Testing\"/PR builds (`download_testing_version`) — **NONE**, fetched from `nightly.link` (a third-party, unauthenticated GitHub-Actions-artifact mirror) then executed as the loader. Plugin store install (`_unzip_to_plugin_dir`) — **hash-from-manifest**, SHA-256 compared to a caller-supplied `hash`, but the check is **skipped entirely if `hash` is falsy/empty** (`if hash and (zip_hash != hash)`). Plugin \"remote_binary\" downloads (`download_remote_binary_to_path`) — SHA-256 **strictly enforced**, always compared, raises on mismatch | N/A everywhere — all are plain hash comparisons against values fetched from the same or a sibling unauthenticated HTTPS API; no cryptographic signing keys/PKI involved anywhere in the loader | `backend/decky_loader/updater.py:141-186` (`download_decky_binary` — no hash check, `chmod 777`, then `do_restart` executes it); `updater.py:264-293` (`download_testing_version` — `nightly.link`, zero verification); `backend/decky_loader/browser.py:58-64` (`_unzip_to_plugin_dir` — SHA-256 check bypassable via empty hash); `backend/decky_loader/helpers.py:110-132` (`download_remote_binary_to_path` — SHA-256 always enforced); `backend/decky_loader/helpers.py:23` (`ssl_ctx = ssl.create_default_context(cafile=certifi.where())`) |"
+    }
+  ]
 }

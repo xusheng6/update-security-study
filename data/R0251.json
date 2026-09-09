@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/listen1/listen1_desktop",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In the reviewed Listen1-desktop snapshot, the main process imports electron-updater and invokes checkForUpdatesAndNotify at startup. The available source does not substantiate a publication claim that the updater has no code-signing protection.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "electron-updater, no code-signing.",
   "limitations": [
-    "New default-branch snapshot rather than the original study release; no auditable platform signing configuration or release artifact was inspected."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "bbc38654bd593d4ae70143230ea7814b34d09128"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In the reviewed Listen1-desktop snapshot, the main process imports electron-updater and invokes checkForUpdatesAndNotify at startup. The available source does not substantiate a publication claim that the updater has no code-signing protection.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study release; no auditable platform signing configuration or release artifact was inspected."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "hash (sha512, unsigned)",
+  "trust_root": "server-TLS",
+  "original_evidence": [
+    {
+      "file": "batch-P1.md",
+      "line": 4,
+      "text": "| Listen1-desktop | https://github.com/listen1/listen1_desktop | Electron (electron-builder; electron-updater required directly, not in package.json deps) | Y | Y (`autoUpdater.checkForUpdatesAndNotify()` called unconditionally at module load) | Y (checkForUpdatesAndNotify is electron-updater's built-in download+notify+quitAndInstall flow) | https (defaults to GitHub provider via package.json \"repository\" field; electron-builder build config has no explicit \"publish\" block) | N (no separate signed manifest; latest*.yml served over HTTPS from GitHub Releases, same electron-updater default as above) | hash-from-manifest (sha512 field in latest*.yml, electron-updater default) | N/A — no CSC_LINK/mac_csc_link/win signing secrets in the sole CI workflow, so unsigned artifacts / no OS code-signing confirmed | app/main.js:13,20 (`const { autoUpdater } = require(\"electron-updater\"); autoUpdater.checkForUpdatesAndNotify();`); package.json:19-22 (\"repository\" github URL, no explicit \"publish\" config); .github/workflows/release.yml (uses samuelmeuli/action-electron-builder, no signing cert secrets referenced) |"
+    }
+  ]
 }

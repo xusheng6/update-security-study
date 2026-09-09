@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/tortoisegit/tortoisegit",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+  "description": "OpenPGP RSA signature verified against a key compiled into the binary before ShellExecuting the installer.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "acc10fc20afe36aabc4afbc5f1af33f31acae32e"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "OpenPGP RSA signature",
+  "trust_root": "key compiled into binary (version.h)",
+  "original_evidence": [
+    {
+      "file": "batch-W4.md",
+      "line": 15,
+      "text": "| TortoiseGit | https://github.com/tortoisegit/tortoisegit.git | acc10fc20a / 2026-06-27 | Y | N (manual \"Update\" button; check itself can be scheduled weekly) | Y | https (`versioncheck.tortoisegit.org`, download URLs) | Y | **OpenPGP RSA/DSA signature** on the downloaded installer/version-file, verified against a **key pinned in the binary** | pinned-in-binary (`tortoisegit_public_key` compiled into `src/version.h`) | src/TortoiseProc/CheckForUpdatesDlg.cpp:225-231 (download+`VerifyIntegrity` of version file), :477-540 (`OnBnClickedButtonUpdate` → `VerifyIntegrity()` then `ShellExecute` of installer); src/TortoiseProc/UpdateCrypto.cpp:983-1066 (`VerifyIntegrity`, RSA sig check against `tortoisegit_public_key`); src/version.h:58 (pinned key bytes) |"
+    }
+  ]
 }

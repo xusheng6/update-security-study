@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/kivy/buildozer",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: Build tool downloads write URL response bytes directly and do not perform a hash or signature check before extraction.",
+  "description": "Downloads ANT/Android SDK/NDK over HTTPS with no checksum/signature, then executes the toolchain.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "105543da41f7a0c866a46ff07d10cb8137df2e7b"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: Build tool downloads write URL response bytes directly and do not perform a hash or signature check before extraction.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AK6.md",
+      "line": 20,
+      "text": "| Buildozer | https://github.com/kivy/buildozer.git | 105543da41f7a0c866a46ff07d10cb8137df2e7b / 2026-07-20 | Y | Y (auto-triggered whenever a required build tool is missing, no separate confirmation) | Y | https (dl.google.com, archive.apache.org); default Python `urllib`/SSL context (cert validation enforced), no `verify=False`/insecure bypass found | N | **none** — no checksum/hash/signature anywhere in the download/extract path | none | `buildozer/buildops.py:401-433` (`download()` — plain `urlopen`, writes bytes straight to disk, no hash check); `buildozer/targets/android.py:365-385` (`_install_apache_ant` — downloads+extracts Apache ANT tarball, no verification); `:388-420` (`_install_android_sdk` — downloads Android cmdline-tools zip from dl.google.com, no verification); `:432-480` (`_install_android_ndk` — downloads NDK zip, no verification); these tools (aapt, javac/ant, ndk-build, sdkmanager) are then directly invoked as part of the Android build toolchain |"
+    }
+  ]
 }

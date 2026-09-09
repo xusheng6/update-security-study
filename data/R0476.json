@@ -5,12 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://invent.kde.org/plasma/discover",
   "channel": "package-manager",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Targeted retained-source read supports the narrow package-manager behavior: Discover configures Flatpak remotes with GPG verification only when a remote key is supplied; package installation is delegated to backend trust settings.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "No self-update; delegates to PackageKit/backends, preserving distro signing.",
   "limitations": [
-    "This application delegates payload verification to PackageKit/Flatpak/snapd/apt backends; the external backend version and active keyring are outside this checkout.",
-    "This evidence does not establish a complete primary self-updater classification."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "5ce1835a9236c07df8b0e1f5eda72050c0b0a5c6"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow package-manager behavior: Discover configures Flatpak remotes with GPG verification only when a remote key is supplied; package installation is delegated to backend trust settings.",
+    "limitations": [
+      "This application delegates payload verification to PackageKit/Flatpak/snapd/apt backends; the external backend version and active keyring are outside this checkout.",
+      "This evidence does not establish a complete primary self-updater classification."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "distro signing (PackageKit)",
+  "trust_root": "distro keyring",
+  "original_evidence": [
+    {
+      "file": "batch-M6.md",
+      "line": 10,
+      "text": "| KDE Discover | https://invent.kde.org/plasma/discover | Qt/QML, backend plugins (PackageKit, Flatpak, Snap, fwupd, RpmOstree, AlpineApk, SystemdSysupdate, KNewStuff) | N (self — distro-packaged, no self-update code found) | N/A | N — same architecture as GNOME Software: all package payload downloads/installs delegated to PackageKit/Flatpak/etc. backends, which perform their own signed transactions | https delegated to backends | Y (delegated) via PackageKit and Flatpak backends | signature[GPG] delegated to PackageKit (`repoSignatureRequired`/`installSignature` D-Bus round-trip) and to Flatpak (`flatpak_remote_set_gpg_verify`/`set_gpg_key`) | distro package-manager trusted keyrings via PackageKit; Flatpak remote's configured GPG key | libdiscover/backends/PackageKitBackend/PKTransaction.cpp:335-352 (`repoSignatureRequired`, `PackageKit::Daemon::installSignature(type, keyId, packageID)`); libdiscover/backends/PackageKitBackend/PackageKitUpdater.cpp:919-936 (same signal wired for the updater path); libdiscover/backends/FlatpakBackend/FlatpakBackend.cpp:252-265 (`flatpak_remote_set_gpg_verify(remote, true)`, `flatpak_remote_set_gpg_key`) |"
+    }
+  ]
 }

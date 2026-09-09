@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/gradle/gradle",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected Gradle wrapper supports SHA-256 checking through distributionSha256Sum configuration. This supports a configurable integrity control, not a complete publisher-authentication classification for all generated wrappers.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Wrapper is TLS-only by default; SHA-256 pinning exists but is opt-in and absent from the generated wrapper; corrupt-zip retry fetches the hash from the same server.",
   "limitations": [
-    "New default-branch snapshot, not the historical Gradle wrapper revision under study.",
-    "The fallback .sha256 value is a checksum, not an independent publisher signature; release-side checksum publication and generated-wrapper defaults beyond this checkout were not independently verified.",
-    "New default-branch snapshot, not the historical Gradle wrapper revision under study. The fallback .sha256 value is a checksum, not an independent publisher signature; release-side checksum publication and generated-wrapper defaults beyond this checkout were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "9f6a7d3acb61228a9de4aee5b7ee80629b7bf8f4"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected Gradle wrapper supports SHA-256 checking through distributionSha256Sum configuration. This supports a configurable integrity control, not a complete publisher-authentication classification for all generated wrappers.",
+    "limitations": [
+      "New default-branch snapshot, not the historical Gradle wrapper revision under study.",
+      "The fallback .sha256 value is a checksum, not an independent publisher signature; release-side checksum publication and generated-wrapper defaults beyond this checkout were not independently verified.",
+      "New default-branch snapshot, not the historical Gradle wrapper revision under study. The fallback .sha256 value is a checksum, not an independent publisher signature; release-side checksum publication and generated-wrapper defaults beyond this checkout were not independently verified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "SHA-256 (opt-in)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AD5.md",
+      "line": 12,
+      "text": "| Gradle (wrapper) | https://github.com/gradle/gradle.git | 4eefc0920a9431513536d238c0194bcf30b47894 / 2026-08-21 | Y | Y | Y | https (scheme enforced by `validateDistributionUrl`), TLS default JVM trust store, enforced | N by default | SHA-256 checksum **only if** `distributionSha256Sum` is set in `gradle-wrapper.properties`; Gradle's own generated wrapper file (`gradle/wrapper/gradle-wrapper.properties`) does **not** set it | none by default; when set, the hash is a plain-text value in a project file (TOFU per-repo, not pinned in the wrapper binary); on a corrupt-zip retry the wrapper will additionally auto-fetch the sha256 **from the same distribution server** (`<url>.sha256`) if the user never supplied one | `platforms/core-runtime/wrapper-shared/src/main/java/org/gradle/wrapper/Install.java:99-125` (verifyDownloadChecksum: `if (expectedSum == null) return;`), `Install.java:131-146` (fetchDistributionSha256Sum pulls hash from `distributionUrl + \".sha256\"`), default properties: `gradle/wrapper/gradle-wrapper.properties` (no `distributionSha256Sum` key) |"
+    }
+  ]
 }

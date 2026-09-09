@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/gramps-project/gramps",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The macOS addon URL helper sets CERT_NONE and disables hostname checking.",
+  "description": "Addon manager downloads .gpr.py registration files and exec()s them with no signature — and a macOS branch sets CERT_NONE/check_hostname=False (→ D on Mac).",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "a32b463b1629f4385b8487024a6300e3602628d6"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The macOS addon URL helper sets CERT_NONE and disables hostname checking.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AF5.md",
+      "line": 7,
+      "text": "| Gramps | https://github.com/gramps-project/gramps.git | a32b463b / 2026-07-03 | Y (addon manager only; core app has no self-updater — distro/installer managed) | N (manual \"Install Addon(s)\" click) | Y (addon `.gpr.py` registration files are `exec()`'d directly after download) | https for addon list/download BUT code contains an explicit macOS branch that fully disables TLS verification (`CERT_NONE`, `check_hostname=False`) | N | none (no hash/signature check on downloaded addon zip/tarball contents) | server-supplied/unpinned (addon catalog + files served from gramps-project.org wiki, unauthenticated) | `gramps/gen/plug/utils.py:194-214` (`urlopen_maybe_no_check_cert` — CERT_NONE on mac()), `gramps/gen/plug/utils.py:337-394` (`load_addon_file` downloads zip/tar and `exec(contents, env)` on each `.gpr.py`), `gramps/gui/plug/_windows.py:1476-1484` (`__get_addon` UI entry point) |"
+    }
+  ]
 }

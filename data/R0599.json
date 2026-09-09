@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/atomery/juli",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Singlebox Juli’s reviewed updater module uses electron-updater and routes update events, including update availability, progress, and completion, to the application UI. The source does not establish OS code-signing enforcement or the complete Juli release configuration.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater/Juli, OS code-signing.",
   "limitations": [
-    "Newly recovered snapshot; historical release behavior is not reverified.",
-    "Build metadata, released artifacts, and delegated signing enforcement remain unresolved.",
-    "Newly recovered snapshot; historical release behavior is not reverified. Build metadata, released artifacts, and delegated signing enforcement remain unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "9164c922658d86ebf9e2a88d0ff59e8f533bc35a"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Singlebox Juli’s reviewed updater module uses electron-updater and routes update events, including update availability, progress, and completion, to the application UI. The source does not establish OS code-signing enforcement or the complete Juli release configuration.",
+    "limitations": [
+      "Newly recovered snapshot; historical release behavior is not reverified.",
+      "Build metadata, released artifacts, and delegated signing enforcement remain unresolved.",
+      "Newly recovered snapshot; historical release behavior is not reverified. Build metadata, released artifacts, and delegated signing enforcement remain unresolved."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "OS code-signing",
+  "trust_root": "electron-updater (Juli)",
+  "original_evidence": [
+    {
+      "file": "batch-AM7.md",
+      "line": 19,
+      "text": "| Singlebox (via atomery/juli shared codebase) | https://github.com/atomery/juli.git | 9164c92 / 2022-04-04 | Y | Y (same pattern as WebCatalog, same author/codebase) | Y (`autoUpdater.quitAndInstall`) | https (electron-updater default provider) | B (electron-updater OS code-sign) | OS code signature | **OS keystore** | src/electron/libs/electron-updater.js:1-153 (identical `electron-updater` wiring to WebCatalog's `updater.js`); README.md of the original `atomery/singlebox` repo confirms \"development is unified with the WebCatalog project\" and code lives in `atomery/juli` |"
+    }
+  ]
 }

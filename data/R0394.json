@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/jMonkeyEngine/sdk",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In the reviewed jMonkeyEngine SDK snapshot, the NetBeans update-center module supplies a bundled trustedcerts.jks through KeyStoreProvider, and its stable and contribution catalog settings use plaintext HTTP while the nightly catalog uses HTTPS. The snapshot does not establish the complete release artifact or publisher-signature policy.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "NetBeans module updates verified via a pinned keystore bundled in the app. Caveat: update catalogs fetched over plaintext HTTP.",
   "limitations": [
-    "New default-branch snapshot rather than the original study checkout; release/build configuration and historical study version may differ, and the checkout does not establish complete released plugin provenance."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "83f2cb493a685c7ef21c8b96acd1f49f62e63c0d"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In the reviewed jMonkeyEngine SDK snapshot, the NetBeans update-center module supplies a bundled trustedcerts.jks through KeyStoreProvider, and its stable and contribution catalog settings use plaintext HTTP while the nightly catalog uses HTTPS. The snapshot does not establish the complete release artifact or publisher-signature policy.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study checkout; release/build configuration and historical study version may differ, and the checkout does not establish complete released plugin provenance."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "http",
+  "payload_verification": "signed modules (pinned keystore)",
+  "trust_root": "trustedcerts.jks bundled in app",
+  "original_evidence": [
+    {
+      "file": "batch-Z2.md",
+      "line": 16,
+      "text": "| jMonkeyEngine SDK | https://github.com/jMonkeyEngine/sdk | 8deff00e83aaa23b853a986af26624c40e84062c / 2026-08-20 | Y (NetBeans Platform AutoUpdate / plugin update centers — also serves the SDK's own core modules) | N (user-triggered via Plugin Manager, not silent) | Y (NBM modules downloaded and loaded into the running IDE) | **mixed**: http (PLAINTEXT) for \"stable\" and \"contrib\" catalogs; https for \"nightly\" catalog | Y (NBM jar-signed modules) | signature (NetBeans autoupdate verifies module jar signature against a keystore embedded as a module resource) | **pinned-in-binary** (`trustedcerts.jks` shipped inside `jme3-core-updatecenters` module) | jme3-core-updatecenters/src/com/jme3/gde/core/updatecenters/keystore/JmeKeyStoreProvider.java:17-45 (loads bundled trustedcerts.jks into NetBeans KeyStoreProvider SPI); jme3-core-updatecenters/src/.../keystore/trustedcerts.jks (present in repo); jme3-core-updatecenters/src/com/jme3/gde/core/updatecenters/Bundle.properties:2-4 (line 2 = https nightly catalog; lines 3-4 = **http://updates.jmonkeyengine.org/...** stable+contrib catalogs) |"
+    }
+  ]
 }

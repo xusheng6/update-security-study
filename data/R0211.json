@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/radareorg/radare2",
   "channel": "package-manager",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "r2pm is a package-management channel, separate from the primary radare2 updater. Its source supports Git and archive package sources; the review does not establish an independent package-signature policy or certify the original vulnerability classification.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "r2pm clones a recipe repo and executes an embedded shell script with no hash/GPG verification.",
   "limitations": [
-    "New default-branch snapshot rather than historical release re-verification; this review is limited to r2pm's package database/source/archive path and does not establish controls in remote repositories or package build dependencies."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "ad27058877024389292fddf12e1db6e13824ba34"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "r2pm is a package-management channel, separate from the primary radare2 updater. Its source supports Git and archive package sources; the review does not establish an independent package-signature policy or certify the original vulnerability classification.",
+    "limitations": [
+      "New default-branch snapshot rather than historical release re-verification; this review is limited to r2pm's package database/source/archive path and does not establish controls in remote repositories or package build dependencies."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-M2.md",
+      "line": 11,
+      "text": "| radare2 (r2pm) | github.com/radareorg/radare2 | C (native); `r2pm` package manager | Y — r2pm plugin/package manager (no core-binary self-updater found) | manual (`r2pm -i <pkg>` / `-U` must be explicitly invoked) | Y — clones the package-recipe DB and **executes an embedded shell script** (`R2PM_INSTALL()` block) via `r_sys_cmd`/`system()`-family calls to build & install packages; recipes may also `curl`/`wget` arbitrary further files | https for the package DB (`git clone` of `https://github.com/radareorg/radare2-pm`); `curl`/`wget` fallback for any additional URLs a package recipe defines — those URLs are untrusted/author-defined, not vetted by r2pm | no | **none** — no hash/checksum/GPG/signature check found anywhere in `r2pm.c` | none | `libr/main/r2pm.c:8` (`R2PM_GITURL \"https://github.com/radareorg/radare2-pm\"`); `r2pm.c:176` (`git clone --depth=1 ... \"%s\" \"%s\"`); `r2pm.c:1073,1251` (extraction of `\"\\nR2PM_INSTALL() {\\n\"` script block from recipe text, later executed); `r2pm.c:777-813` (curl/wget download + tar/unzip extraction helpers); repo-wide grep for `sha256|sha1|gpg|verify|checksum|signature` in `r2pm.c` returned **zero matches** |"
+    }
+  ]
 }

@@ -5,12 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/syncthing/syncthing",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "The retained source shows a configured trust root and update invocation consistent with the recorded narrow A classification.",
+  "description": "Update signature verified vs an Ed25519 key embedded in the binary.",
   "limitations": [
-    "This is a recovered snapshot rather than the original study checkout; release/build behavior and historical version may differ.",
-    "The release metadata list is not itself signed; the artifact release signature is the control observed in source."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "9af3c75f377c51a7e3f285704025385104d8f428"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained source shows a configured trust root and update invocation consistent with the recorded narrow A classification.",
+    "limitations": [
+      "This is a recovered snapshot rather than the original study checkout; release/build behavior and historical version may differ.",
+      "The release metadata list is not itself signed; the artifact release signature is the control observed in source."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "Ed25519 signature",
+  "trust_root": "go:embed signingkey.pem",
+  "original_evidence": [
+    {
+      "file": "batch-AA7.md",
+      "line": 33,
+      "text": "| Syncthing | https://github.com/syncthing/syncthing | 38ac58c82e50 / 2026-08-20 | Y | Y (configurable, on by default outside `-noupgrade` builds) | Y (replaces running binary in place) | https (default `ReleasesURL` = `https://upgrades.syncthing.net/meta.json`) | N (release list/meta.json itself unsigned) | **signature** (ed25519 `release.sig` verified against embedded key) | **pinned-in-binary** (`go:embed signingkey.pem`) | lib/upgrade/signingkey.go:17-18 (`//go:embed signingkey.pem` / `var SigningKey []byte`); lib/upgrade/upgrade_supported.go:371-398 (`verifyUpgrade` reads `release.sig` from archive, `signature.Verify(SigningKey, sig, mr)`); lib/config/optionsconfiguration.go:51 (default ReleasesURL); cmd/syncthing/main.go:381 (`InsecureSkipVerify:true` — but this is only the `syncthing cli` helper calling the **local daemon's own loopback GUI API** to trigger an already-verified upgrade, not the payload transport — noted, does not affect tier) |"
+    }
+  ]
 }

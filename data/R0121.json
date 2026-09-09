@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/arduino/arduino-ide",
   "channel": "unresolved",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The reviewed Arduino IDE snapshot shows SHA-512 release metadata generation, a Windows signing hook, and a conditional macOS notarization hook. It does not provide auditable application updater methods connecting those artifacts to an in-app retrieval and installation flow; the updater classification remains unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater; SHA512 + Authenticode/notarization.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; a separate updater component or historical release integration is not represented in the reviewed source.",
-    "Release signing and SHA-512 metadata establish packaging controls only; they do not establish an in-app updater or runtime verification boundary.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; a separate updater component or historical release integration is not represented in the reviewed source.; Release signing and SHA-512 metadata establish packaging controls only; they do not establish an in-app updater or runtime verification boundary."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "e5d4e20ed6aa0952c8d9f6d0c31726969b18a7c2"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The reviewed Arduino IDE snapshot shows SHA-512 release metadata generation, a Windows signing hook, and a conditional macOS notarization hook. It does not provide auditable application updater methods connecting those artifacts to an in-app retrieval and installation flow; the updater classification remains unresolved.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; a separate updater component or historical release integration is not represented in the reviewed source.",
+      "Release signing and SHA-512 metadata establish packaging controls only; they do not establish an in-app updater or runtime verification boundary.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; a separate updater component or historical release integration is not represented in the reviewed source.; Release signing and SHA-512 metadata establish packaging controls only; they do not establish an in-app updater or runtime verification boundary."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "hash + OS-code-signing",
+  "trust_root": "OS-trust-store",
+  "original_evidence": [
+    {
+      "file": "batch-H4.md",
+      "line": 16,
+      "text": "| Arduino IDE (v2) | arduino/arduino-ide | Electron + Theia | Y | check: automatic on launch (`autoDownload = false`); download and install require explicit user action (`downloadUpdate()` then `quitAndInstall()`) | Y — downloads the full installer via `electron-updater` and executes/installs it once the user confirms | HTTPS, `generic` provider at `https://downloads.arduino.cc/arduino-ide` (default; a preference, but ships HTTPS); no `rejectUnauthorized`/insecure overrides found anywhere in the extension | N — electron-updater's generic-provider manifest (`latest.yml`/`latest-mac.yml`/`latest-linux.yml`) is a plain unsigned YAML file fetched over HTTPS, not itself signed | hash-from-manifest (SHA512 in `latest*.yml`) **plus** OS-code-signing: Windows installer is Authenticode-signed (`electron-app/package.json` → `win.sign: \"./scripts/windowsCustomSign.js\"`, electron-updater's default `verifyUpdateCodeSignature` compares publisher cert) and macOS build is hardened-runtime + notarized (`afterSign: \"scripts/notarize.js\"`) | OS trust store / code-signing certificate embedded in the installer (Windows Authenticode publisher cert, Apple Developer ID used for notarization) — not an app-specific key | `arduino-ide-extension/src/electron-main/ide-updater/ide-updater-impl.ts:15,42-49,55-98,100-115` (autoUpdater wiring, `autoDownload=false`, `setFeedURL({provider:'generic',...})`, `downloadUpdate`/`quitAndInstall`); `electron-app/package.json:107-203` (win.sign, mac hardenedRuntime+notarize, s3 publish); `arduino-ide-extension/src/browser/arduino-preferences.ts:181` (default base URL) |"
+    }
+  ]
 }

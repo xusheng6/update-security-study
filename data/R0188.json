@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/getstation/desktop-app",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In the retrieved Station checkout, packaged builds use electron-updater, poll for updates every 30 minutes, and can quit and install after an update is downloaded; the Windows electron-builder configuration explicitly sets verifyUpdateCodeSignature to false. The effective updater verification behavior remains framework-dependent.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "electron-updater with verifyUpdateCodeSignature:false.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot rather than the original study release; release metadata and the framework's internal verification implementation were not audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "c64d541d2a3eb1ac5e8792888daedff51a215c2f"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In the retrieved Station checkout, packaged builds use electron-updater, poll for updates every 30 minutes, and can quit and install after an update is downloaded; the Windows electron-builder configuration explicitly sets verifyUpdateCodeSignature to false. The effective updater verification behavior remains framework-dependent.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot rather than the original study release; release metadata and the framework's internal verification implementation were not audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "hash (sha512); code-sig DISABLED",
+  "trust_root": "server-TLS",
+  "original_evidence": [
+    {
+      "file": "batch-K3.md",
+      "line": 16,
+      "text": "| Station | getstation/desktop-app | Electron (`electron-updater`), Yarn workspaces monorepo (`packages/app`) | Y | auto (chk/dl automatic — `periodicTick(30 min)` saga calls `checkForUpdates()` on a timer unless `STATION_NO_CHECK_FOR_UPDATE` env is set, plus an initial check on app `READY`; install requires explicit user action dispatching `QUIT_AND_INSTALL`) | Y | https (GitHub Releases via `electron-updater`'s default `publish: {provider: 'github'}`, owner/repo inferred from `package.json` \"repository\", i.e. `getstation/desktop-app`) | manifest present (`latest.yml`, TLS only, not independently signed) | hash-from-manifest nominally, BUT Windows Authenticode verification is EXPLICITLY DISABLED (`verifyUpdateCodeSignature: false`) — same weakening as Caprine | none effective on Windows / OS-trust-store on macOS (Squirrel.Mac still enforces signing-identity match for the mac target) | `packages/app/src/auto-update/sagas.ts:24,90-98` (`POLL_UPDATE_INTERVAL = ms('30mins')`; `main()` wires `periodicTick(POLL_UPDATE_INTERVAL)` → `checkForUpdates` unless `process.env.STATION_NO_CHECK_FOR_UPDATE`); `packages/app/src/services/services/auto-updater/main.ts:16-26` (`quitAndInstall()` only calls `autoUpdater.quitAndInstall()` if a download already completed, else just `app.quit()` — i.e. requires the update to have finished downloading and a user-initiated quit/install action); `packages/app/electron-builder.yml:3-4,50-54` (`publish: {provider: 'github'}`; `win: {target:[nsis], verifyUpdateCodeSignature: false}`) |"
+    }
+  ]
 }

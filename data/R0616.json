@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/PBH-BTN/PeerBanHelper",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The retained PeerBanHelper install4j configuration enables updater checks and names an HTTPS update descriptor. The descriptor's artifact-authentication policy and released behavior remain unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "install4j auto-update over HTTPS, unsigned, checksum-only.",
   "limitations": [
-    "Newly recovered default-branch snapshot, not historical release re-verification.",
-    "Install4j runtime verification, generated descriptor contents, released artifact signatures/checksums, and current publication behavior were not audited.",
-    "Newly recovered default-branch snapshot, not historical release re-verification. Install4j runtime verification, generated descriptor contents, released artifact signatures/checksums, and current publication behavior were not audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "f8e9b1bf8c1c7585f2afa7cef2da78d3aa2658d3"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained PeerBanHelper install4j configuration enables updater checks and names an HTTPS update descriptor. The descriptor's artifact-authentication policy and released behavior remain unresolved.",
+    "limitations": [
+      "Newly recovered default-branch snapshot, not historical release re-verification.",
+      "Install4j runtime verification, generated descriptor contents, released artifact signatures/checksums, and current publication behavior were not audited.",
+      "Newly recovered default-branch snapshot, not historical release re-verification. Install4j runtime verification, generated descriptor contents, released artifact signatures/checksums, and current publication behavior were not audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "checksum only",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AN3.md",
+      "line": 12,
+      "text": "| PeerBanHelper | https://github.com/PBH-BTN/PeerBanHelper.git | f8e9b1bf 2026-08-20 | Y | unclear (install4j update-descriptor wired, no explicit auto-trigger action found in project file) | Y | https | N | checksum only, server-supplied | server-supplied/unpinned | `install4j/project.install4j:170` `autoUpdateDescriptorUrl=\"https://pbh-files.pbh-btn.com/updates/latest/updates.xml\"`; no `codeSigning`/keystore element in project file and no signing step in `.github/workflows/build_installers.yml` → installer artifacts appear unsigned |"
+    }
+  ]
 }

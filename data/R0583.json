@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/tfutils/tfenv",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: Default install checks SHA-256 from the same HashiCorp host; PGP verification is conditional on explicit user configuration.",
+  "description": "SHA256SUMS from the same host by default; PGP vs a repo-pinned HashiCorp key exists but is opt-in only.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "de6ce2e809c155cbc5e2cfeb3b1bef151244e045"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: Default install checks SHA-256 from the same HashiCorp host; PGP verification is conditional on explicit user configuration.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "SHA-256 (same host; PGP opt-in)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AK4.md",
+      "line": 23,
+      "text": "| tfenv | https://github.com/tfutils/tfenv.git | de6ce2e / 2026-04-28 | Y | N | Y | https (`releases.hashicorp.com`), TLS enforced, no insecure flags found | N (default path); optional (opt-in PGP-signed SHA256SUMS) | Default: **hash (SHA256)** from a `SHASUMS` file fetched from the *same* host. Opt-in: **PGP signature** over that SHASUMS file, verified via `gpg`/`gpgv`/keybase | Default: server-supplied/same-endpoint. Opt-in: **pinned-in-repo** (`tfenv/share/hashicorp-keys.pgp`, shipped in the clone) for the `use-gpgv` path | `tfenv/libexec/tfenv-install:249` `TFENV_REMOTE=https://releases.hashicorp.com`; `:259-301` downloads `terraform_${version}_SHA256SUMS`; `:318-376` PGP verification only runs if the user has created `${TFENV_CONFIG_DIR}/use-gnupg` or `use-gpgv` (or has keybase following hashicorp) — **absent any of those, line 376 logs a warning and skips signature verification entirely**, falling through to plain SHA256 compare at `:380-397`; `tfenv/share/hashicorp-keys.pgp` (5.6KB OpenPGP pubkey, present in the clone) is the pinned trust root used by the `use-gpgv` path at `:346-350`. `log 'error'` (`tfenv/lib/bashlog.sh:154-160`) calls `exit 1`, so a checksum/signature failure is fatal, not silently ignored. |"
+    }
+  ]
 }

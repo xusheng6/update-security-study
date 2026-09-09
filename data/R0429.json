@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/UniversalMediaServer/UniversalMediaServer",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected Universal Media Server source includes an application updater using JavaHttpClient. Its complete payload-authentication policy and the original zero-verification classification are not established by the retained review.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Auto-updater at startup; HTTPS but zero payload verification, then launches the installer via Desktop.open().",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not historical source for the original study release.",
-    "JavaHttpClient transport details and released update artifacts were not independently reviewed.",
-    "The snapshot is newly retrieved and JavaHttpClient details, released artifacts, and historical behavior were not independently reviewed. The absence of a check in AutoUpdater does not disprove verification inside another component and does not establish that the update is unsafe."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "30e5ecca4efe24e25d4c566130a8b91965505f60"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected Universal Media Server source includes an application updater using JavaHttpClient. Its complete payload-authentication policy and the original zero-verification classification are not established by the retained review.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not historical source for the original study release.",
+      "JavaHttpClient transport details and released update artifacts were not independently reviewed.",
+      "The snapshot is newly retrieved and JavaHttpClient details, released artifacts, and historical behavior were not independently reviewed. The absence of a check in AutoUpdater does not disprove verification inside another component and does not establish that the update is unsafe."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AC2.md",
+      "line": 8,
+      "text": "| Universal Media Server | https://github.com/UniversalMediaServer/UniversalMediaServer | 7cbd908d3ccb / 2026-08-16 | Y | N (check is automatic at GUI startup; download+run requires user clicking \"Free\" button) | Y | https, TLS enforced (java.net.http.HttpClient, no custom TrustManager/HostnameVerifier found) | N (properties file fetched over HTTPS from raw.github.com, plain key=value, no signature) | none (no hash/signature check on the downloaded installer before execution) | N/A — no verifying key anywhere in the client | net/pms/external/update/AutoUpdater.java:206-218 (downloadUpdate, no checksum/sig check); :142-161 (launchExe -> Desktop.open(exe) executes downloaded installer directly); net/pms/external/update/AutoUpdaterServerProperties.java:45-48 (loadFrom trusts server-supplied properties blindly); net/pms/configuration/Build.java:34-45 (UPDATE_SERVER_URL = https://raw.github.com/.../latest_version.properties); src/main/java/net/pms/swing/gui/JavaGui.java:137 (autoUpdater.pollServer() called automatically at startup) |"
+    }
+  ]
 }

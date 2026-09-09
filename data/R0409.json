@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/input-output-hk/daedalus",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Daedalus includes an application-update SHA-256 comparison against selected update metadata. This supports an integrity-control observation; independent publisher authentication and the original impact claim remain unestablished.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Downloads+executes an installer after a SHA-256 from a network-fetched news feed cross-checked against a second network hash file — no pinned key; compromise of either IOHK host = RCE.",
   "limitations": [
-    "The snapshot is not tied to the original study release.",
-    "News-source provenance, independent authentication of update metadata and security-impact assertions were not established.",
-    "New default-branch snapshot; the specific historical installer/update implementation and release behavior needed to substantiate the original claim are absent from the reviewed source."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "adf90b52e02d7ca4cba816572be2a9a66ac1b438"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Daedalus includes an application-update SHA-256 comparison against selected update metadata. This supports an integrity-control observation; independent publisher authentication and the original impact claim remain unestablished.",
+    "limitations": [
+      "The snapshot is not tied to the original study release.",
+      "News-source provenance, independent authentication of update metadata and security-impact assertions were not established.",
+      "New default-branch snapshot; the specific historical installer/update implementation and release behavior needed to substantiate the original claim are absent from the reviewed source."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "SHA-256 (network-fetched)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AA1.md",
+      "line": 20,
+      "text": "| Daedalus (Cardano wallet) | https://github.com/input-output-hk/daedalus | 0061f3d / 2026-08-18 | Y | Y (news-feed driven auto-download + prompted install) | Y | https (`newsfeed.daedalus.io`, `newsfeed.daedaluswallet.io`; no TLS bypass found in externalRequest) | N/A (no OS code-signature check performed by this code path) | SHA-256 hash comparison only — hash value comes from the news-feed JSON itself (`softwareUpdate.hash`), cross-checked against a second, separately-hosted hash file (`newsfeed-verification/<network>/<timestamp>.txt`) on a *different* IOHK-controlled domain, but neither is a key baked into the binary | server-supplied/unpinned — hash originates from network-fetched newsfeed and a second network-fetched hash file; no embedded public key/signature verification in this flow | source/main/ipc/manageAppUpdateChannel.ts:59-79 (checkInstallerHash: sha256 compare only), 178-198 (spawn/openPath installer after hash check → download_and_execute=Y); source/renderer/app/stores/AppUpdateStore.ts:188-199 (`hash` taken straight from News feed item), 396-427 (`_installUpdate` sends filePath+hash over IPC); source/renderer/app/api/news/requests/getNewsHash.ts:15-25 (second-host hash fetch, still unpinned/network-supplied); source/renderer/app/config/urlsConfig.ts:18-27 |"
+    }
+  ]
 }

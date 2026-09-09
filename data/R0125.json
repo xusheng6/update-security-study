@@ -5,13 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/ghostty-org/ghostty",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Ghostty's macOS updater uses Sparkle with an Info.plist SUPublicEDKey and SUEnableAutomaticChecks=false; the delegate disables automatic checks and retrieves while retaining a manual check action. Linux updater behavior and Sparkle internals remain outside this review.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "macOS Sparkle EdDSA pinned; auto-check off by default. No updater on Linux.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; this is macOS evidence only.",
-    "Released signing, Sparkle internals, and Linux packaging/updater behavior are outside the reviewed source.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; this is macOS evidence only.; Released signing, Sparkle internals, and Linux packaging/updater behavior are outside the reviewed source."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "492300cad104195411d12217dd22f1cd05f31376"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Ghostty's macOS updater uses Sparkle with an Info.plist SUPublicEDKey and SUEnableAutomaticChecks=false; the delegate disables automatic checks and retrieves while retaining a manual check action. Linux updater behavior and Sparkle internals remain outside this review.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; this is macOS evidence only.",
+      "Released signing, Sparkle internals, and Linux packaging/updater behavior are outside the reviewed source.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; this is macOS evidence only.; Released signing, Sparkle internals, and Linux packaging/updater behavior are outside the reviewed source."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[Sparkle-EdDSA]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-H8.md",
+      "line": 16,
+      "text": "| Ghostty | https://github.com/ghostty-org/ghostty | Zig core + Swift/AppKit (macOS app); GTK4 (Linux) | Y — macOS build only, via the Sparkle framework. Linux/GTK build has no in-app updater (distro/package-manager only; grep of `src/apprt/gtk/**` found no update-check code) | chk: manual by default — `SUEnableAutomaticChecks=false` in Info.plist force-disables `automaticallyChecksForUpdates`/`automaticallyDownloadsUpdates` regardless of the app's own `auto-update` config option; user must invoke \"Check for Updates\" manually. (A config-driven auto chk/dl code path exists but is currently short-circuited off by the plist flag.) | Y — once the user approves an update in the UI, Sparkle downloads and installs the package and relaunches the app | https — appcast feed URLs `https://tip.files.ghostty.org/appcast.xml` and `https://release.files.ghostty.org/appcast.xml`; TLS handled by Sparkle/URLSession defaults, no ATS exceptions or cert-bypass code found in `macos/` | N (the appcast XML itself is fetched over plain HTTPS with no outer signature; integrity of the file list/versions relies on TLS) | signature (EdDSA / Ed25519) — Sparkle verifies each release enclosure's `edSignature` before installing | Embedded public key baked into the app bundle at build time: `SUPublicEDKey` = `wsNcGf5hirwtdXMVnYoxRIX/SqZQLMOsYlD3q3imeok=` in `macos/Ghostty-Info.plist` | macos/Ghostty-Info.plist:107-110 (`SUEnableAutomaticChecks`=false, `SUPublicEDKey`); macos/Sources/App/AppDelegate.swift:768-788 (sync logic: plist flag overrides user config); macos/Sources/Features/Update/UpdateDelegate.swift:14-15 (feed URLs per channel); macos/Sources/Features/Update/UpdateController.swift, UpdateDriver.swift, UpdateViewModel.swift (Sparkle `SPUStandardUpdaterController`/`SUAppcastItem` usage). |"
+    }
+  ]
 }

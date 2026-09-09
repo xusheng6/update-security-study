@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/SourMesen/Mesen2",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Mesen checks update content with SHA-256 against its file metadata and rejects a mismatch. The checksum observation does not establish an independently authenticated manifest or certify installation privileges.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "SHA-256 from an unsigned JSON manifest, self-replaces exe via Process.Start + admin fallback.",
   "limitations": [
-    "Newly retrieved source snapshot, not proof of original-release behavior.",
-    "The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified.",
-    "Newly retrieved source snapshot, not proof of original-release behavior.; The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,36 @@
       "commit": "b9fa69ddc6d0a331fb103fdb5eef6904305703c2"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Mesen checks update content with SHA-256 against its file metadata and rejects a mismatch. The checksum observation does not establish an independently authenticated manifest or certify installation privileges.",
+    "limitations": [
+      "Newly retrieved source snapshot, not proof of original-release behavior.",
+      "The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified.",
+      "Newly retrieved source snapshot, not proof of original-release behavior.; The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (allow-listed)",
+  "payload_verification": "SHA-256 (unsigned manifest)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-H8.md",
+      "line": 14,
+      "text": "| Mesen (Mesen2) | https://github.com/SourMesen/Mesen2 | C# / .NET + Avalonia UI (C++ core) | Y | chk: auto at startup by default (`AutomaticallyCheckForUpdates` defaults to true) + manual \"Check for Updates\" menu item; dl/inst: user-confirmed via an update-prompt dialog (not silent) | Y — downloads the release archive, extracts it, then `Process.Start`s the extracted binary as a self-installer (`--update` args) which kills the running app, copies the new exe over the old one, and relaunches (with a `runas`/admin-elevation fallback if the plain copy fails) | https — manifest at `https://www.mesen.ca/Services/v2/latestversion.json`; download URLs are allow-listed to start with `https://www.mesen.ca/` or `https://github.com/SourMesen/`. TLS validation is ENFORCED (default .NET `HttpClient` behavior; no `ServerCertificateCustomValidationCallback`/cert-bypass code anywhere in `UI/**/*.cs`) | N (plain JSON over HTTPS, no signature envelope around the manifest) | hash-from-manifest — SHA-256 of the downloaded file is computed client-side and compared against a `Hash` field carried inside the same unsigned JSON manifest; mismatch aborts the update | N/A — the hash lives in the unsigned manifest itself, so integrity ultimately rests on the HTTPS channel to mesen.ca/github.com rather than a verified signing key | UI/ViewModels/UpdatePromptViewModel.cs:46 (fetch manifest `latestversion.json`); :52 (download-URL prefix allow-list); :103-129 (download + SHA-256 compute); :130-143 (hash compare, delete+reject on mismatch); UI/Utilities/UpdateHelper.cs:22-50 (`LaunchUpdate`, `Process.Start(srcFile, \"--update ...\")`); :52-104 (`AttemptUpdate`: kill running process, backup, copy new exe over old, `Process.Start(destFile)`, `runas` elevation fallback); UI/Config/PreferencesConfig.cs:25 (`AutomaticallyCheckForUpdates = true` default); UI/Windows/MainWindow.axaml.cs:276 (startup check gated on that flag). |"
+    },
+    {
+      "file": "batch-U5.md",
+      "line": 23,
+      "text": "| Mesen2 | https://github.com/SourMesen/Mesen2 | b9fa69d / 2026-06-04 | Y | Y (prompted) | Y | https, TLS enforced (default .NET `HttpClient`, no `ServerCertificateValidationCallback` override found) | N (plain JSON) | hash (SHA256), server-supplied | server-supplied (same `mesen.ca` JSON that supplies the download URL also supplies the expected hash) | UI/ViewModels/UpdatePromptViewModel.cs:41-147 (fetch `https://www.mesen.ca/Services/v2/latestversion.json`, download, SHA256 compare at line 127-143); UI/Utilities/UpdateHelper.cs:22-104 (launches downloaded exe as external updater, self-replaces binary) |"
+    }
+  ]
 }

@@ -5,11 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/mymonero/mymonero-app-js",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In the retrieved MyMonero checkout, packaged non-Linux builds use electron-updater. The controller starts with download and install-on-quit disabled, checks for updates automatically, prompts before downloading when automatic download is off, and prompts before quitting to install. The build configuration names a Windows certificate subject and invokes a macOS notarization hook.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater; Authenticode/notarization, auto-check 10min, user-consent.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot rather than the original study release; packaging hooks/configuration do not prove that a particular published artifact was successfully signed or notarized, and electron-updater's internal enforcement is not reimplemented here."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "5c7455d30e4e20150962f5f74efd83477962a05e"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In the retrieved MyMonero checkout, packaged non-Linux builds use electron-updater. The controller starts with download and install-on-quit disabled, checks for updates automatically, prompts before downloading when automatic download is off, and prompts before quitting to install. The build configuration names a Windows certificate subject and invokes a macOS notarization hook.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot rather than the original study release; packaging hooks/configuration do not prove that a particular published artifact was successfully signed or notarized, and electron-updater's internal enforcement is not reimplemented here."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "hash + OS-code-signing",
+  "trust_root": "OS-trust-store",
+  "original_evidence": [
+    {
+      "file": "batch-L1.md",
+      "line": 11,
+      "text": "| MyMonero | github.com/mymonero/mymonero-app-js | Electron desktop | Y | chk automatic (10s after launch, then every 10 min via `setInterval`); dl manual-confirm (`autoDownload=false` by default — dialog asks user \"Download it now?\"); inst on quit (`autoInstallOnAppQuit`, user/pref-controlled) | Y (standard `electron-updater` autoUpdater downloads and installs the update package once the user consents / on quit) | https (electron-builder `\"publish\": \"github\"` → GitHub Releases, OS trust store, no pinning) | N (`latest.yml`/`latest-mac.yml` update-metadata files are delivered over plain https from GitHub Releases and are not independently signed) | hash-from-manifest + OS-code-signing (electron-updater compares sha512 from `latest.yml`; on Windows it also checks the installer's Authenticode certificate subject against the configured `certificateSubjectName: \"MyMonero (PTY) LTD\"`; macOS build is notarized via `afterSign: ./bin/notarize.js`) | OS-trust-store (Authenticode chain / Apple notarization enforced by the OS, not a key pinned by the app itself beyond the expected subject-name string) | local_modules/AppUpdates/AppUpdatesController.electron.main.js:20-33 (electron-updater init, autoDownload=false), :94-121 (update-available dialog/download), :206-213 (10s + 10min auto-check interval); package.json:30-58 (`publish:\"github\"`, `certificateSubjectName`, `afterSign` notarize) |"
+    }
+  ]
 }

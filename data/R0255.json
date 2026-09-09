@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/alin23/Lunar",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In the reviewed Lunar snapshot, Info.plist declares the Sparkle feed at files.lunar.fyi/appcast2.xml and includes a SUPublicEDKey value. This is configuration evidence for a public-key update boundary; release-specific enforcement remains unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Sparkle EdDSA, SUPublicEDKey in Info.plist.",
   "limitations": [
-    "New default-branch snapshot rather than the original study release; the built product, release signing history, and runtime Sparkle enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "8a21ffe302a00890d9f5d5101536cdd2a4631be8"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In the reviewed Lunar snapshot, Info.plist declares the Sparkle feed at files.lunar.fyi/appcast2.xml and includes a SUPublicEDKey value. This is configuration evidence for a public-key update boundary; release-specific enforcement remains unresolved.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study release; the built product, release signing history, and runtime Sparkle enforcement were not independently verified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[Sparkle-EdDSA]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-Q1.md",
+      "line": 19,
+      "text": "| Lunar | github.com/alin23/Lunar | **Sparkle (EdDSA = A)** | **Y** | **Y** (default-on toggle) | **Y** | https | TLS-only (appcast2.xml itself unsigned; no legacy `SUPublicDSAKey`/DSA present) | signature[EdDSA] | embedded in Info.plist (`SUPublicEDKey`) | `Lunar/Lunar/Info.plist:97-100`: `SUFeedURL` = `https://files.lunar.fyi/appcast2.xml`, `SUPublicEDKey` = `lqnO6tg2A9evTIFo2SC9ArZ6NS84gtBshcAWdwh12xQ=`; `Lunar/Lunar.xcodeproj/project.pbxproj:105-106,326` (Sparkle.framework linked + embedded, `CodeSignOnCopy`); `Lunar/Lunar/AppDelegate.swift:325` `lazy var updater = SPUUpdater(...)`, `:611-612` `@IBAction func checkForUpdates(_:) { updater.checkForUpdates() }`; `Lunar/Lunar/Views/ProViews.swift:92,121` `@Default(.checkForUpdate) var checkForUpdates` bound to a user-facing \"Auto update\" `Toggle`. |"
+    }
+  ]
 }

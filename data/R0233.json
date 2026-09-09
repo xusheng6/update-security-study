@@ -5,11 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/hyperspacedev/hyperspace",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Hyperspace's recovered Electron entry point imports electron-updater and calls checkForUpdatesAndNotify during desktop startup. The snapshot does not establish the historical activity date or the delegated framework's artifact-verification behavior.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater (dormant since 2021).",
   "limitations": [
-    "New default-branch snapshot rather than historical release re-verification; the source does not establish the dormant-since-2021 date, release provider metadata, or electron-updater's runtime verification details."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "d2f1f23006f759e915b04662476d0ba941b1e17e"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Hyperspace's recovered Electron entry point imports electron-updater and calls checkForUpdatesAndNotify during desktop startup. The snapshot does not establish the historical activity date or the delegated framework's artifact-verification behavior.",
+    "limitations": [
+      "New default-branch snapshot rather than historical release re-verification; the source does not establish the dormant-since-2021 date, release provider metadata, or electron-updater's runtime verification details."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "hash + OS-code-signing",
+  "trust_root": "OS-trust-store",
+  "original_evidence": [
+    {
+      "file": "batch-O2.md",
+      "line": 14,
+      "text": "| Hyperspace | https://github.com/hyperspacedev/hyperspace | Electron (React/TypeScript) | Y | Y (`autoUpdater.checkForUpdatesAndNotify()` runs unconditionally at startup — electron-updater's default background-download + install-on-quit behavior) | Y (electron-updater default: downloads update artifact in background and installs it automatically when the app next quits/relaunches) | https, electron-updater's default GitHub Releases provider (inferred from `package.json:7` `\"repository\": \"https://github.com/hyperspacedev/hyperspace.git\"`; no explicit `publish:` block found in `ebuild/standard.yml`, and `-p 'never'` in build scripts only suppresses publishing during the build step, not the runtime provider) | unknown (no code-signing certs/config evidence in repo; `ebuild/standard.yml` sets `dmg: {sign: false}` and calls `afterSign: desktop/notarize.js`, but actual release-time signing status can't be determined from source) | hash-from-manifest (electron-updater's documented default: SHA512 hash embedded in the auto-generated `latest.yml`/`latest-mac.yml`/`latest-linux.yml` is compared against the downloaded artifact; optional Windows publisher-name check only applies if the binary is code-signed, which is unconfirmed here) | electron-updater default (SHA512 field in GitHub Releases `latest*.yml`); no custom verification key/logic implemented in app code | `package.json:43` `\"electron-updater\": \"^4.3.1\"`; `public/electron.js:14` `const { autoUpdater } = require(\"electron-updater\");` and `public/electron.js:18` `autoUpdater.checkForUpdatesAndNotify();`. NOTE: project appears abandoned — `git log -1` on default branch shows last commit 2021-01-07, so this updater path is very likely dead/untested against current GitHub Releases infrastructure. |"
+    }
+  ]
 }

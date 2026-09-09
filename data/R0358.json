@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/jmoenig/Snap",
   "channel": "plugin",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Snap! loads project-provided extension URLs as script elements without an integrity check.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "autoLoadExtensions injects <script src=url> from project-embedded variables with no signature/hash (content-as-code). Web/PWA.",
   "limitations": [
-    "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "5175b6639197996cd8b4872f521b3a89854a3ab0"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Snap! loads project-provided extension URLs as script elements without an integrity check.",
+    "limitations": [
+      "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-X3.md",
+      "line": 23,
+      "text": "| Snap! | https://github.com/jmoenig/Snap.git | 00ca029 / 2026-08-09 | N/A — pure client-side web app / PWA (no native installer in this repo) | N | **Y (content channel — confirmed)** | n/a for app self-update; extension fetch uses whatever scheme is embedded in the project (often plain `http://` allowed) | n/a | none | none — raw `<script src=url>` injection, no integrity check | `src/gui.js:7303-7338` — `IDE_Morph.prototype.autoLoadExtensions`: reads global vars named `__module__*` from a loaded Snap! project, and for each URL value does `document.createElement('script'); scriptElement.src = url; document.head.appendChild(scriptElement);` with **no signature/hash check** — arbitrary JS execution from opening an untrusted `.xml`/project file. Gated only by `Process.prototype.enableJS` or an allow-list (`SnapExtensions.urls`), both of which are user/app configurable, not a security boundary |"
+    }
+  ]
 }

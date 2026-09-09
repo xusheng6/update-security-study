@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/p0deje/Maccy",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Maccy uses Sparkle 2 with an appcast hosted at raw.githubusercontent.com and no SUPublicEDKey in the inspected app configuration. The app source does not establish the external Sparkle runtime verification policy, so payload authenticity remains unresolved from this read.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Sparkle with NO SUPublicEDKey — payload authenticity rests on TLS alone.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; the appcast and historical release are not reverified.",
-    "Sparkle's external runtime signature and trust-root behavior was not audited here; app-level absence of SUPublicEDKey cannot establish TLS-only authenticity.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; the appcast and historical release are not reverified. Sparkle's external runtime signature and trust-root behavior was not audited here; app-level absence of SUPublicEDKey cannot establish TLS-only authenticity."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "c376789c5d377b7c520b6f6e91f3f3a1aa28640b"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Maccy uses Sparkle 2 with an appcast hosted at raw.githubusercontent.com and no SUPublicEDKey in the inspected app configuration. The app source does not establish the external Sparkle runtime verification policy, so payload authenticity remains unresolved from this read.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; the appcast and historical release are not reverified.",
+      "Sparkle's external runtime signature and trust-root behavior was not audited here; app-level absence of SUPublicEDKey cannot establish TLS-only authenticity.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; the appcast and historical release are not reverified. Sparkle's external runtime signature and trust-root behavior was not audited here; app-level absence of SUPublicEDKey cannot establish TLS-only authenticity."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (raw.githubusercontent)",
+  "payload_verification": "none (Sparkle, no key)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-K1.md",
+      "line": 13,
+      "text": "| Maccy | p0deje/Maccy | Sparkle | Y | chk: false by default (explicitly set in AppDelegate), user-toggleable; dl/inst: Sparkle standard prompt | Y | https (`https://raw.githubusercontent.com/p0deje/Maccy/master/appcast.xml`) | **NONE** — no `SUPublicEDKey`/`SUPublicDSAKey` anywhere in repo | none — Sparkle configured with no verifying key at all | none | Maccy/Info.plist:31-36 (only SUEnableDownloaderService/SUEnableInstallerLauncherService/SUFeedURL present); Maccy/AppDelegate.swift:44; Maccy/SoftwareUpdater.swift:5-30 |"
+    }
+  ]
 }

@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/moodle/moodle",
   "channel": "plugin",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Moodle’s plugin helper accepts HTTP or HTTPS URLs and compares the plugin ZIP with a caller-supplied MD5; the core notifier and endpoint provenance are outside this source review.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Core update notify-only; plugin installer trusts an MD5 from the same download.moodle.org endpoint (content-as-code).",
   "limitations": [
-    "Source-at-commit snapshot; current release configuration remains unverified.",
-    "The caller supplying the URL and MD5, the core notifier, and any external package controls were not reviewed.",
-    "Primary classification remains UNRESOLVED under the evidence-review instruction; retained source is commit-scoped and does not establish all released or external framework behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,36 @@
       "commit": "6216fe4ed19a5a3c88c0951d1647e9f2d626bcbb"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Moodle’s plugin helper accepts HTTP or HTTPS URLs and compares the plugin ZIP with a caller-supplied MD5; the core notifier and endpoint provenance are outside this source review.",
+    "limitations": [
+      "Source-at-commit snapshot; current release configuration remains unverified.",
+      "The caller supplying the URL and MD5, the core notifier, and any external package controls were not reviewed.",
+      "Primary classification remains UNRESOLVED under the evidence-review instruction; retained source is commit-scoped and does not establish all released or external framework behavior."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "MD5 (same endpoint)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AI6.md",
+      "line": 11,
+      "text": "| Moodle (core) | https://github.com/moodle/moodle.git | 6216fe4 / 2026-08-18 | N (core) | N | N | https, TLS enforced | N/A | N/A (notify-only) | N/A | `public/lib/classes/update/checker.php:416` (`https://download.moodle.org/api/1.3/updates.php`), version-check only, no core auto-download+apply |"
+    },
+    {
+      "file": "batch-AI6.md",
+      "line": 12,
+      "text": "| Moodle — plugin installer *(side channel, scored separately)* | same | same | Y | N (admin click \"Install now\") | Y | https, TLS enforced (`$skipcertverify=false`) | No | **hash only (MD5)**, unauthenticated, sourced live from same HTTPS endpoint as the download | server-supplied/unpinned (fresh MD5 fetched from download.moodle.org API at install time) | `public/lib/classes/update/code_manager.php:93-140` (`get_remote_plugin_zip($url,$md5)`: downloads, then `md5_file($tempfile) === $md5`, no signature check anywhere); `public/lib/classes/plugin_manager.php:1129-1169` (`get_remote_plugin_info`/`get_remote_plugin_zip` call live moodle.org API for URL+MD5); `code_manager.php:436` (`$skipcertverify = false` confirms TLS cert validation IS enforced for the download) |"
+    }
+  ]
 }

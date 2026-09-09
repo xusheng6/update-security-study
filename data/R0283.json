@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/jupyterlab/jupyterlab-desktop",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The reviewed JupyterLab Desktop snapshot performs automatic update checks by default and conditionally configures automatic installation on macOS; its dialog can route the user to an installer download page. The updater framework and release-signing enforcement remain unresolved from this source.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "macOS Squirrel.Mac, anchored in OS code-signing.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study release.",
-    "No cited implementation establishes Squirrel.Mac identity, OS signature validation, or released artifact provenance.",
-    "Newly retrieved default-branch snapshot, not the original study release. No cited implementation establishes Squirrel.Mac identity, OS signature validation, or released artifact provenance."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "24a1ab0817f605de478b59b2b7746bd3e9fd0b5e"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The reviewed JupyterLab Desktop snapshot performs automatic update checks by default and conditionally configures automatic installation on macOS; its dialog can route the user to an installer download page. The updater framework and release-signing enforcement remain unresolved from this source.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study release.",
+      "No cited implementation establishes Squirrel.Mac identity, OS signature validation, or released artifact provenance.",
+      "Newly retrieved default-branch snapshot, not the original study release. No cited implementation establishes Squirrel.Mac identity, OS signature validation, or released artifact provenance."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "OS code-signing",
+  "trust_root": "Squirrel.Mac",
+  "original_evidence": [
+    {
+      "file": "batch-U4.md",
+      "line": 18,
+      "text": "| jupyterlab-desktop | jupyterlab/jupyterlab-desktop | 64ae7920fae7 / 2026-08-16 | Y | Y (macOS only) / N (win/linux notify-only) | Y (macOS via Squirrel.Mac) / N (win/linux) | https, TLS enforced Y | NA (version-only feed, not a signed manifest) | sig (macOS: OS code-sign check via Squirrel.Mac) / none (win/linux, just a link) | OS-keystore (Apple code signing) / NA | src/main/app.ts:288-298,542-578,665-671; package.json:220 |"
+    }
+  ]
 }

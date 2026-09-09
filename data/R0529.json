@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/ktr0731/evans",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Evans updates through an external go-updater means implementation; this checkout directly re-execs the replacement and does not show an app-level signature check.",
+  "description": "Opt-in auto-update downloads a GitHub-release binary over HTTPS and syscall.Exec's it in place — no signature/checksum.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "5efe5f55fba8832652ca2c784739ee6294553907"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Evans updates through an external go-updater means implementation; this checkout directly re-execs the replacement and does not show an app-level signature check.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AH1.md",
+      "line": 23,
+      "text": "| Evans (gRPC client, TUI/REPL) | https://github.com/ktr0731/evans.git | 5efe5f5 / 2023-12-02 | Y | Y (opt-in via `meta.autoUpdate` config, default false) | **Y** | https (GitHub Releases API + release-asset download via `github.com/ktr0731/go-updater` + `google/go-github`) | N | **none found** — binary asset is downloaded and directly `syscall.Exec`'d to replace the running binary; no checksum/signature check in app code (external `go-updater` dep not vendored, so its internals could not be fully audited from this shallow clone) | none pinned — trust rests entirely on GitHub Releases API/CDN + TLS | app/update.go:62-141 (download+exec flow), app/means.go:11-14 (GitHub-release means) |"
+    }
+  ]
 }

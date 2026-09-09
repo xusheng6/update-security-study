@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/cryptoadvance/specter-desktop",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Specter Desktop’s wrapper checks its specterd component against an architecture-specific SHA-256 value bundled in version data. This supports a component-integrity observation; the complete release-authentication policy remains unestablished.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Electron wrapper downloads+executes specterd; SHA256 baked into the bundled manifest (pinned-at-build hash, no signature).",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not historical release re-verification; the provenance and delivery of version-data.json and external GitHub release controls were not independently audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "5d3d5b91e614991c2dedb87c0e0e608e2c6382ae"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Specter Desktop’s wrapper checks its specterd component against an architecture-specific SHA-256 value bundled in version data. This supports a component-integrity observation; the complete release-authentication policy remains unestablished.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not historical release re-verification; the provenance and delivery of version-data.json and external GitHub release controls were not independently audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "hash (SHA256, bundled manifest)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-L1.md",
+      "line": 9,
+      "text": "| Specter Desktop | github.com/cryptoadvance/specter-desktop | Python/Flask backend + Electron desktop wrapper (pyinstaller/electron) | N (no mechanism checks a remote server for a *newer* app version; no electron-updater/autoUpdater present) | N/A for self-update — however at first run/repair the Electron wrapper unconditionally downloads the \"specterd\" companion daemon binary matching the version already pinned in the shipped app bundle | Y (downloads `specterd-<version>-<platform>.zip` from GitHub Releases, extracts it, and executes it as the backend daemon) | https (github.com/.../releases/download/... via Node `request` lib, standard TLS/OS trust store, no pinning) | N (`version-data.json` is a plain JSON file bundled inside the app package at build time by `set-version.js`; it is not independently/detachedly signed) | hash-from-manifest (downloaded specterd's SHA-256 is compared against the hash baked into the bundled `version-data.json`) | none (hash only, no signature/key; the manifest's own integrity rests solely on the outer Electron app package's code signing, e.g. mac \"identity\": \"Kim Neunert\" in electron-builder config, not on any key checked by this download logic) | pyinstaller/electron/downloadloc.js:1-14 (GitHub releases URL builder); pyinstaller/electron/src/download.js:31-78 (download→extract→SHA256 compare→execute); pyinstaller/electron/set-version.js:1-59 (hash baked into version-data.json at build time) |"
+    }
+  ]
 }

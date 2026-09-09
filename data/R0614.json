@@ -5,12 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/Splode/pomotroid",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "Targeted retained-source read supports the narrow Tier A behavior: Pomotroid’s Tauri updater embeds a Minisign public key and HTTPS endpoint; its commands call tauri-plugin-updater check and download_and_install.",
+  "description": "Migrated to Tauri; payload verified vs a pinned Ed25519 key.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in key/configuration.",
-    "The final verifier implementation is delegated to Sparkle, tauri-plugin-updater, or self_update where applicable."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "f9f0b266f7a04b895599ca660544219c0d0df054"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow Tier A behavior: Pomotroid’s Tauri updater embeds a Minisign public key and HTTPS endpoint; its commands call tauri-plugin-updater check and download_and_install.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in key/configuration.",
+      "The final verifier implementation is delegated to Sparkle, tauri-plugin-updater, or self_update where applicable."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "Ed25519 (minisign)",
+  "trust_root": "pubkey pinned in tauri.conf.json",
+  "original_evidence": [
+    {
+      "file": "batch-AN4.md",
+      "line": 12,
+      "text": "| Pomotroid | https://github.com/Splode/pomotroid | f9f0b26 / 2026-06-19 | Y | Y (auto-check toggle, checked when Settings opened; `system_toggle_check_updates` default described as automatic) | Y | https (raw.githubusercontent.com), TLS enforced, no disabling found | Y (signed `latest.json` manifest) | signature (Ed25519/minisign via `tauri-plugin-updater`) | **pinned-in-binary** (pubkey compiled into app config) | src-tauri/tauri.conf.json:34 (`\"pubkey\": \"dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6...\"`) and :36 (`endpoints: [\"https://raw.githubusercontent.com/Splode/pomotroid/main/latest.json\"]`); src-tauri/src/commands.rs:650-700 (`check_update`/`install_update` tauri commands); src-tauri/Cargo.toml:28 (`tauri-plugin-updater = \"2\"`) |"
+    }
+  ]
 }

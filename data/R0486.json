@@ -5,12 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/holochain/launcher",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "B",
-  "description": "Targeted retained-source read supports the narrow primary updater classification: Launcher disables auto-download, checks packaged updates at launch with a semver compatibility gate, and separately downloads then quits-and-installs only after the install mutation is invoked.",
+  "description": "electron-updater; hApp bundles from an appstore/devhub over the DHT are a separate content channel.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in configuration.",
-    "Where electron-updater/Squirrel/install4j performs final verification, the external framework implementation is not vendored here."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "c0fc5cbb2d0a4ef570e79ed9d1704570f3446764"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow primary updater classification: Launcher disables auto-download, checks packaged updates at launch with a semver compatibility gate, and separately downloads then quits-and-installs only after the install mutation is invoked.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in configuration.",
+      "Where electron-updater/Squirrel/install4j performs final verification, the external framework implementation is not vendored here."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "B",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "OS code-signing",
+  "trust_root": "electron-updater",
+  "original_evidence": [
+    {
+      "file": "batch-AE4.md",
+      "line": 20,
+      "text": "| Holochain Launcher | https://github.com/holochain/launcher.git | c0fc5cbb 2026-01-09 | Y | Y-partial (checks automatically on launch; download/install is a manual click, `autoDownload=false`) | Y | https, TLS enforced (no bypass found) | Y (electron-updater manifest) | OS code signature (mac Squirrel.Mac / win NSIS via electron-builder) | OS keystore (Developer ID / Authenticode via electron-builder default signing) | `src/main/index.ts:5` (`import { autoUpdater } from '@matthme/electron-updater'` — a fork of electron-updater, not upstream), `:294-313` (`checkForUpdates()` on launch, semver-major-compatibility gate), `:621-629` (`installLauncherUpdate` → `downloadUpdate()` → `quitAndInstall()`). **Separate content-as-code channel, score C-equivalent**: the Launcher also installs hApp bundles fetched from a Holochain \"devhub/appstore\" over the Holochain DHT and runs them in the conductor (`src/main/index.ts:778,813,829` `installApp(...)`) — payload trust here rides on the Holochain DHT's own validation rules, not reviewed in depth. |"
+    }
+  ]
 }

@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/giantpinkrobots/varia",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports the narrow recorded behavior: Varia's opt-in updater fetches GitHub release metadata over HTTPS and downloads the selected binary without a hash or signature check.",
+  "description": "Opt-in updater downloads a GitHub-Releases installer/.dmg via aria2c and directly executes it (subprocess) with zero hash/signature.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "The retained snapshot does not establish current released artifact behavior or independent release signing.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "840cd3bd3a628a17e26a73d681be6ce31bbe4bf6"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports the narrow recorded behavior: Varia's opt-in updater fetches GitHub release metadata over HTTPS and downloads the selected binary without a hash or signature check.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "The retained snapshot does not establish current released artifact behavior or independent release signing.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-V2.md",
+      "line": 10,
+      "text": "| Varia | https://github.com/giantpinkrobots/varia | 7624b5d / 2026-08-19 | Y | N (opt-in toggle `check_for_updates_on_startup_enabled`, default `'0'`; Windows/Mac only) | **Y** | https (github.com / api.github.com via aria2c CLI; no `--check-certificate=false` seen, default aria2c cert validation applies) | N | **none** | none | `src/window/updater.py:50-52` fetches `https://api.github.com/repos/giantpinkrobots/varia/releases` via `aria2c` subprocess; `:87,91` build `binary_url` = `https://github.com/.../releases/download/<tag>/varia-windows-setup-amd64.exe` (or `.dmg`); `:170-177` download the installer via `aria2c` with **no hash/signature check anywhere in the file**; `src/variamain.py:571-575` then directly executes it: `subprocess.Popen([self.update_executable, \"/SILENT\", ...])` (Win) / `subprocess.call(('open', self.update_executable))` (Mac). |"
+    }
+  ]
 }

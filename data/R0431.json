@@ -5,14 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/bardsoftware/ganttproject",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected GanttProject updater includes PGP verification using a bundled key and a separate signature-requiring manual update flow. The retained evidence does not establish the original defeated-pin or attacker-impact conclusion; withdraw that security-impact classification pending an appropriately scoped review.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "PGP signature vs a pinned key, but verification is silently skipped if the update manifest omits the signature field — an endpoint-compromise attacker just omits it. Defeated pin.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not historical source for the original study release.",
-    "The external Eclipsito updater implementation and update endpoint metadata were not reviewed.",
-    "The source establishes conditional behavior, not the security of the publisher key or endpoint.",
-    "The snapshot is newly retrieved; the external Eclipsito updater, endpoint metadata, publisher key security, and original release were not reviewed. A blank signature bypass in this callback is an observed control-flow fact, but it does not by itself establish exploitability, attacker access, or overall updater safety."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "fdc825057787568b8723aa20a4d7f321b4b64fe2"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected GanttProject updater includes PGP verification using a bundled key and a separate signature-requiring manual update flow. The retained evidence does not establish the original defeated-pin or attacker-impact conclusion; withdraw that security-impact classification pending an appropriately scoped review.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not historical source for the original study release.",
+      "The external Eclipsito updater implementation and update endpoint metadata were not reviewed.",
+      "The source establishes conditional behavior, not the security of the publisher key or endpoint.",
+      "The snapshot is newly retrieved; the external Eclipsito updater, endpoint metadata, publisher key security, and original release were not reviewed. A blank signature bypass in this callback is an observed control-flow fact, but it does not by itself establish exploitability, attacker access, or overall updater safety."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "PGP (fail-open)",
+  "trust_root": "pinned PGP key (bundled) — but skipped if manifest omits sig",
+  "original_evidence": [
+    {
+      "file": "batch-AC3.md",
+      "line": 16,
+      "text": "| GanttProject | https://github.com/bardsoftware/ganttproject | cb6e8503c0c47312e8855ae2fd9703b97c0dd5ee / 2026-08-21 | Y | Y (isCheckEnabled default true) | Y (Eclipsito downloads + installs, applied on restart) | https (manifest at https://www.ganttproject.biz/dl/updates/ganttproject-3.0.json); eclipsito.jar itself is a prebuilt vendored dep, its internal HTTP client not inspectable from source | n/a (JSON manifest, not separately signed) | signature (PGP) — but CONDITIONAL | pinned-in-binary (classpath resource `/ganttproject-3.4.3390.pub.asc`, bundled in the app, not server-supplied) | biz/ganttproject/platform/PgpUtil.kt:130-151 (verifyFile against bundled pubkey); **bypass**: biz/ganttproject/platform/UpdateDialogModel.kt:264-268 — `if (signatureBody.isNullOrBlank()) { true } else { verifyFile(...); true }` — verification is skipped entirely if the server-supplied manifest entry omits `signatureBody` |"
+    }
+  ]
 }

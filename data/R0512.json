@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/jetify-com/devbox",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "SelfUpdate constructs a curl/wget pipe to bash for the launcher script without signature or checksum verification.",
+  "description": "devbox version update runs `curl -fsSL get.jetpack.io | bash` — no signature/hash of the script.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "f26266e0eddacb6d955a027b68b0ebef9515f0f7"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "SelfUpdate constructs a curl/wget pipe to bash for the launcher script without signature or checksum verification.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AG2.md",
+      "line": 24,
+      "text": "| Devbox | https://github.com/jetify-com/devbox | f26266e0eddacb6d955a027b68b0ebef9515f0f7 / 2026-08-16 | Y | N (manual `devbox version update`) | Y | https (curl to `get.jetpack.io`, no `-k`/insecure flag observed) | N/A | none (no signature/hash check before piping to `bash`) | none | `internal/vercheck/vercheck.go:59-95` (`CheckVersion` is a passive notice-only check that sets an env var); `:111-119` (`selfUpdateLauncher`: `curl -fsSL https://get.jetpack.io/devbox \\| bash` or `wget -qO- ... \\| bash`, classic curl-pipe-bash with **no signature or checksum verification** of the script before execution) |"
+    }
+  ]
 }

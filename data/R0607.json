@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/janeczku/calibre-web",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: Admin-triggered update targets the GitHub release API; source extracts and overwrites live application files without hash/signature verification.",
+  "description": "Admin self-updater overwrites live app source from a GitHub zipball, no signature/hash (TLS-only).",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "e1f04638c8fa1697b9676f70689882c294d6d33f"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: Admin-triggered update targets the GitHub release API; source extracts and overwrites live application files without hash/signature verification.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AM3.md",
+      "line": 16,
+      "text": "| calibre-web | https://github.com/janeczku/calibre-web | e1f04638 / 2026-08-23 | Y | N (admin clicks \"update\" button in web UI) | Y | https, TLS enforced (default `requests` `verify=True`; no `verify=False`/insecure flags found anywhere in repo) | N | none | server-supplied/unpinned (GitHub API `https://api.github.com/repos/janeczku/calibre-web`) | `cps/updater.py:38` (`_REPOSITORY_API_URL`), `:82` (`requests.get` downloads release zip), `:87-92` (`zipfile.ZipFile(...).extractall`), `:263-313` (`update_source`/`move_all_files` overwrite live app source files), `:100-107` (server restarted after copy, no restart triggers install) |"
+    }
+  ]
 }

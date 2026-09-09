@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/sdkman/sdkman-cli",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: Self-update streams the HTTPS response directly to bash without checksum or signature verification; insecure TLS is an opt-in setting.",
+  "description": "Self-update is bare curl|bash; candidate checksums are off by default and same-endpoint when enabled.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "f02e5de113ea46a95e5e2fd795eabe6f2b7d4095"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: Self-update streams the HTTPS response directly to bash without checksum or signature verification; insecure TLS is an opt-in setting.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none (default)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AK4.md",
+      "line": 22,
+      "text": "| sdkman-cli | https://github.com/sdkman/sdkman-cli.git | f02e5de / 2026-08-05 | Y | N | Y | https by default; opt-in `sdkman_insecure_ssl=true` config adds `curl --insecure` to every SDKMAN network call | N | Self-update: **none** (curl-pipe-to-bash). Candidate install: **hash**, but **disabled by default** and sourced from the *same* broker response as the download itself | server-supplied/unpinned (same endpoint); self-update path has no key/hash at all | `sdkman-cli/src/main/bash/sdkman-selfupdate.sh:51,53` — `__sdkman_secure_curl \"${SDKMAN_CANDIDATES_API}/selfupdate/.../${SDKMAN_PLATFORM}\" \\| bash` — no checksum/signature on the self-update payload at all, straight pipe-to-bash; `sdkman-cli/src/main/bash/sdkman-utils.sh:25-31` `__sdkman_secure_curl` adds `--insecure` when `sdkman_insecure_ssl=true`; `sdkman-cli/src/main/bash/sdkman-install.sh:141-157` downloads candidate binary then `__sdkman_checksum_zip`; `:191-195` `if [[ \"$sdkman_checksum_enable\" != \"true\" ]]; then ... skipping verification` — no default value for `sdkman_checksum_enable` found anywhere in the repo, so checksum verification is **off unless explicitly enabled**; `:205-233` when enabled, checksum is read from `X-Sdkman-Checksum-*` HTTP response headers of the *same* download (`:141-143`), i.e. same-endpoint, not independently signed. |"
+    }
+  ]
 }

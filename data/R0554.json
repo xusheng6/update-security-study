@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/statping-ng/statping-ng",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The update command streams install.sh from curl directly into bash without checksum or signature verification.",
+  "description": "statping update pipes an unsigned install script from HTTPS into bash.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "c02149f0a5f67fec1e60cfa3537478cd50899b15"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The update command streams install.sh from curl directly into bash without checksum or signature verification.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AI5.md",
+      "line": 21,
+      "text": "| Statping-ng | https://github.com/statping-ng/statping-ng | c02149f0a5f67fec1e60cfa3537478cd50899b15 / 2025-06-04 | Y | N (admin must run `statping update` manually) | Y (when invoked) | https for `install.sh` fetch and GitHub release API | N | **N — no checksum/signature check** | N/A | `cmd/commands.go:23-52` — `updateCmd` does `curl -o- -L https://statping.com/install.sh \\| bash`, unsigned, no integrity check; version check only `cmd/cli.go:397-401` (`api.github.com/repos/.../releases/latest`); the `updateDisplay()` notice function (`cmd/cli.go:351-365`) is dead code, never called. No dynamic Go plugin loading exists anywhere (`plugin.Open`/`.so` — zero matches); notifiers are statically compiled in. |"
+    }
+  ]
 }

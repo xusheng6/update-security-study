@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Rosalie241/RMG",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "RMG selects platform-matching GitHub release assets through its Qt update path and uses platform-specific update handling; no artifact hash or signature check is visible in the reviewed application code.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Linux: rename AppImage over running exe; Windows: runs unverified .exe via batch. No hash/sig.",
   "limitations": [
-    "New default-branch snapshot at the recorded commit; GitHub release metadata and Windows installer signing were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "9dced048f747085f942f55941dd4304279acc145"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "RMG selects platform-matching GitHub release assets through its Qt update path and uses platform-specific update handling; no artifact hash or signature check is visible in the reviewed application code.",
+    "limitations": [
+      "New default-branch snapshot at the recorded commit; GitHub release metadata and Windows installer signing were not independently verified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validated)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-I1.md",
+      "line": 18,
+      "text": "| Rosalie's Mupen GUI (RMG) | github.com/Rosalie241/RMG | Qt desktop GUI wrapping Mupen64Plus | Y | **auto chk** (`checkForUpdates(true, false)` runs on every startup unless disabled in Settings) + **manual dl/inst** (user clicks \"Update\" in the `UpdateDialog`, which then downloads and — with no further prompt — installs) | **Y — confirmed, on all platforms.** `DownloadUpdateDialog` downloads the matching release asset via `QNetworkAccessManager`; `InstallUpdateDialog::install()` then, depending on platform: **Windows** — if a `.exe` installer asset was selected, writes and runs a `.bat` script that `taskkill`s the running RMG PID and silently launches the downloaded, unverified `.exe` (`/SILENT /DIR=...`); otherwise extracts a ZIP and `xcopy`s it over the install directory before relaunching `RMG.exe`. **Linux (AppImage build, `APPIMAGE_UPDATER`)** — downloads the new AppImage, `std::rename()`s it directly over the currently-running AppImage file (`$APPIMAGE` env var), preserves its permissions, and launches it detached | HTTPS (`https://api.github.com/repos/Rosalie241/RMG/releases/latest` for the check; GitHub Releases `browser_download_url` assets for the download) via `QNetworkAccessManager` with `NoLessSafeRedirectPolicy`; no `ignoreSslErrors`/`setPeerVerifyMode` found — TLS validation enforced | N (plain GitHub Releases API JSON, unsigned) | **none** — no hash or signature check anywhere in `DownloadUpdateDialog.cpp`/`InstallUpdateDialog.cpp` before the downloaded `.exe` is executed, the ZIP is extracted over the install directory, or the AppImage replaces the running binary | N/A | `Source/RMG/UserInterface/MainWindow.cpp:116` (`checkForUpdates(true,false)` at startup), `:1314` (`https://api.github.com/repos/Rosalie241/RMG/releases/latest`); `Source/RMG/UserInterface/Dialog/Update/UpdateDialog.cpp:67-118` (`accept()` — asset selection by filename pattern, no hash field parsed); `DownloadUpdateDialog.cpp:33-40` (`NoLessSafeRedirectPolicy`, no hash check), `:88-131` (`APPIMAGE_UPDATER`: `std::rename()` over running AppImage, `QProcess::startDetached`); `InstallUpdateDialog.cpp:64-85` (Windows `.exe`: `taskkill` + silent-run downloaded installer, no verification), `:87-133` (ZIP extract + `xcopy` over app dir, no verification) |"
+    }
+  ]
 }

@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/CherryHQ/cherry-studio",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Cherry Studio’s updater reads its automatic-download preference and disables installation on quit. The original Windows code-signature configuration claim remains unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "electron-updater with verifyUpdateCodeSignature:false on Windows.",
   "limitations": [
-    "New default-branch snapshot rather than historical release re-verification; the full updater service/configuration and electron-builder generated artifacts were not sufficient here to establish the Windows signature setting or framework enforcement."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "6beb5e1b7e952915f649e5e09b940e08956da3b1"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Cherry Studio’s updater reads its automatic-download preference and disables installation on quit. The original Windows code-signature configuration claim remains unresolved.",
+    "limitations": [
+      "New default-branch snapshot rather than historical release re-verification; the full updater service/configuration and electron-builder generated artifacts were not sufficient here to establish the Windows signature setting or framework enforcement."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "hash; code-sig DISABLED (win)",
+  "trust_root": "server-TLS",
+  "original_evidence": [
+    {
+      "file": "batch-N1.md",
+      "line": 31,
+      "text": "| Cherry Studio | CherryHQ/cherry-studio | Electron (`electron-updater`) | Y | Y — auto-checks 5s after startup then every ~4h (±15% jitter) when `app.dist.auto_update.enabled` is set; `autoDownload` follows that same preference; install itself requires explicit user click (\"Install Now\" — `autoInstallOnAppQuit=false`) | Y — downloaded installer is executed by `autoUpdater.quitAndInstall()` | HTTPS, generic electron-builder provider at `https://releases.cherry-ai.com`; release-history JSON fetch is separately size-capped (1MB) and timeout-capped (10s) | N — no separate signature over the `latest*.yml` manifest itself (electron-updater's manifest is unsigned JSON/YAML served over plain HTTPS) | hash-from-manifest (electron-updater compares downloaded file's `sha512` against the value inside the HTTPS-fetched, unsigned `latest*.yml`) **+ OS code-signing at install** (Windows Authenticode via custom `scripts/win-sign.js`; macOS notarization via `scripts/notarize.js`, gated on CI secrets) — **but the extra electron-updater cross-check that the update's Authenticode signer matches the currently-installed app is explicitly disabled** (`verifyUpdateCodeSignature: false`) | Windows Authenticode cert used by `scripts/win-sign.js` (custom signer, not inspected further here); Apple Developer ID via `@electron/notarize` using CI-injected `APPLE_*` secrets | `src/main/services/AppUpdaterService.ts:62-135` (4h scheduled auto-check, `autoDownload` from preference, `autoInstallOnAppQuit=false`); `src/main/services/AppUpdaterService.ts:379-382` (`quitAndInstall`); `electron-builder.yml:103-105` (`verifyUpdateCodeSignature: false`); `electron-builder.yml:119-121,159` (`notarize: false` + custom `afterSign: scripts/notarize.js`); `electron-builder.yml:152-154` (`publish: provider: generic, url: https://releases.cherry-ai.com`) |"
+    }
+  ]
 }

@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/OctoFarm/OctoFarm",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The retained OctoFarm source supports GitHub release discovery and version notification. Its self-update implementation and artifact-authentication policy remain unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Self-updates via bare git pull/reset --hard, no signature, then pm2 restart.",
   "limitations": [
-    "Newly recovered default-branch snapshot, not historical release re-verification.",
-    "The reviewed service does not establish a self-update executor, reset policy, PM2 integration, or release artifact verification; other files/dependencies were not treated as evidence for those claims.",
-    "Newly recovered default-branch snapshot, not historical release re-verification. The reviewed service does not establish a self-update executor, reset policy, PM2 integration, or release artifact verification; other files/dependencies were not treated as evidence for those claims."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "f22996b739b4c2285e7d342a026e86058d91c519"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained OctoFarm source supports GitHub release discovery and version notification. Its self-update implementation and artifact-authentication policy remain unresolved.",
+    "limitations": [
+      "Newly recovered default-branch snapshot, not historical release re-verification.",
+      "The reviewed service does not establish a self-update executor, reset policy, PM2 integration, or release artifact verification; other files/dependencies were not treated as evidence for those claims.",
+      "Newly recovered default-branch snapshot, not historical release re-verification. The reviewed service does not establish a self-update executor, reset policy, PM2 integration, or release artifact verification; other files/dependencies were not treated as evidence for those claims."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AN7.md",
+      "line": 14,
+      "text": "| OctoFarm | https://github.com/OctoFarm/OctoFarm.git | f22996b / 2022-10-07 | Y | N (manual \"Update\" button; auto-check-only notification exists) | Y | https (git+https via simple-git; no TLS override found) | N (no GPG signature check on commits) | none (bare `git pull`, optionally `git reset --hard` then pull; no hash/signature) | server-supplied/unpinned (GitHub over TLS) | `server/utils/git.utils.js:6` `simpleGit(mainRepo)`; `:58-61` `pullLatestRepository(force)` → `git.reset(\"hard\")` + `git.pull()`; `server/services/server-commands.service.js:114` `await pullLatestRepository(force.forcePull)`, `:117` `installNpmDependency()`, `:28` `exec(\"pm2 restart OctoFarm\")` (executes newly-pulled code). `client/js/pages/system/server.actions.js:371-447` wires the \"Update OctoFarm\" UI button + auto update-check notification. |"
+    }
+  ]
 }

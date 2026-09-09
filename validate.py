@@ -33,4 +33,11 @@ for r in rows:
     assert (OUT / 'records' / (r['id'] + '.html')).is_file()
     assert json.loads((OUT / 'data' / (r['id'] + '.json')).read_text()) == r
     assert r['description'] and r['name']
+by_id = {r['id']: r for r in rows}
+geogebra = by_id['R0207']
+assert geogebra['historical_tier'] == 'C'
+assert geogebra['description'] == 'Windows auto-updater silently downloads+loads new application jars, zero verification.'
+assert geogebra['transport'] == 'https (validated)'
+assert geogebra['payload_verification'] == 'none'
+assert geogebra['review_basis'] == 'original-claude-code-analysis'
 print(f'Validated local links and data for {len(rows):,} records.')

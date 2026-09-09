@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/tkashkin/GameHub",
   "channel": "data",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "GameHub’s installer compares an available per-part checksum with retrieved game content and reports mismatches. This is a conditional content-integrity control; metadata authentication and the full distribution policy remain unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Installers verified by MD5/SHA from unsigned manifest.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "9327885393f022fd1cccb219a19c0f87ae5e0f5a"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "GameHub’s installer compares an available per-part checksum with retrieved game content and reports mismatches. This is a conditional content-integrity control; metadata authentication and the full distribution policy remain unresolved.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "installers",
+  "transport": "https (validated)",
+  "payload_verification": "hash-from-manifest",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-I2.md",
+      "line": 10,
+      "text": "| GameHub | github.com/tkashkin/GameHub (unmaintained, last commit 2022-05-25) | Vala/GTK, Flatpak | N (app self-update — none found); Y (GOG/Humble game installers = content-as-code) | manual (user-initiated game install) | Y — downloads GOG/Humble installer executables and runs them to install games | HTTPS (`api.gog.com`, `embed.gog.com`, `auth.gog.com`) | N | hash-from-manifest — MD5/SHA1/SHA256/SHA512 checksum (provider-supplied) compared post-download; mismatch surfaces a \"Corrupted installer\" dialog | N/A (checksum value from GOG/Humble API JSON, not a signature) | `src/data/Runnable.vala:556-664` (`ChecksumType` enum, checksum compare, \"Checksum mismatch\" warning); `src/ui/dialogs/CorruptedInstallerDialog.vala:71` |"
+    }
+  ]
 }

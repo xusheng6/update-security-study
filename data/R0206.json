@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/ianyh/Amethyst",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In the retrieved Amethyst checkout, the application uses Sparkle with stable and canary HTTPS feed URLs from Info.plist and exposes Sparkle's manual check action. The inspected Info.plist has no SUPublicEDKey or SUPublicDSAKeyFile entry; the complete framework and released-bundle trust configuration remains unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Sparkle with no key — TLS-only.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not historical release re-verification; Sparkle framework defaults, dependency configuration, and published bundle controls were not independently audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "6508ee2cacf8f9b357e1a3249a8f28ba5c94db2a"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In the retrieved Amethyst checkout, the application uses Sparkle with stable and canary HTTPS feed URLs from Info.plist and exposes Sparkle's manual check action. The inspected Info.plist has no SUPublicEDKey or SUPublicDSAKeyFile entry; the complete framework and released-bundle trust configuration remains unresolved.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not historical release re-verification; Sparkle framework defaults, dependency configuration, and published bundle controls were not independently audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none (Sparkle, no key)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-M1.md",
+      "line": 11,
+      "text": "| Amethyst (window manager) | https://github.com/ianyh/Amethyst | Sparkle 2.9.5 (Swift Package Manager) | Y | Y for checks (Sparkle 2 default `automaticallyChecksForUpdates`=true, no override found); install-on-approval only (no auto-install key set) | Y (once user approves) | https (`SUFeedURL`=`https://ianyh.com/amethyst/appcast.xml`; separate `SUCanaryFeedURL`=`https://ianyh.com/amethyst/canary-appcast.xml` for beta channel) | TLS-only — **no `SUPublicEDKey`/`SUPublicDSAKey` in Info.plist** | none observed (no signature attribute on enclosures in the live feed) | none | Amethyst/Amethyst-Info.plist:33-36 (`SUCanaryFeedURL`, `SUFeedURL`; grep of full plist finds no `SUPublic*Key`); Amethyst.xcworkspace/xcshareddata/swiftpm/Package.resolved (pins `sparkle-project/Sparkle` v2.9.5); live fetch of `https://ianyh.com/amethyst/appcast.xml` on 2026-08-19 — newest entry v0.24.3 (Apr 2026) enclosure has no `sparkle:edSignature`/`dsaSignature` attribute (oldest 2013 entries also plain `http://`) |"
+    }
+  ]
 }

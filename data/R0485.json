@@ -5,12 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/beakerbrowser/beaker",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "B",
-  "description": "Targeted retained-source read supports the narrow primary updater classification: Beaker configures a GitHub release feed and schedules a daily update check only when the user setting enables it; Linux/source builds are explicitly excluded from auto-update.",
+  "description": "electron-updater to GitHub releases, standard signing (archived 2022).",
   "limitations": [
-    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in configuration.",
-    "Where electron-updater/Squirrel/install4j performs final verification, the external framework implementation is not vendored here."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "764bdefeeed9558dbf10aec77df262a896f57236"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow primary updater classification: Beaker configures a GitHub release feed and schedules a daily update check only when the user setting enables it; Linux/source builds are explicitly excluded from auto-update.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in configuration.",
+      "Where electron-updater/Squirrel/install4j performs final verification, the external framework implementation is not vendored here."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "B",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "OS code-signing",
+  "trust_root": "electron-updater",
+  "original_evidence": [
+    {
+      "file": "batch-AE4.md",
+      "line": 13,
+      "text": "| Beaker Browser | https://github.com/beakerbrowser/beaker.git | 764bdefe 2022-12-27 | Y | Y (daily bg check if user opted in) | Y | https, TLS enforced (no bypass found) | Y (electron-updater manifest) | OS code signature (mac Squirrel.Mac / win NSIS) | OS keystore (mac Developer ID / win Authenticode via electron-builder default signing) | `app/bg/browser.js:2,54,87-95,566-577,789-796,798-806` (GitHub-releases feed `beakerbrowser/beaker`, `settingsDb.get('auto_update_enabled')` gate, `SCHEDULED_AUTO_UPDATE_DELAY`); note: `isBrowserUpdatesSupported = !(IS_LINUX \\|\\| IS_FROM_SOURCE)` — Linux/AppImage builds explicitly excluded from auto-update (`browser.js:38`). Project archived Dec 2022 (`archive-notice.md`) — updater code frozen, likely no longer serving current releases. |"
+    }
+  ]
 }

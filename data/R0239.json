@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/xanderfrangos/twinkle-tray",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Twinkle Tray compares update content size with retained release metadata. This is a completeness check; cryptographic artifact authentication is not established by that evidence.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Spawns the downloaded installer, verified only by a byte-length vs release size field.",
   "limitations": [
-    "New default-branch snapshot rather than the original study release; release metadata authenticity, code signing, and the complete updater configuration were not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "e3d5bb0bde75f7ef1a6ae450b314090c804e0f8e"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Twinkle Tray compares update content size with retained release metadata. This is a completeness check; cryptographic artifact authentication is not established by that evidence.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study release; release metadata authenticity, code signing, and the complete updater configuration were not established."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "none (size-only)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-O6.md",
+      "line": 12,
+      "text": "| Twinkle Tray | github.com/xanderfrangos/twinkle-tray | Electron | Y — custom in-app updater (`checkForUpdates`/`getLatestUpdate`/`runUpdate` in `src/electron.js`), active only for the non-packaged (non-MSIX, non-portable) NSIS/direct-installer build (`isAppX === false && !isPortable`) | Y for the check — runs automatically once per day at startup and after certain events (`checkForUpdates()` gated by `settings.checkForUpdates` and a once-per-day `lastCheck`); download+run is user-initiated via `ipcMain.on('get-update', ...)` from the renderer UI, not silent | Y — downloads the GitHub release asset directly to `%LOCALAPPDATA%...\\update.exe` via `fetch(version.downloadURL)`, then `spawn(updatePath, {detached:true})` executes it and the app quits | HTTPS — release list from `https://api.github.com/repos/xanderfrangos/twinkle-tray/releases`; asset downloaded from `release.assets[0].browser_download_url` (GitHub-hosted, redirects to `objects.githubusercontent.com`), both via Node's `fetch` (default TLS validation, no pinning/overrides) | N (GitHub Releases API JSON, unsigned; no manifest signature) | none — the only integrity check is a byte-length comparison against the `size` field from the same unsigned release JSON (`if (size !== version.filesize) throw ...`); no cryptographic hash or signature of the downloaded `update.exe` is computed or checked before it is spawned and executed | n/a | src/electron.js:113 (`updatePath = path.join(configFilesDir, '\\\\update.exe')`); :4822-4870 (`checkForUpdates`, fetches `https://api.github.com/repos/xanderfrangos/twinkle-tray/releases`, picks `assets[0].browser_download_url`/`size`); :4873-4933 (`getLatestUpdate`, `fetch(version.downloadURL)` → `fs.createWriteStream(updatePath)`, size-only check at \"Update download was incomplete\"); :4937-4946 (`runUpdate`, `fileSize != expectedSize` check — size only, no hash); :4962-4970 (`spawn(updatePath, {detached:true, stdio:'ignore'})` then `app.quit()`); :3492-3495 (`ipcMain.on('get-update', ...) → getLatestUpdate(version)`, user-triggered) |"
+    }
+  ]
 }

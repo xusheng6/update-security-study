@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/the-djmaze/snappymail",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "D",
-  "description": "SnappyMail defaults its HTTP client to verify_peer=false, the repository updater does not override it, and core/plugin archives are extracted into the live PHP tree without package signatures.",
+  "description": "RainLoop fork; inherited the broken updater — verify_peer defaults false, extracts into the live PHP tree with zero payload check. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "c154d23cfeca1137647b0cf88dd492e3e29e164e"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "SnappyMail defaults its HTTP client to verify_peer=false, the repository updater does not override it, and core/plugin archives are extracted into the live PHP tree without package signatures.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "D",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validation off)",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AI7.md",
+      "line": 22,
+      "text": "| SnappyMail | https://github.com/the-djmaze/snappymail | c154d23cfeca1137647b0cf88dd492e3e29e164e / 2026-03-11 | Y | N (admin-triggered) | Y | https, **TLS cert validation NOT enforced** (verify_peer defaults false, never set true for repo/update requests) | N | none (no hash/signature checked before extraction) | none | `snappymail/v/0.0.0/app/libraries/snappymail/repository.php:8,12-24,29-56,140-153,256-307` (fetches `core.json`/`packages.json`/plugin archives from `https://snappymail.eu/repository/v2/` and downloads+extracts with zero integrity check); `snappymail/v/0.0.0/app/libraries/snappymail/upgrade.php:189-229` (`Upgrade::core()` extracts downloaded tar.gz straight over the live install via PharData/TAR, no signature check); `snappymail/v/0.0.0/app/libraries/snappymail/http/request.php:21` (`$verify_peer = false` default, never overridden by Repository class); `snappymail/v/0.0.0/app/libraries/snappymail/http/request/curl.php:37` (`CURLOPT_SSL_VERIFYPEER => ($this->verify_peer \\|\\| $this->ca_bundle)` — both false/null here) |"
+    }
+  ]
 }

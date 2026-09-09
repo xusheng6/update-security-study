@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Sonarr/Sonarr",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Sonarr compares the update package SHA-256 with the hash in its package metadata and rejects a mismatch. This is a source-level integrity observation; independent publisher authentication, automatic-update policy and historical release behavior are not certified here.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Auto dl+install (when enabled); SHA256 from unsigned manifest, bundled updater swaps files+restart.",
   "limitations": [
-    "The separately pinned retrieved checkout is not proof of the original study release.",
-    "This review supports the package checksum control, not a complete assessment of metadata authentication or automatic-update settings.",
-    "The separately pinned retrieved checkout is not proof of the original study release. This review supports the package checksum control, not a complete assessment of metadata authentication or automatic-update settings."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "5352e16d95a785aee1b760a7593857350c6a94ec"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Sonarr compares the update package SHA-256 with the hash in its package metadata and rejects a mismatch. This is a source-level integrity observation; independent publisher authentication, automatic-update policy and historical release behavior are not certified here.",
+    "limitations": [
+      "The separately pinned retrieved checkout is not proof of the original study release.",
+      "This review supports the package checksum control, not a complete assessment of metadata authentication or automatic-update settings.",
+      "The separately pinned retrieved checkout is not proof of the original study release. This review supports the package checksum control, not a complete assessment of metadata authentication or automatic-update settings."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (servarr.com)",
+  "payload_verification": "hash (SHA256, unsigned)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-J6.md",
+      "line": 9,
+      "text": "| Sonarr | Sonarr/Sonarr | .NET (C#, \"NzbDrone\" core) | Y | chk=auto (background `ApplicationUpdateCheckCommand`); dl/inst=fully automatic when Settings→General \"Automatically Download and Install Updates\" is enabled (`UpdateMechanism=BuiltIn`, `UpdateAutomatically=true`); otherwise notify-only | Y (fully automatic, no user click, when BuiltIn+auto-install enabled) | https, host `https://services.sonarr.tv/v1/`; TLS validation enforced by default .NET `HttpClient` — no `ServerCertificateValidationCallback`/`ServerCertificateCustomValidationCallback` override anywhere in the update path (the only such override in the whole repo is in `Notifications/Email/Email.cs` for SMTP, unrelated to updates) | no (JSON `UpdatePackage` response from services.sonarr.tv is plain, unsigned) | hash-from-manifest (SHA256, field `Hash`, verified via `IVerifyUpdates.Verify` before extraction; throws `UpdateVerificationFailedException` on mismatch) | n/a — hash delivered inline in the HTTPS-fetched JSON manifest, no asymmetric signature | src/NzbDrone.Common/Cloud/SonarrCloudRequestBuilder.cs:15 (`https://services.sonarr.tv/v1/`); src/NzbDrone.Core/Update/UpdateVerification.cs:20-27 (`SHA256Hash()` compare); src/NzbDrone.Core/Update/InstallUpdateService.cs:126 (`_httpClient.DownloadFile`), :130 (`_updateVerifier.Verify`), :172 (`_processProvider.Start(updateClientExePath...)` launches Sonarr.Update client which does the file-swap+restart), :252/:331 (`UpdateAutomatically` gate) |"
+    }
+  ]
 }

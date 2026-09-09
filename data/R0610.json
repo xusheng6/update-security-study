@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/trustcrypto/OnlyKey-App",
   "channel": "primary",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "N",
-  "description": "Active updater reveals the downloaded file; unpack and restart-to-install calls are commented out.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Auto-downloads with no manifest signature/hash (stops short of auto-exec — reveals file; auto-install code commented out).",
   "limitations": [
-    "Imported from completed SOURCE-REVIEW-BATCH-1.md; retained snapshot only.",
-    "Current releases, canonical provenance, and paths outside inspected behavior are not independently established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "b8918cec80f5feda50c24a0aec3d6fb914ea8481"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Active updater reveals the downloaded file; unpack and restart-to-install calls are commented out.",
+    "limitations": [
+      "Imported from completed SOURCE-REVIEW-BATCH-1.md; retained snapshot only.",
+      "Current releases, canonical provenance, and paths outside inspected behavior are not independently established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "N",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AM7.md",
+      "line": 9,
+      "text": "| OnlyKey App | https://github.com/trustcrypto/OnlyKey-App.git | b8918ce / 2025-08-28 | Y | Y (default on) | N (downloads then only opens file in Finder/Explorer; swap/auto-install code path is present but dead — commented out) | https (S3, cert validation not disabled — enforced) | N (manifest.json has no signature field) | none observed | n/a | app/scripts/updater.js:19-72 (checkForAppUpdate/nw-autoupdater), app/scripts/updater.js:63-72 (download then `nw.Shell.showItemInFolder`, swap/restart lines 67-69 commented out), manifest.json:27 (`manifestUrl\": \"https://s3.amazonaws.com/onlykey-app/releases/latest/manifest.json\"`), app/scripts/userPreferences.js:43-47 (getPropVal defaults to `true`) |"
+    }
+  ]
 }

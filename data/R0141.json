@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/simplex-chat/simplex-chat",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "SimpleX Chat’s desktop updater honors the update-channel preference and schedules delayed checks. The original installer and Gatekeeper claims remain unresolved from this source review.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Auto-checks 24h, installs (msiexec/hdiutil/AppImage) with zero hash/sig; macOS path bypasses Gatekeeper quarantine.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
-    "Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "4df04bdb3ff94059734ad2da7d2766de6dba2cc7"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "SimpleX Chat’s desktop updater honors the update-channel preference and schedules delayed checks. The original installer and Gatekeeper claims remain unresolved from this source review.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+      "Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validated)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-I3.md",
+      "line": 17,
+      "text": "| SimpleX Chat (desktop) | github.com/simplex-chat/simplex-chat (apps/multiplatform, Kotlin Compose Multiplatform desktop target) | Kotlin/JVM (Compose Multiplatform) | Y | chk: auto (every 24h + on launch, unless channel set to DISABLED); dl: manual (user clicks a per-asset \"Download\" button); inst: manual (user clicks \"Install\" button, which then runs the installer without further user confirmation) | Y | https (`api.github.com/repos/simplex-chat/simplex-chat/releases` for manifest; `asset.browserDownloadUrl`, GitHub Releases CDN, for payload) — plain `OkHttpClient` with no custom `TrustManager`/hostname-verifier override found, i.e. TLS validation enforced by default | N — the GitHub Releases JSON response is not independently signed; integrity relies solely on TLS delivery from GitHub | **none** — no hash or signature check is performed on the downloaded asset before it is installed/executed by the app code | none (no verifying key used at all in this code path) | apps/multiplatform/common/src/desktopMain/kotlin/chat/simplex/common/views/helpers/AppUpdater.kt:179-202 (`checkForUpdate()`: GET `https://api.github.com/repos/simplex-chat/simplex-chat/releases`, no signature check); :267-278 (`setupHttpClient()`: plain `OkHttpClient.Builder()`, no trust manager override); :284-384 (`downloadAsset()`: downloads `asset.browserDownloadUrl` to temp file, no hash/signature verification before offering \"Install\"); :407-502 (`installAppUpdate()`: Windows runs `msiexec /i <file>` directly; macOS `hdiutil mount` + `cp -R` into /Applications, bypassing normal Gatekeeper quarantine-prompt flow since the file was fetched via OkHttp rather than a browser; Linux AppImage self-replaced via atomic move + `setExecutable(true)`, or `xdg-open` for .deb/.rpm) |"
+    }
+  ]
 }

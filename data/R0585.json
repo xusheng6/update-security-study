@@ -5,12 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/MacDownApp/macdown",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "Targeted retained-source read supports the narrow Tier A behavior: MacDown’s Sparkle configuration uses an HTTPS appcast and names the bundled dsa_pub.pem public key; the retained source also includes the Sparkle integration.",
+  "description": "Sparkle appcast, DSA signature vs a pinned key.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in key/configuration.",
-    "The final verifier implementation is delegated to Sparkle, tauri-plugin-updater, or self_update where applicable."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "3e2a2bf101c215c143bf00d9f857965f0ee82487"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow Tier A behavior: MacDown’s Sparkle configuration uses an HTTPS appcast and names the bundled dsa_pub.pem public key; the retained source also includes the Sparkle integration.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in key/configuration.",
+      "The final verifier implementation is delegated to Sparkle, tauri-plugin-updater, or self_update where applicable."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "DSA signature",
+  "trust_root": "Sparkle dsa_pub.pem pinned in binary",
+  "original_evidence": [
+    {
+      "file": "batch-AL5.md",
+      "line": 26,
+      "text": "| MacDown | https://github.com/MacDownApp/macdown.git | 3e2a2bf / 2021-04-29 | Y | N (user must approve install) | Y | https, TLS validation not disabled (no rejectUnauthorized/InsecureSkipVerify/etc. found) | Y (Sparkle DSA-signed appcast) | signature (Sparkle legacy DSA) | **pinned in binary** — `MacDown/Resources/dsa_pub.pem` bundled in app resources | `MacDown/MacDown-Info.plist:134-137` `SUFeedURL=https://macdown.uranusjr.com/sparkle/macdown/stable/appcast.xml`, `SUPublicDSAKeyFile=dsa_pub.pem`; `MacDown/Code/Application/MPMainController.m:11` `#import <Sparkle/SUUpdater.h>`; `Podfile` pins `pod 'Sparkle', '~> 1.18'` |"
+    }
+  ]
 }

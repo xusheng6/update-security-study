@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/coderholic/pyradio",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports the narrow recorded behavior: PyRadio unpacks a GitHub source archive and executes its installation script without hash or signature verification.",
+  "description": "Downloads an unsigned source zip over HTTPS then shell-executes its install script — RCE on compromise.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "The retained snapshot does not establish current released artifact behavior or independent release signing."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "4917dad4d1251cfb55ca5142809620e18bc5097d"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports the narrow recorded behavior: PyRadio unpacks a GitHub source archive and executes its installation script without hash or signature verification.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "The retained snapshot does not establish current released artifact behavior or independent release signing."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AA4.md",
+      "line": 19,
+      "text": "| PyRadio | https://github.com/coderholic/pyradio | 4917dad / 2026-05-04 | Y | N (user-invoked `-U` / update menu; not automatic) | **Y** | https (github.com), TLS enforced via `requests.get()` default (no verify=False found) | N | **none** — plain zip source archive from GitHub tag/branch, no hash or signature check anywhere in `_download_file`/`_download_pyradio` | n/a (unauthenticated GitHub source archive) | pyradio/install.py:816 (ZIP_URL=github.com/coderholic/pyradio/archive/...), :1109-1142 (_download_pyradio: download+unzip), :1075-1080 (`subprocess.call('devel/build_install_pyradio ...', shell=True)` — **executes a script pulled from the just-downloaded, unverified archive**), :1206-1227 (_download_file: `requests.get(url)`, no cert/hash check) |"
+    }
+  ]
 }

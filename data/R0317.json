@@ -5,12 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/unetbootin/unetbootin",
   "channel": "boot-media",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Inspected path downloads boot-media content, not an application self-update; no global absence claim follows from this path alone.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "Downloads bootable distro ISOs/kernels over plaintext HTTP (hardcoded http:// mirrors) and writes them straight to bootable USB/HDD with no integrity check. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Imported from completed SOURCE-REVIEW-BATCH-1.md; retained snapshot only.",
-    "Current releases, canonical provenance, and paths outside inspected behavior are not independently established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "48956c86f49a667a237c0eb5220e991fc65eed59"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Inspected path downloads boot-media content, not an application self-update; no global absence claim follows from this path alone.",
+    "limitations": [
+      "Imported from completed SOURCE-REVIEW-BATCH-1.md; retained snapshot only.",
+      "Current releases, canonical provenance, and paths outside inspected behavior are not independently established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "http",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-V8.md",
+      "line": 20,
+      "text": "| UNetbootin | https://github.com/unetbootin/unetbootin | 48956c8 / 2023-06-28 | N (no self-update) | Y (silent, automatic during normal \"create USB\" workflow) | Y (downloads and writes bootable OS installer images/kernels to USB/HDD) | **plaintext HTTP** — hardcoded distro download URLs use `http://`, e.g. `http://archive.ubuntu.com/...`, `http://download.fedoraproject.org/...`, `http://download.opensuse.org/...`; QNetworkAccessManager used with no TLS at all on this path | none | none — no checksum/signature verification of downloaded ISO/kernel/initrd found | n/a | `src/unetbootin/distrolst.cpp:63-64` (Ubuntu netinst kernel/initrd over `http://archive.ubuntu.com`); dozens more `http://` distro URLs throughout `distrolst.cpp` (Fedora, openSUSE, Gentoo, etc.); download implementation `src/unetbootin/unetbootin.cpp:2611` `downloadfile()` via `QNetworkAccessManager` has no hash/signature check of the downloaded file before writing it to the boot media — the `.md5`/`.sha1` regexes at lines 50-53 are only file-exclusion patterns for what NOT to copy to the USB, not verification logic. **This is the worst finding in the batch: unauthenticated plaintext-HTTP delivery of a bootable OS installer, silently written to media the user then boots from.** |"
+    }
+  ]
 }

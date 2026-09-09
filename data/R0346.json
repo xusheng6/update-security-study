@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/naev/naev",
   "channel": "plugin",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Naev has a Rust plugin manager that supports Git and archive sources. This plugin-content channel does not establish the primary application’s update behavior or a complete publisher-authentication policy.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "App self-update notify-only, but the Rust plugin manager downloads/mounts Lua-scripted plugins over HTTPS with no signature (content-as-code).",
   "limitations": [
-    "New default-branch snapshot, not historical release re-verification.",
-    "Evidence covers the plugin manager only and no released artifact provenance.",
-    "New default-branch snapshot, not historical release re-verification. Evidence covers the plugin manager only and no released artifact provenance."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "f00f40d12c2ab5842dd57d374eea66b9037aec79"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Naev has a Rust plugin manager that supports Git and archive sources. This plugin-content channel does not establish the primary application’s update behavior or a complete publisher-authentication policy.",
+    "limitations": [
+      "New default-branch snapshot, not historical release re-verification.",
+      "Evidence covers the plugin manager only and no released artifact provenance.",
+      "New default-branch snapshot, not historical release re-verification. Evidence covers the plugin manager only and no released artifact provenance."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-W3.md",
+      "line": 18,
+      "text": "| Naev | https://github.com/naev/naev | cdb2a4fc9d1d / 2026-08-19 | N (no self-updater; genuine negative census — no curl/appcast/Sparkle code in `src/`) | n/a | n/a | n/a | n/a | n/a | n/a | grep across `src/` for curl/appcast/Sparkle/self_update: no hits |"
+    }
+  ]
 }

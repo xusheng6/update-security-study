@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/mavlink/qgroundcontrol",
   "channel": "firmware",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The firmware controller and bootloader implement a download-and-flash path. This is device firmware scope; the retained source does not establish a signed firmware trust root or primary app updater.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "Default plaintext-HTTP firmware URLs for SiK/PX4 boards, CRC-only integrity — flashes firmware to real hardware. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "6d5aa800a3e9b29eceffee46d74d8fa55e335896"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The firmware controller and bootloader implement a download-and-flash path. This is device firmware scope; the retained source does not establish a signed firmware trust root or primary app updater.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "http",
+  "payload_verification": "CRC only",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-Z7.md",
+      "line": 12,
+      "text": "| QGroundControl | https://github.com/mavlink/qgroundcontrol | 1301709 / 2026-08-20 | N (self) / Y (firmware channel) | N | Y (flashes vehicle firmware) | **http** (unenforced — plaintext by default for SiK radio/PX4) | N | none (CRC only, write-integrity not authenticity) | none/unpinned | src/Vehicle/VehicleSetup/FirmwareUpgradeController.cc:339 (`http://px4-travis.s3.amazonaws.com/SiK/stable/...`), :351 (`http://px4-travis.s3.amazonaws.com/Firmware/%1/%2.px4` — default path for all recognized PX4 boards); src/Vehicle/VehicleSetup/Bootloader.cc:486-693 (`verify()`/`_verifyCRC()` — CRC32 write-integrity check only, no signature) |"
+    }
+  ]
 }

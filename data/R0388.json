@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/bioclipse/bioclipse.core",
   "channel": "plugin",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The retained Eclipse product enables p2 scheduling and embeds HTTP repositories used to install OSGi bundles. This is a plugin/update channel, not a complete primary executable updater.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "Eclipse p2 auto-updater enabled by default; every vendored repo URL is plaintext HTTP. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "74232eb6ef9fe3254ab8dad683b205c48703aff0"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained Eclipse product enables p2 scheduling and embeds HTTP repositories used to install OSGi bundles. This is a plugin/update channel, not a complete primary executable updater.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "http",
+  "payload_verification": "—",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-Y4.md",
+      "line": 23,
+      "text": "| Bioclipse | https://github.com/bioclipse/bioclipse.core | 74232eb6e (2021-06-11) | Y | Y (`org.eclipse.equinox.p2.ui.sdk.scheduler/autoUpdateInit=true` — standard Eclipse p2 auto-update scheduler enabled by default) | Y (standard Eclipse p2 behavior: downloads and installs updated OSGi bundles once accepted) | **http, plaintext** — every default repository URL actually vendored in this repo is `http://`; no `<repositories>` block exists in `bioclipse.product`/`p2.inf` to show what the core auto-scheduler itself targets (that config appears to live in the separate, uncloned `bioclipse/bioclipse.update` repo) | p2 metadata (artifacts.xml/content.xml) would be fetched over the same plaintext channel if these are the operative repos | hash-in-p2-metadata only, served over plaintext HTTP — no separate signing found in this repo | server-supplied/unpinned, and transport itself unauthenticated | `plugins/net.bioclipse.ui/plugin_customization.ini:1` (`autoUpdateInit=true`), `plugins/net.bioclipse.ui.install/plugin.xml:18` (`value=\"http://pele.farmbio.uu.se/bioclipse/releases/2.6\"`), `:36` (`.../bioclipse/data`), `:61` (`.../bioclipse/dsmodels`), `plugins/net.bioclipse.ui/src/net/bioclipse/ui/prefs/UpdateSitesEditDialog.java:54` (help text: \"URL should start with http:// or file://\" — HTTPS isn't even the documented expectation) |"
+    }
+  ]
 }

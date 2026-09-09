@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/sharkwouter/minigalaxy",
   "channel": "data",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Minigalaxy checks game-installer MD5 values when its installer inventory supplies them and reports mismatches. This is a conditional game-content integrity check; metadata authentication remains unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Installers MD5-checked from unsigned manifest.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
-    "Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "e4884bbf82485a1b4055ae70b2e859cbea7f82a4"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Minigalaxy checks game-installer MD5 values when its installer inventory supplies them and reports mismatches. This is a conditional game-content integrity check; metadata authentication remains unresolved.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+      "Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "installers",
+  "transport": "https (validated)",
+  "payload_verification": "hash (MD5)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-I2.md",
+      "line": 13,
+      "text": "| Minigalaxy | github.com/sharkwouter/minigalaxy | GTK3, Python, distro packages/Flatpak | N (app self-update — none found); Y (GOG game installers = content-as-code) | manual (user-initiated game install/update) | Y — downloads GOG installer packages and runs them (via mojosetup/innoextract flow) to install games | HTTPS (`api.gog.com`, `embed.gog.com`, `auth.gog.com`, `gamesdb.gog.com`) | N | hash-from-manifest — MD5 fetched from GOG's checksum XML endpoint, verified against downloaded installer before use; corrupted files are discarded | N/A (MD5 value from GOG API JSON/XML, not a signature) | `minigalaxy/api.py:262-285` (fetch MD5 from checksum XML); `minigalaxy/installer.py:151-176` (`verify_installer_integrity`, `hashlib.md5`, `verify_checksum`) |"
+    }
+  ]
 }

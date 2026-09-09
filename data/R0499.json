@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/PQYPLZXHGF/Ancestris",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Core and extension update centers are enabled at HTTP URLs.",
+  "description": "Current v13/v14 fetch the NetBeans update centers + .nbm modules over validated HTTPS; modules are unsigned, so a compromise of dl.ancestris.org would still allow a malicious module → RCE. Corrected D→C: the earlier plaintext-HTTP finding came from a stale GitHub mirror; verified against the canonical SVN trunk (svn.ancestris.org).",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement remain unverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "36b1436c2b583751631b42a112340eb555ae872b"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Core and extension update centers are enabled at HTTP URLs.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement remain unverified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validated)",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AF5.md",
+      "line": 19,
+      "text": "| Ancestris (unofficial GitHub mirror of the project's canonical self-hosted SVN; no official git repo exists) | https://github.com/PQYPLZXHGF/Ancestris.git | 36b1436c / 2016-05-10 | Y — but this **is** the application's own update mechanism: Ancestris is a NetBeans-RCP app composed entirely of modules, and its \"core\" module-set is served from the same Autoupdate provider as its plugins | N (NetBeans \"Check for Updates\" — user must review and click Install in the Plugins dialog) | Y — approved updates are `.nbm` module jars downloaded and loaded directly into the running JVM (this is literally how the app's own code, not just plugins, gets updated) | **plaintext HTTP** for both update centers — no TLS at all on the update path | N (no signature verification logic found in this repo's own config; relying on 3rd-party NetBeans autoupdate infra, itself unauthenticated here) | none found — no hash/signature verification wired up for the `updates.xml` catalog or the `.nbm` payloads in this codebase | server-supplied/unpinned, over unencrypted HTTP | `AncestrisCore/ancestris.app/src/ancestris/app/layer.xml:343` (`http://dl.ancestris.org/ancestris/nbm/trunk/extensions/updates.xml`), `:354` (`http://dl.ancestris.org/ancestris/nbm/trunk/core/updates.xml` — **core app modules**), both providers `enabled=true` |"
+    }
+  ]
 }

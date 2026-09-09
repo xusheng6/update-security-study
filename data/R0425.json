@@ -5,14 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/mhogomchungu/sirikali",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected SiriKali code includes a backend-component update channel using HTTPS GitHub release metadata. This is evidence about backend components; the original categorical zero-verification classification is not established by the retained review.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Auto-checks GitHub for backend crypto binaries (sshfs/securefs/cryfs/gocryptfs), downloads over HTTPS with zero verification, extracts + chmod +x into the execution path.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not historical source for the original study release.",
-    "The inspected path does not establish behavior of external release infrastructure or every backend implementation.",
-    "No released artifact or publisher signature was reviewed.",
-    "The snapshot is a newly retrieved default branch rather than the original study release. External release controls, released artifacts, and every backend implementation were not reviewed. No verification check was identified in the inspected path; that absence does not prove the software is unsafe or that no control exists elsewhere."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "86695986b3e037e1c583d4275ca2cffe2e5801d8"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected SiriKali code includes a backend-component update channel using HTTPS GitHub release metadata. This is evidence about backend components; the original categorical zero-verification classification is not established by the retained review.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not historical source for the original study release.",
+      "The inspected path does not establish behavior of external release infrastructure or every backend implementation.",
+      "No released artifact or publisher signature was reviewed.",
+      "The snapshot is a newly retrieved default branch rather than the original study release. External release controls, released artifacts, and every backend implementation were not reviewed. No verification check was identified in the inspected path; that absence does not prove the software is unsafe or that no control exists elsewhere."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AB6.md",
+      "line": 14,
+      "text": "| SiriKali | https://github.com/mhogomchungu/sirikali.git | c3966b8de56e54f8b617044063bc89ef4875cd14 / 2026-03-27 | Y | Y (opt-in; default OFF) | Y | https, TLS validation not disabled (no rejectUnauthorized/VERIFYPEER/InsecureSkipVerify hits; default QNetworkAccessManager cert checking) | N | none (no hash/signature check before execution) | none | `src/checkforupdates.cpp:37,218` (queries `https://api.github.com/repos/mhogomchungu/sirikali/releases` and per-engine `releaseURL()`); `src/checkforupdateswindow.cpp:267-313` (`download()` — HTTPS GET of `browser_download_url` asset, no digest recorded); `:315-350` (`extract()` — runs `bsdtar` on downloaded archive, no verify step); `:360-384` (`updateComplete()` sets `+x` on extracted binary and calls `engine.updateExecutablePaths()`, i.e. the backend crypto-engine binary — sshfs/securefs/cryfs/gocryptfs — is put into service with zero payload verification); `:116-122` `doneUpdating(bool s)` — when `s` is true (path taken from automatic startup check `checkIfInstalled()`), it calls `update(0)` immediately with **no user click required**; `src/settings.cpp:895-907` `internallyManageBackEnds()` defaults to `false`, so the auto-download-and-execute path only fires if the user has opted in to \"internally manage backends\" (manual \"Check for Updates\" menu item is always available and unconditional) |"
+    }
+  ]
 }

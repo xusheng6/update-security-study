@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/ioBroker/ioBroker",
   "channel": "package-manager",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The retained ioBroker evidence concerns initial installation and package-manager integration. It does not establish the js-controller adapter update policy asserted in the original record.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "js-controller adapter install, server-TLS-only.",
   "limitations": [
-    "New default-branch snapshot, not the historical js-controller or adapter release.",
-    "The script served by iobroker.net, adapter manager, npm registry metadata, and any release-side signature/digest controls were not reviewed.",
-    "New default-branch snapshot, not the historical js-controller or adapter release. The script served by iobroker.net, adapter manager, npm registry metadata, and any release-side signature/digest controls were not reviewed."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "7b139e3263642018c10646cf2b283898ad796f7c"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained ioBroker evidence concerns initial installation and package-manager integration. It does not establish the js-controller adapter update policy asserted in the original record.",
+    "limitations": [
+      "New default-branch snapshot, not the historical js-controller or adapter release.",
+      "The script served by iobroker.net, adapter manager, npm registry metadata, and any release-side signature/digest controls were not reviewed.",
+      "New default-branch snapshot, not the historical js-controller or adapter release. The script served by iobroker.net, adapter manager, npm registry metadata, and any release-side signature/digest controls were not reviewed."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "npm-registry hash",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AC6.md",
+      "line": 22,
+      "text": "| ioBroker (js-controller) | https://github.com/ioBroker/ioBroker.js-controller | 6602a78 / 2026-08-14 | Y | Y (adapter auto-update settings; controller self-update via admin UI) | Y | https to npm registry (default npm/registry TLS, not disabled in code) | N | hash from npm registry metadata (same endpoint) | unpinned / npm registry-supplied | packages/controller/src/lib/upgradeManager.ts:227 (`tools.installNodeModule('iobroker.js-controller@'+version, ...)`); packages/common-db/src/lib/common/tools.ts:1543 (installNodeModule → npm install) |"
+    }
+  ]
 }

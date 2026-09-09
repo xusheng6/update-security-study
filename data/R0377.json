@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/cyanfish/naps2",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "NAPS2’s inspected updater requires SHA-256 metadata and an RSA signature verified with its bundled public certificate. The historical release and opt-in scheduling claim remain unestablished.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Auto-updater verifies SHA-256 + RSA signature against a pinned X.509 cert embedded in the binary. Opt-in.",
   "limitations": [
-    "New default-branch snapshot rather than historical release; opt-in scheduling, release artifact provenance, and independent certificate publication were not verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "b43aa68f07d5e4c53ccc0d44950af1c00d17346d"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "NAPS2’s inspected updater requires SHA-256 metadata and an RSA signature verified with its bundled public certificate. The historical release and opt-in scheduling claim remain unestablished.",
+    "limitations": [
+      "New default-branch snapshot rather than historical release; opt-in scheduling, release artifact provenance, and independent certificate publication were not verified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "SHA-256 + RSA-PKCS1 signature",
+  "trust_root": "X.509 cert embedded in binary (naps2-public.cer)",
+  "original_evidence": [
+    {
+      "file": "batch-Y8.md",
+      "line": 14,
+      "text": "| NAPS2 | https://github.com/cyanfish/naps2.git | ff72ae5 / 2026-08-20 | Y | N (check auto-runs weekly if user opts in via `CheckForUpdates` setting, default **false**; download+install requires user to click the notification) | Y | https (endpoint `https://www.naps2.com/api/v1/update`; download URL comes from that JSON, not independently pinned to https) — no TLS-validation-disabling code found anywhere in repo | N (no code-signing manifest check found; relies on its own scheme below) | hash+signature: SHA-256 of downloaded installer verified, then RSA-PKCS1 signature over that hash verified | **pinned-in-binary**: `naps2-public.cer` X.509 cert checked into repo (`NAPS2.Lib/naps2-public.cer`), embedded as a resource (`ClientCreds_.naps2_public`), RSA public key extracted from it at runtime — not fetched from network | NAPS2.Lib/Update/UpdateChecker.cs:11,44-52; NAPS2.Lib/Update/UpdateOperation.cs:82-93,158-173; NAPS2.Lib/ClientCreds_.resx:127-129; NAPS2.Lib/naps2-public.cer (present in repo) |"
+    }
+  ]
 }

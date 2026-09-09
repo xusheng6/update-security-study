@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/OpenCPN/OpenCPN",
   "channel": "plugin",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The plugin downloader disables TLS verification, accepts an empty catalog checksum, and passes the archive into native-plugin installation. This supports the plugin channel; primary app update scope is unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "CURLOPT_SSL_VERIFYPEER=0 explicitly set (with a FIXME) disabling TLS for the plugin catalog + native-plugin tarball downloads; SHA-256 fails open and comes from the same unverified catalog. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "01873e32db4db7f818a7122cfaa07b9bc498456e"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The plugin downloader disables TLS verification, accepts an empty catalog checksum, and passes the archive into native-plugin installation. This supports the plugin channel; primary app update scope is unresolved.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validation off)",
+  "payload_verification": "SHA-256 (fail-open)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-Y2.md",
+      "line": 25,
+      "text": "| OpenCPN | https://github.com/OpenCPN/OpenCPN | 01873e3 / 2026-08-19 | **Y** (native plugin manager) | N (manual, via Plugin Manager UI; not run at startup) | **Y** | **HTTPS URL, but TLS cert validation explicitly DISABLED in code** | N | SHA-256 hash, but **fail-open + hash sourced from the same unauthenticated channel** | none (hash delivered via same untrusted catalog fetch) | **`model/src/downloader.cpp:78`** and **`:124`**: `curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);` (preceded by `// FIXME -- Add correct certificates on host.`) in the shared `Downloader` class used for BOTH the plugin catalog fetch (`model/src/catalog_handler.cpp:116-130`, `DOWNLOAD_REPO=\"https://raw.githubusercontent.com/OpenCPN/plugins\"`) and the plugin tarball download (`gui/src/download_mgr.cpp:115-165`, `GuiDownloader` extends `Downloader`); `gui/src/download_mgr.cpp:67-98` `checksum_ok()` computes SHA-256 of the downloaded tarball and compares to `metadata.checksum` — but that checksum comes from the very same TLS-unverified catalog fetch, AND if `metadata.checksum == \"\"` the function returns `true` (`download_mgr.cpp:70-72`, fail-open, no check at all); `model/src/plugin_handler.cpp:1209-1238` `InstallPlugin()` then extracts the tarball and loads it as a native plugin. Net effect: any on-path attacker (no CA-trusted cert needed) can MITM both the catalog and the tarball and supply a matching forged checksum — full RCE, worse than typical CDN-compromise since TLS itself is defeated |"
+    }
+  ]
 }

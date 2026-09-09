@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Radarr/Radarr",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Radarr compares the update package SHA-256 with the hash in its package metadata and rejects a mismatch. This is a source-level integrity observation; independent publisher authentication, automatic-update policy and historical release behavior are not certified here.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Servarr pipeline: SHA256-from-unsigned-manifest, auto-install.",
   "limitations": [
-    "The separately pinned retrieved checkout is not proof of the original study release.",
-    "This review supports the package checksum control, not a complete assessment of metadata authentication or automatic-update settings.",
-    "The separately pinned retrieved checkout is not proof of the original study release. This review supports the package checksum control, not a complete assessment of metadata authentication or automatic-update settings."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "516ca5979e0b2ed776778e9b73158aec0a456c96"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Radarr compares the update package SHA-256 with the hash in its package metadata and rejects a mismatch. This is a source-level integrity observation; independent publisher authentication, automatic-update policy and historical release behavior are not certified here.",
+    "limitations": [
+      "The separately pinned retrieved checkout is not proof of the original study release.",
+      "This review supports the package checksum control, not a complete assessment of metadata authentication or automatic-update settings.",
+      "The separately pinned retrieved checkout is not proof of the original study release. This review supports the package checksum control, not a complete assessment of metadata authentication or automatic-update settings."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (servarr.com)",
+  "payload_verification": "hash (SHA256, unsigned)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-J6.md",
+      "line": 10,
+      "text": "| Radarr | Radarr/Radarr | .NET (C#, Servarr/NzbDrone fork of Sonarr) | Y | identical mechanism/gating to Sonarr | Y (fully automatic when auto-install enabled) | https, host `https://radarr.servarr.com/v1/`; TLS enforced by default, no bypass found in update path (only Email.cs SMTP override, unrelated) | no | hash-from-manifest (SHA256) | n/a | src/NzbDrone.Common/Cloud/RadarrCloudRequestBuilder.cs:16 (`https://radarr.servarr.com/v1/`); src/NzbDrone.Core/Update/UpdateVerification.cs:24-26 (SHA256 compare); src/NzbDrone.Core/Update/InstallUpdateService.cs:172 (spawns update client), :252/:330 (`UpdateAutomatically` gate) |"
+    }
+  ]
 }

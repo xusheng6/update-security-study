@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Jackett/Jackett",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Jackett’s recovered source does not provide sufficient contextual evidence to publish the claimed zero-verification self-update behavior.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Auto-update ON by default; downloads GitHub archive + runs updater with zero verification.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "4ffc7bd36a33c5ef7a0e3e2cb12c29f2a6183d97"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Jackett’s recovered source does not provide sufficient contextual evidence to publish the claimed zero-verification self-update behavior.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (--IgnoreSslErrors avail)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-J6.md",
+      "line": 14,
+      "text": "| Jackett | Jackett/Jackett | .NET (C#, cross-platform incl. Mono) | Y | chk/dl/inst fully automatic by default — `ServerConfig.UpdateDisabled` defaults to `false` (bool default), checked 1h after startup then every 24h thereafter, no user interaction required | Y (downloads the release zip/tar.gz from GitHub, extracts it, launches `JackettUpdater(.exe)` as a new process, then calls `Environment.Exit(0)` on the running Jackett process) | https, `https://api.github.com/repos/Jackett/Jackett/releases` and each asset's `Browser_download_url` (github.com); TLS validation enforced by default (`ValidateCertificate` returns `sslPolicyErrors == SslPolicyErrors.None`) unless the user explicitly starts Jackett with the `--IgnoreSslErrors` runtime flag, which disables validation for **all** HTTP traffic including the updater | no (GitHub Releases API JSON is unsigned) | none — `DownloadRelease`/`StartUpdate` perform no hash or signature check of the downloaded archive before extraction and execution | n/a | src/Jackett.Common/Services/UpdateService.cs:86 (`serverConfig.UpdateDisabled` gate, default false), :118-123 (GitHub API URL), :63-72 (1h then 24h check loop), :210-296 (`DownloadRelease`, no verification), :298-355 (`StartUpdate` launches `JackettUpdater`, then `Environment.Exit(0)`); src/Jackett.Common/Utils/Clients/HttpWebClient.cs:32-55 (`ValidateCertificate`, `IgnoreSslErrors` bypass) |"
+    }
+  ]
 }

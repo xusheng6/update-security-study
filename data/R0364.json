@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/TryQuiet/quiet",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Quiet Desktop schedules application-update checks and requires an application action to proceed with installation. Endpoint provenance and independent release signing remain unverified.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "electron-updater/S3, unsigned hash manifest (bucket name test.quiet looks like leftover staging config).",
   "limitations": [
-    "The retained snapshot does not provide auditable endpoint configuration or independent release-signature enforcement; the exact original release behavior is not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "e0a92300af73c14730a05df394a5bef03351c73f"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Quiet Desktop schedules application-update checks and requires an application action to proceed with installation. Endpoint provenance and independent release signing remain unverified.",
+    "limitations": [
+      "The retained snapshot does not provide auditable endpoint configuration or independent release-signature enforcement; the exact original release behavior is not established."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "sha512 (unsigned manifest)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-X6.md",
+      "line": 13,
+      "text": "| Quiet (TryQuiet) | https://github.com/TryQuiet/quiet | 00de372 / 2026-07-27 | Y | Y (auto-checks every 15 min, autoDownload default true; install requires one IPC click `proceed-update`) | Y | https (electron-updater, S3 provider); no disabled-TLS-validation code found | N (electron-builder `latest*.yml`, unsigned) | hash only — electron-updater sha512 check; no code-signing cert config present in repo | server-supplied/unpinned (S3 bucket `test.quiet` — note bucket name looks like a test/staging bucket baked into the shipped config) | packages/desktop/src/main/main.ts:5,29-35 (import + interval), :481-515 (`checkForUpdate`/`setupUpdater`), :933-942 (`checkForUpdate()` loop + `proceed-update` → `autoUpdater.quitAndInstall()`); packages/desktop/package.json:72-75 (`\"publish\":{\"provider\":\"s3\",\"bucket\":\"test.quiet\"}`) |"
+    }
+  ]
 }

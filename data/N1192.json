@@ -5,12 +5,18 @@
   "historical_tier": "N",
   "project_url": "https://github.com/jamovi/jamovi",
   "channel": "not established",
-  "review_status": "Historical record",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The initial scan recorded no in-app updater or notification-only behavior. This record has not received the same source recheck as the A–D records; the original label does not establish how every installation channel is secured.",
-  "limitations": [],
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "N",
+  "description": "No app self-updater. Module library is a strong content channel: ed25519 signature verified vs a pinned pubkey before install (A-equivalent, stronger than typical).",
+  "limitations": [
+    "AI-generated static source analysis. The N label was not independently re-audited and does not assess every external installation or content channel."
+  ],
   "sources": [],
-  "review_basis": "initial-scan",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "downloads_and_runs": "no",
+  "transport": "https",
+  "payload_verification": "ed25519 (module channel)",
+  "trust_root": "pubkey hardcoded in zipverify.py"
 }

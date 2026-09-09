@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/docpad/docpad",
   "channel": "package-manager",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected DocPad upgrade command delegates package updates to npm. The retained application source does not independently establish the original registry-hash-only trust classification.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "docpad upgrade self-updates via global npm install — same npm-registry-hash-only trust.",
   "limitations": [
-    "New default-branch snapshot rather than the original study checkout; npm registry metadata, historical release artifacts, and any external publisher-signing policy were not independently audited.",
-    "npm registry metadata, historical release artifacts, and external publisher-signing policy were not independently audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "c3a7431cb9654782600b2c79477bfc16403c8423"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected DocPad upgrade command delegates package updates to npm. The retained application source does not independently establish the original registry-hash-only trust classification.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study checkout; npm registry metadata, historical release artifacts, and any external publisher-signing policy were not independently audited.",
+      "npm registry metadata, historical release artifacts, and external publisher-signing policy were not independently audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "npm-registry hash (unpinned)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AB4.md",
+      "line": 21,
+      "text": "| DocPad | https://github.com/docpad/docpad.git | c3a7431c / 2023-12-19 | Y (`docpad upgrade`) | N (manual CLI command) | Y | https (npm registry) | N | hash-only, delegated to npm's own tarball integrity check | server-supplied/unpinned (npm registry) | `source/lib/docpad.coffee:4804-4806` (`upgrade: -> @installNodeModule('npm docpad@6', {global:true}, next)`), `:2657-2621` (`installNodeModule` → `safeps.spawn(['npm','install',...])`). Same pattern also used for the `docpad install <plugin>` content-as-code channel |"
+    }
+  ]
 }

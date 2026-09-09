@@ -5,11 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/RandomEngy/VidCoder",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "VidCoder delegates application updates to Velopack and exposes immediate and next-launch update modes. The external framework’s artifact-authentication policy remains unestablished by this checkout.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "Velopack (Squirrel successor) with Authenticode enforcement; can auto-apply silently.",
   "limitations": [
-    "New default-branch snapshot rather than the original study checkout; released artifact signing and Velopack's external verification implementation were not independently audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "18c7c8726dbfba1269acd69d3778a3f41aca59a7"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "VidCoder delegates application updates to Velopack and exposes immediate and next-launch update modes. The external framework’s artifact-authentication policy remains unestablished by this checkout.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study checkout; released artifact signing and Velopack's external verification implementation were not independently audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "Authenticode",
+  "trust_root": "Velopack (OS code-signing)",
+  "original_evidence": [
+    {
+      "file": "batch-Y5.md",
+      "line": 11,
+      "text": "| VidCoder | https://github.com/RandomEngy/VidCoder | fdc3186 2026-08-17 | Y | **Y** (SilentNextLaunch mode applies without prompt; PromptApplyImmediately mode prompts) | **Y** | https (`f001.backblazeb2.com`) | Velopack package | Authenticode/OS code-signing check performed by Velopack before applying | OS certificate store (Windows Authenticode, via Velopack/Squirrel-style updater) | `VidCoder/Services/Updater.cs:49-50,98-132` (`new UpdateManager(Utilities.VelopackUpdateUrl)`, `CheckForUpdatesAsync`/`DownloadUpdatesAsync`/`ApplyUpdatesAndRestart`), `VidCoder/Utilities/Utilities.cs:35-36` (HTTPS backblaze URLs) |"
+    }
+  ]
 }

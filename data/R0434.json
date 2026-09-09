@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://gitlab.com/tikiwiki/tiki",
   "channel": "unresolved",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected Tiki evidence concerns Composer package management. It does not substantiate the specific installer-authentication behavior or trust classification in the original finding; withdraw those assertions.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "'Install Composer' downloads+executes composer-setup.php; SHA-384 fetched unauthenticated from a second endpoint, no pinned key.",
   "limitations": [
-    "New default-branch snapshot, not the historical installer release. The specific Install Composer UI/action and its external retrieval sequence remain unaudited.",
-    "The default-branch snapshot is not the historical installer release; the specific Install Composer UI/action and its external retrieval sequence remain unaudited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,24 @@
       "commit": "2c3913a8faaca8b65b5415a0558cebe564fc129e"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected Tiki evidence concerns Composer package management. It does not substantiate the specific installer-authentication behavior or trust classification in the original finding; withdraw those assertions.",
+    "limitations": [
+      "New default-branch snapshot, not the historical installer release. The specific Install Composer UI/action and its external retrieval sequence remain unaudited.",
+      "The default-branch snapshot is not the historical installer release; the specific Install Composer UI/action and its external retrieval sequence remain unaudited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "SHA-384 (2nd endpoint)",
+  "trust_root": "—",
+  "original_evidence": []
 }

@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/luanti-org/luanti",
   "channel": "plugin",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected code verifies a ContentDB package/content channel, including mods and games, but it does not establish the primary application updater tier. The cited path has no package hash or signature check before extraction/install; transport and Android TLS behavior are delegated to core.download_file and were not established by this Lua body.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "ContentDB mods are Lua code fetched with zero hash/signature; TLS validation is off by default on Android (Tier D there).",
   "limitations": [
-    "Newly retrieved snapshot at the recorded commit, not historical release verification.",
-    "The observation is limited to the plugin/content channel; it does not support a primary-tier conclusion.",
-    "Native core HTTP/TLS implementation and platform build defaults remain uninspected."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "b81bb3c68ac633f1df8dd8ed758644cabf4c1efd"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected code verifies a ContentDB package/content channel, including mods and games, but it does not establish the primary application updater tier. The cited path has no package hash or signature check before extraction/install; transport and Android TLS behavior are delegated to core.download_file and were not established by this Lua body.",
+    "limitations": [
+      "Newly retrieved snapshot at the recorded commit, not historical release verification.",
+      "The observation is limited to the plugin/content channel; it does not support a primary-tier conclusion.",
+      "Native core HTTP/TLS implementation and platform build defaults remain uninspected."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "mods (ContentDB)",
+  "transport": "https (validation OFF on Android)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": []
 }

@@ -5,13 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/mozilla/releases-comm-central",
   "channel": "unresolved",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Thunderbird's comm-central source delegates application updates to Mozilla's shared update service; this review does not substantiate Thunderbird-specific MAR certificate pinning or an independent MAR verification configuration.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Shares Firefox MAR with its own pinned certs.",
   "limitations": [
-    "Newly retrieved official Thunderbird mirror default-branch snapshot, not the original study checkout; the cryptographic updater implementation is inherited from Gecko and Thunderbird-specific release build inputs were not present in comm-central.",
-    "The Firefox MAR implementation cannot be transferred to Thunderbird as evidence of its own pinned certificate set.",
-    "Newly retrieved official Thunderbird mirror default-branch snapshot, not the original study checkout; the cryptographic updater implementation is inherited from Gecko and Thunderbird-specific release build inputs were not present in comm-central.; The Firefox MAR implementation cannot be transferred to Thunderbird as evidence of its own pinned certificate set."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "1892a02cd19635366fc30d8cd12c0e6a31275ea9"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Thunderbird's comm-central source delegates application updates to Mozilla's shared update service; this review does not substantiate Thunderbird-specific MAR certificate pinning or an independent MAR verification configuration.",
+    "limitations": [
+      "Newly retrieved official Thunderbird mirror default-branch snapshot, not the original study checkout; the cryptographic updater implementation is inherited from Gecko and Thunderbird-specific release build inputs were not present in comm-central.",
+      "The Firefox MAR implementation cannot be transferred to Thunderbird as evidence of its own pinned certificate set.",
+      "Newly retrieved official Thunderbird mirror default-branch snapshot, not the original study checkout; the cryptographic updater implementation is inherited from Gecko and Thunderbird-specific release build inputs were not present in comm-central.; The Firefox MAR implementation cannot be transferred to Thunderbird as evidence of its own pinned certificate set."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (Balrog)",
+  "payload_verification": "signature[RSA-SHA384] (MAR)",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": []
 }

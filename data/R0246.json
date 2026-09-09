@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/losnoco/Cog",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Cog’s application metadata template configures a Sparkle feed and EdDSA public key. This supports the configured-key claim, with built-bundle values and framework enforcement still unverified.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Sparkle EdDSA pinned.",
   "limitations": [
-    "New default-branch snapshot; no auditable Info.plist or updater key declaration was located in the reviewed source, so the claimed pinned EdDSA control cannot be published from this evidence."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,23 @@
       "commit": "c17be85654a64170c86bb8bbb4b59fd7b6795722"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Cog’s application metadata template configures a Sparkle feed and EdDSA public key. This supports the configured-key claim, with built-bundle values and framework enforcement still unverified.",
+    "limitations": [
+      "New default-branch snapshot; no auditable Info.plist or updater key declaration was located in the reviewed source, so the claimed pinned EdDSA control cannot be published from this evidence."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[Sparkle-EdDSA]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": []
 }

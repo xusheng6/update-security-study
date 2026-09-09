@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/pqrs-org/Karabiner-Elements",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In the retrieved Karabiner-Elements checkout, the updater uses Sparkle with an appcast URL and a configured SUPublicEDKey. The updater-bundle plist disables Sparkle automatic checks and automatic updates, while the application exposes explicit stable/beta checks and a configurable background-check path.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Sparkle EdDSA pinned.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not historical release re-verification; published bundle signing, feed contents, and Sparkle's internal signature enforcement remain outside this source-only review."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "9312593e1a3bf72b94c63c524ebabe2637442e8a"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In the retrieved Karabiner-Elements checkout, the updater uses Sparkle with an appcast URL and a configured SUPublicEDKey. The updater-bundle plist disables Sparkle automatic checks and automatic updates, while the application exposes explicit stable/beta checks and a configurable background-check path.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not historical release re-verification; published bundle signing, feed contents, and Sparkle's internal signature enforcement remain outside this source-only review."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[Sparkle-EdDSA]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-M1.md",
+      "line": 9,
+      "text": "| Karabiner-Elements | https://github.com/pqrs-org/Karabiner-Elements | Sparkle 2.9.1, in a dedicated `Karabiner-Updater.app` helper | Y | N — `SUEnableAutomaticChecks`=false and `SUAllowsAutomaticUpdates`=false; user must explicitly invoke the updater | Y (once user approves the Sparkle install prompt) | https (`https://appcast.pqrs.org/karabiner-elements-appcast.xml`, or `...-appcast-devel.xml` for beta channel) | Sparkle-EdDSA | signature (EdDSA) | pinned-in-binary (SUPublicEDKey embedded in the Updater app's Info.plist) | src/apps/Updater/Resources/Info.plist.in:33-44 (`SUFeedURL`, `SUPublicEDKey`=`WdJ29ySfnKxiloyN7d2q/Q9NRijT1kC7q1b87fRcW8c=`, `SUEnableAutomaticChecks`=false, `SUAllowsAutomaticUpdates`=false); src/apps/Updater/src/Updater.swift:48-57 (feedURLString returns stable vs. devel URL); src/apps/Updater/project.yml:3-6 (Sparkle 2.9.1 dependency) |"
+    }
+  ]
 }

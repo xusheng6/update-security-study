@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/matomo-org/matomo",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Core update downloads and decompresses the archive, then performs file/path validation; no cryptographic signature is shown.",
+  "description": "Core self-updater extracts a release zip over HTTPS with zero hash/signature (only checks expected paths exist). Marketplace shares the gap.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,34 @@
       "commit": "1899a06743eafab7aaeb1f0a946355528b22b4a2"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Core update downloads and decompresses the archive, then performs file/path validation; no cryptographic signature is shown.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AI5.md",
+      "line": 13,
+      "text": "| Matomo (core self-updater) | https://github.com/matomo-org/matomo | 1899a06743eafab7aaeb1f0a946355528b22b4a2 / 2026-08-21 | Y | semi (bg version-check auto every 8h; download+install requires admin click \"Update Matomo automatically\" or `core:update`) | Y | https by default (`Http::sendHttpRequest`, CA-pinned via `configCurlCertificate`); verify-disable path exists (`core/Http.php:797-801`) but gated behind `$acceptInvalidSslCertificate`, default false, not set true in updater path | N | **N — no hash/signature check**, only verifies a hardcoded list of expected file *paths* exist post-extract | N/A (no signature scheme) | `plugins/CoreUpdater/Updater.php:80-147,242-260,262-296,298-313,364-409`; download URL `plugins/CoreUpdater/ReleaseChannel.php:42-49`; bg check `core/UpdateCheck.php:29-64`; one-click trigger `plugins/CoreUpdater/Controller.php:157-188` |"
+    },
+    {
+      "file": "batch-AI5.md",
+      "line": 14,
+      "text": "| **Matomo — plugin/theme Marketplace** (side channel) | same repo | same | Y | N (admin-initiated install/update) | Y | https to plugins.matomo.org, `$acceptInvalidSslCertificate=false` hardcoded | N | **N — no sha256/checksum/signature check anywhere** | N/A | `plugins/CorePluginsAdmin/PluginInstaller.php:51-91,140-154,161-174,176-241,289-301`; `plugins/Marketplace/Api/Service.php:119,190` |"
+    }
+  ]
 }

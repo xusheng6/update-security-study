@@ -5,13 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/zotero/zotero",
   "channel": "primary",
-  "review_status": "Detailed recheck",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The original A-tier explanation depends on a pinned MAR verification boundary. The exact Windows mozconfig instead requests an updater built with MAR signature verification disabled, and the packaging caller installs Zotero's custom updater on Windows, macOS, and Linux because Mozilla's updater requires Mozilla-signed updates. MAR creation is present, but it is not evidence that the updater enforces MAR signatures. This is a concrete contradiction to the claimed protection, while the retained source does not provide enough updater-archive internals, release artifact mapping, or feed configuration to assign a defensible lower tier. The original A classification should therefore change to unresolved pending release-specific updater evidence.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Reuses Firefox's MAR updater but self-hosts the feed on zotero.org — MAR's pinned cert makes self-hosting safe.",
   "limitations": [
-    "The checkout is a newly retrieved default-branch snapshot at commit fc17dcd24ad34686cb24e6b3ffb06a6a7a5e0e5d, not the original study checkout.",
-    "The updater binaries are packaged archives referenced by build scripts and were not independently inspected; no shipped release artifact was mapped to this mozconfig.",
-    "The HTTP legacy extension update channel is separate from the primary application updater and is not used here to infer the primary channel's tier."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "fc17dcd24ad34686cb24e6b3ffb06a6a7a5e0e5d"
     }
   ],
-  "review_basis": "deep-source-recheck",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The original A-tier explanation depends on a pinned MAR verification boundary. The exact Windows mozconfig instead requests an updater built with MAR signature verification disabled, and the packaging caller installs Zotero's custom updater on Windows, macOS, and Linux because Mozilla's updater requires Mozilla-signed updates. MAR creation is present, but it is not evidence that the updater enforces MAR signatures. This is a concrete contradiction to the claimed protection, while the retained source does not provide enough updater-archive internals, release artifact mapping, or feed configuration to assign a defensible lower tier. The original A classification should therefore change to unresolved pending release-specific updater evidence.",
+    "limitations": [
+      "The checkout is a newly retrieved default-branch snapshot at commit fc17dcd24ad34686cb24e6b3ffb06a6a7a5e0e5d, not the original study checkout.",
+      "The updater binaries are packaged archives referenced by build scripts and were not independently inspected; no shipped release artifact was mapped to this mozconfig.",
+      "The HTTP legacy extension update channel is separate from the primary application updater and is not used here to infer the primary channel's tier."
+    ],
+    "review_status": "Detailed recheck",
+    "review_basis": "deep-source-recheck",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (self-hosted)",
+  "payload_verification": "signature[MAR]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-G3.md",
+      "line": 8,
+      "text": "| zotero | zotero/zotero | Firefox/XUL (Mozilla Gecko toolkit, \"AppUpdate\"/AUS+MAR) | Y | auto (chk/dl/inst) — standard Mozilla `nsIApplicationUpdateService`, `app.update.auto=true` | Y (Mozilla toolkit updater downloads and applies MAR update packages) | https (AppUpdate URL is https-only in application.ini); TLS validation delegated to Mozilla/NSS toolkit code not present in this JS-level repo (validation=unknown-external — the actual updater/verifier binary source lives in the upstream Gecko/mozilla-central toolkit that Zotero vendors as a prebuilt runtime, not in this repo) | scheme[MAR/PKCS7, Mozilla toolkit] — NOT independently confirmed in this repo since the MAR-signing cert (.der) and updater binary source are not present here; `app.update.cert.errors`/`app.update.backgroundErrors` prefs referenced confirm the Mozilla AUS cert/update-verification pipeline is wired up in the UI layer | signature[Mozilla MAR/PKCS7] believed retained (standard toolkit behavior; MAR_CHANNEL_ID is set at packaging time) — not directly verifiable in this repo | OS-trust-store for the HTTPS transport layer; MAR signature verification key would be Mozilla-toolkit-embedded (pinned-in-binary) per standard Gecko updater design, unconfirmed in this repo | app/assets/application.ini:17-18 (`[AppUpdate] URL=https://www.zotero.org/download/client/update/%VERSION%/%BUILD_ID%/%BUILD_TARGET%/%LOCALE%/%CHANNEL%/%OS_VERSION%/update.xml`); app/assets/prefs.js:109-134 (`app.update.auto`=true, `app.update.channel`, `app.update.interval`); chrome/content/zotero/update/updates.js:17-27 (`nsIApplicationUpdateService`, `PREF_APP_UPDATE_CERT_ERRORS`); app/update-packaging/build_autoupdate.sh:324 (`MAR_CHANNEL_ID`) |"
+    }
+  ]
 }

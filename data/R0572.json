@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/appcelerator/titanium",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: SDK install begins downloading the selected archive and later extracts it without a checksum or signature verification step; TLS rejection can be configured by the user.",
+  "description": "`ti sdk install` downloads/extracts SDK zips with no hash/signature.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "4c7dbf004e7fe9047852dd6f128620d9d9dfea93"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: SDK install begins downloading the selected archive and later extracts it without a checksum or signature verification step; TLS rejection can be configured by the user.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AK6.md",
+      "line": 16,
+      "text": "| Titanium CLI (TiDev, appcelerator/titanium) | https://github.com/appcelerator/titanium.git | 4c7dbf004e7fe9047852dd6f128620d9d9dfea93 / 2026-08-22 | Y | N (explicit `ti sdk install`, though CLI prompts/suggests it when the project's required SDK is missing) | Y | https; TLS validation enforced by default (`rejectUnauthorized: true`), user-configurable to disable via `ticonfig` (`cli.rejectUnauthorized`) — opt-in only, not hardcoded off | N | **none** — no checksum/hash/signature anywhere on the SDK install path | none | `src/util/tisdk.js:235-246` (release manifests fetched over https from downloads.titaniumsdk.com); `src/commands/sdk.js:552-625` (`getInstallFile` downloads SDK/CI-build zip — arbitrary URL or GitHub release accepted — no hash check after download); `src/commands/sdk.js:628-700` (`extractSDK` extracts immediately, no verification step); `src/util/request.js:1-27` (rejectUnauthorized default true, configurable) |"
+    }
+  ]
 }

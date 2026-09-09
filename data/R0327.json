@@ -5,13 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/pnpm/pnpm",
   "channel": "package-manager",
-  "review_status": "Detailed recheck",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "The retained source substantiates the original A-tier control for pnpm's self-update engine channel: exact lockfile integrity is checked against npm registry signatures using embedded ECDSA keys, and invalid, absent, or canonical-registry-unverifiable signatures fail before execution. The fail-closed claim is too absolute because the explicit isTolerableWithoutSignature branch proceeds for unreachable or uncovered signatures from a noncanonical registry. The adjacent configuration code shows that registry can come from trusted package-manager configuration, and the exception retains lockfile integrity; it does not permit an invalid signature or a project-controlled key to replace npm's trust root. That bounded residual-trust case narrows the claim but does not warrant lowering the channel's A tier.",
+  "description": "self-update verifies npm-registry ECDSA sigs vs hardcoded keys, sha512, fail-closed.",
   "limitations": [
-    "The checkout is a newly retrieved default-branch snapshot at commit b71013fa6448b54e0d4b5cfe76eba6210619c206, not the original study checkout or a mapped shipped release.",
-    "Evidence covers pnpm's self-update/package-manager engine channel, not signatures for arbitrary project dependencies.",
-    "This is defensive source review only; no downloads, builds, endpoint checks, or exploitability testing were performed."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "b71013fa6448b54e0d4b5cfe76eba6210619c206"
     }
   ],
-  "review_basis": "deep-source-recheck",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained source substantiates the original A-tier control for pnpm's self-update engine channel: exact lockfile integrity is checked against npm registry signatures using embedded ECDSA keys, and invalid, absent, or canonical-registry-unverifiable signatures fail before execution. The fail-closed claim is too absolute because the explicit isTolerableWithoutSignature branch proceeds for unreachable or uncovered signatures from a noncanonical registry. The adjacent configuration code shows that registry can come from trusted package-manager configuration, and the exception retains lockfile integrity; it does not permit an invalid signature or a project-controlled key to replace npm's trust root. That bounded residual-trust case narrows the claim but does not warrant lowering the channel's A tier.",
+    "limitations": [
+      "The checkout is a newly retrieved default-branch snapshot at commit b71013fa6448b54e0d4b5cfe76eba6210619c206, not the original study checkout or a mapped shipped release.",
+      "Evidence covers pnpm's self-update/package-manager engine channel, not signatures for arbitrary project dependencies.",
+      "This is defensive source review only; no downloads, builds, endpoint checks, or exploitability testing were performed."
+    ],
+    "review_status": "Detailed recheck",
+    "review_basis": "deep-source-recheck",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "registry ECDSA + sha512",
+  "trust_root": "NPM_SIGNING_KEYS hardcoded in source",
+  "original_evidence": [
+    {
+      "file": "batch-W7.md",
+      "line": 20,
+      "text": "| pnpm | https://github.com/pnpm/pnpm | 03fd4ca / 2026-08-21 | Y (`pnpm self-update`, plus automatic engine-version-switch when a repo pins a different pnpm via `packageManager`/`devEngines`) | N for `self-update` itself (manual); the engine-version-switch path (same verification code) triggers automatically when entering a project pinned to a different pnpm version | Y | https (npm registry, `registry.npmjs.org` by default; explicitly routes self-update through the trusted bootstrap config so a project `.npmrc` cannot redirect it) | packument-level npm registry signatures (`dist.signatures`), fail-closed if unverifiable from the canonical registry | signature — ECDSA registry signature verified via `verifyInstalledPackageSignatures`, combined with sha512 integrity pin from the lockfile | **pinned-in-binary**: `NPM_SIGNING_KEYS` array hardcoded in source (refreshed by CI workflow at build time, not fetched live at runtime) | `pnpm11/deps/security/signatures/src/npmSigningKeys.ts:8-22` (hardcoded `NPM_SIGNING_KEYS` ECDSA keys), `pnpm11/engine/pm/commands/src/self-updater/verifyPnpmEngineIdentity.ts:77-127` (`verifyPnpmEngineIdentity`, `trustedKeys = getNpmSigningKeys()`, fails closed with `PNPM_ENGINE_IDENTITY_UNVERIFIABLE`/`_MISMATCH` on any failure not explicitly tolerable), `pnpm11/engine/pm/commands/src/self-updater/selfUpdate.ts:92-96` (routes through trusted bootstrap config, not project `.npmrc`) |"
+    }
+  ]
 }

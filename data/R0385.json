@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Card-Forge/forge",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Forge’s updater presents release or snapshot packages and asks the user before proceeding.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Downloads a jar/tar.bz2 over HTTPS and runs it via Desktop.open() with zero hash/signature.",
   "limitations": [
-    "New default-branch snapshot rather than the original study checkout; this review did not inspect release-side signatures or controls outside AutoUpdater, and no execution or build was performed."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "6155ef58a50f634883ae8a2a9a19a6fb89527295"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Forge’s updater presents release or snapshot packages and asks the user before proceeding.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study checkout; this review did not inspect release-side signatures or controls outside AutoUpdater, and no execution or build was performed."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-Y6.md",
+      "line": 27,
+      "text": "| Forge (MTG) | https://github.com/Card-Forge/forge | 339c1f1 / 2026-08-20 | Y | N (checks silently, then shows Update-Now/Later dialog) | **Y** | https (github.com releases, releases.cardforge.org); no custom TrustManager found → enforced | N (plain `version.txt` / `maven-metadata.xml`) | **none** — no hash, no signature before install | none | `forge-gui/src/main/java/forge/download/AutoUpdater.java:166` (packageUrl built from version.txt), `:221` (download), `:242-243` (`installer.setExecutable(true,false); desktop.open(installer);` — runs the downloaded jar with zero verification); mirrored logic in `forge-gui-mobile/src/forge/assets/AssetsDownloader.java:50-90` |"
+    }
+  ]
 }

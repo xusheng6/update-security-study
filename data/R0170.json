@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/iina/iina",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "IINA configures Sparkle with an HTTPS appcast and a pinned SUPublicEDKey, selecting stable or beta feeds through its updater delegate. Runtime signature enforcement is delegated to Sparkle, and this newly retrieved snapshot does not reverify the historical release.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Sparkle EdDSA, SUPublicEDKey pinned.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; Sparkle's dependency-level verifier and historical release artifact signing were not independently reverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "b669dd8917b82f8ef86a3c3b7b5a3c63c473f532"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "IINA configures Sparkle with an HTTPS appcast and a pinned SUPublicEDKey, selecting stable or beta feeds through its updater delegate. Runtime signature enforcement is delegated to Sparkle, and this newly retrieved snapshot does not reverify the historical release.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; Sparkle's dependency-level verifier and historical release artifact signing were not independently reverified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[Sparkle-EdDSA]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-K1.md",
+      "line": 7,
+      "text": "| IINA | iina/iina | Sparkle | Y | chk: user-toggle (bound to `automaticallyChecksForUpdates`); dl/inst: Sparkle standard (prompts unless user enables auto-install) | Y | https (`https://www.iina.io/appcast.xml`) | Sparkle-EdDSA (legacy DSA key also present; EdDSA takes precedence in modern Sparkle) | signature[EdDSA] | pinned-in-binary | iina/Info.plist:639-644 (SUFeedURL, SUPublicDSAKeyFile, SUPublicEDKey); iina/SettingsPageGeneral.swift:114 |"
+    }
+  ]
 }

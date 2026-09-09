@@ -5,14 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/netbirdio/netbird",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected NetBird updater embeds production verification material and validates a signed revocation list, artifact keys, and artifact signature through an Ed25519-based chain. This is limited to the newly retrieved snapshot.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Ed25519 root key embedded via go:embed with a full rotation/revocation chain.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout.",
-    "Source does not prove historical release/build configuration, publication provenance, or other distribution channels.",
-    "Embedded certificates do not prove released binaries were built from this snapshot.",
-    "Newly retrieved default-branch snapshot, not the original study checkout. Source does not prove historical release/build configuration, publication provenance, or other distribution channels. Embedded certificates do not prove released binaries were built from this snapshot."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "76ea72237f3346ff157aa8374b9fa800d6498976"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected NetBird updater embeds production verification material and validates a signed revocation list, artifact keys, and artifact signature through an Ed25519-based chain. This is limited to the newly retrieved snapshot.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout.",
+      "Source does not prove historical release/build configuration, publication provenance, or other distribution channels.",
+      "Embedded certificates do not prove released binaries were built from this snapshot.",
+      "Newly retrieved default-branch snapshot, not the original study checkout. Source does not prove historical release/build configuration, publication provenance, or other distribution channels. Embedded certificates do not prove released binaries were built from this snapshot."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "Ed25519 signature",
+  "trust_root": "root key go:embed'd (rotation/revocation)",
+  "original_evidence": [
+    {
+      "file": "batch-W6.md",
+      "line": 17,
+      "text": "| NetBird | https://github.com/netbirdio/netbird | 4a6efbb / 2026-08-20 | Y | Y | Y | https, TLS validated (`http.DefaultClient`, no InsecureSkipVerify) | Y | signature (Ed25519, chained: root key → rotatable artifact-signing keys → artifact sig, + revocation-list check) | **pinned-in-binary** (`//go:embed certs` embeds `root-pub.pem` Ed25519 root key at compile time; that root key then authenticates server-supplied intermediate signing keys) | `client/internal/updater/reposign/root.go` (root key/ed25519), `client/internal/updater/reposign/verify.go:57-146` (chain: revocation list → artifact keys → artifact sig, all keyed off `a.rootKeys` loaded from embedded certs), `client/internal/updater/reposign/embed_prod.go` (`//go:embed certs`), `client/internal/updater/reposign/certs/root-pub.pem`, `client/internal/updater/installer/repourl_prod.go:7` (`https://publickeys.netbird.io/artifact-signatures`) |"
+    }
+  ]
 }

@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/linuxmint/cinnamon",
   "channel": "plugin",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Cinnamon’s Spices harvester uses an HTTPS service for indexes and ZIP assets and processes selected spice packages; the reviewed source does not establish the core DE update policy or a general content-as-code conclusion.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Core DE is distro-updated (N), but the Spices store downloads applet/extension/theme zips over HTTPS with no hash/signature and loads executable JS/Python into the shell (content-as-code).",
   "limitations": [
-    "Newly recovered default-branch snapshot, not the original study checkout.",
-    "The core DE update channel and any server-side or package-signing controls were not established.",
-    "Primary classification remains UNRESOLVED under the evidence-review instruction; retained source is commit-scoped and does not establish all released or external framework behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "d29b0006375f13483cecca9d5bbdaf926be3b194"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Cinnamon’s Spices harvester uses an HTTPS service for indexes and ZIP assets and processes selected spice packages; the reviewed source does not establish the core DE update policy or a general content-as-code conclusion.",
+    "limitations": [
+      "Newly recovered default-branch snapshot, not the original study checkout.",
+      "The core DE update channel and any server-side or package-signing controls were not established.",
+      "Primary classification remains UNRESOLVED under the evidence-review instruction; retained source is commit-scoped and does not establish all released or external framework behavior."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AE7.md",
+      "line": 7,
+      "text": "| Cinnamon | https://github.com/linuxmint/cinnamon | d29b000 / 2026-08-21 | N | N | N | n/a | n/a | none | n/a | no self-updater found; `cinnamon-settings.py:93-110` only lists launchers for external distro package managers (dnfdragora, pamac, synaptic). Distro-packaged. |"
+    }
+  ]
 }

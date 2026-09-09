@@ -5,11 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/mRemoteNG/mRemoteNG",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "mRemoteNG's Windows updater downloads a channel-described MSI, requires Authenticode verification against the metadata thumbprint, and compares the file's SHA-512 before accepting it. The reviewed source does not establish authentication of the channel metadata or a weekly schedule.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "Weekly self-update; verifies Authenticode thumbprint + SHA512 before auto-launch (both from unsigned manifest).",
   "limitations": [
-    "New default-branch snapshot rather than historical release re-verification; metadata signing/authentication, framework/platform installer behavior, weekly scheduling, and auto-launch behavior were not independently established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "aa6d6884da4f081a5b9fa76c762fb0cf9b03c581"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "mRemoteNG's Windows updater downloads a channel-described MSI, requires Authenticode verification against the metadata thumbprint, and compares the file's SHA-512 before accepting it. The reviewed source does not establish authentication of the channel metadata or a weekly schedule.",
+    "limitations": [
+      "New default-branch snapshot rather than historical release re-verification; metadata signing/authentication, framework/platform installer behavior, weekly scheduling, and auto-launch behavior were not independently established."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "Authenticode (pinned thumbprint) + SHA-512",
+  "trust_root": "OS-trust-store",
+  "original_evidence": [
+    {
+      "file": "batch-N7.md",
+      "line": 11,
+      "text": "| mRemoteNG | github.com/mRemoteNG/mRemoteNG | .NET (C#, WinForms) | Y | Y (startup check); download/install requires a user click, then executes automatically on app exit | Y | https (default `UpdateAddress=https://mremoteng.org/`; manifest/changelog/installer URLs observed use `https://github.com/...` and `https://raw.githubusercontent.com/...`) — standard `HttpClient`, no custom cert-validation bypass found | N (manifest is a plain `key: value` text file, e.g. `Version/dURL/clURL/CertificateThumbprint/Checksum` — no digital signature on the manifest itself; trust relies solely on TLS to `mremoteng.org`) | Y — dual check before install: (1) Windows Authenticode signature verify with pinned thumbprint (2) SHA-512 checksum compare | Authenticode thumbprint + SHA-512 checksum are both supplied by the (HTTPS-delivered, unsigned) manifest itself — not hardcoded/pinned in the app binary | `mRemoteNG/App/Checks/AppUpdater.cs:166-189` (Authenticode `RequireThumbprintMatch`/`ThumbprintToMatch` then `SHA512` compare, throws on mismatch); `mRemoteNG/App/Checks/UpdateInfo.cs:17,41,66-73` (thumbprint/checksum parsed from manifest); `mRemoteNG/App/Info/UpdateChannelInfo.cs:68-72` + `mRemoteNG/Properties/OptionsUpdatesPage.settings:11-13` (`UpdateAddress=https://mremoteng.org/`) and `:33-35` (`CheckForUpdatesOnStartup=True` default); `mRemoteNG/UI/Window/UpdateWindow.cs:88-89` (`btnDownload_Click` is user-initiated); `mRemoteNG/App/Shutdown.cs:123-127` (`Process.Start` executes the downloaded installer automatically at app quit, after `PathValidator.ValidateExecutablePathOrThrow`). |"
+    }
+  ]
 }

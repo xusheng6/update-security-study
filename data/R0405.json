@@ -5,12 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/canton7/SyncTrayzor",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "The retained source shows a configured trust root and update invocation consistent with the recorded narrow A classification.",
+  "description": "PGP-clearsigned sha512 manifest verified vs a key embedded as a binary resource.",
   "limitations": [
-    "This is a recovered snapshot rather than the original study checkout; release/build behavior and historical version may differ.",
-    "The shipped App.config uses HTTPS, but the code fallback permits plaintext HTTP if configuration is absent."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "234ff60a160f87e574869dd6d761643f40125dfa"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained source shows a configured trust root and update invocation consistent with the recorded narrow A classification.",
+    "limitations": [
+      "This is a recovered snapshot rather than the original study checkout; release/build behavior and historical version may differ.",
+      "The shipped App.config uses HTTPS, but the code fallback permits plaintext HTTP if configuration is absent."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "PGP-clearsigned sha512 manifest",
+  "trust_root": "PGP key embedded as binary resource",
+  "original_evidence": [
+    {
+      "file": "batch-AA7.md",
+      "line": 30,
+      "text": "| SyncTrayzor | https://github.com/canton7/SyncTrayzor | 234ff60a160f / 2025-08-24 | Y | Y (auto check+download; install prompts user unless auto-install configured) | Y | https (`App.config:17` → `https://synctrayzor.antonymale.co.uk/version-check`); note code-level fallback default is plaintext `http://` if config missing | Y — sha512sum manifest is PGP clear-signed | signature (PGP) + hash (SHA512 of installer checked against PGP-verified manifest) | **pinned-in-binary** (embedded assembly resource) | src/SyncTrayzor/Services/UpdateManagement/UpdateDownloader.cs:22,40-59 (downloads `sha512sum-{version}.txt.asc`, PGP-verifies it, then SHA512-checks the installer against it); InstallerCertificateVerifier.cs:15-41 (`certificateName = \"SyncTrayzor.Resources.synctrayzor_releases_cert.asc\"`, `PgpClearsignUtilities.ReadAndVerifyFile`); security/synctrayzor_releases_cert.asc (pinned pubkey present in repo); src/SyncTrayzor/App.config:17 (https); src/SyncTrayzor/Services/Config/AppSettings.cs:36 (plaintext-http code default — minor hardening gap, overridden by shipped App.config) |"
+    }
+  ]
 }

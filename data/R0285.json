@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/SourMesen/Mesen2",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports the narrow recorded primary behavior: Mesen2 fetches an HTTPS JSON manifest, prompts before download, computes SHA-256 over the installer, and compares it with the manifest value before launching its updater.",
+  "description": "Hash server-supplied from the same host as the download.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "The retained snapshot does not establish current released artifact behavior or independent release signing.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "b9fa69ddc6d0a331fb103fdb5eef6904305703c2"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports the narrow recorded primary behavior: Mesen2 fetches an HTTPS JSON manifest, prompts before download, computes SHA-256 over the installer, and compares it with the manifest value before launching its updater.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "The retained snapshot does not establish current released artifact behavior or independent release signing.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "server-supplied hash",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-U5.md",
+      "line": 23,
+      "text": "| Mesen2 | https://github.com/SourMesen/Mesen2 | b9fa69d / 2026-06-04 | Y | Y (prompted) | Y | https, TLS enforced (default .NET `HttpClient`, no `ServerCertificateValidationCallback` override found) | N (plain JSON) | hash (SHA256), server-supplied | server-supplied (same `mesen.ca` JSON that supplies the download URL also supplies the expected hash) | UI/ViewModels/UpdatePromptViewModel.cs:41-147 (fetch `https://www.mesen.ca/Services/v2/latestversion.json`, download, SHA256 compare at line 127-143); UI/Utilities/UpdateHelper.cs:22-104 (launches downloaded exe as external updater, self-replaces binary) |"
+    }
+  ]
 }

@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/session-foundation/session-desktop",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Session updater uses electron-updater with periodic checks; platform install behavior is gated by canAutoUpdate.",
+  "description": "Electron app that explicitly set verifyUpdateCodeSignature:false, dropping itself out of Tier B.",
   "limitations": [
-    "Newly retrieved/recovered source snapshot; this is not historical source re-verification. Released artifact behavior and external framework enforcement remain unverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "5e7ee416cf0e7e35e0f815a71d2545094df2d3c0"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Session updater uses electron-updater with periodic checks; platform install behavior is gated by canAutoUpdate.",
+    "limitations": [
+      "Newly retrieved/recovered source snapshot; this is not historical source re-verification. Released artifact behavior and external framework enforcement remain unverified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "hash-from-manifest",
+  "trust_root": "server-TLS",
+  "original_evidence": [
+    {
+      "file": "batch-U8.md",
+      "line": 26,
+      "text": "| Session Desktop | https://github.com/session-foundation/session-desktop | 37222b8 / 2026-08-18 | Y | Y (checks every 10 min once a newer release is seen) | Y (mac/win/AppImage; `.deb` builds explicitly excluded from auto-update, `canAutoUpdate()`) | https, TLS enforced for update path (an unrelated `rejectUnauthorized:false` exists only in the app's onion-routing/seed-node network layer, `ts/session/apis/seed_node_api/SeedNodeAPI.ts:82`, not the updater) | manifest present (`app-update.yml`), not independently signed | mac/win: OS code-sign (electron-updater default, no `verifyUpdateCodeSignature` override found); Linux AppImage: hash (SHA512 from same unsigned manifest, server-supplied) | mac/win: OS keystore; Linux: server-supplied | ts/updater/updater.ts:36-266; package.json (`electron-updater` dep, no `publish`/verify override found) |"
+    }
+  ]
 }

@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/nvm-sh/nvm",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: nvm fetches SHASUMS256.txt from the same Node mirror and compares the archive hash, with no GPG signature verification.",
+  "description": "SHA-256 fetched unauthenticated from the same nodejs.org host (no GPG despite one being published).",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "6798d1dbc99e879f36a7d2eb2231104dc7e78e77"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: nvm fetches SHASUMS256.txt from the same Node mirror and compares the archive hash, with no GPG signature verification.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "SHA-256 (same host)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AK4.md",
+      "line": 18,
+      "text": "| nvm | https://github.com/nvm-sh/nvm.git | 6798d1d / 2026-08-17 | Y | N | Y | https (`nodejs.org/dist`), TLS enforced, no insecure flags found | N | **hash (SHA256)**, fetched from same host at install time | server-supplied/unpinned (same endpoint as download) | `nvm/nvm.sh:2037-2044` `nvm_get_checksum()` downloads `${MIRROR}/${version}/SHASUMS256.txt` from the *same* nodejs.org mirror; `:1988-2019` `nvm_compare_checksum`; `:2699-2722` install fails/removes tarball on mismatch. No GPG/signature check anywhere (`grep .sig/gpg` = 0 hits) despite Node.js publishing `SHASUMS256.txt.sig`. |"
+    }
+  ]
 }

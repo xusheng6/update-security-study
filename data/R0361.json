@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Tautulli/Tautulli",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Tautulli extracts the downloaded GitHub tarball over the program directory without a payload signature/hash.",
+  "description": "Opt-in auto-update extracts an unsigned, unhashed GitHub tarball directly over the running installation.",
   "limitations": [
-    "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "a43b8720e7e55642248be21cc5f7569b5cc731c3"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Tautulli extracts the downloaded GitHub tarball over the program directory without a payload signature/hash.",
+    "limitations": [
+      "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-X4.md",
+      "line": 17,
+      "text": "| Tautulli | https://github.com/Tautulli/Tautulli | c7153de / 2026-06-16 | Y | Y (`PLEXPY_AUTO_UPDATE` config: scheduler calls `check_github()` then `plexpy.shutdown(restart=True, update=True)` fully unattended for git/source installs) | Y (git install: `git pull --ff-only`; source install: downloads GitHub tarball over HTTPS and `tarfile.extractall()`s it directly over the live program directory, then restarts into the new code) | https, `requests` with `verify=bool(CONFIG.VERIFY_SSL_CERT)` — **default is enabled (1)** but is a user-toggleable config option that silently disables cert validation network-wide (including the update-tarball fetch) if turned off | N | none — no hash or signature check anywhere in `update()` before the tarball is extracted and files overwritten | N/A | plexpy/versioncheck.py:284-287 (auto-update trigger from scheduler), :318-347 (`request.request_content(tar_download_url)` → `tarfile.extractall` → `os.renames` over PROG_DIR, no checksum/signature step); plexpy/request.py:55-56,147-148 (`verify=bool(CONFIG.VERIFY_SSL_CERT)`); plexpy/config.py:197 (default `VERIFY_SSL_CERT=1`) |"
+    }
+  ]
 }

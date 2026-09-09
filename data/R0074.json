@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/mozilla/gecko-dev",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Firefox's updater verifies the opened MAR against compiled primary/secondary certificate data when MOZ_VERIFY_MAR_SIGNATURE is enabled, then checks MAR channel and version metadata before applying the update.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "MAR signs the whole archive; verifying certs compiled into the updater.",
   "limitations": [
-    "Newly retrieved official Mozilla Git mirror default-branch snapshot, not the original study checkout; the claim is bounded to builds with MOZ_VERIFY_MAR_SIGNATURE and the inspected channel-specific certificate configuration."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,23 @@
       "commit": "5836a062726f715fda621338a17b51aff30d0a8c"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Firefox's updater verifies the opened MAR against compiled primary/secondary certificate data when MOZ_VERIFY_MAR_SIGNATURE is enabled, then checks MAR channel and version metadata before applying the update.",
+    "limitations": [
+      "Newly retrieved official Mozilla Git mirror default-branch snapshot, not the original study checkout; the claim is bounded to builds with MOZ_VERIFY_MAR_SIGNATURE and the inspected channel-specific certificate configuration."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (Balrog)",
+  "payload_verification": "signature[RSA-SHA384] (MAR)",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": []
 }

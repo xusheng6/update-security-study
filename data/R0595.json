@@ -5,13 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/tutao/tutanota",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The retained Tuta desktop build tooling documents RSA/SHA-512 verification of installer signatures against the tutao public key and attaches the signature to update metadata. This is build and release-signing evidence; it does not independently establish the electron-updater runtime path or every platform’s fail-closed behavior.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "RSA signature on top of electron-updater, pinned keys, fails closed.",
   "limitations": [
-    "The candidate source is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "Runtime electron-updater enforcement and released artifact behavior remain outside this build-tool evidence.",
-    "The candidate source is a newly retrieved default-branch snapshot, not the original study checkout. Runtime electron-updater enforcement and released artifact behavior remain outside this build-tool evidence."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "0f34397ae95db354b707ab963bec84cdcbd8f5b6"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained Tuta desktop build tooling documents RSA/SHA-512 verification of installer signatures against the tutao public key and attaches the signature to update metadata. This is build and release-signing evidence; it does not independently establish the electron-updater runtime path or every platform’s fail-closed behavior.",
+    "limitations": [
+      "The candidate source is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "Runtime electron-updater enforcement and released artifact behavior remain outside this build-tool evidence.",
+      "The candidate source is a newly retrieved default-branch snapshot, not the original study checkout. Runtime electron-updater enforcement and released artifact behavior remain outside this build-tool evidence."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "RSA signature + electron-updater",
+  "trust_root": "pinned keys",
+  "original_evidence": []
 }

@@ -5,12 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/thomasnordquist/MQTT-Explorer",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "B",
-  "description": "Targeted retained-source read supports the narrow primary updater classification: MQTT Explorer's updater uses electron-updater and GitHub release artifacts; the framework's manifest SHA-512 and platform publisher checks are delegated controls.",
+  "description": "Windows electron-updater Authenticode (B); Linux AppImage hash-only, unpinned (C leg). macOS excluded.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in configuration.",
-    "Where electron-updater/Squirrel/install4j performs final verification, the external framework implementation is not vendored here."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "35f31973c456a024a37450f5961e4610dc9a9ce0"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow primary updater classification: MQTT Explorer's updater uses electron-updater and GitHub release artifacts; the framework's manifest SHA-512 and platform publisher checks are delegated controls.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in configuration.",
+      "Where electron-updater/Squirrel/install4j performs final verification, the external framework implementation is not vendored here."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "B",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "Authenticode (Win) / sha512 (Linux)",
+  "trust_root": "electron-updater",
+  "original_evidence": [
+    {
+      "file": "batch-AL7.md",
+      "line": 15,
+      "text": "| MQTT Explorer | https://github.com/thomasnordquist/MQTT-Explorer | 35f31973c456a024a37450f5961e4610dc9a9ce0 / 2026-01-30 | Y | Y | Y | https (GitHub releases, no TLS override found) | N (latest.yml not separately signed) | sha512 hash from manifest (Win/Linux) **+** Windows Authenticode publisher check (electron-updater default, NSIS only) | server-supplied/unpinned (hash) + OS keystore (Authenticode, Windows only) | src/autoUpdater.ts:1-27, src/electron.ts:76,147-148, package.json:54-91 |"
+    }
+  ]
 }

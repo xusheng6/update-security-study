@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/josStorer/RWKV-Runner",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The update applies the downloaded reader with empty selfupdate options and no verifier configured at this call site.",
+  "description": "selfupdate.Apply(updateFile, Options{}) — empty Options = zero payload verification (no hash, no signature) despite HTTPS.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement remain unverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "3e10340342b9267f468ddde366b9b6e350d350d0"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The update applies the downloaded reader with empty selfupdate options and no verifier configured at this call site.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement remain unverified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none (empty Options)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AE1.md",
+      "line": 24,
+      "text": "| RWKV-Runner | https://github.com/josStorer/RWKV-Runner | 3e10340 / 2026-07-07 | Y (custom Wails self-updater) | Y (`checkUpdate()` runs at startup in `startup.ts:93`; download+apply triggered by single toast click) | Y | https (GitHub or Gitee mirror release asset URL; TLS enforced, no `InsecureSkipVerify` found) | N | **none** — `selfupdate.Apply(updateFile, selfupdate.Options{})` called with empty Options: no checksum, no signature, no verifier of any kind | none — trust is HTTPS+GitHub/Gitee identity only | `backend-golang/app.go:227,279` (`selfupdate.Apply(updateFile, selfupdate.Options{})`), `frontend/src/utils/index.tsx:566-583,619` |"
+    }
+  ]
 }

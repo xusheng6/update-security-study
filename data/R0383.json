@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/cytoscape/cytoscape-impl",
   "channel": "mixed",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Cytoscape’s implementation separates installed-app update discovery from core-application version notifications. The original artifact-checksum and publisher-authentication assertions remain unestablished.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "App Manager/App Store loads third-party app jars over HTTPS with its own SHA-512 checksum-parsing line commented out in code — zero verification (content-as-code). Core updater is notify-only.",
   "limitations": [
-    "New default-branch implementation snapshot, not the original study release.",
-    "These channel and notification observations do not certify the artifact verification policy.",
-    "New default-branch implementation snapshot, not the original study release. These channel and notification observations do not certify the artifact verification policy."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "208c1015e565ac55f6a78c2a23aa8196a7cf28ae"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Cytoscape’s implementation separates installed-app update discovery from core-application version notifications. The original artifact-checksum and publisher-authentication assertions remain unestablished.",
+    "limitations": [
+      "New default-branch implementation snapshot, not the original study release.",
+      "These channel and notification observations do not certify the artifact verification policy.",
+      "New default-branch implementation snapshot, not the original study release. These channel and notification observations do not certify the artifact verification policy."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none (SHA-512 commented out)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-Y4.md",
+      "line": 16,
+      "text": "| Cytoscape (own update-check) | https://github.com/cytoscape/cytoscape-impl | 208c1015e (2026-07-16) | Y | Y (`CheckForUpdatesAction implements CyStartListener` — runs at app start) | N (notify-only, opens browser) | http (plaintext, both version-check and download-page URLs) | NA | none | NA | `swing-application-impl/src/.../task/GetLatestVersionTask.java:42` (`NEWS_URL=\"http://chianti.ucsd.edu/cytoscape-news/news.html\"`), `:132` (`Jsoup.connect(NEWS_URL)`, plain HTTP), `swing-application-impl/src/.../updater/UpdatesDialog.java:45` (`DOWNLOAD_URL=\"http://cytoscape.org/download.php\"`), `:196-203` (Download button just calls `OpenBrowser.openURL`), `swing-application-impl/src/.../actions/CheckForUpdatesAction.java:45` |"
+    }
+  ]
 }

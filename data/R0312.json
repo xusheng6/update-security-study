@@ -5,14 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/OctoPrint/OctoPrint",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The reviewed OctoPrint software-update configuration uses pip with a versioned GitHub archive URL for the OctoPrint target; the cited source does not establish an independent publisher signature check or the behavior of plugin updates.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Self-update = pip install of a raw GitHub archive zip, no signature. Plugin Manager is a matching content-as-code channel.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout.",
-    "The cited block does not prove how pip or plugin installation verifies artifacts at runtime.",
-    "Plugin Manager behavior and historical released behavior require separate version-matched evidence.",
-    "Newly retrieved default-branch snapshot, not the original study checkout. The cited block does not prove how pip or plugin installation verifies artifacts at runtime. Plugin Manager behavior and historical released behavior require separate version-matched evidence."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "70c17d2c66546506e967cb24db187346cc8eb3a6"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The reviewed OctoPrint software-update configuration uses pip with a versioned GitHub archive URL for the OctoPrint target; the cited source does not establish an independent publisher signature check or the behavior of plugin updates.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout.",
+      "The cited block does not prove how pip or plugin installation verifies artifacts at runtime.",
+      "Plugin Manager behavior and historical released behavior require separate version-matched evidence.",
+      "Newly retrieved default-branch snapshot, not the original study checkout. The cited block does not prove how pip or plugin installation verifies artifacts at runtime. Plugin Manager behavior and historical released behavior require separate version-matched evidence."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-V6.md",
+      "line": 19,
+      "text": "| OctoPrint | https://github.com/OctoPrint/OctoPrint.git | 380cf937023fa2b2c92780bfcd77b91de6e93ed2 / 2026-08-20 | Y | N (periodic check only; actual update requires user click \"Update Now\" in Software Update plugin) | Y | https (`https://github.com/OctoPrint/OctoPrint/archive/{version}.zip`, then `pip install`). No TLS bypass found. | N (no manifest/signature; just a version string comparison) | none — self-update pulls a **raw GitHub source-archive zip over HTTPS and `pip install`s it directly**, no hash/signature check of the archive contents | server-supplied/unpinned (trusts github.com identity + whatever tag/branch tree is current) | src/octoprint/plugins/softwareupdate/__init__.py:671 (`\"pip\": \"https://github.com/OctoPrint/OctoPrint/archive/{target_version}.zip\"`), :351 (uses `create_pip_caller`); **content-channel**: src/octoprint/plugins/pluginmanager/__init__.py:939-1107 (`command_install` — Plugin Manager installs arbitrary third-party plugins via `pip install <url>` from the community plugin repository JSON or any user-supplied URL — C-equivalent code-execution channel, same lack of signature verification) |"
+    }
+  ]
 }

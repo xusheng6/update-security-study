@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://gitlab.com/LazyLibrarian/LazyLibrarian",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "LazyLibrarian extracts the GitLab tarball over the application; TLS verification is configuration-dependent and no payload signature is checked.",
+  "description": "Unsigned download-extract-overwrite.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "ac0165828ee490beae20c72dcb2e16417b393ca2"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "LazyLibrarian extracts the GitLab tarball over the application; TLS verification is configuration-dependent and no payload signature is checked.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AG7.md",
+      "line": 24,
+      "text": "| LazyLibrarian | https://gitlab.com/LazyLibrarian/LazyLibrarian | ac01658 / 2026-08-23 | Y | Y (opt-in, `Git.AUTO_UPDATE`, default `False`) | Y | https to GitLab API/tarball; TLS verification gated by `CONFIG['SSL_VERIFY']` (default `True`, `configdefs.py:114`) — falls back to `verify=False` only if URL isn't https or user disabled it | N | none — extracts tarball and overwrites files, no hash/signature check | server-supplied/unpinned (GitLab tarball for branch) | `lazylibrarian/versioncheck.py:486-630` (`update()` — downloads `tar_download_url` from GitLab, `verify=CONFIG['SSL_CERTS'] if CONFIG['SSL_CERTS'] else True` when https+SSL_VERIFY, else `verify=False` at line 604; extracts via `tarfile`, overwrites app dir); `lazylibrarian/configdefs.py:114,192` (`SSL_VERIFY` default `1`, `AUTO_UPDATE` default `False`) |"
+    }
+  ]
 }

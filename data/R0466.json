@@ -5,12 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/hyphanet/fred",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "The retained source shows a configured trust root and update invocation consistent with the recorded narrow A classification.",
+  "description": "Update jar fetched over Freenet's darknet, verified against a USK pubkey hash compiled into the binary. Autoupdate off by default.",
   "limitations": [
-    "This is a recovered snapshot rather than the original study checkout; release/build behavior and historical version may differ.",
-    "The inspected source covers the Hyphanet node updater channel; Freenet transport/framework behavior is external to this source read."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "e1705ee545dd44bbf9d84c23bfc2a9e65d07c2c0"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained source shows a configured trust root and update invocation consistent with the recorded narrow A classification.",
+    "limitations": [
+      "This is a recovered snapshot rather than the original study checkout; release/build behavior and historical version may differ.",
+      "The inspected source covers the Hyphanet node updater channel; Freenet transport/framework behavior is external to this source read."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "P2P (darknet)",
+  "payload_verification": "USK pubkey hash",
+  "trust_root": "compiled into binary",
+  "original_evidence": [
+    {
+      "file": "batch-AE4.md",
+      "line": 14,
+      "text": "| Hyphanet (Freenet) — fred | https://github.com/hyphanet/fred.git | e1705ee5 2026-08-16 | Y | N by default (`autoupdate` config defaults to `false`; `debian/freenet.ini:12` ships `false`), Y once user/installer enables it | Y (replaces the running node's jar and can auto-restart) | **not HTTP/HTTPS** — fetched over Freenet's own darknet/opennet P2P protocol via a signed USK key, not TLS | Y — inherent to the USK key type (content is rejected by the fetch layer unless it verifies against the key embedded in the URI) | cryptographic signature verified against the **updater pubkey hash embedded in the USK URI itself, hard-coded in source → compiled into the binary**; separate `REVOCATION_URI` allows blowing a compromised key | `src/freenet/node/updater/NodeUpdateManager.java:86` (`UPDATE_URI = \"USK@vCKGjQtKuticcaZ-dwOgmkYPVLj~N1dm9mb3j3Smg4Y,...\"`), `:100` (`REVOCATION_URI`), `:247-251` (`autoupdate` config, default `false`), `:1099-1106` (`armed \\|\\| isAutoUpdateAllowed` gates deployment); `debian/freenet.ini:12` |"
+    }
+  ]
 }

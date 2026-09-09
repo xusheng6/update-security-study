@@ -5,13 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/gopasspw/gopass",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "gopass's built-in update flow refuses externally managed binaries, retrieves SHA256SUMS and SHA256SUMS.sig from the latest GitHub release, verifies the detached signature against embedded gopass release public keys, and checks the selected archive's SHA-256 before replacing the executable. Its updater HTTP client requires TLS 1.3 or newer.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "gopass update: GPG-verified SHA256SUMS + hash vs embedded PGP key; refuses if package-managed. Best-in-class.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; embedded key rotation and release behavior may change in later commits.",
-    "Evidence supports the updater source trust flow and does not independently audit GitHub release administration or a built binary.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; embedded key rotation and release behavior may change in later commits.; Evidence supports the updater source trust flow and does not independently audit GitHub release administration or a built binary."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,36 @@
       "commit": "e2dd748cdbe12829f51f3e79035a11401e939616"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "gopass's built-in update flow refuses externally managed binaries, retrieves SHA256SUMS and SHA256SUMS.sig from the latest GitHub release, verifies the detached signature against embedded gopass release public keys, and checks the selected archive's SHA-256 before replacing the executable. Its updater HTTP client requires TLS 1.3 or newer.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; embedded key rotation and release behavior may change in later commits.",
+      "Evidence supports the updater source trust flow and does not independently audit GitHub release administration or a built binary.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; embedded key rotation and release behavior may change in later commits.; Evidence supports the updater source trust flow and does not independently audit GitHub release administration or a built binary."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (TLS1.3)",
+  "payload_verification": "signature[GPG] + SHA-256",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-H6.md",
+      "line": 7,
+      "text": "| gopass (CLI) | github.com/gopasspw/gopass | Go CLI | Y | manual only: no automatic download/install; a daily terminal reminder (\"You haven't checked for updates...\") prompts the user to run `gopass update`, which then does chk+dl+inst in one interactive flow (with an `IsUpdateable()` guard that refuses to run if the binary is externally managed, e.g. by a package manager) | Y (only when user explicitly runs `gopass update`) | HTTPS: GitHub API `https://api.github.com/repos/%s/%s/releases/latest` for release metadata + GitHub release asset URLs for `SHA256SUMS`, `SHA256SUMS.sig`, and the platform tarball/zip; TLS validation ENFORCED and hardened — custom `http.Client` sets `tls.Config{MinVersion: tls.VersionTLS13}` (no `InsecureSkipVerify`) | Y — `SHA256SUMS` (the manifest of per-file hashes) is itself GPG-signed via a separate detached `SHA256SUMS.sig`, verified with `openpgp.CheckArmoredDetachedSignature` before any hash is trusted | signature (OpenPGP detached signature over SHA256SUMS) + hash-from-manifest (SHA-256 of the downloaded binary tarball checked against the GPG-verified SHA256SUMS) | embedded in source: hardcoded PGP public key(s) in `pubkeys` var (2025 release-signing key, \"GitHub Actions Only\") | internal/updater/update.go:1-4 (package doc: \"verify the GPG signature of the release\"), :25-50 (`Update()` calls `IsUpdateable`, `FetchLatestRelease`), :54-77 (downloads `SHA256SUMS` then `SHA256SUMS.sig`, calls `gpgVerify`, aborts on failure/`!ok`), :94-104 (SHA-256 of downloaded tarball compared against GPG-verified `SHA256SUMS` entry, `bytes.Equal` mismatch → hard error), internal/updater/verify.go:18-64 (hardcoded PGP public key block, comment \"To update see README.md\"), :84-118 (`gpgVerify`/`gpgVerifyAt` load keyring, `openpgp.CheckArmoredDetachedSignature`), internal/updater/download.go:20-30 (`httpClient` with `tls.Config{MinVersion: tls.VersionTLS13}`, no InsecureSkipVerify), internal/updater/github.go:20 (`BaseURL = \"https://api.github.com/repos/%s/%s/releases/latest\"`), internal/action/reminder.go:41-45 (daily notify-only reminder, never auto-runs update) |"
+    },
+    {
+      "file": "batch-V3.md",
+      "line": 22,
+      "text": "| gopass-ui | https://github.com/codecentric/gopass-ui.git | 6f4bcd3 2022-12-29 | Y (notify-only) | Y (hourly check) | N — only renders a link to the GitHub releases page | https (GitHub API) | N/A | N/A | N/A | src/renderer/explorer-app/components/LastVersionInfo.tsx:14-25,39-40 (`GithubService.getTagsOfRepository`, then `<ExternalLink url='.../releases/latest'>`) |"
+    }
+  ]
 }

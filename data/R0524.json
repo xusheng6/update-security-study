@@ -5,12 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/geckocircuits/GeckoCIRCUITS",
   "channel": "primary",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "N",
-  "description": "Update UI streams an archive to a user-selected file; no installer launch in inspected path.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "Update page + update .zip both fetched over plaintext HTTP with zero payload verification. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Imported from completed SOURCE-REVIEW-BATCH-1.md; retained snapshot only.",
-    "Current releases, canonical provenance, and paths outside inspected behavior are not independently established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "bb07d4160432836f55be0a99f21926795aa1efb9"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Update UI streams an archive to a user-selected file; no installer launch in inspected path.",
+    "limitations": [
+      "Imported from completed SOURCE-REVIEW-BATCH-1.md; retained snapshot only.",
+      "Current releases, canonical provenance, and paths outside inspected behavior are not independently established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "N",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "http",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AG4.md",
+      "line": 27,
+      "text": "| GeckoCIRCUITS (PLECS-alt) | https://github.com/geckocircuits/GeckoCIRCUITS.git | bb07d4160432836f55be0a99f21926795aa1efb9 / 2026-02-23 | Y | Y (auto-runs at startup, `checkForUpdateInterval()`, if user has enabled DAILY/WEEKLY; default is NEVER) | N (payload is downloaded to a user-chosen file on disk but not auto-extracted/executed by the app) | **plaintext http**, no TLS at all on either the version-check page or the zip download | N | none (no hash/signature on the .zip) | none | src/main/java/.../allg/DialogUpdate.java:89 (`PRO_URL = \"http://www.gecko-simulations.com/GeckoCIRCUITS/GeckoCIRCUITSreleaseHistory.html\"`), :129-141 (plain `URLConnection` GET, no TLS), :366 (`new URL(\"http://www.gecko-simulations.com/GeckoCIRCUITS/GeckoCIRCUITS.zip\")`, downloaded via plaintext HTTP to a user-picked save file, :376-380 writes bytes with no verification); src/main/java/.../allg/Fenster.java:272 (`DialogUpdate.checkForUpdateInterval()` called on startup) |"
+    }
+  ]
 }

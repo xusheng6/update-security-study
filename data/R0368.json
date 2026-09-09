@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/mijorus/gearlever",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Gear Lever manages AppImage updates through configured update sources. The inspected source selection accepts HTTP and HTTPS, and uses zsync SHA-1 for update detection; a complete publisher-authentication policy remains unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "AppImage-update: HTTPS metadata but no crypto payload verification before chmod +x and run; user can also configure plaintext HTTP/FTP sources (→D).",
   "limitations": [
-    "New default-branch snapshot rather than historical release; source review does not establish server metadata authenticity or every updater provider's behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "a2917f2adafc78e0478e47d5843de9ede6c1aa3f"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Gear Lever manages AppImage updates through configured update sources. The inspected source selection accepts HTTP and HTTPS, and uses zsync SHA-1 for update detection; a complete publisher-authentication policy remains unresolved.",
+    "limitations": [
+      "New default-branch snapshot rather than historical release; source review does not establish server metadata authenticity or every updater provider's behavior."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-X8.md",
+      "line": 9,
+      "text": "| Gear Lever | github.com/mijorus/gearlever | a2917f2a / 2026-07-22 | N (self) / Y (manages AppImage updates) | Y (background check via `--fetch-updates` at login/notify-only); download/install always user-triggered | Y (AppImage update pipeline) | HTTPS by default (`requests.get`, no `verify=False`/insecure flags found for API calls) but `http://` and anonymous `ftp://` explicitly accepted as configurable update sources | N/A | Weak/inconsistent: size-only sanity check on download (`src/models/StaticFileUpdater.py:92-117`); optional sha256/sha1 compare only used to decide \"update available\", never to gate install | server-supplied (GitHub/GitLab/Codeberg/Forgejo API JSON or `.zsync` control file over same channel); no GPG, no pinned key | `src/models/StaticFileUpdater.py:92,102-117`; `src/providers/AppImageProvider.py:255-256` (`can_install_file` = MIME-type check only) and `~68-71` (`set_trusted()` → `os.chmod(...,0o755)` with zero crypto check before exec); `src/models/FTPUpdater.py:70` (unauthenticated/unencrypted FTP as first-class source) |"
+    }
+  ]
 }

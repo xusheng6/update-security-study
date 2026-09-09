@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Murmele/Gittyup",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Gittyup downloads the release asset and installs it without an integrity check; user-configurable TLS ignore behavior exists.",
+  "description": "Downloads installers from GitHub Releases over HTTPS on all platforms with zero payload verification (no spctl even on mac DMG).",
   "limitations": [
-    "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "a52b17a626fcebd815efcb75c98495039853dd57"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Gittyup downloads the release asset and installs it without an integrity check; user-configurable TLS ignore behavior exists.",
+    "limitations": [
+      "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-W4.md",
+      "line": 19,
+      "text": "| Gittyup | https://github.com/Murmele/Gittyup.git | a52b17a626 / 2026-07-21 | Y | Y (opt-in setting `InstallUpdatesAutomatically`, default is confirm-dialog) | Y | https (`github.com/Murmele/gittyup/releases/...`), TLS enforced by default but user can permanently disable via \"Ignore\" dialog (`ssl/ignore` setting) | n/a | **none** — no hash/signature check anywhere before install | n/a | src/update/Updater.cpp:50-96 (`kLinkFmt` https GitHub release asset, auto-install branch), :198-242 (`download()`, no integrity check), :354-376 (Linux: runs downloaded `.sh` via `/bin/sh` with no check); src/update/Updater_win.cpp:7-28 (`ShellExecuteW` on downloaded `.exe`, no check); src/update/Updater_mac.mm:70-118 (mounts DMG, copies `.app` over existing bundle, no `codesign`/`spctl` check); src/app/Application.cpp:112-113 (sslErrors wired to a user-togglable ignore dialog) |"
+    }
+  ]
 }

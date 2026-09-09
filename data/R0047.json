@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/anyproto/anytype-ts",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Withdraw the original security classification for this record. Anytype’s Electron client disables electron-updater automatic retrieval and install-on-quit defaults, uses retrieval from its update-available handler, and exposes a separate relaunch path; the reviewed source does not establish the released installation UX or signing/notarization enforcement. The retained evidence is insufficient to support the original full claim.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "Full-auto electron-updater; notarized/signed.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
-    "The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot.",
-    "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "e0401c27f7526cfb337f762c52c8dd03a92e5287"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Withdraw the original security classification for this record. Anytype’s Electron client disables electron-updater automatic retrieval and install-on-quit defaults, uses retrieval from its update-available handler, and exposes a separate relaunch path; the reviewed source does not establish the released installation UX or signing/notarization enforcement. The retained evidence is insufficient to support the original full claim.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+      "The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot.",
+      "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (DO Spaces)",
+  "payload_verification": "hash + OS-code-signing",
+  "trust_root": "OS-trust-store",
+  "original_evidence": []
 }

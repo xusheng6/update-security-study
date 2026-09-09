@@ -5,14 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/hexchat/hexchat",
   "channel": "plugin",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "HexChat's reviewed Windows update plugin links WinSparkle, sets https://hexchat.github.io/appcast.xml as its appcast, initializes the library, and exposes a Check for Updates command. The WinSparkle verification policy and any platform fallback are unresolved from the project source reviewed.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "WinSparkle, but installs with zero signature check when no key is configured — no Authenticode fallback exists.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "WinSparkle library source/configuration and released plugin packaging were not available as project primary evidence.",
-    "No endpoint or plugin execution was performed.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout. WinSparkle library source/configuration and released plugin packaging were not available as project primary evidence. No endpoint or plugin execution was performed."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "b544ac3350e85d4cc41fe3414cbdb82d75ce5d7a"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "HexChat's reviewed Windows update plugin links WinSparkle, sets https://hexchat.github.io/appcast.xml as its appcast, initializes the library, and exposes a Check for Updates command. The WinSparkle verification policy and any platform fallback are unresolved from the project source reviewed.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "WinSparkle library source/configuration and released plugin packaging were not available as project primary evidence.",
+      "No endpoint or plugin execution was performed.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout. WinSparkle library source/configuration and released plugin packaging were not available as project primary evidence. No endpoint or plugin execution was performed."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none (no key configured)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-U8.md",
+      "line": 22,
+      "text": "| HexChat | https://github.com/hexchat/hexchat | b544ac3 / 2024-02-09 | Y (Windows only, `upd` plugin, built by default per meson boolean default) | Y (WinSparkle auto-checks on interval via `win_sparkle_init()`, plus manual `/UPDCHK`) | Y (WinSparkle downloads+runs installer) | https (`APPCAST_URL = \"https://hexchat.github.io/appcast.xml\"`) | no DSA/EdDSA key pinned anywhere in repo (`win_sparkle_set_dsa_pub_pem`/`_eddsa_pub_pem` never called) | **none**, confirmed by reading WinSparkle's own source directly: `updatedownloader.cpp` initializes `signatureValid = true` and, when no key is configured, only logs `\"Using unsigned updates!\"` and proceeds to install anyway (no Authenticode fallback exists in WinSparkle at all — checked current vslavik/winsparkle source, only DSA/EdDSA paths exist) | none pinned in repo | plugins/upd/upd.c:23-53; CI pulls WinSparkle-20151011 (.github/workflows/windows-build.yml:43); cross-checked against vslavik/winsparkle src/updatedownloader.cpp:198-219 and src/signatureverifier.cpp (only DSA-SHA1/EdDSA methods exist, no cert-matching fallback) |"
+    }
+  ]
 }

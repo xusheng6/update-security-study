@@ -5,14 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/tannerhelland/PhotoDemon",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "PhotoDemon’s package reader includes structural validation and conditional checksum handling. These facts do not establish independent publisher authentication or settle the original default-policy and impact claims.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Automatic self-updater downloads a .pdz2 over HTTPS from GitHub Pages and auto-executes a bundled PD_Update_Patcher.exe at shutdown; ExpectedChecksum defaults to skip — zero verification. Compromise of the GitHub Pages host = silent RCE.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "Embedded checksum enforcement is conditional on checksums being present; the source does not establish a publisher signature or signer trust root.",
-    "The source demonstrates update extraction and launch behavior but does not establish current released-artifact behavior or exploitability.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout. Embedded checksum enforcement is conditional on checksums being present; the source does not establish a publisher signature or signer trust root. The source demonstrates update extraction and launch behavior but does not establish current released-artifact behavior or exploitability."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "8357ce499191bf12b84091b936aa9424ac35022f"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "PhotoDemon’s package reader includes structural validation and conditional checksum handling. These facts do not establish independent publisher authentication or settle the original default-policy and impact claims.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "Embedded checksum enforcement is conditional on checksums being present; the source does not establish a publisher signature or signer trust root.",
+      "The source demonstrates update extraction and launch behavior but does not establish current released-artifact behavior or exploitability.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout. Embedded checksum enforcement is conditional on checksums being present; the source does not establish a publisher signature or signer trust root. The source demonstrates update extraction and launch behavior but does not establish current released-artifact behavior or exploitability."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none (checksum skipped)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-W2.md",
+      "line": 12,
+      "text": "| PhotoDemon | https://github.com/tannerhelland/PhotoDemon.git | 8357ce499 / 2026-08-18 | Y | Y (checked every session by default, `PDUF_EACH_SESSION`; user can set weekly/monthly/never) | **Y — fully automatic download + execute, no user confirmation required at the download/patch-apply step** | https to `tannerhelland.github.io` (GitHub Pages; `pdDownload.ctl` uses WinHTTP-backed async download — no TLS-bypass code found anywhere in repo) | N (plain HTML page on GitHub Pages with `<a id=\"pdv_*_start/end\">` tag markers, not signed) | **none** — the update-package download call passes no `checksumToVerify` argument (defaults to 0 = skip), so the only integrity mechanism the codebase supports (`pdDownload.ExpectedChecksum`, a non-cryptographic checksum) is never applied to the `.pdz2` update package itself | n/a (no signing key of any kind used for the self-update payload) | `Modules/UpdateEngine.bas:315,331,334` (`updateURL = \"https://tannerhelland.github.io/PhotoDemon-Updates-v2/auto/\" & track & \".pdz2\"`; `FormMain.RequestAsynchronousDownload(\"PD_UPDATE_PATCH\", updateURL, PD_PATCH_IDENTIFIER, vbAsyncReadForceUpdate, ...)` — **no checksum arg passed**), `:350-400` (`PatchProgramFiles()` extracts embedded `PD_Update_Patcher.exe` from the downloaded package and calls `ShellExecuteW` on it with no signature/hash check), `Controls/pdDownload.ctl:117-118,245-259` (`ExpectedChecksum As Long` — defaults 0 = \"checkSumPassed\" defaults TRUE / skipped), `Forms/MainWindow.frm:2630-2643` (`AsyncDownloader_FinishedOneItem` → on `PD_PATCH_IDENTIFIER` success calls `Updates.NotifyUpdatePackageAvailable`, which is applied automatically at next shutdown with no further gating). **Plugin/filter channel note:** PhotoDemon also supports loading native Photoshop-compatible `.8bf` filter plugins via a bundled `pspiHost.dll` (`Modules/Plugin_Management.bas:751`, `Forms/Effects_8bf.frm`) and ships UI text claiming it will \"download and configure\" optional codec libraries (libavif, libheif, etc.) on demand (`Forms/Tools_PluginManager.frm:731`), but no wired-up network-fetch call site for these optional DLLs was found in this snapshot — `GetPluginHomepage()`/`GetPluginLicenseURL()` only populate hyperlink controls pointing to the upstream project pages for manual user download, reusing none of the update-package download path. |"
+    }
+  ]
 }

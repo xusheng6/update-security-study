@@ -5,12 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/Codeux-Software/Textual",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In the reviewed Textual snapshot, Sparkle automatic updates use the HTTPS feed configured in the application plist and the app starts SPUStandardUpdaterController. The retained source does not establish a pinned EdDSA trust root or released artifact signing policy.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "Sparkle 2 with EdDSA by convention; pinned key not in repo (likely build-injected).",
   "limitations": [
-    "New default-branch snapshot rather than the original study checkout; SUPublicEDKey/key material, generated feeds, released artifacts, and independent release-signing verification remain unverified.",
-    "The snapshot is a newly retrieved default branch rather than the original study checkout; generated feeds, released artifacts, and build-injected key material remain unverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "4f093128cef99c5c0478ea548b9f3e5fd2543510"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In the reviewed Textual snapshot, Sparkle automatic updates use the HTTPS feed configured in the application plist and the app starts SPUStandardUpdaterController. The retained source does not establish a pinned EdDSA trust root or released artifact signing policy.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study checkout; SUPublicEDKey/key material, generated feeds, released artifacts, and independent release-signing verification remain unverified.",
+      "The snapshot is a newly retrieved default branch rather than the original study checkout; generated feeds, released artifacts, and build-injected key material remain unverified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "EdDSA (build-injected)",
+  "trust_root": "Sparkle 2 (key build-injected)",
+  "original_evidence": [
+    {
+      "file": "batch-AB3.md",
+      "line": 27,
+      "text": "| Textual | https://github.com/Codeux-Software/Textual | 4f093128cef99c5c0478ea548b9f3e5fd2543510 / 2026-07-02 | Y | Y (allowed) | Y | https, TLS validation not disabled anywhere in repo | Y (Sparkle 2 appcast, EdDSA-signed by convention) | signature (Sparkle 2 EdDSA) | not committed to repo — likely injected at release-build time (standard Sparkle 2 practice; `SUPublicEDKey` absent from tracked `Info.plist`, could not confirm pin from source alone) | `Sources/App/Classes/Controllers/TXMenuController.m:2984-2989` (`SPUStandardUpdaterController` — Sparkle 2 API); `Sources/App/Resources/Property Lists/Application Properties/Info.plist:102-113` (`SUFeedURL` = `https://updates.textualapp.com/sparkle/feeds/v7/feed-one-merged.xml`, `SUAllowsAutomaticUpdates` = true). |"
+    }
+  ]
 }

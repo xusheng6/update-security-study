@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/ferdium/ferdium-app",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The recovered Ferdium source confirms framework-based updating but does not show an app-level payload signature; the recorded C assessment is retained narrowly, with framework enforcement left external.",
+  "description": "Disabled the code-signature check with a comment: 'to allow auto-update without signed certificate'.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; historical release/build behavior may differ.",
-    "Repository origin and commit were checked against the candidate metadata; this source is project-associated but does not establish the original study release checkout."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,24 @@
       "commit": "fd86d0090070128a52390f476ca78713bba038f6"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The recovered Ferdium source confirms framework-based updating but does not show an app-level payload signature; the recorded C assessment is retained narrowly, with framework enforcement left external.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; historical release/build behavior may differ.",
+      "Repository origin and commit were checked against the candidate metadata; this source is project-associated but does not establish the original study release checkout."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "hash-from-manifest",
+  "trust_root": "server-TLS",
+  "original_evidence": []
 }

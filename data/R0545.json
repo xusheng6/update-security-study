@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/maxpozdeev/mytinytodo",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The updater downloads the tarball and extracts it over MTTPATH without integrity verification.",
+  "description": "Bundled Updater downloads a tar.gz and extracts it over the app with no integrity verification.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "3f06d51072d939e168d1d95c44df2051b3150e54"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The updater downloads the tarball and extracts it over MTTPATH without integrity verification.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AI3.md",
+      "line": 34,
+      "text": "| MyTinyTodo | https://github.com/maxpozdeev/mytinytodo | 3f06d51 / 2026-08-02 | Y | N (admin must click \"Check for updates\" then \"Update\" in the bundled Updater extension's settings panel) | Y | https (`api.github.com` for version check via `file_get_contents()`; asset `browser_download_url` for the tar.gz — no `verify_peer=>false` or similar found in the stream context) | N | none — downloaded tar.gz is extracted straight over the app directory via shell `tar xzf` with **no hash or signature check** | N/A | `src/ext/updater/class.updater.php:44` (`requestJson()` hits `https://api.github.com/repos/maxpozdeev/mytinytodo/releases`), `:96-108` (`download()` — plain `fopen()`/`file_put_contents()`, no integrity check), `:113-135` (`extractAndReplace()` — `exec(\"tar xzf ... --strip-components 1 -C $dir\")` over `MTTPATH` with zero verification); triggered via `src/ext/updater/class.controller.php` `postCheck()`/`postUpdate()` admin API endpoints |"
+    }
+  ]
 }

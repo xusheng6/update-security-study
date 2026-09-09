@@ -5,15 +5,37 @@
   "historical_tier": "A",
   "project_url": "",
   "channel": "unresolved",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Withdraw the original security classification. A matching historical ClashX source snapshot is not retained; a fork is not interchangeable evidence.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Sparkle EdDSA pinned; auto-starts updater.",
   "limitations": [
-    "No matching retained checkout or verified archive is available; a named fork was not treated as evidence for the original product.",
-    "A matching historical ClashX source snapshot is not retained; a fork is not interchangeable evidence. Reinstating the original classification requires that missing evidence."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Withdraw the original security classification. A matching historical ClashX source snapshot is not retained; a fork is not interchangeable evidence.",
+    "limitations": [
+      "No matching retained checkout or verified archive is available; a named fork was not treated as evidence for the original product.",
+      "A matching historical ClashX source snapshot is not retained; a fork is not interchangeable evidence. Reinstating the original classification requires that missing evidence."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[Sparkle-EdDSA]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-M1.md",
+      "line": 16,
+      "text": "| ClashX | repo removed — see note | Sparkle 2.x (`SPUStandardUpdaterController`) | Y | Y — updater is started automatically at app launch (`startingUpdater: true`), independent of any user action | Y (once user approves the Sparkle prompt) | https (`SUFeedURL`=`https://clashx-pro.github.io/ClashX/appcast.xml`) | Sparkle-EdDSA | signature (EdDSA) | pinned-in-binary (`SUPublicEDKey` in Info.plist) | ClashX/Info.plist:131-134 (`SUPublicEDKey`=`O+gNSh16a5FEGHwPrffpFzE35WbN/wjOctobXqHrUWU=`, `SUFeedURL`); ClashX/General/Managers/AutoUpgardeManager.swift:12-46 (`SPUStandardUpdaterController(startingUpdater: true, ...)`); live fetch of the appcast on 2026-08-19 shows current release v1.140.0 (24 Jul 2026) with a valid `sparkle:edSignature` — actively maintained. **NOTE on repo identity**: the originally-named `github.com/yichengchen/clashX` returns HTTP 404 (repo removed/private) as of this research date; `https://github.com/ClashX-Pro/ClashX` is the community-maintained continuation and is what the live `SUFeedURL` above actually serves from (`clashx-pro.github.io`) |"
+    }
+  ]
 }

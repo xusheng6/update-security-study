@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/lutris/lutris",
   "channel": "data",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Lutris has a runtime-component update channel. The inspected component performs a basic non-empty-content check, which is not publisher authentication; the broader verification policy remains unestablished.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Wine/DXVK runtime components auto-downloaded with only a non-empty-file check.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
-    "The lower SimpleDownloader/HTTP certificate behavior and the primary Lutris application updater were not audited.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; The lower SimpleDownloader/HTTP certificate behavior and the primary Lutris application updater were not audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "abcefd06481b36eaed051b669884f389b1eb8e6d"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Lutris has a runtime-component update channel. The inspected component performs a basic non-empty-content check, which is not publisher authentication; the broader verification policy remains unestablished.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
+      "The lower SimpleDownloader/HTTP certificate behavior and the primary Lutris application updater were not audited.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; The lower SimpleDownloader/HTTP certificate behavior and the primary Lutris application updater were not audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "components",
+  "transport": "https (certifi)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": []
 }

@@ -5,12 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/manga-download/hakuneko",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "Targeted retained-source read supports the narrow Tier A behavior for this primary application updater: HakuNeko contains a hardcoded RSA public key in application configuration; the updater uses this independent key to verify the signed cache payload.",
+  "description": "Update verified against an RSA public key hardcoded in source — survives full CDN/domain takeover.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in pinned key/configuration.",
-    "Framework verification depends on the packaged updater implementation where the application delegates to Sparkle or tauri-plugin-updater."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "128f3c771c7d50bf4eec19638d480f133469eca8"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow Tier A behavior for this primary application updater: HakuNeko contains a hardcoded RSA public key in application configuration; the updater uses this independent key to verify the signed cache payload.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in pinned key/configuration.",
+      "Framework verification depends on the packaged updater implementation where the application delegates to Sparkle or tauri-plugin-updater."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "RSA-SHA256 signature",
+  "trust_root": "pubkey hardcoded in source",
+  "original_evidence": [
+    {
+      "file": "batch-AK7.md",
+      "line": 21,
+      "text": "| hakuneko | https://github.com/manga-download/hakuneko | 128f3c77 / 2026-03-29 | Y | Y (runs automatically on app start) | Y (downloads a cache archive and applies it to the app's JS/HTML runtime bundle) | https (GitHub Pages) | Y — RSA-SHA256 signature over the payload | signature (RSA-SHA256) | **pinned-in-binary** — hardcoded PEM public key in source (`Configuration.js`), independent of the download host | src/app/Updater.js:20-31; src/app/UpdatePackageInfo.js:17-24; src/app/Configuration.js:5-13,51-53 |"
+    }
+  ]
 }

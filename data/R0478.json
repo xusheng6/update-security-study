@@ -5,12 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://gitlab.com/volian/nala",
   "channel": "package-manager",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Targeted retained-source read supports the narrow package-manager behavior: Nala rejects untrusted package URIs unless the explicit allow-unauthenticated configuration is enabled; package authentication is delegated to apt metadata/keyrings.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "No self-update; apt/rust-apt backend, repo GPG preserved.",
   "limitations": [
-    "This application delegates payload verification to PackageKit/Flatpak/snapd/apt backends; the external backend version and active keyring are outside this checkout.",
-    "This evidence does not establish a complete primary self-updater classification."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "6d84cb1dda4f8b19fb7aa938f32ff45d55232b89"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow package-manager behavior: Nala rejects untrusted package URIs unless the explicit allow-unauthenticated configuration is enabled; package authentication is delegated to apt metadata/keyrings.",
+    "limitations": [
+      "This application delegates payload verification to PackageKit/Flatpak/snapd/apt backends; the external backend version and active keyring are outside this checkout.",
+      "This evidence does not establish a complete primary self-updater classification."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "apt GPG",
+  "trust_root": "apt keyring",
+  "original_evidence": [
+    {
+      "file": "batch-AE2.md",
+      "line": 21,
+      "text": "| nala | https://gitlab.com/volian/nala.git | 6d84cb1dda4f8b19fb7aa938f32ff45d55232b8 / 2026-08-09 | N | N | Y | https (Acquire), TLS enforced by rust-apt/libapt-pkg | Y (APT Release file GPG-signed) | hash (SHA256/SHA512 from signed Release metadata; MD5/SHA1 explicitly rejected) + GPG on Release; unauthenticated fetch blocked unless opted in | OS keystore `/etc/apt/trusted.gpg.d` | `src/hashsum.rs:1-131`; `src/download/downloader.rs:71-93` `untrusted_error()` blocks install unless `config.allow_unauthenticated()`; `src/config/configuration.rs:254-257` gated by explicit `--allow-unauthenticated` / `-o APT::Get::AllowUnauthenticated=true`; Cargo.toml binds `rust-apt` directly (no apt-get subprocess) |"
+    }
+  ]
 }

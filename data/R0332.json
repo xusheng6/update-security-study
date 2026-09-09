@@ -5,14 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/SagerNet/sing-box",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected sing-box Windows daemon update code includes version eligibility and signer-continuity checks. The complete certificate-trust policy and release coverage require separate evidence; no overall tier is certified.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "Windows daemon self-update: real Authenticode + signer-continuity pinning. External-UI downloader is C-equiv; rule-set updater is a data channel.",
   "limitations": [
-    "The inspected implementation is the experimental Windows boxdd daemon path; it does not by itself establish all sing-box distribution or UI updater paths.",
-    "The retained source does not show how an installer is acquired or prove a historical released artifact used this path.",
-    "The external UI downloader and rule-set updater were not classified from the available contextual source.",
-    "The inspected implementation is the experimental Windows boxdd daemon path; it does not by itself establish all sing-box distribution or UI updater paths. The retained source does not show how an installer is acquired or prove a historical released artifact used this path. The external UI downloader and rule-set updater were not classified from the available contextual source."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,42 @@
       "commit": "60b504a1c74a33fe24872c8144c8f0b7d3d61b2a"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected sing-box Windows daemon update code includes version eligibility and signer-continuity checks. The complete certificate-trust policy and release coverage require separate evidence; no overall tier is certified.",
+    "limitations": [
+      "The inspected implementation is the experimental Windows boxdd daemon path; it does not by itself establish all sing-box distribution or UI updater paths.",
+      "The retained source does not show how an installer is acquired or prove a historical released artifact used this path.",
+      "The external UI downloader and rule-set updater were not classified from the available contextual source.",
+      "The inspected implementation is the experimental Windows boxdd daemon path; it does not by itself establish all sing-box distribution or UI updater paths. The retained source does not show how an installer is acquired or prove a historical released artifact used this path. The external UI downloader and rule-set updater were not classified from the available contextual source."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "Authenticode + signer-continuity",
+  "trust_root": "OS keystore (pinned signer)",
+  "original_evidence": [
+    {
+      "file": "batch-W6.md",
+      "line": 19,
+      "text": "| sing-box — **Windows desktop daemon self-update** | https://github.com/SagerNet/sing-box | 2b12b99 / 2026-08-19 | Y | N (triggered via local gRPC/UI action; installer path handed to daemon, download step itself not in this repo) | Y | n/a for this repo (installer already on disk when handed to daemon) | Y (Authenticode) | signature (Authenticode via `WinVerifyTrust`) + **signer-continuity pinning**: extracted signer cert bytes must equal the signer of the *currently running* daemon | OS keystore (Authenticode/WinTrust chain) **plus** self-referential pin (`daemonSigner` read from the running trusted binary at startup, not literally hardcoded) | `experimental/boxdd/update_windows.go:29-90` (`installUpdate`: NSIS structural check + Authenticode signer compared via `bytes.Equal(installerSigner, platform.daemonSigner)`), `experimental/boxdd/authenticode_windows.go:28-84` (`authenticodeSigner` uses real `WinVerifyTrustEx`), `experimental/boxdd/peer_windows.go:58-64` (`daemonSigner` derived from own running executable's Authenticode cert) |"
+    },
+    {
+      "file": "batch-W6.md",
+      "line": 20,
+      "text": "| sing-box — **rule-set auto-updater** (data channel, noted per instructions) | (same repo) | | Y | Y (interval-based) | N (loaded as routing rules, not executed code) | https by default via generic `httpClientManager` (standard Go TLS, no InsecureSkipVerify found for this path; `InsecureSkipVerify` hits elsewhere in repo are for user-configured outbound proxy TLS, e.g. REALITY, unrelated) | N | none (routing rule data) | n/a | `route/rule/rule_set_updater.go:1-80` (loop updater), `route/rule/rule_set_remote.go:44-98,291-312` (http.Client via resolveTransport) |"
+    },
+    {
+      "file": "batch-W6.md",
+      "line": 21,
+      "text": "| sing-box — **external UI (Yacd-meta dashboard) downloader**, content-as-code side channel (C-equivalent) | (same repo) | | Y | Y (auto on first run if dir empty) or via clash-API `POST /upgrade/ui` | Y (downloads and serves a JS/HTML dashboard bundle) | https, TLS validated (`RootCAs: adapter.RootPoolFromContext`, no InsecureSkipVerify) | N | none | server-supplied / unpinned (no hash/signature check of the zip at all) | `experimental/clashapi/server_resources.go:22-83` (`downloadExternalUI`, default `https://github.com/MetaCubeX/Yacd-meta/archive/gh-pages.zip`, straight `zip.OpenReader` extraction with zero verification), `experimental/clashapi/api_meta_upgrade.go:1-32` (`/upgrade/ui` endpoint) |"
+    }
+  ]
 }

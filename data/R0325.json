@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/Tunnelblick/Tunnelblick",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+  "description": "Custom ECDSA-SHA256 signing of appcast + payload, key pinned in the app bundle.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "8ba2e3e5b2c4861429cf3fde030600efa5b02cca"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "ECDSA-SHA256 signature",
+  "trust_root": "key pinned in Info.plist",
+  "original_evidence": [
+    {
+      "file": "batch-W6.md",
+      "line": 29,
+      "text": "| Tunnelblick | https://github.com/Tunnelblick/Tunnelblick | 9e5afa8 / 2026-08-20 | Y | Y | Y | https via `NSURLConnection` with no custom authentication-challenge/trust override found (default macOS cert validation enforced) | Y (custom appcast, not vanilla Sparkle) | signature (ECDSA/SHA-256, X9.62 format) on **both** the appcast XML and the update .zip payload | **pinned-in-binary** (`SUPublicDSAKey` embedded in the signed app's `Info.plist`, loaded via `TunnelblickInfo.m`, only overridable by a local admin-forced preference — not network-supplied) | `tunnelblick/Info.plist:129-130` (`SUPublicDSAKey`), `tunnelblick/TunnelblickInfo.m:232-242` (`updateTunnelblickPublicDSAKey` reads `SUPublicDSAKey` from Info.plist), `tunnelblick/TBValidator.m:75-252` (`validateAppcastData`/`validateUpdateData`, both call `UpdateSigning verifyData:signatureBase64:publicKeyBase64:`), `tunnelblick/TBDownloader.m:97` (plain `NSURLConnection`, no trust bypass) |"
+    }
+  ]
 }

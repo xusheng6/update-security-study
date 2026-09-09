@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/rust-lang/rustup",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The inspected rustup self-update body supports a primary C observation, but the prior SHA-256 claim does not apply to this self-update path: it directly uses DownloadOptions::download and then runs the downloaded rustup-init. The repository has a separate checksum helper for distribution downloads, but that is not called by prepare_update in the cited code.",
+  "description": "SHA-256 mandatory, but PGP signature verification was DROPPED — only a dead pgp_keys field remains. A 'built then removed' case.",
   "limitations": [
-    "Newly retrieved snapshot at the recorded commit, not historical release verification.",
-    "No cryptographic verification of the rustup-init payload is established by the self-update body.",
-    "The DownloadOptions transport implementation and release hosting are separate boundaries."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "9a634dac14ad74ce1c8128bb9c9567e7668b0f93"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected rustup self-update body supports a primary C observation, but the prior SHA-256 claim does not apply to this self-update path: it directly uses DownloadOptions::download and then runs the downloaded rustup-init. The repository has a separate checksum helper for distribution downloads, but that is not called by prepare_update in the cited code.",
+    "limitations": [
+      "Newly retrieved snapshot at the recorded commit, not historical release verification.",
+      "No cryptographic verification of the rustup-init payload is established by the self-update body.",
+      "The DownloadOptions transport implementation and release hosting are separate boundaries."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "self-update",
+  "transport": "https (validated)",
+  "payload_verification": "hash (SHA-256)",
+  "trust_root": "none",
+  "original_evidence": []
 }

@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/OrangeDrangon/android-messages-desktop",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Android Messages Desktop configures electron-updater with automatic download and install disabled, and asks the user before downloading and again before restart installation. The source does not establish OS code-signing enforcement.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater, user-gated, OS code-signing.",
   "limitations": [
-    "Newly recovered source snapshot; historical release behavior is not reverified.",
-    "electron-updater and released OS signing enforcement are external to this source.",
-    "Newly recovered source snapshot; historical release behavior is not reverified. electron-updater and released OS signing enforcement are external to this source."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "8a700ab5248db525c9eb56417a432fd57c7a418d"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Android Messages Desktop configures electron-updater with automatic download and install disabled, and asks the user before downloading and again before restart installation. The source does not establish OS code-signing enforcement.",
+    "limitations": [
+      "Newly recovered source snapshot; historical release behavior is not reverified.",
+      "electron-updater and released OS signing enforcement are external to this source.",
+      "Newly recovered source snapshot; historical release behavior is not reverified. electron-updater and released OS signing enforcement are external to this source."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "OS code-signing",
+  "trust_root": "electron-updater",
+  "original_evidence": [
+    {
+      "file": "batch-AM7.md",
+      "line": 11,
+      "text": "| Android Messages Desktop | https://github.com/OrangeDrangon/android-messages-desktop.git | (see repo) | Y | Y (silent check on launch, `checkForUpdate(false)`) | Y (user must click \"Download & Install\" then \"Restart Now\"; not silent) | https (GitHub releases, `provider: \"github\"`) | B-style (electron-updater) | electron-updater built-in OS code-sign check (no extra app-level hash/sig check found) | **OS keystore** (Authenticode/notarization via electron-updater/electron-builder defaults) | src/helpers/autoUpdate.ts:9-10,70-131 (autoDownload=false, autoInstallOnAppQuit=false, manual confirm flow), src/background.ts:100 (`checkForUpdate(false)`), electron-builder.config.js:13 (`provider: \"github\"`) |"
+    }
+  ]
 }

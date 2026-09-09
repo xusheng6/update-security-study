@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/signalapp/Signal-Desktop",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+  "description": "Payload signed vs a pinned Curve25519/XEdDSA key, over a connection with a pinned CA cert. Strongest in the batch.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "aee156c662c64dc6cbe5e363325565f5cbd7203a"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "Curve25519/XEdDSA signature",
+  "trust_root": "pinned key + pinned CA cert",
+  "original_evidence": [
+    {
+      "file": "batch-U8.md",
+      "line": 20,
+      "text": "| Signal Desktop | https://github.com/signalapp/Signal-Desktop | 57194b0 / 2026-08-19 | Y | Y | Y | https, TLS enforced **+ pinned CA cert** (`config/default.json:23`, Signal's own Root CA baked into config, used by `got.main.ts:23-46` for all update fetches — pins the CA, not just OS trust store) | No (release feed itself unsigned; app-level payload sig is what matters) | hash+sig (SHA-256 + Curve25519/XEdDSA) | pinned-in-binary (`config/default.json:12`; Linux AppImage build uses a separate pinned `appImageUpdatesPublicKey`, `config/default.json:13` / `ts/updater/linuxAppImage.main.ts:58-59`) | ts/updater/common.main.ts:311-312,423-436; ts/updater/signature.node.ts:39-42; config/default.json:12,13,23; ts/updater/got.main.ts:23-46 |"
+    }
+  ]
 }

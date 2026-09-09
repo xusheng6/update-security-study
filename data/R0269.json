@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/clementine-player/Clementine",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Clementine's recovered macOS bundle metadata configures the Sparkle feed at https://clementine-data.appspot.com/sparkle and names sparkle_pub.pem as SUPublicDSAKeyFile. The snapshot does not establish Sparkle runtime enforcement, historical release behavior, or the Windows update-check implementation.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "macOS legacy Sparkle 1.x, DSA pinned (weak 1024-bit but sound architecture). Windows 'check for updates' is dead code (no-op).",
   "limitations": [
-    "New default-branch snapshot rather than historical release re-verification; Sparkle framework call sites, released macOS artifacts, key-size interpretation, and Windows update behavior were not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,34 @@
       "commit": "a4b3599ecd10662487bf22a1a14c4293467e2485"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Clementine's recovered macOS bundle metadata configures the Sparkle feed at https://clementine-data.appspot.com/sparkle and names sparkle_pub.pem as SUPublicDSAKeyFile. The snapshot does not establish Sparkle runtime enforcement, historical release behavior, or the Windows update-check implementation.",
+    "limitations": [
+      "New default-branch snapshot rather than historical release re-verification; Sparkle framework call sites, released macOS artifacts, key-size interpretation, and Windows update behavior were not established."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "legacy DSA signature (1024-bit)",
+  "trust_root": "Sparkle DSA key bundled (mac)",
+  "original_evidence": [
+    {
+      "file": "batch-S3.md",
+      "line": 12,
+      "text": "| Clementine | https://github.com/clementine-player/Clementine.git | d6407152dc369b8925fa5702a1e307ccc527a4a8 (2026-08-13) | Y (macOS only, functional) | Y | Y (macOS only) | https (SUFeedURL), TLS enforced | Y | signature (legacy Sparkle 1.x, 1024-bit DSA — weak/deprecated algorithm) | pinned key bundled as resource — `dist/sparkle_pub.pem` installed into `Contents/Resources` | `dist/Info.plist.in:37-40` (SUFeedURL + SUPublicDSAKeyFile); `dist/sparkle_pub.pem:1-5`; `src/core/mac_startup.mm:54-56,276-289`; **Windows menu entry is dead code** — `src/ui/mainwindow.cpp:2431-2434` `CheckForUpdates()` body is `#if defined(Q_OS_DARWIN)` only, so the Win32 menu item (`mainwindow.cpp:847-853`) silently no-ops |"
+    },
+    {
+      "file": "batch-S3.md",
+      "line": 25,
+      "text": "| Clementine | **A** | macOS: legacy Sparkle 1.x, DSA signature checked against a pubkey file bundled in the app resources. Weak 1024-bit DSA algorithm is a caveat but the pinned-key architecture is intact. Windows menu entry is dead code; Linux has none. |"
+    }
+  ]
 }

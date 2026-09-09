@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/lorainelab/integrated-genome-browser",
   "channel": "plugin",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "IGB installs a global trust-all manager before plugin traffic; its OSGi plugin channel is affected, while the separate install4j binary updater is outside this source control and is code-signed.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "install4j updater over HTTPS with code-signing, BUT the app installs two trust-all X509TrustManagers at startup (disableSSLCertValidation), disabling TLS validation app-wide before any update/plugin traffic. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,23 @@
       "commit": "6c688a5f2429775dae7253a80db7ec59bb184340"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "IGB installs a global trust-all manager before plugin traffic; its OSGi plugin channel is affected, while the separate install4j binary updater is outside this source control and is code-signed.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https (validation off)",
+  "payload_verification": "OS code-signing (defeated)",
+  "trust_root": "—",
+  "original_evidence": []
 }

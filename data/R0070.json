@@ -5,11 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/rancher-sandbox/rancher-desktop",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Rancher Desktop’s MSI updater supplies SHA-512 metadata to its updater and conditionally verifies the MSI signature against publisherName from electron-builder configuration. The effective release publisher configuration is required before claiming this check always runs.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "Custom MSIUpdater layers an Authenticode publisher check on top of SHA512.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not original study checkout; this is limited to the MSI updater path and configured publisher controls."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,23 @@
       "commit": "5268253535f1a3acf05787d2a20bafc84be2abcc"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Rancher Desktop’s MSI updater supplies SHA-512 metadata to its updater and conditionally verifies the MSI signature against publisherName from electron-builder configuration. The effective release publisher configuration is required before claiming this check always runs.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not original study checkout; this is limited to the MSI updater path and configured publisher controls."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "hash + Win Authenticode",
+  "trust_root": "OS-trust-store",
+  "original_evidence": []
 }

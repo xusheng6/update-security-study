@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/OpenMPT/openmpt",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "OpenMPT verifies update-info JWS signatures before accepting the update; signing keys are fetched from configured HTTPS anchors.",
+  "description": "Auto-downloads + ShellExecutes an installer over HTTPS and verifies a JWS/RSA-PSS signature — but the signing public keys are fetched live from a configurable URL, not pinned in the binary. Server-supplied trust (same failure shape as Binary Ninja).",
   "limitations": [
-    "Newly retrieved source snapshot at the recorded commit; this is not historical release re-verification. Released artifact behavior and external framework enforcement remain unverified.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "f83cedb0cd5446e4dfaa83ac97e3087107e26767"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "OpenMPT verifies update-info JWS signatures before accepting the update; signing keys are fetched from configured HTTPS anchors.",
+    "limitations": [
+      "Newly retrieved source snapshot at the recorded commit; this is not historical release re-verification. Released artifact behavior and external framework enforcement remain unverified.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "JWS/RSA-PSS signature",
+  "trust_root": "keys fetched live over HTTPS (configurable URL, NOT pinned)",
+  "original_evidence": [
+    {
+      "file": "batch-U1.md",
+      "line": 10,
+      "text": "| OpenMPT | https://github.com/OpenMPT/openmpt.git | 0eafb12 / 2026-08-19 | Y | Y (auto-check by default, \"suitable moment\" heuristic) | **Y** — downloads installer/archive and launches it via `ShellExecute` (or generates & runs a PowerShell/VBS updater script) | **https**, cert validation enforced (WinInet; only HTTP downgrade path is gated behind `IsBefore(WinVista)` legacy XP check) | Y — JWS (RSASSA-PSS) signature over the update-info JSON | signature (RSA-PSS JWS) + secondary checksum; signature check is on by default (`UpdateSkipSignatureVerificationUNSECURE` defaults `false`) | **server-supplied** — signing public keys are fetched at check-time via HTTPS from configurable \"root anchor\" URLs (`https://update.openmpt.de/update/`, `https://demo-scene.de/openmpt/update/` → `signingkeys.jwkset.json`); **not pinned in the binary** | `mptrack/UpdateCheck.h:61-62,438-452`; `mptrack/UpdateCheck.cpp:1153-1215` (fetch+verify), `:1356,1404,1434` (`ShellExecute` launch of downloaded installer/script) |"
+    }
+  ]
 }

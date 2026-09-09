@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Zettlr/Zettlr",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Zettlr’s inspected updater obtains release metadata and a SHA256SUMS asset through its release service, retrieves the compatible asset, and compares its computed SHA-256 with the parsed checksum before opening it. No independent signing key is visible in this updater code; transport and release-service trust remain outside the read.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Checksum fetched from the same untrusted host as the binary — no independent trust root.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
-    "The inspected updater does not show an independent signing key; the external API, HTTPS implementation, and release publication controls were not audited.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; The inspected updater does not show an independent signing key; the external API, HTTPS implementation, and release publication controls were not audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "a143cc1c7518def522ab2bb7d31f0794e9262da3"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Zettlr’s inspected updater obtains release metadata and a SHA256SUMS asset through its release service, retrieves the compatible asset, and compares its computed SHA-256 with the parsed checksum before opening it. No independent signing key is visible in this updater code; transport and release-service trust remain outside the read.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
+      "The inspected updater does not show an independent signing key; the external API, HTTPS implementation, and release publication controls were not audited.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; The inspected updater does not show an independent signing key; the external API, HTTPS implementation, and release publication controls were not audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (got)",
+  "payload_verification": "SHA-256 (same host)",
+  "trust_root": "none",
+  "original_evidence": []
 }

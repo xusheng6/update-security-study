@@ -5,14 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/ampache/ampache",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected Ampache updater source documents database migration orchestration only. The asserted admin git pull/composer/npm exec update path and its commit-verification behavior remain unsubstantiated by this source snapshot.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Admin git pull + composer/npm install via exec() — arbitrary build-script + PHP execution, no commit verification.",
   "limitations": [
-    "The current source snapshot may differ from the historical release under the original claim.",
-    "Deployment scripts and administrator environment behavior were not treated as evidence of an application exec path.",
-    "No source evidence here establishes commit verification or its absence in an alternate update mechanism.",
-    "The current snapshot may differ from the historical release, and deployment scripts or another administrator update mechanism were not reviewed. The missing asserted path here is an evidence gap, not proof that Ampache is safe, that no such path exists elsewhere, or that commit verification is absent project-wide."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "58503596dd60238958baf19e62a07baaa703a932"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected Ampache updater source documents database migration orchestration only. The asserted admin git pull/composer/npm exec update path and its commit-verification behavior remain unsubstantiated by this source snapshot.",
+    "limitations": [
+      "The current source snapshot may differ from the historical release under the original claim.",
+      "Deployment scripts and administrator environment behavior were not treated as evidence of an application exec path.",
+      "No source evidence here establishes commit verification or its absence in an alternate update mechanism.",
+      "The current snapshot may differ from the historical release, and deployment scripts or another administrator update mechanism were not reviewed. The missing asserted path here is an evidence gap, not proof that Ampache is safe, that no such path exists elsewhere, or that commit verification is absent project-wide."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AC2.md",
+      "line": 17,
+      "text": "| Ampache | https://github.com/ampache/ampache | 58503596dd60 / 2026-08-20 | Y | N (auto version-check only; the actual \"pull sources\" action requires an authenticated ADMIN to click Update in the web UI) | Y (for git-based installs) | https (git pull over https:// URL — TLS enforced by libcurl/git defaults; GitHub API calls use WpOrg\\Requests over https, comment in code literally says \"https is mandatory\") | N | none — `git pull` fetches whatever HEAD of the branch currently is; no GPG-signed-tag/commit verification, no hash check on the fetched sources or on the release zip before it is offered for manual download | N/A — no pinned key anywhere; trust is placed entirely in GitHub's TLS endpoint | src/Module/System/AutoUpdate.php:461-502 (update_files(): `git pull https://github.com/ampache/ampache.git` executed via `exec()`, no signature/commit verification); :175-200 (github_request(), HTTPS GitHub API, comment \"https is mandatory\" but no cert-pinning); :370-456 (update_dependencies() then runs `composer install` and `npm install`+`npm run build`, i.e. executes arbitrary post-install/build scripts from fetched dependencies); src/Module/Application/Update/UpdateAction.php:70-100 (gates the pull-and-exec path behind `AccessLevelEnum::ADMIN`, so it is admin-triggered not silent/auto) |"
+    }
+  ]
 }

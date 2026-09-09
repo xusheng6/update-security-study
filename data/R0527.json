@@ -5,12 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/git-up/GitUp",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "Targeted retained-source read supports the narrow Tier A behavior for this primary application updater: GitUp embeds SUPublicEDKey in Info.plist; AppDelegate starts Sparkle and calls checkForUpdatesInBackground unless the disable preference is set.",
+  "description": "Sparkle with pinned EdDSA key.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in pinned key/configuration.",
-    "Framework verification depends on the packaged updater implementation where the application delegates to Sparkle or tauri-plugin-updater."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "5272b2b01a581ce2287e34131ff95493a241a321"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow Tier A behavior for this primary application updater: GitUp embeds SUPublicEDKey in Info.plist; AppDelegate starts Sparkle and calls checkForUpdatesInBackground unless the disable preference is set.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in pinned key/configuration.",
+      "Framework verification depends on the packaged updater implementation where the application delegates to Sparkle or tauri-plugin-updater."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "EdDSA signature",
+  "trust_root": "Sparkle SUPublicEDKey pinned in Info.plist",
+  "original_evidence": [
+    {
+      "file": "batch-AH3.md",
+      "line": 27,
+      "text": "| GitUp | https://github.com/git-up/GitUp.git | 5272b2b / 2026-07-26 | Y | Y (default, opt-out pref) | Y | https (`kURL_AppCast` in `Common.h`) | not separately signed, but enclosure carries EdDSA sig | signature (Sparkle EdDSA) | **pinned-in-binary** (`SUPublicEDKey` embedded in `Info.plist`) | `GitUp/Application/Info.plist:5-6` (`SUPublicEDKey`); `GitUp/Application/AppDelegate.m:206-215` (`SPUStandardUpdaterController`, `automaticallyChecksForUpdates = YES` unless `DisableSparkle` pref set, `checkForUpdatesInBackground`); `GitUp/Application/Common.h:34` (`kURL_AppCast` https) |"
+    }
+  ]
 }

@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/gitahead/gitahead",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "GitAhead’s updater helper uses Qt’s NoLessSafeRedirectPolicy and reports network errors. The original assertions about persistent TLS exceptions and the complete artifact-verification policy remain unsubstantiated by this bounded source review.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Auto-downloads+installs the installer with no hash/sig; a user Ignore of SSL errors persists as a bypass.",
   "limitations": [
-    "Newly retrieved source snapshot, not proof of original-release behavior.",
-    "The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified.",
-    "Newly retrieved source snapshot, not proof of original-release behavior.; The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "1cfc416b6d83bf76ecbfd8272d29a880c7868dd0"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "GitAhead’s updater helper uses Qt’s NoLessSafeRedirectPolicy and reports network errors. The original assertions about persistent TLS exceptions and the complete artifact-verification policy remain unsubstantiated by this bounded source review.",
+    "limitations": [
+      "Newly retrieved source snapshot, not proof of original-release behavior.",
+      "The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified.",
+      "Newly retrieved source snapshot, not proof of original-release behavior.; The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (user can persist SSL-ignore)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-H5.md",
+      "line": 4,
+      "text": "| GitAhead | github.com/gitahead/gitahead | Qt/C++ (archived, last release ~2020) | Y | notify+manual by default; auto-download if `update/download` setting enabled and same major version | Y | HTTPS; TLS validation ENFORCED by default but user-bypassable (prompt \"Ignore\" persists `ssl/ignore=true`) | N (plain changelog.md, not a signed manifest) | none (no hash or signature check on downloaded installer/dmg/exe; relies only on HTTPS transport + implicit OS code-signing checks, e.g. macOS Gatekeeper on the .app / Windows ShellExecute of the .exe) | n/a (no signing key used by app) | src/update/Updater.cpp:47 (kLinkFmt github releases URL, HTTPS), :70 (sslErrors wired), :105-174 (update() fetches raw changelog.md over HTTPS, parses version, builds download link, no hash field), :176-222 (download() saves reply bytes directly to temp file, no checksum/signature check anywhere), src/update/Updater_win.cpp:22 (ShellExecuteW runs downloaded .exe directly), src/update/Updater_mac.mm:73-122 (mounts downloaded .dmg, copies .app over existing bundle, no codesign/notarization check in app code), src/app/Application.cpp:284-310 (handleSslErrors: `ssl/ignore` settings bypass, reply->ignoreSslErrors(errors)) |"
+    }
+  ]
 }

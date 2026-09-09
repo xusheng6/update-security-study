@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/lwouis/alt-tab-macos",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "AltTab configures Sparkle with a pinned SUPublicEDKey and scheduled automatic checks; its delegate supplies the appcast URL and the app starts Sparkle after launch. Runtime signature enforcement is delegated to Sparkle, and this snapshot does not reverify the historical release.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Sparkle EdDSA pinned.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; Sparkle's dependency-level verifier and historical release artifact signing were not independently reverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "2f3c67739211f790b8f949f427ccb0575c8684a8"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "AltTab configures Sparkle with a pinned SUPublicEDKey and scheduled automatic checks; its delegate supplies the appcast URL and the app starts Sparkle after launch. Runtime signature enforcement is delegated to Sparkle, and this snapshot does not reverify the historical release.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; Sparkle's dependency-level verifier and historical release artifact signing were not independently reverified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[Sparkle-EdDSA]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-K1.md",
+      "line": 9,
+      "text": "| AltTab | lwouis/alt-tab-macos | Sparkle | Y | chk: auto=true by default (`SUEnableAutomaticChecks`); dl/inst: user-selectable policy (`automaticallyDownloadsUpdates` set from an autoInstall preference) | Y | https (`https://alt-tab.app/appcast.xml`, domain from xcconfig) | Sparkle-EdDSA (no DSA key found) | signature[EdDSA] | pinned-in-binary | Info.plist:61-64; src/api/Endpoints.swift:6-7; config/base.xcconfig:24-25; src/vendors/SparkleDelegate.swift:26-28; src/events/PreferencesEvents.swift:85 |"
+    }
+  ]
 }

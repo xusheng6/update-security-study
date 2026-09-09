@@ -5,12 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://gitlab.gnome.org/GNOME/gnome-packagekit",
   "channel": "package-manager",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Targeted retained-source read supports the narrow package-manager behavior: gnome-packagekit presents a modal warning when PackageKit reports an untrusted package and asks the user whether to continue; verification is performed by the PackageKit backend.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "No self-update; PackageKit backend preserves signing.",
   "limitations": [
-    "This application delegates payload verification to PackageKit/Flatpak/snapd/apt backends; the external backend version and active keyring are outside this checkout.",
-    "This evidence does not establish a complete primary self-updater classification."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "c628672988f4df70001ca84d6b6bbf391c4c30b5"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow package-manager behavior: gnome-packagekit presents a modal warning when PackageKit reports an untrusted package and asks the user whether to continue; verification is performed by the PackageKit backend.",
+    "limitations": [
+      "This application delegates payload verification to PackageKit/Flatpak/snapd/apt backends; the external backend version and active keyring are outside this checkout.",
+      "This evidence does not establish a complete primary self-updater classification."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "distro signing (PackageKit)",
+  "trust_root": "distro keyring",
+  "original_evidence": [
+    {
+      "file": "batch-AE2.md",
+      "line": 26,
+      "text": "| gnome-packagekit | https://gitlab.gnome.org/GNOME/gnome-packagekit.git | c628672988f4df70001ca84d6b6bbf391c4c30b5 / 2026-06-13 | N | N | Y (via PackageKit, delegated) | N/A — zero direct HTTP/HTTPS calls anywhere in `src/`; all network access is inside the PackageKit daemon, outside this codebase | delegated to whichever PackageKit backend is configured | none independent — pure `PkClient`/`PkTask` D-Bus GUI; no ONLY_TRUSTED flag ever cleared in code (only SIMULATE flag found) | whatever the configured PackageKit backend trusts (never pinned/stored in this app) | `src/gpk-application.c:1646` (`pk_task_install_packages_async`); `src/gpk-task.c:88-140` (`gpk_task_untrusted_question` shows modal \"not signed by a trusted provider... Are you sure?\" dialog — user-confirmed override via upstream PkTask vfunc, not a silent code-level bypass) |"
+    }
+  ]
 }

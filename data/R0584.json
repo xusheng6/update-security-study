@@ -5,12 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/coronalabs/corona",
   "channel": "mixed",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Generic Linux Lua networking is separate from the plugin/build downloader; the blanket updater consequence is unsupported.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "Linux network.* Lua runtime hard-disables TLS (CURLOPT_SSL_VERIFYPEER, 0L) — affects the Simulator's downloads and every Linux game built with it; plus an unsigned plugin-download channel. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Imported from completed SOURCE-REVIEW-BATCH-1.md; retained snapshot only.",
-    "Current releases, canonical provenance, and paths outside inspected behavior are not independently established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,35 @@
       "commit": "7dbc7cccdee81b0a900505b419fab6531650194a"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Generic Linux Lua networking is separate from the plugin/build downloader; the blanket updater consequence is unsupported.",
+    "limitations": [
+      "Imported from completed SOURCE-REVIEW-BATCH-1.md; retained snapshot only.",
+      "Current releases, canonical provenance, and paths outside inspected behavior are not independently established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validation off)",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AK2.md",
+      "line": 17,
+      "text": "| Solar2D (Simulator/CoronaBuilder) | https://github.com/coronalabs/corona | 7dbc7cc / 2026-07-02 | N (app itself) / Y (plugin content-channel) | Y (plugin fetch is automatic during build) | Y (downloads native plugin `.tgz` and links/loads it into built apps) | https, TLS verify enforced for this path (curl default; no VERIFYPEER=0 found in the plugin/download HTTP client) | N | none found (no hash/signature check on the downloaded `.tgz` before caching/use) | server-supplied/unpinned (plain GitHub Releases / solar2dmarketplace.com URLs) | platform/resources/CoronaBuilderPluginCollector.lua:191,206; tools/CoronaBuilder/Rtt_DownloadPluginsMain.cpp:40; platform/linux/src/Rtt_HTTPClientLinux.cpp:22-67 |"
+    },
+    {
+      "file": "batch-AK2.md",
+      "line": 18,
+      "text": "| Solar2D — Linux runtime network stack (secondary finding, not the updater) | (same repo) | 7dbc7cc / 2026-07-02 | n/a | n/a | n/a | **http/https, TLS verification explicitly DISABLED** for the Linux `network.request`/`network.download` Lua API (used by the Simulator itself via `platform/resources/init.lua:559-561` and by every app built with Solar2D on Linux) | n/a | n/a | n/a | platform/linux/src/NetworkLibrary.cpp:340 `curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);` |"
+    }
+  ]
 }

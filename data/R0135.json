@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/itchio/itch",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "itch schedules component update checks and delegates upgrades to its package manager. The original CRC32-only self-update classification is not established by this orchestration layer.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Fully auto check→dl→install of itself + butler; only a CRC32 corruption check.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,23 @@
       "commit": "3395cc5f3fd095e9b59268add08ccf1c24020787"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "itch schedules component update checks and delegates upgrades to its package manager. The original CRC32-only self-update classification is not established by this orchestration layer.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validated)",
+  "payload_verification": "none (CRC32 only)",
+  "trust_root": "none",
+  "original_evidence": []
 }

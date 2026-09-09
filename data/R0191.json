@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/Electron-Cash/Electron-Cash",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Electron Cash's Qt updater retrieves a JSON version announcement, accepts newer matching variants only when the message verifies under one of three hard-coded Bitcoin Cash addresses, and presents the project download page. The checked-in flow performs notification and manual download rather than automatic installation.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Electrum pattern: version blob signed by a pinned coin address; notify-only.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot rather than the original study release; the claim is limited to the inspected Qt checker and does not generalize to other platform front ends."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "bb67161b162c1eea2ed2128dc224f7c55532cb8f"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Electron Cash's Qt updater retrieves a JSON version announcement, accepts newer matching variants only when the message verifies under one of three hard-coded Bitcoin Cash addresses, and presents the project download page. The checked-in flow performs notification and manual download rather than automatic installation.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot rather than the original study release; the claim is limited to the inspected Qt checker and does not generalize to other platform front ends."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "no",
+  "transport": "https",
+  "payload_verification": "signature[coin-address]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-L1.md",
+      "line": 7,
+      "text": "| Electron Cash | github.com/Electron-Cash/Electron-Cash | Python/PyQt5 desktop (not actually Electron) | Y | notify (opt-in auto-check via `has_auto_update_check`/`set_auto_update_check`; also manual \"Check for Updates\" menu item); never auto-downloads/installs | N (only opens browser to static download page `electroncash.org/#download`) | https (raw.github.com, OS trust store, no cert pinning) | Y (each version string in the JSON dict is individually signed, not the file as a whole) | signature (Bitcoin/BCH message-signing, secp256k1 ECDSA) — verifies only the version-string announcement, not any binary payload | pinned-in-binary (`VERSION_ANNOUNCEMENT_SIGNING_ADDRESSES` hardcoded BCH addresses) | electroncash_gui/qt/update_checker.py:66-73 (URL + pinned addresses), :117-166 (`_process_server_reply` sig check via `bitcoin.verify_message`); electroncash_gui/qt/main_window.py:5179-5182 (auto-check toggle) |"
+    }
+  ]
 }

@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/zaps166/QMPlay2",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "QMPlay2 includes an executable-format check and write-error handling in its update component. These structural controls do not establish publisher authentication or the complete verification policy.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Auto-downloads and ShellExecuteW's the installer, verified only by an 'MZ' magic-byte check — no hash/signature.",
   "limitations": [
-    "Newly retrieved source snapshot, not proof of original-release behavior.",
-    "The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified.",
-    "Newly retrieved source snapshot, not proof of original-release behavior.; The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "5749d4b421cb412aed831ad213cb8bc0f29afd0c"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "QMPlay2 includes an executable-format check and write-error handling in its update component. These structural controls do not establish publisher authentication or the complete verification policy.",
+    "limitations": [
+      "Newly retrieved source snapshot, not proof of original-release behavior.",
+      "The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified.",
+      "Newly retrieved source snapshot, not proof of original-release behavior.; The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (raw.githubusercontent)",
+  "payload_verification": "none (MZ sniff)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-H2.md",
+      "line": 6,
+      "text": "| QMPlay2 | github.com/zaps166/QMPlay2 | Qt/C++ | Y | Windows builds only (`UPDATER` macro, `if(WIN32)` in src/gui/CMakeLists.txt, gated by CMake option `USE_UPDATES` default ON): auto chk + auto dl on startup if \"AutoUpdates\" setting enabled; auto inst requires one user click (\"Apply update\" button) which then silently launches the downloaded installer with `--Auto`. Non-Windows builds: notify-only (no UPDATER macro compiled in), no download. | Y (Windows only) | HTTPS to raw.githubusercontent.com for the manifest and for the installer download (`net.start(url)` via app's NetworkAccess wrapper; no explicit SSL-bypass code found anywhere in repo) | N (plain INI-style text file on GitHub raw, not cryptographically signed) | payload check is only a magic-byte sniff of the first chunk (`arr.startsWith(\"MZ\")`, i.e. confirms it's a Windows PE file) — NOT a hash or signature check of the full downloaded installer | n/a (no signing key used; relies on HTTPS+GitHub hosting only) | src/gui/Updater.cpp:110 (`net.start(\"https://raw.githubusercontent.com/zaps166/QMPlay2OnlineContents/master/Updater\")`), :150-184 (parses per-OS version/URL from manifest, opens `updateFile` and calls `getFile(FileURL...)`), :219-226 (`writeToFile`: `err = !arr.startsWith(\"MZ\")` on first chunk — only magic-byte check, no hash/signature), :254-259 (`applyUpdate()` calls `QMPlay2GUI.runUpdate(updateFile.fileName())`), src/gui/Main.cpp:132-137 (`runUpdate`: `ShellExecuteW(nullptr, L\"open\", UpdateFile, L\"--Auto\", ...)` — executes downloaded .exe), src/gui/MainWidget.cpp:558-560 (auto-trigger: `if (settings.getBool(\"AutoUpdates\")) updater.downloadUpdate();`), src/gui/CMakeLists.txt:118-123 (`if(WIN32) if(USE_UPDATES) add_definitions(-DUPDATER)`), CMakeLists.txt:101 (`option(USE_UPDATES \"Build with software updates\" ON)`). No `ignoreSslErrors`/`VerifyNone`/`setPeerVerifyMode` found anywhere in repo. |"
+    }
+  ]
 }

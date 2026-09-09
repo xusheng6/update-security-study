@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/CouchPotato/CouchPotatoServer",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "CouchPotato obtains a server-provided download URL, extracts the archive, and replaces the application without verification.",
+  "description": "Delegates the download URL itself to a remote API (api.couchpota.to) — one endpoint controls delivered code. Abandoned 2020.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "7260c12f72447ddb6f062367c6dfbda03ecd4e9c"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "CouchPotato obtains a server-provided download URL, extracts the archive, and replaces the application without verification.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AG7.md",
+      "line": 22,
+      "text": "| CouchPotato | https://github.com/CouchPotato/CouchPotatoServer | 7260c12 / 2020-02-04 (project abandoned — last commit 2020) | Y | Y (opt-in, `conf('automatic')`) | Y | https to `api.couchpota.to` (server-controlled indirection); download itself follows a URL returned by that API, no TLS override found | N | none — extracts zip/tar and overwrites app dir, no hash/signature check | server-supplied/unpinned — even the download URL is fetched from CouchPotato's own API (`cp.source_url` → `https://api.couchpota.to/updater/?...`), a single compromised/hijacked endpoint fully controls what code gets installed | `couchpotato/core/_base/updater/main.py:79-109` (`autoUpdate` — automatic install+restart when `conf('automatic')` set); `couchpotato/core/_base/updater/main.py:299-337` (`SourceUpdater.doUpdate` — downloads via `file.download` event, extracts zip/tar, `replaceWith()` overwrites app_dir with no verification); `couchpotato/core/media/movie/providers/info/couchpotatoapi.py:25,59-64` (`urls['updater'] = 'https://api.couchpota.to/updater/?%s'` supplies the actual download URL) |"
+    }
+  ]
 }

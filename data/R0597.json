@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/wavebox/waveboxapp",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Wavebox’s reviewed updater registers electron’s Squirrel feed URL, checks for updates on supported platforms, and reports signing failures by disabling the updater. The source does not establish the publisher certificate, notarization, or released artifact policy.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "Squirrel + Authenticode/notarization.",
   "limitations": [
-    "Newly recovered snapshot; historical release behavior is not reverified.",
-    "External Squirrel enforcement and released certificate/notarization state are not established.",
-    "Newly recovered snapshot; historical release behavior is not reverified. External Squirrel enforcement and released certificate/notarization state are not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "7ab0ef641b7f23e21baf2350d9d7718abc08392f"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Wavebox’s reviewed updater registers electron’s Squirrel feed URL, checks for updates on supported platforms, and reports signing failures by disabling the updater. The source does not establish the publisher certificate, notarization, or released artifact policy.",
+    "limitations": [
+      "Newly recovered snapshot; historical release behavior is not reverified.",
+      "External Squirrel enforcement and released certificate/notarization state are not established.",
+      "Newly recovered snapshot; historical release behavior is not reverified. External Squirrel enforcement and released certificate/notarization state are not established."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "OS code-signing",
+  "trust_root": "Squirrel",
+  "original_evidence": [
+    {
+      "file": "batch-AM7.md",
+      "line": 15,
+      "text": "| Wavebox (classic) | https://github.com/wavebox/waveboxapp.git | 7ab0ef6 / 2026-08-13 | Y | Y (12h interval, `UPDATE_CHECK_INTERVAL`) | Y (Squirrel `quitAndInstall`) | https (`waveboxio.com/squirrel/...`) | B (Squirrel.Mac/Squirrel.Windows OS code-sign check) | OS code signature (Squirrel refuses on `isSigningFailureException`) | **OS keystore** (macOS code signature verified by Squirrel.Mac; Windows via Squirrel/Update.exe) | classic/src/app/src/AppUpdater/AppUpdater.js:1,52-65,137-139 (`electron.autoUpdater`, `setFeedURL`/`checkForUpdates`, `quitAndInstall`), classic/src/shared/constants.js:129-131 (`UPDATE_FEED_DARWIN/WIN32 = https://waveboxio.com/squirrel/...`), classic/src/scenes/mailboxes/src/stores/updater/updaterStore.js:300-350 |"
+    }
+  ]
 }

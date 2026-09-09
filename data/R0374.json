@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/PlayOnLinux/POL-POM-4",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "D",
-  "description": "The installer fetches scripts from an HTTP repository; its GPG failure path warns but still runs the script. macOS additionally uses wget with certificate checks disabled.",
+  "description": "Plaintext HTTP for scripts/Wine-deps; macOS disables TLS cert checking; the GPG signature check fails open — a bad signature still executes after a dismissible warning. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "fde00fecf468ac05c54a14a85065a954b284f14d"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The installer fetches scripts from an HTTP repository; its GPG failure path warns but still runs the script. macOS additionally uses wget with certificate checks disabled.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "D",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "http",
+  "payload_verification": "GPG (fails open)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-X8.md",
+      "line": 10,
+      "text": "| PlayOnLinux (POL-POM-4) | github.com/PlayOnLinux/POL-POM-4 | fde00fec / 2026-02-22 | Y (notify-only, self) | N | Y (core install-script / Wine / gecko / mono channel) | **Broken**: `SITE=\"http://repository.playonlinux.com\"` plaintext HTTP for scripts/resources (`python/lib/Variables.py:19`); macOS `POL_WGET` uses `--no-check-certificate` (`Variables.py:43`) — TLS validation explicitly disabled; Wine builds fetched over HTTPS | N/A | GPG signature check exists but **fails open**: `POL_Bash()` still `bash \"$@\"`'s the script even when `POL_GPG_auth_script` returns not-TRUE, only shows a dismissible warning (`lib/playonlinux.lib:334-353`); resource/script MD5 checked against a hash fetched over the same plaintext HTTP channel, and skippable (`SERVER_MD5=\"NO_MD5\"` explicitly bypasses check, `lib/scripts.lib:552-559`); Wine-build SHA1 (HTTPS, same-origin) is actually enforced (`lib/wine.lib:704-715`) | Bundled `etc/playonlinux.gpg` (static, shipped in-tree) for scripts — moot due to fail-open bug; server-supplied hash for resources/scripts | `lib/playonlinux.lib:308-353`; `bash/install:47-54`; `python/lib/Variables.py:19,43`; `lib/scripts.lib:520-576` |"
+    }
+  ]
 }

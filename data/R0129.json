@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Chatterino/chatterino2",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Chatterino has an application update channel and its network request settings leave TLS certificate checking enabled by default. These source observations do not certify the complete artifact-authentication policy or the original impact claim.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Downloads+startDetached installer, no hash/sig (ignoreSslErrors present but never called).",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; installer/server behavior can vary by release.",
-    "The review does not audit Authenticode validation performed by a launched installer.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; installer/server behavior can vary by release.; The review does not audit Authenticode validation performed by a launched installer."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "b5fcf950387fd4fa19464d07809148c2c831fb8c"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Chatterino has an application update channel and its network request settings leave TLS certificate checking enabled by default. These source observations do not certify the complete artifact-authentication policy or the original impact claim.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; installer/server behavior can vary by release.",
+      "The review does not audit Authenticode validation performed by a launched installer.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; installer/server behavior can vary by release.; The review does not audit Authenticode validation performed by a launched installer."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes (Win)",
+  "transport": "https (validated)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-I5.md",
+      "line": 11,
+      "text": "| Chatterino2 | github.com/Chatterino/chatterino2 | C++/Qt | Y | Windows: chk automatic (on `betaUpdates` setting change / app flow) + dl automatic + inst on user click (\"download in background, run updater when finished\"); macOS/Linux: notify + manual (opens browser) | Y on Windows (writes `Update.exe`/`update.zip` to disk then `QProcess::startDetached` executes it, or hands off to `ChatterinoUpdater.exe` for portable) | https (`https://notitia.chatterino.com/version/chatterino/<os>/<branch>` for manifest; download URLs come from that JSON); TLS enforced — `ignoreSslErrors()` exists in the network API (`ignoreSslErrors=false` by default, documented \"for local eventsub\") but has **zero call sites** anywhere in src/ (confirmed by grep), so it is never actually invoked | N (plain JSON over HTTPS, no signature) | **none** — no hash/signature check of the downloaded `Update.exe`/`update.zip` before `QProcess::startDetached` executes it | N/A | src/singletons/Updates.cpp:334-337 (version-check URL), :150-227 (Windows portable: download zip → `QProcess::startDetached(updaterPath, {filename,\"restart\"})`), :238-293 (Windows normal: download exe, write file, `QProcess::startDetached(filePath, {})`, no hash check present), :135-149 (macOS/Linux: browser-only, no auto-install); src/common/network/NetworkTask.cpp:62-66 and NetworkRequest.hpp:84 (`ignoreSslErrors`, default false, no callers found in src/) |"
+    }
+  ]
 }

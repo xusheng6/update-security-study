@@ -5,13 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/janhq/jan",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "jan configures a public key and two endpoints for Tauri’s updater and registers that plugin on desktop targets. The original HMAC claim and complete custom-updater enforcement remain unsubstantiated.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Tauri updater; minisign pubkey in tauri.conf.json.",
   "limitations": [
-    "Newly retrieved source snapshot, not a recheck of the original study release or a shipped binary.",
-    "Configured controls do not certify all dependency, platform, distribution and release policies.",
-    "Newly retrieved source snapshot, not a recheck of the original study release or a shipped binary.; Configured controls do not certify all dependency, platform, distribution and release policies."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "e2185dbc7db3a002da35b3688b57910ec6fd87b2"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "jan configures a public key and two endpoints for Tauri’s updater and registers that plugin on desktop targets. The original HMAC claim and complete custom-updater enforcement remain unsubstantiated.",
+    "limitations": [
+      "Newly retrieved source snapshot, not a recheck of the original study release or a shipped binary.",
+      "Configured controls do not certify all dependency, platform, distribution and release policies.",
+      "Newly retrieved source snapshot, not a recheck of the original study release or a shipped binary.; Configured controls do not certify all dependency, platform, distribution and release policies."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https + HMAC",
+  "payload_verification": "signature[minisign/Ed25519]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": []
 }

@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Hammerspoon/hammerspoon",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Hammerspoon enables scheduled Sparkle checks but the plist contains no SUPublic key.",
+  "description": "Sparkle with no SUPublicEDKey — confirmed no edSignature on live appcast; TLS-only.",
   "limitations": [
-    "Newly retrieved/recovered source snapshot; this is not historical source re-verification. Released artifact behavior and external framework enforcement remain unverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "23e387e2805a9890066366e0ac96c71b27f0cfd5"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Hammerspoon enables scheduled Sparkle checks but the plist contains no SUPublic key.",
+    "limitations": [
+      "Newly retrieved/recovered source snapshot; this is not historical source re-verification. Released artifact behavior and external framework enforcement remain unverified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none (Sparkle, no key)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-M1.md",
+      "line": 10,
+      "text": "| Hammerspoon | https://github.com/Hammerspoon/hammerspoon | Sparkle (bundled via CocoaPods, `Pods/Sparkle`) | Y | Y for checks (`SUEnableAutomaticChecks`=true, `SUScheduledCheckInterval`=21600s/6h); install still requires user confirmation via Sparkle's standard prompt (no `SUAutomaticallyUpdate`/silent-install key set) | Y (once user confirms the Sparkle prompt) | https (`SUFeedURL`=`https://raw.githubusercontent.com/Hammerspoon/hammerspoon/master/appcast.xml`; release enclosures point at `https://github.com/.../releases/download/...`) | TLS-only — **no `SUPublicEDKey` or `SUPublicDSAKey` present anywhere in Info.plist** | none observed (no `sparkle:edSignature`/`sparkle:dsaSignature` attribute on any enclosure in the live feed) | none (no key configured; falls back to whatever Sparkle's default unsigned-update handling does, which per Sparkle's own docs is a same-Team-ID code-signing check — not independently confirmed in this repo's source since Sparkle ships as a compiled framework, not source) | Hammerspoon/Hammerspoon-Info.plist:189-193 (`SUEnableAutomaticChecks` true, `SUFeedURL`, `SUScheduledCheckInterval` 21600; grep of full file confirms no `SUPublic*Key` key exists); live fetch of `https://raw.githubusercontent.com/Hammerspoon/hammerspoon/master/appcast.xml` on 2026-08-19 — enclosure for v1.1.1 (`sparkle:version=\"6936\"`) carries no signature attribute |"
+    }
+  ]
 }

@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/WonderCMS/wondercms",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The update action fetches replacement index.php content and writes it over the live application.",
+  "description": "Core index.php overwrites itself with content fetched from raw.githubusercontent.com and executes it immediately — no hash/signature/pinning.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "f7501135e4f81502bd99675d0f0c58fde706e49f"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The update action fetches replacement index.php content and writes it over the live application.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AF7.md",
+      "line": 21,
+      "text": "| WonderCMS | https://github.com/WonderCMS/wondercms.git | f7501135e4f81502bd99675d0f0c58fde706e49f / 2026-01-01 | Y | N (admin clicks \"Update\" button) | Y | https, TLS enforced (cURL default verify, no `CURLOPT_SSL_VERIFYPEER=0` anywhere in `index.php`) | N | **none** | server-supplied/unpinned (raw.githubusercontent.com content trusted outright and written straight into the running app) | **Most severe finding in this batch.** `index.php:3272-3285` `updateAction()`: `$contents = $this->getFileFromRepo('index.php'); file_put_contents(__FILE__, $contents);` — the entire core CMS is a *single PHP file* that **overwrites itself** with raw content fetched over HTTPS from `raw.githubusercontent.com` (`WCMS_REPO` const at `:44`), with zero hash or signature verification before executing it as the live application. Any GitHub/CDN compromise or MITM using any CA the server trusts (no pinning) = instant RCE. Theme/plugin installer (`index.php:1681-1762`, `installUpdateModuleAction()`) downloads arbitrary `.zip` URLs (from a modules-cache manifest itself fetched over HTTPS unauthenticated) via cURL, has zip-slip path checks (`:1730-1746`) but **no payload signature/hash check** either — content-as-code channel, same C-equivalent risk. |"
+    }
+  ]
 }

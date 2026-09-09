@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/xwiki/xwiki-platform",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In the reviewed XWiki distribution flow, an InstallRequest is created for an extension, root-namespace modification is allowed, and an InstallJob is executed; this source does not establish the claimed Maven checksum WARN-not-FAIL policy.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Distribution Wizard self-upgrades via Extension Manager, but the Maven checksum policy is WARN not FAIL — a hash mismatch doesn't block install.",
   "limitations": [
-    "Snapshot is newly retrieved and not the historical release under study. Maven Resolver checksum configuration and completed Distribution Wizard artifact verification were not established from this review.",
-    "The source is a newly retrieved snapshot, not the historical release; Maven Resolver checksum configuration and completed Distribution Wizard artifact verification were not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "886abee49244ddc9d8d23c531d1eaf9e9afdee54"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In the reviewed XWiki distribution flow, an InstallRequest is created for an extension, root-namespace modification is allowed, and an InstallJob is executed; this source does not establish the claimed Maven checksum WARN-not-FAIL policy.",
+    "limitations": [
+      "Snapshot is newly retrieved and not the historical release under study. Maven Resolver checksum configuration and completed Distribution Wizard artifact verification were not established from this review.",
+      "The source is a newly retrieved snapshot, not the historical release; Maven Resolver checksum configuration and completed Distribution Wizard artifact verification were not established."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "checksum WARN not FAIL",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AC4.md",
+      "line": 14,
+      "text": "| XWiki (platform, own self-upgrade via Distribution Wizard) | https://github.com/xwiki/xwiki-platform + https://github.com/xwiki/xwiki-commons | platform 668fa71 / 2026-08-20, commons (latest) | Y | N (admin-triggered wizard) | Y | https (`extensions.xwiki.org`, `store.xwiki.com` — Apache HttpClient, no custom SSL context / no verify disabling found) | N | hash (Maven SHA1/MD5 checksum) — **not enforced**: policy is WARN not FAIL | server-supplied/unpinned (checksum published alongside artifact on same repo) | `xwiki-platform-core/.../extension-distribution/.../DistributionManager.java` + `DefaultDistributionJob.java` (self-upgrade orchestration reuses Extension Manager); checksum policy: `xwiki-commons-core/.../aether/internal/XWikiRepositorySystemSession.java:157` and `AetherExtensionRepository.java:372` both `setChecksumPolicy(RepositoryPolicy.CHECKSUM_POLICY_WARN)`; repo URLs `ExtensionXWikiOrgExtensionRepositorySource.java:79` (`https://extensions.xwiki.org/xwiki/rest/`), `StoreXWikiComExtensionRepositorySource.java:71` |"
+    }
+  ]
 }

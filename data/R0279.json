@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/KLayout/klayout",
   "channel": "plugin",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "KLayout Salt fetches package metadata/payload URLs without an independent hash or signature verification step.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "'Salt' package/macro manager downloads + executes Ruby/Python macro packages over HTTPS (TLS enforced) with zero hash/signature (content-as-code).",
   "limitations": [
-    "Newly retrieved source snapshot at the recorded commit; this is not historical release re-verification. Released artifact behavior and external framework enforcement remain unverified.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "e71272c3b178105bd2a2f25af54673a7af7ed60d"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "KLayout Salt fetches package metadata/payload URLs without an independent hash or signature verification step.",
+    "limitations": [
+      "Newly retrieved source snapshot at the recorded commit; this is not historical release re-verification. Released artifact behavior and external framework enforcement remain unverified.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-U3.md",
+      "line": 14,
+      "text": "| KLayout | https://github.com/KLayout/klayout.git | dcd1b48 / 2026-08-20 | N (app itself); separate \"Salt\" package manager present | N | Salt: Y (installs & runs Ruby/Python macro packages) | https via Qt (`tlHttpStreamQt.cc`) or curl (`tlHttpStreamCurl.cc`); Qt path only logs `sslErrors`, never calls `ignoreSslErrors()` → validation enforced | n/a | **none** — Salt downloads package spec/grain + payload from URLs in a package index with no hash/signature check found | n/a (server-supplied index/URLs only) | klayout/src/lay/lay/laySaltDownloadManager.cc (package fetch/install, no verify); klayout/src/tl/tl/tlHttpStreamQt.cc:533-547 (sslErrors only logged, not ignored) — CONTENT-SIDE-CHANNEL, not the app's own binary updater |"
+    }
+  ]
 }

@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/openstreetmap/josm",
   "channel": "plugin",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "JOSM’s reviewed plugin component checks JAR readability. That structural check does not establish publisher authentication or classify the core application updater.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "App update notify-only, but the plugin manager downloads plugin jars with zero hash/signature (only checks it's a valid jar) — content-as-code.",
   "limitations": [
-    "New default-branch snapshot rather than the original study checkout; the cited evidence is limited to plugin downloads and does not establish the core application updater's notification behavior or release signing."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "1b1d53f148d4f978c8df9b0554f84b610749a15b"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "JOSM’s reviewed plugin component checks JAR readability. That structural check does not establish publisher authentication or classify the core application updater.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study checkout; the cited evidence is limited to plugin downloads and does not establish the core application updater's notification behavior or release signing."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none (valid-jar check only)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-Y2.md",
+      "line": 18,
+      "text": "| JOSM | https://github.com/openstreetmap/josm | 331d9b3 / 2026-08-19 | N (main app, notify-only); **Y** (plugin system) | N (manual, user-triggered) | **Y (plugins)** | HTTPS (`Config.getUrls().getJOSMWebsite()` default is https) | N (no manifest signing) | **none** | **none** | `src/org/openstreetmap/josm/plugins/PluginDownloadTask.java:105-153` downloads a plugin jar from `pi.downloadlink` (http/https) with **no hash/signature check**; `PluginHandler.installDownloadedPlugins()` (`src/org/openstreetmap/josm/plugins/PluginHandler.java:1407-1468`) only verifies the file `is a valid JAR` (`new JarFile(updatedPlugin).close()`) before renaming `.jar.new`→`.jar` and loading it — no checksum/signature field exists anywhere in `PluginInformation.java`. Main JOSM app itself is notify-only (`src/org/openstreetmap/josm/gui/bugreport/JosmUpdatePanel.java` just prompts the user to visit the download page) |"
+    }
+  ]
 }

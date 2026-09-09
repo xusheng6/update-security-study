@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/pdfforge/PDFCreator",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports the narrow recorded behavior: PDFCreator compares the downloaded file with an MD5 supplied by the same HTTPS update manifest before launching it.",
+  "description": "HTTPS/TLS enforced, but payload check is only an MD5 from the same unauthenticated update.pdfforge.org manifest as the installer; runs it via UseShellExecute.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "The retained snapshot does not establish current released artifact behavior or independent release signing."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "e4ff3d454f0c431430ee5c084ce1b8dc7ea31e3a"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports the narrow recorded behavior: PDFCreator compares the downloaded file with an MD5 supplied by the same HTTPS update manifest before launching it.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "The retained snapshot does not establish current released artifact behavior or independent release signing."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "MD5 (same manifest)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-Z4.md",
+      "line": 20,
+      "text": "| PDFCreator | https://github.com/pdfforge/PDFCreator.git | e4ff3d454f0c431430ee5c084ce1b8dc7ea31e3a / 2026-07-06 | Y | Y (auto-downloads once newer version detected; install requires user \"restart now/later\" confirmation) | Y | https (update.pdfforge.org), TLS validation enforced (no ServerCertificateValidationCallback/ServicePointManager override found) | N (plain text ini-style manifest, not signed) | hash only — MD5, sourced from the **same server response** as the download URL | **server-supplied/unpinned** — the MD5 hash and download URL both come from `update-info.txt`, fetched over HTTPS from the same pdfforge.org endpoint that hosts the installer | `Source/Application/Utilities/URLs.cs:26` (`PdfCreatorUpdateInfoUrl = \"https://update.pdfforge.org/pdfcreator/update-info.txt\"`); `Source/Application/UI/Presentation/Helper/Version/OnlineVersionHelper.cs:107-108,123` (parses `DownloadUrl`/`FileHash` straight out of the fetched ini); `Source/Application/Core/Services/Update/UpdateDownloader.cs:95-117` (`_hashUtil.VerifyFileMd5Async(tempFile, version.FileHash)`); `Source/Application/UI/Presentation/Assistants/Update/UpdateLauncher.cs:98,132-136` (hash check then `Process.Start(processInfo)` with `UseShellExecute=true` to run the downloaded installer). Endpoint/CDN compromise (or a MITM that also controls the same origin) ⇒ RCE — classic tier C. |"
+    }
+  ]
 }

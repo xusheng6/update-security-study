@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/lllyasviel/Fooocus",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Fooocus’s update entry point synchronizes its local branch with the configured Git origin when a fast-forward is available. The reviewed source supports this Git-based maintenance channel, not the original complete startup, authentication or execution-impact claim.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Documented launch auto git-fetch + hard-reset to origin HEAD every startup, no prompt/verify, then executes the pulled code.",
   "limitations": [
-    "New default-branch snapshot rather than historical release re-verification; this review did not establish where the updater entry point is invoked in deployed launch flows, nor any release signing or checksum control outside the shown git operations."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "ae05379cc97bc4361ec8b4ec90193dab21be763f"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Fooocus’s update entry point synchronizes its local branch with the configured Git origin when a fast-forward is available. The reviewed source supports this Git-based maintenance channel, not the original complete startup, authentication or execution-impact claim.",
+    "limitations": [
+      "New default-branch snapshot rather than historical release re-verification; this review did not establish where the updater entry point is invoked in deployed launch flows, nor any release signing or checksum control outside the shown git operations."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (git)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-N1.md",
+      "line": 29,
+      "text": "| Fooocus | lllyasviel/Fooocus | Python (Gradio, ComfyUI-derived backend) | Y — built into the **documented, standard launch command** itself | **Y — fully automatic on every single startup, no prompt, no opt-out flag** | Y — `pygit2` `fetch()` + fast-forward `reset(..., GIT_RESET_HARD)` to latest `origin/<branch>` HEAD runs before Fooocus starts, then the freshly-pulled `launch.py` is imported and executed in the same process (`from launch import *`) | git protocol over the configured `origin` remote (typically `https://github.com/lllyasviel/Fooocus`); TLS only | N | none — no signature/commit-verification of any kind; whatever `origin/<branch>` currently contains is merged and immediately executed | n/a | `entry_with_update.py:1-46` (entire file — auto `fetch`+hard-reset+`from launch import *`); `readme.md:141,146,163,168,182,186,201,211,218,234,236,474,478,482` (every documented run command invokes `entry_with_update.py`, not `launch.py`) |"
+    }
+  ]
 }

@@ -5,14 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/Stremio/stremio-shell",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Stremio's reviewed updater verifies the fetched version descriptor with an embedded PEM public key through OpenSSL SHA-256 digest verification, then checks each downloaded file against the descriptor's SHA-256 checksum before marking it prepared. The snapshot does not independently establish released-artifact provenance or the original study version's deployment configuration.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "RSA-SHA256 signature over the update manifest verified vs a pinned RSA key; per-file SHA-256 from the signed manifest.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "The source demonstrates the verification implementation but not the provenance of the live endpoint, current release artifacts, or key rotation.",
-    "No build or execution was performed.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout. The source demonstrates the verification implementation but not the provenance of the live endpoint, current release artifacts, or key rotation. No build or execution was performed."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "c3a8bcbf857d5569b6ae7444ead0dc0a0814888b"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Stremio's reviewed updater verifies the fetched version descriptor with an embedded PEM public key through OpenSSL SHA-256 digest verification, then checks each downloaded file against the descriptor's SHA-256 checksum before marking it prepared. The snapshot does not independently establish released-artifact provenance or the original study version's deployment configuration.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "The source demonstrates the verification implementation but not the provenance of the live endpoint, current release artifacts, or key rotation.",
+      "No build or execution was performed.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout. The source demonstrates the verification implementation but not the provenance of the live endpoint, current release artifacts, or key rotation. No build or execution was performed."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "RSA-SHA256 signature + per-file SHA-256",
+  "trust_root": "RSA pubkey hardcoded in publickey.h",
+  "original_evidence": [
+    {
+      "file": "batch-V1.md",
+      "line": 17,
+      "text": "| Stremio (stremio-shell) | https://github.com/Stremio/stremio-shell.git | c3a8bcbf857d / 2026-03-27 | Y | Y (`--autoupdater-force` optional; normal periodic check) | Y | https (`https://www.stremio.com/updater/check`, per README) | Yes | signature (RSA-SHA256 via OpenSSL `EVP_DigestVerify*`) on the version-descriptor JSON, plus per-file SHA-256 checksum from that signed descriptor | **pinned in binary** — RSA public key hardcoded as a PEM string in `publickey.h`, compiled in | publickey.h:1-13 (embedded `-----BEGIN PUBLIC KEY-----` RSA key); verifysig.c:5-15 (`init_public_key()` loads it via `PEM_read_bio_PUBKEY`), verifysig.c:17-79 (`verify_sig` = `EVP_DigestVerifyInit/Update/Final`); autoupdater.cpp:189-207 (`updateFromVersionDescFinished` rejects if `verify_sig(...) != 0`, emits `\"Unable to verify update signature\"`); autoupdater.cpp:214-247 (`prepareUpdate` extracts per-file `url`+`checksum` from the *signed* descriptor); autoupdater.cpp:320-329 (`downloadFinished` compares SHA-256 checksum before accepting the file) |"
+    }
+  ]
 }

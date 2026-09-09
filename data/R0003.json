@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/ivan386/Shareaza",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "D",
-  "description": "The version response supplies both the download sources and hashes, and the completed upgrade is offered to ShellExecute. The source supports a Windows, user-gated primary updater with same-channel hash metadata.",
+  "description": "Version check is plain HTTP (shareaza.sourceforge.net/version/); the SHA1/Tiger hash the P2P download is verified against comes from that unauthenticated response — a MitM supplies both hash and sources. Confirmed from the shipped binary. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,23 @@
       "commit": "0c2f2f56c8294c930f26463a522057d00ed319fa"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The version response supplies both the download sources and hashes, and the completed upgrade is offered to ShellExecute. The source supports a Windows, user-gated primary updater with same-channel hash metadata.",
+    "limitations": [
+      "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "D",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "http + P2P",
+  "payload_verification": "hash (unauth manifest)",
+  "trust_root": "none",
+  "original_evidence": []
 }

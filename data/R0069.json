@@ -5,11 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/containers/podman-desktop",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Podman Desktop integrates electron-updater, explicitly disables automatic retrieval and supports a configured generic update feed. The wrapper does not independently establish the claimed SHA-512 enforcement.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater; SHA512 manifest.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not original study checkout; runtime updater and release metadata remain outside this review."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,23 @@
       "commit": "1522072a647c8337ba8c2e8225b29acbebe54e11"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Podman Desktop integrates electron-updater, explicitly disables automatic retrieval and supports a configured generic update feed. The wrapper does not independently establish the claimed SHA-512 enforcement.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not original study checkout; runtime updater and release metadata remain outside this review."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "hash (SHA512)",
+  "trust_root": "OS-trust-store",
+  "original_evidence": []
 }

@@ -5,14 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/flacon/flacon",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In MAC_UPDATER builds, flacon checks for updates in the background through Sparkle's SUUpdater when automatic checks are enabled, using the configured macOS appcast URL. The wrapper does not establish a SUPublicEDKey or DSAKey, and Sparkle framework and packaged release configuration remain outside this review; no Windows/Linux updater conclusion is made.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "macOS Sparkle appcast but no SUPublicEDKey/DSAKey — signature enforcement unconfirmed. Win/Linux no updater.",
   "limitations": [
-    "Sparkle implementation, release signing, and packaged Info.plist are outside this snapshot.",
-    "The snapshot is newly retrieved and is not the historical study revision.",
-    "The review does not certify current binaries or non-macOS updater behavior.",
-    "Sparkle implementation, release signing, and packaged Info.plist are outside this snapshot. The snapshot is newly retrieved and is not the historical study revision. The review does not certify current binaries or non-macOS updater behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "2dcc83ecc2528b5769e1629488a6f5a6706362dc"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In MAC_UPDATER builds, flacon checks for updates in the background through Sparkle's SUUpdater when automatic checks are enabled, using the configured macOS appcast URL. The wrapper does not establish a SUPublicEDKey or DSAKey, and Sparkle framework and packaged release configuration remain outside this review; no Windows/Linux updater conclusion is made.",
+    "limitations": [
+      "Sparkle implementation, release signing, and packaged Info.plist are outside this snapshot.",
+      "The snapshot is newly retrieved and is not the historical study revision.",
+      "The review does not certify current binaries or non-macOS updater behavior.",
+      "Sparkle implementation, release signing, and packaged Info.plist are outside this snapshot. The snapshot is newly retrieved and is not the historical study revision. The review does not certify current binaries or non-macOS updater behavior."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none (no key set)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AC7.md",
+      "line": 18,
+      "text": "| flacon | https://github.com/flacon/flacon.git | 2dcc83e / 2026-07-26 | Y (macOS only) | Y (`checkForUpdatesInBackground` on startup if enabled) | Y (Sparkle installs the downloaded update) | https (`SUFeedURL` = `https://flacon.github.io/download/feed.xml`) | unknown — no `SUPublicEDKey`/`SUPublicDSAKey` found anywhere in repo | not verifiable from source (Sparkle w/o a pinned EdDSA key in `Info.plist.in` would not cryptographically verify the payload; key may be injected at release-CI time but is absent from this repo) | not pinned in repo — cannot confirm | updater/updater.h, updater/updater.mm (wraps Sparkle `SUUpdater`, `#if MAC_UPDATER` only); CMakeLists.txt:258-262 (`MAC_UPDATE_URL = \"https://flacon.github.io/download/feed.xml\"`, `find_package(Sparkle REQUIRED)`); misc/Info.plist.in:94-95 (`SUFeedURL` present, no `SUPublicEDKey` key anywhere in the file); Windows/Linux builds have no updater code at all |"
+    }
+  ]
 }

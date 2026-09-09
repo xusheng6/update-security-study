@@ -5,13 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/cinnyapp/cinny-desktop",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Cinny’s updater-enabled builds register the Tauri updater with a configured public key and release endpoint and prompt the user about available updates. Feature selection and the external verifier’s release behavior remain explicit limits.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Tauri updater with pinned minisign key.",
   "limitations": [
-    "Newly retrieved source snapshot, not a recheck of the original study release or a shipped binary.",
-    "Configured controls do not certify all dependency, platform, distribution and release policies.",
-    "Newly retrieved source snapshot, not a recheck of the original study release or a shipped binary.; Configured controls do not certify all dependency, platform, distribution and release policies."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "35c467de100e1d5379d6f780642304eb92772cdb"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Cinny’s updater-enabled builds register the Tauri updater with a configured public key and release endpoint and prompt the user about available updates. Feature selection and the external verifier’s release behavior remain explicit limits.",
+    "limitations": [
+      "Newly retrieved source snapshot, not a recheck of the original study release or a shipped binary.",
+      "Configured controls do not certify all dependency, platform, distribution and release policies.",
+      "Newly retrieved source snapshot, not a recheck of the original study release or a shipped binary.; Configured controls do not certify all dependency, platform, distribution and release policies."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[Ed25519]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": []
 }

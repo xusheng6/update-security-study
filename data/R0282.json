@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/apache/netbeans",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The reviewed NetBeans source confirms provider refresh and module update-unit discovery, but does not substantiate the claimed SHA-512 versus JAR-signature behavior or the runtime role of ide.ks; the publication claim remains unresolved pending those implementation and configuration artifacts.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Update catalogs trusted by static config, not signature. SHA-512 fast path skips JAR-signature verification for 'trusted' sources; the shipped pinned keystore ide.ks is empty.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study release.",
-    "The cited flow does not expose catalog parsing, SHA-512 verification, JAR-signature handling, or ide.ks contents.",
-    "Newly retrieved default-branch snapshot, not the original study release. The cited flow does not expose catalog parsing, SHA-512 verification, JAR-signature handling, or ide.ks contents."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "93b07d6375d98adf0c133ac3b6f4e598a8798fa6"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The reviewed NetBeans source confirms provider refresh and module update-unit discovery, but does not substantiate the claimed SHA-512 versus JAR-signature behavior or the runtime role of ide.ks; the publication claim remains unresolved pending those implementation and configuration artifacts.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study release.",
+      "The cited flow does not expose catalog parsing, SHA-512 verification, JAR-signature handling, or ide.ks contents.",
+      "Newly retrieved default-branch snapshot, not the original study release. The cited flow does not expose catalog parsing, SHA-512 verification, JAR-signature handling, or ide.ks contents."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "SHA-512 (skips JAR-sig)",
+  "trust_root": "empty ide.ks keystore",
+  "original_evidence": [
+    {
+      "file": "batch-U4.md",
+      "line": 22,
+      "text": "| netbeans | apache/netbeans | 97742f11c04c / 2026-08-13 | Y | Y | Y | http (literal default in source) / https (prod, unconfirmed — build-time placeholder) — **TLS not enforced on the confirmed default** | N (catalog trust is static config, not signed) | hash (SHA-512) on fast/trusted path + sig (JAR CodeSigner) only as fallback for untrusted sources | pinned-in-binary (core/ide.ks, but committed copy is an empty keystore — real cert not in OSS tree) + OS-CA fallback | platform/autoupdate.services/.../InstallSupportImpl.java:1096-1150 (checksum-only fast path for trusted catalogs); nbbuild/default-properties.xml:51 (literal http:// default URL); Utilities.java:146-184,313-356 (JAR-signature verification, untrusted-source fallback only) |"
+    }
+  ]
 }

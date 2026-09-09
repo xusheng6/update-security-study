@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/salesagility/SuiteCRM",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "D",
-  "description": "The depot downloader disables TLS peer verification, and ModuleInstaller includes the downloaded manifest.php. This supports the admin depot channel; typical local-upload reachability is separate.",
+  "description": "Module Loader downloads from depot.sugarcrm.com with CURLOPT_SSL_VERIFYPEER=0, then include()s an unverified manifest.php — zero hash/signature. CDN/MITM = RCE. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "d6bca97a0159ec019a969b86eca32affab3beb7c"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The depot downloader disables TLS peer verification, and ModuleInstaller includes the downloaded manifest.php. This supports the admin depot channel; typical local-upload reachability is separate.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "D",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validation off)",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AI1.md",
+      "line": 11,
+      "text": "| SuiteCRM | https://github.com/salesagility/SuiteCRM.git | d6bca97a0159ec019a969b86eca32affab3beb7c / 2026-07-31 | Y | N (admin-triggered) | Y | https, **TLS cert validation DISABLED** | N | none | none — arbitrary `include()` of downloaded `manifest.php` | `ModuleInstall/PackageManager/PackageManagerDownloader.php:71` `curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);` (no VERIFYHOST set either); download triggered from `modules/Administration/UpgradeWizard.php:105` `$pm->download('', '', $_REQUEST['release_id']);` against `depot.sugarcrm.com` (`PackageManagerDownloader.php:41`); package then applied via `ModuleInstall/ModuleInstaller.php:149` `include($this->base_dir . '/manifest.php')` — no hash/signature check anywhere in the install path (only `md5_file` diffing of *local* files for conflict detection, `ModuleInstaller.php:2493`) |"
+    }
+  ]
 }

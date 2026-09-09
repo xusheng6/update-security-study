@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/syncthing/syncthing-gtk",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Syncthing-GTK extracts the daemon archive and stages it executable without payload verification.",
+  "description": "Auto-downloads the Syncthing daemon binary, extracts with zero hash/sig, chmod +x, runs it.",
   "limitations": [
-    "Newly retrieved/recovered source snapshot; this is not historical source re-verification. Released artifact behavior and external framework enforcement remain unverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "d5dd0854d2837ad088bb50c9da3af3012e9c4fb4"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Syncthing-GTK extracts the daemon archive and stages it executable without payload verification.",
+    "limitations": [
+      "Newly retrieved/recovered source snapshot; this is not historical source re-verification. Released artifact behavior and external framework enforcement remain unverified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-H7.md",
+      "line": 13,
+      "text": "| Syncthing-GTK | https://github.com/syncthing/syncthing-gtk (archived/deprecated) | Python2/GTK | Y | auto chk/dl/inst (of the managed Syncthing **daemon**, not of Syncthing-GTK itself) | Y — downloads a daemon binary archive from GitHub and writes it to disk with executable permission; the app subsequently launches it as a subprocess | HTTPS via GLib/GIO (`Gio.File.new_for_uri`) to api.github.com; TLS validation left at GIO/glib-networking default (ENFORCED) — no bypass code found in the downloader path itself | N (relies on GitHub API JSON + release asset, no separate signed manifest) | none (no checksum/signature check of the downloaded archive before extraction) | `syncthing_gtk/stdownloader.py`: `ST_URL = \"https://api.github.com/repos/syncthing/syncthing/releases\"` (line 22); `get_version()`/`_cb_read_latest()` (lines 107-224) picks the newest compatible release and asset URL from the GitHub API JSON with no signature/hash check; `download()` (lines 227-241) fetches `self.dll_url` via `Gio.File.new_for_uri(...).read_async`; `_open_archive`/`_extract` (lines 284-352) extract the `syncthing`/`syncthing.exe` binary from the tar/zip and `os.fchmod(output.fileno(), 0o755)` (line 341) makes it executable — no hash/signature verification anywhere in this file. `syncthing_gtk/app.py:535-537,639-641,2147-2191` stage the new binary as `<path>.new`, then on next start swap it into place as `self.config[\"syncthing_binary\"]` and launch it (`app.py:477` `cmdline = [self.config[\"syncthing_binary\"], ...]`), i.e. an unverified downloaded binary is executed. Note: an unrelated `ssl.CERT_NONE` bypass exists in `syncthing_gtk/iddialog.py:97-108`, but that is for loading QR-code images from the local daemon's self-signed HTTPS API, not the updater. |"
+    }
+  ]
 }

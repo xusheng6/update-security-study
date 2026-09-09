@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Sharkboy-j/Kebler",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: Updater fetches the latest GitHub release asset and launches it after user confirmation without hash/signature verification.",
+  "description": "Downloads+executes the last GitHub Releases asset with no hash/signature.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "43486b66ca8b9310b20b147dec9df704ac4498e5"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: Updater fetches the latest GitHub release asset and launches it after user confirmation without hash/signature verification.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AN3.md",
+      "line": 19,
+      "text": "| Kebler | https://github.com/Sharkboy-j/Kebler.git | 43486b66 2023-11-02 | Y | N (prompts user, dialog Yes/No before install) | Y | https, validation enforced (default `HttpClient`, no callback overrides found) | N | none | server-supplied/unpinned (GitHub Releases API + asset URL) | `src/Kebler.Update.Core/GitHubApi.cs:35` `https://api.github.com/repos/{user}/{repository}/releases/latest`; `src/Kebler/Updater.cs:65-80` downloads the last release asset and on confirm calls `InstallUpdates()` (line 62-80) which does `Process.Start` on the downloaded installer (`ConstStrings.TempInstallerExePath`) with no hash/signature check anywhere in `GitHubApi.cs`/`Updater.cs` |"
+    }
+  ]
 }

@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/haiwen/seafile-client",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Seafile’s Windows adapter configures a WinSparkle appcast and toggles automatic checks through WinSparkle; the cited application source does not show Authenticode validation, and the macOS signing-key boundary remains outside this review.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "Authenticode via WinVerifyTrust; mac key not in repo.",
   "limitations": [
-    "Newly retrieved default-branch snapshot; not historical release re-verification.",
-    "External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown.",
-    "Newly retrieved default-branch snapshot; not historical release re-verification.; External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "d402473252418d5d60d6290e15eefe4ef896684d"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Seafile’s Windows adapter configures a WinSparkle appcast and toggles automatic checks through WinSparkle; the cited application source does not show Authenticode validation, and the macOS signing-key boundary remains outside this review.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot; not historical release re-verification.",
+      "External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown.",
+      "Newly retrieved default-branch snapshot; not historical release re-verification.; External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "OS-code-signing (WinSparkle)",
+  "trust_root": "OS-trust-store",
+  "original_evidence": []
 }

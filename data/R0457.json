@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/marytts/marytts",
   "channel": "package-manager",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "MaryTTS compares component archive MD5 values with its XML component descriptions. This is a content-integrity control; independent authentication of those descriptions is not established by the retained review.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Component installer downloads packages from an unsigned XML manifest, MD5 from that same manifest, then loads Java classes into the running JVM.",
   "limitations": [
-    "New default-branch snapshot, not the historical MaryTTS release under study.",
-    "The XML publisher/release-side authentication and any package-loading behavior after download were not independently audited; MD5 equality alone is not treated as publisher authentication.",
-    "New default-branch snapshot, not the historical MaryTTS release under study. The XML publisher/release-side authentication and any package-loading behavior after download were not independently audited; MD5 equality alone is not treated as publisher authentication."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "f3389a195015e28804cac44411489e87c8741f12"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "MaryTTS compares component archive MD5 values with its XML component descriptions. This is a content-integrity control; independent authentication of those descriptions is not established by the retained review.",
+    "limitations": [
+      "New default-branch snapshot, not the historical MaryTTS release under study.",
+      "The XML publisher/release-side authentication and any package-loading behavior after download were not independently audited; MD5 equality alone is not treated as publisher authentication.",
+      "New default-branch snapshot, not the historical MaryTTS release under study. The XML publisher/release-side authentication and any package-loading behavior after download were not independently audited; MD5 equality alone is not treated as publisher authentication."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "MD5 (same manifest)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AD2.md",
+      "line": 24,
+      "text": "| MaryTTS | https://github.com/marytts/marytts.git | f3389a19 / 2025-01-17 | Y | N (user-initiated, GUI installer) | Y | https (component list) + locations embedded per-package (scheme not enforced) | N | hash (MD5) | server-supplied/unpinned | `marytts-runtime/src/main/java/marytts/tools/install/InstallerGUI.java:183` — component list fetched from `https://raw.github.com/marytts/marytts/master/download/marytts-components.xml`; `ComponentDescription.java:668-708` downloads each component via `HttpURLConnection` from URLs listed in that same XML (`CreateComponentXML.java:250` shows the generator historically producing `http://mary.dfki.de/download/...`, i.e. plaintext-HTTP-capable); `ComponentDescription.java:781-793` computes MD5 of the downloaded archive and compares against `packageMD5` — but that MD5 is itself sourced from the same unauthenticated components XML (`packageMD5 = packageElement.getAttribute(\"md5sum\")`, line 150). Downloaded voice/language packages are zip archives whose contents (voice `.config` + Java classes) are loaded into the running JVM's classpath at runtime — a genuine content-as-code channel. **Tier: C** (real self-updater/installer, MD5-only, unsigned manifest, unauthenticated key source — endpoint/CDN compromise of either the GitHub-raw XML or the download mirror ⇒ code load into the MaryTTS JVM). |"
+    }
+  ]
 }

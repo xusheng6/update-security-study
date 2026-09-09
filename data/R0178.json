@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/ramboxapp/community-edition",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Rambox uses electron-updater with a GitHub feed and an IPC-triggered quit-and-install path. SHA512 and platform code-signature enforcement are delegated to electron-updater/package tooling and remain unresolved in this application-source review.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater, sha512 + code-sign.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; historical release behavior is not reverified.",
-    "The cited app source delegates digest and platform-signature enforcement to electron-updater and its packaging/runtime dependencies.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; historical release behavior is not reverified. The cited app source delegates digest and platform-signature enforcement to electron-updater and its packaging/runtime dependencies."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "eaa33fc8f3ce5f9600b032fd9ca7cfba1827b84f"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Rambox uses electron-updater with a GitHub feed and an IPC-triggered quit-and-install path. SHA512 and platform code-signature enforcement are delegated to electron-updater/package tooling and remain unresolved in this application-source review.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; historical release behavior is not reverified.",
+      "The cited app source delegates digest and platform-signature enforcement to electron-updater and its packaging/runtime dependencies.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; historical release behavior is not reverified. The cited app source delegates digest and platform-signature enforcement to electron-updater and its packaging/runtime dependencies."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "hash + OS-code-signing",
+  "trust_root": "OS-trust-store",
+  "original_evidence": [
+    {
+      "file": "batch-K3.md",
+      "line": 15,
+      "text": "| Rambox (community-edition) | ramboxapp/community-edition | Electron (`electron-updater`) | Y | manual (no automatic startup or interval check found; `checkForUpdates` is wired only to a \"Migrate now\" button on a deprecation banner telling users this CE build is unsupported and pushing them to the paid/hosted Rambox) | Y (once triggered) | https (GitHub Releases via `electron-updater`; feed hardcoded in code to `ramboxapp/download`, while `package.json`'s `build.publish` points at `ramboxapp/community-edition` — a mismatch between build-time publish config and the runtime-overridden feed) | manifest present (`latest.yml`/`latest-mac.yml` on GitHub Releases, TLS only, not independently signed) | hash-from-manifest (default electron-updater sha512 check); Windows Authenticode verification NOT disabled (no `verifyUpdateCodeSignature: false` present, unlike Caprine/Station, so default `true` applies on the NSIS target) | OS-trust-store (Windows Authenticode publisher check, default electron-updater behavior since not overridden) | `electron/updater.js:1-27` (`autoUpdater.setFeedURL({provider:'github', owner:'ramboxapp', repo:'download', vPrefixedTagName:true})`; `ipcMain.on('autoUpdater:quit-and-install', ...) => autoUpdater.quitAndInstall(true,true)`); `app/view/main/Main.js:265-274` (\"Migrate now\" button → `Rambox.app.checkUpdate()`, the only call site found); `app/Application.js:249-251` (`checkUpdate` just forwards `autoUpdater:check-for-updates` over IPC); `package.json` build config `\"publish\":[{\"provider\":\"github\",\"owner\":\"ramboxapp\",\"repo\":\"community-edition\",\"vPrefixedTagName\":false}]` (no `win.verifyUpdateCodeSignature` override present) |"
+    }
+  ]
 }

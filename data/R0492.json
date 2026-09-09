@@ -5,12 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://gitlab.com/storyteller-platform/storyteller",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "Targeted retained-source read supports the narrow Tier A behavior for this primary application updater: Tauri updater configuration embeds a Minisign public key and HTTPS endpoint; release startup code invokes the updater check in packaged builds.",
+  "description": "Clean tauri-plugin-updater, minisign pubkey pinned, no bypass paths.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in pinned key/configuration.",
-    "Framework verification depends on the packaged updater implementation where the application delegates to Sparkle or tauri-plugin-updater."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "6ff8da0e29252b8bcdb6aadff828d03457dd6448"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow Tier A behavior for this primary application updater: Tauri updater configuration embeds a Minisign public key and HTTPS endpoint; release startup code invokes the updater check in packaged builds.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in pinned key/configuration.",
+      "Framework verification depends on the packaged updater implementation where the application delegates to Sparkle or tauri-plugin-updater."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "Ed25519 (minisign)",
+  "trust_root": "pubkey pinned in tauri config",
+  "original_evidence": [
+    {
+      "file": "batch-AF1.md",
+      "line": 20,
+      "text": "| Storyteller (Tauri desktop client) | https://gitlab.com/storyteller-platform/storyteller (GitHub mirror: github.com/smoores-dev/storyteller) | 6ff8da0 / 2026-08-23 | Y | Y (silent check at launch, plus manual \"check now\") | Y | https, TLS enforced | Y (minisign, all platform entries) | **verified** — standard `tauri-plugin-updater` end-to-end, entirely backend-driven Rust code, no custom bypass paths | pinned Ed25519/minisign pubkey in `tauri.conf.json`; CI signs artifacts with `TAURI_SIGNING_PRIVATE_KEY` | `applications/tauri/src-tauri/tauri.conf.json:63-66` pubkey + endpoint (GitLab generic package registry `.../packages/generic/storyteller-tauri/latest/latest.json`); `Cargo.toml:15` `tauri-plugin-updater = \"2\"`; `src/main.rs:46` plugin init, `:636` silent startup check, `:688-732` `check_for_updates()`→`updater.check()`; signing declared in `.gitlab/ci/publish-tauri.yml` header comment |"
+    }
+  ]
 }

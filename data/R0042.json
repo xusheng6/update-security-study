@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Foundry376/Mailspring",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The source supports a narrow primary C observation for Mailspring: its feed is HTTPS, but the feed response may nominate either HTTP or HTTPS and the in-repo code does not verify the payload. Windows verification/install is delegated to Squirrel Update.exe; macOS delegates to Electron autoUpdater, so the complete artifact-verification boundary is external to this checkout.",
+  "description": "Windows Squirrel Update.exe, no in-repo verification, and the feed-URL check permits http:. mac path is Squirrel.Mac (B).",
   "limitations": [
-    "Newly retrieved snapshot at the recorded commit, not historical release verification.",
-    "Squirrel.Windows, Squirrel.Mac/Electron, and the update service are external components; their artifact-signing behavior was not established here.",
-    "The Linux implementation only opens the nominated URL and does not establish automatic replacement."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "5181e717622cd6d9f0b26f5697cfb6ab3eeec9a8"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The source supports a narrow primary C observation for Mailspring: its feed is HTTPS, but the feed response may nominate either HTTP or HTTPS and the in-repo code does not verify the payload. Windows verification/install is delegated to Squirrel Update.exe; macOS delegates to Electron autoUpdater, so the complete artifact-verification boundary is external to this checkout.",
+    "limitations": [
+      "Newly retrieved snapshot at the recorded commit, not historical release verification.",
+      "Squirrel.Windows, Squirrel.Mac/Electron, and the update service are external components; their artifact-signing behavior was not established here.",
+      "The Linux implementation only opens the nominated URL and does not establish automatic replacement."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "http OR https (safeHttpUrl permits http)",
+  "payload_verification": "none (in-repo)",
+  "trust_root": "OS-trust-store (Squirrel)",
+  "original_evidence": []
 }

@@ -5,13 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/icy-imaging/icy",
   "channel": "mixed",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Icy has shared network-policy configuration and separate application and plugin update components. The retained review does not establish the complete release-authentication policy or certify the original impact classification.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "Installs a trust-all X509TrustManager + accept-all hostname verifier app-wide at startup; updater AND plugin manager download+execute code through defeated TLS with zero verification. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "The retained commit does not establish released-artifact or current-upstream behavior.",
-    "Plugin-manager implementation and any separate artifact-authentication control require separate review.",
-    "The retained commit does not establish released-artifact or current-upstream behavior. Plugin-manager implementation and any separate artifact-authentication control require separate review."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "04edbe2f7b27579f10933594666e772608b71a0f"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Icy has shared network-policy configuration and separate application and plugin update components. The retained review does not establish the complete release-authentication policy or certify the original impact classification.",
+    "limitations": [
+      "The retained commit does not establish released-artifact or current-upstream behavior.",
+      "Plugin-manager implementation and any separate artifact-authentication control require separate review.",
+      "The retained commit does not establish released-artifact or current-upstream behavior. Plugin-manager implementation and any separate artifact-authentication control require separate review."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https (validation off)",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AM8.md",
+      "line": 21,
+      "text": "| Icy | https://github.com/icy-imaging/icy | 04edbe2f / 2026-03-05 | Y | Y (silent auto-update path exists) | Y | **https, but TLS certificate + hostname validation are globally disabled by the app itself** | N | none | N/A | icy/src/main/java/icy/network/NetworkUtil.java:288 (`installTruster()` called unconditionally at network init, comment \"accept all HTTPS connections by default\"); :336 (`HttpsURLConnection.setDefaultHostnameVerifier(new FakeHostnameVerifier())` — verify() always returns true); :339-392 (custom `X509ExtendedTrustManager` with empty/no-op `checkServerTrusted`/`checkClientTrusted` — installed as the JVM default SSLContext); icy/src/main/java/icy/update/IcyUpdater.java:404-426 (`downloadAndSaveForUpdate` writes downloaded bytes straight to disk, no hash/signature check) and :449-488 (`launchUpdater` → `SystemUtil.execJAR(Updater.UPDATER_NAME,...)` — executes the downloaded updater jar) |"
+    }
+  ]
 }

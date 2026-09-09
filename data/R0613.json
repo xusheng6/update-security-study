@@ -5,12 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/dathere/qsv",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "Targeted retained-source read supports the narrow Tier A behavior: qsv configures self_update with an Ed25519 zipsign key included from source; the explicit update flags invoke that verifier-backed path while background checks are notify-only.",
+  "description": "`--update` signature-verifies via zipsign vs an Ed25519 key compiled into the binary — survives GitHub/CDN compromise. Manual-flag; background check is notify-only.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in key/configuration.",
-    "The final verifier implementation is delegated to Sparkle, tauri-plugin-updater, or self_update where applicable."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "02eccc756edcd4ad3fc03232725296327d9cc8a7"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow Tier A behavior: qsv configures self_update with an Ed25519 zipsign key included from source; the explicit update flags invoke that verifier-backed path while background checks are notify-only.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in key/configuration.",
+      "The final verifier implementation is delegated to Sparkle, tauri-plugin-updater, or self_update where applicable."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "zipsign Ed25519",
+  "trust_root": "pubkey compiled into binary (include_bytes!)",
+  "original_evidence": [
+    {
+      "file": "batch-AN8.md",
+      "line": 15,
+      "text": "| **qsv** | https://github.com/dathere/qsv | 02eccc7 / 2026-08-23 | **Y** | N (explicit flag required; background check is notify-only) | **Y** (with `-u`/`-U`) | https, TLS validation enforced (reqwest default; no `danger_accept_invalid_certs`/disabled-verify found) | N (no separate manifest; binary itself is signed) | **signature** — ed25519 via `zipsign`, verified by `self_update`'s `verifying_keys()` | **pinned-in-binary** — `include_bytes!(\"qsv-zipsign-public.key\")`, 32-byte Ed25519 pubkey shipped in `src/` and compiled into the binary | `src/util.rs:1585-1656` (release list + `Update::configure()...verifying_keys([*include_bytes!(\"qsv-zipsign-public.key\")])`); key file `src/qsv-zipsign-public.key`; flags `src/main.rs:58-59,354` (`--update`/`-u`, `--updatenow`/`-U`); throttled background *check-only* notify at `src/util.rs:1696-1725`, `src/main.rs:368,615` |"
+    }
+  ]
 }

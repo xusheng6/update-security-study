@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/webcatalog/webcatalog-app",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "WebCatalog’s reviewed updater wires electron-updater events and presents a restart choice after an update is available; the source also has a silent-update state and does not establish a uniformly user-gated download policy. Build metadata and delegated signing enforcement remain unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater, user-gated.",
   "limitations": [
-    "Newly recovered snapshot; historical release behavior is not reverified.",
-    "Released artifacts and electron-updater signing enforcement remain external.",
-    "Newly recovered snapshot; historical release behavior is not reverified. Released artifacts and electron-updater signing enforcement remain external."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "b10665b32e08c4b419705a2ca406553a993e878a"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "WebCatalog’s reviewed updater wires electron-updater events and presents a restart choice after an update is available; the source also has a silent-update state and does not establish a uniformly user-gated download policy. Build metadata and delegated signing enforcement remain unresolved.",
+    "limitations": [
+      "Newly recovered snapshot; historical release behavior is not reverified.",
+      "Released artifacts and electron-updater signing enforcement remain external.",
+      "Newly recovered snapshot; historical release behavior is not reverified. Released artifacts and electron-updater signing enforcement remain external."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "OS code-signing",
+  "trust_root": "electron-updater",
+  "original_evidence": [
+    {
+      "file": "batch-AM7.md",
+      "line": 18,
+      "text": "| WebCatalog | https://github.com/webcatalog/webcatalog-app.git | b10665b / 2022-04-03 | Y | Y (checks on launch, silent unless user-triggered) | Y (`autoUpdater.quitAndInstall`) | https (generic CDN `cdn-2.webcatalog.io` + S3 + GitHub) | B (electron-updater OS code-sign) | OS code signature (HSM Authenticode sign on Windows, hardened runtime + notarization on macOS) | **OS keystore** | main-src/libs/updater.js:1-142 (`electron-updater` events, `quitAndInstall`), dist.js:137-167 (`win.sign: hsmCodeSignAsync`, `mac.hardenedRuntime`/notarize, `publish` generic+s3+github) |"
+    }
+  ]
 }

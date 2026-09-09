@@ -5,11 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/JannisX11/blockbench",
   "channel": "plugin",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Blockbench disables automatic download and gates download on user approval; its plugin loader executes fetched plugin code without a separate integrity check.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater sha512 + notarization. BUT plugin store executes fetched JS via new Function(), no hash/sig.",
   "limitations": [
-    "Newly recovered source snapshot; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "47e633e4a1338f957ee7baa0acbcf54da11e77df"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Blockbench disables automatic download and gates download on user approval; its plugin loader executes fetched plugin code without a separate integrity check.",
+    "limitations": [
+      "Newly recovered source snapshot; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "hash + OS-code-signing",
+  "trust_root": "OS-trust-store",
+  "original_evidence": [
+    {
+      "file": "batch-N4.md",
+      "line": 7,
+      "text": "| Blockbench | https://github.com/JannisX11/blockbench | Electron (desktop) + web | Y (app-update); separately Y for plugin store | app-update: auto-check on startup (`autoUpdater.checkForUpdates()`), `autoDownload=false` (download gated on user clicking \"allow\"), `autoInstallOnAppQuit=true`; plugin store: manual install/toggle by user | app-update: Y (electron-updater downloads and installs the new build); plugin store: Y — plugin JS is fetched and executed with no sandboxing | app-update: https (electron-updater → GitHub Releases); plugin store: https enforced in code (throws if URL doesn't start with `https`) | app-update: N (no independently-signed manifest beyond electron-builder's auto-generated `latest.yml`); plugin store: N (no manifest at all) | app-update: hash-from-manifest (sha512 embedded in electron-builder's `latest.yml`) + OS-code-signing (macOS `hardenedRuntime`+notarization via `scripts/notarize.js`, entitlements); plugin store: **none** — no hash/signature check of any kind | app-update: none beyond HTTPS+GitHub Releases trust (no separate maintainer signing key found in repo); OS-code-signing key = Apple Developer ID cert (external, not in repo) | `electron/main.js:11,304-330` (`require('electron-updater')`, `autoUpdater.checkForUpdates()`/`downloadUpdate()`/`autoInstallOnAppQuit`); `package.json:193` (`\"electron-updater\": \"^6.7.3\"`), `package.json` `build.mac.hardenedRuntime`+`afterSign: scripts/notarize.js`; `js/plugin_loader.ts:39` (plugin CDN base `https://cdn.jsdelivr.net/gh/JannisX11/blockbench-plugins/plugins`), `:668-694` (`#runPluginFile` — `$.ajax`/`fetch` over http(s), throws if not https), `:697-704` (`#runCode` — `new Function('requireNativeModule','require', code)(scoped_require, scoped_require)`, i.e. arbitrary plugin JS executed with no hash/signature check); repo-wide grep for `integrity\\|sha256\\|checksum\\|signature\\|publicKey` in `js/`/`electron/` returns zero relevant hits. |"
+    }
+  ]
 }

@@ -5,13 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/HandBrake/HandBrake",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "HandBrake’s Windows updater restricts the retrieval host to handbrake.fr over HTTPS and verifies the retrieved file with an RSA SHA-256 signature from the appcast.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Pinned RSA-4096 over the appcast.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.",
-    "The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.; The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "ecc742047e1e0d87bbbdd2bcdfabb44bef1829b3"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "HandBrake’s Windows updater restricts the retrieval host to handbrake.fr over HTTPS and verifies the retrieved file with an RSA SHA-256 signature from the appcast.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.",
+      "The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.; The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[RSA-4096/SHA-256]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-AL6.md",
+      "line": 9,
+      "text": "| HandBrake | https://github.com/HandBrake/HandBrake.git | ecc74204 / 2026-08-22 | Y | Y (periodic background appcast check; install is one click) | Y | https, TLS enforced (no bypass found) | N (appcast XML itself unsigned, but download-URL host is allowlisted to handbrake.fr/download.handbrake.fr/github.com/HandBrake) | signature — RSA-4096/SHA256 (`RSA.VerifyData`, PKCS1) over the downloaded installer | pinned-in-binary (embedded resource `HandBrakeWPF.public.4096.key`, RSA-4096 pub key compiled into assembly) | win/CS/HandBrakeWPF/Services/UpdateService.cs:200-233 (VerifyDownload/RSA), :117-130 (host allowlist), win/CS/HandBrakeWPF/public.4096.key:1 |"
+    }
+  ]
 }

@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/The-Powder-Toy/The-Powder-Toy",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The updater accepts a format/magic check and decompresses the payload before handing it to Platform::UpdateStart; no cryptographic signature is checked.",
+  "description": "Updater writes downloaded bytes over the running exe then ShellExecutes it (4-byte magic only). Separately, installScriptManager auto-runs unsigned Lua from a 3rd-party domain.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "b31f4462bc7d217159b83859a35405db9b640455"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The updater accepts a format/magic check and decompresses the payload before handing it to Platform::UpdateStart; no cryptographic signature is checked.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AI4.md",
+      "line": 15,
+      "text": "| The Powder Toy | https://github.com/The-Powder-Toy/The-Powder-Toy.git | b31f4462bc7d217159b83859a35405db9b640455 / 2026-08-21 | Y | N (user must click \"Run Updater\" confirm) | Y | https, TLS enforced (`src/client/http/requestmanager/Libcurl.cpp:496-499` pins `CURLOPT_PROTOCOLS_STR=\"https\"` + `CURLOPT_SSLVERSION=TLSv1_2`; no VERIFYPEER=0 found) | N | none (4-byte \"BuTT\" magic check + bz2 decompress only) | N/A | `src/gui/update/UpdateActivity.cpp:36-114` (no hash/sig check, `Platform::UpdateStart(res)` at 106); `src/common/platform/Windows.cpp:313-341` (writes downloaded bytes straight over the running exe, then `ShellExecute`s it); `src/client/http/StartupRequest.cpp:9` (unauthenticated `Startup.json` manifest). |"
+    }
+  ]
 }

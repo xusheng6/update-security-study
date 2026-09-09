@@ -5,16 +5,38 @@
   "historical_tier": "A",
   "project_url": "https://shortcat.app/",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Withdraw the original security classification. Shortcat appcast signatures do not establish the corresponding binary’s key configuration.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Sparkle EdDSA (closed source; scheme confirmed via appcast).",
   "limitations": [
-    "No canonical public source or verified application archive is retained; appcast and cask records do not establish the shipped binary's key configuration.",
-    "Shortcat appcast signatures do not establish the corresponding binary’s key configuration. Reinstating the original classification requires that missing evidence."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
   "classification_certified": false,
-  "project_link_basis": "Official product website checked on 2026-09-08."
+  "project_link_basis": "Official product website checked on 2026-09-08.",
+  "later_review_audit": {
+    "description": "Withdraw the original security classification. Shortcat appcast signatures do not establish the corresponding binary’s key configuration.",
+    "limitations": [
+      "No canonical public source or verified application archive is retained; appcast and cask records do not establish the shipped binary's key configuration.",
+      "Shortcat appcast signatures do not establish the corresponding binary’s key configuration. Reinstating the original classification requires that missing evidence."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[Sparkle-EdDSA]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-Q1.md",
+      "line": 18,
+      "text": "| Shortcat | closed source; no public repo (shortcat.app, developer Sproutcube) | **Sparkle (EdDSA = A)** | **Y** | **Y** (cask `auto_updates true`) | **Y** (standard Sparkle behavior) | https | TLS-only (appcast.xml itself unsigned; standard Sparkle 2 pattern) | signature[EdDSA] | unknown exact value (closed source; conventionally an `SUPublicEDKey` embedded in the shipped Info.plist, per the `sparkle:edSignature` scheme observed) | Live fetch `https://updates.shortcat.app/appcast.xml`: `<enclosure url=\"https://files.shortcat.app/releases/v0.12.2/Shortcat.zip\" sparkle:version=\"189\" sparkle:shortVersionString=\"0.12.2\" type=\"application/octet-stream\" sparkle:edSignature=\"fEKNT/DUnus+AY8pPZjNcFSHTbSX3a4MqeCPmF/zbUIoa0nrpyau9scoaqOp20heRjrlMU5BrzzQNoBM3q7NDQ==\" length=\"10446357\" />`; `raw.githubusercontent.com/Homebrew/homebrew-cask/master/Casks/s/shortcat.rb`: `auto_updates true`, `livecheck do url \"https://updates.shortcat.app/appcast.xml\" strategy :sparkle, &:short_version end`. |"
+    }
+  ]
 }

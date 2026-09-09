@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/RainLoop/rainloop-webmail",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "D",
-  "description": "RainLoop’s HTTP helper disables certificate verification, repository endpoints are HTTP, and core/plugin packages are extracted into the live PHP tree. No package signature/hash is visible in the update path.",
+  "description": "CURLOPT_SSL_VERIFYPEER=>false hardcoded in the exact function used for core-update + plugin downloads; no signature/hash. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "9bf8fa5b63d7e6871ee533126a7e1b1c85ee45b5"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "RainLoop’s HTTP helper disables certificate verification, repository endpoints are HTTP, and core/plugin packages are extracted into the live PHP tree. No package signature/hash is visible in the update path.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "D",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validation off)",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AI7.md",
+      "line": 23,
+      "text": "| RainLoop Webmail | https://github.com/RainLoop/rainloop-webmail | 9bf8fa5b63d7e6871ee533126a7e1b1c85ee45b5 / 2022-09-01 (project archived) | Y | N (admin-triggered) | Y | https, **TLS cert validation explicitly DISABLED** (hardcoded, not conditional) | N | none | none | `rainloop/v/0.0.0/app/libraries/RainLoop/Actions.php:4570-4592` (`DoAdminUpdateCoreData`), `:4635-4659` (`downloadRemotePackageByUrl` → `MailSo\\Base\\Http::SaveUrlToFile`), `:4700-4728` (plugin install, same pattern); `rainloop/v/0.0.0/app/libraries/RainLoop/Providers/Version.php:82-187` (`UpdateCore` extracts zip via PclZip and overwrites live `index.php`/`rainloop/` tree with zero signature/hash check); `rainloop/v/0.0.0/app/libraries/MailSo/Base/Http.php:580` (`CURLOPT_SSL_VERIFYPEER => false` inside `SaveUrlToFile`, the function used to fetch the update/plugin package) |"
+    }
+  ]
 }

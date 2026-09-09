@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/supermerill/SuperSlicer",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected SuperSlicer application updater includes a size check. The retained evidence does not establish complete cryptographic artifact authentication.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Forked PrusaSlicer's AppUpdater near-verbatim; size-check only.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; release artifact signing and other distribution paths are not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "1f3d287e9be46caa83bc19c16c51c8abd0c211d6"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected SuperSlicer application updater includes a size check. The retained evidence does not establish complete cryptographic artifact authentication.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; release artifact signing and other distribution paths are not established."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validated)",
+  "payload_verification": "none (size-only)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-J1.md",
+      "line": 11,
+      "text": "| SuperSlicer | github.com/supermerill/SuperSlicer (branch master_27) | wxWidgets/C++ (libcurl) — PrusaSlicer fork, same `AppUpdater.cpp` lineage | Y | check: automatic + notify. download/run: user-initiated via dialog, optional \"run after download\" checkbox (identical mechanism to PrusaSlicer) | Y (same opt-in `run_file`/`create_process` mechanism as PrusaSlicer) | https (api.github.com/repos/supermerill/superslicer/releases); TLS not overridden — no VERIFYPEER/VERIFYHOST disable in Http.cpp (grep negative) | N | none (size check only, same as PrusaSlicer; grep for sha256/signature/checksum/HMAC/EVP_ in PresetUpdater.cpp = no matches) | n/a | src/slic3r/Utils/AppUpdater.cpp:47 (run_file), :209 (download_file, size-only check); src/libslic3r/AppConfig.cpp:47 (VERSION_CHECK_URL=\"https://api.github.com/repos/supermerill/superslicer/releases\"); src/slic3r/Utils/Http.cpp (grep negative VERIFYPEER/VERIFYHOST); src/slic3r/Utils/PresetUpdater.cpp (grep negative) |"
+    }
+  ]
 }

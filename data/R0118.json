@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/buttercup/buttercup-desktop",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Buttercup's desktop updater checks the buttercup-desktop GitHub feed about every 30 minutes, leaves electron-updater auto-retrieval disabled until the user starts a retrieval, and installs a retrieved update through the install action. Release scripts publish SHA-512 metadata and invoke a Windows signing hook; this review does not establish application-pinned runtime verification.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater; SHA512 + code-sign, auto-download off by default.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; electron-updater dependency internals and release-specific signing credentials are outside this tree.",
-    "Metadata generation and a signing hook do not establish independent runtime verification of the downloaded artifact.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; electron-updater dependency internals and release-specific signing credentials are outside this tree.; Metadata generation and a signing hook do not establish independent runtime verification of the downloaded artifact."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "cb98fe711b555fb1b0e3f7ffdc3a85cd844d7307"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Buttercup's desktop updater checks the buttercup-desktop GitHub feed about every 30 minutes, leaves electron-updater auto-retrieval disabled until the user starts a retrieval, and installs a retrieved update through the install action. Release scripts publish SHA-512 metadata and invoke a Windows signing hook; this review does not establish application-pinned runtime verification.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; electron-updater dependency internals and release-specific signing credentials are outside this tree.",
+      "Metadata generation and a signing hook do not establish independent runtime verification of the downloaded artifact.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; electron-updater dependency internals and release-specific signing credentials are outside this tree.; Metadata generation and a signing hook do not establish independent runtime verification of the downloaded artifact."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "hash + OS-code-signing",
+  "trust_root": "OS-trust-store",
+  "original_evidence": [
+    {
+      "file": "batch-H6.md",
+      "line": 4,
+      "text": "| Buttercup | github.com/buttercup/buttercup-desktop | Electron (electron-updater / electron-builder) | Y | auto chk (every 30 min via `setDelayedInterval`) + notify; `autoUpdater.autoDownload = false` so download/install require explicit user action (`startUpdate()` / `installUpdate()` → `quitAndInstall()`) | Y | HTTPS via GitHub Releases feed (`electron-updater`'s `github` provider, owner `buttercup`, repo `buttercup-desktop`); TLS validation ENFORCED (no `rejectUnauthorized`/TLS-bypass code found in source/) | N (electron-updater's `latest.yml`/`latest-mac.yml` manifest is plain YAML with a SHA-512 field, not separately signed) | hash-from-manifest (SHA-512 of the downloaded installer checked against the value in `latest*.yml`) + OS-code-signing (electron-updater's default `verifyUpdateCodeSignature`/Squirrel.Mac behavior requires the downloaded installer's Authenticode/code-signing identity to match the running app on Windows/macOS) | n/a for the manifest hash (unsigned, trust = GitHub HTTPS); code-signing identity check relies on the OS certificate store / running app's own signing cert, not an app-embedded key | source/main/services/update.ts:3 (`import { autoUpdater } from \"electron-updater\"`), :90-96 (`setFeedURL({provider:\"github\", owner:\"buttercup\", repo:\"buttercup-desktop\"})`, `autoDownload=false`), :106 (`checkForUpdates()`), :130-132 (`installUpdate()` → `autoUpdater.quitAndInstall()`), :139-141 (`startUpdate()` → `autoUpdater.downloadUpdate()`), :143-146 (`startUpdateWatcher` polls every `UPDATE_AUTO_CHECK = ms(\"30m\")`); package.json:248 (`\"electron-updater\": \"^6.1.8\"`); negative grep for rejectUnauthorized/NODE_TLS_REJECT_UNAUTHORIZED/checkServerIdentity across source/resources (verified 2026-08-19) |"
+    }
+  ]
 }

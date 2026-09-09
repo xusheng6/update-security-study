@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/marktext/marktext",
   "channel": "plugin",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "MarkText's reviewed desktop code uses electron-updater: it disables automatic download, asks the UI about an available update, downloads after the IPC decision, and calls quitAndInstall after the download event. Artifact hash and OS code-signing enforcement are delegated to updater and platform components not established by this source file.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater, sha512 + OS code-signing enforced.",
   "limitations": [
-    "The checkout is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "electron-updater internals, generated release metadata, installer behavior, and OS code-signing policy were not independently established here.",
-    "The checkout is a newly retrieved default-branch snapshot, not the original study checkout. electron-updater internals, generated release metadata, installer behavior, and OS code-signing policy were not independently established here."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "1d3025b2b6306613a6fa0f822ba9bcaf8890b094"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "MarkText's reviewed desktop code uses electron-updater: it disables automatic download, asks the UI about an available update, downloads after the IPC decision, and calls quitAndInstall after the download event. Artifact hash and OS code-signing enforcement are delegated to updater and platform components not established by this source file.",
+    "limitations": [
+      "The checkout is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "electron-updater internals, generated release metadata, installer behavior, and OS code-signing policy were not independently established here.",
+      "The checkout is a newly retrieved default-branch snapshot, not the original study checkout. electron-updater internals, generated release metadata, installer behavior, and OS code-signing policy were not independently established here."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "sha512 + OS code-signing",
+  "trust_root": "electron-updater",
+  "original_evidence": [
+    {
+      "file": "batch-U7.md",
+      "line": 8,
+      "text": "| MarkText | https://github.com/marktext/marktext.git | e52106f / 2026-07-27 | Y | Y (auto-check; download on user confirm) | Y | https, TLS enforced (no bypass found) | no (uses electron-builder `latest.yml`, unsigned) | hash (sha512 in latest.yml) + OS code-sign check (default electron-updater `verifyUpdateCodeSignature`, not overridden) | OS keystore (Windows Authenticode / macOS codesign) | packages/desktop/src/main/menu/actions/marktext.ts:1-11 (autoUpdater import/use); packages/desktop/electron-builder.yml (no publish/verify override) |"
+    }
+  ]
 }

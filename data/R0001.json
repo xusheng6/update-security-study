@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/libretro/RetroArch",
   "channel": "plugin",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The retained core updater fetches the core index and uses a same-channel CRC for re-download decisions; the loaded core is native code. No independent signature or trust root appears in this path.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "Cores fetched over cleartext, no list/payload check, then dlopen'd as native code. MitM or domain control = RCE — and one default core host, hakchicloud.com, was allowed to lapse and (2026-08-24) re-registered by an unrelated third party. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,23 @@
       "commit": "011d93ff6ef3fd5851d6e865654a84cc2bae57c5"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained core updater fetches the core index and uses a same-channel CRC for re-download decisions; the loaded core is native code. No independent signature or trust root appears in this path.",
+    "limitations": [
+      "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "http (mbedTLS verify ignored)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": []
 }

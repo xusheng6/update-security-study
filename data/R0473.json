@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/go-skynet/LocalAI",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Checksum verification is conditional; failed checksum download logs a warning and continues without verification.",
+  "description": "Self-updater hash-only, fetched unauthenticated from the same GitHub release and fails open if the checksum fetch fails. Model/backend gallery is a separate content channel.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement remain unverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "82c191afadf5f005281e798ccfa0ffd0d5805030"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Checksum verification is conditional; failed checksum download logs a warning and continues without verification.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement remain unverified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "hash (fails open)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AE1.md",
+      "line": 16,
+      "text": "| LocalAI | https://github.com/go-skynet/LocalAI | 82c191a / 2026-08-22 | Y (Fyne desktop launcher, `cmd/launcher`) | Y (periodic + on-demand `CheckForUpdates`) | Y | https, TLS enforced (default Go `net/http`, no `InsecureSkipVerify` on this path) | N (checksums.txt is a plain unsigned text file) | hash (sha256), but **fails open**: if the checksum file can't be downloaded it proceeds anyway | server-supplied/unpinned — checksum file fetched from the *same* GitHub release as the binary, no independently pinned key | `cmd/launcher/internal/release_manager.go:200-245` (\"Warning: Proceeding without checksum verification\") |"
+    }
+  ]
 }

@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/swiftbar/SwiftBar",
   "channel": "primary",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The recovered non-App-Store build starts Sparkle against an HTTPS appcast. No pinned Sparkle signing key is visible in the snapshot, but Sparkle verification is external to this checkout, so primary authentication and tier remain unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Links Sparkle 2 but no SUPublicEDKey + unsigned appcast — crypto inert, TLS-only.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot rather than the original study checkout; it does not certify current releases."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "b9fa1ed3fc75868913bf604c1620500e7468460a"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The recovered non-App-Store build starts Sparkle against an HTTPS appcast. No pinned Sparkle signing key is visible in the snapshot, but Sparkle verification is external to this checkout, so primary authentication and tier remain unresolved.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot rather than the original study checkout; it does not certify current releases."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none (Sparkle, no key)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-N2.md",
+      "line": 14,
+      "text": "| SwiftBar | https://github.com/swiftbar/SwiftBar | Sparkle 2 (SPM dependency; **disabled entirely in the Mac App Store build variant**) | Y (direct/non-MAS build only; N for the `MAC_APP_STORE` build variant, which stubs out `SPUUpdaterDelegate`/`SPUStandardUserDriverDelegate` and never imports Sparkle) | Y (checks automatically; standard Sparkle UI) | Y (non-MAS build) | https | TLS-only | **none** — appcast enclosures carry no `sparkle:edSignature`/`sparkle:dsaSignature`, and no `SUPublicEDKey`/`SUPublicDSAKey` is set anywhere in the app (Info.plist or code), so Sparkle has no pinned key to verify against | none (no key pinned anywhere in the repo) | `SwiftBar/AppDelegate.swift:5-11` — `#if MAC_APP_STORE` stubs Sparkle protocols, `#else import Sparkle`. `SwiftBar/AppDelegate.swift:129` — `SPUUpdater(hostBundle:applicationBundle:userDriver:delegate:)`. `SwiftBar/AppDelegate.swift:276-280` — `feedURLString(for:)` returns `https://swiftbar.github.io/SwiftBar/appcast-beta.xml` or `https://swiftbar.github.io/SwiftBar/appcast.xml`. `SwiftBar/Resources/Info.plist:48-52` — `NSAppTransportSecurity` → `NSAllowsArbitraryLoads=true` (ATS disabled app-wide, though the hardcoded feed URLs are https). Repo-wide `grep -rn \"SUPublicEDKey|SUPublicDSAKey\"` returns zero hits. Live appcast `https://swiftbar.github.io/SwiftBar/appcast.xml` (fetched via WebFetch) items for v2.1.1/2.1.0/2.0.1 all lack signature attributes, enclosures point to `github.com/swiftbar/SwiftBar/releases/download/...`. `SwiftBar.xcodeproj/project.pbxproj:1019-1025` — SPM dependency on `https://github.com/sparkle-project/Sparkle`, `>= 2.0.0`. |"
+    }
+  ]
 }

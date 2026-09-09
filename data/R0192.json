@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/pooler/electrum-ltc",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Electrum-LTC's Qt updater retrieves a version JSON document, accepts it only when a signature from the hard-coded Litecoin address verifies, and presents the electrum-ltc.org download page for a newer version. The inspected flow does not download or install the package itself.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Electrum pattern: pinned coin-address-signed version blob; notify-only.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot rather than the original study release; the claim is limited to the inspected Qt checker and does not establish behavior of other distribution channels."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "f9cbfaca5f8b2ab3eef89758bf78b7e4c2c554a0"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Electrum-LTC's Qt updater retrieves a version JSON document, accepts it only when a signature from the hard-coded Litecoin address verifies, and presents the electrum-ltc.org download page for a newer version. The inspected flow does not download or install the package itself.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot rather than the original study release; the claim is limited to the inspected Qt checker and does not establish behavior of other distribution channels."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "no",
+  "transport": "https",
+  "payload_verification": "signature[coin-address]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-L1.md",
+      "line": 8,
+      "text": "| Electrum-LTC | github.com/pooler/electrum-ltc | Python/PyQt5 desktop | Y | notify (opt-in; user is prompted once at first run to enable `check_updates`); never auto-downloads/installs | N (only opens browser to static download page `electrum-ltc.org/#download`) | https (electrum-ltc.org/version, OS trust store, no pinning) | Y (single \"version\"+\"signatures\" JSON object is signed per-release) | signature (Bitcoin/LTC message-signing via `ecc.verify_message_with_address`) — version string only, no binary payload verified | pinned-in-binary (`VERSION_ANNOUNCEMENT_SIGNING_KEYS = (\"LWZzbv5SbiRRjBDL6dUYRdBX9Dp89RDZgG\",)` hardcoded) | electrum_ltc/gui/qt/update_checker.py:23-28 (URL+pinned key), :105-131 (sig verification); main_window.py:280-297 (opt-in prompt + auto check) |"
+    }
+  ]
 }

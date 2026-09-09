@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/bottlesdevs/Bottles",
   "channel": "data",
-  "review_status": "Detailed recheck",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Tier C remains appropriate for the observed component and dependency channel: remote catalog data selects downloadable files, a supplied value is compared locally, and the resulting component or installer is used. The source corrects the algorithm from SHA256 to MD5 and shows a checksum bypass, while it does not establish a signed catalog or the Flatpak packaging boundary. Those are claim and scope corrections rather than evidence for a stronger or weaker project wide tier.",
+  "description": "App via Flatpak; components SHA256 from unsigned manifest.",
   "limitations": [
-    "Snapshot is the newly retrieved default branch at commit 29032bf3084f78c900777d188e7286f8f7280aeb, not the original study checkout; released behavior may differ.",
-    "The reviewed source does not authenticate the YAML catalog or establish how Flatpak distributes the application itself.",
-    "This review covers component/dependency downloads and execution paths; it does not establish behavior of every Bottles channel or release artifact."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "29032bf3084f78c900777d188e7286f8f7280aeb"
     }
   ],
-  "review_basis": "deep-source-recheck",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Tier C remains appropriate for the observed component and dependency channel: remote catalog data selects downloadable files, a supplied value is compared locally, and the resulting component or installer is used. The source corrects the algorithm from SHA256 to MD5 and shows a checksum bypass, while it does not establish a signed catalog or the Flatpak packaging boundary. Those are claim and scope corrections rather than evidence for a stronger or weaker project wide tier.",
+    "limitations": [
+      "Snapshot is the newly retrieved default branch at commit 29032bf3084f78c900777d188e7286f8f7280aeb, not the original study checkout; released behavior may differ.",
+      "The reviewed source does not authenticate the YAML catalog or establish how Flatpak distributes the application itself.",
+      "This review covers component/dependency downloads and execution paths; it does not establish behavior of every Bottles channel or release artifact."
+    ],
+    "review_status": "Detailed recheck",
+    "review_basis": "deep-source-recheck",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "components",
+  "transport": "https (validated)",
+  "payload_verification": "hash-from-manifest (SHA256)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-I2.md",
+      "line": 7,
+      "text": "| Bottles | github.com/bottlesdevs/Bottles | GTK4/Libadwaita, Python, Flatpak-distributed | N (app self-update); Y (Wine/Proton runners, DXVK, dependencies = content-as-code) | manual (user-initiated component install; app itself relies on Flatpak for updates, no in-app self-updater found) | Y — downloads Wine/Proton runner archives, DXVK/VKD3D/NVAPI, and Windows dependency installers, extracts them, later executed inside bottles | HTTPS (`proxy.usebottles.com`, `raw.githubusercontent.com/bottlesdevs/*`); TLS enforced (pycurl/requests defaults, no verify=False found) | N (plain YAML catalog/component manifests over HTTPS, unsigned) | hash-from-manifest — SHA256 `file_checksum` field from manifest compared post-download; corrupted files removed and re-downloaded | N/A (checksum is a plain value in an unsigned YAML manifest, not a signature) | `bottles/backend/repos/component.py:391-410` (checksum compare in `ComponentManager.download`); `bottles/backend/managers/repository.py:41-58` (HTTPS repo URLs) |"
+    }
+  ]
 }

@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/vlang/v",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: The CLI self-update pulls the vlang master branch over HTTPS and recompiles the fetched source; no release signature or pinned hash verification is used.",
+  "description": "`v up` does git pull + recompile-and-run with only git's integrity, no signature/pinned key — GitHub-account compromise ⇒ RCE. Windows bootstrap downloads+executes an .exe with zero verification.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "d934e4beafd3c071edc976684773bb880fe05ef8"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: The CLI self-update pulls the vlang master branch over HTTPS and recompiles the fetched source; no release signature or pinned hash verification is used.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "git hash-chain only",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AK3.md",
+      "line": 17,
+      "text": "| V (vlang) | https://github.com/vlang/v.git | d934e4beafd3c071edc976684773bb880fe05ef8 / 2026-08-23 | Y | N (manual `v up`) | Y | https (git pull over https; git enforces TLS by default, no override found) | N/A (no manifest) | none — relies solely on git's SHA-1 object-integrity chain; no GPG-signed-commit verification, no release signature, no hash pinning | N/A — unauthenticated, trust is \"whatever `https://github.com/vlang/v` `master` HEAD currently is\" | `cmd/tools/vup.v:83-99` `update_from_master()` runs `git pull --rebase https://github.com/vlang/v master` (or on first run `git remote add origin …; git fetch; git reset --hard origin/master`), then `recompile_v()` (`:123-146`) executes `v self` / `make`, i.e. compiles and will subsequently run the newly-fetched, newly-compiled source — self-update-and-execute. Additionally `cmd/tools/vup.v:260-278` `install_git()`, invoked when git is missing on Windows, downloads a hardcoded installer `https://github.com/git-for-windows/git/releases/download/v2.30.0.windows.2/Git-2.30.0.2-32-bit.exe` via `bitsadmin.exe /transfer` and then **directly executes it** (`os.execute(os.quoted_path(...))` at `:273`) with **zero hash/signature verification**. `v up` is a manual/opt-in command (not auto-triggered). |"
+    }
+  ]
 }

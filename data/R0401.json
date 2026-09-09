@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/bisq-network/bisq2",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+  "description": "Bundled GPG resource keys required by default plus a webpage-key cross-check plus a keyId allowlist. Strongest updater in the corpus.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "269f08cef084b88d2ed9bdf721a7289bf908180e"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "GPG signature (required)",
+  "trust_root": "bundled GPG keys + webpage cross-check + keyId allowlist",
+  "original_evidence": [
+    {
+      "file": "batch-AA1.md",
+      "line": 14,
+      "text": "| Bisq 2 | https://github.com/bisq-network/bisq2 | c47c0e9 / 2026-08-19 | Y | N (user-triggered `downloadAndVerify()` from update overlay) | Y | https (github.com release assets; standard HttpURLConnection, no TLS override) | N/A (jar/installer not OS-code-signed in this flow) | GPG signature verified (not just hash) against downloaded `.asc` detached signature | pinned-in-binary — bundled resource keys `evolution/src/main/resources/keys/387C8307.asc` and `E222AA02.asc`, required to independently verify the artifact (`checkSignatureWithKeyInResources`, only skippable via explicit `ignoreSigningKeyInResourcesCheck` config flag, default false) — in addition to a webpage-fetched key check | evolution/src/main/java/bisq/evolution/updater/DownloadedFilesVerification.java:36-77 (multi-source verify: resources key + webpage key + keyId allowlist); UpdaterUtils.java:29-37 (URLs); UpdaterService.java:196-225 (downloadAndVerify), 305-323 (verify call); resources at evolution/src/main/resources/keys/{387C8307,E222AA02}.asc |"
+    }
+  ]
 }

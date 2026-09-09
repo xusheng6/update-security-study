@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/getgrav/grav",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected Grav implementation has a GPM application self-upgrade channel with an HTTPS metadata endpoint. The retained evidence does not substantiate the original project-wide assertion of zero integrity or signature controls; withdraw that categorical classification.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "GPM selfupgrade downloads over HTTPS and installs the ZIP with zero hash/signature.",
   "limitations": [
-    "New default-branch snapshot rather than the original study checkout; the remote release metadata contents, downloaded archives, publisher signatures, and any external packaging controls were not independently audited.",
-    "The remote release metadata, downloaded archives, external packaging controls, and historical release behavior were not independently audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "d3403f2eb984eb7d7701176f95de8951a3802bf1"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected Grav implementation has a GPM application self-upgrade channel with an HTTPS metadata endpoint. The retained evidence does not substantiate the original project-wide assertion of zero integrity or signature controls; withdraw that categorical classification.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study checkout; the remote release metadata contents, downloaded archives, publisher signatures, and any external packaging controls were not independently audited.",
+      "The remote release metadata, downloaded archives, external packaging controls, and historical release behavior were not independently audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AB4.md",
+      "line": 11,
+      "text": "| Grav | https://github.com/getgrav/grav.git | 2d3befe8 / 2026-08-20 | Y | N (manual `bin/gpm selfupgrade`/`update`) | Y | https, TLS cert validation ENFORCED by default (`verify_peer: true`, `verify_host: true`) | N | none (no hash/signature check anywhere in the download→install path) | n/a | `system/src/Grav/Common/GPM/Installer.php` (install()/unZip(), no verify/checksum/signature call in the whole class); download at `system/src/Grav/Console/Gpm/InstallCommand.php:650` (`Response::get($package->zipball_url...)`) and `:732` (`Installer::install(...)`); self-upgrade download at `system/src/Grav/Console/Gpm/SelfupgradeCommand.php:270`; TLS default at `system/src/Grav/Common/HTTP/Client.php:70-76` and `system/config/system.yaml:245-246` |"
+    }
+  ]
 }

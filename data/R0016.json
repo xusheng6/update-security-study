@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/PCSX2/pcsx2",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The recovered PCSX2 source shows HTTPS release metadata and archive download/extraction but no independent asset hash or signature verification in the inspected path, supporting C.",
+  "description": "HTTPS manifest but asset URL carries no hash; extract + spawn helper exe (elevated on Windows).",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; historical release/build behavior may differ.",
-    "Repository origin and commit were checked against the candidate metadata; this source is project-associated but does not establish the original study release checkout."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,24 @@
       "commit": "236f67a82fd8a37b1e5c128228403fb7b89b3cd8"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The recovered PCSX2 source shows HTTPS release metadata and archive download/extraction but no independent asset hash or signature verification in the inspected path, supporting C.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; historical release/build behavior may differ.",
+      "Repository origin and commit were checked against the candidate metadata; this source is project-associated but does not establish the original study release checkout."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": []
 }

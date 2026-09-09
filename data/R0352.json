@@ -5,14 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/buchen/portfolio",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Portfolio Performance enables an Eclipse p2 in-app update operation against its HTTPS update site. UpdateHelper registers and refreshes p2 metadata and artifact repositories and runs provisioning after confirmation; active bundle-signing trust roots and released signatures remain delegated to external p2/JRE configuration.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "Eclipse p2 with jar-signed bundles.",
   "limitations": [
-    "New default-branch snapshot, not historical release re-verification.",
-    "Active p2/JRE certificate trust root and released signed bundles are not independently verified.",
-    "No claim is made about current release signing.",
-    "New default-branch snapshot, not historical release re-verification. Active p2/JRE certificate trust root and released signed bundles are not independently verified. No claim is made about current release signing."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "ee9768567617a536d032bd8d308b19253edfe0ae"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Portfolio Performance enables an Eclipse p2 in-app update operation against its HTTPS update site. UpdateHelper registers and refreshes p2 metadata and artifact repositories and runs provisioning after confirmation; active bundle-signing trust roots and released signatures remain delegated to external p2/JRE configuration.",
+    "limitations": [
+      "New default-branch snapshot, not historical release re-verification.",
+      "Active p2/JRE certificate trust root and released signed bundles are not independently verified.",
+      "No claim is made about current release signing.",
+      "New default-branch snapshot, not historical release re-verification. Active p2/JRE certificate trust root and released signed bundles are not independently verified. No claim is made about current release signing."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "signed JARs (p2)",
+  "trust_root": "Eclipse p2 keystore",
+  "original_evidence": [
+    {
+      "file": "batch-X2.md",
+      "line": 12,
+      "text": "| Portfolio Performance | https://github.com/buchen/portfolio.git | 90b27560fc0804878386911227cac6d01b7a28fa / 2026-08-20 | Y | N (user must click Update, confirms install dialog) | Y | https, TLS enforced (no custom TrustManager/SSLContext found repo-wide) | Y (bundle jars code-signed via `maven-jarsigner-plugin` referenced in `name.abuchen.portfolio.ui/pom.xml:34`, using the same code-signing cert as the Windows/macOS installers) | signature (Eclipse p2 jar-signature verification against JRE trust store, prompts user with publisher identity) | OS/JRE keystore (Authenticode-analog; not pinned in binary) | `name.abuchen.portfolio.ui/src/.../update/UpdateHelper.java:195-254` (`UpdateOperation`/p2 provisioning), default update site `https://updates.portfolio-performance.info/portfolio` in `PreferencesInitializer.java:22` |"
+    }
+  ]
 }

@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/readest/readest",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The retained Tauri configuration confirms the application bundle; platform updater controls remain split across updater code.",
+  "description": "Installer + nightly channels verify minisign vs pinned key (A), but the stable-channel Windows-portable/Linux-AppImage/Android builds skip signature verification entirely — a code-confirmed downgrade.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement remain unverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "279698832d8730dec8cb0d6c7b71c4a00159791b"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained Tauri configuration confirms the application bundle; platform updater controls remain split across updater code.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement remain unverified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "minisign (skipped on stable)",
+  "trust_root": "pinned pubkey (nightly only)",
+  "original_evidence": [
+    {
+      "file": "batch-AF1.md",
+      "line": 17,
+      "text": "| Readest | https://github.com/readest/readest.git | 2796988 / 2026-08-23 | Y | Y (auto-check; stable-installer install requires user confirm) | Y | https, TLS enforced (Tauri http plugin, no disabled-validation found) | Y (minisign `.sig` per artifact, referenced from `latest.json`/`nightly/latest.json`) | **Split by channel/platform.** Stable macOS + Windows-NSIS + Linux(non-AppImage): verified via `check()`/`downloadAndInstall()` from `@tauri-apps/plugin-updater`, minisign signature checked against the pinned pubkey, fails closed. Nightly channel: verified for **all** platforms (incl. Windows-portable/Linux-AppImage/Android) via an explicit `verifyUpdateSignature()` Rust call, same pinned pubkey, fail-closed, unit-tested. **Stable-channel Windows-portable, Linux-AppImage, and Android APK: NOT verified** — downloads the artifact named in the manifest and directly launches/installs it with no signature-check call at all. | pinned-in-binary (Ed25519/minisign pubkey embedded in `tauri.conf.json` `plugins.updater.pubkey`, duplicated as `READEST_UPDATER_PUBKEY` in `src/services/constants.ts`) | `apps/readest-app/src-tauri/tauri.conf.json` `plugins.updater.pubkey`+`endpoints`; `src-tauri/Cargo.toml:164` `tauri-plugin-updater = \"2\"`; `src/helpers/updater.ts` (`check()` stable path); `src-tauri/src/nightly_update.rs:44-77` (fail-closed minisign verify); `src/components/UpdaterWindow.tsx:131` `checkAndroidUpdate`→`:181` `installPackage` (**no verify call**); `:221` `checkWindowsPortableUpdate`→`:241` spawn downloaded .exe (**no verify**); `:257` `checkAppImageUpdate`→`:276` chmod+launch (**no verify**); contrast `:295-355` `buildNightlyUpdate`, same 3 platform keys, `:342` `verifyUpdateSignature(...)` IS called |"
+    }
+  ]
 }

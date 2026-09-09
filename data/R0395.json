@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/deepnight/ldtk",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "LDtk’s Windows application integrates electron-updater and configurable automatic updating. The retained packaging configuration does not establish whether released artifacts are signed.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "electron-updater auto-install, but builds are unsigned — trust reduces to a sha512 in latest.yml from the same GitHub release.",
   "limitations": [
-    "New default-branch snapshot rather than the original study checkout; released artifact signing, generated latest.yml contents, and electron-updater's external verification implementation were not independently audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "6d69bd1d6be92f01ac30778f6a934f0da8448b16"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "LDtk’s Windows application integrates electron-updater and configurable automatic updating. The retained packaging configuration does not establish whether released artifacts are signed.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study checkout; released artifact signing, generated latest.yml contents, and electron-updater's external verification implementation were not independently audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "sha512 (unsigned build)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-Z2.md",
+      "line": 12,
+      "text": "| LDtk | https://github.com/deepnight/ldtk | 6d69bd1d6be92f01ac30778f6a934f0da8448b16 / 2026-07-12 | Y | Y (settings.v.autoInstallUpdates → checkAndInstall) | Y | https (GitHub releases via electron-updater), TLS enforced, no disabling found | N (no code-signing cert config in electron-builder.json or CI workflows) | hash (sha512 in electron-updater's latest.yml, default electron-updater flow) | server-supplied/unpinned (latest.yml fetched from same GitHub release as the installer) | app/package.json:34 (electron-updater dep); src/electron.renderer/App.hx:305-377 (initAutoUpdater/checkForUpdate/checkAndInstall); app/electron-builder.json:42-52 (nsis+github publish, no cert/CSC_LINK anywhere in repo) |"
+    }
+  ]
 }

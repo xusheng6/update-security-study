@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/pymedusa/Medusa",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Medusa downloads a GitHub tarball, performs only tar-format validation, then extracts and overwrites application files without a digest/signature.",
+  "description": "Unsigned zip/git download-overwrite (Sick-Beard lineage).",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "bbb1c9271692170c00eed3d5c573425bf6c91050"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Medusa downloads a GitHub tarball, performs only tar-format validation, then extracts and overwrites application files without a digest/signature.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AG7.md",
+      "line": 19,
+      "text": "| Medusa | https://github.com/pymedusa/Medusa | bbb1c92 / 2026-08-21 | Y | Y (opt-in, `General.auto_update`, default `0`) | Y | Code builds `http://github.com/...` URL literally (redirects to https in practice); requests via `MedusaSafeSession`, default `verify=True`/`app.SSL_VERIFY=True` | N | none — tarball extracted and files overwritten with no hash/signature check | server-supplied/unpinned (GitHub tarball for branch) | `medusa/updater/source_updater.py:178-200` (`tar_download_url = 'http://github.com/' + org + '/' + repo + '/tarball/' + branch`, downloaded via `helpers.download_file`); `medusa/updater/source_updater.py:200-260` (extract+overwrite, no verification); `medusa/session/core.py:125-183` (`verify=True` default, `app.SSL_VERIFY` gate); `medusa/app.py:195` (`SSL_VERIFY = True` default); `medusa/__main__.py:617` (`AUTO_UPDATE` default `0`) |"
+    }
+  ]
 }

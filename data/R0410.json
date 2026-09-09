@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/xpipe-io/xpipe",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports the narrow recorded behavior: xpipe writes downloaded installer bytes directly and invokes platform installers without in-app hash or signature verification.",
+  "description": "HTTPS download, zero hash/sig, then runs the installer with sudo/msiexec/rpm --force (--force explicitly bypasses signature checks).",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "The retained snapshot does not establish current released artifact behavior or independent release signing."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "d85ca821baa46092a320ebb13546d7240adb74f8"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports the narrow recorded behavior: xpipe writes downloaded installer bytes directly and invokes platform installers without in-app hash or signature verification.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "The retained snapshot does not establish current released artifact behavior or independent release signing."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AA2.md",
+      "line": 16,
+      "text": "| xpipe | https://github.com/xpipe-io/xpipe | 00d9147230 / 2026-08-07 | Y | Y(check)/N(install requires click \"install\") | Y | https to api.xpipe.io (version query) + https to github.com (installer download), TLS enforced | N (JSON from `api.xpipe.io`, unsigned) | none (bytes written straight to disk, no hash/sig check) | none enforced in-app; relies on OS installer trust which is **not actually enforced**: Windows `msiexec /i ... /qb` (no Authenticode check forced), Linux `sudo apt install \"<file>.deb\"` / `sudo rpm -U -v --force \"<file>.rpm\"` (rpm `--force` explicitly skips signature/conflict checks; local .deb install bypasses APT repo GPG trust), macOS `sudo installer -pkg ... -target /` (bypasses Gatekeeper's quarantine-triggered signature check) | `app/src/main/java/io/xpipe/app/update/AppDownloads.java:26-50` (download, `Files.write`, no verification); `app/src/main/java/io/xpipe/app/update/AppRelease.java` (URL built from tag returned by api.xpipe.io); `app/src/main/java/io/xpipe/app/update/AppInstaller.java:59-243` (installLocal for Msi/Debian/Rpm/Pkg — all run installer directly, `rpm -U -v --force` at line ~186) |"
+    }
+  ]
 }

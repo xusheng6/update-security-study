@@ -5,11 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/borgbase/vorta",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In the recovered Vorta updater, frozen macOS builds load Sparkle, select a stable or pre-release HTTPS appcast, optionally enable background checks, and disable automatic downloads. The reviewed source does not establish a SUPublicEDKey, Apple Developer ID fallback, or updater implementation for non-macOS builds.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "macOS Sparkle 2 auto-check + user-confirmed install. SUFeedURL set but SUPublicEDKey never set — so EdDSA payload-signature (Tier A) isn't configured; falls back to matching the Apple Developer ID between builds (Tier B). Linux/Windows have no in-app updater.",
   "limitations": [
-    "New default-branch snapshot rather than historical release re-verification; Sparkle framework enforcement, released bundle signing identity, SUPublicEDKey or fallback behavior, and platform packaging were not independently audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,34 @@
       "commit": "ebf7571293a0f34250274c1ab3cb5dc19084a568"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In the recovered Vorta updater, frozen macOS builds load Sparkle, select a stable or pre-release HTTPS appcast, optionally enable background checks, and disable automatic downloads. The reviewed source does not establish a SUPublicEDKey, Apple Developer ID fallback, or updater implementation for non-macOS builds.",
+    "limitations": [
+      "New default-branch snapshot rather than historical release re-verification; Sparkle framework enforcement, released bundle signing identity, SUPublicEDKey or fallback behavior, and platform packaging were not independently audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "OS code-signing (Apple Dev ID)",
+  "trust_root": "codesign+notarize identity (no SUPublicEDKey set)",
+  "original_evidence": [
+    {
+      "file": "batch-T2.md",
+      "line": 16,
+      "text": "| Vorta | https://github.com/borgbase/vorta.git | 7f83935f25c672e24d3241cf968679b9c939ea72 (2026-08-16) | Y (macOS only) | Y (`sparkle.setAutomaticallyChecksForUpdates_(True)` + `checkForUpdatesInBackground()` when the \"check_for_updates\" setting is on) | Y (macOS only, after user confirms Sparkle's install prompt — `setAutomaticallyDownloadsUpdates_(False)` means silent auto-download is off, but Sparkle still downloads+installs once the user accepts) | https (`SUFeedURL` = `https://borgbase.github.io/vorta/appcast.xml`, GitHub Pages TLS); no TLS-bypass code found in `updater.py` (uses Apple's Sparkle.framework / NSURLSession, not a custom client) | Not verifiable from this repo — appcast.xml itself lives in a separate `gh-pages`-style feed not present in this clone | signature expected via Sparkle, but **no `SUPublicEDKey` is set anywhere** in `package/vorta.spec`'s `Info.plist` dict (only `SUFeedURL` is set, `package/vorta.spec:78`) → Sparkle 2.x's EdDSA-signature check is not configured, so it falls back to Sparkle's code-signing-identity verification (new update's Apple Developer ID/Team must match the running app's) rather than an app-pinned key | OS keystore / Apple code-signing + notarization (Developer ID cert imported and used for `codesign`/`notarytool` in CI), not a key pinned in the binary | `src/vorta/updater.py:7-48` (Sparkle setup, `setAutomaticallyDownloadsUpdates_(False)` at :44, macOS-only — `else: return None` at :47-48 confirms **no Linux/Windows in-app updater** exists, TODO comment at :47); `package/vorta.spec:14,78` (`APP_APPCAST_URL`, `SUFeedURL`, **no `SUPublicEDKey` key present in the `info_plist` dict at all**); `.github/workflows/build-macos.yml:55,64` (`brew install --cask sparkle`, i.e. current Sparkle 2.x, copied into `Vorta.app/Contents/Frameworks`); `.github/workflows/build-macos.yml:69-87` and `package/macos-package-app.sh:15,20,23,43,50` (codesign with imported cert + `xcrun notarytool submit` + staple) confirm the real trust anchor is Apple code-signing, not an EdDSA key. No Windows build workflow exists in this repo. |"
+    },
+    {
+      "file": "batch-T2.md",
+      "line": 27,
+      "text": "| Vorta | **B** | macOS-only Sparkle updater checks and (with user consent) downloads+installs updates over HTTPS, but no `SUPublicEDKey` is configured in `Info.plist`, so Sparkle 2's EdDSA payload-signature verification (which would be Tier A, key pinned in the binary) is not active — it falls back to Sparkle's code-signing-identity check, anchored in the Apple Developer ID cert used to codesign+notarize the app in CI. That's an OS-code-signing trust anchor, not an app-pinned key, hence Tier B rather than A. Linux/Windows have no in-app updater at all (`updater.py:47-48`, and no Windows build workflow exists). |"
+    }
+  ]
 }

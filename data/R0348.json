@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/flightgear/flightgear",
   "channel": "mixed",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "N",
-  "description": "The primary FlightGear updater is a HTTPS notification/check path and does not establish an in-app self-update-to-executable flow. A separate aircraft package channel uses HTTP catalogs and same-catalog MD5, so the original undifferentiated primary D label should be corrected to N for primary update with a qualified data/content finding.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "Sim self-update N; aircraft/package catalog default+fallback URLs are plaintext HTTP, integrity MD5-only from that same unauthenticated catalog, and aircraft carry embedded Nasal scripts (code). [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "807e406dd3bceca816942490a999970e157dbcfa"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The primary FlightGear updater is a HTTPS notification/check path and does not establish an in-app self-update-to-executable flow. A separate aircraft package channel uses HTTP catalogs and same-catalog MD5, so the original undifferentiated primary D label should be corrected to N for primary update with a qualified data/content finding.",
+    "limitations": [
+      "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "N",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "http",
+  "payload_verification": "MD5 (same catalog)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-W3.md",
+      "line": 33,
+      "text": "| FlightGear | https://github.com/FlightGear/flightgear | 807e406dd3bc / 2025-02-27 | Y | N | N | https (`download.flightgear.org`) | N | none | n/a | `src/GUI/UpdateChecker.cxx:105` (`\"https://download.flightgear.org/builds/\" + _majorMinorVersion + \"/updates.xml\"`); only posts a QML notification (`NewVersionNotification.qml`), no in-app download/exec of the sim itself |"
+    }
+  ]
 }

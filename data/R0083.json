@@ -5,13 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/rclone/rclone",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "rclone’s self-update path verifies a signed SHA256SUMS file with an embedded PGP key and compares the selected archive hash; the reviewed source does not independently establish the survey’s complete beta-channel exception.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "GPG-verified on stable; --beta skips verification entirely.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.",
-    "The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.; The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "3d7b101c7f4bc3ebdcfc882c063fffd1c16bf196"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "rclone’s self-update path verifies a signed SHA256SUMS file with an embedded PGP key and compares the selected archive hash; the reviewed source does not independently establish the survey’s complete beta-channel exception.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.",
+      "The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.; The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "self-update",
+  "transport": "https",
+  "payload_verification": "signature[GPG] — beta skips!",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-AA7.md",
+      "line": 24,
+      "text": "| rclone-browser (kapitainsky fork) | https://github.com/kapitainsky/RcloneBrowser | 45bf7411839b / 2020-12-30 | Y | Y (checks once/day) | N (link-out only) | https (api.github.com) | N/A | none (notify-only) | N/A | src/main_window.cpp:536-596 (rclone version check via `api.github.com/repos/rclone/rclone/releases/latest`, shows QMessageBox linking to downloads page); src/main_window.cpp:614-662 (self-version check, same GitHub-API-notify pattern, no download) |"
+    }
+  ]
 }

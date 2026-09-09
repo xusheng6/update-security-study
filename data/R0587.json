@@ -5,12 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/bangle-io/bangle-io",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "B",
-  "description": "Targeted retained-source read supports the narrow primary updater classification: Bangle's desktop updater disables automatic download/install-on-quit, uses a GitHub feed, and prompts for download and installation.",
+  "description": "electron-updater, trust rooted in OS code-signing + notarization.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in configuration.",
-    "Where electron-updater/Squirrel/install4j performs final verification, the external framework implementation is not vendored here."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "b5968cb09f6504813867f8099fbca6eb6e521565"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow primary updater classification: Bangle's desktop updater disables automatic download/install-on-quit, uses a GitHub feed, and prompts for download and installation.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in configuration.",
+      "Where electron-updater/Squirrel/install4j performs final verification, the external framework implementation is not vendored here."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "B",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "sha512 + OS code-signing",
+  "trust_root": "electron-updater (forceCodeSigning/notarize)",
+  "original_evidence": [
+    {
+      "file": "batch-AL5.md",
+      "line": 28,
+      "text": "| bangle-io (desktop) | https://github.com/bangle-io/bangle-io.git | b5968cb / 2026-08-09 | Y | N (auto-download disabled, user-prompted) | Y | https (GitHub Releases provider; no disabled TLS validation found) | Y (electron-builder `forceCodeSigning: true` for stable channel, mac `notarize`) | OS code-signing (Authenticode/notarization) via electron-updater; no separate payload hash/sig check found beyond electron-updater's built-in code-signature verification | OS keystore (Windows Authenticode / macOS notarization/Gatekeeper), not an app-pinned key | `packages/tooling/desktop-entry/src/updater.ts` (electron-updater `AppUpdater`, `setFeedURL({provider:'github', owner:'bangle-io', repo:'bangle-io'})`, `autoDownload=false`); `packages/tooling/desktop-entry/electron-builder.config.cjs` (`publish:[{provider:'github',...}]`, `forceCodeSigning: isStable`, `mac.notarize`) |"
+    }
+  ]
 }

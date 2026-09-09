@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/ollama/ollama",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Withdraw the original security classification for this record. Ollama’s desktop updater signs update-check requests, retrieves the returned installer, and verifies it through a platform hook before marking it ready; the Windows implementation calls WinVerifyTrustEx and reads the signer subject, but this snapshot does not show an explicit Ollama Inc. organization comparison. The retained evidence is insufficient to support the original full claim.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "Auto everything, but Authenticode + Organization=='Ollama Inc.' gate.",
   "limitations": [
-    "Newly retrieved default-branch snapshot; not historical release re-verification.",
-    "External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown.",
-    "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "83ed7d9965b1ee07e0f0b29fd46e47c31f0fcab8"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Withdraw the original security classification for this record. Ollama’s desktop updater signs update-check requests, retrieves the returned installer, and verifies it through a platform hook before marking it ready; the Windows implementation calls WinVerifyTrustEx and reads the signer subject, but this snapshot does not show an explicit Ollama Inc. organization comparison. The retained evidence is insufficient to support the original full claim.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot; not historical release re-verification.",
+      "External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown.",
+      "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "full auto",
+  "transport": "https",
+  "payload_verification": "OS-code-signing + org check",
+  "trust_root": "OS-trust-store",
+  "original_evidence": [
+    {
+      "file": "batch-AE1.md",
+      "line": 21,
+      "text": "| Ollamac | https://github.com/kevinhermawan/Ollamac | 7c6bc45 / 2025-03-06 | Y (Sparkle) | Y (`SPUStandardUpdaterController(startingUpdater: true)`) | Y | https (`raw.githubusercontent.com/.../appcast.xml`, TLS enforced) | appcast items carry per-item EdDSA sig | signature (Sparkle EdDSA) | **pinned-in-binary** (`SUPublicEDKey` in Info.plist, compiled into app) | `Ollamac/Resources/Info.plist:9-11`, `Ollamac/App/OllamacApp.swift:37-38,78` |"
+    }
+  ]
 }

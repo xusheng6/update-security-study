@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/SelfhostedPro/Yacht",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Yacht starts watchtower:latest with the Docker socket to replace the target container, including Yacht itself.",
+  "description": "Self-update spins up a watchtower container (Docker socket mounted) that pulls the mutable :latest tag and swaps Yacht's own container — no signature/Docker Content Trust.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "7ea29dc97cf0dcc35fb43044fb462284dcf9ae98"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Yacht starts watchtower:latest with the Docker socket to replace the target container, including Yacht itself.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AH4.md",
+      "line": 23,
+      "text": "| Yacht | https://github.com/SelfhostedPro/Yacht.git | 7ea29dc / 2025-06-30 | **Y** | N (button-triggered, JWT-authenticated, not scheduled) | **Y** | Docker Engine registry pull (delegated to Docker daemon's own HTTPS/TLS to Docker Hub — Yacht's own code performs no TLS handling and has no disable-validation flags) | N (pulls mutable `:latest` tag, no Docker Content Trust / cosign) | **none** — only a registry-digest *diff* is computed to decide \"update available\"; the actual replacement pulls whatever image the registry serves for the tag, unauthenticated at the app layer | server-supplied/unpinned (relies entirely on Docker Hub's registry + whatever TLS chain the Docker daemon trusts; Yacht pins nothing) | `backend/api/actions/apps.py:336-368` (`app_update`) and `:381-427` (`_update_self` / `update_self_in_background`) spin up a **`containrrr/watchtower:latest`** container with `/var/run/docker.sock` mounted and `--cleanup --run-once <container-name>`, which pulls the latest image for the target container (including **Yacht's own running container**) and replaces it — i.e. Yacht downloads-and-executes new code for itself via a delegated updater. `backend/api/utils/apps.py:330-349` (`_check_updates`) only compares `RepoDigests`, no signature check. Endpoint: `backend/api/routers/app_settings.py:86-89` (`GET /update`, JWT-authenticated) and `:92-97` (`GET /check/update`). |"
+    }
+  ]
 }

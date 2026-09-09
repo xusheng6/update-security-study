@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/subhra74/xdm",
   "channel": "primary",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The shared HTTP clients disable certificate validation globally, and the component updater handles the yt-dlp release in the application directory. The retained source supports this component updater channel; the app-level browser-only update is separate.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "ServerCertificateCustomValidationCallback => true kills all cert validation; bundled yt-dlp updater downloads+chmod+x with zero verification → MitM→RCE. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "1ca5a25aae007826c859c81bea494e7c102e1242"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The shared HTTP clients disable certificate validation globally, and the component updater handles the yt-dlp release in the application directory. The retained source supports this component updater channel; the app-level browser-only update is separate.",
+    "limitations": [
+      "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https, validation GLOBALLY DISABLED",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-I5.md",
+      "line": 13,
+      "text": "| XDM / Xtreme Download Manager | github.com/subhra74/xdm | C#/.NET (WPF + GTK UI) | Y | app itself: chk automatic (5s after launch, then every 3h via `AppUpdater.QueryNewVersion`'s `Timer`) but notify + manual install (opens browser to download page); bundled yt-dlp \"component\": chk/dl/inst fully automatic, replacing the binary in `AppDir` with no user step beyond the update dialog | Y for the yt-dlp component (downloaded file is `File.Move`d into `AppDir`, `chmod +x`'d on Linux, and later executed by XDM as its downloader engine) | https (api.github.com, github.com/.../releases) but **TLS certificate validation is globally DISABLED** — `ServerCertificateCustomValidationCallback = (a,b,c,d) => true` is hard-coded (not conditional) in the shared HTTP client, plus a second blanket `ServicePointManager.ServerCertificateValidationCallback` override in both UI front-ends | N (GitHub Releases API JSON, unsigned) | **none** — no hash/signature check anywhere in `ComponentUpdaterUIController`/`UpdateChecker` before the downloaded yt-dlp binary replaces the old one and is marked executable | N/A | app/XDM/XDM.Core/Clients/Http/DotNetHttpClient.cs:56 (`ServerCertificateCustomValidationCallback = (a,b,c,d) => true`, unconditional); app/XDM/XDM.Wpf.UI/App.xaml.cs:32 and app/XDM/XDM.Gtk.UI/Program.cs:76 (`ServicePointManager.ServerCertificateValidationCallback += (a,b,c,d) => true`); app/XDM/XDM.Core/Updater/UpdateChecker.cs:205-215 (`FindNewYoutubeDLVersion` via GitHub releases asset); app/XDM/XDM.Core/UI/ComponentUpdaterUIController.cs:120-152 (download → `File.Move` into AppDir, `PlatformHelper.SetExecutable` on Linux, no hash check); app/XDM/XDM.Core/Application.cs:534-536 (app-level update just does `PlatformHelper.OpenBrowser(AppUpdater.UpdatePage)`) |"
+    }
+  ]
 }

@@ -5,15 +5,37 @@
   "historical_tier": "B",
   "project_url": "https://github.com/nbonamy/witsy",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The recovered Witsy candidate does not contain auditable Electron updater or signing implementation; update cadence and code-signing controls remain unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "Electron autoUpdater, hourly; OS code-signing.",
   "limitations": [
-    "The recovered default-branch candidate is a newly retrieved sparse/materialized snapshot rather than the original study checkout; only README.md is present, so the Electron updater, schedule, artifact channel, and signing configuration cannot be reviewed."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
   "classification_certified": false,
-  "project_link_basis": "Unambiguous matching retained checkout origin; current upstream availability not rechecked."
+  "project_link_basis": "Unambiguous matching retained checkout origin; current upstream availability not rechecked.",
+  "later_review_audit": {
+    "description": "The recovered Witsy candidate does not contain auditable Electron updater or signing implementation; update cadence and code-signing controls remain unresolved.",
+    "limitations": [
+      "The recovered default-branch candidate is a newly retrieved sparse/materialized snapshot rather than the original study checkout; only README.md is present, so the Electron updater, schedule, artifact channel, and signing configuration cannot be reviewed."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (update.electronjs.org)",
+  "payload_verification": "OS-code-signing (Squirrel)",
+  "trust_root": "OS-trust-store",
+  "original_evidence": [
+    {
+      "file": "batch-O1.md",
+      "line": 27,
+      "text": "| Witsy | Kochava-Studios/witsy (formerly nbonamy/witsy) | Electron (Electron Forge), uses Electron's built-in `autoUpdater` via the `update-electron-app` convention/`update.electronjs.org` service | Y | **Y** — checks immediately at startup and then every 60 minutes (`setInterval(..., 60*60*1000)`); update is downloaded automatically in the background once available; **install** requires either the user clicking \"Install Update\" in the tray menu or occurs automatically when the app quits (`before-quit-for-update` hook) | Y | https — feed URL `https://update.electronjs.org/Kochava-Studios/witsy/{platform}-{arch}/{version}`, which proxies to the project's GitHub Releases; delivered via Electron's native `autoUpdater` (Squirrel.Mac on macOS, Squirrel.Windows on Windows) | not an app-defined manifest; relies on the update.electronjs.org/Squirrel service's own release feed | OS-code-signing — Squirrel.Mac requires the downloaded update bundle's code signature to match the running app's signing identity before applying it; no separate hash/signature check is implemented in Witsy's own code | Apple Developer ID (macOS Squirrel) / Authenticode certificate (Windows Squirrel) — i.e. the OS/platform code-signing chain, not an app-embedded key | `src/main/autoupdate.ts:32-35` (feed URL construction, `autoUpdater.setFeedURL`); `:92-98` (`autoUpdater.checkForUpdates()` at startup + `setInterval(..., 60*60*1000)`); `:79-84` (`update-downloaded` event → `hooks.onUpdateAvailable`); `:122-129` (`install()` → `autoUpdater.quitAndInstall()`); `src/main/tray.ts:90-93` (tray \"Install Update\" menu item calls `autoUpdater.install`); `src/main.ts:231-237` (`new AutoUpdater(app, { onUpdateAvailable: () => trayIconManager.install() ... })`) |"
+    }
+  ]
 }

@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/vercel/hyper",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Hyper’s desktop client checks a Hyper release feed on a timer and hands retrieved releases to Electron’s updater; this source snapshot does not independently establish publisher-signature enforcement.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Same ambiguity as Tabby — needs re-verify.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
-    "The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,41 @@
       "commit": "30ec0a2a91de17eeb32dd71998fe8a8ec59f98eb"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Hyper’s desktop client checks a Hyper release feed on a timer and hands retrieved releases to Electron’s updater; this source snapshot does not independently establish publisher-signature enforcement.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+      "The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature? (ambiguous)",
+  "trust_root": "server-TLS",
+  "original_evidence": [
+    {
+      "file": "batch-AH5.md",
+      "line": 23,
+      "text": "| hyperlink | https://github.com/untitaker/hyperlink | cdfc6408b2ee179748fac238b0fce26b9ea4222 / 2026-07-30 | N | N | N | n/a — no network code | n/a | n/a | n/a | Despite the name, this is an offline HTML link-checker (reads local `.html` files and validates internal hrefs/anchors) — it does not itself make outbound HTTP requests or check for updates. `Cargo.lock` has no HTTP client crate; grep for updater keywords = 0 hits |"
+    },
+    {
+      "file": "batch-O2.md",
+      "line": 14,
+      "text": "| Hyperspace | https://github.com/hyperspacedev/hyperspace | Electron (React/TypeScript) | Y | Y (`autoUpdater.checkForUpdatesAndNotify()` runs unconditionally at startup — electron-updater's default background-download + install-on-quit behavior) | Y (electron-updater default: downloads update artifact in background and installs it automatically when the app next quits/relaunches) | https, electron-updater's default GitHub Releases provider (inferred from `package.json:7` `\"repository\": \"https://github.com/hyperspacedev/hyperspace.git\"`; no explicit `publish:` block found in `ebuild/standard.yml`, and `-p 'never'` in build scripts only suppresses publishing during the build step, not the runtime provider) | unknown (no code-signing certs/config evidence in repo; `ebuild/standard.yml` sets `dmg: {sign: false}` and calls `afterSign: desktop/notarize.js`, but actual release-time signing status can't be determined from source) | hash-from-manifest (electron-updater's documented default: SHA512 hash embedded in the auto-generated `latest.yml`/`latest-mac.yml`/`latest-linux.yml` is compared against the downloaded artifact; optional Windows publisher-name check only applies if the binary is code-signed, which is unconfirmed here) | electron-updater default (SHA512 field in GitHub Releases `latest*.yml`); no custom verification key/logic implemented in app code | `package.json:43` `\"electron-updater\": \"^4.3.1\"`; `public/electron.js:14` `const { autoUpdater } = require(\"electron-updater\");` and `public/electron.js:18` `autoUpdater.checkForUpdatesAndNotify();`. NOTE: project appears abandoned — `git log -1` on default branch shows last commit 2021-01-07, so this updater path is very likely dead/untested against current GitHub Releases infrastructure. |"
+    },
+    {
+      "file": "batch-W7.md",
+      "line": 9,
+      "text": "| hyperfine | https://github.com/sharkdp/hyperfine | f12f3d9 / 2026-04-30 | N | N/A | N/A | N/A | N/A | none | N/A | negative census as above across `**/*.rs`, no updater code found. |"
+    }
+  ]
 }

@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/spring/pr-downloader",
   "channel": "data",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Withdraw the original security classification for this record. The recovered pr-downloader source exposes MD5 content hashing and rapid-pool validation, but it does not show the claimed CA-bundle bootstrap or TLS-validation configuration. The retained evidence is insufficient to support the original full claim.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Shared content-download lib (Zero-K/BAR): piece MD5/SHA1 exists once a manifest is trusted, but the CA-bundle bootstrap is fetched with TLS validation off and the SHA1 CA pin is commented-out dead code.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout.",
-    "No auditable CA-bundle bootstrap or TLS-validation source was found in the retained checkout; the claimed SHA1 CA pin status cannot be assessed.",
-    "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "25959cfa2f3daa5528ffce762c822b4eedb3bd71"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Withdraw the original security classification for this record. The recovered pr-downloader source exposes MD5 content hashing and rapid-pool validation, but it does not show the claimed CA-bundle bootstrap or TLS-validation configuration. The retained evidence is insufficient to support the original full claim.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout.",
+      "No auditable CA-bundle bootstrap or TLS-validation source was found in the retained checkout; the claimed SHA1 CA pin status cannot be assessed.",
+      "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "MD5/SHA1 (weak root)",
+  "trust_root": "—",
+  "original_evidence": []
 }

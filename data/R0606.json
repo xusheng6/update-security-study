@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/projectdiscovery/httpx",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: The explicit update replaces the binary and uses a same-release checksum file; version checking is separate from asset download.",
+  "description": "Same projectdiscovery updater as subfinder — sha256 unpinned, InsecureSkipVerify:true on version check.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "50b901aeec5736a785f2ad155d998eeca67a42f3"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: The explicit update replaces the binary and uses a same-release checksum file; version checking is separate from asset download.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https (validation off on notify)",
+  "payload_verification": "sha256 (same release)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AM2.md",
+      "line": 23,
+      "text": "| httpx | https://github.com/projectdiscovery/httpx.git | 50b901a / 2026-08-12 | Y | **N** (explicit `-update`/`-up` flag; automatic notify-only check unless `-duc`) | **Y** (when `-update` is passed, replaces the running binary) | same as subfinder: asset-download uses enforced TLS; sibling version-check client in the same shared lib has `InsecureSkipVerify: true` | N | same self-referential sha256 checksum from same-release `checksums.txt`, no independent signature | server-supplied/unpinned | `runner/options.go:493-495`; `runner/banner.go:27-31` (calls `updateutils.GetUpdateToolCallback(\"httpx\", ...)`); same vendored-dep evidence as subfinder above |"
+    }
+  ]
 }

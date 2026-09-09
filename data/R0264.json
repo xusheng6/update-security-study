@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/WerWolv/ImHex",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "ImHex has platform-specific installer handlers and a separate pattern-store channel. These source observations establish the need to assess those channels separately; this review does not certify the original authentication or elevated-execution impact claim.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Updater downloads+executes the installer with elevation; snap path uses 'snap install --dangerous' which disables snap's signature check. Pattern-store SHA-256 is used only for staleness, not authenticity.",
   "limitations": [
-    "New default-branch snapshot rather than the original study release; no release manifest, artifact signature, or delegated package-manager policy was established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,34 @@
       "commit": "1e82724cb9bfc85551f5b22c5b81b740a2ed8da1"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "ImHex has platform-specific installer handlers and a separate pattern-store channel. These source observations establish the need to assess those channels separately; this review does not certify the original authentication or elevated-execution impact claim.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study release; no release manifest, artifact signature, or delegated package-manager policy was established."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none (installer); SHA-256 staleness-only (patterns)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-R6.md",
+      "line": 15,
+      "text": "| ImHex | github.com/WerWolv/ImHex | app-updater | Y | check=auto (startup background task, gated by `hex.builtin.setting.general.server_contact` setting + telemetry-consent check); apply=manual (user must click title-bar \"Update\" button, which launches separate `imhex-updater` binary) | Y — downloads platform installer (.msi/.dmg/.deb/.rpm/.pkg.tar.zst/.AppImage/.flatpak/.snap) and **executes it**, several paths with `sudo`/admin-elevation | https, TLS≥1.2, `CURLOPT_SSL_VERIFYPEER=1`, `CURLOPT_SSL_VERIFYHOST=2` (`lib/libimhex/source/helpers/http_requests_native.cpp:82-91`); default protocol forced to https (line 86) | N — version info comes from unsigned GitHub Releases API JSON (`api.github.com/repos/WerWolv/ImHex`), authenticity rests solely on TLS, not on a signed manifest | none — no hash/signature check of the downloaded installer anywhere in the updater before execution; for `.msi`/`.dmg`/`.AppImage` there is **no verification step at all** in ImHex code; `.deb`/`.rpm`/`.pkg.tar.zst` rely entirely on whatever default GPG-signature policy the underlying OS package manager applies (not enforced/checked by ImHex, no `--nogpgcheck`-style flag seen but also none forcing signature checks); `.snap` install explicitly passes `--dangerous`, which **disables snap's built-in signature verification** | N/A — no key material referenced by ImHex; downstream OS package managers (if they check at all) use their own pre-existing trust stores, not anything ImHex supplies | Update check: `plugins/builtin/source/content/init_tasks.cpp:29-93` (startup task registered `main.cpp`/`init_tasks.cpp:142`), `lib/libimhex/source/api/imhex_api.cpp:994-1038` (`checkForUpdate`). Download+install: `main/updater/source/main.cpp:45-89` (`downloadUpdate`, no hash check), `main/updater/source/main.cpp:213-243` (`installUpdate`, per-platform commands incl. `zenity --password \\| sudo -S apt install...`, `... rpm -i...`, `... pacman -U...`, `... flatpak install...`, `snap install --dangerous`), `:148-211` (`updateMacOSBundle`, uses `osascript ... with administrator privileges` to copy .app to /Applications with **no code-signature check**), `main.cpp:245-326` (entrypoint, launched by `updateImHex()` in `lib/libimhex/source/api/imhex_api.cpp:1040+`). API endpoints: `lib/libimhex/include/hex/api/http/api_urls.hpp:3-4`. |"
+    },
+    {
+      "file": "batch-R6.md",
+      "line": 16,
+      "text": "| ImHex | github.com/WerWolv/ImHex | pattern/plugin content store | Y | manual only — user opens Store view and clicks download/update per item, or clicks \"update all\"; no auto-download | Y — downloads pattern files (`.hexpat`), includes, magic DB, node graphs, encodings, disassembler defs, constants, **themes** (Lua-evaluated by `ThemeManager`), **Yara rules**; folders are extracted from downloaded `.tar` archives; downloaded content is subsequently **loaded/interpreted by ImHex** (content-as-code for patterns/magic/nodes) | https, TLS≥1.2, `CURLOPT_SSL_VERIFYPEER=1`, `CURLOPT_SSL_VERIFYHOST=2` (same curl config as above); endpoint `https://api.werwolv.net/imhex/store` (`api_urls.hpp:3`) | N — store manifest is plain JSON over TLS from `api.werwolv.net`, not itself signed | **hash-from-manifest, but only used for staleness detection, not integrity verification of the download.** Manifest entry carries a SHA-256 `hash` field (`lib/libimhex/include/hex/api/http/store_api.hpp:25`); `updateEntryMetadata()` compares this hash against the hash of the **already-installed local file** to flag `hasUpdate` (`plugins/builtin/source/content/views/view_store.cpp:66-91`, esp. line 77-81 `crypt::sha256`/`crypt::decode16` compare). After a **new** download completes, `StoreApi::download()` (`lib/libimhex/source/api/http/store_api.cpp:111-150`) and `ViewStore::handleDownloadFinished()` (`view_store.cpp:334-365`) never re-hash the downloaded bytes against `entry.hash` — the freshly downloaded file is trusted and installed/extracted unconditionally on HTTP 2xx. | N/A — SHA-256 hash values themselves come from the same unsigned JSON manifest they're meant to validate against (no external/pinned trust root) | `lib/libimhex/include/hex/api/http/store_api.hpp:15-98` (Entry incl. `hash` field), `lib/libimhex/source/api/http/store_api.cpp:31-76` (`parseStore`, reads `entry[\"hash\"]`), `:111-150` (`download`, no post-download hash check), `plugins/builtin/source/content/views/view_store.cpp:66-91` (`updateEntryMetadata`, hash used only for update-available detection), `:334-365` (`handleDownloadFinished`, installs/extracts without integrity check), `:47-51` (themes are read and passed to `ThemeManager::addTheme`), `:348-351` (folder entries extracted via `Tar::extractAll`). |"
+    }
+  ]
 }

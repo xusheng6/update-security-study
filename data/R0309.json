@@ -5,14 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/wulkano/Kap",
   "channel": "mixed",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Kap schedules hourly electron-updater checks in production and manages plugins through a separate package channel. The reviewed source does not independently establish Squirrel.Mac or notarization enforcement.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater + Squirrel.Mac + notarization. Plugin manager npm-installs arbitrary plugins at runtime (content-as-code, noted).",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout.",
-    "Updater artifact verification, Squirrel.Mac behavior, and notarization were not established.",
-    "No exploitability or execution-chain conclusion is made.",
-    "Newly retrieved default-branch snapshot, not the original study checkout. Updater artifact verification, Squirrel.Mac behavior, and notarization were not established. No exploitability or execution-chain conclusion is made."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "c42692fa63ac71ed192e01684beb78a1b864aa88"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Kap schedules hourly electron-updater checks in production and manages plugins through a separate package channel. The reviewed source does not independently establish Squirrel.Mac or notarization enforcement.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout.",
+      "Updater artifact verification, Squirrel.Mac behavior, and notarization were not established.",
+      "No exploitability or execution-chain conclusion is made.",
+      "Newly retrieved default-branch snapshot, not the original study checkout. Updater artifact verification, Squirrel.Mac behavior, and notarization were not established. No exploitability or execution-chain conclusion is made."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "OS code-signing",
+  "trust_root": "electron-updater / Squirrel.Mac (notarized)",
+  "original_evidence": [
+    {
+      "file": "batch-V4.md",
+      "line": 12,
+      "text": "| Kap | https://github.com/wulkano/Kap.git | c42692fa63ac71ed192e01684beb78a1b864aa88 / 2024-02-14 | Y | Y | Y | https (electron-updater default provider, GitHub Releases) | OS code-signing (macOS Gatekeeper/notarization + Squirrel.Mac signature-identity check via electron-updater), not a separate app-level manifest signature | electron-updater — relies on HTTPS delivery + hardened-runtime/notarized code signature validated by Squirrel.Mac at install time | OS keystore (Apple code-signing identity / notarization, enforced by macOS, not an app-pinned key) | main/index.ts:4 (`import {autoUpdater} from 'electron-updater'`), :57-77 (hourly `setInterval(checkForUpdates, ...)` + on-launch check), :124; package.json:52 (`electron-updater` dep), :258-262 (`mac.hardenedRuntime`, `afterSign: electron-builder-notarize`). Side note (content-as-code, scored separately, C-equivalent): main/plugins/index.ts:6,40-59 — in-app plugin manager shells out via `execa`/yarn to `npm install` arbitrary plugin packages from the public npm registry and loads them into the Electron main process; no additional package-signature check beyond npm registry TLS. |"
+    }
+  ]
 }

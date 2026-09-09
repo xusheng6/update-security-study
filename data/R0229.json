@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/nzbget/nzbget",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "NZBGet's source contains an RSA-SHA256 verification utility that hashes an input file, reads a signature record and PEM public key, and calls RSA_verify. Its maintenance update path separately reads an install script from package-info.json; this snapshot does not establish that the web installer path invokes the verifier, uses an embedded key, or obtains its manifest over HTTP.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Web-UI update; installer RSA-SHA256 verified vs embedded pubkey.pem (manifest over http).",
   "limitations": [
-    "New default-branch snapshot rather than historical release re-verification; the web UI's installer/manifest flow, embedded key material, transport URL, and call-site relationship to VerifySignature were not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "5e26d52d706f129769e1d620a595c78498ca8cff"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "NZBGet's source contains an RSA-SHA256 verification utility that hashes an input file, reads a signature record and PEM public key, and calls RSA_verify. Its maintenance update path separately reads an install script from package-info.json; this snapshot does not establish that the web installer path invokes the verifier, uses an embedded key, or obtains its manifest over HTTP.",
+    "limitations": [
+      "New default-branch snapshot rather than historical release re-verification; the web UI's installer/manifest flow, embedded key material, transport URL, and call-site relationship to VerifySignature were not established."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "http manifest / https installer",
+  "payload_verification": "signature[RSA-SHA256]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-O3.md",
+      "line": 9,
+      "text": "| NZBGet | https://github.com/nzbget/nzbget | C++ (daemon + web UI) | Y | N (web-UI initiated only: \"Settings → SYSTEM → Check for update\"; also exposed as XML-RPC methods `checkupdate`/`startupdate`) | Y (downloads a platform installer/`.run`/`-setup.exe` and executes it with elevated/replace-in-place semantics) | http for the version-manifest fetch (`update-info-link` is `http://nzbget.net/info/nzbget-version-*.json`, not https); download/signature links come from that manifest (scheme as published, unauthenticated at transport layer); actual download performed by NZBGet's own internal `webget` HTTP client | N (the JSON manifest `NZBGET_UPDATE.txt`/version-info file is plain, unsigned, fetched over http) | signature (RSA-SHA256, PKCS#1 v1.5 via OpenSSL `RSA_verify`, over a plaintext hex signature file downloaded alongside the installer) | embedded `pubkey.pem` shipped inside the app directory (repo root `pubkey.pem`, installed to `$NZBOP_APPDIR/pubkey.pem`); no chain of trust beyond \"ships with the binary\" — corresponding private key not in repo | `pubkey.pem` (repo root); `daemon/main/Maintenance.cpp:32-52,198-206,318-416` (OpenSSL `Signature` class: `ComputeInHash`→SHA-256, `ReadSignature`→hex-decode `.sig.txt`, `ReadPubKey`→`PEM_read_bio_RSA_PUBKEY`, `Verify`→`RSA_verify(NID_sha256,...)`); `daemon/main/nzbget.cpp:872-882` (`ProcessSigVerify`, CLI `-B verify`, exits code 93 on success); `linux/install-update.sh:32-93` (downloads `NZBGET_UPDATE.txt` via http link from `webui/package-info.json`, downloads `.sig.txt` and installer, runs `nzbget -B verify pubkey.pem sig installer`, requires exit code 93, then `sh installer.run --update`); `windows/install-update.bat:70-149,221-227` (same flow; final `\"%SETUP_EXE%\" /S` silent-installs); `linux/package-info.json:2` and `windows/package-info.json:2` (`\"update-info-link\": \"http://nzbget.net/info/...\"`, note plain http). |"
+    }
+  ]
 }

@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/strawberrymusicplayer/strawberry",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In the reviewed Strawberry snapshot, macOS metadata configures a Sparkle feed and SUPublicEDKey, while CMake conditionally enables Sparkle on Apple and QtSparkle on Apple or Windows. The inspected source does not establish a Linux in-app updater through these components; other release mechanisms remain outside this review.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Sparkle EdDSA on macOS, qtsparkle on Windows — payload signed vs pinned key. No Linux in-app updater.",
   "limitations": [
-    "New default-branch snapshot rather than the original study release; Linux packaging and any non-Sparkle update behavior, release artifacts, and delegated framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,34 @@
       "commit": "5d247064cbb7b548fbb4fcdfbabfc6635a9dacb3"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In the reviewed Strawberry snapshot, macOS metadata configures a Sparkle feed and SUPublicEDKey, while CMake conditionally enables Sparkle on Apple and QtSparkle on Apple or Windows. The inspected source does not establish a Linux in-app updater through these components; other release mechanisms remain outside this review.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study release; Linux packaging and any non-Sparkle update behavior, release artifacts, and delegated framework enforcement were not independently verified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "EdDSA signature",
+  "trust_root": "Sparkle key pinned in Info.plist (mac) / qtsparkle (Win)",
+  "original_evidence": [
+    {
+      "file": "batch-S3.md",
+      "line": 11,
+      "text": "| Strawberry | https://github.com/strawberrymusicplayer/strawberry.git | b0b1e015c972d45558792c81b8b872024340adc5 (2026-08-17) | Y | Y | Y | https, TLS enforced (no VerifyNone/InsecureSkipVerify in update path) | Y | signature (EdDSA via Apple Sparkle.framework on macOS; qtsparkle-qt6 on Windows, external lib not vendored) | pinned in binary — `SUPublicEDKey` embedded in `Info.plist` inside the signed/notarized bundle | `dist/macos/Info.plist.in:37-40` (SUFeedURL https + SUPublicEDKey); `src/core/sparkleupdater.mm:63-77` (SPUStandardUpdaterController); `CMakeLists.txt:284-384` (updater gated to APPLE OR WIN32 only — **no Linux in-app updater**) |"
+    },
+    {
+      "file": "batch-S3.md",
+      "line": 24,
+      "text": "| Strawberry | **A** | macOS: Sparkle EdDSA signature checked against `SUPublicEDKey` pinned in `Info.plist`. Windows: qtsparkle mirrors the same appcast-signing design (external lib, not vendored, so its check code wasn't directly inspectable). Linux: no in-app updater at all. |"
+    }
+  ]
 }

@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/autobrr/mkbrr",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: Manual update uses go-selfupdate GitHub release detection and replacement without configured checksum/signature validation.",
+  "description": "go-selfupdate vs GitHub Releases, no signature validator.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "e99dc06ee7ad0ccbd0512ae354960200ed4cbf93"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: Manual update uses go-selfupdate GitHub release detection and replacement without configured checksum/signature validation.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AN3.md",
+      "line": 13,
+      "text": "| mkbrr | https://github.com/autobrr/mkbrr.git | e99dc06e 2026-08-18 | Y | N (manual `mkbrr update`) | Y | https | N | none configured | server-supplied/unpinned (GitHub Releases API) | `cmd/update.go:34,52` uses `github.com/creativeprojects/go-selfupdate`, `selfupdate.DetectLatest(...ParseSlug(\"autobrr/mkbrr\"))` + `selfupdate.UpdateTo(...)` — no validator/checksum-signature configured |"
+    }
+  ]
 }

@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/pi-hole/pi-hole",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The FTL installer downloads a binary and a same-host .sha1 file, then checks the binary against that value; the core/web update path fetches and compares Git revisions and can pull new code. The source supports the recorded narrow transport-plus-same-channel hash/update behavior, without an independent signature trust root.",
+  "description": "FTL binary checksummed via sha1 from the same unauthenticated host; core/web updates are plain git pull, no commit signing.",
   "limitations": [
-    "The source does not establish signed commits or an independently authenticated hash channel.",
-    "Snapshot is a newly retrieved default branch, not the historical study revision."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "f47b8ede5a8e38f9c703202d324a074dbdba4ca9"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The FTL installer downloads a binary and a same-host .sha1 file, then checks the binary against that value; the core/web update path fetches and compares Git revisions and can pull new code. The source supports the recorded narrow transport-plus-same-channel hash/update behavior, without an independent signature trust root.",
+    "limitations": [
+      "The source does not establish signed commits or an independently authenticated hash channel.",
+      "Snapshot is a newly retrieved default branch, not the historical study revision."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "sha1 (same host)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AD3.md",
+      "line": 8,
+      "text": "| Pi-hole | https://github.com/pi-hole/pi-hole.git | f47b8ede5a8e38f9c703202d324a074dbdba4ca9 (2026-07-06) | Y | N (manual `pihole -up`; not cron-scheduled in this repo) | Y (FTL binary); core/web via `git pull`| https (git+curl), TLS enforced, no `-k`/insecure flags found | N | sha1 hash — fetched from same unauthenticated host/CDN as the binary (`ftl.pi-hole.net` or GH releases) | server-supplied/unpinned (no GPG signature, no pinned key) | `automated install/basic-install.sh:1877-1887` (download binary + `.sha1` from same URL, `sha1sum -c` only); `advanced/Scripts/update.sh:41-103` (`git fetch`/`git pull` core+web over https, no `git verify-commit`) |"
+    }
+  ]
 }

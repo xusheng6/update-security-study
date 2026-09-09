@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/antares-sql/antares",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Antares’ updater handles distribution-specific restrictions and has a distinct macOS branch with automatic retrieval disabled. Other eligible branches invoke electron-updater; release signing and full framework enforcement remain unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "electron-updater, no code-signing anywhere; macOS auto-update disabled 'for unsigned app updates'.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
-    "Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "954b455f612d170742c1a1065276132f2cc115ea"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Antares’ updater handles distribution-specific restrictions and has a distinct macOS branch with automatic retrieval disabled. Other eligible branches invoke electron-updater; release signing and full framework enforcement remain unresolved.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+      "Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validated)",
+  "payload_verification": "hash (no code-sign)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-I8.md",
+      "line": 9,
+      "text": "| Antares SQL | antares-sql/antares | Electron (electron-updater) | Y | chk: automatic on renderer mount (`ipcRenderer.send('check-for-updates')`); Win/Linux(AppImage): `checkForUpdatesAndNotify()` → auto dl + notify, inst manual restart; macOS: `autoDownload=false`, only links to external download page (manual); Windows Store / non-AppImage Linux: updates disabled entirely | Y (Windows / AppImage-Linux only; N on macOS and store builds) | https, provider inferred from `repository` field (GitHub releases, no explicit `publish` block in package.json); TLS enforced (no bypass found) | N | hash-from-manifest only (sha512 in latest.yml); **no code signing found** for mac or Windows in package.json/workflows — explicit source comment \"Temporary solution on MacOS for unsigned app updates\" | none (unsigned builds) | src/main/ipc-handlers/updates.ts:1-59 (esp. comment at line ~25 \"unsigned app updates\"); src/renderer/App.vue:110 (`ipcRenderer.send('check-for-updates')` in onMounted); package.json `build` block — no `publish`/no CSC_*/signing keys; .github/workflows/build.yml has no signing secrets |"
+    }
+  ]
 }

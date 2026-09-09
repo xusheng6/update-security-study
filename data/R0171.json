@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/rxhanson/Rectangle",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Rectangle configures Sparkle with an HTTPS feed and a pinned SUPublicEDKey, and its app delegate starts the standard updater and exposes manual and automatic checks. Runtime signature enforcement remains delegated to Sparkle; this snapshot does not reverify the historical release.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Sparkle EdDSA pinned.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; Sparkle's dependency-level verifier and historical release artifact signing were not independently reverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "6a1e46c0c3c8ef7b2bfc4b9f98e7ceb33065d27b"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Rectangle configures Sparkle with an HTTPS feed and a pinned SUPublicEDKey, and its app delegate starts the standard updater and exposes manual and automatic checks. Runtime signature enforcement remains delegated to Sparkle; this snapshot does not reverify the historical release.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; Sparkle's dependency-level verifier and historical release artifact signing were not independently reverified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[Sparkle-EdDSA]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-K1.md",
+      "line": 8,
+      "text": "| Rectangle | rxhanson/Rectangle | Sparkle | Y | chk: user-toggle via `SUEnableAutomaticChecks` default; dl/inst: Sparkle standard prompt | Y | https (`https://rectangleapp.com/downloads/updates.xml`) | Sparkle-EdDSA (no legacy DSA key) | signature[EdDSA] | pinned-in-binary | Rectangle/Info.plist:44-47; Rectangle/AppDelegate.swift:148; Rectangle/Defaults.swift:56 |"
+    }
+  ]
 }

@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/EKA2L1/EKA2L1",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "EKA2L1’s Windows updater performs archive-format checks as part of its update workflow. That structural validation does not establish publisher authentication or certify the report’s execution-impact claim.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "HTTPS to GitHub but zero payload verification before extracting/executing the update.",
   "limitations": [
-    "The checkout is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "The source does not establish released artifact signing, current release asset provenance, or whether another updater component adds controls.",
-    "The checkout is a newly retrieved default-branch snapshot, not the original study checkout. The source does not establish released artifact signing, current release asset provenance, or whether another updater component adds controls."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "9af4d590fd6f38f575d037451bf842f669547985"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "EKA2L1’s Windows updater performs archive-format checks as part of its update workflow. That structural validation does not establish publisher authentication or certify the report’s execution-impact claim.",
+    "limitations": [
+      "The checkout is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "The source does not establish released artifact signing, current release asset provenance, or whether another updater component adds controls.",
+      "The checkout is a newly retrieved default-branch snapshot, not the original study checkout. The source does not establish released artifact signing, current release asset provenance, or whether another updater component adds controls."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-U5.md",
+      "line": 35,
+      "text": "| EKA2L1 | https://github.com/EKA2L1/EKA2L1 | 193557f / 2026-08-21 | Y (Windows Qt build only) | Y (dialog offers update, user confirms) | Y | https, TLS default (Qt `QNetworkAccessManager`, `NoLessSafeRedirectPolicy` set, no insecure override found) | N | **none** — downloaded zip is extracted and copied over the install directory with no hash/signature check | n/a (no verification exists) | src/emu/qt/src/update_dialog.cpp:54-56 (`api.github.com/repos/eka2l1/eka2l1/...`), 315-316 (download request); src/emu/qt/src/updater.cpp:98-195 (`extract()` unzips straight into `..\\` install dir via miniz, no checksum anywhere), 213-222 (relaunches `eka2l1_qt.exe`) |"
+    }
+  ]
 }

@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/rustdesk/rustdesk",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "RustDesk’s inspected updater constrains its download URLs to an HTTPS GitHub release location for its own repository. This supports the URL-policy observation; complete artifact authentication and the original impact claim remain unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Strict HTTPS + GitHub-URL allowlist, but the downloaded installer has no independent hash/signature — a compromised Releases asset or api.rustdesk.com yields root RCE via macOS LaunchDaemon.",
   "limitations": [
-    "The checkout is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "The reviewed file does not establish release asset signing, framework installer checks, or behavior in other platform-specific updater implementations.",
-    "The checkout is a newly retrieved default-branch snapshot, not the original study checkout. The reviewed file does not establish release asset signing, framework installer checks, or behavior in other platform-specific updater implementations."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "692113c87e476c2e8a82a7cdb9aa98354abc11fc"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "RustDesk’s inspected updater constrains its download URLs to an HTTPS GitHub release location for its own repository. This supports the URL-policy observation; complete artifact authentication and the original impact claim remain unresolved.",
+    "limitations": [
+      "The checkout is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "The reviewed file does not establish release asset signing, framework installer checks, or behavior in other platform-specific updater implementations.",
+      "The checkout is a newly retrieved default-branch snapshot, not the original study checkout. The reviewed file does not establish release asset signing, framework installer checks, or behavior in other platform-specific updater implementations."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-U6.md",
+      "line": 15,
+      "text": "| RustDesk | https://github.com/rustdesk/rustdesk.git | c45f7d2dd222b0cb323ddfbd65d19dd7b8eb10b2 / 2026-08-21 | Y | Y | Y | https, TLS cert validation ENFORCED (strict client requires scheme==\"https\" and forces `danger_accept_invalid_cert=false`) | N (version-check JSON response has no signature) | none (only a version-string compare + URL-allowlist to github.com/rustdesk/rustdesk; no hash/sig of the downloaded installer) | N/A | src/updater.rs:598 create_http_client_with_url_strict(&dmg_url); src/hbbs_http/http_client.rs:142-165 (HTTPS-only, invalid-cert rejected); src/updater.rs:1039-1078 validate_update_tree (path-safety only, no codesign check); src/common.rs:953-1001 do_check_software_update |"
+    }
+  ]
 }

@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/marcantondahmen/automad",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The update archive is fetched and then unpacked into application files without a signature/hash step.",
+  "description": "Fetches core/extension zips over HTTPS with no independent signature check.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "79c05a0a5a1b2a094e93b79f9e08e113c6acb768"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The update archive is fetched and then unpacked into application files without a signature/hash step.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AF7.md",
+      "line": 10,
+      "text": "| Automad | https://github.com/marcantondahmen/automad.git | 79c05a0a5a1b2a094e93b79f9e08e113c6acb768 / 2026-08-22 | Y | N (admin clicks \"Update\" in dashboard) | Y | https, TLS enforced (default cURL verify, no CURLOPT_SSL_VERIFYPEER override found) | N | none (no hash/sig check on downloaded zip) | server-supplied/unpinned (raw.githubusercontent.com content trusted outright) | `automad/src/server/System/Update.php:57` (DOWNLOAD_URL=github.com/…/archive/…zip), `:131` getArchive() → `Fetch::download()`, `:145` unpack() extracts zip directly over app files, no verification step; `automad/src/server/System/Fetch.php:64-89` (cURL, no SSL_VERIFYPEER disable). Also has a Composer-based \"Package Manager\" (`PackageManagerController.php`) for 3rd-party packages/repos — same trust class (Composer/Packagist over HTTPS, no independent signature). |"
+    }
+  ]
 }

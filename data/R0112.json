@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/xemu-project/xemu",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "xemu extracts and replaces xemu.exe from the GitHub asset without hash/signature verification.",
+  "description": "Downloads GitHub release zip, replaces xemu.exe, no hash/sig.",
   "limitations": [
-    "Newly retrieved/recovered source snapshot; this is not historical source re-verification. Released artifact behavior and external framework enforcement remain unverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "f52a0d4e3dcbd63ad18f08b4a6899cd6ce1c878b"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "xemu extracts and replaces xemu.exe from the GitHub asset without hash/signature verification.",
+    "limitations": [
+      "Newly retrieved/recovered source snapshot; this is not historical source re-verification. Released artifact behavior and external framework enforcement remain unverified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validated; dead disable-code)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-H8.md",
+      "line": 13,
+      "text": "| xemu | https://github.com/xemu-project/xemu | C (QEMU-based) / Dear ImGui, libcurl | Y | chk: auto at startup (Windows builds only, gated by user-configurable setting, default checks enabled) + manual \"Check for Updates...\" menu item; dl/inst: manual (user must click \"Update\", then \"Restart\") | Y — downloads a `.zip` release asset, extracts in-place with miniz, renames/replaces `xemu.exe`, and `_execv`'s into the new binary | https — `https://api.github.com/repos/xemu-project/xemu/releases/latest` for metadata, GitHub `browser_download_url` for the asset, both via libcurl. TLS validation is ENFORCED by default: the disable-verification code path exists but is compiled out (`#define ALLOW_INSECURE_HOSTS 0`, hardcoded) | N (plain GitHub Releases API JSON, HTTPS-protected only, no signature) | none — no hash or signature check on the downloaded zip before extraction/execution | N/A | ui/xui/update.cc:32 (`releases_url`); :149-219 (`check_for_update_internal`, parses GitHub JSON, matches asset by expected filename, no verification); :248-316 (`update_internal` — http_get → miniz unzip → overwrite `xemu.exe`, lines 294-299); :322-329 (`restart_to_updated`, `_execv`); ui/xui/main.cc:151-155 (`#if defined(_WIN32)` startup auto-check gated by `g_config.general.updates.check`); util/http.c:29 (`#define ALLOW_INSECURE_HOSTS 0`); :101-104 and :150-153 (`CURLOPT_SSL_VERIFYPEER`/`VERIFYHOST` set to 0, but dead code under the above macro). |"
+    }
+  ]
 }

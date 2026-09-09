@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/isbeorn/nina",
   "channel": "plugin",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "N.I.N.A.’s plugin installer validates checksums supplied by plugin metadata. The separate application updater and independent publisher authentication remain unestablished.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Downloads+executes a Windows installer; hash from the same unauthenticated HTTPS endpoint. No signature/pinned key.",
   "limitations": [
-    "New default-branch snapshot rather than the original study checkout; no auditable application Windows-installer update path, endpoint provenance, Authenticode policy, or pinned-key policy was identified in the reviewed source."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,23 @@
       "commit": "cdb0dc4dbbe6ae964ba60636ead542c069155f65"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "N.I.N.A.’s plugin installer validates checksums supplied by plugin metadata. The separate application updater and independent publisher authentication remain unestablished.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study checkout; no auditable application Windows-installer update path, endpoint provenance, Authenticode policy, or pinned-key policy was identified in the reviewed source."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "hash (same endpoint)",
+  "trust_root": "—",
+  "original_evidence": []
 }

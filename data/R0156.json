@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/nvaccess/nvda",
   "channel": "primary",
-  "review_status": "Detailed recheck",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The C tier remains appropriate: the source supports HTTPS retrieval, periodic automatic checking, an optional SHA1 comparison for the launcher, and user confirmation before applying the update. The original JSON wording is concretely wrong because parsing is line-oriented key/value text, and the source does not establish a signature over that metadata. Those are claim corrections and a limitation on authentication conclusions; they do not turn an unsigned or optionally hash-checked manifest into a stronger tier or establish a different tier.",
+  "description": "Auto-check; dl+install user-clicks; SHA1 from an unsigned JSON manifest.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot at commit 4dd8aec18f27b4c583180fda235fd596cef74de0, not the original study checkout; historical release behavior may differ.",
-    "The review does not establish server-side metadata authentication, Windows installer signing, or the provenance of the SHA1 value; the narrow requests verify=False path for Windows root certificate recovery is separate from the real urllib update request."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "4dd8aec18f27b4c583180fda235fd596cef74de0"
     }
   ],
-  "review_basis": "deep-source-recheck",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The C tier remains appropriate: the source supports HTTPS retrieval, periodic automatic checking, an optional SHA1 comparison for the launcher, and user confirmation before applying the update. The original JSON wording is concretely wrong because parsing is line-oriented key/value text, and the source does not establish a signature over that metadata. Those are claim corrections and a limitation on authentication conclusions; they do not turn an unsigned or optionally hash-checked manifest into a stronger tier or establish a different tier.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot at commit 4dd8aec18f27b4c583180fda235fd596cef74de0, not the original study checkout; historical release behavior may differ.",
+      "The review does not establish server-side metadata authentication, Windows installer signing, or the provenance of the SHA1 value; the narrow requests verify=False path for Windows root certificate recovery is separate from the real urllib update request."
+    ],
+    "review_status": "Detailed recheck",
+    "review_basis": "deep-source-recheck",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validated)",
+  "payload_verification": "hash (SHA1, unsigned manifest)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-J6.md",
+      "line": 7,
+      "text": "| NVDA | nvaccess/nvda | Python (wxPython, Windows) | Y | chk=auto (periodic background check); dl=user-click \"Download update\"; inst=user-click \"Update now\" (pending update auto-relaunches installer on next startup only after user already confirmed once) | Y (user-confirmed) | https; TLS validation enforced by default (`urllib.request`/`ssl`, no `verify=False` in check/download path). One narrow exception: `_updateWindowsRootCertificates()` opens a `requests` connection with `verify=False` solely to read the peer cert bytes and feed them to the Windows CryptoAPI so Windows fetches a missing root CA on-demand (Win7/8 issue #4803) — retry of the real request still goes through normal verified `urllib` | no (JSON update-check response from api.nvaccess.org is plain, unsigned JSON) | hash-from-manifest (SHA1, field `launcherHash` in the JSON, compared with `hashlib.sha1()` of the downloaded .exe) | n/a — hash delivered inline in the HTTPS-fetched JSON manifest, no separate signature/key | source/updateCheck.py:84 (`_DEFAULT_CHECK_URL = \"https://api.nvaccess.org/nvdaUpdateCheck\"`); :244 (`urllib.request.urlopen`); :869-897 (`_download`, SHA1 `hasher.hexdigest() != self.fileHash` → `RuntimeError`); :1088-1096 (`_updateWindowsRootCertificates`, `verify=False`); :592-601/634-668 (`UpdateAskInstallDialog` requires \"Update now\" click) → :319-328 (`_executeUpdate` spawns `core.NewNVDAInstance(destPath, ...)`) |"
+    }
+  ]
 }

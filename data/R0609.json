@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/chatty/chatty",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: Downloaded installer is launched with ProcessBuilder; published checksums are for manual comparison and are not computed by this path.",
+  "description": "Auto-checks GitHub, ProcessBuilder-executes the Windows installer with no hash (checksums only shown for manual compare).",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "48f0c9e75f91b57c440ef864d21ae09a0cf7737c"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: Downloaded installer is launched with ProcessBuilder; published checksums are for manual comparison and are not computed by this path.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AM7.md",
+      "line": 16,
+      "text": "| Chatty (Twitch chat client) | https://github.com/chatty/chatty.git | 48f0c9e / 2026-06-19 | Y | Y (`checkNewVersion` setting, default `true`, checked every 2 days) | Y (downloads installer via `FileDownloaderDialog`, then `RunUpdater.run()` spawns the InnoSetup `.exe` directly with `ProcessBuilder`) | https (`api.github.com/repos/chatty/chatty/releases`) | N | **none** — checksums are published on a webpage (`tduva.com/chatty/checksums/...`) for **manual** user comparison only; nothing in code computes/compares a hash or signature before executing the downloaded installer | n/a | src/chatty/util/GitHub.java:20 (`https://api.github.com/repos/chatty/chatty/releases`), src/chatty/SettingsManager.java:125 (`checkNewVersion` default `true`), src/chatty/gui/components/updating/RunUpdater.java:27-73 (spawns downloaded installer via `ProcessBuilder`), src/chatty/gui/components/updating/UpdateDialog.java:320 (checksums link, informational only), src/chatty/gui/components/updating/FileDownloader.java (plain `HttpURLConnection` download, no digest check) |"
+    }
+  ]
 }

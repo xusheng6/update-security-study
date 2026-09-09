@@ -5,14 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/jdx/mise",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected mise self-update verifies the release archive with the repository zipsign key and conditionally checks the macOS binary with codesign; the macOS check can be skipped when codesign is unavailable.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "self-update verifies a zipsign Ed25519 signature vs a pinned key + macOS codesign. Manual trigger.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout.",
-    "Source does not establish release signing provenance or historical binaries.",
-    "The macOS code-signature control is conditional.",
-    "Newly retrieved default-branch snapshot, not the original study checkout. Source does not establish release signing provenance or historical binaries. The macOS code-signature control is conditional."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "b396c62bc4eb30f1b2d7a280d75c8e9aa8776546"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected mise self-update verifies the release archive with the repository zipsign key and conditionally checks the macOS binary with codesign; the macOS check can be skipped when codesign is unavailable.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout.",
+      "Source does not establish release signing provenance or historical binaries.",
+      "The macOS code-signature control is conditional.",
+      "Newly retrieved default-branch snapshot, not the original study checkout. Source does not establish release signing provenance or historical binaries. The macOS code-signature control is conditional."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "zipsign Ed25519 + codesign",
+  "trust_root": "key pinned via include_bytes!(zipsign.pub)",
+  "original_evidence": [
+    {
+      "file": "batch-W7.md",
+      "line": 19,
+      "text": "| mise | https://github.com/jdx/mise | 8dd2c77 / 2026-08-20 | Y (`mise self-update`) | N (manual command only, no background auto-update) | Y | https (GitHub Releases via `self_update` crate) | payload itself is signed (zip/tar archive), no separate manifest | signature — `zipsign` archive signature verified via `zipsign_api`/`self_update`'s `verifying_keys` | **pinned-in-binary**: public key embedded at compile time via `include_bytes!(\"../../zipsign.pub\")` (file present at repo root) | `src/cli/self_update.rs:352-358` (`update.verifying_keys([*include_bytes!(\"../../zipsign.pub\")])` on the main `self_update` path), `zipsign.pub` (repo root, pinned Ed25519 pubkey), `src/cli/self_update.rs:430-449` (`verify_zip_signature`, same pinned key, used for the Windows shim update path too), `src/cli/self_update.rs:460-499` (additional macOS `codesign` verification of the resulting binary as belt-and-suspenders) |"
+    }
+  ]
 }

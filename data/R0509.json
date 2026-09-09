@@ -5,12 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/livebook-dev/livebook",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "Targeted retained-source read supports the narrow Tier A behavior for this primary application updater: Livebook checks for updates on boot, prompts before download/install, and invokes tauri-plugin-updater download_and_install after user confirmation; the Tauri config supplies the pinned key.",
+  "description": "Tauri + pinned minisign; auto-check, confirm-before-install.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in pinned key/configuration.",
-    "Framework verification depends on the packaged updater implementation where the application delegates to Sparkle or tauri-plugin-updater."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "bab7c1460dd9be195ddffa6d77093c26be776158"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow Tier A behavior for this primary application updater: Livebook checks for updates on boot, prompts before download/install, and invokes tauri-plugin-updater download_and_install after user confirmation; the Tauri config supplies the pinned key.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in pinned key/configuration.",
+      "Framework verification depends on the packaged updater implementation where the application delegates to Sparkle or tauri-plugin-updater."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "Ed25519 (minisign)",
+  "trust_root": "pubkey pinned in tauri config",
+  "original_evidence": [
+    {
+      "file": "batch-AG8.md",
+      "line": 21,
+      "text": "| livebook | https://github.com/livebook-dev/livebook.git | bab7c1460dd9be195ddffa6d77093c26be776158 / 2026-08-16 | Y | N (checks automatically on boot, but shows an OK/Cancel dialog before downloading/installing) | Y (after user clicks OK) | https, TLS enforced | Y (per-artifact minisign signature in `latest.json`) | signature (Ed25519/minisign via `tauri-plugin-updater`) | pinned-in-binary (`tauri.conf.json` pubkey) | `rel/app/src-tauri/tauri.conf.json:51-54` (pubkey+endpoint); `rel/app/src-tauri/src/lib.rs:580-605` (`check_for_updates_on_boot`, dialog, `download_and_install`) |"
+    }
+  ]
 }

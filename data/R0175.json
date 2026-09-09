@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/mangerlahn/Latest",
   "channel": "mixed",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Latest configures its own Sparkle feed with a pinned SUPublicEDKey and uses SPUUpdater to check and install updates for discovered Sparkle app bundles, reading each target bundle's SUFeedURL (with a DevMate fallback). Target-app key configuration and Sparkle runtime enforcement remain delegated and were not independently audited in this snapshot.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Self-updates via Sparkle EdDSA; also updates other Sparkle apps (inherits their key hygiene).",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; external target-app key material, Sparkle's dependency-level verifier, and historical release artifacts were not independently reverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "1301cf6eb23391065691482fb52569fe70f9a3e2"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Latest configures its own Sparkle feed with a pinned SUPublicEDKey and uses SPUUpdater to check and install updates for discovered Sparkle app bundles, reading each target bundle's SUFeedURL (with a DevMate fallback). Target-app key configuration and Sparkle runtime enforcement remain delegated and were not independently audited in this snapshot.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; external target-app key material, Sparkle's dependency-level verifier, and historical release artifacts were not independently reverified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[Sparkle-EdDSA]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-K1.md",
+      "line": 16,
+      "text": "| Latest | mangerlahn/Latest | Sparkle (dual role: self-updates itself, AND acts as a generic Sparkle-appcast update engine for other installed apps on the user's Mac) | Y | unknown for self-update (no explicit `SUEnableAutomaticChecks`/`automaticallyChecksForUpdates` override found; likely default Sparkle first-run prompt) | Y — for itself via its own Info.plist keys; also for **third-party apps**: it instantiates `SPUUpdater(hostBundle: <target app's bundle>, ...)` and performs their downloads/installs, inheriting each target app's own Sparkle key config (verification for those varies per target, not assessed here) | https (`https://max.codes/latest/update.xml` for itself) | Sparkle-EdDSA (legacy `SUPublicDSAKeyFile` dsa_pub.pem also present) for its own updates | signature[EdDSA] for its own updates; for third-party apps, depends entirely on that app's own configured key | pinned-in-binary (own SUPublicEDKey) for itself | Latest/Resources/Info.plist:42-47; Latest/Model/Updater/SparkleUpdateOperation.swift:44-67; Latest/Model/Update Checker Extensions/Sparkle/SparkleCheckerOperation.swift:72; Latest/Model/Sparkle/Sparkle.swift:11-38 |"
+    }
+  ]
 }

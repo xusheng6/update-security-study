@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/geogebra/geogebra",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The retrieved GeoGebra source contains a Windows auto-update compatibility wrapper, but this checkout does not expose the implementation needed to substantiate the claimed silent JAR download/load path or its verification behavior. The specific updater claim remains unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Windows auto-updater silently downloads+loads new application jars, zero verification.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not historical release re-verification; the external Windows updater, released desktop artifacts, and any separate installer repository were not recovered or audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "28b4a726980c5afd874296e3add0dd776b52d5e3"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retrieved GeoGebra source contains a Windows auto-update compatibility wrapper, but this checkout does not expose the implementation needed to substantiate the claimed silent JAR download/load path or its verification behavior. The specific updater claim remains unresolved.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not historical release re-verification; the external Windows updater, released desktop artifacts, and any separate installer repository were not recovered or audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes (Win)",
+  "transport": "https (validated)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-M4.md",
+      "line": 7,
+      "text": "| GeoGebra (desktop) | github.com/geogebra/geogebra | Java (Swing desktop; GWT web) | Y (app-update; desktop only) | Y on Windows, silent, no user prompt before download; Mac shows a notification dialog only (no silent download); Linux: no auto-download path found | Y on Windows — downloads a zip of updated `.jar` files over HTTPS and extracts them into `%APPDATA%\\GeoGebra <ver>\\jars\\update\\`, which the native Windows launcher (not in this Java repo) loads on next start | https (`jars.geogebra.org`, `download.geogebra.org`) | N | N — no hash/signature check anywhere in the download or extract path | none found | `source/desktop/desktop/.../gui/app/GeoGebraFrame.java:529-577` (`downloadGeoGebraJars`, unzips into `JARS_UPDATE_DIR`), `:583-713` (`checkVersion`, queries `GeoGebraConstants.VERSION_URL`/`VERSION_URL_MINOR`), `:694-698` (\"Windows only: automatic update\" — `if (AppD.WINDOWS && currentVersionL < newestVersionL) downloadGeoGebraJars();`); `source/shared/common/.../GeoGebraConstants.java:183` (`VERSION_URL = \"https://download.geogebra.org/installers/version.txt\"`); `source/common-jre/.../jre/util/DownloadManager.java` (`copyURLToFile` — plain stream copy, no checksum/signature check) |"
+    }
+  ]
 }

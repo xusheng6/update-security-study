@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/aarnt/octopi",
   "channel": "package-manager",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Octopi’s inspected yay helper derives a GitHub release asset and uses local archive handling; this source does not establish the pacman signing path or a digest/signature control for that helper.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "pacman path is signed, but the AUR-helper bootstrap downloads+executes an unsigned yay binary from GitHub releases with zero verification.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external package-manager enforcement remain unverified.",
-    "The inspected function does not establish the pacman signing path or whether other AUR helpers use separate controls.",
-    "Primary classification remains UNRESOLVED under the evidence-review instruction; retained source is commit-scoped and does not establish all released or external framework behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "0beadbf0f4b19151240657e6350ad9d5fd8b4702"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Octopi’s inspected yay helper derives a GitHub release asset and uses local archive handling; this source does not establish the pacman signing path or a digest/signature control for that helper.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external package-manager enforcement remain unverified.",
+      "The inspected function does not establish the pacman signing path or whether other AUR helpers use separate controls.",
+      "Primary classification remains UNRESOLVED under the evidence-review instruction; retained source is commit-scoped and does not establish all released or external framework behavior."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none (AUR bootstrap)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AE2.md",
+      "line": 13,
+      "text": "| octopi | https://github.com/aarnt/octopi.git | 0beadbf0f4b19151240657e6350ad9d5fd8b4702 / 2026-08-03 | N | N | Y | https, TLS enforced (default curl, no `-k`) | pacman path: Y (SigLevel keyring); AUR-bootstrap path: **none** | pacman path: GPG detached sig; AUR-bootstrap path: **none at all** | pacman path: OS keyring `/etc/pacman.d/gnupg`; AUR-bootstrap path: N/A — no verification exists | `src/globals.cpp:228-308` `downloadTempYayHelper()` (curl -L GitHub release tarball/binary → tar xzf, no gpg/sha check); `src/pacmanexec.cpp:1552` executes the downloaded `~/.config/octopi/yay` binary directly; `src/mainwindow_transaction.cpp:1713` triggers the chain from GUI |"
+    }
+  ]
 }

@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/onivim/oni2",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The reviewed Onivim 2 snapshot wires Sparkle on macOS release builds and WinSparkle on Windows release builds, with native bindings for feed URLs and update checks; appcast key pinning and artifact verification remain unresolved in the reviewed project source.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "Sparkle/WinSparkle; verification via SUCodeSigningVerifier (no demonstrated pinned appcast key).",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study release.",
-    "Sparkle/WinSparkle native verifier code and any appcast public-key configuration are outside the cited project bindings.",
-    "Newly retrieved default-branch snapshot, not the original study release. Sparkle/WinSparkle native verifier code and any appcast public-key configuration are outside the cited project bindings."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "161a92c2226728b37cd9a6f554b7397f4beb3d5e"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The reviewed Onivim 2 snapshot wires Sparkle on macOS release builds and WinSparkle on Windows release builds, with native bindings for feed URLs and update checks; appcast key pinning and artifact verification remain unresolved in the reviewed project source.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study release.",
+      "Sparkle/WinSparkle native verifier code and any appcast public-key configuration are outside the cited project bindings.",
+      "Newly retrieved default-branch snapshot, not the original study release. Sparkle/WinSparkle native verifier code and any appcast public-key configuration are outside the cited project bindings."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "OS code-signing",
+  "trust_root": "Sparkle/WinSparkle (SUCodeSigningVerifier)",
+  "original_evidence": []
 }

@@ -5,13 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://gitlab.torproject.org/tpo/applications/tor-browser",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The recovered Tor Browser updater inherits MAR verification through compiled primary and secondary certificate data when signature verification is enabled, and rejects a MAR whose embedded channel does not match the configured product channel. This snapshot does not establish a Tor-specific marsigner.der or prove that the accepted certificates differ from stock Firefox's, so the stronger project-specific claim remains unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Firefox MAR, self-hosted with its OWN pinned marsigner.der + project MAR channel that rejects stock Firefox MARs.",
   "limitations": [
-    "Partial newly retrieved Tor Project checkout with toolkit updater files materialized, not the original study checkout or a built Tor Browser binary.",
-    "Generated certificate headers, release channel configuration, and Tor distribution signing assets needed to prove the Tor-specific trust root are absent from this snapshot.",
-    "Partial newly retrieved Tor Project checkout with toolkit updater files materialized, not the original study checkout or a built Tor Browser binary.; Generated certificate headers, release channel configuration, and Tor distribution signing assets needed to prove the Tor-specific trust root are absent from this snapshot."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "c76b89e2fd0e719eb012d5dccb507338bb122537"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The recovered Tor Browser updater inherits MAR verification through compiled primary and secondary certificate data when signature verification is enabled, and rejects a MAR whose embedded channel does not match the configured product channel. This snapshot does not establish a Tor-specific marsigner.der or prove that the accepted certificates differ from stock Firefox's, so the stronger project-specific claim remains unresolved.",
+    "limitations": [
+      "Partial newly retrieved Tor Project checkout with toolkit updater files materialized, not the original study checkout or a built Tor Browser binary.",
+      "Generated certificate headers, release channel configuration, and Tor distribution signing assets needed to prove the Tor-specific trust root are absent from this snapshot.",
+      "Partial newly retrieved Tor Project checkout with toolkit updater files materialized, not the original study checkout or a built Tor Browser binary.; Generated certificate headers, release channel configuration, and Tor distribution signing assets needed to prove the Tor-specific trust root are absent from this snapshot."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (aus1.torproject.org)",
+  "payload_verification": "signature[MAR]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-H6.md",
+      "line": 8,
+      "text": "| Tor Browser | gitlab.torproject.org/tpo/applications/tor-browser (Firefox ESR fork); build/update config in gitlab.torproject.org/tpo/applications/tor-browser-build | Firefox/Gecko (native, MAR updater retained) | Y | auto chk/dl (Firefox background update service, standard Gecko behavior) + apply on restart, matching upstream Firefox defaults | Y (applies signed MAR patch/full update to the install directory, then relaunches) | HTTPS to Tor Project's own update server, NOT Mozilla's: `updater_url: 'https://aus1.torproject.org/torbrowser/update_3/'`; downloads additionally traverse the Tor network itself; TLS validation follows unmodified Gecko network-stack behavior (no bypass found in the build/update config reviewed) | N (the `update.xml` manifest served by AUS is not separately signed beyond HTTPS transport, same as upstream Firefox design) | signature (MAR embedded PKCS7/RSA signature, verified via NSS in the retained Firefox `updater` component) — Tor Browser keeps Firefox's MAR verification code path but swaps in its own signing certificate(s), and further restricts acceptance via a project-specific MAR channel ID so a validly-signed-but-wrong-channel MAR (e.g. stock Firefox) is rejected | embedded certificate baked into the binary: Tor Project's own `marsigner.der` replaces Mozilla's default cert in `toolkit/mozapps/update/updater/release_secondary.der` and `nightly_aurora_level3_secondary.der` (not Mozilla's default MAR signing key) | tor-browser-build:projects/firefox/config:40 (`updater_url: 'https://aus1.torproject.org/torbrowser/update_3/'`), :41-42 (`mar_id_prefix: 'torbrowser-torproject'`, `mar_channel_id` derived per-channel), :38-39,45-47 (comment: overriding the updater URL \"will also override the certificate\", confirming URL+cert are paired/pinned per build), projects/firefox/mozconfig.in:91-94 (`--with-updater-url=` set from `updater_url`/`override_updater_url`), :109-110 (`MAR_CHANNEL_ID`/`ACCEPTED_MAR_CHANNEL_IDS` set to the Tor-specific channel id, rejecting other-channel MARs even if validly signed), projects/firefox/build:90-94 (`cp $rootdir/marsigner.der toolkit/mozapps/update/updater/release_secondary.der` and `.../nightly_aurora_level3_secondary.der` — replaces Mozilla's embedded MAR cert with Tor Project's own), tools/marsigning_check.sh:46,94 (`signmar` / NSS cert named `marsigner` used to sign/verify MARs) |"
+    }
+  ]
 }

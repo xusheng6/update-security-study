@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/NickeManarin/ScreenToGif",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Retained source supports the recorded narrow primary-updater C classification: GitHub HTTPS metadata and download are present, but the downloaded update has no cryptographic payload verification and is shell-opened on the portable/MSIX path.",
+  "description": "Size-only comparison, no integrity check on the downloaded installer.",
   "limitations": [
-    "This checkout does not establish released artifact signing or current upstream behavior.",
-    "The inspected code is Windows-oriented; platform-specific distribution paths may differ."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "a4d0a67c2131cd048ceec86cd40afc2f1a06f2fd"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Retained source supports the recorded narrow primary-updater C classification: GitHub HTTPS metadata and download are present, but the downloaded update has no cryptographic payload verification and is shell-opened on the portable/MSIX path.",
+    "limitations": [
+      "This checkout does not establish released artifact signing or current upstream behavior.",
+      "The inspected code is Windows-oriented; platform-specific distribution paths may differ."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-AL6.md",
+      "line": 10,
+      "text": "| ScreenToGif | https://github.com/NickeManarin/ScreenToGif.git | a4d0a67c / 2026-07-28 | Y | Y (if `InstallUpdates` setting on, auto-downloads; else prompts) | Y | https (api.github.com + GitHub release asset CDN), TLS enforced via ServicePointManager Tls11/12/13, no bypass | N | none — only compares downloaded file size to the size reported by the GitHub API, no hash/signature (comment explicitly says a hash check would be needed) | server-supplied/unpinned (no verification at all) | ScreenToGif/ViewModel/ApplicationViewModel.cs:1204-1208 (\"I would need to check a hash\"), :1296 (ProcessHelper.StartWithShell executes installer), ScreenToGif.Util/GitHubHelper.cs:17 (api.github.com/repos/.../releases/latest) |"
+    }
+  ]
 }

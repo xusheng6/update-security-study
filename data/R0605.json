@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/projectdiscovery/subfinder",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: The explicit update replaces the binary and matches a checksum file from the same GitHub release; the sibling version-check client has separate TLS behavior.",
+  "description": "`-update` sha256 from the same GitHub release (unpinned); shared projectdiscovery lib hardcodes InsecureSkipVerify:true on the version-check path.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "51e9b9065e6afb66d3bca3705b21d84bb40354c4"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: The explicit update replaces the binary and matches a checksum file from the same GitHub release; the sibling version-check client has separate TLS behavior.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https (validation off on notify)",
+  "payload_verification": "sha256 (same release)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AM2.md",
+      "line": 22,
+      "text": "| subfinder | https://github.com/projectdiscovery/subfinder.git | 51e9b90 / 2026-08-23 | Y | **N** (explicit `-update`/`-up` flag; a separate lightweight *notify-only* version check runs automatically unless `-duc`) | **Y** (when `-update` is passed, replaces the running binary) | https; the asset-download client (`google/go-github`) uses Go's default TLS (enforced). **BUT** the *sibling* version-check HTTP client in the very same shared update package hard-codes `InsecureSkipVerify: true` | N | sha256 checksum matched against a `checksums.txt` file fetched from the **same** GitHub release (self-referential, unauthenticated; no independent signature) | server-supplied/unpinned (checksum sourced from the same untrusted release artifact set) | `pkg/runner/options.go:121-122,198-205`; `pkg/runner/banners.go:28-34` (calls `updateutils.GetUpdateToolCallback`); vendored dep `github.com/projectdiscovery/utils` `update/update.go:42-113` (self-update via `minio/selfupdate`, comment at line 73: *\"TODO: selfupdate has support for checksum validation, code signing verification etc. implement them after discussion\"*), `update/update.go:189-197` (`InsecureSkipVerify: true` at line 194, in `init()` for `DefaultHttpClient`, used only by `GetToolVersionCallback`), `update/gh.go:161-186` (`GetExecutableFromAsset` checksum check against `checksums.txt` in the same release) |"
+    }
+  ]
 }

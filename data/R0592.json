@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/input-leap/input-leap",
   "channel": "package-manager",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "input-leap’s Auto Config downloads Bonjour over HTTP and invokes msiexec without payload verification. This is a dependency installer channel, not a primary app updater.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "'Auto Config' auto-downloads a Bonjour MSI over plaintext HTTP and runs msiexec /i /passive with zero verification — on-path RCE. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "34a34fb20b93113a6b26052cb5a54f9be2327775"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "input-leap’s Auto Config downloads Bonjour over HTTP and invokes msiexec without payload verification. This is a dependency installer channel, not a primary app updater.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "http",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AL4.md",
+      "line": 13,
+      "text": "| input-leap | https://github.com/input-leap/input-leap (clone: repos/AL4/input-leap) | 34a34fb / 2025-11-28 | N (no self-updater for InputLeap itself) | N | **Y (side-channel: 3rd-party dependency installer)** | **http — PLAINTEXT, no TLS at all** | N | **none** | n/a | `src/gui/src/MainWindow.cpp:67` `bonjourBaseUrl = \"http://binaries.symless.com/bonjour/\"`; `:1289-1332` `downloadBonjour()` fetches `Bonjour.msi`/`Bonjour64.msi` over plain HTTP via `DataDownloader` (`src/gui/src/DataDownloader.cpp` uses bare `QNetworkAccessManager`, no cert/hash checks); `:1335-1372` `installBonjour()` writes the downloaded bytes straight to a temp file and launches `msiexec /i <file> /passive` with **zero hash or signature verification** of the downloaded MSI before execution. Triggered automatically when user enables \"Auto Config\" (`promptAutoConfig()` / `on_m_pCheckBoxAutoConfig_toggled`, same file ~1385-1430). |"
+    }
+  ]
 }

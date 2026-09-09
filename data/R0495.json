@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/Librum-Reader/Librum",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "D",
-  "description": "The updater’s request builder uses QueryPeer, the downloaded archive is handed to an elevated unpack-and-install batch path, and the app restarts. No independent payload signature/hash is shown in the retained update flow.",
+  "description": "TLS cert validation disabled app-wide (QSslSocket::QueryPeer) including the update download; .zip installed via an Administrator-elevated batch script with zero integrity check. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -21,7 +21,29 @@
       "commit": "5fdac3454c3c3fbc4191aa6a4f277368895c9c70"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The updater’s request builder uses QueryPeer, the downloaded archive is handed to an elevated unpack-and-install batch path, and the app restarts. No independent payload signature/hash is shown in the retained update flow.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "D",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validation off)",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AF1.md",
+      "line": 18,
+      "text": "| Librum | https://github.com/Librum-Reader/Librum.git | 5fdac34 / 2024-07-01 | Y | check:Y (auto on launch) / install:N (user clicks \"Update\") | Y | https, **TLS validation effectively disabled** (`QSslSocket::QueryPeer` instead of default `VerifyPeer` on a client socket — handshake proceeds even if the cert fails validation) | N | **none** — response bytes written straight to a `.zip`, no hash/signature check anywhere | N/A — no verification performed | `src/infrastructure/persistance/app_info_access.cpp:70-77` `createRequest()`: `sslConfiguration.setPeerVerifyMode(QSslSocket::QueryPeer)` (same weakened config reused across `dictionary_access.cpp`, `authentication_access.cpp`, `library_storage_access.cpp`, etc.); `:38-44` `downloadBinaries()` GETs `{domain}/binary/{packageName}.zip`; `src/application/services/app_info_service.cpp:118-131` `processDownloadedBinaryData`→`saveBinaryDataToFile`; `:66-84` `unpackAndInstallBinaries()` shells out to `unzip_and_move.bat`, which **\"queries Administrator rights\"** and overwrites the installed binaries — no integrity check anywhere; trigger: `src/presentation/settings/updatesPage/MUpdatesAvailable.qml:103` `AppInfoController.updateApplication()` |"
+    }
+  ]
 }

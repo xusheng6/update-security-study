@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/sasgis/sas.planet.src",
   "channel": "primary",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "N",
-  "description": "Completion UI displays manual-update instructions after saving the archive.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Trusts a plaintext-HTTP source with zero verification and writes the archive to disk, but does NOT auto-execute (UI: update manually from file). [Opus-verified]",
   "limitations": [
-    "Imported from completed SOURCE-REVIEW-BATCH-1.md; retained snapshot only.",
-    "Current releases, canonical provenance, and paths outside inspected behavior are not independently established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "98e31caeaa7c28f49e9e105f2e30ae49a232f5e4"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Completion UI displays manual-update instructions after saving the archive.",
+    "limitations": [
+      "Imported from completed SOURCE-REVIEW-BATCH-1.md; retained snapshot only.",
+      "Current releases, canonical provenance, and paths outside inspected behavior are not independently established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "N",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "http+https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AF6.md",
+      "line": 25,
+      "text": "| SASPlanet | https://github.com/sasgis/sas.planet.src.git | 98e31caeaa7c28f49e9e105f2e30ae49a232f5e4 / 2026-08-01 | Y | N (manual, via Update Checker dialog — not found wired to any startup/timer path in this snapshot, see note) | Y (downloads to disk) / N (does not auto-execute the installer) | **HTTP (plaintext) + HTTPS mixed, and the HTTP source can win** | N/A | **none — no hash or signature check on the downloaded file** | N/A (no verification at all) | `Src/UpdateChecker/u_UpdateChecker.pas:99-107` defines 3 sources queried in parallel — GitHub API (HTTPS), BitBucket (HTTPS), and **`http://www.sasgis.org/programs/sasplanet/{nightly,release}.php`** (plaintext HTTP); `Src/UpdateChecker/u_UpdateCheckerThread.pas:113-121` fires `Perform()` on *all* sources simultaneously; `Src/UpdateChecker/u_UpdateCheckerFunc.pas:143-158` `LatestResultFromArray` picks whichever response reports the newest date/revision **regardless of which source it came from** — an on-path attacker against the plaintext `sasgis.org` endpoint can inject a fake \"newer\" release pointing anywhere (including back to `http://...`) and win the race. `Src/UpdateChecker/u_UpdateDownloaderThread.pas:96-165` downloads the chosen URL and writes it straight to disk with **zero hash/signature verification**. `Src/UpdateChecker/frm_UpdateChecker.pas:390-396` (`psFinished`) just shows an info box with the saved file path — it does **not** auto-launch the installer, so full RCE requires the user to double-click the dropped file, but the file itself is fully attacker-controlled under MITM of the plaintext channel with no integrity check. |"
+    }
+  ]
 }

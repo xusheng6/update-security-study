@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/chamilo/chamilo-lms",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: The indexed checkout contains the admin System Update controller; the recorded update implementation requires a manifest SHA-256 and only conditionally attempts Minisign, with no production key configured in this snapshot.",
+  "description": "A real Minisign fail-closed updater, but signature-checking is optional per server manifest and the production signing-key list ships empty in this snapshot → sha256-only.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "ad99fce75537ca0d742ddd028050522df1dd4b90"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: The indexed checkout contains the admin System Update controller; the recorded update implementation requires a manifest SHA-256 and only conditionally attempts Minisign, with no production key configured in this snapshot.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "Minisign (optional; keys empty)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AI6.md",
+      "line": 13,
+      "text": "| Chamilo (core \"System Update\") | https://github.com/chamilo/chamilo-lms.git | ad99fce / 2026-08-22 | Y | N (admin-triggered via `SystemUpdateController` / CLI commands) | Y (`UpdateFileApplier::apply()` copies staged files over live source tree) | https (Symfony `HttpClientInterface`, default cert verification, no `verify_peer:false` found) | Conditional — signature is OPTIONAL per-manifest | **sha256 always checked; Minisign signature checked only IF the manifest's `signature.type` field is present** — a manifest that omits the `signature` block downgrades verification to hash-only. Additionally, `OFFICIAL_MINISIGN_PUBLIC_KEYS` is shipped **empty** (`= []`) in this snapshot, so even when a manifest does request signature verification, no production key is currently pinned (fails closed in that case, but the unsigned/hash-only path remains live) | pinned-in-binary *by design* (Minisign pubkey hardcoded in `UpdateTrustedKeyring`), but the trusted-key list is currently EMPTY for production; only a dev/test key is trusted, gated behind `ENABLE_DEVELOPMENT_UPDATE_TOOLS=false` (disabled) | `src/CoreBundle/Service/Update/UpdateConfiguration.php:13` (manifest source `https://updates.chamilo.org/2.x/stable.json`); `src/CoreBundle/Service/Update/UpdateTrustedKeyring.php:22-23` (`OFFICIAL_MINISIGN_PUBLIC_KEYS = []`); `src/CoreBundle/Service/Update/Dto/UpdateManifest.php:122-125` (`requiresSignature()` returns true only if optional `signature.type` set); `src/CoreBundle/Service/Update/UpdatePackageVerifier.php:62-81` (sha256 always compared; signature branch only `elseif ($manifest->requiresSignature())`, else just a warning); `src/CoreBundle/Service/Update/Signature/MinisignSignatureVerifier.php:22-65` (shells out to `minisign -Vm`); `src/CoreBundle/Service/Update/UpdateStagingManager.php:104` (`$zip->extractTo`); `src/CoreBundle/Service/Update/UpdateFileApplier.php:488` (`copy($operation['source_path'], $operation['target_path'])` — live deployment) |"
+    }
+  ]
 }

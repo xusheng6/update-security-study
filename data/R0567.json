@@ -5,13 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/go-nv/goenv",
   "channel": "package-manager",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "goenv’s go-build helper verifies supplied checksums, including SHA-256 values shipped in versioned Go definitions, and returns failure on mismatch.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "go-build verifies SHA-256 checksums shipped (pinned) in the repo's version definitions, aborts on mismatch.",
   "limitations": [
-    "Source-at-commit evidence only; release signing for toolchain archives is outside this review.",
-    "The claim is limited to checksum enforcement and does not establish a publisher signature.",
-    "Primary classification remains UNRESOLVED under the evidence-review instruction; retained source is commit-scoped and does not establish all released or external framework behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "305606fe4930117b9397dd0862181d0a456447cd"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "goenv’s go-build helper verifies supplied checksums, including SHA-256 values shipped in versioned Go definitions, and returns failure on mismatch.",
+    "limitations": [
+      "Source-at-commit evidence only; release signing for toolchain archives is outside this review.",
+      "The claim is limited to checksum enforcement and does not establish a publisher signature.",
+      "Primary classification remains UNRESOLVED under the evidence-review instruction; retained source is commit-scoped and does not establish all released or external framework behavior."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "SHA-256 pinned in repo",
+  "trust_root": "checksums in versioned definition files",
+  "original_evidence": [
+    {
+      "file": "batch-AK4.md",
+      "line": 13,
+      "text": "| goenv | https://github.com/go-nv/goenv.git | 305606f / 2026-08-20 | Y | N | Y | https (`go.dev/dl`), TLS enforced | N | **hash (SHA256)**, pinned in versioned repo source | pinned-in-repo (git-shipped definition files) | `goenv/plugins/go-build/bin/go-build:408-450` `verify_checksum()`; `:457` `url=\"https://go.dev/dl/${url}\"`; checksum shipped inline in definitions, e.g. `goenv/plugins/go-build/share/go-build/1.22.0:1` `...tar.gz#ebca81df...`; download aborts (`:439-443`) on mismatch. go-build is vendored inside the goenv clone (unlike node-build/ruby-build for nodenv/rbenv), so goenv itself ships install capability. |"
+    }
+  ]
 }

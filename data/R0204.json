@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/caddyserver/caddy",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Caddy exposes explicit commands for updating its executable and package composition through its build service. The reviewed source supports this channel identification; an overall publisher-authentication or vulnerability classification is not established by this review.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "`caddy upgrade`/add-package downloads a fresh binary and overwrites+execs the running exe with no hash/signature.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not historical release re-verification; caddyserver.com service behavior, artifact signing, and any controls outside this command path were not audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "9dd286c5e49e2173406e7b2828820b29262a754c"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Caddy exposes explicit commands for updating its executable and package composition through its build service. The reviewed source supports this channel identification; an overall publisher-authentication or vulnerability classification is not established by this review.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not historical release re-verification; caddyserver.com service behavior, artifact signing, and any controls outside this command path were not audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validated)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-M8.md",
+      "line": 8,
+      "text": "| caddy | github.com/caddyserver/caddy | Go | Y | manual (user runs `caddy upgrade`/`add-package`/`remove-package`; EXPERIMENTAL) | Y | https, default Go TLS validation (no InsecureSkipVerify on this path; repo-wide InsecureSkipVerify hits are all in unrelated reverse-proxy/TLS-pool modules, not the upgrade code) | N (no manifest at all) | none — binary is written straight to disk with no hash or signature check | n/a (none used) | `cmd/packagesfuncs.go` — `cmdUpgrade`/`cmdAddPackage`/`cmdRemovePackage` all call `upgradeBuild()`, which does `http.Get(downloadPath+\"?\"+qs)` (`downloadPath = \"https://caddyserver.com/api/download\"`, line ~330) then `writeCaddyBinary()` (io.Copy straight from response body to the executable path, no checksum/signature check anywhere in the file) then immediately `exec.Command(path, \"list-modules\", ...)` / `exec.Command(path, \"version\")` to run the freshly-downloaded binary. Registered in `cmd/commands.go:407-417` as \"Upgrade Caddy (EXPERIMENTAL)\". Confirmed via grep: no `sha256`/`checksum`/`signature` string anywhere in `cmd/*.go`. |"
+    }
+  ]
 }

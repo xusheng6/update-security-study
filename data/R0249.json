@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/cupcakearmy/autorestic",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "autorestic provides a release-based upgrade command for its own executable. The inspected implementation supports that channel identification; the full artifact-authentication policy and the separate restic update dependency remain unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "`upgrade` overwrites own binary + triggers restic self-update, zero checksum/sig.",
   "limitations": [
-    "New default-branch snapshot rather than the original study release; restic's delegated self-update and release-side integrity controls were not assessed, and no exploitability conclusion is made."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "496a8cc3afbbf25d8b019eae91d6bc0dce82591e"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "autorestic provides a release-based upgrade command for its own executable. The inspected implementation supports that channel identification; the full artifact-authentication policy and the separate restic update dependency remain unresolved.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study release; restic's delegated self-update and release-side integrity controls were not assessed, and no exploitability conclusion is made."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "self-update",
+  "transport": "https (plain http.Get)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-P5.md",
+      "line": 8,
+      "text": "| **autorestic** (github.com/cupcakearmy/autorestic) | Y | N (manual `autorestic upgrade` CLI command only; not run automatically at startup) | Y (downloads a `.bz2` archive from the latest GitHub release and overwrites its own binary at `/usr/local/bin`, and also can drive `restic self-update`) | https in practice (URLs come from `api.github.com` and GitHub `browser_download_url`), but code uses plain Go `http.Get` with **no explicit scheme enforcement, no TLS pinning, and no cert-verification hardening** | N (no manifest, no signature file of any kind is fetched — only raw GitHub Releases JSON) | **none** — archive is decompressed and installed with zero checksum or signature check | n/a (no key exists in this flow) | `autorestic/internal/bins/bins.go:34` (`http.Get` for JSON), `:60-116` (`downloadAndInstallAsset` — bzip2 decompress → `os.Rename` straight into install path, no hash check anywhere), `:125` (restic release URL), `:156` (autorestic release URL); CLI wiring: `autorestic/cmd/upgrade.go:8-21` |"
+    }
+  ]
 }

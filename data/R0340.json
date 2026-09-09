@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/superfly/flyctl",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "flyctl delegates self-update to curl|sh, iwr|iex, or brew; installer verification is outside this checkout.",
+  "description": "Auto-updates by shelling out to `curl https://fly.io/install.sh | sh` — zero in-repo payload verification.",
   "limitations": [
-    "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "10c9d5335a588f611964931259163c705e528200"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "flyctl delegates self-update to curl|sh, iwr|iex, or brew; installer verification is outside this checkout.",
+    "limitations": [
+      "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none (external script)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-W7.md",
+      "line": 17,
+      "text": "| flyctl | https://github.com/superfly/flyctl | 0eb5a81 / 2026-08-20 | Y | Y (default `cfg.AutoUpdate=true`) | Y | https, TLS validation enforced (default `http.DefaultClient`, no `InsecureSkipVerify`/custom `tls.Config` found) | no | none in-repo — auto-update shells out to `curl -L https://fly.io/install.sh \\| sh` (or `iwr ... \\| iex` on Windows, or `brew upgrade`); the actual verification (if any) happens inside that external install script, which lives outside this repo and was not audited | N/A (delegated to external, unaudited install script) | `internal/command/command.go:372-449` (`promptAndAutoUpdate` runs before every command, auto-updates when `cfg.AutoUpdate` and severely out of date); `internal/config/config.go:192` (`AutoUpdate` defaults to `true`); `internal/update/update.go:247-267` (`upgradeCommand`/`UpgradeInPlace` build and exec `curl\\|sh`, `iwr\\|iex`, or `brew upgrade`); `internal/update/update.go:99,142,168` (plain `http.DefaultClient`, no checksum/signature check anywhere in `internal/update/update.go`) |"
+    }
+  ]
 }

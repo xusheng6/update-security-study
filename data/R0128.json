@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/mikf/gallery-dl",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "gallery-dl provides a GitHub-release-based self-update channel. The reviewed implementation supports that channel identification; independent publisher authentication and an overall vulnerability classification remain unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "-U self-replaces with no hash/signature.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; release behavior may differ.",
-    "This is limited to the reviewed self-update path.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; release behavior may differ.; This is limited to the reviewed self-update path."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "2adf2a8e0041ec55afdcc2211fd5c7ca239a9352"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "gallery-dl provides a GitHub-release-based self-update channel. The reviewed implementation supports that channel identification; independent publisher authentication and an overall vulnerability classification remain unresolved.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; release behavior may differ.",
+      "This is limited to the reviewed self-update path.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; release behavior may differ.; This is limited to the reviewed self-update path."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "self-update",
+  "transport": "https (validated)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-I5.md",
+      "line": 8,
+      "text": "| gallery-dl | github.com/mikf/gallery-dl | Python CLI | Y | manual trigger (`-U`/`--update`/`--update-check`); dl+replace automatic once invoked | Y (overwrites `sys.executable` in place) | https (api.github.com, github.com); TLS enforced (default, no verify=False found) | N/A (no manifest beyond GitHub release JSON) | **none** — no checksum/signature check anywhere in update path (confirmed by negative grep for sha256/checksum/gpg/signature in update.py and downloader/) | N/A | gallery_dl/update.py:44-117 (`UpdateJob.handle_url` downloads asset and `os.replace`s executable, no hash check present), :212-213 (https download URL build) |"
+    }
+  ]
 }

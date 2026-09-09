@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/zidoro/pomatez",
   "channel": "mixed",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Pomatez contains separate Electron and Tauri updater integrations. The Electron helper imports electron-updater and checks for updates, while the Tauri release configuration contains a base64-encoded updater public key and release-preparation code handles signature metadata. This source review does not establish the claimed per-platform shipped-leg tiering or effective runtime enforcement.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Tauri leg A (pinned pubkey), macOS Electron B (notarized), Windows Electron C (unsigned, hash-only) — scored by weakest shipped leg.",
   "limitations": [
-    "The retained snapshot does not establish current shipped artifacts or generated platform bundles.",
-    "Framework enforcement and platform-specific notarization/signing outcomes remain unresolved.",
-    "The retained snapshot does not establish current shipped artifacts or generated platform bundles. Framework enforcement and platform-specific notarization/signing outcomes remain unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,36 @@
       "commit": "c2727800c6272573590911e9ee81637b89e55d5f"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Pomatez contains separate Electron and Tauri updater integrations. The Electron helper imports electron-updater and checks for updates, while the Tauri release configuration contains a base64-encoded updater public key and release-preparation code handles signature metadata. This source review does not establish the claimed per-platform shipped-leg tiering or effective runtime enforcement.",
+    "limitations": [
+      "The retained snapshot does not establish current shipped artifacts or generated platform bundles.",
+      "Framework enforcement and platform-specific notarization/signing outcomes remain unresolved.",
+      "The retained snapshot does not establish current shipped artifacts or generated platform bundles. Framework enforcement and platform-specific notarization/signing outcomes remain unresolved."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "varies by build",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AN4.md",
+      "line": 14,
+      "text": "| Pomatez — **Electron build** | https://github.com/zidoro/pomatez | c272780 / 2026-05-19 | Y | Y (`autoUpdater.checkForUpdates()` fires unconditionally at startup) | Y | https (electron-updater, GitHub Releases provider), TLS enforced, no disabling found | latest.yml (electron-builder default: sha512 hash manifest, not detached-signed) | **Windows: hash only** (sha512 in latest.yml); **macOS: OS code-signing + notarization** | Windows: server-supplied/unpinned (latest.yml hosted on same GH release as payload); macOS: OS keystore (Apple Developer ID cert + notarization, Gatekeeper-enforced) | app/electron/src/helpers/autoUpdater.ts:1-41 (`import {autoUpdater} from \"electron-updater\"`; `autoUpdater.checkForUpdates()`); app/electron/src/main.ts:373-397; app/electron/package.json:12 (`\"repository\": \"https://github.com/zidoro/pomatez\"` → auto GH provider), :50-81 (mac/win/linux targets, **no Windows codesign config**); .github/workflows/build.yml:49-69 (`CSC_LINK`/`CSC_KEY_PASSWORD`/Apple notarization keys supplied **only** for the macOS matrix leg — the `windows-latest` build leg has no `WIN_CSC_LINK` equivalent, so Windows artifacts ship unsigned); electron-builder/afterSign.js (mac-only `@electron/notarize` call, `electronPlatformName !== \"darwin\"` → skip) |"
+    },
+    {
+      "file": "batch-AN4.md",
+      "line": 15,
+      "text": "| Pomatez — **Tauri build** (parallel migration path, same repo) | https://github.com/zidoro/pomatez | c272780 / 2026-05-19 | Y | Y (`check_for_updates` tauri command invoked from frontend) | Y | https (api.github.com release lookup, then GitHub Releases asset download) | Y (`tauri-updater.json` release asset, signed) | signature (Ed25519/minisign via `tauri-plugin-updater`) | **pinned-in-binary** (pubkey shipped in `release.conf.json`, merged into compiled config for release builds) | app/tauri/release.conf.json:2-4 (`\"pubkey\": \"dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6...\"`); app/tauri/src/updater.rs:1-95 (fetches `https://api.github.com/repos/zidoro/pomatez/releases/latest`, finds `tauri-updater.json` asset, builds updater with pinned pubkey, `update.download_and_install(...)`); .github/workflows/build-tauri.yml:110-112 (`TAURI_SIGNING_PRIVATE_KEY`) |"
+    }
+  ]
 }

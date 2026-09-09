@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Flow-Launcher/Flow.Launcher",
   "channel": "mixed",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Flow Launcher delegates primary updates to Squirrel and has a separate plugin update channel. The reviewed application wrapper does not establish the dependency’s complete integrity policy, so the asserted verification classification remains unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Squirrel.Windows silent auto-apply; hash-from-manifest; plugin channel no verify.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not historical release re-verification; Squirrel's internal verification and release artifact properties were not audited, and no network or exploitability testing was performed."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,34 @@
       "commit": "50a86b3777db57f5e1151d54eefe3a394e44de31"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Flow Launcher delegates primary updates to Squirrel and has a separate plugin update channel. The reviewed application wrapper does not establish the dependency’s complete integrity policy, so the asserted verification classification remains unresolved.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not historical release re-verification; Squirrel's internal verification and release artifact properties were not audited, and no network or exploitability testing was performed."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "hash (Squirrel)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-L2.md",
+      "line": 15,
+      "text": "| Flow Launcher (app update) | github.com/Flow-Launcher/Flow.Launcher | .NET/WPF, Squirrel.Windows | Y | chk auto every 5h (`AutoUpdates` setting) silently; dl+**apply(inst-to-disk) auto** in silent mode; only the final **restart-to-run-new-version is a Yes/No user prompt** | Y | https (`api.github.com/repos/.../releases` for release list; package/RELEASES files fetched by Squirrel from the GitHub release asset URL) | N (no separate signature on Squirrel's `RELEASES` manifest visible in this repo) | hash-from-manifest — delegated to the Squirrel.Windows library (SHA1/SHA256 checksums in the `RELEASES` file); this repo does not itself implement or re-verify the check, it calls `updateManager.CheckForUpdate()/DownloadReleases()/ApplyReleases()` | N/A from this repo's code (verification logic lives inside the external Squirrel.Windows NuGet package, not vendored here) | Flow.Launcher.Core/Updater.cs:17 (`using Squirrel;`); Updater.cs:38-45 (`UpdateAppAsync(bool silentUpdate = true)`); Updater.cs:69-71 (`DownloadReleases` then `ApplyReleases` run unconditionally); Updater.cs:88-92 (restart only after `ShowMsgBox(...,MessageBoxButton.YesNo)==Yes`); Updater.cs:131-146 (`GitHubUpdateManagerAsync`: `https://api.github.com/repos{path}/releases`, builds `UpdateManager(latestUrl,...)`); Flow.Launcher/App.xaml.cs:308-323 (`AutoUpdates()`: `PeriodicTimer(TimeSpan.FromHours(5))`, calls `UpdateAppAsync()` with default `silentUpdate=true` on timer and at startup) |"
+    },
+    {
+      "file": "batch-L2.md",
+      "line": 16,
+      "text": "| Flow Launcher (plugin channel) | github.com/Flow-Launcher/Flow.Launcher | plugin store manifest + zip download | Y | chk auto every 5h; **dl+inst require a user dialog click** (`PluginUpdateWindow.ShowDialog()==true`) | Y — zip downloaded and installed via `InstallPlugin`, executed in-process with full plugin API access | https/http via `HttpDownloadAsync` (no scheme enforcement found) | N | **none found** — no Hash/Sha/Checksum/Signature/Verify identifiers anywhere in `PluginInstaller.cs` or `PluginsManager.cs` | N/A | Flow.Launcher/App.xaml.cs:326-357 (`AutoPluginUpdates`: 5h `PeriodicTimer`, `CheckForPluginUpdatesAsync`, then `PluginUpdateWindow.ShowDialog()` gates the actual update); Flow.Launcher.Core/Plugin/PluginInstaller.cs:448-459 (`PublicApi.Instance.HttpDownloadAsync(downloadUrl, filePath, ...)`); negative grep for `Hash|Sha|Checksum|Signature|Verify` in PluginInstaller.cs and PluginsManager.cs returned no hits |"
+    }
+  ]
 }

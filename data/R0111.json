@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/nomacs/nomacs",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "nomacs downloads the installer and writes it without a cryptographic payload check.",
+  "description": "Silent check → downloads .msi → auto-launches via openUrl, no hash/sig (has an unused HashCode field).",
   "limitations": [
-    "Newly retrieved/recovered source snapshot; this is not historical source re-verification. Released artifact behavior and external framework enforcement remain unverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "8e3b16ff957c6d569c83f3bab0edee7e5154fb24"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "nomacs downloads the installer and writes it without a cryptographic payload check.",
+    "limitations": [
+      "Newly retrieved/recovered source snapshot; this is not historical source re-verification. Released artifact behavior and external framework enforcement remain unverified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (nomacs.org)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-H3.md",
+      "line": 11,
+      "text": "| nomacs | https://github.com/nomacs/nomacs | C++/Qt | Y | chk automatic (default on, Windows/Mac builds only — disabled on Linux) → notify/confirm dialog → dl+install on user confirmation | Y | https (`nomacs.org`); TLS enforced (no `ignoreSslErrors`/`sslErrors` found in repo) | N (plain-text manifest, unsigned) | none | n/a | `ImageLounge/src/DkCore/DkUpdater.cpp:166-172` GETs plaintext `https://nomacs.org/version/version_win_stable` (e.g. `version_mac_stable`/`version_linux`), unsigned; `:271-284` `startDownload()` fetches the `.msi`/setup via `QNetworkAccessManager`; `:286-328` `downloadFinishedSlot()` writes it to a temp file with **no hash or signature check**; `ImageLounge/src/DkGui/DkNoMacs.cpp:1960-1971` `startSetup()` calls `QDesktopServices::openUrl(QUrl::fromLocalFile(filePath))`, which launches the OS handler (Windows Installer) on the downloaded file automatically once the user has accepted the update-available dialog; `DkNoMacs.cpp:1865-1875` auto-checks silently on startup (`sync_p.checkForUpdates = !isPortable()`, default true), `#ifndef Q_OS_LINUX` gate. |"
+    }
+  ]
 }

@@ -5,12 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/ytdl-org/youtube-dl",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "The retained source shows a configured trust root and update invocation consistent with the recorded narrow A classification.",
+  "description": "RSA-2048 signature (pinned key) verifies versions.json; SHA-256 of the downloaded binary checked vs the signed JSON before self-overwrite. Manual -U.",
   "limitations": [
-    "This is a recovered snapshot rather than the original study checkout; release/build behavior and historical version may differ.",
-    "The manual self-update path is the inspected channel; other packaging/distribution paths were not audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "956b8c585591b401a543e409accb163eeaaa1193"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained source shows a configured trust root and update invocation consistent with the recorded narrow A classification.",
+    "limitations": [
+      "This is a recovered snapshot rather than the original study checkout; release/build behavior and historical version may differ.",
+      "The manual self-update path is the inspected channel; other packaging/distribution paths were not audited."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "RSA-2048 signature + SHA-256",
+  "trust_root": "key hardcoded in update.py",
+  "original_evidence": [
+    {
+      "file": "batch-AC1.md",
+      "line": 14,
+      "text": "| youtube-dl | https://github.com/ytdl-org/youtube-dl.git | 956b8c5 / 2025-11-26 | Y | N (manual `-U`/`--update` flag only) | Y (overwrites running exe/zip, self-replaces) | https, enforced by default (nocheckcertificate=False unless user passes `--no-check-certificate`) | Y | signature (RSA-2048 over `versions.json`) **and** SHA-256 hash of the actual downloaded binary checked against the hash embedded in that signed JSON | pinned-in-binary (`UPDATES_RSA_KEY` hardcoded modulus/exponent literal) | youtube_dl/update.py:20-31 `rsa_verify()`; :40 `UPDATES_RSA_KEY` pinned; :59-74 fetch+verify `versions.json` signature; :116-119 & :162-165 SHA-256 hash check of downloaded binary before write; youtube_dl/__init__.py:448-449 gated on `opts.update_self` |"
+    }
+  ]
 }

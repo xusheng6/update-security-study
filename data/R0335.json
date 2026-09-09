@@ -5,14 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/gitextensions/gitextensions",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Git Extensions includes a Windows application-update workflow. The retained evidence does not establish the full artifact-authentication policy or original impact classification.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Downloads .msi over HTTPS via WebClient then runs msiexec with no hash/signature.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the historical study checkout.",
-    "The source path does not prove that every release URL is HTTPS or that external Windows Installer policy is absent.",
-    "No released MSI, publisher signature record, or independent artifact provenance was inspected.",
-    "This is a newly retrieved default-branch snapshot, not the historical study checkout. The source path does not prove that every release URL is HTTPS or that external Windows Installer policy is absent. No released MSI, publisher signature record, or independent artifact provenance was inspected."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "c788b14e70168a67e136ca80b078092673538235"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Git Extensions includes a Windows application-update workflow. The retained evidence does not establish the full artifact-authentication policy or original impact classification.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the historical study checkout.",
+      "The source path does not prove that every release URL is HTTPS or that external Windows Installer policy is absent.",
+      "No released MSI, publisher signature record, or independent artifact provenance was inspected.",
+      "This is a newly retrieved default-branch snapshot, not the historical study checkout. The source path does not prove that every release URL is HTTPS or that external Windows Installer policy is absent. No released MSI, publisher signature record, or independent artifact provenance was inspected."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-W4.md",
+      "line": 16,
+      "text": "| Git Extensions | https://github.com/gitextensions/gitextensions.git | 6e50c9c3f0 / 2026-08-20 | Y | N (manual \"Update Now\") | Y | https (GitHub API + release asset URL) | unknown/not checked in-app | **none** — downloaded `.msi` is executed with no hash/signature check | n/a | src/app/GitUI/CommandsDialogs/BrowseDialog/FormUpdates.cs:69-144 (`SearchForUpdates` via GitHub API `Client github`), :254-294 (`btnUpdateNow_Click` → `WebClient.DownloadFileTaskAsync` → `msiexec.exe /i ... ` with **no verification step** between download and execution) |"
+    }
+  ]
 }

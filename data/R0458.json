@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/AdguardTeam/AdGuardHome",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The updater polls version information, downloads the package into an update directory, and replaces the current executable with the downloaded one. VersionInfo contains no digest or signature field, and downloadPackageFile writes the response body directly; the source therefore supports the recorded narrow unauthenticated package-update behavior.",
+  "description": "'Update now' downloads+installs a new binary; version-check JSON has no hash/signature field — zero payload verification.",
   "limitations": [
-    "The inspected source snapshot does not establish release artifact provenance beyond transport defaults.",
-    "Snapshot is a newly retrieved default branch, not the historical study revision."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "47137edc21147713fe44c15f765b16cf66049aad"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The updater polls version information, downloads the package into an update directory, and replaces the current executable with the downloaded one. VersionInfo contains no digest or signature field, and downloadPackageFile writes the response body directly; the source therefore supports the recorded narrow unauthenticated package-update behavior.",
+    "limitations": [
+      "The inspected source snapshot does not establish release artifact provenance beyond transport defaults.",
+      "Snapshot is a newly retrieved default branch, not the historical study revision."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AD3.md",
+      "line": 7,
+      "text": "| AdGuard Home | https://github.com/AdguardTeam/AdGuardHome.git | 5c113ec4c565a8911f4531b3701a9013e066c433 (2026-08-19) | Y | N (user clicks \"Update now\"; version-check poll is automatic every 8h) | Y | https, TLS validation enforced (default `http.Client`, no `InsecureSkipVerify` outside test files) | N | none — no hash, no signature field anywhere in `version.json` schema | none | `internal/updater/check.go:24-35` (VersionInfo struct has no hash/sig field); `internal/updater/updater.go:398-434` (`downloadPackageFile` writes body straight to disk, no checksum check); `internal/updater/updater.go:347-382` (`replace` renames downloaded exe straight over the running binary) |"
+    }
+  ]
 }

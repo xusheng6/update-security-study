@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/agalwood/Motrix",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Retained source supports the recorded narrow C primary-app classification and separately documents a stronger signed builtin-plugin channel. Primary app update interaction is user-mediated and release verification relies on electron-updater/build configuration outside the inspected application code; builtin plugin hot updates use a pinned Ed25519 key.",
+  "description": "electron-updater with no verifyUpdateCodeSignature override; TLS-only manifest.",
   "limitations": [
-    "The checkout does not prove release-time OS code-signing certificates or artifact signatures.",
-    "The plugin signature path is a separate channel and does not upgrade the primary app tier."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "804891be4dff10a6242d5fa86a83cd2fa4fa048f"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Retained source supports the recorded narrow C primary-app classification and separately documents a stronger signed builtin-plugin channel. Primary app update interaction is user-mediated and release verification relies on electron-updater/build configuration outside the inspected application code; builtin plugin hot updates use a pinned Ed25519 key.",
+    "limitations": [
+      "The checkout does not prove release-time OS code-signing certificates or artifact signatures.",
+      "The plugin signature path is a separate channel and does not upgrade the primary app tier."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (generic)",
+  "payload_verification": "hash-from-manifest",
+  "trust_root": "server-TLS",
+  "original_evidence": [
+    {
+      "file": "batch-AN3.md",
+      "line": 16,
+      "text": "| Motrix | https://github.com/agalwood/Motrix.git | 804891be 2026-08-24 | Y | N (autoDownload/autoInstallOnAppQuit forced false; user must click download+install) | Y | https | Y (electron-updater manifest + code signing) | code-signing (electron-updater standard flow; mac target requires valid signature/hardenedRuntime for Squirrel.Mac to apply update) | OS keystore/Authenticode+notarization | `src/main/core/update-manager.ts:73-74` (`autoDownload=false`, `autoInstallOnAppQuit=false`); `electron-builder.json:236-239` `publish: {provider: \"generic\", url: \"https://dl.motrix.app/releases/\"}`; `.github/workflows/release.yml` has separate `windows-release-signing`/`macos-release-signing` jobs. **Content-as-code side channel (A-tier, notably good)**: builtin-plugin \"hot updates\" are Ed25519-signature-verified against a key pinned in source: `src/core/plugin/update/signature.ts:9-28` (`verify(null, bytes, createPublicKey(pem), sig)`) against `src/shared/builtin-signing.ts:5-10` (`BUILTIN_SIGNING_PUBKEYS`, hard-coded PEM, comment: \"NEVER runtime-configurable\") |"
+    }
+  ]
 }

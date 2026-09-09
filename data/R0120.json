@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/Nheko-Reborn/nheko",
   "channel": "mixed",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Nheko's Windows App Installer manifest references the MSIX and requests on-launch update checks every 168 hours with a prompt; directly installed MSIX packages do not check. The AppImage recipe has no update-information value, so this review finds no AppImage self-updater. Windows signing is performed in CI with the configured certificate thumbprint.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "Windows App Installer verifies MSIX Authenticode; Linux AppImage has no updater.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; the source supports the documented platform split but not every historical release.",
-    "The classification is mixed across Windows installer channels and Linux AppImage, so no single primary tier is proposed.",
-    "Newly retrieved default-branch snapshot, not the original study checkout; the source supports the documented platform split but not every historical release.; The classification is mixed across Windows installer channels and Linux AppImage, so no single primary tier is proposed."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "f023a602d0eb3ac11c836e7c91afcca01ce26bb6"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Nheko's Windows App Installer manifest references the MSIX and requests on-launch update checks every 168 hours with a prompt; directly installed MSIX packages do not check. The AppImage recipe has no update-information value, so this review finds no AppImage self-updater. Windows signing is performed in CI with the configured certificate thumbprint.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; the source supports the documented platform split but not every historical release.",
+      "The classification is mixed across Windows installer channels and Linux AppImage, so no single primary tier is proposed.",
+      "Newly retrieved default-branch snapshot, not the original study checkout; the source supports the documented platform split but not every historical release.; The classification is mixed across Windows installer channels and Linux AppImage, so no single primary tier is proposed."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes (Win MSIX)",
+  "transport": "https",
+  "payload_verification": "OS-code-signing (MSIX Authenticode)",
+  "trust_root": "OS-trust-store",
+  "original_evidence": []
 }

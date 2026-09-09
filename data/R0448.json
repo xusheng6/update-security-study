@@ -5,14 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/batocera-linux/batocera-emulationstation",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Batocera EmulationStation has platform-specific updater components and a shared networking helper. The retained evidence does not establish the original cross-platform script provenance or full payload-authentication policy.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "HTTPS-enforced but fetches and directly executes an unsigned batocera-upgrade shell script from GitHub-raw.",
   "limitations": [
-    "The external es-update script and Batocera Linux packaging are outside this repository.",
-    "The snapshot is newly retrieved and is not the historical study revision.",
-    "No released artifact was tested and no exploitability claim is made.",
-    "The external es-update script and Batocera Linux packaging are outside this repository. The snapshot is newly retrieved and is not the historical study revision. No released artifact was tested and no exploitability claim is made."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "d3a72a65c10079a327d90651c9e884d0ae816461"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Batocera EmulationStation has platform-specific updater components and a shared networking helper. The retained evidence does not establish the original cross-platform script provenance or full payload-authentication policy.",
+    "limitations": [
+      "The external es-update script and Batocera Linux packaging are outside this repository.",
+      "The snapshot is newly retrieved and is not the historical study revision.",
+      "No released artifact was tested and no exploitability claim is made.",
+      "The external es-update script and Batocera Linux packaging are outside this repository. The snapshot is newly retrieved and is not the historical study revision. No released artifact was tested and no exploitability claim is made."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AC8.md",
+      "line": 22,
+      "text": "| Batocera EmulationStation (batocera-linux fork) | https://github.com/batocera-linux/batocera-emulationstation.git | f839490 / 2026-08-19 | Y | N (menu \"START UPDATE\", user-initiated) | Y | https, TLS enforced (curl, no `-k`/`--insecure`) | N | **none** | n/a | `es-app/src/ApiSystem.cpp:251-263`: `updateSystem()` runs `curl --connect-timeout 10 -m 30 -L -f -s -o /tmp/batocera-upgrade https://github.com/batocera-linux/batocera.linux/raw/refs/heads/master/package/batocera/core/batocera-scripts/scripts/batocera-upgrade && chmod +x /tmp/batocera-upgrade`, then (`:277`) `popen(upgradeScriptPath + \" --upgrade\")` — the fetched shell script is executed with **zero hash or signature check** before being chmod+x'd and run. `es-app/src/guis/GuiUpdate.cpp` wires this to the \"START UPDATE\" menu action in `GuiMenu.cpp:1225`. Whatever the downloaded `batocera-upgrade` script itself later verifies (out of scope of this repo) is irrelevant — GitHub/CDN compromise of that one raw file = RCE |"
+    }
+  ]
 }

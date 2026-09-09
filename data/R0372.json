@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/akaunting/akaunting",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "D",
-  "description": "The core self-update uses the shared Guzzle client with certificate validation disabled, downloads the core archive, and extracts it. No independent payload signature/hash check is present in this path.",
+  "description": "Core self-updater's HTTP client hardcodes verify=>false (SiteApi.php:18), disabling TLS validation for the endpoint serving the update zip, with no payload sig/hash. MITM-to-RCE on an accounting app. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "dfc1171cf1e3749b2763cb0ade9f997c434e8f0e"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The core self-update uses the shared Guzzle client with certificate validation disabled, downloads the core archive, and extracts it. No independent payload signature/hash check is present in this path.",
+    "limitations": [
+      "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "D",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validation off)",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-X2.md",
+      "line": 20,
+      "text": "| **Akaunting** | https://github.com/akaunting/akaunting.git | 24258529e0f7c4394ae3cd9d82c82d4ed309c6ef / 2026-08-20 | Y | N (admin-triggered from Settings > Updates) | Y (downloads a zip and extracts it over the live install, then runs `update:finish` artisan command) | **https URL, but TLS certificate validation explicitly DISABLED in code** (`'verify' => false`) | N | none (only ZipSlip/path-traversal filename filtering in `UnzipFile.php`; no hash or signature check of the zip contents) | none / server-supplied-unpinned | **`app/Traits/SiteApi.php:18`**: `$client = new Client(['verify' => false, 'base_uri' => static::$base_uri]);` where `base_uri = 'https://api.akaunting.com/'` (line 14); this exact client is used by `app/Jobs/Install/DownloadFile.php:35-45` (`getUrl()` builds `core/download/{version}/{php}/{mysql}` for the `alias == 'core'` case, i.e. the **app's own self-update**, not just marketplace modules) to fetch the update zip, which is then extracted by `app/Jobs/Install/UnzipFile.php:43-70` |"
+    }
+  ]
 }

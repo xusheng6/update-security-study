@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/lumeland/lume",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Lume's `upgrade` CLI command delegates to the imported upgrade implementation for the current project and awaits it. The reviewed command file does not itself establish the remote CDN, module execution, or signature/checksum behavior of that delegated implementation.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "`lume upgrade` does Deno import() of remote TypeScript from a CDN — downloads+executes, no sig/checksum.",
   "limitations": [
-    "New default-branch snapshot rather than historical release re-verification; the imported upgrade implementation, CDN transport, and any signature/checksum behavior were not independently connected to this command body."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "7d5c3f01192a02749be58a36fc569fc44dd398e5"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Lume's `upgrade` CLI command delegates to the imported upgrade implementation for the current project and awaits it. The reviewed command file does not itself establish the remote CDN, module execution, or signature/checksum behavior of that delegated implementation.",
+    "limitations": [
+      "New default-branch snapshot rather than historical release re-verification; the imported upgrade implementation, CDN transport, and any signature/checksum behavior were not independently connected to this command body."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "self-update",
+  "transport": "https (jsdelivr)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-N5.md",
+      "line": 10,
+      "text": "| Lume | lumeland/lume | Deno static site generator (CLI) | Y | N (explicit `lume upgrade` command only) | Y | https (`fetch()`/dynamic `import()` over HTTPS to jsdelivr, standard TLS only — no extra validation) | N — no signed manifest of any kind | none (no hash pinning, no signature check, no checksum comparison; relies solely on HTTPS/TLS transport to the CDN) | N/A (no verifying key exists) | `cli/upgrade.ts:1-6` imports `upgrade` from `../deps/init.ts` and calls it when the user runs `lume upgrade` (registered as a CLI subcommand in `cli.ts:4-18,109`). `deps/init.ts:1-11`: `fetch(\"https://data.jsdelivr.com/v1/package/gh/lumeland/init\")` retrieves the version list, picks `data.versions.shift()` (i.e., trusts the first entry returned by the CDN's JSON API with no signature/hash check), then does `await import(\\`https://cdn.jsdelivr.net/gh/lumeland/init@${version}/mod.ts\\`)` and `await import(\\`https://cdn.jsdelivr.net/gh/lumeland/init@${version}/upgrade.ts\\`)` — Deno's dynamic `import()` of a remote URL both downloads and executes that TypeScript/JS module directly, with only HTTPS/TLS as the integrity mechanism (no code signing, no checksum manifest). This is a real download-and-execute path, but it only fires on the explicit, user-invoked `lume upgrade` command — not automatically on every run. |"
+    }
+  ]
 }

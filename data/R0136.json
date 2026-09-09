@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/itchio/butler",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "butler uses wharf signature files containing per-block weak and strong hashes to validate content for patch operations; this review does not establish a publisher-authentication signature or coverage of every retrieval path.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Per-block wharf hashes for content; no signature.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "cfc3b130d9660519bf3a87678b5f8bc75fef8112"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "butler uses wharf signature files containing per-block weak and strong hashes to validate content for patch operations; this review does not establish a publisher-authentication signature or coverage of every retrieval path.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validated)",
+  "payload_verification": "hash (wharf SHA1/256)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-I2.md",
+      "line": 12,
+      "text": "| butler (itch.io CLI/patcher) | github.com/itchio/butler | Go | Y (self, via `cmd/operate/upgrade.go` using itch.io API); also drives **game** downloads/patches for the itch app | game-install path: auto (invoked by itch app / `butlerd`) | Y — downloads and applies game build patches, executing the resulting game binaries when launched | HTTPS (`https://api.itch.io`); no `InsecureSkipVerify` found in source | N/A (wharf patch/signature files are itch.io-API-delivered alongside the patch, not independently signed with a separate PKI) | **hash-from-manifest**, but stronger than typical: the \"wharf\" protocol (`cmd/verify/verify.go`, `cmd/apply/apply.go`, `cmd/diff/diff.go`) verifies every applied block/file against per-block SHA-1/SHA-256 hashes embedded in a `.sig` \"signature\" file fetched over HTTPS from itch.io's API before/while applying patches | N/A (hashes come from itch.io's own API response, not a separate cryptographic key) | `cmd/verify/verify.go:1-60` (\"Use a signature to verify the integrity of a directory\"); `cmd/apply/apply.go`, `cmd/operate/upgrade.go:1-40` (wharf `pwr` patcher); `mansion/context_test.go:16` (`https://api.itch.io`); no `InsecureSkipVerify` hits |"
+    }
+  ]
 }

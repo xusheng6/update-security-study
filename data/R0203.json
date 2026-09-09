@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/hedgewars/hw",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In the retrieved Hedgewars checkout, the macOS Sparkle bundle configuration uses the HTTPS Hedgewars appcast and names the bundled dsa_pub.pem as SUPublicDSAKeyFile. The Qt front end invokes the macOS Sparkle checker only when its auto-update preference is enabled. Other platform packaging and Sparkle framework enforcement remain outside this review.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "macOS Sparkle DSA-signed vs bundled dsa_pub.pem (no Win/Linux updater).",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not historical release re-verification; released artifacts, framework enforcement, and complete Windows/Linux packaging paths were not independently audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "85685825d924cf08b2becfdac61bccbaf4dbd9dd"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In the retrieved Hedgewars checkout, the macOS Sparkle bundle configuration uses the HTTPS Hedgewars appcast and names the bundled dsa_pub.pem as SUPublicDSAKeyFile. The Qt front end invokes the macOS Sparkle checker only when its auto-update preference is enabled. Other platform packaging and Sparkle framework enforcement remain outside this review.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not historical release re-verification; released artifacts, framework enforcement, and complete Windows/Linux packaging paths were not independently audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes (mac)",
+  "transport": "https",
+  "payload_verification": "signature[Sparkle-DSA]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-M7.md",
+      "line": 11,
+      "text": "| Hedgewars | https://github.com/hedgewars/hw (GitHub mirror of canonical https://hg.hedgewars.org/hedgewars/) | Sparkle (macOS only) | Y on macOS only (`AutoUpdater`/`SparkleAutoUpdater` wraps Apple's Sparkle framework); no Windows/Linux self-updater found in source (no WinSparkle or equivalent present) | Partial — `checkForUpdatesInBackground` runs silently on startup, but Sparkle's stock UI still prompts the user to confirm install (not silent auto-install) | Y (Sparkle downloads and installs the update package once user accepts prompt) | https (`SUFeedURL` = `https://www.hedgewars.org/download/appcast.xml`) | Y — Sparkle DSA-signed appcast/enclosure scheme configured | Y (Sparkle framework verifies the downloaded update's DSA signature against the bundled public key before allowing install — standard Sparkle behavior; verification code itself lives in the (out-of-repo) Sparkle.framework, not in this repo) | Bundled public key file `share/dsa_pub.pem`, referenced via `SUPublicDSAKeyFile` | frontend-qt6/hwform.cpp:202 (`updater->checkForUpdates();`); frontend-qt6/util/platform/SparkleAutoUpdater.mm:32-54 (`[SUUpdater sharedUpdater]`, `checkForUpdatesInBackground`, `checkForUpdates:NULL`); share/Info.plist.in:50-53 (`SUPublicDSAKeyFile` → `dsa_pub.pem`, `SUFeedURL` → `https://www.hedgewars.org/download/appcast.xml`); share/dsa_pub.pem (key file present in repo) |"
+    }
+  ]
 }

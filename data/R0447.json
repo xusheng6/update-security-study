@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/SteamGridDB/steam-rom-manager",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The Electron main process configures electron-updater, disables automatic download, checks for updates after the window is ready, and only downloads/installs through explicit IPC actions. This supports a primary updater using the framework channel and manifest hash behavior recorded for the app, while the source does not establish a pinned signing key.",
+  "description": "electron-updater, unsigned, hash from the same GitHub channel.",
   "limitations": [
-    "electron-updater framework internals and released artifact signing are not contained in this checkout.",
-    "Snapshot is a newly retrieved default branch, not the historical study revision."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "bd66e5f4ef1eb0b4855bbd216063f547f1468368"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The Electron main process configures electron-updater, disables automatic download, checks for updates after the window is ready, and only downloads/installs through explicit IPC actions. This supports a primary updater using the framework channel and manifest hash behavior recorded for the app, while the source does not establish a pinned signing key.",
+    "limitations": [
+      "electron-updater framework internals and released artifact signing are not contained in this checkout.",
+      "Snapshot is a newly retrieved default branch, not the historical study revision."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "sha512 (unsigned)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AC8.md",
+      "line": 15,
+      "text": "| Steam ROM Manager | https://github.com/SteamGridDB/steam-rom-manager.git | 7f0f402 / 2026-08-06 | Y | Y (auto-check on launch; download is user-confirmed) | Y | https (electron default net stack; no rejectUnauthorized/NODE_TLS_REJECT_UNAUTHORIZED override found) | N (app is unsigned — no CSC_LINK/codesign step in `.github/workflows/`) | hash (SHA512 via electron-updater `latest.yml`) | server-supplied/unpinned (GitHub Releases, same channel as the hash manifest) | `src/main/app.ts:12` `import { autoUpdater } from \"electron-updater\"`; `:158-159` `autoUpdater.autoDownload=false`; `:222-243` update events; `:331` `autoUpdater.checkForUpdatesAndNotify()` on `dom-ready`; `:334` `autoUpdater.downloadUpdate()`; `:337` `autoUpdater.quitAndInstall()`; `package.json` `\"publish\": {\"provider\":\"github\"...}`. Also downloads SteamGridDB box art (data channel, not code) |"
+    }
+  ]
 }

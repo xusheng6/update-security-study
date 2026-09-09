@@ -5,13 +5,19 @@
   "historical_tier": "N",
   "project_url": "https://github.com/greenshot/greenshot",
   "channel": "not established",
-  "review_status": "Historical record",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The initial scan recorded no in-app updater or notification-only behavior. This record has not received the same source recheck as the A–D records; the original label does not establish how every installation channel is secured.",
-  "limitations": [],
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "N",
+  "description": "TLS validation disabled process-wide, but the update path is notify-only (version JSON, then opens the download page). No download-and-execute. [Opus-verified]",
+  "limitations": [
+    "AI-generated static source analysis. The N label was not independently re-audited and does not assess every external installation or content channel."
+  ],
   "sources": [],
-  "review_basis": "initial-scan",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
   "classification_certified": false,
-  "project_link_basis": "Unambiguous matching retained checkout origin; current upstream availability not rechecked."
+  "project_link_basis": "Unambiguous matching retained checkout origin; current upstream availability not rechecked.",
+  "downloads_and_runs": "no",
+  "transport": "https, validation disabled app-wide",
+  "payload_verification": "n/a",
+  "trust_root": "none"
 }

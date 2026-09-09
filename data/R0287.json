@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/BlitterStudio/amiberry",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Amiberry’s updater supports comparison with SHA-256 metadata supplied by a release. The check is conditional on an expected digest being available; independent publisher authentication and release-specific policy remain unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "TLS properly enforced, but SHA-256 comes from a server-supplied SHA256SUMS asset and fails open if that asset is missing.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study release.",
-    "The cited source establishes a checksum control only; it does not establish publisher signatures or the complete released artifact channel.",
-    "Newly retrieved default-branch snapshot, not the original study release. The cited source establishes a checksum control only; it does not establish publisher signatures or the complete released artifact channel."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "cf3654469f360d95da84cfbb7d6f92eb5ced9f40"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Amiberry’s updater supports comparison with SHA-256 metadata supplied by a release. The check is conditional on an expected digest being available; independent publisher authentication and release-specific policy remain unresolved.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study release.",
+      "The cited source establishes a checksum control only; it does not establish publisher signatures or the complete released artifact channel.",
+      "Newly retrieved default-branch snapshot, not the original study release. The cited source establishes a checksum control only; it does not establish publisher signatures or the complete released artifact channel."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "SHA256SUMS (fails open)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-U5.md",
+      "line": 29,
+      "text": "| amiberry | https://github.com/BlitterStudio/amiberry | 0cce51c / 2026-08-20 | Y | Y (checkbox, `check_for_updates(channel)` on demand/startup) | Y (platform-gated: `UpdateMethod::SELF_UPDATE` on desktop builds, `NOTIFY_ONLY`/`DISABLED` on Flatpak/Android/LibRetro) | https, TLS **explicitly enforced**: `CURLOPT_SSL_VERIFYPEER,1` / `CURLOPT_SSL_VERIFYHOST,2` | N (plain GitHub Releases JSON) | hash (SHA256), server-supplied, **fail-open if absent** | server-supplied (`SHA256SUMS` asset published in the same GitHub release as the binary) | src/osdep/amiberry_update.cpp:43 (`api.github.com/repos/BlitterStudio/amiberry/releases`), 456-457 & 813-814 (VERIFYPEER/VERIFYHOST=1/2), 518-571 (parses `SHA256SUMS` asset), 850-868 (`verify_update_checksum` — \"SHA256 not provided, skipping verification, return true\" at line 852-855); src/osdep/imgui/about.cpp:109-126 (enforces the check result before `apply_update`, but only if a hash was supplied at all) |"
+    }
+  ]
 }

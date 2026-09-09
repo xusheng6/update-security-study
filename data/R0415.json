@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/nextcloud/desktop",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Nextcloud’s macOS application template embeds a Sparkle EdDSA public key and integrates the framework’s updater. Windows and Linux verification policies and shipped artifacts remain separate, unresolved evidence requirements.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "macOS is genuine A (Sparkle pinned EdDSA), but the Windows NSISUpdater downloads the MSI and runs it via msiexec with zero hash/signature. Linux notify-only.",
   "limitations": [
-    "New default-branch snapshot; released artifact signatures, framework internals, generated feeds, and Linux-specific updater behavior were not independently audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "f3f739fd8a101e13e69ec41595797cf1bd2861c0"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Nextcloud’s macOS application template embeds a Sparkle EdDSA public key and integrates the framework’s updater. Windows and Linux verification policies and shipped artifacts remain separate, unresolved evidence requirements.",
+    "limitations": [
+      "New default-branch snapshot; released artifact signatures, framework internals, generated feeds, and Linux-specific updater behavior were not independently audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none (Windows)",
+  "trust_root": "Sparkle EdDSA pinned (mac only)",
+  "original_evidence": [
+    {
+      "file": "batch-AA7.md",
+      "line": 26,
+      "text": "| Nextcloud Desktop Client | https://github.com/nextcloud/desktop | 8c026e378a96 / 2026-08-21 | Y | Y | Y (Win); Y via Sparkle (macOS); N/notify-only (Linux) | https (`updates.nextcloud.org/client/`, real Qt TLS validation — AccessManager sets no ignoreSslErrors/VerifyNone) | N (Windows: plain XML version feed); macOS Sparkle appcast payload is signed even though feed itself isn't | Windows: **NONE** — installer/MSI run directly with zero hash/signature check. macOS: EdDSA signature via Sparkle, key pinned in Info.plist. Linux: N/A (opens browser only) | macOS: pinned-in-binary (Sparkle SUPublicEDKey). Windows: none | src/gui/updater/ocupdater.cpp:202-233 (`slotStartInstaller` — `QProcess::startDetached`/`msiexec` run on the downloaded .exe/.msi with **no** verification step anywhere in the file); cmake/modules/MacOSXBundleInfo.plist.in:54 (`SUPublicEDKey`); src/gui/updater/updater.cpp:120-142 (`Updater::create` platform dispatch: SparkleUpdater/macOS, NSISUpdater/Windows, PassiveUpdateNotifier/Linux); NEXTCLOUD.cmake:22 |"
+    }
+  ]
 }

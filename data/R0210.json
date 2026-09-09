@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/projectdiscovery/nuclei",
   "channel": "mixed",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Nuclei exposes separate engine and template update controls. Its template manager updates an existing template directory only when version state requires it, using a GitHub release downloader; the reviewed source places InsecureSkipVerify in the headless browser client, so that setting should not be attributed to the update channel. The release downloader's end-to-end artifact verification remains unresolved from this snapshot.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Version client sets InsecureSkipVerify:true; -update SHA256 skipped if checksums.txt absent; templates auto-fetched every run with ZERO verification.",
   "limitations": [
-    "New default-branch snapshot rather than historical release re-verification; the delegated github release downloader and binary updater implementation were not audited here, so artifact verification and version-channel TLS behavior remain unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "f5d0ef81a563c4c5c237d6d978839a57c1e67a2a"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Nuclei exposes separate engine and template update controls. Its template manager updates an existing template directory only when version state requires it, using a GitHub release downloader; the reviewed source places InsecureSkipVerify in the headless browser client, so that setting should not be attributed to the update channel. The release downloader's end-to-end artifact verification remains unresolved from this snapshot.",
+    "limitations": [
+      "New default-branch snapshot rather than historical release re-verification; the delegated github release downloader and binary updater implementation were not audited here, so artifact verification and version-channel TLS behavior remain unresolved."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https, InsecureSkipVerify (version chan)",
+  "payload_verification": "hash (soft-fail) / none (templates)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-M2.md",
+      "line": 16,
+      "text": "| Nuclei | github.com/projectdiscovery/nuclei | Go — binary self-update (`-update`/`-up`) **and** a separate automatic nuclei-templates channel | Y — two distinct channels (see auto column) | **Binary**: chk automatic every run (via pdtm API), but dl/inst strictly **manual** (`-update`/`-up` flag required). **Templates**: chk **and** dl/inst are **automatic by default on every single run** (`FreshInstallIfNotExists` + `UpdateIfOutdated` called unconditionally in `runner.New()`) unless disabled via `-duc`/`CanCheckForUpdates()` | Y — **templates**: downloaded YAML is loaded directly into the scan engine and drives execution (including protocols capable of running commands when such templates/flags are enabled), so a compromised template feed = executed scan logic, and this happens automatically with no user action. **Binary**: downloaded archive directly replaces the running executable via `github.com/minio/selfupdate.Apply()` (manual trigger only) | https — GitHub REST API via `go-github` client + signed asset redirect URLs (normal TLS cert validation) for both binary and template downloads. **However**, the separate `api.pdtm.sh` version-check/ignore-file client explicitly sets `TLSClientConfig{InsecureSkipVerify: true}` — TLS certificate validation is **disabled** for that channel | no — `checksums.txt` is just another unsigned GitHub release asset from the same repo/trust boundary; no GPG/cosign/code-signing anywhere (explicit TODO in source) | **Binary self-update**: hash-from-manifest, SHA-256 checked against a `checksums.txt` release asset — but **soft-fail**: if that asset is missing from the release, verification is silently skipped entirely (`expectedChecksum` stays empty ⇒ compare branch never runs). **Templates (automatic channel)**: **none** — `DownloadSourceWithCallback` unpacks the GitHub source zipball straight to disk with zero checksum/signature check; the local `.checksum` (MD5) file is computed *after the fact* from files already on disk purely to print a change-summary table, not to verify anything against a trusted value | none — TODO comment in source states code-signing verification (\"selfupdate...has support for checksum validation, code signing verification etc. implement them after discussion\") is **not implemented** | `pkg/installer/versioncheck.go:17-23,37-121` (pdtm API version check); `internal/runner/runner.go:128-159` (`NucleiVersionCheck`+`FreshInstallIfNotExists`+`UpdateIfOutdated`+`UpdateIgnoreFile` all unconditional unless disabled); `pkg/installer/template.go:127-149,152-234,322-379` (install/update templates via `DownloadSourceWithCallback`, no checksum step; MD5 `.checksum` file computed post-write for UI diff only, `template.go:582-660`); `cmd/nuclei/main.go:489,594-595` (`-update`/`-up` flag → `runner.NucleiToolUpdateCallback()`, manual); `internal/runner/banner.go:28-31`; external module `github.com/projectdiscovery/utils` `update/gh.go:111-195` (`GetExecutableFromAsset`: SHA-256 vs `checksums.txt`, soft-fail if absent) and `update/gh.go:230-253` (`DownloadSourceWithCallback`: zero verification); `update/update.go:72-73` (TODO: no code-signing) and `update/update.go:189-197` (`init()`: `InsecureSkipVerify: true`) |"
+    }
+  ]
 }

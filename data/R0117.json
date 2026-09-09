@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://code.qt.io/qt-creator/qt-creator",
   "channel": "package-manager",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Qt Creator’s updateinfo plugin delegates update queries to the configured Maintenance Tool. The original claim about Installer Framework artifact verification remains unresolved because it concerns the external maintenance implementation, not this plugin.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Delegates to Qt Installer Framework Maintenance Tool; integrity is only an optional SHA1, no signature.",
   "limitations": [
-    "Newly retrieved source snapshot, not proof of original-release behavior.",
-    "The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified.",
-    "Newly retrieved source snapshot, not proof of original-release behavior.; The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "89a8132235e166168153a32f6c14687864fb494b"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Qt Creator’s updateinfo plugin delegates update queries to the configured Maintenance Tool. The original claim about Installer Framework artifact verification remains unresolved because it concerns the external maintenance implementation, not this plugin.",
+    "limitations": [
+      "Newly retrieved source snapshot, not proof of original-release behavior.",
+      "The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified.",
+      "Newly retrieved source snapshot, not proof of original-release behavior.; The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validated)",
+  "payload_verification": "SHA1 optional (IFW)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-H4.md",
+      "line": 20,
+      "text": "| Qt Creator | qt-creator/qt-creator (UpdateInfo plugin) + code.qt.io/installer-framework/installer-framework (external \"Maintenance Tool\") | native C++/Qt; delegates entirely to the separate Qt Installer Framework (QtIFW) \"Maintenance Tool\" binary | Y | check: automatic, on a configurable interval (default weekly, first check 1 min after startup — `updateinfoplugin.cpp`); download/install: manual — user must click \"Start Update\" or \"Start Package Manager\", which launches the external MaintenanceTool | Y, but entirely inside the separate MaintenanceTool (QtIFW) process — qt-creator itself only spawns it via `QProcess`/`Process::startDetached` with args (`ch`, `se`, `--updater`, `--start-package-manager`) and parses its XML/text output; qt-creator's own source contains no network download code | Repository URL scheme (`http://`/`https://`) is vendor-configured, not restricted in code; in `installer-framework`'s `downloadfiletask.cpp:345-353`, `onSslErrors()` only **logs** SSL errors via `qCWarning` and never calls `reply->ignoreSslErrors()`, so Qt's default behavior (abort on cert failure) applies — no explicit TLS bypass found | N — `Updates.xml` repository manifest integrity is protected only by an *optional* SHA1 checksum (`Repository::xmlChecksum()`, `<Checksum>` element), not a cryptographic signature | hash-from-manifest: SHA1 checksums for `Updates.xml` and each extracted package file (`metadatajob.cpp:781-789,620-624,891-956`); no code-signing/PKI signature verification of packages found anywhere in the public `installer-framework` source | N/A (plain SHA1 embedded in the same over-the-wire XML manifest it's meant to protect, not an independent trust anchor) | `qt-creator/src/plugins/updateinfo/updateinfoplugin.cpp:365-424` (spawns `MaintenanceTool ch/se`, parses output), `:747-760` (`startUpdater()`/`startPackageManager()` launch MaintenanceTool detached); `installer-framework/src/libs/installer/metadatajob.cpp:781-789` (SHA1 checksum mismatch check for Updates.xml); `installer-framework/src/libs/installer/downloadfiletask.cpp:345-353` (`onSslErrors` logs only) |"
+    }
+  ]
 }

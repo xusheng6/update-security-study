@@ -5,12 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/mmattozzi/cocoa-rest-client",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "Targeted retained-source read supports the narrow Tier A behavior for this primary application updater: Sparkle configuration supplies an HTTPS appcast and bundled SUPublicDSAKeyFile; the app delegate exposes Sparkle automatic checking/downloading settings.",
+  "description": "Sparkle over HTTPS, DSA signature vs a pinned bundled key.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in pinned key/configuration.",
-    "Framework verification depends on the packaged updater implementation where the application delegates to Sparkle or tauri-plugin-updater."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "51e0e7540fa4d0c814799243558b685915a6c5dc"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow Tier A behavior for this primary application updater: Sparkle configuration supplies an HTTPS appcast and bundled SUPublicDSAKeyFile; the app delegate exposes Sparkle automatic checking/downloading settings.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in pinned key/configuration.",
+      "Framework verification depends on the packaged updater implementation where the application delegates to Sparkle or tauri-plugin-updater."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "DSA signature",
+  "trust_root": "Sparkle dsa_pub.pem bundled",
+  "original_evidence": [
+    {
+      "file": "batch-AH1.md",
+      "line": 28,
+      "text": "| Cocoa Rest Client (macOS native REST client) | https://github.com/mmattozzi/cocoa-rest-client.git | 51e0e75 / 2024-10-13 | Y | Y (Sparkle `automaticallyChecksForUpdates`/`automaticallyDownloadsUpdates`, user-configurable) | **Y** (Sparkle downloads and installs the update package) | **https** appcast URL: `https://mmattozzi.github.io/cocoa-rest-client/appcast.xml` | Y | **signature** — Sparkle legacy DSA signature on the update enclosure | **pinned-in-binary** — `SUPublicDSAKeyFile` = `dsa_pub.pem`, bundled at `English.lproj/dsa_pub.pem` (real 20-line PEM key, not a placeholder) | CocoaRestClient-Info.plist (SUFeedURL, SUPublicDSAKeyFile keys), English.lproj/dsa_pub.pem, CocoaRestClientAppDelegate.m:310-312 (SUUpdater usage) |"
+    }
+  ]
 }

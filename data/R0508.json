@@ -5,12 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/nteract/nteract",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "Targeted retained-source read supports the narrow Tier A behavior for this primary application updater: The Tauri updater configuration embeds a Minisign public key and endpoint, while the Rust application registers tauri-plugin-updater.",
+  "description": "Rewritten as Tauri v2; tauri-plugin-updater verifies minisign vs a pinned key.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in pinned key/configuration.",
-    "Framework verification depends on the packaged updater implementation where the application delegates to Sparkle or tauri-plugin-updater."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "0b711d49571cfdc5708372d7d0cf2f18a4285cad"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow Tier A behavior for this primary application updater: The Tauri updater configuration embeds a Minisign public key and endpoint, while the Rust application registers tauri-plugin-updater.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in pinned key/configuration.",
+      "Framework verification depends on the packaged updater implementation where the application delegates to Sparkle or tauri-plugin-updater."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "Ed25519 (minisign)",
+  "trust_root": "pubkey pinned in tauri.conf.json",
+  "original_evidence": [
+    {
+      "file": "batch-AG8.md",
+      "line": 19,
+      "text": "| nteract | https://github.com/nteract/nteract.git | 0b711d49571cfdc5708372d7d0cf2f18a4285cad / 2026-08-22 | Y | N (auto-checks on a timer, but install requires user click-through in the upgrade review screen) | Y (after user confirms) | https, TLS enforced (default Tauri/reqwest HTTP client, no disabling found) | Y (per-artifact minisign signature embedded in `latest.json` update manifest) | signature (Ed25519/minisign via `tauri-plugin-updater`) | pinned-in-binary (base64 minisign pubkey compiled into `tauri.conf.json` → binary) | `crates/notebook/tauri.conf.json:51-58` (pubkey+endpoint); `crates/notebook/src/lib.rs:4748` (plugin registered); `apps/notebook/upgrade/App.tsx:337` (`update.downloadAndInstall`) |"
+    }
+  ]
 }

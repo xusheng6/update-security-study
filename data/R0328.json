@@ -5,14 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/Eugeny/tabby",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Tabby integrates electron-updater and platform packaging controls. The retained evidence does not establish complete runtime signature enforcement or released-artifact signing provenance.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater; trust root is OS code-signing.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout.",
-    "Source does not provide released artifact signatures, publisher identity, or a complete framework/OS verification trace.",
-    "Observation is limited to the primary electron-updater channel.",
-    "Newly retrieved default-branch snapshot, not the original study checkout. Source does not provide released artifact signatures, publisher identity, or a complete framework/OS verification trace. Observation is limited to the primary electron-updater channel."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "14e2d60b9b6dee84a53c37f05eefeb803787de04"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Tabby integrates electron-updater and platform packaging controls. The retained evidence does not establish complete runtime signature enforcement or released-artifact signing provenance.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout.",
+      "Source does not provide released artifact signatures, publisher identity, or a complete framework/OS verification trace.",
+      "Observation is limited to the primary electron-updater channel.",
+      "Newly retrieved default-branch snapshot, not the original study checkout. Source does not provide released artifact signatures, publisher identity, or a complete framework/OS verification trace. Observation is limited to the primary electron-updater channel."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "sha512 + OS code-signing",
+  "trust_root": "electron-updater",
+  "original_evidence": [
+    {
+      "file": "batch-W1.md",
+      "line": 22,
+      "text": "| Tabby | https://github.com/Eugeny/tabby | 14e2d60 / 2026-07-13 | Y | Y | Y | https (GitHub Releases via electron-updater default provider; no `publish:` override or insecure-TLS flags found in `electron-builder.yml`) | Y (electron-builder `latest.yml`/`latest-mac.yml` manifest, generated at release time, contains sha512 hash of the installer) | hash-from-manifest + OS code-signing of the installed binary (electron-updater default: verifies downloaded installer's sha512 against the manifest fetched from the same GitHub release, then relies on Authenticode/notarization for the actual code-signing trust root) | server-supplied manifest (unpinned) for the hash check; OS keystore (Windows cert store / Apple notarization) for the code-signing trust root | `tabby/app/lib/window.ts:2,492-516` (`import { autoUpdater } from 'electron-updater'`; `autoUpdater.autoDownload = true`, `autoInstallOnAppQuit = true`, `checkForUpdates()`); `tabby/app/package.json:26` (`\"electron-updater\": \"^5.2.1\"`); code signing evidence: `tabby/.github/workflows/build.yml:89,433` (`CSC_LINK`/`WIN_CSC_LINK` secrets), `tabby/electron-builder.yml` `mac.hardenedRuntime: true` (implies notarization). |"
+    }
+  ]
 }

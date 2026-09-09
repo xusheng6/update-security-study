@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/lobehub/lobe-chat",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Lobe Chat’s desktop source integrates electron-updater, configures a generic channel feed, and schedules checks; the application source does not establish the claimed SHA-512 or OS-signing enforcement.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater, OS code-signing.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout.",
-    "electron-updater internals and released artifact signing were not audited; the source does not establish the original SHA-512 and OS-signing classification.",
-    "Primary classification remains UNRESOLVED under the evidence-review instruction; retained source is commit-scoped and does not establish all released or external framework behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "ca3d7fd35d0df26a6d13719c6406aadb1004cbcd"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Lobe Chat’s desktop source integrates electron-updater, configures a generic channel feed, and schedules checks; the application source does not establish the claimed SHA-512 or OS-signing enforcement.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout.",
+      "electron-updater internals and released artifact signing were not audited; the source does not establish the original SHA-512 and OS-signing classification.",
+      "Primary classification remains UNRESOLVED under the evidence-review instruction; retained source is commit-scoped and does not establish all released or external framework behavior."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "sha512 + OS code-signing",
+  "trust_root": "electron-updater",
+  "original_evidence": [
+    {
+      "file": "batch-AE1.md",
+      "line": 18,
+      "text": "| Lobe Chat (desktop) | https://github.com/lobehub/lobe-chat | ca3d7fd3 / 2026-08-23 | Y (`apps/desktop`, electron-updater) | Y (`autoCheckUpdate:true`, `autoDownloadUpdate:true`, hourly) | Y | https (`releases.lobehub.com`, TLS enforced) | effectively yes — electron-builder `latest.yml` + code-signed installer | OS code-signing (electron-updater codesign check) + sha512 in manifest | OS keystore (Apple/Windows code-signing trust) | `apps/desktop/src/main/core/infrastructure/UpdaterManager.ts:9`, `apps/desktop/src/main/modules/updater/configs.ts:18-24` |"
+    }
+  ]
 }

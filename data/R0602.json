@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/cline/cline",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: CLI update checks the npm registry and can apply a detached npm global update without confirmation; source adds no application-level payload signature or hash.",
+  "description": "Auto-updates by default and explicitly passes --min-release-age=0 to bypass npm's own supply-chain-attack safeguard.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "be8b984d10d1ad0e9a3917e051ac697f592587d2"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: CLI update checks the npm registry and can apply a detached npm global update without confirmation; source adds no application-level payload signature or hash.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AM1.md",
+      "line": 9,
+      "text": "| Cline (CLI) | https://github.com/cline/cline.git | be8b984 / 2026-08-23 | Y | Y (default true, silent) | Y | https (registry.npmjs.org) | N | none (npm registry TLS only; `--min-release-age=0` explicitly bypasses npm's minimum-release-age safety gate) | N/A — unpinned | sdk/packages/core/src/services/global-settings.ts:64 (`autoUpdateEnabled: z.boolean().default(true)`), apps/cli/src/commands/update.ts:187-188 (GET registry.npmjs.org/{pkg}/{tag}), :146-172 (`withMinimumReleaseAgeBypass` adds `--min-release-age=0` to `npm update -g cline`), :310-331 (`autoUpdateOnStartup` — non-blocking, no prompt), :401-439 (`applyDeferredUpdate` spawns detached shell install with no confirmation). Also silently auto-updates a second npm package \"kanban\" the same way (:198-200, :578-597) — side channel, same tier. |"
+    }
+  ]
 }

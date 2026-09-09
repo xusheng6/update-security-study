@@ -5,13 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/feather-wallet/feather",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Withdraw the original security classification for this record. Feather bundles release PGP key material and OpenPGP support, but this review did not establish updater invocation and signature enforcement before installation. The retained evidence is insufficient to support the original full claim.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "Pinned PGP key bundled as a Qt resource.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.",
-    "The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module.",
-    "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "948773cf13c7486ee230eb67b6bac06b2f94c874"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Withdraw the original security classification for this record. Feather bundles release PGP key material and OpenPGP support, but this review did not establish updater invocation and signature enforcement before installation. The retained evidence is insufficient to support the original full claim.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.",
+      "The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module.",
+      "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https / Tor",
+  "payload_verification": "signature[OpenPGP-RSA] + hash",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-AA1.md",
+      "line": 10,
+      "text": "| Feather Wallet | https://github.com/feather-wallet/feather | 13b3d93 / 2026-08-12 | Y | N (checks automatically; user clicks Download then Install buttons) | Y | https (QNetworkAccessManager via Networking wrapper; no InsecureSkipVerify/ignoreSslErrors found) | N/A (no code-signed installer manifest; uses GPG-signed hash list instead) | hash (SHA-256) of downloaded zip verified against a GPG-signed hash list (`hashes-<ver>-plain.txt`) | pinned-in-binary — GPG public key embedded as Qt resource `:/assets/gpg_keys/featherwallet.asc`, loaded at Updater ctor | src/utils/updater/Updater.cpp:19-20 (key load), 94-130 (verify signed hashes), 195-226 (sha256), 228-258 (OpenPGP RSA verify against m_maintainers); UpdateDialog.cpp:102-141 (download+hash check), 154+ (unzip/install → download_and_execute=Y) |"
+    }
+  ]
 }

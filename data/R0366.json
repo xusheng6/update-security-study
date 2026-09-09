@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/emacs-mirror/emacs",
   "channel": "package-manager",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected Emacs evidence concerns package.el content management, with a configurable package-signature policy. It does not establish a core application self-updater or certify the original overall trust classification.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Core has no self-updater. package.el: GNU/NonGNU ELPA GPG-verify vs a bundled keyring, but defaults to allow-unsigned and MELPA publishes no signatures; archive URL falls back to plaintext HTTP without GnuTLS (content-as-code).",
   "limitations": [
-    "Newly retrieved default-branch snapshot; MELPA publication practice, historical release configuration, and a complete core update-path audit were not established. The observations concern package-manager content."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "0076b8df578099a95900b129b8cbd33390c466db"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected Emacs evidence concerns package.el content management, with a configurable package-signature policy. It does not establish a core application self-updater or certify the original overall trust classification.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot; MELPA publication practice, historical release configuration, and a complete core update-path audit were not established. The observations concern package-manager content."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "GPG (allow-unsigned default)",
+  "trust_root": "bundled keyring (ELPA)",
+  "original_evidence": [
+    {
+      "file": "batch-X7.md",
+      "line": 20,
+      "text": "| Emacs | https://github.com/emacs-mirror/emacs.git | 73599f66e1d / 2026-08-20 | N (core has no self-updater) | N | N | n/a | n/a | n/a | n/a | no `checkForUpdate`/Sparkle/self_update in core; see content-as-code note below |"
+    }
+  ]
 }

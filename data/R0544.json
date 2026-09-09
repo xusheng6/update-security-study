@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Leantime/leantime",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The command sinks the release zip and extracts it without a hash or signature check.",
+  "description": "system:update downloads a GitHub release zip and cp -r's it over the live app, zero hash/signature.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "9a9f49f1008f4782b30f6723c54228f4f992e636"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The command sinks the release zip and extracts it without a hash or signature check.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AI3.md",
+      "line": 29,
+      "text": "| Leantime | https://github.com/Leantime/leantime | 9a9f49f / 2026-08-15 | Y | N (admin-run CLI command `php artisan system:update`, not triggered automatically) | Y | https (github.com releases; default PHP stream-context / Laravel `Http::sink()` — no `verify=>false`/insecure option set anywhere in the file) | N | none — no hash or signature check of the downloaded zip before it is extracted and `cp -r`'d over the live app tree | N/A | `app/Command/UpdateLeantime.php:56-72` (fetch latest release JSON + build download URL), `:98-101` (`Http::sink($zipFile)->get($downloadUrl)` with zero integrity check), `:104-116` (`ZipArchive::extractTo` then `exec('cp -r ... APP_ROOT')` — extracted files copied straight over the running app with no verification step at any point) |"
+    }
+  ]
 }

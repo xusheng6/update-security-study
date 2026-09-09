@@ -5,11 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/dbgate/dbgate",
   "channel": "mixed",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "DbGate integrates electron-updater for startup checks, optional retrieval, and the install action, with GitHub publication configured for macOS, Linux, and Windows. Its checked macOS packaging configuration enables hardened runtime and notarization; the source reviewed here does not establish Windows signing status or independently prove SHA512 enforcement.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater SHA512; macOS notarized (Windows unsigned).",
   "limitations": [
-    "New default-branch snapshot at the recorded commit; electron-updater internals, generated manifests, and released artifact signing were not independently audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "c4c653fb51d1f4fc97ef7b6dbc20669eca9ddbd7"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "DbGate integrates electron-updater for startup checks, optional retrieval, and the install action, with GitHub publication configured for macOS, Linux, and Windows. Its checked macOS packaging configuration enables hardened runtime and notarization; the source reviewed here does not establish Windows signing status or independently prove SHA512 enforcement.",
+    "limitations": [
+      "New default-branch snapshot at the recorded commit; electron-updater internals, generated manifests, and released artifact signing were not independently audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "hash + OS-code-signing (mac)",
+  "trust_root": "OS-trust-store",
+  "original_evidence": [
+    {
+      "file": "batch-I8.md",
+      "line": 8,
+      "text": "| DbGate | dbgate/dbgate | Electron (electron-updater) | Y | chk: automatic on startup unless `app.autoUpdateMode`='skip' (default \"\"); dl: automatic only if setting='download', else notify+manual click; inst: manual (user clicks \"Restart DbGate\") | Y | https, electron-updater GitHub provider → github.com releases; TLS enforced (no bypass code found) | N (latest.yml plain, unsigned) | hash-from-manifest (sha512 in latest.yml) + OS-code-signing on macOS (`notarize:true`, `hardenedRuntime:true`); Windows — no certificateFile configured (unsigned NSIS) | Apple notarization/Developer ID cert (mac only) | app/src/electron.js:7,79-85,228-234,314-326,511-557; app/package.json `build.mac.publish`/`win.publish`/`linux.publish` (`provider:\"github\"`), `build.mac.notarize:true`,`hardenedRuntime:true`; packages/web/src/utility/appUpdate.ts:1-49 |"
+    }
+  ]
 }

@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/homebridge/homebridge",
   "channel": "unresolved",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The retained Homebridge core code handles already installed plugins. The original claim concerns the separate config-ui-x installer, whose package-authentication behavior is not established by that evidence.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "config-ui-x plugin installer over npm-registry-hash trust.",
   "limitations": [
-    "New default-branch snapshot, not the historical Homebridge/config-ui-x release combination.",
-    "The config-ui-x repository and npm installer implementation were not reviewed; npm's own registry integrity semantics are therefore unresolved.",
-    "New default-branch snapshot, not the historical Homebridge/config-ui-x release combination. The config-ui-x repository and npm installer implementation were not reviewed; npm's own registry integrity semantics are therefore unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,36 @@
       "commit": "edf54930340d67cade23d01abd41b03cd9621e8b"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained Homebridge core code handles already installed plugins. The original claim concerns the separate config-ui-x installer, whose package-authentication behavior is not established by that evidence.",
+    "limitations": [
+      "New default-branch snapshot, not the historical Homebridge/config-ui-x release combination.",
+      "The config-ui-x repository and npm installer implementation were not reviewed; npm's own registry integrity semantics are therefore unresolved.",
+      "New default-branch snapshot, not the historical Homebridge/config-ui-x release combination. The config-ui-x repository and npm installer implementation were not reviewed; npm's own registry integrity semantics are therefore unresolved."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "npm-registry hash",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AC6.md",
+      "line": 24,
+      "text": "| Homebridge (core) | https://github.com/homebridge/homebridge | ab1e8c4 / 2026-08-16 | N (no self-updater or plugin installer in core; that lives in homebridge-config-ui-x) | N | N | N/A | N/A | N/A | N/A | src/pluginManager.ts has no npm/exec calls; negative census confirms |"
+    },
+    {
+      "file": "batch-AC6.md",
+      "line": 25,
+      "text": "| homebridge-config-ui-x (content channel — plugin install/update UI + Homebridge self-update) | https://github.com/homebridge/homebridge-config-ui-x | afe70ac / 2026-08-19 | Y | N (user-initiated via UI, though scheduled checks exist) | Y | https to npm registry via spawned npm CLI (default TLS, not disabled) | N | hash from npm registry metadata (same endpoint) | unpinned / npm registry-supplied | src/modules/plugins/plugins.service.ts:2600-2671 (`runNpmCommand` spawns npm install/update); :1002 (`updateHomebridgePackage`) |"
+    }
+  ]
 }

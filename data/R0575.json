@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/dazedcat19/FMD2",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: The app checks update metadata and hands the downloaded package to an external updater that extracts and replaces the app without a payload signature check.",
+  "description": "Downloads+launches an external updater EXE with zero verification.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "300dcfa91dd2e46ff8962d93e6bb3bd123050a3a"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: The app checks update metadata and hands the downloaded package to an external updater that extracts and replaces the app without a payload signature check.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AK7.md",
+      "line": 19,
+      "text": "| FMD2 | https://github.com/dazedcat19/FMD2 | 300dcfa9 / 2026-08-21 | Y | Y (`OptionAutoCheckLatestVersion` defaults True, checks on startup) | Y (downloads a `.7z`/zip update package, then spawns an external updater EXE which extracts and replaces the app) | https (raw.githubusercontent.com) | N | **none** | N/A | baseunits/CheckUpdate.pas:101-133; baseunits/SelfUpdater.pas:113-165; dist/config.json:4-5; baseunits/FMDOptions.pas:151 |"
+    }
+  ]
 }

@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/flutter/flutter",
   "channel": "mixed",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The reviewed Flutter snapshot contains a Dart SDK update script that selects an HTTPS storage URL and downloads the SDK archive without a visible artifact-integrity check in that script. Engine-cache verification is a separate path and is not established by this excerpt; the source does not substantiate the broader git-pull and zero-verification claim.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "`flutter upgrade` = git pull; Dart SDK download has zero integrity check; engine artifacts only an MD5 echoed by the same GCS response.",
   "limitations": [
-    "The retained snapshot does not establish the current release configuration or the separate engine-cache path.",
-    "No claim about git history or upstream release policy is established by this script.",
-    "The retained snapshot does not establish the current release configuration or the separate engine-cache path. No claim about git history or upstream release policy is established by this script."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "4ebf37fe7df0a130ba5bee17315b98f905c10b34"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The reviewed Flutter snapshot contains a Dart SDK update script that selects an HTTPS storage URL and downloads the SDK archive without a visible artifact-integrity check in that script. Engine-cache verification is a separate path and is not established by this excerpt; the source does not substantiate the broader git-pull and zero-verification claim.",
+    "limitations": [
+      "The retained snapshot does not establish the current release configuration or the separate engine-cache path.",
+      "No claim about git history or upstream release policy is established by this script.",
+      "The retained snapshot does not establish the current release configuration or the separate engine-cache path. No claim about git history or upstream release policy is established by this script."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "MD5 (same host)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AK6.md",
+      "line": 7,
+      "text": "| Flutter (flutter CLI) | https://github.com/flutter/flutter.git | 4ebf37fe7df0a130ba5bee17315b98f905c10b34 / 2026-08-22 | Y | Y (artifact/Dart-SDK auto-fetched on cache miss during normal commands; `flutter upgrade` is user-invoked git pull) | Y | https, TLS validation enforced (Dart `HttpClient`/`curl` defaults; no `badCertificateCallback`/insecure bypass found) | N | Dart SDK zip: **none**. Engine-cache artifacts: MD5 checksum read from the download response's own `x-goog-hash` header (server-supplied, same endpoint) | none (Dart SDK) / server-supplied-unpinned (engine cache MD5) | `bin/internal/update_dart_sdk.sh:124-214` (curl→unzip→install, zero integrity check); `packages/flutter_tools/lib/src/cache.dart:1381-1409` (`_expectedMd5` reads `x-goog-hash` from same GCS response, no pinned/external hash); `packages/flutter_tools/lib/src/commands/upgrade.dart:180-244` (`flutter upgrade` = git fetch/pull of the flutter/flutter repo, no GPG/commit-signature check) |"
+    }
+  ]
 }

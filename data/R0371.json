@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/frostworx/steamtinkerlaunch",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "SteamTinkerLaunch has separate tool-maintenance paths, including a checksum comparison for custom Proton content. The original assertion covering all named tools is not established by this subset.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Default-on Steam Deck self-updater does unsigned git pull; downloaded tools (GE-Proton, Winetricks, ReShade, SpecialK) only WARN on checksum mismatch and still extract (content-as-code).",
   "limitations": [
-    "New default-branch snapshot rather than historical release; the named GE-Proton/Winetricks/ReShade/SpecialK paths were not all connected to this checksum branch, and no execution/build testing was performed."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "8550ab26a712b7f5f6d0947070181446b9de61fd"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "SteamTinkerLaunch has separate tool-maintenance paths, including a checksum comparison for custom Proton content. The original assertion covering all named tools is not established by this subset.",
+    "limitations": [
+      "New default-branch snapshot rather than historical release; the named GE-Proton/Winetricks/ReShade/SpecialK paths were not all connected to this checksum branch, and no execution/build testing was performed."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "checksum (advisory only)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-X8.md",
+      "line": 19,
+      "text": "| SteamTinkerLaunch | github.com/sonic2kk/steamtinkerlaunch | 8550ab26 / 2025-07-14 | Y (Steam Deck only) | **Y, default-on** (`STEAMDECK_AUTOUP=\"1\"`, line 3249) | Y (self via `git pull`, plus dozens of tool downloads: GE-Proton, Winetricks, ReShade, SpecialK, Conty, Vortex, Arch-package deps) | HTTPS (git/wget/curl to github.com/reshade.me/archive.archlinux.org/nightly.link); no `-k`/`--insecure`/`--no-check-certificate` found anywhere in the ~27k-line script | N/A | **None** for self-update (plain `git pull`/`git clone`, no commit/tag signature check, `lib` `gitUpdate()` line 6947-6963); for GE-Proton/Conty/Vortex/FWS: sha512/sha256/md5 checksum fetched from the *same* GitHub host, and on mismatch `dlCheck`/`chkFile` only logs a WARN and **still extracts the archive** (`chkFile` line 842-864, `dlCustomProton` line 4409-4469) | none (no GPG anywhere in the codebase; `grep -n \"gpg\\|signature\\|pubkey\"` returns no genuine hits) | `steamtinkerlaunch:26560-26584` (`installFilesSteamDeck`); `:6947-6963` (`gitUpdate`); `:4409-4469` (`dlCustomProton`); `:842-864` (`chkFile`, non-blocking checksum) |"
+    }
+  ]
 }

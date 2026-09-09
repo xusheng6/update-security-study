@@ -5,11 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/LedgerHQ/ledger-live",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Ledger Live’s non-store updater includes SHA-512 integrity checks and signature verification with key rotation chained from a pinned EC key. Store distributions use a separate channel; release and platform coverage remain bounded to the inspected snapshot.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "electron-updater baseline plus an independent pinned-EC-pubkey chain-of-trust with key rotation; disables under App Store distribution.",
   "limitations": [
-    "New default-branch snapshot rather than the original study checkout; this review did not validate released artifacts, endpoint deployment, or platform-specific packaging behavior beyond the checked store-distribution branch."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "6f9b570de882356b1660e75b7c747ef2887fde13"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Ledger Live’s non-store updater includes SHA-512 integrity checks and signature verification with key rotation chained from a pinned EC key. Store distributions use a separate channel; release and platform coverage remain bounded to the inspected snapshot.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study checkout; this review did not validate released artifacts, endpoint deployment, or platform-specific packaging behavior beyond the checked store-distribution branch."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "EC signature (+ electron-updater)",
+  "trust_root": "pinned EC pubkey chain (ledger-pubkey.ts), rotation",
+  "original_evidence": [
+    {
+      "file": "batch-AA1.md",
+      "line": 19,
+      "text": "| Ledger Live (desktop) | https://github.com/LedgerHQ/ledger-live | 3bbaa09 / 2026-08-20 | Y | Y (autoDownload=true, autoInstallOnAppQuit=true) — disabled entirely for store distributions (`isStoreDistribution()`) | Y | https (electron-updater GitHub/S3 feed `https://resources.live.ledger.app/...`; extra fetch via `@ledgerhq/live-network`, no TLS override found) | Y (electron-updater's own OS-signature/hash check) PLUS an additional independent verification layer | SHA-512 hash of downloaded file verified against a hash file, whose signature is verified with RSA/EC pubkey chain-of-trust (key rotation: new keys must be signed by the previous key) | pinned-in-binary — `src/main/updater/ledger-pubkey.ts` hardcodes a PEM EC public key baked into the app, used as root of trust for `getNextKey`/`getNextKeySignature` chain | apps/ledger-live-desktop/src/main/updater/init.ts:1-74 (autoUpdater config, verify() call after update-downloaded); createElectronAppUpdater.ts:1-27 (hash+sig+pubkey URLs); createAppUpdater.ts:13-73 (verify hash+signature, key-rotation chain, throws on failure); ledger-pubkey.ts:1-6 (pinned PEM key) |"
+    }
+  ]
 }

@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/rembo10/headphones",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Headphones downloads and extracts a GitHub tarball over the program directory without a hash/signature check.",
+  "description": "Unsigned download-extract-overwrite (Sick-Beard lineage).",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "62757c0fcf3f679d5779c5589620b46ce550b093"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Headphones downloads and extracts a GitHub tarball over the program directory without a hash/signature check.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AG7.md",
+      "line": 23,
+      "text": "| Headphones | https://github.com/rembo10/headphones | 62757c0 / 2025-06-02 | Y | N (manual \"Update Now\" from web UI only; `CHECK_GITHUB` scheduler only sets a notify flag, does not auto-install) | Y (on explicit user request) | https (`https://github.com/%s/headphones/tarball/%s`), via `request.request_content` → `requests` with `verify=bool(CONFIG.VERIFY_SSL_CERT)`, default `1`/True | N | none — extracts tarball and overwrites files, no hash/signature check | server-supplied/unpinned (GitHub tarball for branch) | `headphones/versioncheck.py:175-222` (`update()` — non-git install path downloads tarball, extracts, `os.renames` files over PROG_DIR, no verification); `headphones/request.py:39-59` (`verify = bool(CONFIG.VERIFY_SSL_CERT)`); `headphones/config.py:306` (`VERIFY_SSL_CERT` default `1`); `headphones/__init__.py:673-676` (update only runs when explicit `update` flag passed from shutdown/restart handler, i.e. user-triggered) |"
+    }
+  ]
 }

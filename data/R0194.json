@@ -5,11 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/cerebroapp/cerebro",
   "channel": "mixed",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Cerebro’s inspected primary updater uses electron-updater. Its plugin updater is a separate channel with different transport and artifact-verification controls. Report those channels separately; the source observations here do not certify the original host-execution impact claim.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater SHA512 for app; BUT plugin channel = plain-HTTP npm, no verify, auto-installs+executes every 12h — content-as-code RCE.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot rather than the original study release; no network endpoint or exploitability testing was performed, and the evidence does not establish that every plugin update is automatically installed or that any specific content executes under a particular user action."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,34 @@
       "commit": "98f8fb3e2ea33fefc90f30f6e0dfcbdf875ef3f9"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Cerebro’s inspected primary updater uses electron-updater. Its plugin updater is a separate channel with different transport and artifact-verification controls. Report those channels separately; the source observations here do not certify the original host-execution impact claim.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot rather than the original study release; no network endpoint or exploitability testing was performed, and the evidence does not establish that every plugin update is automatically installed or that any specific content executes under a particular user action."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "hash + OS-code-signing",
+  "trust_root": "OS-trust-store",
+  "original_evidence": [
+    {
+      "file": "batch-L2.md",
+      "line": 10,
+      "text": "| Cerebro (app update) | github.com/KELiON/cerebro | Electron (Node/JS), electron-updater | Y | chk/dl auto (10s after launch, then hourly); inst auto on quit | Y | https (GitHub Releases via electron-updater generic \"github\" provider) | N (plain `latest*.yml` served over HTTPS, no separate signature on the manifest itself) | hash-from-manifest (SHA512 in `latest.yml`/`latest-mac.yml`, checked by electron-updater); macOS additionally subject to OS Gatekeeper/code-signing on the .dmg | N/A (hash embedded in HTTPS-fetched YAML; no independent signing key) | app/initAutoUpdater.js:1-26 (auto chk 10s+1h, no autoDownload override so electron-updater default `autoDownload:true` applies); app/main/main.js:43-45 (\"will be automatically installed on quit\"); app/main/createWindow/checkForUpdates.js:2,28-56 (manual \"Check for Updates\" menu path, opens external browser as fallback); electron-builder.json:93-97 (`\"publish\":{\"provider\":\"github\"}`) |"
+    },
+    {
+      "file": "batch-L2.md",
+      "line": 11,
+      "text": "| Cerebro (plugin channel) | github.com/KELiON/cerebro | npm-style plugin loader, JS executed in-process | Y (separate from app updater) | chk auto every 12h at startup; dl+inst auto, no user confirmation | Y — downloaded code is extracted straight into `node_modules` and loaded/executed inside the Electron main process | **http** for the registry metadata call; **https** (`https.get`) for the tarball itself, but the tarball URL is taken unvalidated from the http-fetched JSON | N (no signature) | **none** — no hash or signature check anywhere in install/update path | N/A | app/lib/plugins/npm.js:14 (`const API_BASE = 'http://registry.npmjs.org/'`); npm.js:88 (`fetch(`${API_BASE}${name}`)` over plain HTTP); npm.js:37 (`https.get(tarPath, ...)` — URL for this https call is taken from the unauthenticated http response, so an on-path attacker can redirect it); npm.js:28-53 (extract tar directly to plugin dir, no checksum/signature check at any point); app/plugins/core/plugins/initializeAsync.js:26-43 (`checkForUpdates` runs at startup and every 12h and calls `client.update()` automatically for any plugin with `isUpdateAvailable`, no prompt) |"
+    }
+  ]
 }

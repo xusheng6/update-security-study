@@ -5,12 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/electerm/electerm",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "B",
-  "description": "Targeted source read supports the narrow recorded behavior: electerm downloads an installer and opens it directly without an in-app hash/signature check; its default mirror can be a third-party proxy.",
+  "description": "macOS notarization enforced, but no in-app payload verification and a 3rd-party download mirror; Windows relies on SmartScreen only (effectively C there).",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "The retained snapshot does not establish current released artifact behavior or independent release signing; external updater verification remains a gap where noted."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "31ffa216d46240de69a1581e6dab3f6578130ee5"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports the narrow recorded behavior: electerm downloads an installer and opens it directly without an in-app hash/signature check; its default mirror can be a third-party proxy.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "The retained snapshot does not establish current released artifact behavior or independent release signing; external updater verification remains a gap where noted."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "B",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "OS code-signing (mac)",
+  "trust_root": "electron-updater (notarized)",
+  "original_evidence": [
+    {
+      "file": "batch-AA2.md",
+      "line": 14,
+      "text": "| electerm | https://github.com/electerm/electerm | 1ed95f38e9 / 2026-08-21 | Y | Y(check on start)/N(install requires click \"Upgrade\") | Y | https, TLS enforced (no `rejectUnauthorized:false` in update path) | N (plain JSON `electerm-github-release.json`, unsigned, served from vendor site + 3rd-party mirrors) | none (no hash/signature check before launching downloaded file) | OS keystore (mac: Gatekeeper/notarization enforced at launch; **Windows: SmartScreen only, not hard-enforced** — any signed-or-unsigned exe still runs after a warning) | `src/client/common/update-check.js:89-106` (release info from own endpoint, no sig); `src/app/server/download-upgrade.js:80-104,149-153` (download then `openFile(this.localPath)`, no hash/sig check); `src/client/components/main/upgrade.jsx:28-33` (default mirror = `gh-proxy` → `electerm-mirror.html5beta.com`, a 3rd-party proxy domain, not github.com); `build/electron-builder.json:95` (`\"notarize\": true`) |"
+    }
+  ]
 }

@@ -5,14 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/vcmi/vcmi",
   "channel": "plugin",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "VCMI separates mod management from application update notifications.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "App self-update N; mod manager is C by default (HTTPS, no signature, only non-crypto CRC32), degrading to D if the user flips the built-in ignore-SSL toggle.",
   "limitations": [
-    "New default-branch snapshot, not historical release re-verification.",
-    "The mod path does not establish a CRC32 implementation elsewhere in the launcher.",
-    "No released artifact or publisher signature was independently verified.",
-    "New default-branch snapshot, not historical release re-verification. The mod path does not establish a CRC32 implementation elsewhere in the launcher. No released artifact or publisher signature was independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "37bbd934bee63ca2d37b69529467e14947442841"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "VCMI separates mod management from application update notifications.",
+    "limitations": [
+      "New default-branch snapshot, not historical release re-verification.",
+      "The mod path does not establish a CRC32 implementation elsewhere in the launcher.",
+      "No released artifact or publisher signature was independently verified.",
+      "New default-branch snapshot, not historical release re-verification. The mod path does not establish a CRC32 implementation elsewhere in the launcher. No released artifact or publisher signature was independently verified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "CRC32 only",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-W3.md",
+      "line": 27,
+      "text": "| VCMI | https://github.com/vcmi/vcmi | eb693b66956f / 2026-08-20 | Y | N (notify + link only) | N | https (`raw.githubusercontent.com`) | N | none | n/a | `config/schemas/settings.json:780-782` (`updateConfigUrl` default `https://raw.githubusercontent.com/vcmi/vcmi-updates/master/vcmi-updates.json`); `launcher/updatedialog_moc.cpp:54-146` (only renders a \"Download page\" link, no `QProcess`/`startDetached`) |"
+    }
+  ]
 }

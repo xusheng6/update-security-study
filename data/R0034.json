@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/oven-sh/bun",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The inspected Bun self-updater supports a narrow primary C observation: release bytes are checked against a GitHub-derived digest and the candidate executable is version-checked before replacement. The source also exposes an environment-controlled TLS rejection setting, so the transport trust boundary is not simply fixed by this function.",
+  "description": "`bun upgrade` self-replaces; sha256 from GitHub API, TLS-only trust.",
   "limitations": [
-    "Newly retrieved snapshot at the recorded commit, not historical release verification.",
-    "The source does not show a signing-key check; the digest source and GitHub API response are external to this repository.",
-    "Platform-specific replacement details are outside the cited body."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "d316760e8cae0d69ae927898d5afc933ecf34671"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected Bun self-updater supports a narrow primary C observation: release bytes are checked against a GitHub-derived digest and the candidate executable is version-checked before replacement. The source also exposes an environment-controlled TLS rejection setting, so the transport trust boundary is not simply fixed by this function.",
+    "limitations": [
+      "Newly retrieved snapshot at the recorded commit, not historical release verification.",
+      "The source does not show a signing-key check; the digest source and GitHub API response are external to this repository.",
+      "Platform-specific replacement details are outside the cited body."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "self-update",
+  "transport": "https (validated)",
+  "payload_verification": "hash (GitHub API digest)",
+  "trust_root": "none",
+  "original_evidence": []
 }

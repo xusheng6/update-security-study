@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/visualboyadvance-m/visualboyadvance-m",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "VBA-M includes platform updater components; the specific EdDSA/appcast verification claim remains unresolved from the reviewed snapshot.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Sparkle auto-install, but the EdDSA pubkey is commented out and appcast sig is empty — payloads unverified.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,23 @@
       "commit": "c5d79e21e08746569269d45e70d44162ecc5ed74"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "VBA-M includes platform updater components; the specific EdDSA/appcast verification claim remains unresolved from the reviewed snapshot.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (+HTTP fallback)",
+  "payload_verification": "none (EdDSA key commented out)",
+  "trust_root": "none",
+  "original_evidence": []
 }

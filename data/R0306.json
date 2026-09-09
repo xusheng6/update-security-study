@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/authpass/authpass",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports the narrow recorded behavior: AuthPass configures its WinSparkle appcast but does not set a DSA public key; the retained updater path therefore has no configured payload signature trust root.",
+  "description": "WinSparkle over HTTPS but never calls win_sparkle_set_dsa_pub_pem — no payload signature verification.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "The retained snapshot does not establish current released artifact behavior or independent release signing.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "ceb3b3ea22f64ead1eb93b31b1f0657b7844631a"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports the narrow recorded behavior: AuthPass configures its WinSparkle appcast but does not set a DSA public key; the retained updater path therefore has no configured payload signature trust root.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "The retained snapshot does not establish current released artifact behavior or independent release signing.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-V3.md",
+      "line": 12,
+      "text": "| AuthPass | https://github.com/authpass/authpass.git | def4e7c 2026-08-21 | Y (Windows only) | Y | Y | https, TLS enforced (no disabling found) | N (appcast.xml over HTTPS, not separately signed) | none configured — WinSparkle exposes `win_sparkle_set_dsa_pub_pem` but AuthPass never calls it | server-supplied/unpinned (no key set) | authpass/lib/utils/winsparkle_init.dart:17-20 (appcast URL set, no dsa_pub_pem call); clones-V3/winsparkle_flutter_dep/lib/src/typedefs.dart:72-80 (API exists, unused) |"
+    }
+  ]
 }

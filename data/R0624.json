@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/sn4k3/UVtools",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The retained UVtools UI integrates the external Updatum package, checks for updates at startup when configured, and sets macOS code-signing validation in its manager configuration. Payload verification and released-artifact behavior remain delegated to the unvendored dependency and release pipeline.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Updatum GitHub-releases updater; no payload signature visible (verification in the unvendored dependency).",
   "limitations": [
-    "Newly recovered default-branch snapshot, not historical release re-verification.",
-    "Updatum package source, generated release metadata, non-macOS validation, and released artifact provenance were not audited.",
-    "Newly recovered default-branch snapshot, not historical release re-verification. Updatum package source, generated release metadata, non-macOS validation, and released artifact provenance were not audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "ae341e6909ef3358d23c6559fa6527b7850ac737"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained UVtools UI integrates the external Updatum package, checks for updates at startup when configured, and sets macOS code-signing validation in its manager configuration. Payload verification and released-artifact behavior remain delegated to the unvendored dependency and release pipeline.",
+    "limitations": [
+      "Newly recovered default-branch snapshot, not historical release re-verification.",
+      "Updatum package source, generated release metadata, non-macOS validation, and released artifact provenance were not audited.",
+      "Newly recovered default-branch snapshot, not historical release re-verification. Updatum package source, generated release metadata, non-macOS validation, and released artifact provenance were not audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none (unvendored)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AN7.md",
+      "line": 16,
+      "text": "| UVtools | https://github.com/sn4k3/UVtools.git | ae341e6 / 2026-08-20 | Y | N (prompts user; has explicit \"Auto update\" vs \"Manual update\" button) | Y (`DownloadAndInstallUpdateAsync`) | https (GitHub releases via `Updatum` NuGet pkg) | N (no signature check visible in this repo) | none visible in this repo — verification logic lives inside the external `Updatum` NuGet dependency (github.com/sn4k3/Updatum), not vendored here; `InstallUpdateCodesignMacOSApp=true` just ad-hoc re-signs the replaced macOS binary locally to satisfy Gatekeeper, it does not validate the *downloaded* payload against anything pinned | server-supplied/unpinned (GitHub API/releases over TLS) | `UVtools.UI/UVtools.UI.csproj:44` `<PackageReference Include=\"Updatum\" Version=\"1.4.0\"/>`; `App.axaml.cs:62-67` `UpdatumManager AppUpdater = new(...) { InstallUpdateCodesignMacOSApp = true, ... }`; `MainWindow.axaml.cs:1392-1440` `MenuNewVersionClicked()` → `AppUpdater.DownloadAndInstallUpdateAsync(release, ...)` on \"Auto update\" click. |"
+    }
+  ]
 }

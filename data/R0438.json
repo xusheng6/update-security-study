@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/openhab/openhab-addons",
   "channel": "unresolved",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The retained openHAB candidate is the add-ons packaging tree. It does not establish the runtime marketplace installer or its artifact-authentication policy; withdraw the original classification based on this component.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Marketplace/KAR installer, server-TLS-only, no pinned payload.",
   "limitations": [
-    "New default-branch snapshot, not the historical openHAB release under study.",
-    "The openHAB runtime marketplace/add-on installer and release artifact controls were not reviewed; the add-ons build tree cannot establish them.",
-    "New default-branch snapshot, not the historical openHAB release under study. The openHAB runtime marketplace/add-on installer and release artifact controls were not reviewed; the add-ons build tree cannot establish them."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,36 @@
       "commit": "4456a5b4c1dc66192f86d41e525de25b4de5efb4"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The retained openHAB candidate is the add-ons packaging tree. It does not establish the runtime marketplace installer or its artifact-authentication policy; withdraw the original classification based on this component.",
+    "limitations": [
+      "New default-branch snapshot, not the historical openHAB release under study.",
+      "The openHAB runtime marketplace/add-on installer and release artifact controls were not reviewed; the add-ons build tree cannot establish them.",
+      "New default-branch snapshot, not the historical openHAB release under study. The openHAB runtime marketplace/add-on installer and release artifact controls were not reviewed; the add-ons build tree cannot establish them."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AC6.md",
+      "line": 19,
+      "text": "| openHAB (openhab-core) | https://github.com/openhab/openhab-core | b9c3646 / 2026-08-20 | N (self-distro update via apt/docker only; no in-app self-updater for the app itself) | N | N | N/A | N/A | N/A | N/A | negative census: no checkForUpdate/self-update string for openHAB itself; only device \"FirmwareUpdateService\" (device firmware, out of scope) |"
+    },
+    {
+      "file": "batch-AC6.md",
+      "line": 20,
+      "text": "| openHAB Marketplace/Add-on installer (content channel — Karaf KAR add-ons) | (same repo) | b9c3646 / 2026-08-20 | Y | N (user-triggered install via UI) | Y | https URL fetched via `URL.openStream()` (Java default, cert validation not disabled) | N | NONE — no hash/signature check at all | N/A | bundles/org.openhab.core.addon.marketplace.karaf/.../CommunityKarafAddonHandler.java:110-155 (install() → addKarToCache() → `sourceUrl.openStream()` → `Files.copy()`, then `karService.install()` with zero integrity check) |"
+    }
+  ]
 }

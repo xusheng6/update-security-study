@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/qier222/YesPlayMusic",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "YesPlayMusic invokes electron-updater outside development mode and configures GitHub publishing. The original claim that releases have no code-signing protection remains unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "electron-updater, no code-signing.",
   "limitations": [
-    "New default-branch snapshot rather than the original study release; no complete runtime updater integration or auditable release-signing decision was established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "df075cca247eab7bf8686155cb8cc9a1f4c7e271"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "YesPlayMusic invokes electron-updater outside development mode and configures GitHub publishing. The original claim that releases have no code-signing protection remains unresolved.",
+    "limitations": [
+      "New default-branch snapshot rather than the original study release; no complete runtime updater integration or auditable release-signing decision was established."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "hash (sha512, unsigned)",
+  "trust_root": "server-TLS",
+  "original_evidence": [
+    {
+      "file": "batch-P1.md",
+      "line": 3,
+      "text": "| YesPlayMusic | https://github.com/qier222/YesPlayMusic | Electron (electron-builder + electron-updater, GitHub provider) | Y | Y (checkForUpdatesAndNotify runs on startup; autoDownload defaults true, not overridden) | Y (electron-updater downloads installer to temp dir; quitAndInstall triggered via built-in update-downloaded notification handler from checkForUpdatesAndNotify) | https (GitHub Releases API/CDN) | N (no separate signed manifest doc; latest.yml/latest-mac.yml served over HTTPS from GitHub Releases) | hash-from-manifest (electron-updater compares downloaded artifact's sha512 to value embedded in latest*.yml fetched from the release) | N/A — no signing key found; no CSC_LINK/code-signing secrets referenced in CI, so no OS code-signing layer confirmed | src/background.js:28 (`import { autoUpdater } from 'electron-updater'`); src/background.js:267-293 (`checkForUpdates()`, `autoUpdater.checkForUpdatesAndNotify()`, `update-available` handler); vue.config.js:95-97 (`publish: [{ provider: 'github' }]`); .github/workflows/build.yaml (no CSC_LINK/signing secrets present) |"
+    }
+  ]
 }

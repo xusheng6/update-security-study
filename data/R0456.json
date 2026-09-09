@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/AGProjects/blink-qt",
   "channel": "plugin",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In the inspected Blink Windows source, WinSparkle is initialized with the configurable updater_url, whose default is an HTTPS appcast URL; this checkout contains no application-level DSA/EdDSA key configuration, while WinSparkle DLL verification remains unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Windows WinSparkle, HTTPS appcast, but no DSA/EdDSA key configured — unauthenticated payload.",
   "limitations": [
-    "New default-branch snapshot, not the historical Blink release under study.",
-    "WinSparkle DLL/framework source and its runtime signature policy were not reviewed; absence of a key in Blink's Python wrapper is not evidence that the external library cannot verify signatures.",
-    "New default-branch snapshot, not the historical Blink release under study. WinSparkle DLL/framework source and its runtime signature policy were not reviewed; absence of a key in Blink's Python wrapper is not evidence that the external library cannot verify signatures."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "a6485ba79905bbe92ec1acf264dc4b44a5edea4a"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In the inspected Blink Windows source, WinSparkle is initialized with the configurable updater_url, whose default is an HTTPS appcast URL; this checkout contains no application-level DSA/EdDSA key configuration, while WinSparkle DLL verification remains unresolved.",
+    "limitations": [
+      "New default-branch snapshot, not the historical Blink release under study.",
+      "WinSparkle DLL/framework source and its runtime signature policy were not reviewed; absence of a key in Blink's Python wrapper is not evidence that the external library cannot verify signatures.",
+      "New default-branch snapshot, not the historical Blink release under study. WinSparkle DLL/framework source and its runtime signature policy were not reviewed; absence of a key in Blink's Python wrapper is not evidence that the external library cannot verify signatures."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none (no key set)",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AD1.md",
+      "line": 13,
+      "text": "| Blink | https://github.com/AGProjects/blink-qt | a6485ba / 2026-07-22 | Y (Windows only; `UpdateManager = Null` no-op on macOS/Linux) | Y (`winsparkle_init()` called on app start, background appcast fetch) | Y (WinSparkle downloads+launches installer on user confirm) | HTTPS (`https://blink.sipthor.net/BlinkQTAppcast.xml` default), enforced by OS TLS stack — no disabling found | N (no DSA/EdDSA pubkey wired up) | none — no `win_sparkle_set_dsa_pub_pem`/`set_ed_pub_key` call anywhere in repo | none/unpinned | blink/update/windows.py:34-77 (WinSparkle init/appcast, no pubkey call), blink/configuration/settings.py:72 (`updater_url` default) |"
+    }
+  ]
 }

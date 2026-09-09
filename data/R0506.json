@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/danpros/htmly",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The hub updater downloads the zipball and unzips it directly into the installation.",
+  "description": "Update zips over HTTPS, no signature.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "c8b7ed9af39a266b256759becf26dba6a59e11e6"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The hub updater downloads the zipball and unzips it directly into the installation.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AF7.md",
+      "line": 14,
+      "text": "| HTMLy | https://github.com/danpros/htmly.git | c8b7ed9af39a266b256759becf26dba6a59e11e6 / 2026-01-25 | Y | N (admin clicks \"Update to X now\" link) | Y | https, TLS enforced (`verify_peer=true` + explicit `cafile` via Composer CaBundle; constructor throws if no HTTPS wrapper) | N | none (no hash/sig check on downloaded zipball) | server-supplied/unpinned (github.com API + zipball, standard CA trust) | `system/admin/views/update.html.php:8-46` builds `Kanti\\HubUpdater`; `system/htmly.php:2665-2675` route `/admin/update/now/:csrf` calls `$updater->update()`; `system/vendor/kanti/hub-updater/src/HubUpdater.php:90-116` (TLS setup), `:173-192` `update()` downloads `zipball_url` and unzips directly over the install (`unZip()` at `:225-249`) with no signature/hash verification of contents. |"
+    }
+  ]
 }

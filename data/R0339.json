@@ -5,14 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/MetaCubeX/mihomo",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Mihomo’s Clash-Meta update claim remains withheld because the retained and freshly retrieved candidates contain a different Python project. The intended Go implementation and release identity remain unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "POST /upgrade downloads a new core binary over validated HTTPS with zero signature/hash and overwrites the running executable — and this core is embedded by many downstream GUI clients.",
   "limitations": [
-    "Recorded checkout tracks an unrelated Python API project.",
-    "Canonical Meta branch files for hub/route/upgrade.go, component/updater/update_core.go, and component/ca/config.go are not materialized here.",
-    "No conclusion about signature, checksum, TLS roots, overwrite behavior, or downstream embedding is supported.",
-    "Recorded checkout tracks an unrelated Python API project. Canonical Meta branch files for hub/route/upgrade.go, component/updater/update_core.go, and component/ca/config.go are not materialized here. No conclusion about signature, checksum, TLS roots, overwrite behavior, or downstream embedding is supported."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,37 @@
       "commit": "008b91bfe8c0e2daca0ab69061efd9ea1ad71bd2"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Mihomo’s Clash-Meta update claim remains withheld because the retained and freshly retrieved candidates contain a different Python project. The intended Go implementation and release identity remain unresolved.",
+    "limitations": [
+      "Recorded checkout tracks an unrelated Python API project.",
+      "Canonical Meta branch files for hub/route/upgrade.go, component/updater/update_core.go, and component/ca/config.go are not materialized here.",
+      "No conclusion about signature, checksum, TLS roots, overwrite behavior, or downstream embedding is supported.",
+      "Recorded checkout tracks an unrelated Python API project. Canonical Meta branch files for hub/route/upgrade.go, component/updater/update_core.go, and component/ca/config.go are not materialized here. No conclusion about signature, checksum, TLS roots, overwrite behavior, or downstream embedding is supported."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-W6.md",
+      "line": 27,
+      "text": "| Mihomo / Clash Meta core | https://github.com/MetaCubeX/mihomo (branch `Meta`) | ac017cd / 2026-08-16 | Y | N (triggered via local REST API `POST /upgrade`, e.g. by a GUI front-end) | Y | https, TLS validated (custom embedded CA bundle via `ca.Option{ZeroTrust:true}`; confirmed this does NOT set `InsecureSkipVerify` — it only swaps which root CA pool is trusted) | N | **none** — no signature/checksum check of the downloaded core binary anywhere | n/a | `hub/route/upgrade.go:15-53` (`POST /upgrade` → `upgradeCore` → `updater.DefaultCoreUpdater.Update`), `component/updater/update_core.go:83-172` (downloads `mihomo-<os>-<arch>-<ver>.zip/.gz` from `https://github.com/MetaCubeX/mihomo/releases/...`, unpacks, backs up, `copyFile` overwrites the running executable; on darwin only does an **ad-hoc self-`codesign --sign -`**, which is not authenticity verification), `component/ca/config.go:83-100` (`ZeroTrust` only changes RootCAs, not `InsecureSkipVerify`) |"
+    },
+    {
+      "file": "batch-W6.md",
+      "line": 28,
+      "text": "| Mihomo — geoip/geosite database updater (data channel, noted) | (same repo) | | Y | Y | N | https, same TLS handling as above | N | \"hash\" comparison is old-vs-new **change detection only**, not authenticity | n/a | `component/updater/update_geo.go:53,84,117,147` (`data, hash, err := vehicle.Read(...); if oldHash.Equal(hash) { ignored }` — purely a cache/staleness check) |"
+    }
+  ]
 }

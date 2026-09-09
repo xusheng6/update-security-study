@@ -5,14 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/advanced-rest-client/arc-electron",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Advanced REST Client integrates electron-updater and code-signing build hooks. Historical CI signing credentials and released-artifact enforcement remain unverified.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater, forceCodeSigning with real CI cert secrets (archived ~2022 but config legit).",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the archived ~2022 study checkout.",
-    "The source configuration does not establish that real CI certificate secrets were available or used for a released artifact.",
-    "electron-updater framework enforcement and independent released-artifact signatures were not verified from this source snapshot.",
-    "This is a newly retrieved default-branch snapshot, not the archived ~2022 study checkout. The source configuration does not establish that real CI certificate secrets were available or used for a released artifact. electron-updater framework enforcement and independent released-artifact signatures were not verified from this source snapshot."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "4a40ffe7cb044fa1a2f828a5e0ebff3651ee28a9"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Advanced REST Client integrates electron-updater and code-signing build hooks. Historical CI signing credentials and released-artifact enforcement remain unverified.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the archived ~2022 study checkout.",
+      "The source configuration does not establish that real CI certificate secrets were available or used for a released artifact.",
+      "electron-updater framework enforcement and independent released-artifact signatures were not verified from this source snapshot.",
+      "This is a newly retrieved default-branch snapshot, not the archived ~2022 study checkout. The source configuration does not establish that real CI certificate secrets were available or used for a released artifact. electron-updater framework enforcement and independent released-artifact signatures were not verified from this source snapshot."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "OS code-signing",
+  "trust_root": "electron-updater (forceCodeSigning:true)",
+  "original_evidence": [
+    {
+      "file": "batch-W4.md",
+      "line": 20,
+      "text": "| Advanced REST Client (arc-electron) | https://github.com/advanced-rest-client/arc-electron.git | 4a40ffe7cb / 2022-03-02 (repo appears inactive/archived) | Y | Y (auto-checks 5s after start, default `autoDownload`) | Y | https (GitHub Releases via electron-updater) | Y | OS code-signing (Squirrel.Mac / Authenticode via electron-updater) | OS keystore (real signing: CI wires `mac_certs`/`windows_certs` secrets) | src/io/ApplicationUpdater.js:1 (`import { autoUpdater } from 'electron-updater'`), :104-120 (`start()` auto-checks after 5s unless disabled), :231-239 (`quitAndInstall()` on download-ready); package.json:150 (`forceCodeSigning: true`), :154 (`afterSign: electron-builder-notarize`); .github/workflows/test-and-publish.yml:61-64 (real `mac_certs`/`windows_certs` secrets passed to the publish action) |"
+    }
+  ]
 }

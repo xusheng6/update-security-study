@@ -5,12 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/microsoft/PowerToys",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "B",
-  "description": "Targeted retained-source read supports the narrow primary updater classification: PowerToys verifies the exact installer handle with WinVerifyTrust, checks Microsoft signer identity and revocation state, and pins expected product identity before launch.",
+  "description": "Verifies installer Authenticode chain, pins signer='Microsoft Corporation', checks revocation, pins MSI UpgradeCode to block confused-deputy (anti-TOCTOU, cites an MSRC case). Well-hardened.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in configuration.",
-    "Where electron-updater/Squirrel/install4j performs final verification, the external framework implementation is not vendored here."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "5759a62d4aef058e791e8a3e31af972f05fd61eb"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow primary updater classification: PowerToys verifies the exact installer handle with WinVerifyTrust, checks Microsoft signer identity and revocation state, and pins expected product identity before launch.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in configuration.",
+      "Where electron-updater/Squirrel/install4j performs final verification, the external framework implementation is not vendored here."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "B",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "Authenticode (signer + product pinned)",
+  "trust_root": "OS trust + hardcoded signer org",
+  "original_evidence": [
+    {
+      "file": "batch-AL2.md",
+      "line": 27,
+      "text": "| PowerToys | https://github.com/microsoft/PowerToys | 5759a62d4aef / 2026-08-21 | Y | Y (opt-in \"download automatically\", default triggers on periodic check; user still confirms install unless configured) | Y | https (`winrt::Windows::Web::Http::HttpClient` to `api.github.com` / GitHub release CDN; no cert-validation override found in src/common/utils/HttpClient.h) | n/a (installer itself is Authenticode-signed, not a JSON manifest) | Authenticode signature (WinVerifyTrust) + organization pin + product-identity pin (MSI UpgradeCode / exe version resource) | OS certificate store (Windows Trust/Authenticode chain to a trusted root CA) — not a key pinned in the PowerToys binary itself | src/common/updating/updating.cpp:18-19 (`https://api.github.com/repos/microsoft/PowerToys/releases[/latest]`), :161-187 (`download_new_version_async` → `HttpClient::download`); src/common/updating/installer.cpp:281-352 (`verify_installer_trust`: WinVerifyTrust + `verified_signer_is_microsoft` org-name pin at :83-113 + revocation check :121-145 + `is_expected_powertoys_installer` UpgradeCode/version-resource pin :215-278); src/Update/PowerToys.Update.cpp:263-266 calls `verify_installer_trust` before `ShellExecuteExW` elevated launch at :285, with an explicit TOCTOU-closing comment at :242-245. |"
+    }
+  ]
 }

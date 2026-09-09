@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/newmarcel/KeepingYouAwake",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The direct macOS build uses Sparkle's standard updater controller with release and prerelease appcast feeds pointing to GitHub release archives; the checked snapshot does not establish the feed/package trust key or the separate Mac App Store update path.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Sparkle with no key (separate MAS build uses Apple's updater).",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "The checked source does not document the production Sparkle trust key or prove the MAS build's updater implementation.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout. The checked source does not document the production Sparkle trust key or prove the MAS build's updater implementation."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "2be93dd7f390b23fbca934ff3b1ac03468a80077"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The direct macOS build uses Sparkle's standard updater controller with release and prerelease appcast feeds pointing to GitHub release archives; the checked snapshot does not establish the feed/package trust key or the separate Mac App Store update path.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "The checked source does not document the production Sparkle trust key or prove the MAS build's updater implementation.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout. The checked source does not document the production Sparkle trust key or prove the MAS build's updater implementation."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (github.io)",
+  "payload_verification": "none (Sparkle, no key)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-K1.md",
+      "line": 14,
+      "text": "| KeepingYouAwake | newmarcel/KeepingYouAwake | Sparkle (direct-download build only; separate MAS build target has no Sparkle and relies on Apple's App Store update mechanism instead — two entitlements files / `KYA_APP_UPDATER_ENABLED=1` flag distinguish them) | Y (direct build) / N (MAS build) | chk: true by default (`SUEnableAutomaticChecks`); dl/inst: Sparkle standard prompt | Y (direct build) | https (`https://newmarcel.github.io/KeepingYouAwake/appcast.xml`, plus a prerelease variant) | **NONE** — no `SUPublicEDKey`/`SUPublicDSAKey` anywhere in repo | none | none | KeepingYouAwake/Info.plist:20-30; KeepingYouAwake/KYAAppUpdater/KYAAppUpdater.m:1-70; KeepingYouAwake.xcodeproj/project.pbxproj:1152,1180; dual entitlements files (`-Direct` vs MAS) |"
+    }
+  ]
 }

@@ -5,14 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/meetfranz/franz",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Franz's reviewed main-process code uses electron-updater for macOS, Windows, and APPIMAGE environments and calls checkForUpdates or quitAndInstall through IPC. Its builder configuration targets macOS, Windows NSIS, and Linux AppImage/deb/tar.gz; published artifact signing and the claimed Linux signing state remain unresolved from this snapshot.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater with code-signing on mac/Win (Tier B); the Linux AppImage leg is unsigned (C). Largely abandoned (see Ferdium fork).",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
-    "Builder targets and source integration do not prove publisher signatures on released artifacts; no release assets or updater metadata were independently reviewed.",
-    "No build or execution was performed.",
-    "This is a newly retrieved default-branch snapshot, not the original study checkout. Builder targets and source integration do not prove publisher signatures on released artifacts; no release assets or updater metadata were independently reviewed. No build or execution was performed."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "94b1ef298aa72a41eac448f4e5e21a74d857f2fa"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Franz's reviewed main-process code uses electron-updater for macOS, Windows, and APPIMAGE environments and calls checkForUpdates or quitAndInstall through IPC. Its builder configuration targets macOS, Windows NSIS, and Linux AppImage/deb/tar.gz; published artifact signing and the claimed Linux signing state remain unresolved from this snapshot.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+      "Builder targets and source integration do not prove publisher signatures on released artifacts; no release assets or updater metadata were independently reviewed.",
+      "No build or execution was performed.",
+      "This is a newly retrieved default-branch snapshot, not the original study checkout. Builder targets and source integration do not prove publisher signatures on released artifacts; no release assets or updater metadata were independently reviewed. No build or execution was performed."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "sha512 + OS code-signing",
+  "trust_root": "electron-updater",
+  "original_evidence": [
+    {
+      "file": "batch-U8.md",
+      "line": 27,
+      "text": "| Franz | https://github.com/meetfranz/franz | 94b1ef2 / 2026-06-12 | Y | Y (`setInterval` in `AppStore.js:143`) | Y (mac/win/AppImage) | https, TLS enforced, no bypass found | manifest present (electron-builder default), not independently signed | mac/win: OS code-sign (electron-updater default); Linux AppImage: hash (server-supplied) | mac/win: OS keystore; Linux: server-supplied | src/electron/ipc-api/autoUpdate.js:1-60; src/stores/AppStore.js:143 |"
+    }
+  ]
 }

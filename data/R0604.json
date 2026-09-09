@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/epi052/feroxbuster",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Targeted source read supports this narrow assessment: The explicit update command uses self_update GitHub backend with no checksum or signature feature configured.",
+  "description": "`-U` self-update (Rust self_update), zero checksum/signature.",
   "limitations": [
-    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
-    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "378d75964c45db9c92826316ff631d34d59396c7"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted source read supports this narrow assessment: The explicit update command uses self_update GitHub backend with no checksum or signature feature configured.",
+    "limitations": [
+      "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+      "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AM2.md",
+      "line": 21,
+      "text": "| feroxbuster | https://github.com/epi052/feroxbuster.git | 378d759 / 2026-04-15 | Y | **N** (requires explicit `-U`/`--update` flag; opt-in only) | **Y** (replaces the running binary in place) | https, GitHub Releases API (`self_update` crate's default HTTP client; TLS enforced by default, no override found) | N | **none** — no checksum/signature feature enabled | N/A — no verification performed | `src/main.rs:44,232-234,621-637` (`update_app`, calls `self_update::backends::github::Update`); `src/parser.rs:728` (`--update`/`-U` flag def); `src/banner/container.rs:16` (`UPDATE_URL`); `Cargo.toml:62-67` (`self_update = {version=\"0.40\", features=[\"archive-tar\",\"compression-flate2\",\"archive-zip\",\"compression-zip-deflate\"]}` — note the absence of any checksum/`verifying_keys` feature) |"
+    }
+  ]
 }

@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/librenms/librenms",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The daily updater pulls or checks out newer LibreNMS code and, in its post-pull path, runs Composer installation for dependencies. The default configuration leaves daily updates enabled, so the source supports an automatic primary code-update path; no signature verification is shown.",
+  "description": "Cron-driven (default on) git pull + composer install over HTTPS, no GPG — automatic RCE-on-compromise path.",
   "limitations": [
-    "The checked-in path does not establish signed-commit verification or release provenance.",
-    "Snapshot is a newly retrieved default branch, not the historical study revision."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "7c6107ffb2c345fc16b29915a44ebd12eb370d91"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The daily updater pulls or checks out newer LibreNMS code and, in its post-pull path, runs Composer installation for dependencies. The default configuration leaves daily updates enabled, so the source supports an automatic primary code-update path; no signature verification is shown.",
+    "limitations": [
+      "The checked-in path does not establish signed-commit verification or release provenance.",
+      "Snapshot is a newly retrieved default branch, not the historical study revision."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AD3.md",
+      "line": 14,
+      "text": "| LibreNMS | https://github.com/librenms/librenms.git | 2be8a502009e78a2e1f350416f978f906c60756e (2026-08-19) | Y | Y (runs from cron via `daily.sh`, `update` config defaults ON — `$config['update']=0` is commented out by default) | Y (pulls new PHP source + runs `composer install`, i.e. downloads and executes new application code) | https (default `origin` remote is `https://github.com/librenms/librenms.git`) | N | git commit-hash integrity only; **no `git verify-commit`/GPG check** | none (git remote itself, unpinned) | `daily.sh:302-368` (`git checkout --quiet`, `git pull --quiet`, `git fetch --tags`, `git checkout ${latest_hash}`, then `composer install --no-dev`); `config.php.default:29-30` (`#$config['update'] = 0;` — update enabled by default) |"
+    }
+  ]
 }

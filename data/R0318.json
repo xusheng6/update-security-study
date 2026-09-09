@@ -5,14 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/WoeUSB/WoeUSB-ng",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The inspected WoeUSB-ng component concerns boot-image acquisition rather than updates to WoeUSB-ng itself. Keep that content channel separate; its artifact-authentication policy remains unestablished.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Downloads a UEFI bootloader image from GitHub-raw over HTTPS with zero hash/signature before writing it to the boot partition (self-documented FIXME).",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout.",
-    "The evidence is limited to the UEFI:NTFS support routine and does not characterize every WoeUSB-ng input or bootloader path.",
-    "The source observation does not independently establish the security impact or historical release behavior.",
-    "Newly retrieved default-branch snapshot, not the original study checkout. The evidence is limited to the UEFI:NTFS support routine and does not characterize every WoeUSB-ng input or bootloader path. The source observation does not independently establish the security impact or historical release behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,32 @@
       "commit": "cc52ffc6aedad12540c2315c9101e4a4b919d4be"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The inspected WoeUSB-ng component concerns boot-image acquisition rather than updates to WoeUSB-ng itself. Keep that content channel separate; its artifact-authentication policy remains unestablished.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout.",
+      "The evidence is limited to the UEFI:NTFS support routine and does not characterize every WoeUSB-ng input or bootloader path.",
+      "The source observation does not independently establish the security impact or historical release behavior.",
+      "Newly retrieved default-branch snapshot, not the original study checkout. The evidence is limited to the UEFI:NTFS support routine and does not characterize every WoeUSB-ng input or bootloader path. The source observation does not independently establish the security impact or historical release behavior."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-V8.md",
+      "line": 21,
+      "text": "| WoeUSB-ng | https://github.com/WoeUSB/WoeUSB-ng | cc52ffc / 2026-01-25 | N (no self-update) | Y (silent, automatic during normal \"create bootable USB\" workflow) | Y (downloads and writes a UEFI bootloader image executed by firmware at boot) | https, cert validation enforced (default `urllib.request`, no `ssl.CERT_NONE`/`check_hostname=False` found anywhere in the codebase) | N | none — file is written to the boot partition with zero hash/signature check | server-supplied/unpinned (trusts whatever bytes GitHub raw returns) | `src/WoeUSB/core.py:375` `urllib.request.urlretrieve(\"https://github.com/pbatard/rufus/raw/master/res/uefi/uefi-ntfs.img\", \"uefi-ntfs.img\")` inside `install_uefi_ntfs_support_partition()` (`core.py:361`), whose own docstring admits: \"FIXME: Currently this requires internet access to download the image from GitHub directly, it should be replaced by including the image in our datadir.\" The downloaded file is `shutil.copy2()`'d straight onto the UEFI:NTFS boot partition (`core.py:381`) with no checksum or signature check — a compromised GitHub raw CDN or a MITM of that one HTTPS connection (if TLS is ever broken) directly yields a malicious UEFI bootloader on the target device. |"
+    }
+  ]
 }

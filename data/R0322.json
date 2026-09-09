@@ -5,14 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/i2p/i2p.i2p",
   "channel": "mixed",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In the inspected I2P source snapshot, router-signed updates use TrustedUpdate multi-key DSA verification; unsigned router and plugin updates are separate paths. Historical release behavior remains unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "A",
+  "description": "DSA signature verified vs multiple pinned keys. (Unsigned-dev + plugin channels are separate weaker paths.)",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout.",
-    "Source controls do not establish historical release artifacts, publisher provenance, or enabled update mode.",
-    "Plugin evidence is a separate channel and is not generalized to router artifacts.",
-    "Newly retrieved default-branch snapshot, not the original study checkout. Source controls do not establish historical release artifacts, publisher provenance, or enabled update mode. Plugin evidence is a separate channel and is not generalized to router artifacts."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -20,7 +17,26 @@
       "commit": "0d801ffc99f509670db03901065789a8361b9724"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In the inspected I2P source snapshot, router-signed updates use TrustedUpdate multi-key DSA verification; unsigned router and plugin updates are separate paths. Historical release behavior remains unresolved.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout.",
+      "Source controls do not establish historical release artifacts, publisher provenance, or enabled update mode.",
+      "Plugin evidence is a separate channel and is not generalized to router artifacts.",
+      "Newly retrieved default-branch snapshot, not the original study checkout. Source controls do not establish historical release artifacts, publisher provenance, or enabled update mode. Plugin evidence is a separate channel and is not generalized to router artifacts."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "DSA signature",
+  "trust_root": "multiple keys pinned in binary",
+  "original_evidence": []
 }

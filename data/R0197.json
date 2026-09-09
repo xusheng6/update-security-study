@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Wox-launcher/Wox",
   "channel": "mixed",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Wox has separate primary-application and plugin update channels. The inspected primary updater compares the downloaded artifact with an MD5 value supplied by its selected update manifest. That observation does not establish independent publisher authentication or the plugin channel’s verification policy.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Go rewrite; auto-check/dl, MD5 from HTTPS manifest (weak); plugin channel no checksum.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not historical release re-verification; no network or exploitability testing was performed, and plugin behavior outside the reviewed normal-plugin path remains unclassified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,23 @@
       "commit": "fd6f264c739a58a3b27a42cb0a2988a37bb04b74"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Wox has separate primary-application and plugin update channels. The inspected primary updater compares the downloaded artifact with an MD5 value supplied by its selected update manifest. That observation does not establish independent publisher authentication or the plugin channel’s verification policy.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not historical release re-verification; no network or exploitability testing was performed, and plugin behavior outside the reviewed normal-plugin path remains unclassified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (raw.githubusercontent)",
+  "payload_verification": "hash (MD5)",
+  "trust_root": "none",
+  "original_evidence": []
 }

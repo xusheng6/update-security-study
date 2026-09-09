@@ -5,12 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/BruceMacD/chatd",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "B",
-  "description": "Targeted retained-source read supports the narrow primary updater behavior: The macOS updater sets its feed URL, checks immediately and hourly, and accepts the downloaded update for installation on restart; the Windows path is explicitly disabled by the surrounding condition/comment.",
+  "description": "macOS only; Windows auto-update disabled in code.",
   "limitations": [
-    "The retained snapshot does not establish all released artifact signing and deployment details of the current upstream release.",
-    "Framework-delegated verification behavior depends on the packaged updater and release configuration."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "a2160988a7f08ca682cbe4b07345868f7c1bc2d3"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow primary updater behavior: The macOS updater sets its feed URL, checks immediately and hourly, and accepts the downloaded update for installation on restart; the Windows path is explicitly disabled by the surrounding condition/comment.",
+    "limitations": [
+      "The retained snapshot does not establish all released artifact signing and deployment details of the current upstream release.",
+      "Framework-delegated verification behavior depends on the packaged updater and release configuration."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "B",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "OS code-signing (mac)",
+  "trust_root": "electron-updater",
+  "original_evidence": [
+    {
+      "file": "batch-AE1.md",
+      "line": 28,
+      "text": "| chatd | https://github.com/BruceMacD/chatd | a216098 / 2024-05-26 | Y (Electron `autoUpdater`, macOS only — Windows path explicitly disabled due to a known bug) | Y (checks hourly via `setInterval`) | Y | https (`chatd.ai/api/update`, TLS enforced) | Squirrel-validated bundle (mac) | OS code-signing (Squirrel.Mac) | OS keystore (mac codesign identity) | `src/index.js:30,102-123` |"
+    }
+  ]
 }

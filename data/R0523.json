@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/FOGProject/fogproject",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "D",
-  "description": "The updater script disables certificate checks for version and tarball downloads, extracts the archive, and runs installfog.sh unattended. No independent payload authentication is present.",
+  "description": "fogupdater.sh fetches the version check + release tarball with wget --no-check-certificate (plaintext-HTTP SourceForge fallback), then runs installfog.sh -y as root with no signature/hash check → MITM to root RCE. VENDOR-CONFIRMED & FIXED: maintainer patched it to GitHub over enforced HTTPS (PR #1385/#1386); advisory GHSA-qp3r-8mwm-vg6h, CVE pending.",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -21,7 +21,29 @@
       "commit": "9f3b5a8960aa840bda9876a2bda3ddb03d71328e"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The updater script disables certificate checks for version and tarball downloads, extracts the archive, and runs installfog.sh unattended. No independent payload authentication is present.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "D",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "http + https (validation off)",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AG1.md",
+      "line": 16,
+      "text": "| FOG Project | https://github.com/FOGProject/fogproject.git | 9f3b5a8 / 2026-08-11 | **Y** | Y (admin-triggered upgrade + legacy client-agent pull) | **Y** | **HTTP+HTTPS, TLS validation explicitly DISABLED** | N | hash only (MD5), server-supplied | server-supplied/unpinned | `utils/FOGUpdater/fogupdater.sh:14,17,25,43` — `wget --no-check-certificate` used for both the version-check call to `https://fogproject.org/version/index.php` and the tarball download; stable-channel mirrors are plain `http://*.dl.sourceforge.net` (line 25); downloaded tarball is extracted and `./installfog.sh -y` is executed immediately (no signature check, no hash check on the mirror download). Separately, `packages/web/lib/client/updateclient.class.php:56-113` implements a server-side \"ask\"/\"get\" legacy client-updater channel where the FOG client agent fetches an MD5 (`cuMD5`, stored in DB, attacker-controlled if DB/admin compromised) and the file itself from the FOG server with no signature — server IS the trust root. |"
+    }
+  ]
 }

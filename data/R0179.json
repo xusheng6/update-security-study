@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/notable/notable",
   "channel": "unresolved",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The recovered Notable repository documents that newer app versions are unavailable and does not provide the updater implementation needed to substantiate the claimed electron-updater SHA512 and Authenticode controls.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "Last OSS release: electron-updater SHA512 + Authenticode.",
   "limitations": [
-    "The recovered default-branch snapshot is newly retrieved and is not the original study checkout.",
-    "The implementation for the claimed historical release, including updater invocation, SHA512 handling, and Authenticode enforcement, is absent; the repository points to older tags but they were not treated as the claimed release without a release-specific audit.",
-    "The recovered default-branch snapshot is newly retrieved and is not the original study checkout. The implementation for the claimed historical release, including updater invocation, SHA512 handling, and Authenticode enforcement, is absent; the repository points to older tags but they were not treated as the claimed release without a release-specific audit."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "aee95988f3b0d8d0508b56eada087fcdab30a025"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The recovered Notable repository documents that newer app versions are unavailable and does not provide the updater implementation needed to substantiate the claimed electron-updater SHA512 and Authenticode controls.",
+    "limitations": [
+      "The recovered default-branch snapshot is newly retrieved and is not the original study checkout.",
+      "The implementation for the claimed historical release, including updater invocation, SHA512 handling, and Authenticode enforcement, is absent; the repository points to older tags but they were not treated as the claimed release without a release-specific audit.",
+      "The recovered default-branch snapshot is newly retrieved and is not the original study checkout. The implementation for the claimed historical release, including updater invocation, SHA512 handling, and Authenticode enforcement, is absent; the repository points to older tags but they were not treated as the claimed release without a release-specific audit."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "hash + OS-code-signing",
+  "trust_root": "OS-trust-store",
+  "original_evidence": [
+    {
+      "file": "batch-K4.md",
+      "line": 14,
+      "text": "| Notable | notable/notable — **current versions are closed-source** (per repo's SOURCE_CODE.md); analysis is of the last public release, tag `v1.5.1` (AGPL-3.0) | Electron (electron-builder), electron-updater ^4.0.6 | Y (confirmed for last open-source release; current closed-source releases unknown) | auto-check + auto-download (`checkForUpdatesAndNotify`), user notified; install applied on quit / next restart (electron-updater v4 default `autoInstallOnAppQuit=true`) | Y | HTTPS — GitHub Releases (`publish.provider: \"github\"`) | N — electron-builder's generated `latest.yml`/`latest-mac.yml` is a plain unsigned YAML file, not detached-signed | hash-from-manifest (SHA512) + OS-code-signing (Windows NSIS differential-update publisher-name check, `verifyUpdateCodeSignature` defaults to true in electron-updater v4) | SHA512 hash embedded in the electron-builder-generated `latest.yml` fetched over HTTPS from GitHub Releases (no separate detached signature); Windows publisher check uses the installer's own Authenticode signing certificate | src/main/app.ts:5,203-225 (`import {autoUpdater as updater} from 'electron-updater'`, `updater.checkForUpdatesAndNotify()`); package.json:108-112 (`publish`: provider github, owner notable, publishAutoUpdate true); package.json:151 (`electron-updater\": \"^4.0.6\"`); SOURCE_CODE.md (current app is closed-source, unverifiable) |"
+    }
+  ]
 }

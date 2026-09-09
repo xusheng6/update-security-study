@@ -5,11 +5,11 @@
   "historical_tier": "D",
   "project_url": "https://github.com/causefx/Organizr",
   "channel": "plugin",
-  "review_status": "Source observation",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "The marketplace helper disables verify_peer only when a non-empty GitHub token is configured; the default token is empty. Plugin/theme installs therefore support an opt-in plugin-channel finding, not a default primary updater tier.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "D",
+  "description": "Self-updater is C (HTTPS, no payload verify), but the Plugin/Theme Marketplace explicitly sets verify_peer=>false for the GitHub hosts it downloads executable PHP plugin code from — TLS bypass on a code path. [Opus-verified: CONFIRMED-D]",
   "limitations": [
-    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "6b27515ff3bc6f4998ed83aca8c08be0998fd118"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The marketplace helper disables verify_peer only when a non-empty GitHub token is configured; the default token is empty. Plugin/theme installs therefore support an opt-in plugin-channel finding, not a default primary updater tier.",
+    "limitations": [
+      "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (validation off)",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-X4.md",
+      "line": 18,
+      "text": "| Organizr | https://github.com/causefx/Organizr | 6b27515 / 2026-05-19 | Y | N (admin-triggered via authenticated `/api/v2/update` routes; not scheduled) | Y (downloads a branch zip from GitHub, unzips, and overwrites the live PHP application tree — code that executes on the very next HTTP request) | Main updater: https with `verify_peer => true` (good). **Plugin/Theme \"Marketplace\" side channel: `verify_peer => false` explicitly set** when downloading from api.github.com/raw.githubusercontent.com with a configured GitHub token — TLS cert validation DISABLED in code | N | none (self-update: no hash/signature on the downloaded zip at all) | N/A | api/functions/update-functions.php:172-247 (`upgradeInstall`: downloads `https://github.com/causefx/Organizr/archive/{branch}.zip`, `unzipFile`, `rcopy` overwrites live app dir, no verification); api/classes/organizr.class.php:6423-6443 (`downloadFile`, `verify_peer=>true`) vs api/classes/organizr.class.php:6473-6489 (`downloadFileToPath`, **`verify_peer=>false`** for github.com/raw.githubusercontent.com when access token set — used by Theme/Plugin Marketplace at api/classes/organizr.class.php:5812 and :5998, installs downloaded PHP files directly = content-as-code, D-equivalent for that channel) |"
+    }
+  ]
 }

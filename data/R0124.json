@@ -5,12 +5,11 @@
   "historical_tier": "A",
   "project_url": "https://github.com/keeweb/keeweb",
   "channel": "primary",
-  "review_status": "Detailed recheck",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "A",
-  "description": "The original A tier is supported by concrete application-side enforcement: the platform asset is accompanied by a detached signature, the asset bytes are checked with RSASSA-PKCS1-v1_5/SHA-256, and verification uses bundled public-key resources before the update is marked ready. The autoUpdate default is install, so the original auto-off detail is false and must be corrected. The unsigned version manifest and the fact that the later installer launches a cached asset limit the broader security conclusion, but they do not contradict the observed payload signature control or warrant changing the tier.",
+  "description": "Custom Electron updater verifies RSA-SHA256 vs an embedded pubkey before executing; auto off by default.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot at commit ad7891de92cf666400a6b4c859eeb731b0f68761, not the original study checkout; historical release behavior may differ.",
-    "This review establishes application-side signature verification and the default setting; release administration, key custody, TLS behavior outside the reviewed code, and platform installer internals are not established."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "ad7891de92cf666400a6b4c859eeb731b0f68761"
     }
   ],
-  "review_basis": "deep-source-recheck",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The original A tier is supported by concrete application-side enforcement: the platform asset is accompanied by a detached signature, the asset bytes are checked with RSASSA-PKCS1-v1_5/SHA-256, and verification uses bundled public-key resources before the update is marked ready. The autoUpdate default is install, so the original auto-off detail is false and must be corrected. The unsigned version manifest and the fact that the later installer launches a cached asset limit the broader security conclusion, but they do not contradict the observed payload signature control or warrant changing the tier.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot at commit ad7891de92cf666400a6b4c859eeb731b0f68761, not the original study checkout; historical release behavior may differ.",
+      "This review establishes application-side signature verification and the default setting; release administration, key custody, TLS behavior outside the reviewed code, and platform installer internals are not established."
+    ],
+    "review_status": "Detailed recheck",
+    "review_basis": "deep-source-recheck",
+    "proposed_primary_tier": "A",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "signature[RSA-SHA256]",
+  "trust_root": "pinned-in-binary",
+  "original_evidence": [
+    {
+      "file": "batch-H6.md",
+      "line": 3,
+      "text": "| KeeWeb | github.com/keeweb/keeweb | Electron (custom updater, not electron-updater) | Y | user-configurable: `AppSettingsModel.autoUpdate` unset by default → periodic checks only scheduled when a user turns on auto-update (`'notify'` or `'install'`); manual \"check for updates\" always available; updater disabled entirely on Linux | Y | HTTPS: `Links.UpdateJson = https://app.keeweb.info/update.json` (unsigned version manifest) + `Links.UpdateBasePath = https://github.com/keeweb/keeweb/releases/download/v{ver}/` for the installer asset and a separate `Verify.sign.sha256` file; TLS validation ENFORCED (no `rejectUnauthorized`/`NODE_TLS_REJECT_UNAUTHORIZED`/`checkServerIdentity` bypass found in app/scripts) | N (update.json is a plain unsigned JSON version/date manifest) | signature (RSASSA-PKCS1-v1_5, SHA-256) — the downloaded installer's SHA-256 digest is signed and verified via WebCrypto `subtle.verify` against an embedded RSA public key before install | embedded in app bundle: `app/scripts/public-key.pem` and `public-key-new.pem` (two allowed keys, first-match verification) | app/scripts/comp/app/updater.js:15-21 (enabled = `Launcher?.updaterEnabled()`, mac/win only per launcher-electron.js:205-207 `process.platform !== 'linux'`), :26-32 (`getAutoUpdateType` reads `AppSettingsModel.autoUpdate`, no repo-wide default found → falsy by default), :99-156 (`check()` GETs `Links.UpdateJson` over HTTPS, unsigned), :171-243 (`update()` downloads installer asset then a `Verify.sign.sha256` signature file), :245-268 (`verifySignature()` hex-decodes signature, calls `SignatureVerifier.verify`), app/scripts/util/data/signature-verifier.js:1-4,25-40,68-76 (RSASSA-PKCS1-v1_5/SHA-256 verify against `public-key.pem`/`public-key-new.pem`), app/scripts/const/links.js:10,13 (URLs), desktop/scripts/update-installer.js:6-63 (`installUpdate` spawns the downloaded `.exe`/mounts the `.dmg` installer directly via `spawn`/`spawnSync`, executing the downloaded file) |"
+    }
+  ]
 }

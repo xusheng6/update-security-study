@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/WSJTX/wsjtx",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "WSJT-X stages the downloaded Hamlib DLL by rename without hash/signature verification; this is a component channel.",
+  "description": "Update-Hamlib button downloads libhamlib-4.dll over HTTPS and swaps it into the load path on restart, no hash/sig.",
   "limitations": [
-    "Newly retrieved/recovered source snapshot; this is not historical source re-verification. Released artifact behavior and external framework enforcement remain unverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "ccdfaf3c1c109010d15399674ce278167cfde848"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "WSJT-X stages the downloaded Hamlib DLL by rename without hash/signature verification; this is a component channel.",
+    "limitations": [
+      "Newly retrieved/recovered source snapshot; this is not historical source re-verification. Released artifact behavior and external framework enforcement remain unverified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "Hamlib DLL",
+  "transport": "https (Ignore-cert dialog)",
+  "payload_verification": "none",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-J2.md",
+      "line": 7,
+      "text": "| WSJT-X | https://github.com/WSJTX/wsjtx | Qt/C++ | Y (component updater, not app self-update) | manual (button click; no self-update check for WSJT-X itself found) | Y (downloads `libhamlib-4.dll` and stages it to replace the loaded Hamlib DLL on next restart) | https (TLS enforced by default; unverified certs only accepted after an explicit user \"Ignore\" click per-error, cached as exceptions) | none | none (no hash/signature check before file is renamed into place as `libhamlib-4.dll`) | none | `Configuration.cpp:3855` `on_hamlib_download_button_clicked` builds URLs `https://hamlib.sourceforge.net/snapshots-4.7/dll32/libhamlib-4.dll` / `dll64/...` (`Configuration.cpp:3875,3880`); `Configuration.cpp:3905` `after_hamlib_downloaded()` renames `libhamlib-4_new.dll`→`libhamlib-4.dll` with **no hash/signature check**; `Network/FileDownload.cpp` has no checksum logic; `Network/NetworkAccessManager.cpp:18-51` `filter_SSL_errors()` shows TLS is enforced by default, exceptions only added after a modal \"Network SSL/TLS Errors\" dialog is accepted by the user. No app-version self-update check exists anywhere in the source (`main.cpp`, `widgets/mainwindow.cpp` searched; no match for \"new version\"/\"check for update\" logic beyond this hamlib-DLL swap feature and the splash-screen versioning comment at `main.cpp:293`, which is unrelated). |"
+    }
+  ]
 }

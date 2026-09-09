@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/frostwire/frostwire",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "Retained source supports a narrow C classification for the desktop primary updater: HTTPS metadata/download plus an unsigned, server-supplied MD5 comparison before launch. The source does not establish an independent signing trust root.",
+  "description": "Trust-all X509TrustManager is the default client, but the installer's MD5 is fetched over a properly-validated connection, so a MitM can't forge a matching file — RCE chain fails. [Opus-verified]",
   "limitations": [
-    "MD5 and metadata are server-supplied over the update channel; no independent signature/key was found in the inspected updater files.",
-    "Release artifact behavior and current server configuration are unresolved."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,24 @@
       "commit": "59351d7eab2afd273f0914612571fda886f3db5c"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Retained source supports a narrow C classification for the desktop primary updater: HTTPS metadata/download plus an unsigned, server-supplied MD5 comparison before launch. The source does not establish an independent signing trust root.",
+    "limitations": [
+      "MD5 and metadata are server-supplied over the update channel; no independent signature/key was found in the inspected updater files.",
+      "Release artifact behavior and current server configuration are unresolved."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https, validation DISABLED (trust-all)",
+  "payload_verification": "MD5 (unauth)",
+  "trust_root": "none",
+  "original_evidence": []
 }

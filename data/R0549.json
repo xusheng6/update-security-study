@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/Anuken/Mindustry",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The bleeding-edge updater downloads and relaunches the jar; no digest check is performed.",
+  "description": "BE-channel self-updater downloads a jar and overwrites/relaunches with no hash; mod downloader is arbitrary JVM code exec with zero verification.",
   "limitations": [
-    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "0194398a812dee4a35eae5e6da6726cc224fe302"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The bleeding-edge updater downloads and relaunches the jar; no digest check is performed.",
+    "limitations": [
+      "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "none",
+  "trust_root": "—",
+  "original_evidence": [
+    {
+      "file": "batch-AI4.md",
+      "line": 16,
+      "text": "| Mindustry | https://github.com/Anuken/Mindustry.git | 0194398a812dee4a35eae5e6da6726cc224fe302 / 2026-08-22 | Y | Y (headless auto-restart; desktop confirm-then-launch) | Y | https (`api.github.com`/`browser_download_url` via `HttpURLConnection`, default JVM cert validation, no TrustManager bypass found) | N | none | N/A | `core/src/mindustry/net/BeControl.java:66,112-117,140-164` (downloads jar, overwrites/relaunches, no hash check). Only active for bleeding-edge/non-Steam builds; Steam builds have no self-updater. |"
+    }
+  ]
 }

@@ -5,11 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/egoist/devdocs-desktop",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "In the retrieved DevDocs-desktop checkout, packaged non-Linux builds invoke electron-updater's checkForUpdatesAndNotify at startup. The checked-in packaging configuration does not establish the claimed sha512 or Squirrel.Mac Team-ID controls; effective framework verification remains unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater; sha512 + Squirrel.Mac Team-ID.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not historical release re-verification; released artifacts, electron-updater internals, and any external Squirrel.Mac enforcement remain unverified."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "791786035527b7cf8d5e8335cc5ec506fdd20e4d"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "In the retrieved DevDocs-desktop checkout, packaged non-Linux builds invoke electron-updater's checkForUpdatesAndNotify at startup. The checked-in packaging configuration does not establish the claimed sha512 or Squirrel.Mac Team-ID controls; effective framework verification remains unresolved.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not historical release re-verification; released artifacts, electron-updater internals, and any external Squirrel.Mac enforcement remain unverified."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https (GitHub)",
+  "payload_verification": "hash + OS-code-signing (mac)",
+  "trust_root": "OS-trust-store",
+  "original_evidence": [
+    {
+      "file": "batch-L8.md",
+      "line": 14,
+      "text": "| DevDocs-desktop | https://github.com/egoist/devdocs-desktop | Electron (Chromium/Node.js) | Y | Y — `autoUpdater.checkForUpdatesAndNotify()` (electron-updater) downloads the update in the background automatically and prompts to restart & install; **disabled** in dev mode and on Linux | Y — electron-updater downloads the new installer/package and, on relaunch/accept, applies (executes) it; this is the standard electron-builder update-and-install flow | https, via GitHub Releases (electron-builder's default `\"github\"` publish provider, inferred from `package.json` `repository` field — no explicit `publish` block found overriding this) | unknown — electron-updater's auto-generated `latest.yml`/`latest-mac.yml` manifest is not separately GPG/detached-signed in anything visible in this repo; it only embeds a sha512 hash of the installer | partial/unknown — electron-updater's default behavior checks the manifest's sha512 hash against the downloaded installer (integrity only, not independent authenticity); on macOS, Squirrel.Mac additionally requires the new app bundle be code-signed with the same Team ID as the running app (OS-enforced), but no explicit code-signing identity/`CSC_LINK` config is present in `package.json`'s `build` block — signing likely depends on CI secrets not present in source. `scripts/notarize.js` shows macOS notarization is wired up, implying signed release builds, but this cannot be confirmed from source alone | macOS: Apple code-signing Team ID (via Squirrel.Mac, if the shipped app is actually signed — identity supplied externally via CI, not in repo); Windows: none found (`nsis`/`win` config in `package.json` has no signing certificate reference) | app/updater.js:1-13 (`autoUpdater.checkForUpdatesAndNotify()`, guarded by `isDev \\|\\| process.platform === 'linux'`); app/index.js:7,120 (`updater.init()` called unconditionally at startup); app/package.json:36 (`\"electron-updater\": \"^4.3.8\"` — a **runtime** dependency declared only in `app/package.json`, not in the root `package.json`); package.json:62-95 (`build` config: `mac`/`win`/`linux` targets, `hardenedRuntime: true`, no explicit `publish`/code-signing-identity block); scripts/notarize.js (macOS notarization script, referenced from electron-builder's `afterSign` hook conventionally, confirms a signing pipeline exists but its key material is external to the repo) |"
+    }
+  ]
 }

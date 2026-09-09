@@ -5,13 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/VSCodium/vscodium",
   "channel": "unresolved",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Withdraw the original security classification for this record. The inspected VSCodium repository provides release/build scripts and checksum-asset publication, but the retained files reviewed do not establish the shipped updater’s manifest, transport, or payload-verification control flow. The original runtime claim is withheld pending that source. The retained evidence is insufficient to support the original full claim.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "Patched VS Code update path; TLS-only JSON manifest.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
-    "The VS Code/VSCodium product updater implementation was not present in the retained VSCodium source files reviewed; build scripts cannot substitute for it.",
-    "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,25 @@
       "commit": "f8091bc9cd1adb017e549bf022d06d520e89bb65"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Withdraw the original security classification for this record. The inspected VSCodium repository provides release/build scripts and checksum-asset publication, but the retained files reviewed do not establish the shipped updater’s manifest, transport, or payload-verification control flow. The original runtime claim is withheld pending that source. The retained evidence is insufficient to support the original full claim.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
+      "The VS Code/VSCodium product updater implementation was not present in the retained VSCodium source files reviewed; build scripts cannot substitute for it.",
+      "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "hash-from-manifest",
+  "trust_root": "server-TLS",
+  "original_evidence": []
 }

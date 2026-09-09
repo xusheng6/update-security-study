@@ -5,12 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/mgba-emu/mgba",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "C",
-  "description": "The recovered mGBA source does compare the downloaded update against a manifest-provided SHA-256 when present, but the inspected manifest trust root is not independently authenticated; retain the recorded C classification rather than upgrading it.",
+  "description": "The one emulator that actually enforces a SHA-256 before it lets you install.",
   "limitations": [
-    "This is a newly retrieved default-branch snapshot, not the original study checkout; historical release/build behavior may differ.",
-    "Repository origin and commit were checked against the candidate metadata; this source is project-associated but does not establish the original study release checkout."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,24 @@
       "commit": "685023e05d90d87050fb357f46f7bd2d907083f5"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "The recovered mGBA source does compare the downloaded update against a manifest-provided SHA-256 when present, but the inspected manifest trust root is not independently authenticated; retain the recorded C classification rather than upgrading it.",
+    "limitations": [
+      "This is a newly retrieved default-branch snapshot, not the original study checkout; historical release/build behavior may differ.",
+      "Repository origin and commit were checked against the candidate metadata; this source is project-associated but does not establish the original study release checkout."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "C",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "hash-from-manifest (SHA-256)",
+  "trust_root": "server-TLS",
+  "original_evidence": []
 }

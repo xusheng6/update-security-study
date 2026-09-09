@@ -5,11 +5,11 @@
   "historical_tier": "C",
   "project_url": "https://github.com/sqlmapproject/sqlmap",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "sqlmap selects different maintenance paths for pip, Git, and archive installations. These channels should be described separately; the reviewed archive-update implementation does not establish an independently authenticated release manifest.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "C",
+  "description": "`--update` git-pull or zipball-extract over the source tree; zipball path has zero integrity check.",
   "limitations": [
-    "Newly retrieved default-branch snapshot, not historical release re-verification; pip, Git, GitHub archive delivery, and release-side controls were not independently audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,29 @@
       "commit": "1ee368f78a73ccc1c193af32d4e70c1244be5865"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "sqlmap selects different maintenance paths for pip, Git, and archive installations. These channels should be described separately; the reviewed archive-update implementation does not establish an independently authenticated release manifest.",
+    "limitations": [
+      "Newly retrieved default-branch snapshot, not historical release re-verification; pip, Git, GitHub archive delivery, and release-side controls were not independently audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "none (zipball path)",
+  "trust_root": "none",
+  "original_evidence": [
+    {
+      "file": "batch-M2.md",
+      "line": 12,
+      "text": "| sqlmap | github.com/sqlmapproject/sqlmap | Python | Y (`--update` flag) | manual — only runs when `--update`/`conf.updateAll` is explicitly passed; never automatic | Y — overwrites the running application's own `.py` source tree (via `git pull`, or via zipball extraction directly over `sqlmap.py` and all files) | https — `git pull` against `GIT_REPOSITORY = \"https://github.com/sqlmapproject/sqlmap.git\"`; zipball fallback via `ZIPBALL_PAGE = \"https://github.com/sqlmapproject/sqlmap/zipball/master\"`; `pip install -U sqlmap` path relies on PyPI/pip's own transport | no | **none** for the zipball path — `urllib.request.urlretrieve()` downloads the zip and `zipfile.ZipFile.extract()` writes it straight over the live install with **no hash/signature check**; `git pull` path relies only on git's own transport/object integrity (no app-level check); `pip` path relies on pip/PyPI's built-in mechanisms | none (app-level) | `lib/core/update.py:34-169` (full `update()` function, all 3 paths); `lib/core/settings.py:32,35` (`GIT_REPOSITORY`, `ZIPBALL_PAGE` constants); `lib/core/update.py:100-107` (`urlretrieve` + `zipfile` extraction, no checksum) |"
+    }
+  ]
 }

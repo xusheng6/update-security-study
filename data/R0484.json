@@ -5,12 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/ipfs/ipfs-desktop",
   "channel": "primary",
-  "review_status": "Source observation",
+  "review_status": "Original Claude Code analysis",
   "proposed_primary_tier": "B",
-  "description": "Targeted retained-source read supports the narrow primary updater behavior: IPFS Desktop disables background download, downloads after an update-available event, and installs on quit; release verification is delegated to electron-updater with release code-signing configuration.",
+  "description": "electron-updater; mac notarized, Windows Azure Trusted Signing (CN allow-list).",
   "limitations": [
-    "The retained snapshot does not establish all released artifact signing and deployment details of the current upstream release.",
-    "Framework-delegated verification behavior depends on the packaged updater and release configuration."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -18,7 +17,30 @@
       "commit": "30022eed41c18c778a54ab5fa1a36cb4b3d98e3d"
     }
   ],
-  "review_basis": "source-ledger",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Targeted retained-source read supports the narrow primary updater behavior: IPFS Desktop disables background download, downloads after an update-available event, and installs on quit; release verification is delegated to electron-updater with release code-signing configuration.",
+    "limitations": [
+      "The retained snapshot does not establish all released artifact signing and deployment details of the current upstream release.",
+      "Framework-delegated verification behavior depends on the packaged updater and release configuration."
+    ],
+    "review_status": "Source observation",
+    "review_basis": "source-ledger",
+    "proposed_primary_tier": "B",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "OS code-signing",
+  "trust_root": "electron-updater (notarized + Azure Trusted Signing)",
+  "original_evidence": [
+    {
+      "file": "batch-AE4.md",
+      "line": 11,
+      "text": "| IPFS Desktop | https://github.com/ipfs/ipfs-desktop.git | 30022eed 2026-08-10 | Y | Y (bg check every 12h, auto-download, prompts before install) | Y | https, TLS enforced (no bypass found) | Y (electron-updater `latest.yml`/`latest-mac.yml` manifest) | OS code signature (mac Squirrel.Mac / win NSIS diff-update signature check) | OS keystore — mac: Developer ID cert + notarization (hardened runtime); win: Azure Trusted Signing, CN allow-list of 4 publisher names | `src/auto-updater/index.js:2,30-69,183-187`; `electron-builder.yml` (mac hardenedRuntime/notarize afterSign hook; win azureSignOptions multi-CN allow-list) |"
+    }
+  ]
 }

@@ -5,13 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://git.launchpad.net/snap-store",
   "channel": "package-manager",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Withdraw the original security classification for this record. The Snap Store plugin delegates store operations to snapd and supplies optional snap authentication data; assertion verification and the absence of an application self-update path require the active snapd backend and package configuration. The retained evidence is insufficient to support the original full claim.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "No self-update; snapd assertion model preserved.",
   "limitations": [
-    "Source-at-commit snapshot; not the original study checkout.",
-    "Assertion verification is delegated to snapd and its active keyring, outside this checkout; no complete self-update inventory was established.",
-    "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -19,7 +17,31 @@
       "commit": "78a06f78408f6e4a7213eaa6c9604c933664a522"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Withdraw the original security classification for this record. The Snap Store plugin delegates store operations to snapd and supplies optional snap authentication data; assertion verification and the absence of an application self-update path require the active snapd backend and package configuration. The retained evidence is insufficient to support the original full claim.",
+    "limitations": [
+      "Source-at-commit snapshot; not the original study checkout.",
+      "Assertion verification is delegated to snapd and its active keyring, outside this checkout; no complete self-update inventory was established.",
+      "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "yes",
+  "transport": "https",
+  "payload_verification": "snap assertions",
+  "trust_root": "snapd keys",
+  "original_evidence": [
+    {
+      "file": "batch-AE2.md",
+      "line": 24,
+      "text": "| snap-store (Ubuntu Software/Snap Store, gnome-software fork) | https://git.launchpad.net/snap-store | 78a06f78408f6e4a7213eaa6c9604c933664a52 / 2022-04-28 | N | N | Y (via snapd/PackageKit, fully delegated) | https, TLS enforced (libsoup default; app's own HTTP use is icons/appstream/ODRS reviews only, not payloads) | delegated: snap assertions signed by snapd; apt/deb via PackageKit | **none done by this app itself** — snap plugin has zero verify/signature/gpg/sha256 code, talks only to snapd via `SnapdClient` (snapd-glib); no ONLY_TRUSTED bypass found in packagekit plugin | snap path = snapd's root/account/model signing keys (not in this app); apt/PackageKit path = distro keyring (not in this app) | `plugins/snap/gs-plugin-snap.c` (uses `SnapdClient` from `<snapd-glib/snapd-glib.h>`, no verification code); `plugins/packagekit/gs-plugin-packagekit-refine.c:600` (only SIMULATE flag used); confirmed via `gnome-software.doap` this is literally the gnome-software codebase shipped as Snap Store |"
+    }
+  ]
 }

@@ -5,11 +5,11 @@
   "historical_tier": "B",
   "project_url": "https://github.com/wonderunit/storyboarder",
   "channel": "primary",
-  "review_status": "Revised description",
-  "proposed_primary_tier": "UNRESOLVED",
-  "description": "Storyboarder's recovered Electron updater checks for updates with automatic downloading disabled, prompts the user, downloads after confirmation, and schedules quitAndInstall. Its build metadata names a Windows publisher and an afterSign notarization hook; application-source evidence for sha512 enforcement and released artifact signing remains unresolved.",
+  "review_status": "Original Claude Code analysis",
+  "proposed_primary_tier": "B",
+  "description": "electron-updater, downloads+installs on confirm; payload anchored in OS code-signing.",
   "limitations": [
-    "New default-branch snapshot rather than historical release re-verification; electron-updater internals, generated metadata, platform signing output, and notarization results were not independently audited."
+    "AI-generated static source analysis. Confirm the affected version, platform, update channel, and cited control flow before relying on this classification."
   ],
   "sources": [
     {
@@ -17,7 +17,23 @@
       "commit": "8b81a25c71d5f7ca46e8d5b8e3d4f7b3968f95c2"
     }
   ],
-  "review_basis": "publication-decision",
+  "review_basis": "original-claude-code-analysis",
   "snapshot_date": "2026-09-08",
-  "classification_certified": false
+  "classification_certified": false,
+  "later_review_audit": {
+    "description": "Storyboarder's recovered Electron updater checks for updates with automatic downloading disabled, prompts the user, downloads after confirmation, and schedules quitAndInstall. Its build metadata names a Windows publisher and an afterSign notarization hook; application-source evidence for sha512 enforcement and released artifact signing remains unresolved.",
+    "limitations": [
+      "New default-branch snapshot rather than historical release re-verification; electron-updater internals, generated metadata, platform signing output, and notarization results were not independently audited."
+    ],
+    "review_status": "Revised description",
+    "review_basis": "publication-decision",
+    "proposed_primary_tier": "UNRESOLVED",
+    "classification_certified": false,
+    "status": "superseded-as-primary-after-systematic-source-retrieval-failures"
+  },
+  "downloads_and_runs": "auto",
+  "transport": "https",
+  "payload_verification": "sha512 + OS code-signing",
+  "trust_root": "electron-updater (notarization/Authenticode)",
+  "original_evidence": []
 }
