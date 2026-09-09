@@ -41,5 +41,53 @@
       "line": 19,
       "text": "| Medusa | https://github.com/pymedusa/Medusa | bbb1c92 / 2026-08-21 | Y | Y (opt-in, `General.auto_update`, default `0`) | Y | Code builds `http://github.com/...` URL literally (redirects to https in practice); requests via `MedusaSafeSession`, default `verify=True`/`app.SSL_VERIFY=True` | N | none — tarball extracted and files overwritten with no hash/signature check | server-supplied/unpinned (GitHub tarball for branch) | `medusa/updater/source_updater.py:178-200` (`tar_download_url = 'http://github.com/' + org + '/' + repo + '/tarball/' + branch`, downloaded via `helpers.download_file`); `medusa/updater/source_updater.py:200-260` (extract+overwrite, no verification); `medusa/session/core.py:125-183` (`verify=True` default, `app.SSL_VERIFY` gate); `medusa/app.py:195` (`SSL_VERIFY = True` default); `medusa/__main__.py:617` (`AUTO_UPDATE` default `0`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AG7.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/pymedusa/Medusa"
+        },
+        {
+          "label": "commit/date",
+          "value": "bbb1c92 / 2026-08-21"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (opt-in, `General.auto_update`, default `0`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "Code builds `http://github.com/...` URL literally (redirects to https in practice); requests via `MedusaSafeSession`, default `verify=True`/`app.SSL_VERIFY=True`"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — tarball extracted and files overwritten with no hash/signature check"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (GitHub tarball for branch)"
+        },
+        {
+          "label": "evidence",
+          "value": "`medusa/updater/source_updater.py:178-200` (`tar_download_url = 'http://github.com/' + org + '/' + repo + '/tarball/' + branch`, downloaded via `helpers.download_file`); `medusa/updater/source_updater.py:200-260` (extract+overwrite, no verification); `medusa/session/core.py:125-183` (`verify=True` default, `app.SSL_VERIFY` gate); `medusa/app.py:195` (`SSL_VERIFY = True` default); `medusa/__main__.py:617` (`AUTO_UPDATE` default `0`)"
+        }
+      ]
+    }
   ]
 }

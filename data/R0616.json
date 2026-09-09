@@ -43,5 +43,53 @@
       "line": 12,
       "text": "| PeerBanHelper | https://github.com/PBH-BTN/PeerBanHelper.git | f8e9b1bf 2026-08-20 | Y | unclear (install4j update-descriptor wired, no explicit auto-trigger action found in project file) | Y | https | N | checksum only, server-supplied | server-supplied/unpinned | `install4j/project.install4j:170` `autoUpdateDescriptorUrl=\"https://pbh-files.pbh-btn.com/updates/latest/updates.xml\"`; no `codeSigning`/keystore element in project file and no signing step in `.github/workflows/build_installers.yml` → installer artifacts appear unsigned |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AN3.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/PBH-BTN/PeerBanHelper.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "f8e9b1bf 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "unclear (install4j update-descriptor wired, no explicit auto-trigger action found in project file)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "checksum only, server-supplied"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`install4j/project.install4j:170` `autoUpdateDescriptorUrl=\"https://pbh-files.pbh-btn.com/updates/latest/updates.xml\"`; no `codeSigning`/keystore element in project file and no signing step in `.github/workflows/build_installers.yml` → installer artifacts appear unsigned"
+        }
+      ]
+    }
   ]
 }

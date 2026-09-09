@@ -42,5 +42,53 @@
       "line": 14,
       "text": "| LibreNMS | https://github.com/librenms/librenms.git | 2be8a502009e78a2e1f350416f978f906c60756e (2026-08-19) | Y | Y (runs from cron via `daily.sh`, `update` config defaults ON — `$config['update']=0` is commented out by default) | Y (pulls new PHP source + runs `composer install`, i.e. downloads and executes new application code) | https (default `origin` remote is `https://github.com/librenms/librenms.git`) | N | git commit-hash integrity only; **no `git verify-commit`/GPG check** | none (git remote itself, unpinned) | `daily.sh:302-368` (`git checkout --quiet`, `git pull --quiet`, `git fetch --tags`, `git checkout ${latest_hash}`, then `composer install --no-dev`); `config.php.default:29-30` (`#$config['update'] = 0;` — update enabled by default) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AD3.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/librenms/librenms.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "2be8a502009e78a2e1f350416f978f906c60756e (2026-08-19)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (runs from cron via `daily.sh`, `update` config defaults ON — `$config['update']=0` is commented out by default)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (pulls new PHP source + runs `composer install`, i.e. downloads and executes new application code)"
+        },
+        {
+          "label": "transport",
+          "value": "https (default `origin` remote is `https://github.com/librenms/librenms.git`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "git commit-hash integrity only; **no `git verify-commit`/GPG check**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none (git remote itself, unpinned)"
+        },
+        {
+          "label": "evidence",
+          "value": "`daily.sh:302-368` (`git checkout --quiet`, `git pull --quiet`, `git fetch --tags`, `git checkout ${latest_hash}`, then `composer install --no-dev`); `config.php.default:29-30` (`#$config['update'] = 0;` — update enabled by default)"
+        }
+      ]
+    }
   ]
 }

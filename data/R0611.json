@@ -41,5 +41,53 @@
       "line": 14,
       "text": "| MemoryLifter | https://github.com/LearnLift/MemoryLifter.git | 2c6c30a / 2017-04-12 | Y | Y | Y | **http (plaintext, no TLS at all)** | N | none | N/A (unpinned + plaintext HTTP) | `MemoryLifter/Program.cs:257` (version check `WebClient.DownloadString` over `http://services.memorylifter.com/...`); `MemoryLifter/app.config:225` (`UpdateVersionUrl` = `http://services.memorylifter.com/update/VersionHandler.ashx`); `MLifter.Updater/MLifterUpdateHandler.cs:42` (`downloadPath = \"http://services.memorylifter.com/update/program/\" + ver + \"/MemoryLifter-Setup.exe\"`); `:101` (`WebClient.DownloadFileAsync`); `:122` (`Process.Start(localPath)` on completion — no hash/signature check anywhere); `MLifter.Updater/UpdateForm.cs:49,109` (download begins automatically in `UpdateForm_Load`, no explicit \"yes\" confirmation) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AM5.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/LearnLift/MemoryLifter.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "2c6c30a / 2017-04-12"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "**http (plaintext, no TLS at all)**"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A (unpinned + plaintext HTTP)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`MemoryLifter/Program.cs:257` (version check `WebClient.DownloadString` over `http://services.memorylifter.com/...`); `MemoryLifter/app.config:225` (`UpdateVersionUrl` = `http://services.memorylifter.com/update/VersionHandler.ashx`); `MLifter.Updater/MLifterUpdateHandler.cs:42` (`downloadPath = \"http://services.memorylifter.com/update/program/\" + ver + \"/MemoryLifter-Setup.exe\"`); `:101` (`WebClient.DownloadFileAsync`); `:122` (`Process.Start(localPath)` on completion — no hash/signature check anywhere); `MLifter.Updater/UpdateForm.cs:49,109` (download begins automatically in `UpdateForm_Load`, no explicit \"yes\" confirmation)"
+        }
+      ]
+    }
   ]
 }

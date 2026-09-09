@@ -41,5 +41,53 @@
       "line": 18,
       "text": "| Organizr | https://github.com/causefx/Organizr | 6b27515 / 2026-05-19 | Y | N (admin-triggered via authenticated `/api/v2/update` routes; not scheduled) | Y (downloads a branch zip from GitHub, unzips, and overwrites the live PHP application tree — code that executes on the very next HTTP request) | Main updater: https with `verify_peer => true` (good). **Plugin/Theme \"Marketplace\" side channel: `verify_peer => false` explicitly set** when downloading from api.github.com/raw.githubusercontent.com with a configured GitHub token — TLS cert validation DISABLED in code | N | none (self-update: no hash/signature on the downloaded zip at all) | N/A | api/functions/update-functions.php:172-247 (`upgradeInstall`: downloads `https://github.com/causefx/Organizr/archive/{branch}.zip`, `unzipFile`, `rcopy` overwrites live app dir, no verification); api/classes/organizr.class.php:6423-6443 (`downloadFile`, `verify_peer=>true`) vs api/classes/organizr.class.php:6473-6489 (`downloadFileToPath`, **`verify_peer=>false`** for github.com/raw.githubusercontent.com when access token set — used by Theme/Plugin Marketplace at api/classes/organizr.class.php:5812 and :5998, installs downloaded PHP files directly = content-as-code, D-equivalent for that channel) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-X4.md",
+      "source_line": 18,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/causefx/Organizr"
+        },
+        {
+          "label": "commit/date",
+          "value": "6b27515 / 2026-05-19"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (admin-triggered via authenticated `/api/v2/update` routes; not scheduled)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (downloads a branch zip from GitHub, unzips, and overwrites the live PHP application tree — code that executes on the very next HTTP request)"
+        },
+        {
+          "label": "transport",
+          "value": "Main updater: https with `verify_peer => true` (good). **Plugin/Theme \"Marketplace\" side channel: `verify_peer => false` explicitly set** when downloading from api.github.com/raw.githubusercontent.com with a configured GitHub token — TLS cert validation DISABLED in code"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (self-update: no hash/signature on the downloaded zip at all)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "api/functions/update-functions.php:172-247 (`upgradeInstall`: downloads `https://github.com/causefx/Organizr/archive/{branch}.zip`, `unzipFile`, `rcopy` overwrites live app dir, no verification); api/classes/organizr.class.php:6423-6443 (`downloadFile`, `verify_peer=>true`) vs api/classes/organizr.class.php:6473-6489 (`downloadFileToPath`, **`verify_peer=>false`** for github.com/raw.githubusercontent.com when access token set — used by Theme/Plugin Marketplace at api/classes/organizr.class.php:5812 and :5998, installs downloaded PHP files directly = content-as-code, D-equivalent for that channel)"
+        }
+      ]
+    }
   ]
 }

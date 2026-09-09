@@ -43,5 +43,49 @@
       "line": 9,
       "text": "| **restic-browser** (github.com/emuell/restic-browser, Tauri) | **N** (confirmed negative) | n/a | n/a | n/a | n/a | n/a | n/a | Negative-grep confirmed: no `tauri-plugin-updater` in `restic-browser/src-tauri/Cargo.toml` (only `tauri-plugin-window-state`, `tauri-plugin-fs`, `tauri-plugin-dialog`, `tauri-plugin-cli` present) or `restic-browser/package.json` (only `@tauri-apps/plugin-dialog`, `@tauri-apps/plugin-fs`); `restic-browser/src-tauri/tauri.conf.json:39-85` `\"plugins\"` block contains only `\"cli\"`, no `\"updater\"` key/pubkey; repo-wide grep for `updater`/`pubkey`/`public key` returns zero hits outside these checked files |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-P5.md",
+      "source_line": 9,
+      "fields": [
+        {
+          "label": "Project",
+          "value": "**restic-browser** (github.com/emuell/restic-browser, Tauri)"
+        },
+        {
+          "label": "has_updater",
+          "value": "**N** (confirmed negative)"
+        },
+        {
+          "label": "auto",
+          "value": "n/a"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "n/a"
+        },
+        {
+          "label": "transport",
+          "value": "n/a"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "n/a"
+        },
+        {
+          "label": "payload_verification",
+          "value": "n/a"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "Negative-grep confirmed: no `tauri-plugin-updater` in `restic-browser/src-tauri/Cargo.toml` (only `tauri-plugin-window-state`, `tauri-plugin-fs`, `tauri-plugin-dialog`, `tauri-plugin-cli` present) or `restic-browser/package.json` (only `@tauri-apps/plugin-dialog`, `@tauri-apps/plugin-fs`); `restic-browser/src-tauri/tauri.conf.json:39-85` `\"plugins\"` block contains only `\"cli\"`, no `\"updater\"` key/pubkey; repo-wide grep for `updater`/`pubkey`/`public key` returns zero hits outside these checked files"
+        }
+      ]
+    }
   ]
 }

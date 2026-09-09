@@ -43,5 +43,53 @@
       "line": 18,
       "text": "| Snapmaker Luban | https://github.com/Snapmaker/Luban.git | db573f5dff3c6db2361e198d120fb3481088196b / 2025-05-27 | Y | N (`autoDownload = false`; user must confirm) | Y | https (electron-updater `github` provider → api.github.com / objects.githubusercontent.com). No TLS bypass found. | N (electron-builder `latest.yml` is unsigned) | hash (sha512 in electron-updater manifest) + OS code-signing enforced by electron-updater/Squirrel on install | OS keystore (Windows Authenticode / macOS notarization, standard electron-updater trust model) | src/main.js:150-152 (autoDownload=false), :230/233/237 (setFeedURL/checkForUpdates); src/app/lib/uni-api.js:77-81 (`provider: 'github', owner: 'Snapmaker', repo: 'Luban'`); package.json deps `electron-updater 4.3.9` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-V6.md",
+      "source_line": 18,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Snapmaker/Luban.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "db573f5dff3c6db2361e198d120fb3481088196b / 2025-05-27"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (`autoDownload = false`; user must confirm)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (electron-updater `github` provider → api.github.com / objects.githubusercontent.com). No TLS bypass found."
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (electron-builder `latest.yml` is unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (sha512 in electron-updater manifest) + OS code-signing enforced by electron-updater/Squirrel on install"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore (Windows Authenticode / macOS notarization, standard electron-updater trust model)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/main.js:150-152 (autoDownload=false), :230/233/237 (setFeedURL/checkForUpdates); src/app/lib/uni-api.js:77-81 (`provider: 'github', owner: 'Snapmaker', repo: 'Luban'`); package.json deps `electron-updater 4.3.9`"
+        }
+      ]
+    }
   ]
 }

@@ -37,5 +37,53 @@
       "line": 20,
       "text": "| Requestly (desktop app) | github.com/requestly/http-interceptor-desktop-app (formerly `requestly/requestly-desktop-app`, redirects) | Y (`electron-updater`) | Check: unknown/likely UI-triggered — `autoUpdater.checkForUpdatesAndNotify()` is wired to an `ipcMain.handle(\"check-for-updates-and-notify\", ...)` handler (src/lib/autoupdate/index.js:90) that is only invoked from the remote web app UI loaded into the window at runtime (`getWebAppURL()`), whose source is not in this repo; the equivalent direct call is explicitly commented out in the constructor (line 34: `// autoUpdater.checkForUpdatesAndNotify();`). Download: Y once check runs (electron-updater default `autoDownload=true`, no override found). Install: N automatic — separate `ipcMain.handle(\"quit-and-install\", ...)` (line 95-96) required. | Y | HTTPS — electron-builder `publish` targets GitHub Releases (`owner: \"requestly\", repo: \"requestly-desktop-app\"`) | N override found — no `verifyUpdateCodeSignature` key present, so electron-updater's defaults apply (unlike Firecamp, this one does **not** disable the check) | hash-from-manifest (SHA-512, electron-builder `latest*.yml`) + OS-code-signing (electron-updater default Windows Authenticode publisher-match check, since not disabled) | Windows: publisher name in the Authenticode-signed installer, checked against the previous version's signer by electron-updater's default logic; no override found | src/lib/autoupdate/index.js:1 (`import { autoUpdater } from \"electron-updater\"`), :34 (commented-out direct call), :90 (`autoUpdater.checkForUpdatesAndNotify()` inside IPC handler), :95-96 (`quitAndInstall()` inside separate IPC handler); src/main/main.ts:295 (`new AutoUpdate(webAppWindow)` — only wires listeners, does not itself trigger a check); package.json:150-155 (`\"publish\": {\"provider\": \"github\", \"owner\": \"requestly\", \"repo\": \"requestly-desktop-app\"}`) | Whether the check ever runs automatically depends on code in Requestly's remote web app (loaded via `loadURL`, not in this repo) invoking the IPC channel — can't be confirmed from public source alone. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-O7.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/requestly/http-interceptor-desktop-app (formerly `requestly/requestly-desktop-app`, redirects)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (`electron-updater`)"
+        },
+        {
+          "label": "auto",
+          "value": "Check: unknown/likely UI-triggered — `autoUpdater.checkForUpdatesAndNotify()` is wired to an `ipcMain.handle(\"check-for-updates-and-notify\", ...)` handler (src/lib/autoupdate/index.js:90) that is only invoked from the remote web app UI loaded into the window at runtime (`getWebAppURL()`), whose source is not in this repo; the equivalent direct call is explicitly commented out in the constructor (line 34: `// autoUpdater.checkForUpdatesAndNotify();`). Download: Y once check runs (electron-updater default `autoDownload=true`, no override found). Install: N automatic — separate `ipcMain.handle(\"quit-and-install\", ...)` (line 95-96) required."
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS — electron-builder `publish` targets GitHub Releases (`owner: \"requestly\", repo: \"requestly-desktop-app\"`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N override found — no `verifyUpdateCodeSignature` key present, so electron-updater's defaults apply (unlike Firecamp, this one does **not** disable the check)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (SHA-512, electron-builder `latest*.yml`) + OS-code-signing (electron-updater default Windows Authenticode publisher-match check, since not disabled)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "Windows: publisher name in the Authenticode-signed installer, checked against the previous version's signer by electron-updater's default logic; no override found"
+        },
+        {
+          "label": "evidence",
+          "value": "src/lib/autoupdate/index.js:1 (`import { autoUpdater } from \"electron-updater\"`), :34 (commented-out direct call), :90 (`autoUpdater.checkForUpdatesAndNotify()` inside IPC handler), :95-96 (`quitAndInstall()` inside separate IPC handler); src/main/main.ts:295 (`new AutoUpdate(webAppWindow)` — only wires listeners, does not itself trigger a check); package.json:150-155 (`\"publish\": {\"provider\": \"github\", \"owner\": \"requestly\", \"repo\": \"requestly-desktop-app\"}`)"
+        },
+        {
+          "label": "notes",
+          "value": "Whether the check ever runs automatically depends on code in Requestly's remote web app (loaded via `loadURL`, not in this repo) invoking the IPC channel — can't be confirmed from public source alone."
+        }
+      ]
+    }
   ]
 }

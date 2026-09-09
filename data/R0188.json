@@ -41,5 +41,53 @@
       "line": 16,
       "text": "| Station | getstation/desktop-app | Electron (`electron-updater`), Yarn workspaces monorepo (`packages/app`) | Y | auto (chk/dl automatic — `periodicTick(30 min)` saga calls `checkForUpdates()` on a timer unless `STATION_NO_CHECK_FOR_UPDATE` env is set, plus an initial check on app `READY`; install requires explicit user action dispatching `QUIT_AND_INSTALL`) | Y | https (GitHub Releases via `electron-updater`'s default `publish: {provider: 'github'}`, owner/repo inferred from `package.json` \"repository\", i.e. `getstation/desktop-app`) | manifest present (`latest.yml`, TLS only, not independently signed) | hash-from-manifest nominally, BUT Windows Authenticode verification is EXPLICITLY DISABLED (`verifyUpdateCodeSignature: false`) — same weakening as Caprine | none effective on Windows / OS-trust-store on macOS (Squirrel.Mac still enforces signing-identity match for the mac target) | `packages/app/src/auto-update/sagas.ts:24,90-98` (`POLL_UPDATE_INTERVAL = ms('30mins')`; `main()` wires `periodicTick(POLL_UPDATE_INTERVAL)` → `checkForUpdates` unless `process.env.STATION_NO_CHECK_FOR_UPDATE`); `packages/app/src/services/services/auto-updater/main.ts:16-26` (`quitAndInstall()` only calls `autoUpdater.quitAndInstall()` if a download already completed, else just `app.quit()` — i.e. requires the update to have finished downloading and a user-initiated quit/install action); `packages/app/electron-builder.yml:3-4,50-54` (`publish: {provider: 'github'}`; `win: {target:[nsis], verifyUpdateCodeSignature: false}`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-K3.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "getstation/desktop-app"
+        },
+        {
+          "label": "framework",
+          "value": "Electron (`electron-updater`), Yarn workspaces monorepo (`packages/app`)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "auto (chk/dl automatic — `periodicTick(30 min)` saga calls `checkForUpdates()` on a timer unless `STATION_NO_CHECK_FOR_UPDATE` env is set, plus an initial check on app `READY`; install requires explicit user action dispatching `QUIT_AND_INSTALL`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub Releases via `electron-updater`'s default `publish: {provider: 'github'}`, owner/repo inferred from `package.json` \"repository\", i.e. `getstation/desktop-app`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "manifest present (`latest.yml`, TLS only, not independently signed)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest nominally, BUT Windows Authenticode verification is EXPLICITLY DISABLED (`verifyUpdateCodeSignature: false`) — same weakening as Caprine"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none effective on Windows / OS-trust-store on macOS (Squirrel.Mac still enforces signing-identity match for the mac target)"
+        },
+        {
+          "label": "evidence",
+          "value": "`packages/app/src/auto-update/sagas.ts:24,90-98` (`POLL_UPDATE_INTERVAL = ms('30mins')`; `main()` wires `periodicTick(POLL_UPDATE_INTERVAL)` → `checkForUpdates` unless `process.env.STATION_NO_CHECK_FOR_UPDATE`); `packages/app/src/services/services/auto-updater/main.ts:16-26` (`quitAndInstall()` only calls `autoUpdater.quitAndInstall()` if a download already completed, else just `app.quit()` — i.e. requires the update to have finished downloading and a user-initiated quit/install action); `packages/app/electron-builder.yml:3-4,50-54` (`publish: {provider: 'github'}`; `win: {target:[nsis], verifyUpdateCodeSignature: false}`)"
+        }
+      ]
+    }
   ]
 }

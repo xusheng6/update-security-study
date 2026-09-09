@@ -42,5 +42,53 @@
       "line": 13,
       "text": "| Beaker Browser | https://github.com/beakerbrowser/beaker.git | 764bdefe 2022-12-27 | Y | Y (daily bg check if user opted in) | Y | https, TLS enforced (no bypass found) | Y (electron-updater manifest) | OS code signature (mac Squirrel.Mac / win NSIS) | OS keystore (mac Developer ID / win Authenticode via electron-builder default signing) | `app/bg/browser.js:2,54,87-95,566-577,789-796,798-806` (GitHub-releases feed `beakerbrowser/beaker`, `settingsDb.get('auto_update_enabled')` gate, `SCHEDULED_AUTO_UPDATE_DELAY`); note: `isBrowserUpdatesSupported = !(IS_LINUX \\|\\| IS_FROM_SOURCE)` — Linux/AppImage builds explicitly excluded from auto-update (`browser.js:38`). Project archived Dec 2022 (`archive-notice.md`) — updater code frozen, likely no longer serving current releases. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AE4.md",
+      "source_line": 13,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/beakerbrowser/beaker.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "764bdefe 2022-12-27"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (daily bg check if user opted in)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (no bypass found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (electron-updater manifest)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "OS code signature (mac Squirrel.Mac / win NSIS)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore (mac Developer ID / win Authenticode via electron-builder default signing)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`app/bg/browser.js:2,54,87-95,566-577,789-796,798-806` (GitHub-releases feed `beakerbrowser/beaker`, `settingsDb.get('auto_update_enabled')` gate, `SCHEDULED_AUTO_UPDATE_DELAY`); note: `isBrowserUpdatesSupported = !(IS_LINUX \\|\\| IS_FROM_SOURCE)` — Linux/AppImage builds explicitly excluded from auto-update (`browser.js:38`). Project archived Dec 2022 (`archive-notice.md`) — updater code frozen, likely no longer serving current releases."
+        }
+      ]
+    }
   ]
 }

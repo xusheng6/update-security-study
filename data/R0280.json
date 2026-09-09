@@ -41,5 +41,53 @@
       "line": 12,
       "text": "| lapce | lapce/lapce | c9e4c3394803 / 2026-04-03 | Y | N (check auto, install manual) | Y | https, TLS enforced Y | N | none | NA | lapce-app/src/update.rs:22-53 (GitHub API check), :55-86 (download_release, no checksum); window_tab.rs:1349-1383 (extract+restart) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U4.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "lapce/lapce"
+        },
+        {
+          "label": "commit/date",
+          "value": "c9e4c3394803 / 2026-04-03"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (check auto, install manual)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced Y"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "NA"
+        },
+        {
+          "label": "evidence",
+          "value": "lapce-app/src/update.rs:22-53 (GitHub API check), :55-86 (download_release, no checksum); window_tab.rs:1349-1383 (extract+restart)"
+        }
+      ]
+    }
   ]
 }

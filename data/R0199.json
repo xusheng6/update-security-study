@@ -41,5 +41,53 @@
       "line": 9,
       "text": "| Karabiner-Elements | https://github.com/pqrs-org/Karabiner-Elements | Sparkle 2.9.1, in a dedicated `Karabiner-Updater.app` helper | Y | N — `SUEnableAutomaticChecks`=false and `SUAllowsAutomaticUpdates`=false; user must explicitly invoke the updater | Y (once user approves the Sparkle install prompt) | https (`https://appcast.pqrs.org/karabiner-elements-appcast.xml`, or `...-appcast-devel.xml` for beta channel) | Sparkle-EdDSA | signature (EdDSA) | pinned-in-binary (SUPublicEDKey embedded in the Updater app's Info.plist) | src/apps/Updater/Resources/Info.plist.in:33-44 (`SUFeedURL`, `SUPublicEDKey`=`WdJ29ySfnKxiloyN7d2q/Q9NRijT1kC7q1b87fRcW8c=`, `SUEnableAutomaticChecks`=false, `SUAllowsAutomaticUpdates`=false); src/apps/Updater/src/Updater.swift:48-57 (feedURLString returns stable vs. devel URL); src/apps/Updater/project.yml:3-6 (Sparkle 2.9.1 dependency) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-M1.md",
+      "source_line": 9,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/pqrs-org/Karabiner-Elements"
+        },
+        {
+          "label": "framework",
+          "value": "Sparkle 2.9.1, in a dedicated `Karabiner-Updater.app` helper"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N — `SUEnableAutomaticChecks`=false and `SUAllowsAutomaticUpdates`=false; user must explicitly invoke the updater"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (once user approves the Sparkle install prompt)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`https://appcast.pqrs.org/karabiner-elements-appcast.xml`, or `...-appcast-devel.xml` for beta channel)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Sparkle-EdDSA"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (EdDSA)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (SUPublicEDKey embedded in the Updater app's Info.plist)"
+        },
+        {
+          "label": "evidence",
+          "value": "src/apps/Updater/Resources/Info.plist.in:33-44 (`SUFeedURL`, `SUPublicEDKey`=`WdJ29ySfnKxiloyN7d2q/Q9NRijT1kC7q1b87fRcW8c=`, `SUEnableAutomaticChecks`=false, `SUAllowsAutomaticUpdates`=false); src/apps/Updater/src/Updater.swift:48-57 (feedURLString returns stable vs. devel URL); src/apps/Updater/project.yml:3-6 (Sparkle 2.9.1 dependency)"
+        }
+      ]
+    }
   ]
 }

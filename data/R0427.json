@@ -43,5 +43,53 @@
       "line": 17,
       "text": "| Boxer (Mac DOSBox frontend) | https://github.com/alunbestor/Boxer.git | 0062fc1 / 2017-03-18 | Y | Y (`SUEnableAutomaticChecks=true`, daily interval) | Y | https | Y (Sparkle appcast) | **signature** (Sparkle DSA) | **pinned in binary** (`Resources/dsa_pub.pem` shipped in app bundle) | `Info.plist:175-181`: `SUEnableAutomaticChecks=true`, `SUFeedURL=https://updates.boxerapp.com/appcast-dev`, `SUPublicDSAKeyFile=dsa_pub.pem`; `Resources/dsa_pub.pem` contains a real 2048-bit DSA public key; `Frameworks/Sparkle.framework` bundled. Classic Sparkle 1.x DSA-signed-appcast pattern |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC8.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/alunbestor/Boxer.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "0062fc1 / 2017-03-18"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (`SUEnableAutomaticChecks=true`, daily interval)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (Sparkle appcast)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**signature** (Sparkle DSA)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned in binary** (`Resources/dsa_pub.pem` shipped in app bundle)"
+        },
+        {
+          "label": "evidence",
+          "value": "`Info.plist:175-181`: `SUEnableAutomaticChecks=true`, `SUFeedURL=https://updates.boxerapp.com/appcast-dev`, `SUPublicDSAKeyFile=dsa_pub.pem`; `Resources/dsa_pub.pem` contains a real 2048-bit DSA public key; `Frameworks/Sparkle.framework` bundled. Classic Sparkle 1.x DSA-signed-appcast pattern"
+        }
+      ]
+    }
   ]
 }

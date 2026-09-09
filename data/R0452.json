@@ -44,5 +44,53 @@
       "line": 13,
       "text": "| RetroBat | https://github.com/RetroBat-Official/retrobat-setup.git (updater logic) | 4eb2ed0 / 2025-08-13 | Y | Y (menu-driven, EmulationStation \"check/update\" flow) | Y | **https but TLS cert validation DISABLED** | N | hash (SHA256) — but sourced from the same untrusted channel | server-supplied, unpinned, over broken TLS | `system/scripts/shared-variables.cmd:115`: `wget --no-check-certificate ... %installroot_url%/repo/...` (installroot_url=https://www.retrobat.ovh); `system/scripts/es-update.cmd.old:130-131`: downloads package + `.sha256.txt` both via `wget --no-check-certificate`; `:check_hash` (lines 192-234) compares SHA256 against the co-downloaded (also-insecure) hash file, then `:files_copy` xcopies the extracted update over the live install. Current shipped `rb_updater`/`rb_launcher` modules are closed-source binaries not present in the source repo, so this is the last-visible-in-source implementation of the mechanism (renamed `.old` but structurally unchanged per `upgrade.xml` action log) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC8.md",
+      "source_line": 13,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/RetroBat-Official/retrobat-setup.git (updater logic)"
+        },
+        {
+          "label": "commit/date",
+          "value": "4eb2ed0 / 2025-08-13"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (menu-driven, EmulationStation \"check/update\" flow)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "**https but TLS cert validation DISABLED**"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (SHA256) — but sourced from the same untrusted channel"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied, unpinned, over broken TLS"
+        },
+        {
+          "label": "evidence",
+          "value": "`system/scripts/shared-variables.cmd:115`: `wget --no-check-certificate ... %installroot_url%/repo/...` (installroot_url=https://www.retrobat.ovh); `system/scripts/es-update.cmd.old:130-131`: downloads package + `.sha256.txt` both via `wget --no-check-certificate`; `:check_hash` (lines 192-234) compares SHA256 against the co-downloaded (also-insecure) hash file, then `:files_copy` xcopies the extracted update over the live install. Current shipped `rb_updater`/`rb_launcher` modules are closed-source binaries not present in the source repo, so this is the last-visible-in-source implementation of the mechanism (renamed `.old` but structurally unchanged per `upgrade.xml` action log)"
+        }
+      ]
+    }
   ]
 }

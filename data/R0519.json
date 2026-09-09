@@ -41,5 +41,53 @@
       "line": 21,
       "text": "| SickGear | https://github.com/SickGear/SickGear | a4351ea / 2026-08-09 | Y | Y (opt-in, `General.update_auto`, default `0`) | Y | https (`urllib.request.urlretrieve` to `https://github.com/.../tarball/branch`, default Python SSL context — validated) | N | none — only checks `tarfile.is_tarfile()` (format sanity, not authenticity), no hash/signature check | server-supplied/unpinned (GitHub tarball for branch) | `sickgear/version_checker.py:763-803` (`SoftwareUpdater.update` — `tar_download_url='https://github.com/%s/%s/tarball/%s'`, `urllib.request.urlretrieve`, then `tarfile.is_tarfile()` sanity check only, extract+overwrite); `sickgear/__init__.py:898` (`UPDATE_AUTO` default `0`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AG7.md",
+      "source_line": 21,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/SickGear/SickGear"
+        },
+        {
+          "label": "commit/date",
+          "value": "a4351ea / 2026-08-09"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (opt-in, `General.update_auto`, default `0`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`urllib.request.urlretrieve` to `https://github.com/.../tarball/branch`, default Python SSL context — validated)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — only checks `tarfile.is_tarfile()` (format sanity, not authenticity), no hash/signature check"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (GitHub tarball for branch)"
+        },
+        {
+          "label": "evidence",
+          "value": "`sickgear/version_checker.py:763-803` (`SoftwareUpdater.update` — `tar_download_url='https://github.com/%s/%s/tarball/%s'`, `urllib.request.urlretrieve`, then `tarfile.is_tarfile()` sanity check only, extract+overwrite); `sickgear/__init__.py:898` (`UPDATE_AUTO` default `0`)"
+        }
+      ]
+    }
   ]
 }

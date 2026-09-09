@@ -45,5 +45,53 @@
       "line": 18,
       "text": "| Librum | https://github.com/Librum-Reader/Librum.git | 5fdac34 / 2024-07-01 | Y | check:Y (auto on launch) / install:N (user clicks \"Update\") | Y | https, **TLS validation effectively disabled** (`QSslSocket::QueryPeer` instead of default `VerifyPeer` on a client socket — handshake proceeds even if the cert fails validation) | N | **none** — response bytes written straight to a `.zip`, no hash/signature check anywhere | N/A — no verification performed | `src/infrastructure/persistance/app_info_access.cpp:70-77` `createRequest()`: `sslConfiguration.setPeerVerifyMode(QSslSocket::QueryPeer)` (same weakened config reused across `dictionary_access.cpp`, `authentication_access.cpp`, `library_storage_access.cpp`, etc.); `:38-44` `downloadBinaries()` GETs `{domain}/binary/{packageName}.zip`; `src/application/services/app_info_service.cpp:118-131` `processDownloadedBinaryData`→`saveBinaryDataToFile`; `:66-84` `unpackAndInstallBinaries()` shells out to `unzip_and_move.bat`, which **\"queries Administrator rights\"** and overwrites the installed binaries — no integrity check anywhere; trigger: `src/presentation/settings/updatesPage/MUpdatesAvailable.qml:103` `AppInfoController.updateApplication()` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AF1.md",
+      "source_line": 18,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/Librum-Reader/Librum.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "5fdac34 / 2024-07-01"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "check:Y (auto on launch) / install:N (user clicks \"Update\")"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, **TLS validation effectively disabled** (`QSslSocket::QueryPeer` instead of default `VerifyPeer` on a client socket — handshake proceeds even if the cert fails validation)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — response bytes written straight to a `.zip`, no hash/signature check anywhere"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A — no verification performed"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "`src/infrastructure/persistance/app_info_access.cpp:70-77` `createRequest()`: `sslConfiguration.setPeerVerifyMode(QSslSocket::QueryPeer)` (same weakened config reused across `dictionary_access.cpp`, `authentication_access.cpp`, `library_storage_access.cpp`, etc.); `:38-44` `downloadBinaries()` GETs `{domain}/binary/{packageName}.zip`; `src/application/services/app_info_service.cpp:118-131` `processDownloadedBinaryData`→`saveBinaryDataToFile`; `:66-84` `unpackAndInstallBinaries()` shells out to `unzip_and_move.bat`, which **\"queries Administrator rights\"** and overwrites the installed binaries — no integrity check anywhere; trigger: `src/presentation/settings/updatesPage/MUpdatesAvailable.qml:103` `AppInfoController.updateApplication()`"
+        }
+      ]
+    }
   ]
 }

@@ -41,5 +41,53 @@
       "line": 12,
       "text": "| Cockpit CMS | https://github.com/agentejo/cockpit.git | f7cd602bcc6134657ccfeb4e400b0050943dd243 / 2022-07-28 (repo appears stale/unmaintained — last commit 2022; a \"Cockpit v2\" continuation may exist elsewhere) | Y | N (admin-triggered \"Update\" action) | Y | https, TLS enforced (PHP default stream context, no ssl verify_peer disable) | N | none | server-supplied/unpinned | `modules/Cockpit/Controller/Settings.php:73,79-89` (`getUptdateInfo()` hardcodes `zipfile => https://github.com/agentejo/cockpit/archive/master.zip`), `modules/Cockpit/Helper/Updater.php:40` (`fopen($zipUrl,'r')` download) → `:57` extractTo → `:71` copy over `$targetPath` (app root) with **no hash/signature check at all**. Note: dir named `cockpit-cms` to disambiguate from the already-covered Linux \"Cockpit\" sysadmin console — unrelated projects. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AF7.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/agentejo/cockpit.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "f7cd602bcc6134657ccfeb4e400b0050943dd243 / 2022-07-28 (repo appears stale/unmaintained — last commit 2022; a \"Cockpit v2\" continuation may exist elsewhere)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (admin-triggered \"Update\" action)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (PHP default stream context, no ssl verify_peer disable)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned"
+        },
+        {
+          "label": "evidence",
+          "value": "`modules/Cockpit/Controller/Settings.php:73,79-89` (`getUptdateInfo()` hardcodes `zipfile => https://github.com/agentejo/cockpit/archive/master.zip`), `modules/Cockpit/Helper/Updater.php:40` (`fopen($zipUrl,'r')` download) → `:57` extractTo → `:71` copy over `$targetPath` (app root) with **no hash/signature check at all**. Note: dir named `cockpit-cms` to disambiguate from the already-covered Linux \"Cockpit\" sysadmin console — unrelated projects."
+        }
+      ]
+    }
   ]
 }

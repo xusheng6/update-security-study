@@ -42,5 +42,53 @@
       "line": 3,
       "text": "| KeeWeb | github.com/keeweb/keeweb | Electron (custom updater, not electron-updater) | Y | user-configurable: `AppSettingsModel.autoUpdate` unset by default → periodic checks only scheduled when a user turns on auto-update (`'notify'` or `'install'`); manual \"check for updates\" always available; updater disabled entirely on Linux | Y | HTTPS: `Links.UpdateJson = https://app.keeweb.info/update.json` (unsigned version manifest) + `Links.UpdateBasePath = https://github.com/keeweb/keeweb/releases/download/v{ver}/` for the installer asset and a separate `Verify.sign.sha256` file; TLS validation ENFORCED (no `rejectUnauthorized`/`NODE_TLS_REJECT_UNAUTHORIZED`/`checkServerIdentity` bypass found in app/scripts) | N (update.json is a plain unsigned JSON version/date manifest) | signature (RSASSA-PKCS1-v1_5, SHA-256) — the downloaded installer's SHA-256 digest is signed and verified via WebCrypto `subtle.verify` against an embedded RSA public key before install | embedded in app bundle: `app/scripts/public-key.pem` and `public-key-new.pem` (two allowed keys, first-match verification) | app/scripts/comp/app/updater.js:15-21 (enabled = `Launcher?.updaterEnabled()`, mac/win only per launcher-electron.js:205-207 `process.platform !== 'linux'`), :26-32 (`getAutoUpdateType` reads `AppSettingsModel.autoUpdate`, no repo-wide default found → falsy by default), :99-156 (`check()` GETs `Links.UpdateJson` over HTTPS, unsigned), :171-243 (`update()` downloads installer asset then a `Verify.sign.sha256` signature file), :245-268 (`verifySignature()` hex-decodes signature, calls `SignatureVerifier.verify`), app/scripts/util/data/signature-verifier.js:1-4,25-40,68-76 (RSASSA-PKCS1-v1_5/SHA-256 verify against `public-key.pem`/`public-key-new.pem`), app/scripts/const/links.js:10,13 (URLs), desktop/scripts/update-installer.js:6-63 (`installUpdate` spawns the downloaded `.exe`/mounts the `.dmg` installer directly via `spawn`/`spawnSync`, executing the downloaded file) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-H6.md",
+      "source_line": 3,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/keeweb/keeweb"
+        },
+        {
+          "label": "framework",
+          "value": "Electron (custom updater, not electron-updater)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "user-configurable: `AppSettingsModel.autoUpdate` unset by default → periodic checks only scheduled when a user turns on auto-update (`'notify'` or `'install'`); manual \"check for updates\" always available; updater disabled entirely on Linux"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS: `Links.UpdateJson = https://app.keeweb.info/update.json` (unsigned version manifest) + `Links.UpdateBasePath = https://github.com/keeweb/keeweb/releases/download/v{ver}/` for the installer asset and a separate `Verify.sign.sha256` file; TLS validation ENFORCED (no `rejectUnauthorized`/`NODE_TLS_REJECT_UNAUTHORIZED`/`checkServerIdentity` bypass found in app/scripts)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (update.json is a plain unsigned JSON version/date manifest)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (RSASSA-PKCS1-v1_5, SHA-256) — the downloaded installer's SHA-256 digest is signed and verified via WebCrypto `subtle.verify` against an embedded RSA public key before install"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "embedded in app bundle: `app/scripts/public-key.pem` and `public-key-new.pem` (two allowed keys, first-match verification)"
+        },
+        {
+          "label": "evidence",
+          "value": "app/scripts/comp/app/updater.js:15-21 (enabled = `Launcher?.updaterEnabled()`, mac/win only per launcher-electron.js:205-207 `process.platform !== 'linux'`), :26-32 (`getAutoUpdateType` reads `AppSettingsModel.autoUpdate`, no repo-wide default found → falsy by default), :99-156 (`check()` GETs `Links.UpdateJson` over HTTPS, unsigned), :171-243 (`update()` downloads installer asset then a `Verify.sign.sha256` signature file), :245-268 (`verifySignature()` hex-decodes signature, calls `SignatureVerifier.verify`), app/scripts/util/data/signature-verifier.js:1-4,25-40,68-76 (RSASSA-PKCS1-v1_5/SHA-256 verify against `public-key.pem`/`public-key-new.pem`), app/scripts/const/links.js:10,13 (URLs), desktop/scripts/update-installer.js:6-63 (`installUpdate` spawns the downloaded `.exe`/mounts the `.dmg` installer directly via `spawn`/`spawnSync`, executing the downloaded file)"
+        }
+      ]
+    }
   ]
 }

@@ -41,5 +41,53 @@
       "line": 11,
       "text": "| NZBHydra2 | https://github.com/theotherp/nzbhydra2 | 3c174ed / 2026-08-14 | Y | Y (opt-in, `isUpdateAutomatically`) | Y | https, TLS enforced by default (per-host toggle `verifySsl`/`verifySslDisabledFor`, default enabled) | N | none (no hash/sig check on release ZIP asset) | server-supplied/unpinned (GitHub Releases API JSON dictates asset URL) | `core/src/main/java/org/nzbhydra/update/UpdateManager.java:322-376` (downloads GitHub release asset via `webAccess.downloadToFile`, no checksum/signature check before shutdown+extract); `core/src/main/java/org/nzbhydra/update/AutomaticUpdater.java:28-40` (auto-install gate); `other/wrapper/nzbhydra2wrapperPy3.py:175-225` (external wrapper unzips update ZIP over running install, no verification); `core/src/main/java/org/nzbhydra/webaccess/Ssl.java:100-114` (TLS verification state logic, default ENABLED) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AG7.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/theotherp/nzbhydra2"
+        },
+        {
+          "label": "commit/date",
+          "value": "3c174ed / 2026-08-14"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (opt-in, `isUpdateAutomatically`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced by default (per-host toggle `verifySsl`/`verifySslDisabledFor`, default enabled)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (no hash/sig check on release ZIP asset)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (GitHub Releases API JSON dictates asset URL)"
+        },
+        {
+          "label": "evidence",
+          "value": "`core/src/main/java/org/nzbhydra/update/UpdateManager.java:322-376` (downloads GitHub release asset via `webAccess.downloadToFile`, no checksum/signature check before shutdown+extract); `core/src/main/java/org/nzbhydra/update/AutomaticUpdater.java:28-40` (auto-install gate); `other/wrapper/nzbhydra2wrapperPy3.py:175-225` (external wrapper unzips update ZIP over running install, no verification); `core/src/main/java/org/nzbhydra/webaccess/Ssl.java:100-114` (TLS verification state logic, default ENABLED)"
+        }
+      ]
+    }
   ]
 }

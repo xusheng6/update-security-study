@@ -41,5 +41,53 @@
       "line": 16,
       "text": "| LocalAI | https://github.com/go-skynet/LocalAI | 82c191a / 2026-08-22 | Y (Fyne desktop launcher, `cmd/launcher`) | Y (periodic + on-demand `CheckForUpdates`) | Y | https, TLS enforced (default Go `net/http`, no `InsecureSkipVerify` on this path) | N (checksums.txt is a plain unsigned text file) | hash (sha256), but **fails open**: if the checksum file can't be downloaded it proceeds anyway | server-supplied/unpinned — checksum file fetched from the *same* GitHub release as the binary, no independently pinned key | `cmd/launcher/internal/release_manager.go:200-245` (\"Warning: Proceeding without checksum verification\") |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AE1.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/go-skynet/LocalAI"
+        },
+        {
+          "label": "commit/date",
+          "value": "82c191a / 2026-08-22"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y (Fyne desktop launcher, `cmd/launcher`)"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (periodic + on-demand `CheckForUpdates`)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (default Go `net/http`, no `InsecureSkipVerify` on this path)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (checksums.txt is a plain unsigned text file)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (sha256), but **fails open**: if the checksum file can't be downloaded it proceeds anyway"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned — checksum file fetched from the *same* GitHub release as the binary, no independently pinned key"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`cmd/launcher/internal/release_manager.go:200-245` (\"Warning: Proceeding without checksum verification\")"
+        }
+      ]
+    }
   ]
 }

@@ -42,5 +42,53 @@
       "line": 10,
       "text": "| Gajim | https://dev.gajim.org/gajim/gajim.git | 772f2a8a / 2026-08-11 | Y (notify-only) | N (opens browser link only) | N (core updater) / **Y (plugin installer, separate channel — see below)** | https, TLS validation ENFORCED | N/A | none | N/A | Core self-update check: `gajim/common/application.py:296-320` `check_for_gajim_updates()` → `app.ftm.http_request(\"GET\",\"https://gajim.org/current-version.json\", …)`; response handled in `_on_update_response` (`application.py:322-345`) which just compares versions and raises `GajimUpdateAvailable`. Consumer at `gajim/gtk/activity_page.py:181` does `open_uri(event.setup_url)` — opens the download page in the default browser; **no download or execution of any installer happens in-app**. Transport: `gajim/common/multiprocess/http.py:153-156` builds `httpx.Client(verify=ctx, …)` where `ctx = truststore.SSLContext(...)` (OS trust store) — cert validation is enforced, no `verify=False`/`InsecureSkipVerify` found anywhere in the module. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-S1.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://dev.gajim.org/gajim/gajim.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "772f2a8a / 2026-08-11"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (notify-only)"
+        },
+        {
+          "label": "auto",
+          "value": "N (opens browser link only)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N (core updater) / **Y (plugin installer, separate channel — see below)**"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS validation ENFORCED"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "Core self-update check: `gajim/common/application.py:296-320` `check_for_gajim_updates()` → `app.ftm.http_request(\"GET\",\"https://gajim.org/current-version.json\", …)`; response handled in `_on_update_response` (`application.py:322-345`) which just compares versions and raises `GajimUpdateAvailable`. Consumer at `gajim/gtk/activity_page.py:181` does `open_uri(event.setup_url)` — opens the download page in the default browser; **no download or execution of any installer happens in-app**. Transport: `gajim/common/multiprocess/http.py:153-156` builds `httpx.Client(verify=ctx, …)` where `ctx = truststore.SSLContext(...)` (OS trust store) — cert validation is enforced, no `verify=False`/`InsecureSkipVerify` found anywhere in the module."
+        }
+      ]
+    }
   ]
 }

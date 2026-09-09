@@ -42,5 +42,53 @@
       "line": 31,
       "text": "| DDNet | https://github.com/ddnet/ddnet | 9fc3cd63babe / 2026-08-20 | Y | N (menu-triggered `InitiateUpdate()`) | Y | https (`https://update.ddnet.org/...`, no `VERIFYPEER`/`VERIFYHOST` disabling found) | N | none (no hash/signature on downloaded client/server binaries or DLL/.so files) | none | `src/engine/client/updater.cpp:78` (`GetUpdaterUrl` → `\"https://update.ddnet.org/%s\"`); no `sha256`/`Verify`/`Signature` symbols anywhere in `updater.cpp`; `ReplaceClient()`/`ReplaceServer()` (lines ~260-320) directly rename the downloaded file over the running executable/DLL/.so, then `m_pClient->Restart()` (line 486). Called from `src/game/client/components/menus_start.cpp:186` and `menus_settings_ddnet.cpp:318` (user-clicked, not silent) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W3.md",
+      "source_line": 31,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/ddnet/ddnet"
+        },
+        {
+          "label": "commit/date",
+          "value": "9fc3cd63babe / 2026-08-20"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (menu-triggered `InitiateUpdate()`)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`https://update.ddnet.org/...`, no `VERIFYPEER`/`VERIFYHOST` disabling found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (no hash/signature on downloaded client/server binaries or DLL/.so files)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/engine/client/updater.cpp:78` (`GetUpdaterUrl` → `\"https://update.ddnet.org/%s\"`); no `sha256`/`Verify`/`Signature` symbols anywhere in `updater.cpp`; `ReplaceClient()`/`ReplaceServer()` (lines ~260-320) directly rename the downloaded file over the running executable/DLL/.so, then `m_pClient->Restart()` (line 486). Called from `src/game/client/components/menus_start.cpp:186` and `menus_settings_ddnet.cpp:318` (user-clicked, not silent)"
+        }
+      ]
+    }
   ]
 }

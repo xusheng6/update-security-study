@@ -45,5 +45,53 @@
       "line": 10,
       "text": "| HuMo-gen (HuMo-genealogy) | https://github.com/HuubMons/HuMo-genealogy.git | c7f25142 / 2026-08-15 | Y | N (admin must click through \"Automatic update\" wizard steps 1→3) | Y (downloads a zip — from GitHub archive URL **or** a server-supplied URL — extracts it, and `copy()`s extracted PHP files directly over the live application files that execute on every request) | Primary path is https; but code contains an **explicit fallback that disables TLS verification** (`CURLOPT_SSL_VERIFYHOST=false`, `CURLOPT_SSL_VERIFYPEER=false`) used automatically whenever the earlier https attempts fail | N | none — no hash/signature check anywhere on the downloaded zip or extracted PHP files | server-supplied/unpinned (update metadata comes unauthenticated from `raw.githubusercontent.com` or `humo-gen.com`; the actual download URL for step 1 is taken from that same unauthenticated response) | `admin/include/index_check_update.php:44-48` (GitHub raw fetch), `:140-150` (SSL_VERIFYHOST/VERIFYPEER disabled fallback), `admin/update/install_update.php:170-172` (`file_put_contents`/`file_get_contents` download of GitHub archive zip, no verification), `:238` (fallback `copy()` from server URL), `:397` (`copy($update_dir[$i].../..., $create_file)` — overwrites live app file) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AF5.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/HuubMons/HuMo-genealogy.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "c7f25142 / 2026-08-15"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (admin must click through \"Automatic update\" wizard steps 1→3)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (downloads a zip — from GitHub archive URL **or** a server-supplied URL — extracts it, and `copy()`s extracted PHP files directly over the live application files that execute on every request)"
+        },
+        {
+          "label": "transport",
+          "value": "Primary path is https; but code contains an **explicit fallback that disables TLS verification** (`CURLOPT_SSL_VERIFYHOST=false`, `CURLOPT_SSL_VERIFYPEER=false`) used automatically whenever the earlier https attempts fail"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — no hash/signature check anywhere on the downloaded zip or extracted PHP files"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (update metadata comes unauthenticated from `raw.githubusercontent.com` or `humo-gen.com`; the actual download URL for step 1 is taken from that same unauthenticated response)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`admin/include/index_check_update.php:44-48` (GitHub raw fetch), `:140-150` (SSL_VERIFYHOST/VERIFYPEER disabled fallback), `admin/update/install_update.php:170-172` (`file_put_contents`/`file_get_contents` download of GitHub archive zip, no verification), `:238` (fallback `copy()` from server URL), `:397` (`copy($update_dir[$i].../..., $create_file)` — overwrites live app file)"
+        }
+      ]
+    }
   ]
 }

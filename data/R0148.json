@@ -41,5 +41,53 @@
       "line": 8,
       "text": "| DbGate | dbgate/dbgate | Electron (electron-updater) | Y | chk: automatic on startup unless `app.autoUpdateMode`='skip' (default \"\"); dl: automatic only if setting='download', else notify+manual click; inst: manual (user clicks \"Restart DbGate\") | Y | https, electron-updater GitHub provider → github.com releases; TLS enforced (no bypass code found) | N (latest.yml plain, unsigned) | hash-from-manifest (sha512 in latest.yml) + OS-code-signing on macOS (`notarize:true`, `hardenedRuntime:true`); Windows — no certificateFile configured (unsigned NSIS) | Apple notarization/Developer ID cert (mac only) | app/src/electron.js:7,79-85,228-234,314-326,511-557; app/package.json `build.mac.publish`/`win.publish`/`linux.publish` (`provider:\"github\"`), `build.mac.notarize:true`,`hardenedRuntime:true`; packages/web/src/utility/appUpdate.ts:1-49 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-I8.md",
+      "source_line": 8,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "dbgate/dbgate"
+        },
+        {
+          "label": "framework",
+          "value": "Electron (electron-updater)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "chk: automatic on startup unless `app.autoUpdateMode`='skip' (default \"\"); dl: automatic only if setting='download', else notify+manual click; inst: manual (user clicks \"Restart DbGate\")"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, electron-updater GitHub provider → github.com releases; TLS enforced (no bypass code found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (latest.yml plain, unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (sha512 in latest.yml) + OS-code-signing on macOS (`notarize:true`, `hardenedRuntime:true`); Windows — no certificateFile configured (unsigned NSIS)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "Apple notarization/Developer ID cert (mac only)"
+        },
+        {
+          "label": "evidence",
+          "value": "app/src/electron.js:7,79-85,228-234,314-326,511-557; app/package.json `build.mac.publish`/`win.publish`/`linux.publish` (`provider:\"github\"`), `build.mac.notarize:true`,`hardenedRuntime:true`; packages/web/src/utility/appUpdate.ts:1-49"
+        }
+      ]
+    }
   ]
 }

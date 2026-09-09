@@ -44,5 +44,53 @@
       "line": 17,
       "text": "| Ampache | https://github.com/ampache/ampache | 58503596dd60 / 2026-08-20 | Y | N (auto version-check only; the actual \"pull sources\" action requires an authenticated ADMIN to click Update in the web UI) | Y (for git-based installs) | https (git pull over https:// URL — TLS enforced by libcurl/git defaults; GitHub API calls use WpOrg\\Requests over https, comment in code literally says \"https is mandatory\") | N | none — `git pull` fetches whatever HEAD of the branch currently is; no GPG-signed-tag/commit verification, no hash check on the fetched sources or on the release zip before it is offered for manual download | N/A — no pinned key anywhere; trust is placed entirely in GitHub's TLS endpoint | src/Module/System/AutoUpdate.php:461-502 (update_files(): `git pull https://github.com/ampache/ampache.git` executed via `exec()`, no signature/commit verification); :175-200 (github_request(), HTTPS GitHub API, comment \"https is mandatory\" but no cert-pinning); :370-456 (update_dependencies() then runs `composer install` and `npm install`+`npm run build`, i.e. executes arbitrary post-install/build scripts from fetched dependencies); src/Module/Application/Update/UpdateAction.php:70-100 (gates the pull-and-exec path behind `AccessLevelEnum::ADMIN`, so it is admin-triggered not silent/auto) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC2.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/ampache/ampache"
+        },
+        {
+          "label": "commit/date",
+          "value": "58503596dd60 / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (auto version-check only; the actual \"pull sources\" action requires an authenticated ADMIN to click Update in the web UI)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (for git-based installs)"
+        },
+        {
+          "label": "transport",
+          "value": "https (git pull over https:// URL — TLS enforced by libcurl/git defaults; GitHub API calls use WpOrg\\Requests over https, comment in code literally says \"https is mandatory\")"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — `git pull` fetches whatever HEAD of the branch currently is; no GPG-signed-tag/commit verification, no hash check on the fetched sources or on the release zip before it is offered for manual download"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A — no pinned key anywhere; trust is placed entirely in GitHub's TLS endpoint"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/Module/System/AutoUpdate.php:461-502 (update_files(): `git pull https://github.com/ampache/ampache.git` executed via `exec()`, no signature/commit verification); :175-200 (github_request(), HTTPS GitHub API, comment \"https is mandatory\" but no cert-pinning); :370-456 (update_dependencies() then runs `composer install` and `npm install`+`npm run build`, i.e. executes arbitrary post-install/build scripts from fetched dependencies); src/Module/Application/Update/UpdateAction.php:70-100 (gates the pull-and-exec path behind `AccessLevelEnum::ADMIN`, so it is admin-triggered not silent/auto)"
+        }
+      ]
+    }
   ]
 }

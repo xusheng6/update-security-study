@@ -42,5 +42,53 @@
       "line": 14,
       "text": "| electerm | https://github.com/electerm/electerm | 1ed95f38e9 / 2026-08-21 | Y | Y(check on start)/N(install requires click \"Upgrade\") | Y | https, TLS enforced (no `rejectUnauthorized:false` in update path) | N (plain JSON `electerm-github-release.json`, unsigned, served from vendor site + 3rd-party mirrors) | none (no hash/signature check before launching downloaded file) | OS keystore (mac: Gatekeeper/notarization enforced at launch; **Windows: SmartScreen only, not hard-enforced** — any signed-or-unsigned exe still runs after a warning) | `src/client/common/update-check.js:89-106` (release info from own endpoint, no sig); `src/app/server/download-upgrade.js:80-104,149-153` (download then `openFile(this.localPath)`, no hash/sig check); `src/client/components/main/upgrade.jsx:28-33` (default mirror = `gh-proxy` → `electerm-mirror.html5beta.com`, a 3rd-party proxy domain, not github.com); `build/electron-builder.json:95` (`\"notarize\": true`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AA2.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/electerm/electerm"
+        },
+        {
+          "label": "commit/date",
+          "value": "1ed95f38e9 / 2026-08-21"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y(check on start)/N(install requires click \"Upgrade\")"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (no `rejectUnauthorized:false` in update path)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (plain JSON `electerm-github-release.json`, unsigned, served from vendor site + 3rd-party mirrors)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (no hash/signature check before launching downloaded file)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore (mac: Gatekeeper/notarization enforced at launch; **Windows: SmartScreen only, not hard-enforced** — any signed-or-unsigned exe still runs after a warning)"
+        },
+        {
+          "label": "evidence",
+          "value": "`src/client/common/update-check.js:89-106` (release info from own endpoint, no sig); `src/app/server/download-upgrade.js:80-104,149-153` (download then `openFile(this.localPath)`, no hash/sig check); `src/client/components/main/upgrade.jsx:28-33` (default mirror = `gh-proxy` → `electerm-mirror.html5beta.com`, a 3rd-party proxy domain, not github.com); `build/electron-builder.json:95` (`\"notarize\": true`)"
+        }
+      ]
+    }
   ]
 }

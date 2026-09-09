@@ -41,5 +41,53 @@
       "line": 22,
       "text": "| eul | github.com/gao-sun/eul | none (custom in-house checker/replacer, not Sparkle) | **Y** | opt-in / conditional (default preference is notify-only; user can enable unattended auto-update) | **Y** (only when user has opted into the `autoUpdate` preference) | https | NA (plain GitHub Releases API JSON, unsigned) | **none** (no signature/checksum verification anywhere on the update path) | n/a (no verification performed) | `eul/eul/Store/PreferenceStore.swift:18-22` `enum UpgradeMethod { case none, showInStatusBar, autoUpdate }`, `:65` default `upgradeMethod = .showInStatusBar` (notify-only by default), `:107` `URL(string: \"https://api.github.com/repos/\\(repo)/releases/latest\")`, `:120-121` `if self.upgradeMethod == .autoUpdate { AutoUpdate.run() }`; `eul/eul/Utilities/AutoUpdate.swift:68` `https://github.com/gao-sun/eul/releases/latest/download/eul.app.zip`, `:116` `shell(\"unzip -oq \\(zipUrl.path) ...\")` (no signature/hash check), `:49-53` `NSWorkspace.shared.open(tempSelfUpdateUrl, options: .default, configuration: [.arguments: arguments])`; `eul/SelfUpdate/AppDelegate.swift:53-56` `removeItem(at: appUrl)` then `copyItem(at: newAppUrl, to: appUrl)` (old app overwritten with the unverified downloaded one), `:63` `NSWorkspace.shared.open(appUrl)`. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Q1.md",
+      "source_line": 22,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/gao-sun/eul"
+        },
+        {
+          "label": "framework",
+          "value": "none (custom in-house checker/replacer, not Sparkle)"
+        },
+        {
+          "label": "has_updater",
+          "value": "**Y**"
+        },
+        {
+          "label": "auto",
+          "value": "opt-in / conditional (default preference is notify-only; user can enable unattended auto-update)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y** (only when user has opted into the `autoUpdate` preference)"
+        },
+        {
+          "label": "transport",
+          "value": "https"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "NA (plain GitHub Releases API JSON, unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** (no signature/checksum verification anywhere on the update path)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a (no verification performed)"
+        },
+        {
+          "label": "evidence",
+          "value": "`eul/eul/Store/PreferenceStore.swift:18-22` `enum UpgradeMethod { case none, showInStatusBar, autoUpdate }`, `:65` default `upgradeMethod = .showInStatusBar` (notify-only by default), `:107` `URL(string: \"https://api.github.com/repos/\\(repo)/releases/latest\")`, `:120-121` `if self.upgradeMethod == .autoUpdate { AutoUpdate.run() }`; `eul/eul/Utilities/AutoUpdate.swift:68` `https://github.com/gao-sun/eul/releases/latest/download/eul.app.zip`, `:116` `shell(\"unzip -oq \\(zipUrl.path) ...\")` (no signature/hash check), `:49-53` `NSWorkspace.shared.open(tempSelfUpdateUrl, options: .default, configuration: [.arguments: arguments])`; `eul/SelfUpdate/AppDelegate.swift:53-56` `removeItem(at: appUrl)` then `copyItem(at: newAppUrl, to: appUrl)` (old app overwritten with the unverified downloaded one), `:63` `NSWorkspace.shared.open(appUrl)`."
+        }
+      ]
+    }
   ]
 }

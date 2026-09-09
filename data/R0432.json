@@ -42,5 +42,53 @@
       "line": 17,
       "text": "| Gephi | https://github.com/gephi/gephi | 664cc87189cf297d1eb1be797e39bea4b913865d / 2026-08-19 | Y | Y (NetBeans Platform autoupdate-services) | Y (installs .nbm module jars) | https (raw.githubusercontent.com/gephi/gephi/gh-pages/.../autoupdate/updates.xml) | N (plain XML index) | signature (jar-signed .nbm modules via maven-jarsigner-plugin + keystore.ks) | server-supplied/TOFU (NetBeans autoupdate trusts a module cert on first install, then silently trusts same-cert updates; not pinned into the originally-distributed binary) | pom.xml:176-178 (update-center URLs); pom.xml:884-885,1190-1199 (jarsigner/keystore config); modules/application/pom.xml:571-572 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC3.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/gephi/gephi"
+        },
+        {
+          "label": "commit/date",
+          "value": "664cc87189cf297d1eb1be797e39bea4b913865d / 2026-08-19"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (NetBeans Platform autoupdate-services)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y (installs .nbm module jars)"
+        },
+        {
+          "label": "transport",
+          "value": "https (raw.githubusercontent.com/gephi/gephi/gh-pages/.../autoupdate/updates.xml)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (plain XML index)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (jar-signed .nbm modules via maven-jarsigner-plugin + keystore.ks)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/TOFU (NetBeans autoupdate trusts a module cert on first install, then silently trusts same-cert updates; not pinned into the originally-distributed binary)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "pom.xml:176-178 (update-center URLs); pom.xml:884-885,1190-1199 (jarsigner/keystore config); modules/application/pom.xml:571-572"
+        }
+      ]
+    }
   ]
 }

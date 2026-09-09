@@ -43,5 +43,53 @@
       "line": 10,
       "text": "| Varia | https://github.com/giantpinkrobots/varia | 7624b5d / 2026-08-19 | Y | N (opt-in toggle `check_for_updates_on_startup_enabled`, default `'0'`; Windows/Mac only) | **Y** | https (github.com / api.github.com via aria2c CLI; no `--check-certificate=false` seen, default aria2c cert validation applies) | N | **none** | none | `src/window/updater.py:50-52` fetches `https://api.github.com/repos/giantpinkrobots/varia/releases` via `aria2c` subprocess; `:87,91` build `binary_url` = `https://github.com/.../releases/download/<tag>/varia-windows-setup-amd64.exe` (or `.dmg`); `:170-177` download the installer via `aria2c` with **no hash/signature check anywhere in the file**; `src/variamain.py:571-575` then directly executes it: `subprocess.Popen([self.update_executable, \"/SILENT\", ...])` (Win) / `subprocess.call(('open', self.update_executable))` (Mac). |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-V2.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/giantpinkrobots/varia"
+        },
+        {
+          "label": "commit/date",
+          "value": "7624b5d / 2026-08-19"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (opt-in toggle `check_for_updates_on_startup_enabled`, default `'0'`; Windows/Mac only)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "**Y**"
+        },
+        {
+          "label": "transport",
+          "value": "https (github.com / api.github.com via aria2c CLI; no `--check-certificate=false` seen, default aria2c cert validation applies)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/window/updater.py:50-52` fetches `https://api.github.com/repos/giantpinkrobots/varia/releases` via `aria2c` subprocess; `:87,91` build `binary_url` = `https://github.com/.../releases/download/<tag>/varia-windows-setup-amd64.exe` (or `.dmg`); `:170-177` download the installer via `aria2c` with **no hash/signature check anywhere in the file**; `src/variamain.py:571-575` then directly executes it: `subprocess.Popen([self.update_executable, \"/SILENT\", ...])` (Win) / `subprocess.call(('open', self.update_executable))` (Mac)."
+        }
+      ]
+    }
   ]
 }

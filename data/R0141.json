@@ -43,5 +43,53 @@
       "line": 17,
       "text": "| SimpleX Chat (desktop) | github.com/simplex-chat/simplex-chat (apps/multiplatform, Kotlin Compose Multiplatform desktop target) | Kotlin/JVM (Compose Multiplatform) | Y | chk: auto (every 24h + on launch, unless channel set to DISABLED); dl: manual (user clicks a per-asset \"Download\" button); inst: manual (user clicks \"Install\" button, which then runs the installer without further user confirmation) | Y | https (`api.github.com/repos/simplex-chat/simplex-chat/releases` for manifest; `asset.browserDownloadUrl`, GitHub Releases CDN, for payload) — plain `OkHttpClient` with no custom `TrustManager`/hostname-verifier override found, i.e. TLS validation enforced by default | N — the GitHub Releases JSON response is not independently signed; integrity relies solely on TLS delivery from GitHub | **none** — no hash or signature check is performed on the downloaded asset before it is installed/executed by the app code | none (no verifying key used at all in this code path) | apps/multiplatform/common/src/desktopMain/kotlin/chat/simplex/common/views/helpers/AppUpdater.kt:179-202 (`checkForUpdate()`: GET `https://api.github.com/repos/simplex-chat/simplex-chat/releases`, no signature check); :267-278 (`setupHttpClient()`: plain `OkHttpClient.Builder()`, no trust manager override); :284-384 (`downloadAsset()`: downloads `asset.browserDownloadUrl` to temp file, no hash/signature verification before offering \"Install\"); :407-502 (`installAppUpdate()`: Windows runs `msiexec /i <file>` directly; macOS `hdiutil mount` + `cp -R` into /Applications, bypassing normal Gatekeeper quarantine-prompt flow since the file was fetched via OkHttp rather than a browser; Linux AppImage self-replaced via atomic move + `setExecutable(true)`, or `xdg-open` for .deb/.rpm) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-I3.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/simplex-chat/simplex-chat (apps/multiplatform, Kotlin Compose Multiplatform desktop target)"
+        },
+        {
+          "label": "framework",
+          "value": "Kotlin/JVM (Compose Multiplatform)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "chk: auto (every 24h + on launch, unless channel set to DISABLED); dl: manual (user clicks a per-asset \"Download\" button); inst: manual (user clicks \"Install\" button, which then runs the installer without further user confirmation)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`api.github.com/repos/simplex-chat/simplex-chat/releases` for manifest; `asset.browserDownloadUrl`, GitHub Releases CDN, for payload) — plain `OkHttpClient` with no custom `TrustManager`/hostname-verifier override found, i.e. TLS validation enforced by default"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N — the GitHub Releases JSON response is not independently signed; integrity relies solely on TLS delivery from GitHub"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — no hash or signature check is performed on the downloaded asset before it is installed/executed by the app code"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none (no verifying key used at all in this code path)"
+        },
+        {
+          "label": "evidence",
+          "value": "apps/multiplatform/common/src/desktopMain/kotlin/chat/simplex/common/views/helpers/AppUpdater.kt:179-202 (`checkForUpdate()`: GET `https://api.github.com/repos/simplex-chat/simplex-chat/releases`, no signature check); :267-278 (`setupHttpClient()`: plain `OkHttpClient.Builder()`, no trust manager override); :284-384 (`downloadAsset()`: downloads `asset.browserDownloadUrl` to temp file, no hash/signature verification before offering \"Install\"); :407-502 (`installAppUpdate()`: Windows runs `msiexec /i <file>` directly; macOS `hdiutil mount` + `cp -R` into /Applications, bypassing normal Gatekeeper quarantine-prompt flow since the file was fetched via OkHttp rather than a browser; Linux AppImage self-replaced via atomic move + `setExecutable(true)`, or `xdg-open` for .deb/.rpm)"
+        }
+      ]
+    }
   ]
 }

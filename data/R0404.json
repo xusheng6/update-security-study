@@ -42,5 +42,53 @@
       "line": 33,
       "text": "| Syncthing | https://github.com/syncthing/syncthing | 38ac58c82e50 / 2026-08-20 | Y | Y (configurable, on by default outside `-noupgrade` builds) | Y (replaces running binary in place) | https (default `ReleasesURL` = `https://upgrades.syncthing.net/meta.json`) | N (release list/meta.json itself unsigned) | **signature** (ed25519 `release.sig` verified against embedded key) | **pinned-in-binary** (`go:embed signingkey.pem`) | lib/upgrade/signingkey.go:17-18 (`//go:embed signingkey.pem` / `var SigningKey []byte`); lib/upgrade/upgrade_supported.go:371-398 (`verifyUpgrade` reads `release.sig` from archive, `signature.Verify(SigningKey, sig, mr)`); lib/config/optionsconfiguration.go:51 (default ReleasesURL); cmd/syncthing/main.go:381 (`InsecureSkipVerify:true` — but this is only the `syncthing cli` helper calling the **local daemon's own loopback GUI API** to trigger an already-verified upgrade, not the payload transport — noted, does not affect tier) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AA7.md",
+      "source_line": 33,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/syncthing/syncthing"
+        },
+        {
+          "label": "commit/date",
+          "value": "38ac58c82e50 / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (configurable, on by default outside `-noupgrade` builds)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (replaces running binary in place)"
+        },
+        {
+          "label": "transport",
+          "value": "https (default `ReleasesURL` = `https://upgrades.syncthing.net/meta.json`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (release list/meta.json itself unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**signature** (ed25519 `release.sig` verified against embedded key)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned-in-binary** (`go:embed signingkey.pem`)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "lib/upgrade/signingkey.go:17-18 (`//go:embed signingkey.pem` / `var SigningKey []byte`); lib/upgrade/upgrade_supported.go:371-398 (`verifyUpgrade` reads `release.sig` from archive, `signature.Verify(SigningKey, sig, mr)`); lib/config/optionsconfiguration.go:51 (default ReleasesURL); cmd/syncthing/main.go:381 (`InsecureSkipVerify:true` — but this is only the `syncthing cli` helper calling the **local daemon's own loopback GUI API** to trigger an already-verified upgrade, not the payload transport — noted, does not affect tier)"
+        }
+      ]
+    }
   ]
 }

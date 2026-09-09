@@ -41,5 +41,53 @@
       "line": 11,
       "text": "| VidCoder | https://github.com/RandomEngy/VidCoder | fdc3186 2026-08-17 | Y | **Y** (SilentNextLaunch mode applies without prompt; PromptApplyImmediately mode prompts) | **Y** | https (`f001.backblazeb2.com`) | Velopack package | Authenticode/OS code-signing check performed by Velopack before applying | OS certificate store (Windows Authenticode, via Velopack/Squirrel-style updater) | `VidCoder/Services/Updater.cs:49-50,98-132` (`new UpdateManager(Utilities.VelopackUpdateUrl)`, `CheckForUpdatesAsync`/`DownloadUpdatesAsync`/`ApplyUpdatesAndRestart`), `VidCoder/Utilities/Utilities.cs:35-36` (HTTPS backblaze URLs) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Y5.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/RandomEngy/VidCoder"
+        },
+        {
+          "label": "commit/date",
+          "value": "fdc3186 2026-08-17"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "**Y** (SilentNextLaunch mode applies without prompt; PromptApplyImmediately mode prompts)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y**"
+        },
+        {
+          "label": "transport",
+          "value": "https (`f001.backblazeb2.com`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Velopack package"
+        },
+        {
+          "label": "payload_verification",
+          "value": "Authenticode/OS code-signing check performed by Velopack before applying"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS certificate store (Windows Authenticode, via Velopack/Squirrel-style updater)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`VidCoder/Services/Updater.cs:49-50,98-132` (`new UpdateManager(Utilities.VelopackUpdateUrl)`, `CheckForUpdatesAsync`/`DownloadUpdatesAsync`/`ApplyUpdatesAndRestart`), `VidCoder/Utilities/Utilities.cs:35-36` (HTTPS backblaze URLs)"
+        }
+      ]
+    }
   ]
 }

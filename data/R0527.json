@@ -42,5 +42,53 @@
       "line": 27,
       "text": "| GitUp | https://github.com/git-up/GitUp.git | 5272b2b / 2026-07-26 | Y | Y (default, opt-out pref) | Y | https (`kURL_AppCast` in `Common.h`) | not separately signed, but enclosure carries EdDSA sig | signature (Sparkle EdDSA) | **pinned-in-binary** (`SUPublicEDKey` embedded in `Info.plist`) | `GitUp/Application/Info.plist:5-6` (`SUPublicEDKey`); `GitUp/Application/AppDelegate.m:206-215` (`SPUStandardUpdaterController`, `automaticallyChecksForUpdates = YES` unless `DisableSparkle` pref set, `checkForUpdatesInBackground`); `GitUp/Application/Common.h:34` (`kURL_AppCast` https) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AH3.md",
+      "source_line": 27,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/git-up/GitUp.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "5272b2b / 2026-07-26"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (default, opt-out pref)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`kURL_AppCast` in `Common.h`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "not separately signed, but enclosure carries EdDSA sig"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (Sparkle EdDSA)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned-in-binary** (`SUPublicEDKey` embedded in `Info.plist`)"
+        },
+        {
+          "label": "evidence",
+          "value": "`GitUp/Application/Info.plist:5-6` (`SUPublicEDKey`); `GitUp/Application/AppDelegate.m:206-215` (`SPUStandardUpdaterController`, `automaticallyChecksForUpdates = YES` unless `DisableSparkle` pref set, `checkForUpdatesInBackground`); `GitUp/Application/Common.h:34` (`kURL_AppCast` https)"
+        }
+      ]
+    }
   ]
 }

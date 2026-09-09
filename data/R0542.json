@@ -41,5 +41,53 @@
       "line": 19,
       "text": "| Mautic | https://github.com/mautic/mautic.git | 6c4d2341195374cca882fa9852747270b01223aa / 2026-08-21 | Y (`mautic:update:apply` CLI command / admin-panel \"Check for updates\") | N (requires interactive confirmation unless `--force`; not scheduled) | Y | https, TLS validation **enforced** (default Guzzle client, no `verify=>false` found) | N | none | none — trust rests on TLS to `api.github.com` (default `system_update_url`), unpinned | `app/bundles/CoreBundle/Helper/UpdateHelper.php:294` fetches release list from `system_update_url` (default `https://api.github.com/repos/mautic/mautic/releases`, `Config/config.php:719`); `:47-76` `fetchPackage()` downloads the zip via Guzzle and `file_put_contents`; `app/bundles/CoreBundle/Update/Step/InstallNewFilesStep.php:44-58` extracts it straight over the install with `ZipArchive::extractTo()`. No `md5`/`sha`/`checksum`/`signature` string appears anywhere under `app/bundles/CoreBundle/Update/` or `Release/Metadata.php` — the `--force` flag documented as \"bypasses the verification check\" only skips the interactive confirmation / pre-update compatibility checks (PHP version, disk space, etc.), not a cryptographic check. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AI1.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/mautic/mautic.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "6c4d2341195374cca882fa9852747270b01223aa / 2026-08-21"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (`mautic:update:apply` CLI command / admin-panel \"Check for updates\")"
+        },
+        {
+          "label": "auto",
+          "value": "N (requires interactive confirmation unless `--force`; not scheduled)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS validation **enforced** (default Guzzle client, no `verify=>false` found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none — trust rests on TLS to `api.github.com` (default `system_update_url`), unpinned"
+        },
+        {
+          "label": "evidence",
+          "value": "`app/bundles/CoreBundle/Helper/UpdateHelper.php:294` fetches release list from `system_update_url` (default `https://api.github.com/repos/mautic/mautic/releases`, `Config/config.php:719`); `:47-76` `fetchPackage()` downloads the zip via Guzzle and `file_put_contents`; `app/bundles/CoreBundle/Update/Step/InstallNewFilesStep.php:44-58` extracts it straight over the install with `ZipArchive::extractTo()`. No `md5`/`sha`/`checksum`/`signature` string appears anywhere under `app/bundles/CoreBundle/Update/` or `Release/Metadata.php` — the `--force` flag documented as \"bypasses the verification check\" only skips the interactive confirmation / pre-update compatibility checks (PHP version, disk space, etc.), not a cryptographic check."
+        }
+      ]
+    }
   ]
 }

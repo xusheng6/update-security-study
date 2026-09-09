@@ -48,5 +48,99 @@
       "line": 31,
       "text": "| Scrypted plugin installer (content channel) | (same repo) | 06c989b / 2026-08-20 | Y | Y (auto-update option for plugins) | Y | https to registry.npmjs.org (`httpFetch`, default Node TLS via `https.request`, `rejectUnauthorized` left `undefined`⇒enforced — cert validation NOT disabled for this path, unlike the cluster/media paths in the same codebase which do set `rejectUnauthorized:false` elsewhere) | N | **NONE** — notably weaker than plain `npm install`: the code downloads the npm tarball directly and extracts `dist/plugin.zip` WITHOUT ever checking the `dist.shasum`/`dist.integrity` field that the npm registry metadata provides (npm CLI itself would verify this; Scrypted's custom installer skips it) | unpinned / npm registry-supplied (and unused even so) | server/src/runtime.ts:543-596 (`installNpm`: `httpFetch` tarball from `registry.versions[version].dist.tarball`, tar-parses it, loads `package/dist/plugin.zip` directly — no shasum/integrity check anywhere in this function) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC6.md",
+      "source_line": 30,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/koush/scrypted"
+        },
+        {
+          "label": "commit/date",
+          "value": "06c989b / 2026-08-20"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "N (no self-updater for the server itself found in source)"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "N"
+        },
+        {
+          "label": "transport",
+          "value": "N/A"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A"
+        },
+        {
+          "label": "payload_verification",
+          "value": "N/A"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "negative census: no checkForUpdate/selfUpdate/npm-install-g-@scrypted hits in server/src"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-AC6.md",
+      "source_line": 31,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "(same repo)"
+        },
+        {
+          "label": "commit/date",
+          "value": "06c989b / 2026-08-20"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (auto-update option for plugins)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https to registry.npmjs.org (`httpFetch`, default Node TLS via `https.request`, `rejectUnauthorized` left `undefined`⇒enforced — cert validation NOT disabled for this path, unlike the cluster/media paths in the same codebase which do set `rejectUnauthorized:false` elsewhere)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**NONE** — notably weaker than plain `npm install`: the code downloads the npm tarball directly and extracts `dist/plugin.zip` WITHOUT ever checking the `dist.shasum`/`dist.integrity` field that the npm registry metadata provides (npm CLI itself would verify this; Scrypted's custom installer skips it)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "unpinned / npm registry-supplied (and unused even so)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "server/src/runtime.ts:543-596 (`installNpm`: `httpFetch` tarball from `registry.versions[version].dist.tarball`, tar-parses it, loads `package/dist/plugin.zip` directly — no shasum/integrity check anywhere in this function)"
+        }
+      ]
+    }
   ]
 }

@@ -41,5 +41,53 @@
       "line": 21,
       "text": "| Sloth | github.com/sveinbjornt/Sloth | **Sparkle (EdDSA = A)** | **Y** | **Y** (Sparkle 2 default; no override key present, standard nib-based `SPUStandardUpdaterController` wiring) | **Y** | https | TLS-only (appcast itself unsigned) | signature[EdDSA] | embedded in Info.plist (`SUPublicEDKey`) | `Sloth/resources/Info.plist`: `SUFeedURL` = `https://sveinbjorn.org/files/appcasts/SlothAppcast.xml`, `SUPublicEDKey` = `XqfjBk0i1aF2FrZQfUIcpU+h7151345+3pSN9Bs7GwI=`; `Sloth/resources/MainMenu.xib` instantiates `SPUStandardUpdaterController` (per `SPUStandardUpdaterController.h:70-72`, \"You must instantiate a SPUStandardUpdaterController inside of a nib\"); `Sloth.xcodeproj/project.pbxproj:98,350` Sparkle.framework linked from `sparkle/Sparkle.framework`, build phase re-signs the vendored `Updater.app`/`Autoupdate`/`Downloader.xpc`/`Installer.xpc`; live fetch of `https://sveinbjorn.org/files/appcasts/SlothAppcast.xml` confirms current entry: `<enclosure url=\"https://sveinbjorn.org/files/software/sloth/sloth-3.6.zip\" sparkle:version=\"392\" sparkle:edSignature=\"7yVfKS30+fvH8sqTm49T3zXKYJNgVqddy5Wrx0o2jmYnTxutc3wLjI3Bnu4CRwLwEpSlBWWCcpe4TFOURWmAAA==\" .../>`. Homebrew cask: `auto_updates true`. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-R1.md",
+      "source_line": 21,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/sveinbjornt/Sloth"
+        },
+        {
+          "label": "framework",
+          "value": "**Sparkle (EdDSA = A)**"
+        },
+        {
+          "label": "has_updater",
+          "value": "**Y**"
+        },
+        {
+          "label": "auto",
+          "value": "**Y** (Sparkle 2 default; no override key present, standard nib-based `SPUStandardUpdaterController` wiring)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y**"
+        },
+        {
+          "label": "transport",
+          "value": "https"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "TLS-only (appcast itself unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature[EdDSA]"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "embedded in Info.plist (`SUPublicEDKey`)"
+        },
+        {
+          "label": "evidence",
+          "value": "`Sloth/resources/Info.plist`: `SUFeedURL` = `https://sveinbjorn.org/files/appcasts/SlothAppcast.xml`, `SUPublicEDKey` = `XqfjBk0i1aF2FrZQfUIcpU+h7151345+3pSN9Bs7GwI=`; `Sloth/resources/MainMenu.xib` instantiates `SPUStandardUpdaterController` (per `SPUStandardUpdaterController.h:70-72`, \"You must instantiate a SPUStandardUpdaterController inside of a nib\"); `Sloth.xcodeproj/project.pbxproj:98,350` Sparkle.framework linked from `sparkle/Sparkle.framework`, build phase re-signs the vendored `Updater.app`/`Autoupdate`/`Downloader.xpc`/`Installer.xpc`; live fetch of `https://sveinbjorn.org/files/appcasts/SlothAppcast.xml` confirms current entry: `<enclosure url=\"https://sveinbjorn.org/files/software/sloth/sloth-3.6.zip\" sparkle:version=\"392\" sparkle:edSignature=\"7yVfKS30+fvH8sqTm49T3zXKYJNgVqddy5Wrx0o2jmYnTxutc3wLjI3Bnu4CRwLwEpSlBWWCcpe4TFOURWmAAA==\" .../>`. Homebrew cask: `auto_updates true`."
+        }
+      ]
+    }
   ]
 }

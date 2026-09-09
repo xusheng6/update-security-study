@@ -41,5 +41,53 @@
       "line": 17,
       "text": "| Stride (Launcher self-update) | github.com/stride3d/stride | .NET/Avalonia desktop launcher | Y | Y (`SelfUpdater.SelfUpdate` runs on every launch, before the main window becomes interactive — see `MainViewModel.FetchOnlineData` / docs/launcher/self-update.md) | Y — two paths: (1) normal path replaces launcher exe/`tools/` files in place via NuGet package install, then restarts; (2) \"force-reinstall\" path downloads an arbitrary `StrideSetup.exe` from a URL embedded in a NuGet package's `Description` field (regex-parsed) and directly `Process.Start()`s it | HTTPS — NuGet feed (default nuget.org unless overridden by `nuget.config`, no override found in launcher runtime code); force-reinstall URL fetched via plain `HttpClient.GetAsync` with no scheme/host enforcement | N — no explicit signature-validation configuration found in NugetStore.cs; relies on NuGet client library defaults, which do not require packages to be signed | **none** in the launcher's own code for either path — no hash/signature check on the downloaded NuGet package contents or on the force-reinstall `StrideSetup.exe` before installing/executing it | n/a — no key referenced anywhere in SelfUpdater.cs | sources/launcher/Stride.Launcher/Services/SelfUpdater.cs:52-63 (`SelfUpdate`); :66-107 (`DownloadAndInstallNewVersion` — `httpClient.GetAsync(strideInstallerUrl)` then `Process.Start(startInfo)`, no verification step); :129-138 (`force-reinstall:\\s*(\\S+)\\s*(\\S+)` regex, `installerDownloadUrl = regexMatch.Groups[2].Value`); docs/launcher/self-update.md (documents the same flow, no verification step mentioned) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-N8.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/stride3d/stride"
+        },
+        {
+          "label": "framework",
+          "value": ".NET/Avalonia desktop launcher"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (`SelfUpdater.SelfUpdate` runs on every launch, before the main window becomes interactive — see `MainViewModel.FetchOnlineData` / docs/launcher/self-update.md)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — two paths: (1) normal path replaces launcher exe/`tools/` files in place via NuGet package install, then restarts; (2) \"force-reinstall\" path downloads an arbitrary `StrideSetup.exe` from a URL embedded in a NuGet package's `Description` field (regex-parsed) and directly `Process.Start()`s it"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS — NuGet feed (default nuget.org unless overridden by `nuget.config`, no override found in launcher runtime code); force-reinstall URL fetched via plain `HttpClient.GetAsync` with no scheme/host enforcement"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N — no explicit signature-validation configuration found in NugetStore.cs; relies on NuGet client library defaults, which do not require packages to be signed"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** in the launcher's own code for either path — no hash/signature check on the downloaded NuGet package contents or on the force-reinstall `StrideSetup.exe` before installing/executing it"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a — no key referenced anywhere in SelfUpdater.cs"
+        },
+        {
+          "label": "evidence",
+          "value": "sources/launcher/Stride.Launcher/Services/SelfUpdater.cs:52-63 (`SelfUpdate`); :66-107 (`DownloadAndInstallNewVersion` — `httpClient.GetAsync(strideInstallerUrl)` then `Process.Start(startInfo)`, no verification step); :129-138 (`force-reinstall:\\s*(\\S+)\\s*(\\S+)` regex, `installerDownloadUrl = regexMatch.Groups[2].Value`); docs/launcher/self-update.md (documents the same flow, no verification step mentioned)"
+        }
+      ]
+    }
   ]
 }

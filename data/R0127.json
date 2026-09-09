@@ -43,5 +43,53 @@
       "line": 7,
       "text": "| yt-dlp | github.com/yt-dlp/yt-dlp | Python CLI | Y | manual trigger (`-U`/`--update`); once invoked, chk+dl+inst run automatically | Y (replaces its own running executable/zip) | https (github.com, api.github.com); TLS enforced (CERT_REQUIRED default, only disabled via explicit user flag `--no-check-certificate`) | N (SHA2-256SUMS file is a plain unsigned text file) | hash-from-manifest (SHA256, compared against `SHA2-256SUMS` release asset) | N/A (hash only, no signature; sums fetched over HTTPS from same GitHub release) | yt_dlp/update.py:320 (download URL), :464 (fetch SHA2-256SUMS), :536 (`hashlib.sha256(newcontent).hexdigest() != update_info.checksum`), :535 (`_block_restart` if no checksum available); yt_dlp/networking/_helper.py:110 (`ssl.CERT_REQUIRED if verify else ssl.CERT_NONE`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-I5.md",
+      "source_line": 7,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/yt-dlp/yt-dlp"
+        },
+        {
+          "label": "framework",
+          "value": "Python CLI"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "manual trigger (`-U`/`--update`); once invoked, chk+dl+inst run automatically"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (replaces its own running executable/zip)"
+        },
+        {
+          "label": "transport",
+          "value": "https (github.com, api.github.com); TLS enforced (CERT_REQUIRED default, only disabled via explicit user flag `--no-check-certificate`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (SHA2-256SUMS file is a plain unsigned text file)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (SHA256, compared against `SHA2-256SUMS` release asset)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A (hash only, no signature; sums fetched over HTTPS from same GitHub release)"
+        },
+        {
+          "label": "evidence",
+          "value": "yt_dlp/update.py:320 (download URL), :464 (fetch SHA2-256SUMS), :536 (`hashlib.sha256(newcontent).hexdigest() != update_info.checksum`), :535 (`_block_restart` if no checksum available); yt_dlp/networking/_helper.py:110 (`ssl.CERT_REQUIRED if verify else ssl.CERT_NONE`)"
+        }
+      ]
+    }
   ]
 }

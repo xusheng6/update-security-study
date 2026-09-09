@@ -42,5 +42,53 @@
       "line": 19,
       "text": "| Kebler | https://github.com/Sharkboy-j/Kebler.git | 43486b66 2023-11-02 | Y | N (prompts user, dialog Yes/No before install) | Y | https, validation enforced (default `HttpClient`, no callback overrides found) | N | none | server-supplied/unpinned (GitHub Releases API + asset URL) | `src/Kebler.Update.Core/GitHubApi.cs:35` `https://api.github.com/repos/{user}/{repository}/releases/latest`; `src/Kebler/Updater.cs:65-80` downloads the last release asset and on confirm calls `InstallUpdates()` (line 62-80) which does `Process.Start` on the downloaded installer (`ConstStrings.TempInstallerExePath`) with no hash/signature check anywhere in `GitHubApi.cs`/`Updater.cs` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AN3.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Sharkboy-j/Kebler.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "43486b66 2023-11-02"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (prompts user, dialog Yes/No before install)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, validation enforced (default `HttpClient`, no callback overrides found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (GitHub Releases API + asset URL)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/Kebler.Update.Core/GitHubApi.cs:35` `https://api.github.com/repos/{user}/{repository}/releases/latest`; `src/Kebler/Updater.cs:65-80` downloads the last release asset and on confirm calls `InstallUpdates()` (line 62-80) which does `Process.Start` on the downloaded installer (`ConstStrings.TempInstallerExePath`) with no hash/signature check anywhere in `GitHubApi.cs`/`Updater.cs`"
+        }
+      ]
+    }
   ]
 }

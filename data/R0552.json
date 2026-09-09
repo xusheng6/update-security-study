@@ -46,5 +46,99 @@
       "line": 14,
       "text": "| **Matomo — plugin/theme Marketplace** (side channel) | same repo | same | Y | N (admin-initiated install/update) | Y | https to plugins.matomo.org, `$acceptInvalidSslCertificate=false` hardcoded | N | **N — no sha256/checksum/signature check anywhere** | N/A | `plugins/CorePluginsAdmin/PluginInstaller.php:51-91,140-154,161-174,176-241,289-301`; `plugins/Marketplace/Api/Service.php:119,190` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AI5.md",
+      "source_line": 13,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/matomo-org/matomo"
+        },
+        {
+          "label": "commit / date",
+          "value": "1899a06743eafab7aaeb1f0a946355528b22b4a2 / 2026-08-21"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "semi (bg version-check auto every 8h; download+install requires admin click \"Update Matomo automatically\" or `core:update`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https by default (`Http::sendHttpRequest`, CA-pinned via `configCurlCertificate`); verify-disable path exists (`core/Http.php:797-801`) but gated behind `$acceptInvalidSslCertificate`, default false, not set true in updater path"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**N — no hash/signature check**, only verifies a hardcoded list of expected file *paths* exist post-extract"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A (no signature scheme)"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "`plugins/CoreUpdater/Updater.php:80-147,242-260,262-296,298-313,364-409`; download URL `plugins/CoreUpdater/ReleaseChannel.php:42-49`; bg check `core/UpdateCheck.php:29-64`; one-click trigger `plugins/CoreUpdater/Controller.php:157-188`"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-AI5.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "same repo"
+        },
+        {
+          "label": "commit / date",
+          "value": "same"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (admin-initiated install/update)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https to plugins.matomo.org, `$acceptInvalidSslCertificate=false` hardcoded"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**N — no sha256/checksum/signature check anywhere**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "`plugins/CorePluginsAdmin/PluginInstaller.php:51-91,140-154,161-174,176-241,289-301`; `plugins/Marketplace/Api/Service.php:119,190`"
+        }
+      ]
+    }
   ]
 }

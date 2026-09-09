@@ -46,5 +46,99 @@
       "line": 14,
       "text": "| Wick Editor | https://github.com/Wicklets/wick-editor.git | f34f0d95 / 2021-01-20 (stale — 5+ yrs old, effectively unmaintained) | Y | Y (`checkForUpdatesAndNotify()` — electron-updater default auto-download) | Y | https (GitHub Releases via electron-updater provider, inferred from `repository` field) | B-style — electron-updater verifies OS code-signing (Authenticode/notarization) of the downloaded package, not an app-level detached signature | OS code-signing (electron-updater + electron-builder-notarize) | OS keystore / Apple notarization & Windows Authenticode chain (not a key pinned in this app's own binary) | public/electron.js:2 (`require(\"electron-updater\")`), :67 (`autoUpdater.checkForUpdatesAndNotify()`), package.json:21,58-62 (electron-updater, electron-builder-notarize), package.json:8-10 (repository → GitHub provider) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AA3.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/Wicklets/wick-editor"
+        },
+        {
+          "label": "commit/date",
+          "value": "f34f0d9 / 2021-01-20 (stale — repo appears inactive)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS validation not disabled (no rejectUnauthorized/InsecureSkipVerify etc. found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no signed manifest; electron-builder auto-generates unsigned `latest.yml`/`latest-mac.yml` with sha512, not committed to repo)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (sha512 in electron-builder-generated yml) + macOS: Gatekeeper/notarization via `afterSign: electron-builder-notarize` (`package.json:62`); Windows: no CSC/certificateFile config found in repo → signing status unknown/likely unsigned"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "mac: Apple notarization (OS-anchored); win: unpinned/server-supplied (hash comes from same GitHub Releases origin electron-updater fetches from)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`public/electron.js:2` (`require(\"electron-updater\")`), `:29,67` (`autoUpdater.autoUpdater.checkForUpdatesAndNotify()`); `package.json:21` (electron-updater dep), `:8-10` (repository → implicit GitHub Releases publish provider), `:62` (afterSign notarize), `:68-71` (nsis oneClick:false, no signing cert refs)"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-AL6.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Wicklets/wick-editor.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "f34f0d95 / 2021-01-20 (stale — 5+ yrs old, effectively unmaintained)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (`checkForUpdatesAndNotify()` — electron-updater default auto-download)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub Releases via electron-updater provider, inferred from `repository` field)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "B-style — electron-updater verifies OS code-signing (Authenticode/notarization) of the downloaded package, not an app-level detached signature"
+        },
+        {
+          "label": "payload_verification",
+          "value": "OS code-signing (electron-updater + electron-builder-notarize)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore / Apple notarization & Windows Authenticode chain (not a key pinned in this app's own binary)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "public/electron.js:2 (`require(\"electron-updater\")`), :67 (`autoUpdater.checkForUpdatesAndNotify()`), package.json:21,58-62 (electron-updater, electron-builder-notarize), package.json:8-10 (repository → GitHub provider)"
+        }
+      ]
+    }
   ]
 }

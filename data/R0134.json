@@ -41,5 +41,53 @@
       "line": 10,
       "text": "| GameHub | github.com/tkashkin/GameHub (unmaintained, last commit 2022-05-25) | Vala/GTK, Flatpak | N (app self-update — none found); Y (GOG/Humble game installers = content-as-code) | manual (user-initiated game install) | Y — downloads GOG/Humble installer executables and runs them to install games | HTTPS (`api.gog.com`, `embed.gog.com`, `auth.gog.com`) | N | hash-from-manifest — MD5/SHA1/SHA256/SHA512 checksum (provider-supplied) compared post-download; mismatch surfaces a \"Corrupted installer\" dialog | N/A (checksum value from GOG/Humble API JSON, not a signature) | `src/data/Runnable.vala:556-664` (`ChecksumType` enum, checksum compare, \"Checksum mismatch\" warning); `src/ui/dialogs/CorruptedInstallerDialog.vala:71` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-I2.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/tkashkin/GameHub (unmaintained, last commit 2022-05-25)"
+        },
+        {
+          "label": "framework",
+          "value": "Vala/GTK, Flatpak"
+        },
+        {
+          "label": "has_updater",
+          "value": "N (app self-update — none found); Y (GOG/Humble game installers = content-as-code)"
+        },
+        {
+          "label": "auto",
+          "value": "manual (user-initiated game install)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — downloads GOG/Humble installer executables and runs them to install games"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS (`api.gog.com`, `embed.gog.com`, `auth.gog.com`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest — MD5/SHA1/SHA256/SHA512 checksum (provider-supplied) compared post-download; mismatch surfaces a \"Corrupted installer\" dialog"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A (checksum value from GOG/Humble API JSON, not a signature)"
+        },
+        {
+          "label": "evidence",
+          "value": "`src/data/Runnable.vala:556-664` (`ChecksumType` enum, checksum compare, \"Checksum mismatch\" warning); `src/ui/dialogs/CorruptedInstallerDialog.vala:71`"
+        }
+      ]
+    }
   ]
 }

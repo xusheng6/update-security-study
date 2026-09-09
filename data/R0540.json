@@ -41,5 +41,53 @@
       "line": 16,
       "text": "| Crater | https://github.com/crater-invoice/crater | 05d5ce26 / 2023-02-19 (stale, last commit 2023) | Y | N (admin-triggered via UI: download → unzip → copyFiles → migrate, each a separate authorized HTTP endpoint) | Y | https, **TLS validation explicitly DISABLED** | N | none | server-supplied, unpinned | `app/Space/SiteApi.php:14` `$client = new Client(['verify' => false, 'base_uri' => config('crater.base_url').'/']);` (Guzzle `verify=>false` disables cert validation); `config/crater.php:49` `'base_url' => 'https://craterapp.com'`; download+extract-over-app in `app/Space/Updater.php` (`download()` writes zip via `getRemote()`, `unzip()` extracts with `ZipArchive`, `copyFiles()` does `File::copyDirectory($temp_extract_dir.'/Crater', base_path())` — no hash/signature check anywhere in `Updater.php`); admin gating via `authorize('manage update app')` in `app/Http/Controllers/V1/Admin/Update/UpdateController.php` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AI8.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/crater-invoice/crater"
+        },
+        {
+          "label": "commit/date",
+          "value": "05d5ce26 / 2023-02-19 (stale, last commit 2023)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (admin-triggered via UI: download → unzip → copyFiles → migrate, each a separate authorized HTTP endpoint)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, **TLS validation explicitly DISABLED**"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied, unpinned"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`app/Space/SiteApi.php:14` `$client = new Client(['verify' => false, 'base_uri' => config('crater.base_url').'/']);` (Guzzle `verify=>false` disables cert validation); `config/crater.php:49` `'base_url' => 'https://craterapp.com'`; download+extract-over-app in `app/Space/Updater.php` (`download()` writes zip via `getRemote()`, `unzip()` extracts with `ZipArchive`, `copyFiles()` does `File::copyDirectory($temp_extract_dir.'/Crater', base_path())` — no hash/signature check anywhere in `Updater.php`); admin gating via `authorize('manage update app')` in `app/Http/Controllers/V1/Admin/Update/UpdateController.php`"
+        }
+      ]
+    }
   ]
 }

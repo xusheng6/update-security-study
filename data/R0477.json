@@ -42,5 +42,53 @@
       "line": 17,
       "text": "| synaptic | https://github.com/mvo5/synaptic.git | 8e990207236403cb0b97056d99908ee10007f4b8 / 2026-08-02 | N | N | Y | https (apt's own https method, TLS validated, no override found) | Y (Release file GPG-signed) | hash (per-.deb SHA256 checked against signed Packages index; .deb itself not individually signed — standard apt model) | OS keystore `/etc/apt/trusted.gpg.d`, apt-controlled not synaptic-controlled | `common/rpackagelister.cc:921-922` (pkgAcquire+CreatePM), `:2055-2060` (HashStringList compare); `gtk/rgsummarywindow.cc:85-110` (unauthenticated-package warning, user can click through — same as apt-get's own prompt); `common/rpackage.cc:975-985` (screenshot fetch over plain https with **empty HashStringList** — informational side-channel only, not a package payload) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AE2.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/mvo5/synaptic.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "8e990207236403cb0b97056d99908ee10007f4b8 / 2026-08-02"
+        },
+        {
+          "label": "has_updater",
+          "value": "N"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (apt's own https method, TLS validated, no override found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (Release file GPG-signed)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (per-.deb SHA256 checked against signed Packages index; .deb itself not individually signed — standard apt model)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore `/etc/apt/trusted.gpg.d`, apt-controlled not synaptic-controlled"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`common/rpackagelister.cc:921-922` (pkgAcquire+CreatePM), `:2055-2060` (HashStringList compare); `gtk/rgsummarywindow.cc:85-110` (unauthenticated-package warning, user can click through — same as apt-get's own prompt); `common/rpackage.cc:975-985` (screenshot fetch over plain https with **empty HashStringList** — informational side-channel only, not a package payload)"
+        }
+      ]
+    }
   ]
 }

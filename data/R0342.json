@@ -42,5 +42,53 @@
       "line": 21,
       "text": "| topgrade | https://github.com/topgrade-rs/topgrade | 5032200 / 2026-08-19 | Y | **Y by default** — runs on every `topgrade` invocation as the first step unless `TOPGRADE_NO_SELF_UPGRADE` env var is set or disabled in config/CLI | Y (respawns into the new binary immediately after update) | https (GitHub Releases via `self_update` crate, `rustls`/`reqwest`) | no | **none** — no `.verifying_keys()` or checksum call anywhere in `src/self_update.rs`; asset is matched purely by target/bin-name string | N/A | `src/step.rs:610-620` (`SelfUpdate` step runs automatically every invocation unless explicitly disabled), `src/self_update.rs:19-41` (`Update::configure()...build()?.update_extended()` — no verifying_keys/checksum call present), `src/self_update.rs:59-77` (respawns into freshly-downloaded, unverified binary via `exec()`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W7.md",
+      "source_line": 21,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/topgrade-rs/topgrade"
+        },
+        {
+          "label": "commit/date",
+          "value": "5032200 / 2026-08-19"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "**Y by default** — runs on every `topgrade` invocation as the first step unless `TOPGRADE_NO_SELF_UPGRADE` env var is set or disabled in config/CLI"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y (respawns into the new binary immediately after update)"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub Releases via `self_update` crate, `rustls`/`reqwest`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "no"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — no `.verifying_keys()` or checksum call anywhere in `src/self_update.rs`; asset is matched purely by target/bin-name string"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/step.rs:610-620` (`SelfUpdate` step runs automatically every invocation unless explicitly disabled), `src/self_update.rs:19-41` (`Update::configure()...build()?.update_extended()` — no verifying_keys/checksum call present), `src/self_update.rs:59-77` (respawns into freshly-downloaded, unverified binary via `exec()`)"
+        }
+      ]
+    }
   ]
 }

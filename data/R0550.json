@@ -41,5 +41,53 @@
       "line": 19,
       "text": "| Beyond All Reason (bar-lobby / BeyondAllReason.exe) | https://github.com/beyond-all-reason/bar-lobby.git | 036118a5ddf72d30a29a56768fa54bba6e78c352 / 2026-08-21 | Y | Y-ish (auto-checks; download/install gated behind explicit UI action, but `autoInstallOnAppQuit=true` installs without further confirmation once downloaded) | Y | https (github.com Releases feed via electron-updater; no TLS overrides found in `src/`) | N — no `CSC_LINK`/`certificateFile` found in `electron-builder.ts` or CI workflows; Windows NSIS build appears **unsigned**, so this is not OS-code-signing-gated as initially assumed | hash (electron-updater's built-in sha512 check vs `latest.yml`) | server-supplied/unpinned (same GitHub Releases artifact set that serves the payload) | `electron-builder.ts:9-30`, `src/main/content/auto-updater.ts:20-32,109-115`, `package.json:96` (`electron-updater ^6.8.3`) — corrected/refined by dedicated sub-agent pass, see full section below. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AI4.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/beyond-all-reason/bar-lobby.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "036118a5ddf72d30a29a56768fa54bba6e78c352 / 2026-08-21"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y-ish (auto-checks; download/install gated behind explicit UI action, but `autoInstallOnAppQuit=true` installs without further confirmation once downloaded)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (github.com Releases feed via electron-updater; no TLS overrides found in `src/`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N — no `CSC_LINK`/`certificateFile` found in `electron-builder.ts` or CI workflows; Windows NSIS build appears **unsigned**, so this is not OS-code-signing-gated as initially assumed"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (electron-updater's built-in sha512 check vs `latest.yml`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (same GitHub Releases artifact set that serves the payload)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`electron-builder.ts:9-30`, `src/main/content/auto-updater.ts:20-32,109-115`, `package.json:96` (`electron-updater ^6.8.3`) — corrected/refined by dedicated sub-agent pass, see full section below."
+        }
+      ]
+    }
   ]
 }

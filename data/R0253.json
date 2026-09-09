@@ -46,5 +46,99 @@
       "line": 5,
       "text": "| Houdoku | https://github.com/xgi/houdoku | Electron (electron-vite + electron-builder, `electron-updater` GitHub provider) | Y | Y for the check (runs automatically on app load if the `autoCheckForUpdates` setting is enabled, via `ipcRenderer.invoke(APP.CHECK_FOR_UPDATES)`); download/install requires the user to accept the \"perform update\" dialog (`autoUpdater.autoDownload = false`) | Y (once the user accepts, `autoUpdater.downloadUpdate()` fetches the installer and `autoUpdater.quitAndInstall(true, true)` runs it) | https (electron-updater GitHub provider — `api.github.com`/release assets) | N (no separately-signed manifest; electron-updater's standard `latest*.yml` is fetched over HTTPS from the same GitHub release as the installer) | hash-from-manifest (sha512 in `latest*.yml`, electron-updater's default integrity check) | N/A — code signing is present in the release workflow only as commented-out placeholders, so releases are unsigned and there is no OS-code-signing layer backing the update; trust reduces to the sha512 in the release-hosted yml | apps/desktop/src/main/services/updater.ts:16-39 (`autoUpdater.autoDownload=false`, `checkForUpdates()` on IPC call), :62-79 (`PERFORM_UPDATE` → `downloadUpdate()`, `UPDATE_AND_RESTART` → `quitAndInstall`); apps/desktop/src/renderer/App.tsx:86-90 (auto-invokes `CHECK_FOR_UPDATES` on startup when `autoCheckForUpdates` is true); apps/desktop/package.json:88-91 (`\"publish\": {\"provider\": \"github\", \"owner\": \"xgi\", \"repo\": \"houdoku\"}`); .github/workflows/publish.yml:66-67 (`# CSC_LINK` / `# CSC_KEY_PASSWORD` commented out — no code signing configured) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AK7.md",
+      "source_line": 22,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/xgi/houdoku"
+        },
+        {
+          "label": "commit/date",
+          "value": "a0c69348 / 2025-01-16"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (auto-check at launch if setting enabled); download/install requires a user click (`autoDownload=false`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (after user confirms \"Perform Update\")"
+        },
+        {
+          "label": "transport",
+          "value": "https (electron-updater / GitHub releases)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N — mac `identity:null`,`dmg.sign:false`; win `CSC_LINK`/`CSC_KEY_PASSWORD` are **commented out** in CI, so builds ship unsigned"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (electron-updater `latest*.yml` sha512, since unsigned)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (yml on the same GitHub release as the binary)"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "apps/desktop/src/main/services/updater.ts:9-78; apps/desktop/package.json (build.mac.identity/dmg.sign); .github/workflows/publish.yml:66-67"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-P2.md",
+      "source_line": 5,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/xgi/houdoku"
+        },
+        {
+          "label": "framework",
+          "value": "Electron (electron-vite + electron-builder, `electron-updater` GitHub provider)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y for the check (runs automatically on app load if the `autoCheckForUpdates` setting is enabled, via `ipcRenderer.invoke(APP.CHECK_FOR_UPDATES)`); download/install requires the user to accept the \"perform update\" dialog (`autoUpdater.autoDownload = false`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (once the user accepts, `autoUpdater.downloadUpdate()` fetches the installer and `autoUpdater.quitAndInstall(true, true)` runs it)"
+        },
+        {
+          "label": "transport",
+          "value": "https (electron-updater GitHub provider — `api.github.com`/release assets)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no separately-signed manifest; electron-updater's standard `latest*.yml` is fetched over HTTPS from the same GitHub release as the installer)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (sha512 in `latest*.yml`, electron-updater's default integrity check)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A — code signing is present in the release workflow only as commented-out placeholders, so releases are unsigned and there is no OS-code-signing layer backing the update; trust reduces to the sha512 in the release-hosted yml"
+        },
+        {
+          "label": "evidence",
+          "value": "apps/desktop/src/main/services/updater.ts:16-39 (`autoUpdater.autoDownload=false`, `checkForUpdates()` on IPC call), :62-79 (`PERFORM_UPDATE` → `downloadUpdate()`, `UPDATE_AND_RESTART` → `quitAndInstall`); apps/desktop/src/renderer/App.tsx:86-90 (auto-invokes `CHECK_FOR_UPDATES` on startup when `autoCheckForUpdates` is true); apps/desktop/package.json:88-91 (`\"publish\": {\"provider\": \"github\", \"owner\": \"xgi\", \"repo\": \"houdoku\"}`); .github/workflows/publish.yml:66-67 (`# CSC_LINK` / `# CSC_KEY_PASSWORD` commented out — no code signing configured)"
+        }
+      ]
+    }
   ]
 }

@@ -44,5 +44,53 @@
       "line": 11,
       "text": "| OBS Studio | https://github.com/obsproject/obs-studio.git | 0043697fc59d791b95b3495dfa1fe180b395966f / 2026-08-16 | Y | Y | Y | https, TLS enforced (WinHttp default, TLS1.2/1.3 pinned via WINHTTP_OPTION_SECURE_PROTOCOLS; no SECURITY_FLAG_IGNORE found) | N — patch manifest is plain JSON fetched over HTTPS with no detached signature | hash (Blake2b) of each package file compared against hash listed in the same unsigned manifest | server-supplied/unpinned — the manifest and the hashes it asserts both come from the same HTTPS endpoint (cdn-fastly.obsproject.com / obsproject.com); WinVerifyTrust (Authenticode) is only used for the incidental VC++ Redistributable download, not for OBS's own update packages | frontend/updater/updater.cpp:39-43 (CDN URLs), :504-508 (blake2b hash check vs manifest hash), :1513-1514 (manifest parsed with no sig check), :1274 (WinVerifyTrust only for VC redist); frontend/OBSApp.cpp:303 (EnableAutoUpdates default true); frontend/widgets/OBSBasic.cpp:1306 (TimedCheckForUpdates) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-V4.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/obsproject/obs-studio.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "0043697fc59d791b95b3495dfa1fe180b395966f / 2026-08-16"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (WinHttp default, TLS1.2/1.3 pinned via WINHTTP_OPTION_SECURE_PROTOCOLS; no SECURITY_FLAG_IGNORE found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N — patch manifest is plain JSON fetched over HTTPS with no detached signature"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (Blake2b) of each package file compared against hash listed in the same unsigned manifest"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned — the manifest and the hashes it asserts both come from the same HTTPS endpoint (cdn-fastly.obsproject.com / obsproject.com); WinVerifyTrust (Authenticode) is only used for the incidental VC++ Redistributable download, not for OBS's own update packages"
+        },
+        {
+          "label": "evidence",
+          "value": "frontend/updater/updater.cpp:39-43 (CDN URLs), :504-508 (blake2b hash check vs manifest hash), :1513-1514 (manifest parsed with no sig check), :1274 (WinVerifyTrust only for VC redist); frontend/OBSApp.cpp:303 (EnableAutoUpdates default true); frontend/widgets/OBSBasic.cpp:1306 (TimedCheckForUpdates)"
+        }
+      ]
+    }
   ]
 }

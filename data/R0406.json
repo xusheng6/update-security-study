@@ -41,5 +41,53 @@
       "line": 16,
       "text": "| Nault (Nano wallet, desktop-app) | https://github.com/Nault/Nault | fb103f1 / 2025-10-12 | Y | Y (auto-checks; `autoDownload=false` so download is user-confirmed via dialog, then auto-installs) | Y | https (electron-updater default GitHub-releases provider) | Y — electron-updater verifies OS code signature / update.yml hash from same publish channel | hash from update.yml (published alongside installer) + OS Authenticode/codesign via electron-updater/Squirrel/NSIS | server-supplied/unpinned (standard electron-updater GitHub-releases flow; no extra pinned key layer found) | desktop-app/src/desktop-app.ts:4,99-156 (`import {autoUpdater} from 'electron-updater'`; autoDownload=false; update-available→dialog→downloadUpdate(); update-downloaded→quitAndInstall(true,true)); package.json: \"electron-updater\": \"^4.3.5\" |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AA1.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Nault/Nault"
+        },
+        {
+          "label": "commit/date",
+          "value": "fb103f1 / 2025-10-12"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (auto-checks; `autoDownload=false` so download is user-confirmed via dialog, then auto-installs)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (electron-updater default GitHub-releases provider)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y — electron-updater verifies OS code signature / update.yml hash from same publish channel"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash from update.yml (published alongside installer) + OS Authenticode/codesign via electron-updater/Squirrel/NSIS"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (standard electron-updater GitHub-releases flow; no extra pinned key layer found)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "desktop-app/src/desktop-app.ts:4,99-156 (`import {autoUpdater} from 'electron-updater'`; autoDownload=false; update-available→dialog→downloadUpdate(); update-downloaded→quitAndInstall(true,true)); package.json: \"electron-updater\": \"^4.3.5\""
+        }
+      ]
+    }
   ]
 }

@@ -42,5 +42,53 @@
       "line": 19,
       "text": "| Gittyup | https://github.com/Murmele/Gittyup.git | a52b17a626 / 2026-07-21 | Y | Y (opt-in setting `InstallUpdatesAutomatically`, default is confirm-dialog) | Y | https (`github.com/Murmele/gittyup/releases/...`), TLS enforced by default but user can permanently disable via \"Ignore\" dialog (`ssl/ignore` setting) | n/a | **none** — no hash/signature check anywhere before install | n/a | src/update/Updater.cpp:50-96 (`kLinkFmt` https GitHub release asset, auto-install branch), :198-242 (`download()`, no integrity check), :354-376 (Linux: runs downloaded `.sh` via `/bin/sh` with no check); src/update/Updater_win.cpp:7-28 (`ShellExecuteW` on downloaded `.exe`, no check); src/update/Updater_mac.mm:70-118 (mounts DMG, copies `.app` over existing bundle, no `codesign`/`spctl` check); src/app/Application.cpp:112-113 (sslErrors wired to a user-togglable ignore dialog) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W4.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Murmele/Gittyup.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "a52b17a626 / 2026-07-21"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (opt-in setting `InstallUpdatesAutomatically`, default is confirm-dialog)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`github.com/Murmele/gittyup/releases/...`), TLS enforced by default but user can permanently disable via \"Ignore\" dialog (`ssl/ignore` setting)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "n/a"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — no hash/signature check anywhere before install"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/update/Updater.cpp:50-96 (`kLinkFmt` https GitHub release asset, auto-install branch), :198-242 (`download()`, no integrity check), :354-376 (Linux: runs downloaded `.sh` via `/bin/sh` with no check); src/update/Updater_win.cpp:7-28 (`ShellExecuteW` on downloaded `.exe`, no check); src/update/Updater_mac.mm:70-118 (mounts DMG, copies `.app` over existing bundle, no `codesign`/`spctl` check); src/app/Application.cpp:112-113 (sslErrors wired to a user-togglable ignore dialog)"
+        }
+      ]
+    }
   ]
 }

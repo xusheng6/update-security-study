@@ -43,5 +43,53 @@
       "line": 18,
       "text": "| WebCatalog | https://github.com/webcatalog/webcatalog-app.git | b10665b / 2022-04-03 | Y | Y (checks on launch, silent unless user-triggered) | Y (`autoUpdater.quitAndInstall`) | https (generic CDN `cdn-2.webcatalog.io` + S3 + GitHub) | B (electron-updater OS code-sign) | OS code signature (HSM Authenticode sign on Windows, hardened runtime + notarization on macOS) | **OS keystore** | main-src/libs/updater.js:1-142 (`electron-updater` events, `quitAndInstall`), dist.js:137-167 (`win.sign: hsmCodeSignAsync`, `mac.hardenedRuntime`/notarize, `publish` generic+s3+github) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AM7.md",
+      "source_line": 18,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/webcatalog/webcatalog-app.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "b10665b / 2022-04-03"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (checks on launch, silent unless user-triggered)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y (`autoUpdater.quitAndInstall`)"
+        },
+        {
+          "label": "transport",
+          "value": "https (generic CDN `cdn-2.webcatalog.io` + S3 + GitHub)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "B (electron-updater OS code-sign)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "OS code signature (HSM Authenticode sign on Windows, hardened runtime + notarization on macOS)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**OS keystore**"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "main-src/libs/updater.js:1-142 (`electron-updater` events, `quitAndInstall`), dist.js:137-167 (`win.sign: hsmCodeSignAsync`, `mac.hardenedRuntime`/notarize, `publish` generic+s3+github)"
+        }
+      ]
+    }
   ]
 }

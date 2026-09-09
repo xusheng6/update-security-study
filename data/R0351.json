@@ -41,5 +41,53 @@
       "line": 30,
       "text": "| Memospot | https://github.com/memospot/memospot.git | 5b4aeb8fd0f / 2026-08-15 | Y | Y (auto-downloads after a confirm dialog, then installs+restarts) | Y | https (GitHub Releases: `latest.json` + artifact) | Y (Tauri updater manifest is minisign-signed) | signature (Ed25519 via minisign) | **pinned-in-binary** (`pubkey` embedded in `Tauri.toml`, compiled into the binary) | `crates/memospot/src/updater.rs:99-176` (`update()`: `check()` → confirm dialog → `download_and_install()` → `app.restart()`); `crates/memospot/Tauri.toml:70-75` (`[plugins.updater] pubkey = \"...minisign public key...\"`, `endpoints = [\"https://github.com/memospot/memospot/releases/latest/download/latest.json\"]`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-X7.md",
+      "source_line": 30,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/memospot/memospot.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "5b4aeb8fd0f / 2026-08-15"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (auto-downloads after a confirm dialog, then installs+restarts)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub Releases: `latest.json` + artifact)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (Tauri updater manifest is minisign-signed)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (Ed25519 via minisign)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned-in-binary** (`pubkey` embedded in `Tauri.toml`, compiled into the binary)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`crates/memospot/src/updater.rs:99-176` (`update()`: `check()` → confirm dialog → `download_and_install()` → `app.restart()`); `crates/memospot/Tauri.toml:70-75` (`[plugins.updater] pubkey = \"...minisign public key...\"`, `endpoints = [\"https://github.com/memospot/memospot/releases/latest/download/latest.json\"]`)"
+        }
+      ]
+    }
   ]
 }

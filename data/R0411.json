@@ -42,5 +42,53 @@
       "line": 21,
       "text": "| termscp | https://github.com/veeso/termscp | 08c51a32cc / 2026-07-29 | Y | N (manual `termscp -u` / menu action; not silent) | Y | https to api.github.com, TLS enforced (default `reqwest`/`self_update` behavior, no cert-validation override found) | N (GitHub Releases API JSON, unsigned) | none (the `self_update` crate is used without `.verifying_keys()`/checksum config — binary is fetched and swapped in with zero cryptographic check) | none — trust root is \"GitHub Releases asset reachable over TLS\", no pinned key | `src/system/auto_update.rs:56-68` (`GithubUpdater::configure()...build()?.update()`, no `verifying_keys`); `src/system/auto_update.rs:79-92` (`get_latest_release()`); `Cargo.toml` depends on `self_update` crate |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AA2.md",
+      "source_line": 21,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/veeso/termscp"
+        },
+        {
+          "label": "commit/date",
+          "value": "08c51a32cc / 2026-07-29"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual `termscp -u` / menu action; not silent)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https to api.github.com, TLS enforced (default `reqwest`/`self_update` behavior, no cert-validation override found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (GitHub Releases API JSON, unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (the `self_update` crate is used without `.verifying_keys()`/checksum config — binary is fetched and swapped in with zero cryptographic check)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none — trust root is \"GitHub Releases asset reachable over TLS\", no pinned key"
+        },
+        {
+          "label": "evidence",
+          "value": "`src/system/auto_update.rs:56-68` (`GithubUpdater::configure()...build()?.update()`, no `verifying_keys`); `src/system/auto_update.rs:79-92` (`get_latest_release()`); `Cargo.toml` depends on `self_update` crate"
+        }
+      ]
+    }
   ]
 }

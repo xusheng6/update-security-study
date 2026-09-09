@@ -43,5 +43,21 @@
       "line": 55,
       "text": "| Wire Desktop | `wire-desktop` | Split: Tier B on macOS (Squirrel.Mac; prod path is actually Mac App Store); Tier C on Windows (legacy Squirrel.Windows, no explicit payload signature verification found in-repo). |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U8.md",
+      "source_line": 55,
+      "fields": [
+        {
+          "label": "already covered as",
+          "value": "`wire-desktop`"
+        },
+        {
+          "label": "tier / notable finding",
+          "value": "Split: Tier B on macOS (Squirrel.Mac; prod path is actually Mac App Store); Tier C on Windows (legacy Squirrel.Windows, no explicit payload signature verification found in-repo)."
+        }
+      ]
+    }
   ]
 }

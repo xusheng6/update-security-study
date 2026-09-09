@@ -42,5 +42,53 @@
       "line": 20,
       "text": "| apper (KDE) | https://github.com/KDE/apper.git | de4dc9b09db04054e030a07c5ce87b59fd1657e1 / 2025-03-05 | N | N | Y (delegated) | N/A — apper does no downloads itself, all via PackageKit D-Bus | Y by default (backend enforces, e.g. apt Release GPG for aptcc backend) | signature, but **bypassable in-app**: `TransactionFlagOnlyTrusted` is default, but apper contains its own toggle | server/backend-supplied, not pinned in apper | `libapper/PkTransaction.cpp:91,111,127,141` default `TransactionFlagOnlyTrusted`; `:246-270` on GPG errors shows `KMessageBox::warningYesNo(\"You are about to install unsigned packages...\")`, on Yes calls `setTrusted(false)` (`:596-602`) which XORs off OnlyTrusted and **resends the transaction with trust disabled** |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AE2.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/KDE/apper.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "de4dc9b09db04054e030a07c5ce87b59fd1657e1 / 2025-03-05"
+        },
+        {
+          "label": "has_updater",
+          "value": "N"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (delegated)"
+        },
+        {
+          "label": "transport",
+          "value": "N/A — apper does no downloads itself, all via PackageKit D-Bus"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y by default (backend enforces, e.g. apt Release GPG for aptcc backend)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature, but **bypassable in-app**: `TransactionFlagOnlyTrusted` is default, but apper contains its own toggle"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server/backend-supplied, not pinned in apper"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`libapper/PkTransaction.cpp:91,111,127,141` default `TransactionFlagOnlyTrusted`; `:246-270` on GPG errors shows `KMessageBox::warningYesNo(\"You are about to install unsigned packages...\")`, on Yes calls `setTrusted(false)` (`:596-602`) which XORs off OnlyTrusted and **resends the transaction with trust disabled**"
+        }
+      ]
+    }
   ]
 }

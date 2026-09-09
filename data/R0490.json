@@ -41,5 +41,53 @@
       "line": 20,
       "text": "| ActivityWatch (aw-tauri component) | https://github.com/ActivityWatch/activitywatch (submodule https://github.com/activitywatch/aw-tauri) | activitywatch@ce5838296004605c9b8edcecad128e64e2718e31 (2026-08-22); aw-tauri@f70bcdf913db3e1648b99ba459538469f744cd26 | Y | Y (default) | Y | https (GitHub Releases + tauri-plugin-updater over reqwest/TLS; no disabled-validation code found) | Y (attempted — release CI signs artifacts w/ minisign key when `TAURI_SIGNING_PRIVATE_KEY` secret set, `includeUpdaterJson`/`createUpdaterArtifacts` toggled accordingly) | signature (Ed25519/minisign via tauri-plugin-updater) — **but the verifying pubkey shipped in the client config is an empty string** | **none pinned** — `plugins.updater.pubkey` is `\"\"` in the committed/shipped `tauri.conf.json`; no CI step patches in a real pubkey (only `createUpdaterArtifacts` flag is patched) | `aw-tauri/src-tauri/tauri.conf.json:25` (`\"pubkey\": \"\"`); `aw-tauri/src-tauri/src/lib.rs:864` (`tauri_plugin_updater::Builder::new().build()`); `lib.rs:1095-1096` (`handle.updater()` → `.check().await`); `lib.rs:691` (`download_and_install`); `lib.rs:378-383,449` (`auto_download` defaults `true`); `.github/workflows/release.yml:86-111` and `build.yml:90-107` (signing key wired into CI, pubkey never patched) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AE6.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/ActivityWatch/activitywatch (submodule https://github.com/activitywatch/aw-tauri)"
+        },
+        {
+          "label": "commit/date",
+          "value": "activitywatch@ce5838296004605c9b8edcecad128e64e2718e31 (2026-08-22); aw-tauri@f70bcdf913db3e1648b99ba459538469f744cd26"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (default)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub Releases + tauri-plugin-updater over reqwest/TLS; no disabled-validation code found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (attempted — release CI signs artifacts w/ minisign key when `TAURI_SIGNING_PRIVATE_KEY` secret set, `includeUpdaterJson`/`createUpdaterArtifacts` toggled accordingly)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (Ed25519/minisign via tauri-plugin-updater) — **but the verifying pubkey shipped in the client config is an empty string**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**none pinned** — `plugins.updater.pubkey` is `\"\"` in the committed/shipped `tauri.conf.json`; no CI step patches in a real pubkey (only `createUpdaterArtifacts` flag is patched)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`aw-tauri/src-tauri/tauri.conf.json:25` (`\"pubkey\": \"\"`); `aw-tauri/src-tauri/src/lib.rs:864` (`tauri_plugin_updater::Builder::new().build()`); `lib.rs:1095-1096` (`handle.updater()` → `.check().await`); `lib.rs:691` (`download_and_install`); `lib.rs:378-383,449` (`auto_download` defaults `true`); `.github/workflows/release.yml:86-111` and `build.yml:90-107` (signing key wired into CI, pubkey never patched)"
+        }
+      ]
+    }
   ]
 }

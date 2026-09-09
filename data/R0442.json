@@ -48,5 +48,99 @@
       "line": 28,
       "text": "| Zigbee2MQTT device-firmware OTA (content channel, via zigbee-herdsman dependency) | https://github.com/Koenkk/zigbee-herdsman | b3e89bd / 2026-08-16 | Y | Y (auto OTA check/apply configurable) | Y (downloads and flashes firmware to Zigbee devices) | https (`fetch()`, default Node TLS, not disabled) to raw.githubusercontent.com | N | optional sha512 hash — but the hash itself comes from the SAME index.json fetched from the SAME GitHub-hosted source as the firmware, i.e. hash-from-same-endpoint (not an independently pinned signature) | unpinned / GitHub-repo-supplied (Koenkk/zigbee-OTA index.json) | src/controller/helpers/ota.ts:55-56 (`ZIGBEE_OTA_LATEST_URL = \"https://raw.githubusercontent.com/Koenkk/zigbee-OTA/master/index.json\"`); :96 (`fetch(pageUrl)`); :106-119 (`validateFirmware`: optional `sha512` compared via `crypto.createHash`); :127 (`fetchFirmware` → `fetch(url)`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC6.md",
+      "source_line": 27,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Koenkk/zigbee2mqtt"
+        },
+        {
+          "label": "commit/date",
+          "value": "fcbb7ff / 2026-08-01"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "N (no self-updater for the Node.js app; manual npm/docker upgrade)"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "N"
+        },
+        {
+          "label": "transport",
+          "value": "N/A"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A"
+        },
+        {
+          "label": "payload_verification",
+          "value": "N/A"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "negative census: no autoUpdater/checkForUpdate hits outside otaUpdate.ts (device OTA, separate channel below); lib/extension/otaUpdate.ts itself contains no fetch/http code, delegates entirely to zigbee-herdsman"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-AC6.md",
+      "source_line": 28,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Koenkk/zigbee-herdsman"
+        },
+        {
+          "label": "commit/date",
+          "value": "b3e89bd / 2026-08-16"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (auto OTA check/apply configurable)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y (downloads and flashes firmware to Zigbee devices)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`fetch()`, default Node TLS, not disabled) to raw.githubusercontent.com"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "optional sha512 hash — but the hash itself comes from the SAME index.json fetched from the SAME GitHub-hosted source as the firmware, i.e. hash-from-same-endpoint (not an independently pinned signature)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "unpinned / GitHub-repo-supplied (Koenkk/zigbee-OTA index.json)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/controller/helpers/ota.ts:55-56 (`ZIGBEE_OTA_LATEST_URL = \"https://raw.githubusercontent.com/Koenkk/zigbee-OTA/master/index.json\"`); :96 (`fetch(pageUrl)`); :106-119 (`validateFirmware`: optional `sha512` compared via `crypto.createHash`); :127 (`fetchFirmware` → `fetch(url)`)"
+        }
+      ]
+    }
   ]
 }

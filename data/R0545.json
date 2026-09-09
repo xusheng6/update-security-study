@@ -41,5 +41,53 @@
       "line": 34,
       "text": "| MyTinyTodo | https://github.com/maxpozdeev/mytinytodo | 3f06d51 / 2026-08-02 | Y | N (admin must click \"Check for updates\" then \"Update\" in the bundled Updater extension's settings panel) | Y | https (`api.github.com` for version check via `file_get_contents()`; asset `browser_download_url` for the tar.gz — no `verify_peer=>false` or similar found in the stream context) | N | none — downloaded tar.gz is extracted straight over the app directory via shell `tar xzf` with **no hash or signature check** | N/A | `src/ext/updater/class.updater.php:44` (`requestJson()` hits `https://api.github.com/repos/maxpozdeev/mytinytodo/releases`), `:96-108` (`download()` — plain `fopen()`/`file_put_contents()`, no integrity check), `:113-135` (`extractAndReplace()` — `exec(\"tar xzf ... --strip-components 1 -C $dir\")` over `MTTPATH` with zero verification); triggered via `src/ext/updater/class.controller.php` `postCheck()`/`postUpdate()` admin API endpoints |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AI3.md",
+      "source_line": 34,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/maxpozdeev/mytinytodo"
+        },
+        {
+          "label": "commit/date",
+          "value": "3f06d51 / 2026-08-02"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (admin must click \"Check for updates\" then \"Update\" in the bundled Updater extension's settings panel)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`api.github.com` for version check via `file_get_contents()`; asset `browser_download_url` for the tar.gz — no `verify_peer=>false` or similar found in the stream context)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — downloaded tar.gz is extracted straight over the app directory via shell `tar xzf` with **no hash or signature check**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/ext/updater/class.updater.php:44` (`requestJson()` hits `https://api.github.com/repos/maxpozdeev/mytinytodo/releases`), `:96-108` (`download()` — plain `fopen()`/`file_put_contents()`, no integrity check), `:113-135` (`extractAndReplace()` — `exec(\"tar xzf ... --strip-components 1 -C $dir\")` over `MTTPATH` with zero verification); triggered via `src/ext/updater/class.controller.php` `postCheck()`/`postUpdate()` admin API endpoints"
+        }
+      ]
+    }
   ]
 }

@@ -41,5 +41,53 @@
       "line": 18,
       "text": "| JOSM | https://github.com/openstreetmap/josm | 331d9b3 / 2026-08-19 | N (main app, notify-only); **Y** (plugin system) | N (manual, user-triggered) | **Y (plugins)** | HTTPS (`Config.getUrls().getJOSMWebsite()` default is https) | N (no manifest signing) | **none** | **none** | `src/org/openstreetmap/josm/plugins/PluginDownloadTask.java:105-153` downloads a plugin jar from `pi.downloadlink` (http/https) with **no hash/signature check**; `PluginHandler.installDownloadedPlugins()` (`src/org/openstreetmap/josm/plugins/PluginHandler.java:1407-1468`) only verifies the file `is a valid JAR` (`new JarFile(updatedPlugin).close()`) before renaming `.jar.new`→`.jar` and loading it — no checksum/signature field exists anywhere in `PluginInformation.java`. Main JOSM app itself is notify-only (`src/org/openstreetmap/josm/gui/bugreport/JosmUpdatePanel.java` just prompts the user to visit the download page) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Y2.md",
+      "source_line": 18,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/openstreetmap/josm"
+        },
+        {
+          "label": "commit/date",
+          "value": "331d9b3 / 2026-08-19"
+        },
+        {
+          "label": "has_updater",
+          "value": "N (main app, notify-only); **Y** (plugin system)"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual, user-triggered)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y (plugins)**"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS (`Config.getUrls().getJOSMWebsite()` default is https)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no manifest signing)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**none**"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/org/openstreetmap/josm/plugins/PluginDownloadTask.java:105-153` downloads a plugin jar from `pi.downloadlink` (http/https) with **no hash/signature check**; `PluginHandler.installDownloadedPlugins()` (`src/org/openstreetmap/josm/plugins/PluginHandler.java:1407-1468`) only verifies the file `is a valid JAR` (`new JarFile(updatedPlugin).close()`) before renaming `.jar.new`→`.jar` and loading it — no checksum/signature field exists anywhere in `PluginInformation.java`. Main JOSM app itself is notify-only (`src/org/openstreetmap/josm/gui/bugreport/JosmUpdatePanel.java` just prompts the user to visit the download page)"
+        }
+      ]
+    }
   ]
 }

@@ -44,5 +44,53 @@
       "line": 16,
       "text": "| Git Extensions | https://github.com/gitextensions/gitextensions.git | 6e50c9c3f0 / 2026-08-20 | Y | N (manual \"Update Now\") | Y | https (GitHub API + release asset URL) | unknown/not checked in-app | **none** — downloaded `.msi` is executed with no hash/signature check | n/a | src/app/GitUI/CommandsDialogs/BrowseDialog/FormUpdates.cs:69-144 (`SearchForUpdates` via GitHub API `Client github`), :254-294 (`btnUpdateNow_Click` → `WebClient.DownloadFileTaskAsync` → `msiexec.exe /i ... ` with **no verification step** between download and execution) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W4.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/gitextensions/gitextensions.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "6e50c9c3f0 / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual \"Update Now\")"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub API + release asset URL)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "unknown/not checked in-app"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — downloaded `.msi` is executed with no hash/signature check"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/app/GitUI/CommandsDialogs/BrowseDialog/FormUpdates.cs:69-144 (`SearchForUpdates` via GitHub API `Client github`), :254-294 (`btnUpdateNow_Click` → `WebClient.DownloadFileTaskAsync` → `msiexec.exe /i ... ` with **no verification step** between download and execution)"
+        }
+      ]
+    }
   ]
 }

@@ -43,5 +43,53 @@
       "line": 9,
       "text": "| Sonarr | Sonarr/Sonarr | .NET (C#, \"NzbDrone\" core) | Y | chk=auto (background `ApplicationUpdateCheckCommand`); dl/inst=fully automatic when Settings→General \"Automatically Download and Install Updates\" is enabled (`UpdateMechanism=BuiltIn`, `UpdateAutomatically=true`); otherwise notify-only | Y (fully automatic, no user click, when BuiltIn+auto-install enabled) | https, host `https://services.sonarr.tv/v1/`; TLS validation enforced by default .NET `HttpClient` — no `ServerCertificateValidationCallback`/`ServerCertificateCustomValidationCallback` override anywhere in the update path (the only such override in the whole repo is in `Notifications/Email/Email.cs` for SMTP, unrelated to updates) | no (JSON `UpdatePackage` response from services.sonarr.tv is plain, unsigned) | hash-from-manifest (SHA256, field `Hash`, verified via `IVerifyUpdates.Verify` before extraction; throws `UpdateVerificationFailedException` on mismatch) | n/a — hash delivered inline in the HTTPS-fetched JSON manifest, no asymmetric signature | src/NzbDrone.Common/Cloud/SonarrCloudRequestBuilder.cs:15 (`https://services.sonarr.tv/v1/`); src/NzbDrone.Core/Update/UpdateVerification.cs:20-27 (`SHA256Hash()` compare); src/NzbDrone.Core/Update/InstallUpdateService.cs:126 (`_httpClient.DownloadFile`), :130 (`_updateVerifier.Verify`), :172 (`_processProvider.Start(updateClientExePath...)` launches Sonarr.Update client which does the file-swap+restart), :252/:331 (`UpdateAutomatically` gate) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-J6.md",
+      "source_line": 9,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "Sonarr/Sonarr"
+        },
+        {
+          "label": "framework",
+          "value": ".NET (C#, \"NzbDrone\" core)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "chk=auto (background `ApplicationUpdateCheckCommand`); dl/inst=fully automatic when Settings→General \"Automatically Download and Install Updates\" is enabled (`UpdateMechanism=BuiltIn`, `UpdateAutomatically=true`); otherwise notify-only"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (fully automatic, no user click, when BuiltIn+auto-install enabled)"
+        },
+        {
+          "label": "transport",
+          "value": "https, host `https://services.sonarr.tv/v1/`; TLS validation enforced by default .NET `HttpClient` — no `ServerCertificateValidationCallback`/`ServerCertificateCustomValidationCallback` override anywhere in the update path (the only such override in the whole repo is in `Notifications/Email/Email.cs` for SMTP, unrelated to updates)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "no (JSON `UpdatePackage` response from services.sonarr.tv is plain, unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (SHA256, field `Hash`, verified via `IVerifyUpdates.Verify` before extraction; throws `UpdateVerificationFailedException` on mismatch)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a — hash delivered inline in the HTTPS-fetched JSON manifest, no asymmetric signature"
+        },
+        {
+          "label": "evidence",
+          "value": "src/NzbDrone.Common/Cloud/SonarrCloudRequestBuilder.cs:15 (`https://services.sonarr.tv/v1/`); src/NzbDrone.Core/Update/UpdateVerification.cs:20-27 (`SHA256Hash()` compare); src/NzbDrone.Core/Update/InstallUpdateService.cs:126 (`_httpClient.DownloadFile`), :130 (`_updateVerifier.Verify`), :172 (`_processProvider.Start(updateClientExePath...)` launches Sonarr.Update client which does the file-swap+restart), :252/:331 (`UpdateAutomatically` gate)"
+        }
+      ]
+    }
   ]
 }

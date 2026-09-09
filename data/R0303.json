@@ -41,5 +41,53 @@
       "line": 7,
       "text": "| Baka MPlayer | https://github.com/u8sand/Baka-MPlayer.git | 92afd5acf80f / 2026-06-20 | Y | N (user runs `update` cmd / clicks check) | Y (Windows only) | **http** (plaintext, not https) — no TLS at all, so validation-enforcement is moot | No | none — zip is extracted and files moved over the install dir with no hash/signature check at all | n/a (no verification) | src/platform/win.cpp:15-18 (`http://bakamplayer.u8sand.net/version_windows`); src/updatemanager.cpp:35-78 (CheckForUpdates, plain QNetworkRequest to that URL); src/updatemanager.cpp:81-148 (DownloadUpdate, no hash check on `reply`); src/updatemanager.cpp:150-211 (ApplyUpdate: zip_open → extract → generates `updater.bat` that moves files over app dir and restarts, no signature/hash check anywhere in the whole flow) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-V1.md",
+      "source_line": 7,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/u8sand/Baka-MPlayer.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "92afd5acf80f / 2026-06-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (user runs `update` cmd / clicks check)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (Windows only)"
+        },
+        {
+          "label": "transport",
+          "value": "**http** (plaintext, not https) — no TLS at all, so validation-enforcement is moot"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "No"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — zip is extracted and files moved over the install dir with no hash/signature check at all"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a (no verification)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/platform/win.cpp:15-18 (`http://bakamplayer.u8sand.net/version_windows`); src/updatemanager.cpp:35-78 (CheckForUpdates, plain QNetworkRequest to that URL); src/updatemanager.cpp:81-148 (DownloadUpdate, no hash check on `reply`); src/updatemanager.cpp:150-211 (ApplyUpdate: zip_open → extract → generates `updater.bat` that moves files over app dir and restarts, no signature/hash check anywhere in the whole flow)"
+        }
+      ]
+    }
   ]
 }

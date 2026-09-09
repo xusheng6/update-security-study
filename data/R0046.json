@@ -43,5 +43,21 @@
       "line": 57,
       "text": "| Zulip Desktop | `zulip-desktop` | Tier B (mac/win) via default electron-updater code-sign, no override found; Linux is notify-only (N). |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U8.md",
+      "source_line": 57,
+      "fields": [
+        {
+          "label": "already covered as",
+          "value": "`zulip-desktop`"
+        },
+        {
+          "label": "tier / notable finding",
+          "value": "Tier B (mac/win) via default electron-updater code-sign, no override found; Linux is notify-only (N)."
+        }
+      ]
+    }
   ]
 }

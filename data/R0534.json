@@ -41,5 +41,53 @@
       "line": 11,
       "text": "| SuiteCRM | https://github.com/salesagility/SuiteCRM.git | d6bca97a0159ec019a969b86eca32affab3beb7c / 2026-07-31 | Y | N (admin-triggered) | Y | https, **TLS cert validation DISABLED** | N | none | none — arbitrary `include()` of downloaded `manifest.php` | `ModuleInstall/PackageManager/PackageManagerDownloader.php:71` `curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);` (no VERIFYHOST set either); download triggered from `modules/Administration/UpgradeWizard.php:105` `$pm->download('', '', $_REQUEST['release_id']);` against `depot.sugarcrm.com` (`PackageManagerDownloader.php:41`); package then applied via `ModuleInstall/ModuleInstaller.php:149` `include($this->base_dir . '/manifest.php')` — no hash/signature check anywhere in the install path (only `md5_file` diffing of *local* files for conflict detection, `ModuleInstaller.php:2493`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AI1.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/salesagility/SuiteCRM.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "d6bca97a0159ec019a969b86eca32affab3beb7c / 2026-07-31"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (admin-triggered)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, **TLS cert validation DISABLED**"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none — arbitrary `include()` of downloaded `manifest.php`"
+        },
+        {
+          "label": "evidence",
+          "value": "`ModuleInstall/PackageManager/PackageManagerDownloader.php:71` `curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);` (no VERIFYHOST set either); download triggered from `modules/Administration/UpgradeWizard.php:105` `$pm->download('', '', $_REQUEST['release_id']);` against `depot.sugarcrm.com` (`PackageManagerDownloader.php:41`); package then applied via `ModuleInstall/ModuleInstaller.php:149` `include($this->base_dir . '/manifest.php')` — no hash/signature check anywhere in the install path (only `md5_file` diffing of *local* files for conflict detection, `ModuleInstaller.php:2493`)"
+        }
+      ]
+    }
   ]
 }

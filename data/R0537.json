@@ -41,5 +41,53 @@
       "line": 21,
       "text": "| Simutrans | https://github.com/simutrans/simutrans.git | d8c00ef15b8918a2dd749ea0f10a5d22215b3dca / 2026-08-22 | Y (content, not binary self-update) | N (user selects pakset(s) + clicks Install in `pakinstaller_t` GUI, `src/simutrans/gui/pakinstaller.cc:60`; Windows non-USE_OWN_PAKINSTALL path auto-launches `download-paksets.exe` from `banner.cc:257`) | Y | **http** for 17/20 built-in pakset sources — see `src/paksetinfo.h:5-24` (`http://downloads.sourceforge.net/...`, `http://pak128.jpn.org/...` etc.); only 3/20 use https (github/codeberg releases; verified via direct count on `src/paksetinfo.h`). Plain-http path uses a hand-rolled client `network_http_get_file()` (`src/simutrans/network/network_file_transfer.cc:513`) with **no TLS at all**. https path uses `curl -L` (system()) or PowerShell WebClient/URLDownloadToFile — default cert validation, not disabled in code. | N | none — downloaded .zip is extracted directly (`extract_pak_from_zip`, `src/simutrans/dataobj/pakset_downloader.cc:149-188`) with no hash/signature check anywhere in the path | N/A (no verification exists) | `src/simutrans/dataobj/pakset_downloader.cc:190-267` (`pak_download`); `src/paksetinfo.h:5-24` (URL list, mostly plaintext http); `src/simutrans/sys/simsys.cc:1399-1439` (`dr_download_pakset` — Windows runs a separately-downloaded `download-paksets.exe` installer directly). **Content-as-code:** downloaded paksets/scenarios can embed Squirrel scripts (`.nut`) executed via the game's embedded Squirrel VM (`src/simutrans/script/script.cc:171` `sqstd_loadfile`+`sq_call_restricted`) — scenario scripts inside an unverified, often-plaintext-HTTP-delivered pakset zip are later loaded and executed as code. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AI4.md",
+      "source_line": 21,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/simutrans/simutrans.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "d8c00ef15b8918a2dd749ea0f10a5d22215b3dca / 2026-08-22"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (content, not binary self-update)"
+        },
+        {
+          "label": "auto",
+          "value": "N (user selects pakset(s) + clicks Install in `pakinstaller_t` GUI, `src/simutrans/gui/pakinstaller.cc:60`; Windows non-USE_OWN_PAKINSTALL path auto-launches `download-paksets.exe` from `banner.cc:257`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "**http** for 17/20 built-in pakset sources — see `src/paksetinfo.h:5-24` (`http://downloads.sourceforge.net/...`, `http://pak128.jpn.org/...` etc.); only 3/20 use https (github/codeberg releases; verified via direct count on `src/paksetinfo.h`). Plain-http path uses a hand-rolled client `network_http_get_file()` (`src/simutrans/network/network_file_transfer.cc:513`) with **no TLS at all**. https path uses `curl -L` (system()) or PowerShell WebClient/URLDownloadToFile — default cert validation, not disabled in code."
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — downloaded .zip is extracted directly (`extract_pak_from_zip`, `src/simutrans/dataobj/pakset_downloader.cc:149-188`) with no hash/signature check anywhere in the path"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A (no verification exists)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/simutrans/dataobj/pakset_downloader.cc:190-267` (`pak_download`); `src/paksetinfo.h:5-24` (URL list, mostly plaintext http); `src/simutrans/sys/simsys.cc:1399-1439` (`dr_download_pakset` — Windows runs a separately-downloaded `download-paksets.exe` installer directly). **Content-as-code:** downloaded paksets/scenarios can embed Squirrel scripts (`.nut`) executed via the game's embedded Squirrel VM (`src/simutrans/script/script.cc:171` `sqstd_loadfile`+`sq_call_restricted`) — scenario scripts inside an unverified, often-plaintext-HTTP-delivered pakset zip are later loaded and executed as code."
+        }
+      ]
+    }
   ]
 }

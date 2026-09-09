@@ -42,5 +42,53 @@
       "line": 16,
       "text": "| AstroImageJ | https://github.com/AstroImageJ/astroimagej.git | 6b307a63590654113a4ca63956decd2ae240cf84 / 2026-08-21 | Y | Y (check) / N (install needs click) | Y | https, TLS enforced (default Java HttpClient, no trust-all override found) | Y (detached Sigstore signature bundle per release asset) | hash (SHA-256) **and** signature (Sigstore keyless/Fulcio, verified via `dev.sigstore.KeylessVerifier`) | pinned-in-source cert-identity constraint + Sigstore's bundled public trust root (`sigstorePublicDefaults()`) — not server-supplied | Astronomy_/src/main/java/Astronomy/AstroImageJUpdaterV6.java:75 (`CERTIFICATE_IDENTITY = \"https://github.com/AstroImageJ/astroimagej/.github/workflows/publish.yml@refs/heads/master\"`), :330-397 (`downloadAndComputeHash` — SHA-256 check then Sigstore `verifier.verify(hash, bundle, options)`), :246-325 (writes installer to temp, spawns OS-specific elevator script + installer process, then `System.exit(0)` so the installer runs) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AK8.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/AstroImageJ/astroimagej.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "6b307a63590654113a4ca63956decd2ae240cf84 / 2026-08-21"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (check) / N (install needs click)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (default Java HttpClient, no trust-all override found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (detached Sigstore signature bundle per release asset)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (SHA-256) **and** signature (Sigstore keyless/Fulcio, verified via `dev.sigstore.KeylessVerifier`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-source cert-identity constraint + Sigstore's bundled public trust root (`sigstorePublicDefaults()`) — not server-supplied"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "Astronomy_/src/main/java/Astronomy/AstroImageJUpdaterV6.java:75 (`CERTIFICATE_IDENTITY = \"https://github.com/AstroImageJ/astroimagej/.github/workflows/publish.yml@refs/heads/master\"`), :330-397 (`downloadAndComputeHash` — SHA-256 check then Sigstore `verifier.verify(hash, bundle, options)`), :246-325 (writes installer to temp, spawns OS-specific elevator script + installer process, then `System.exit(0)` so the installer runs)"
+        }
+      ]
+    }
   ]
 }

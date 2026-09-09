@@ -41,5 +41,53 @@
       "line": 16,
       "text": "| OpenEmu (macOS) | github.com/OpenEmu/OpenEmu | Cocoa (Swift/ObjC) macOS app, plugin-based emulator \"Cores\" | Y — **two independent update paths**: (1) the app itself via the real **Sparkle** framework; (2) emulator **Cores** (native code plugins) via a custom, homegrown \"CoreUpdater\" | App: **auto chk** (`SUEnableAutomaticChecks=true`) via Sparkle, standard Sparkle install-consent flow. Cores: auto-**check** appcast per core (`checkForUpdatesAndInstall`, `OE_DISABLE_UPDATE_CHECK` env override) with `autoInstall=true` — installs immediately with no further confirmation once a newer `sparkle:version` is found; missing-core installs are always user-initiated (Install/Cancel alert) | App: N directly (delegated to Sparkle, which does its own download+verify+install). **Cores: Y** — `CoreDownload.start()` downloads the core-plugin archive (`URLSessionDownloadTask`) straight from the URL parsed out of the appcast XML, decompresses it via `ArchiveHelper` into `~/Library/Application Support/OpenEmu/Cores/`, and loads it as an `OECorePlugin` (native executable code) — with no code-signature or checksum check found anywhere in `CoreUpdater.swift`/`CoreDownload.swift` | HTTPS (`OECoreListURL`/`SUFeedURL` = `https://raw.github.com/OpenEmu/OpenEmu-Update/...`) via `URLSession`/Sparkle. **App-wide ATS is disabled**: `Info.plist` sets `NSAppTransportSecurity → NSAllowsArbitraryLoads = true`, permitting plaintext HTTP loads anywhere in the app (cores' per-appcast URLs come from a remote XML list not audited here). No custom `URLSessionDelegate`/trust-evaluation override found, so TLS cert validation for `https://` URLs is not disabled, only ATS's baseline protections are | App: **Y, signed** — `SUFeedURL` + `SUPublicEDKey` (Ed25519) + legacy `SUPublicDSAKeyFile: dsa_pub.pem` are configured, i.e. standard signed-Sparkle appcast. **Cores: N** — `CoreUpdater`'s own hand-rolled appcast parser (`checkForUpdateInformation`/`CoreAppcast.process`) reads only `enclosure url`, `sparkle:version`, and `sparkle:minimumSystemVersion` from the XML and **never reads or checks `sparkle:edSignature`**, so the Sparkle-format manifest for cores carries no verified signature in practice | App: **signature (Ed25519/EdDSA via Sparkle)** — properly configured, real Sparkle-managed verification. **Cores: none** — no hash or signature check on the downloaded/extracted core bundle before it is loaded as executable code | App: `SUPublicEDKey` value embedded in `OpenEmu-Info.plist` (`lI9DtKt5iDVR48ifKaP94mrFrHwYn75bfQLr+0alpRY=`) + `dsa_pub.pem` bundled in `OpenEmu/Other Assets/dsa_pub.pem` — standard Sparkle key distribution. Cores: N/A (no key used) | `OpenEmu/OpenEmu-Info.plist:130-135` (`NSAllowsArbitraryLoads=true`), `:149-150` (`OECoreListURL`), `:153-160` (`SUFeedURL`, `SUPublicDSAKeyFile`, `SUPublicEDKey`); `OpenEmu/CoreUpdater.swift:71-132` (`checkForUpdates`/`checkForUpdateInformation` — reads `enclosure/@url`, `sparkle:version`, `sparkle:minimumSystemVersion` only, no `sparkle:edSignature`), `:134-143` (`checkForUpdatesAndInstall`, `autoInstall=true`); `OpenEmu/CoreDownload.swift:53-70` (`start()` — `URLSessionDownloadTask` from `appcastItem.fileURL`), `:126-156` (`didFinishDownloadingTo` — `ArchiveHelper.decompressFileInArchive`, `OECorePlugin.corePlugin(bundleAtURL:)`, no verification call) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-I1.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/OpenEmu/OpenEmu"
+        },
+        {
+          "label": "framework",
+          "value": "Cocoa (Swift/ObjC) macOS app, plugin-based emulator \"Cores\""
+        },
+        {
+          "label": "has_updater",
+          "value": "Y — **two independent update paths**: (1) the app itself via the real **Sparkle** framework; (2) emulator **Cores** (native code plugins) via a custom, homegrown \"CoreUpdater\""
+        },
+        {
+          "label": "auto",
+          "value": "App: **auto chk** (`SUEnableAutomaticChecks=true`) via Sparkle, standard Sparkle install-consent flow. Cores: auto-**check** appcast per core (`checkForUpdatesAndInstall`, `OE_DISABLE_UPDATE_CHECK` env override) with `autoInstall=true` — installs immediately with no further confirmation once a newer `sparkle:version` is found; missing-core installs are always user-initiated (Install/Cancel alert)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "App: N directly (delegated to Sparkle, which does its own download+verify+install). **Cores: Y** — `CoreDownload.start()` downloads the core-plugin archive (`URLSessionDownloadTask`) straight from the URL parsed out of the appcast XML, decompresses it via `ArchiveHelper` into `~/Library/Application Support/OpenEmu/Cores/`, and loads it as an `OECorePlugin` (native executable code) — with no code-signature or checksum check found anywhere in `CoreUpdater.swift`/`CoreDownload.swift`"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS (`OECoreListURL`/`SUFeedURL` = `https://raw.github.com/OpenEmu/OpenEmu-Update/...`) via `URLSession`/Sparkle. **App-wide ATS is disabled**: `Info.plist` sets `NSAppTransportSecurity → NSAllowsArbitraryLoads = true`, permitting plaintext HTTP loads anywhere in the app (cores' per-appcast URLs come from a remote XML list not audited here). No custom `URLSessionDelegate`/trust-evaluation override found, so TLS cert validation for `https://` URLs is not disabled, only ATS's baseline protections are"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "App: **Y, signed** — `SUFeedURL` + `SUPublicEDKey` (Ed25519) + legacy `SUPublicDSAKeyFile: dsa_pub.pem` are configured, i.e. standard signed-Sparkle appcast. **Cores: N** — `CoreUpdater`'s own hand-rolled appcast parser (`checkForUpdateInformation`/`CoreAppcast.process`) reads only `enclosure url`, `sparkle:version`, and `sparkle:minimumSystemVersion` from the XML and **never reads or checks `sparkle:edSignature`**, so the Sparkle-format manifest for cores carries no verified signature in practice"
+        },
+        {
+          "label": "payload_verification",
+          "value": "App: **signature (Ed25519/EdDSA via Sparkle)** — properly configured, real Sparkle-managed verification. **Cores: none** — no hash or signature check on the downloaded/extracted core bundle before it is loaded as executable code"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "App: `SUPublicEDKey` value embedded in `OpenEmu-Info.plist` (`lI9DtKt5iDVR48ifKaP94mrFrHwYn75bfQLr+0alpRY=`) + `dsa_pub.pem` bundled in `OpenEmu/Other Assets/dsa_pub.pem` — standard Sparkle key distribution. Cores: N/A (no key used)"
+        },
+        {
+          "label": "evidence",
+          "value": "`OpenEmu/OpenEmu-Info.plist:130-135` (`NSAllowsArbitraryLoads=true`), `:149-150` (`OECoreListURL`), `:153-160` (`SUFeedURL`, `SUPublicDSAKeyFile`, `SUPublicEDKey`); `OpenEmu/CoreUpdater.swift:71-132` (`checkForUpdates`/`checkForUpdateInformation` — reads `enclosure/@url`, `sparkle:version`, `sparkle:minimumSystemVersion` only, no `sparkle:edSignature`), `:134-143` (`checkForUpdatesAndInstall`, `autoInstall=true`); `OpenEmu/CoreDownload.swift:53-70` (`start()` — `URLSessionDownloadTask` from `appcastItem.fileURL`), `:126-156` (`didFinishDownloadingTo` — `ArchiveHelper.decompressFileInArchive`, `OECorePlugin.corePlugin(bundleAtURL:)`, no verification call)"
+        }
+      ]
+    }
   ]
 }

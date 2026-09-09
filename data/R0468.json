@@ -42,5 +42,53 @@
       "line": 29,
       "text": "| Toggl Track Desktop (toggldesktop) | https://github.com/toggl-open-source/toggldesktop | 013038304ee8e9154db4a45fb642716956cf153b (2023-06-22) | Y (macOS only) | Y (`setAutomaticallyDownloadsUpdates:YES`) | Y (macOS) | https (`SUFeedURL=https://assets.toggl.com/installers/darwin_stable_appcast.xml`) | Y (Sparkle DSA appcast signing) | signature (Sparkle legacy DSA), key **pinned in binary** via `dsa_pub.pem` shipped in `Resources` | pinned-in-binary (`SUPublicDSAKeyFile=dsa_pub.pem`) | `src/ui/osx/TogglDesktop/Supporting Files/TogglDesktop-Info.plist:78-83` (`SUEnableAutomaticChecks`, `SUFeedURL`, `SUPublicDSAKeyFile`); `src/ui/osx/TogglDesktop/Resources/dsa_pub.pem` present; `src/ui/osx/TogglDesktop/App/AppDelegate.m:281,292-293` (`setAutomaticallyDownloadsUpdates:YES`, `checkForUpdatesInBackground`). **Windows/Linux builds have no self-updater found** (`grep` for WinSparkle/Squirrel/AppImageUpdate/zsync across `src/ui/windows` and repo root returned nothing) — those platforms are N. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AE6.md",
+      "source_line": 29,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/toggl-open-source/toggldesktop"
+        },
+        {
+          "label": "commit/date",
+          "value": "013038304ee8e9154db4a45fb642716956cf153b (2023-06-22)"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y (macOS only)"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (`setAutomaticallyDownloadsUpdates:YES`)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y (macOS)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`SUFeedURL=https://assets.toggl.com/installers/darwin_stable_appcast.xml`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (Sparkle DSA appcast signing)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (Sparkle legacy DSA), key **pinned in binary** via `dsa_pub.pem` shipped in `Resources`"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (`SUPublicDSAKeyFile=dsa_pub.pem`)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/ui/osx/TogglDesktop/Supporting Files/TogglDesktop-Info.plist:78-83` (`SUEnableAutomaticChecks`, `SUFeedURL`, `SUPublicDSAKeyFile`); `src/ui/osx/TogglDesktop/Resources/dsa_pub.pem` present; `src/ui/osx/TogglDesktop/App/AppDelegate.m:281,292-293` (`setAutomaticallyDownloadsUpdates:YES`, `checkForUpdatesInBackground`). **Windows/Linux builds have no self-updater found** (`grep` for WinSparkle/Squirrel/AppImageUpdate/zsync across `src/ui/windows` and repo root returned nothing) — those platforms are N."
+        }
+      ]
+    }
   ]
 }

@@ -43,5 +43,53 @@
       "line": 8,
       "text": "| Electrum-LTC | github.com/pooler/electrum-ltc | Python/PyQt5 desktop | Y | notify (opt-in; user is prompted once at first run to enable `check_updates`); never auto-downloads/installs | N (only opens browser to static download page `electrum-ltc.org/#download`) | https (electrum-ltc.org/version, OS trust store, no pinning) | Y (single \"version\"+\"signatures\" JSON object is signed per-release) | signature (Bitcoin/LTC message-signing via `ecc.verify_message_with_address`) — version string only, no binary payload verified | pinned-in-binary (`VERSION_ANNOUNCEMENT_SIGNING_KEYS = (\"LWZzbv5SbiRRjBDL6dUYRdBX9Dp89RDZgG\",)` hardcoded) | electrum_ltc/gui/qt/update_checker.py:23-28 (URL+pinned key), :105-131 (sig verification); main_window.py:280-297 (opt-in prompt + auto check) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-L1.md",
+      "source_line": 8,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/pooler/electrum-ltc"
+        },
+        {
+          "label": "framework",
+          "value": "Python/PyQt5 desktop"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "notify (opt-in; user is prompted once at first run to enable `check_updates`); never auto-downloads/installs"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N (only opens browser to static download page `electrum-ltc.org/#download`)"
+        },
+        {
+          "label": "transport",
+          "value": "https (electrum-ltc.org/version, OS trust store, no pinning)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (single \"version\"+\"signatures\" JSON object is signed per-release)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (Bitcoin/LTC message-signing via `ecc.verify_message_with_address`) — version string only, no binary payload verified"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (`VERSION_ANNOUNCEMENT_SIGNING_KEYS = (\"LWZzbv5SbiRRjBDL6dUYRdBX9Dp89RDZgG\",)` hardcoded)"
+        },
+        {
+          "label": "evidence",
+          "value": "electrum_ltc/gui/qt/update_checker.py:23-28 (URL+pinned key), :105-131 (sig verification); main_window.py:280-297 (opt-in prompt + auto check)"
+        }
+      ]
+    }
   ]
 }

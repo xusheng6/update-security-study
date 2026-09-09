@@ -43,5 +43,53 @@
       "line": 6,
       "text": "| Psono (client) | github.com/psono/psono-client | Multi-target: Electron desktop, Chrome/Firefox extensions, web client | Y (Electron only) | auto chk (hourly, `updateInterval: \"1 hour\"`) + auto dl/inst per `update-electron-app`/Electron `autoUpdater` defaults (Squirrel.Mac / Squirrel.Windows background update-and-relaunch); browser-extension builds rely entirely on the browser store's own auto-update, not app code | Y (Electron: Squirrel applies the downloaded update package and relaunches) | HTTPS via `update-electron-app` → defaults to `update.electronjs.org` proxy of the GitHub releases feed (`repo: \"psono/psono-client\"`); TLS validation ENFORCED (no TLS-bypass code found in src/electron) | N (electron `autoUpdater`/Squirrel feed JSON is not separately signed by the app) | OS-code-signing (Squirrel.Mac requires the update package be signed with the same code-signing identity as the running app; Squirrel.Windows/NSIS via `electron-squirrel-startup` similarly expects a matching signed installer) — no in-app hash/signature check found | n/a (relies on OS keychain/Authenticode trust of the app's own code-signing certificate, not an app-embedded key) | src/electron/index.js:6-9 (`require(\"update-electron-app\")({repo:\"psono/psono-client\", updateInterval:\"1 hour\", logger: require(\"electron-log\")})`), src/electron/package.json:26 (`\"update-electron-app\": \"^2.0.1\"`), src/electron/index.js:19-21 (`electron-squirrel-startup` used for Windows install/uninstall shortcuts, consistent with Squirrel-based auto-update); negative grep for TLS bypass patterns in src/electron (verified 2026-08-19) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-H6.md",
+      "source_line": 6,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/psono/psono-client"
+        },
+        {
+          "label": "framework",
+          "value": "Multi-target: Electron desktop, Chrome/Firefox extensions, web client"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (Electron only)"
+        },
+        {
+          "label": "auto",
+          "value": "auto chk (hourly, `updateInterval: \"1 hour\"`) + auto dl/inst per `update-electron-app`/Electron `autoUpdater` defaults (Squirrel.Mac / Squirrel.Windows background update-and-relaunch); browser-extension builds rely entirely on the browser store's own auto-update, not app code"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (Electron: Squirrel applies the downloaded update package and relaunches)"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS via `update-electron-app` → defaults to `update.electronjs.org` proxy of the GitHub releases feed (`repo: \"psono/psono-client\"`); TLS validation ENFORCED (no TLS-bypass code found in src/electron)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (electron `autoUpdater`/Squirrel feed JSON is not separately signed by the app)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "OS-code-signing (Squirrel.Mac requires the update package be signed with the same code-signing identity as the running app; Squirrel.Windows/NSIS via `electron-squirrel-startup` similarly expects a matching signed installer) — no in-app hash/signature check found"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a (relies on OS keychain/Authenticode trust of the app's own code-signing certificate, not an app-embedded key)"
+        },
+        {
+          "label": "evidence",
+          "value": "src/electron/index.js:6-9 (`require(\"update-electron-app\")({repo:\"psono/psono-client\", updateInterval:\"1 hour\", logger: require(\"electron-log\")})`), src/electron/package.json:26 (`\"update-electron-app\": \"^2.0.1\"`), src/electron/index.js:19-21 (`electron-squirrel-startup` used for Windows install/uninstall shortcuts, consistent with Squirrel-based auto-update); negative grep for TLS bypass patterns in src/electron (verified 2026-08-19)"
+        }
+      ]
+    }
   ]
 }

@@ -42,5 +42,53 @@
       "line": 10,
       "text": "| KDE Discover | https://invent.kde.org/plasma/discover | Qt/QML, backend plugins (PackageKit, Flatpak, Snap, fwupd, RpmOstree, AlpineApk, SystemdSysupdate, KNewStuff) | N (self — distro-packaged, no self-update code found) | N/A | N — same architecture as GNOME Software: all package payload downloads/installs delegated to PackageKit/Flatpak/etc. backends, which perform their own signed transactions | https delegated to backends | Y (delegated) via PackageKit and Flatpak backends | signature[GPG] delegated to PackageKit (`repoSignatureRequired`/`installSignature` D-Bus round-trip) and to Flatpak (`flatpak_remote_set_gpg_verify`/`set_gpg_key`) | distro package-manager trusted keyrings via PackageKit; Flatpak remote's configured GPG key | libdiscover/backends/PackageKitBackend/PKTransaction.cpp:335-352 (`repoSignatureRequired`, `PackageKit::Daemon::installSignature(type, keyId, packageID)`); libdiscover/backends/PackageKitBackend/PackageKitUpdater.cpp:919-936 (same signal wired for the updater path); libdiscover/backends/FlatpakBackend/FlatpakBackend.cpp:252-265 (`flatpak_remote_set_gpg_verify(remote, true)`, `flatpak_remote_set_gpg_key`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-M6.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://invent.kde.org/plasma/discover"
+        },
+        {
+          "label": "framework",
+          "value": "Qt/QML, backend plugins (PackageKit, Flatpak, Snap, fwupd, RpmOstree, AlpineApk, SystemdSysupdate, KNewStuff)"
+        },
+        {
+          "label": "has_updater",
+          "value": "N (self — distro-packaged, no self-update code found)"
+        },
+        {
+          "label": "auto",
+          "value": "N/A"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N — same architecture as GNOME Software: all package payload downloads/installs delegated to PackageKit/Flatpak/etc. backends, which perform their own signed transactions"
+        },
+        {
+          "label": "transport",
+          "value": "https delegated to backends"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (delegated) via PackageKit and Flatpak backends"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature[GPG] delegated to PackageKit (`repoSignatureRequired`/`installSignature` D-Bus round-trip) and to Flatpak (`flatpak_remote_set_gpg_verify`/`set_gpg_key`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "distro package-manager trusted keyrings via PackageKit; Flatpak remote's configured GPG key"
+        },
+        {
+          "label": "evidence",
+          "value": "libdiscover/backends/PackageKitBackend/PKTransaction.cpp:335-352 (`repoSignatureRequired`, `PackageKit::Daemon::installSignature(type, keyId, packageID)`); libdiscover/backends/PackageKitBackend/PackageKitUpdater.cpp:919-936 (same signal wired for the updater path); libdiscover/backends/FlatpakBackend/FlatpakBackend.cpp:252-265 (`flatpak_remote_set_gpg_verify(remote, true)`, `flatpak_remote_set_gpg_key`)"
+        }
+      ]
+    }
   ]
 }

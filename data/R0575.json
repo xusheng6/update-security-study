@@ -42,5 +42,53 @@
       "line": 19,
       "text": "| FMD2 | https://github.com/dazedcat19/FMD2 | 300dcfa9 / 2026-08-21 | Y | Y (`OptionAutoCheckLatestVersion` defaults True, checks on startup) | Y (downloads a `.7z`/zip update package, then spawns an external updater EXE which extracts and replaces the app) | https (raw.githubusercontent.com) | N | **none** | N/A | baseunits/CheckUpdate.pas:101-133; baseunits/SelfUpdater.pas:113-165; dist/config.json:4-5; baseunits/FMDOptions.pas:151 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AK7.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/dazedcat19/FMD2"
+        },
+        {
+          "label": "commit/date",
+          "value": "300dcfa9 / 2026-08-21"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (`OptionAutoCheckLatestVersion` defaults True, checks on startup)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (downloads a `.7z`/zip update package, then spawns an external updater EXE which extracts and replaces the app)"
+        },
+        {
+          "label": "transport",
+          "value": "https (raw.githubusercontent.com)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "baseunits/CheckUpdate.pas:101-133; baseunits/SelfUpdater.pas:113-165; dist/config.json:4-5; baseunits/FMDOptions.pas:151"
+        }
+      ]
+    }
   ]
 }

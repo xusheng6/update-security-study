@@ -38,5 +38,53 @@
       "line": 18,
       "text": "| Shortcat | closed source; no public repo (shortcat.app, developer Sproutcube) | **Sparkle (EdDSA = A)** | **Y** | **Y** (cask `auto_updates true`) | **Y** (standard Sparkle behavior) | https | TLS-only (appcast.xml itself unsigned; standard Sparkle 2 pattern) | signature[EdDSA] | unknown exact value (closed source; conventionally an `SUPublicEDKey` embedded in the shipped Info.plist, per the `sparkle:edSignature` scheme observed) | Live fetch `https://updates.shortcat.app/appcast.xml`: `<enclosure url=\"https://files.shortcat.app/releases/v0.12.2/Shortcat.zip\" sparkle:version=\"189\" sparkle:shortVersionString=\"0.12.2\" type=\"application/octet-stream\" sparkle:edSignature=\"fEKNT/DUnus+AY8pPZjNcFSHTbSX3a4MqeCPmF/zbUIoa0nrpyau9scoaqOp20heRjrlMU5BrzzQNoBM3q7NDQ==\" length=\"10446357\" />`; `raw.githubusercontent.com/Homebrew/homebrew-cask/master/Casks/s/shortcat.rb`: `auto_updates true`, `livecheck do url \"https://updates.shortcat.app/appcast.xml\" strategy :sparkle, &:short_version end`. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Q1.md",
+      "source_line": 18,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "closed source; no public repo (shortcat.app, developer Sproutcube)"
+        },
+        {
+          "label": "framework",
+          "value": "**Sparkle (EdDSA = A)**"
+        },
+        {
+          "label": "has_updater",
+          "value": "**Y**"
+        },
+        {
+          "label": "auto",
+          "value": "**Y** (cask `auto_updates true`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y** (standard Sparkle behavior)"
+        },
+        {
+          "label": "transport",
+          "value": "https"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "TLS-only (appcast.xml itself unsigned; standard Sparkle 2 pattern)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature[EdDSA]"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "unknown exact value (closed source; conventionally an `SUPublicEDKey` embedded in the shipped Info.plist, per the `sparkle:edSignature` scheme observed)"
+        },
+        {
+          "label": "evidence",
+          "value": "Live fetch `https://updates.shortcat.app/appcast.xml`: `<enclosure url=\"https://files.shortcat.app/releases/v0.12.2/Shortcat.zip\" sparkle:version=\"189\" sparkle:shortVersionString=\"0.12.2\" type=\"application/octet-stream\" sparkle:edSignature=\"fEKNT/DUnus+AY8pPZjNcFSHTbSX3a4MqeCPmF/zbUIoa0nrpyau9scoaqOp20heRjrlMU5BrzzQNoBM3q7NDQ==\" length=\"10446357\" />`; `raw.githubusercontent.com/Homebrew/homebrew-cask/master/Casks/s/shortcat.rb`: `auto_updates true`, `livecheck do url \"https://updates.shortcat.app/appcast.xml\" strategy :sparkle, &:short_version end`."
+        }
+      ]
+    }
   ]
 }

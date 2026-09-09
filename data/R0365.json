@@ -42,5 +42,53 @@
       "line": 14,
       "text": "| Threema Desktop | https://github.com/threema-ch/threema-desktop | 9ae421c / 2026-07-16 | Y | N (manual: shows prompt dialog, requires user \"confirmed\" click before download; Linux is always manual-only) | Y | https, TLS enforced **with certificate pinning** (SPKI/HPKP-style) covering `*.threema.ch` (includes `releases.threema.ch`, the update host) — real MITM/rogue-CA protection on the transport, but note a **separate test-mock file** does set `rejectUnauthorized:false` (test-only, not in the shipped update path) | N (JSON `latest-version-*.json`, unsigned) | hash only — downloads a `.sha256` file from the **same unauthenticated server**, no signature on binary or checksum | server-supplied/unpinned for the payload itself (TLS-pinned channel, but no independent signing key protects the binary/hash — compromise of releases.threema.ch or its cert-pinned infra = RCE) | apps/desktop/src/common/dom/update/index.ts:158-215 (`_check`, fetches `latest-version-*.json`), :220-264 (`_download`, fetches installer + `.sha256`, no verification of the hash against the file shown); apps/desktop/config/vite.config.ts:130,353-370 (`UPDATE_SERVER_URL=https://releases.threema.ch/desktop/`, pins for `*.threema.ch`); apps/desktop/src/electron/tls-cert-verifier.ts:118-234 (pin enforcement); apps/desktop/src/electron/electron-main.ts:657-659 (`restart-and-install-update` just exits with a code; no in-JS signature check before hand-off); apps/desktop/src/test/playwright/mocks/onprem-provisioning-server/client.ts:36 (`rejectUnauthorized:false`, test-only) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-X6.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/threema-ch/threema-desktop"
+        },
+        {
+          "label": "commit/date",
+          "value": "9ae421c / 2026-07-16"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (manual: shows prompt dialog, requires user \"confirmed\" click before download; Linux is always manual-only)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced **with certificate pinning** (SPKI/HPKP-style) covering `*.threema.ch` (includes `releases.threema.ch`, the update host) — real MITM/rogue-CA protection on the transport, but note a **separate test-mock file** does set `rejectUnauthorized:false` (test-only, not in the shipped update path)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (JSON `latest-version-*.json`, unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash only — downloads a `.sha256` file from the **same unauthenticated server**, no signature on binary or checksum"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned for the payload itself (TLS-pinned channel, but no independent signing key protects the binary/hash — compromise of releases.threema.ch or its cert-pinned infra = RCE)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "apps/desktop/src/common/dom/update/index.ts:158-215 (`_check`, fetches `latest-version-*.json`), :220-264 (`_download`, fetches installer + `.sha256`, no verification of the hash against the file shown); apps/desktop/config/vite.config.ts:130,353-370 (`UPDATE_SERVER_URL=https://releases.threema.ch/desktop/`, pins for `*.threema.ch`); apps/desktop/src/electron/tls-cert-verifier.ts:118-234 (pin enforcement); apps/desktop/src/electron/electron-main.ts:657-659 (`restart-and-install-update` just exits with a code; no in-JS signature check before hand-off); apps/desktop/src/test/playwright/mocks/onprem-provisioning-server/client.ts:36 (`rejectUnauthorized:false`, test-only)"
+        }
+      ]
+    }
   ]
 }

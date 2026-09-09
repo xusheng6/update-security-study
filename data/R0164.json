@@ -41,5 +41,53 @@
       "line": 13,
       "text": "| Bazarr | morpheus65535/bazarr | Python (Flask + APScheduler) | Y | chk/dl/inst fully automatic — `settings.general.auto_update` defaults to `True`, `check_if_new_update` runs on a 6-hour APScheduler interval with no user interaction | Y (downloads `bazarr.zip` from a GitHub release asset and unzips it directly over the running install tree, then calls `webserver.restart()` — this loads unreviewed/unverified Python source into the running app) | https, `https://api.github.com/repos/morpheus65535/Bazarr/releases` and the release's `browser_download_url` (GitHub-hosted); TLS validation enforced by default — plain `requests.get(...)` calls with no `verify=False` anywhere in check_update.py | no (GitHub Releases API JSON is unsigned) | none — no hash, checksum, or signature check anywhere in `download_release`/`apply_update` before files are extracted over the install directory | n/a | bazarr/app/check_update.py:30 (`url_releases = 'https://api.github.com/repos/morpheus65535/Bazarr/releases...'`), :121-137 (`download_release`, plain `requests.get`, no integrity check), :140-207 (`apply_update`, unzip straight into `bazarr_dir` then `webserver.restart()`); bazarr/app/config.py:97 (`'general.auto_update', default=True`); bazarr/app/scheduler.py:283-285 (`check_if_new_update` on 6h interval when `auto_update` true) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-J6.md",
+      "source_line": 13,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "morpheus65535/bazarr"
+        },
+        {
+          "label": "framework",
+          "value": "Python (Flask + APScheduler)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "chk/dl/inst fully automatic — `settings.general.auto_update` defaults to `True`, `check_if_new_update` runs on a 6-hour APScheduler interval with no user interaction"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (downloads `bazarr.zip` from a GitHub release asset and unzips it directly over the running install tree, then calls `webserver.restart()` — this loads unreviewed/unverified Python source into the running app)"
+        },
+        {
+          "label": "transport",
+          "value": "https, `https://api.github.com/repos/morpheus65535/Bazarr/releases` and the release's `browser_download_url` (GitHub-hosted); TLS validation enforced by default — plain `requests.get(...)` calls with no `verify=False` anywhere in check_update.py"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "no (GitHub Releases API JSON is unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — no hash, checksum, or signature check anywhere in `download_release`/`apply_update` before files are extracted over the install directory"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence",
+          "value": "bazarr/app/check_update.py:30 (`url_releases = 'https://api.github.com/repos/morpheus65535/Bazarr/releases...'`), :121-137 (`download_release`, plain `requests.get`, no integrity check), :140-207 (`apply_update`, unzip straight into `bazarr_dir` then `webserver.restart()`); bazarr/app/config.py:97 (`'general.auto_update', default=True`); bazarr/app/scheduler.py:283-285 (`check_if_new_update` on 6h interval when `auto_update` true)"
+        }
+      ]
+    }
   ]
 }

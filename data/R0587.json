@@ -42,5 +42,53 @@
       "line": 28,
       "text": "| bangle-io (desktop) | https://github.com/bangle-io/bangle-io.git | b5968cb / 2026-08-09 | Y | N (auto-download disabled, user-prompted) | Y | https (GitHub Releases provider; no disabled TLS validation found) | Y (electron-builder `forceCodeSigning: true` for stable channel, mac `notarize`) | OS code-signing (Authenticode/notarization) via electron-updater; no separate payload hash/sig check found beyond electron-updater's built-in code-signature verification | OS keystore (Windows Authenticode / macOS notarization/Gatekeeper), not an app-pinned key | `packages/tooling/desktop-entry/src/updater.ts` (electron-updater `AppUpdater`, `setFeedURL({provider:'github', owner:'bangle-io', repo:'bangle-io'})`, `autoDownload=false`); `packages/tooling/desktop-entry/electron-builder.config.cjs` (`publish:[{provider:'github',...}]`, `forceCodeSigning: isStable`, `mac.notarize`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AL5.md",
+      "source_line": 28,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/bangle-io/bangle-io.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "b5968cb / 2026-08-09"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (auto-download disabled, user-prompted)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub Releases provider; no disabled TLS validation found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (electron-builder `forceCodeSigning: true` for stable channel, mac `notarize`)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "OS code-signing (Authenticode/notarization) via electron-updater; no separate payload hash/sig check found beyond electron-updater's built-in code-signature verification"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore (Windows Authenticode / macOS notarization/Gatekeeper), not an app-pinned key"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`packages/tooling/desktop-entry/src/updater.ts` (electron-updater `AppUpdater`, `setFeedURL({provider:'github', owner:'bangle-io', repo:'bangle-io'})`, `autoDownload=false`); `packages/tooling/desktop-entry/electron-builder.config.cjs` (`publish:[{provider:'github',...}]`, `forceCodeSigning: isStable`, `mac.notarize`)"
+        }
+      ]
+    }
   ]
 }

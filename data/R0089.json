@@ -43,5 +43,53 @@
       "line": 10,
       "text": "| Feather Wallet | https://github.com/feather-wallet/feather | 13b3d93 / 2026-08-12 | Y | N (checks automatically; user clicks Download then Install buttons) | Y | https (QNetworkAccessManager via Networking wrapper; no InsecureSkipVerify/ignoreSslErrors found) | N/A (no code-signed installer manifest; uses GPG-signed hash list instead) | hash (SHA-256) of downloaded zip verified against a GPG-signed hash list (`hashes-<ver>-plain.txt`) | pinned-in-binary — GPG public key embedded as Qt resource `:/assets/gpg_keys/featherwallet.asc`, loaded at Updater ctor | src/utils/updater/Updater.cpp:19-20 (key load), 94-130 (verify signed hashes), 195-226 (sha256), 228-258 (OpenPGP RSA verify against m_maintainers); UpdateDialog.cpp:102-141 (download+hash check), 154+ (unzip/install → download_and_execute=Y) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AA1.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/feather-wallet/feather"
+        },
+        {
+          "label": "commit/date",
+          "value": "13b3d93 / 2026-08-12"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (checks automatically; user clicks Download then Install buttons)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (QNetworkAccessManager via Networking wrapper; no InsecureSkipVerify/ignoreSslErrors found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A (no code-signed installer manifest; uses GPG-signed hash list instead)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (SHA-256) of downloaded zip verified against a GPG-signed hash list (`hashes-<ver>-plain.txt`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary — GPG public key embedded as Qt resource `:/assets/gpg_keys/featherwallet.asc`, loaded at Updater ctor"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/utils/updater/Updater.cpp:19-20 (key load), 94-130 (verify signed hashes), 195-226 (sha256), 228-258 (OpenPGP RSA verify against m_maintainers); UpdateDialog.cpp:102-141 (download+hash check), 154+ (unzip/install → download_and_execute=Y)"
+        }
+      ]
+    }
   ]
 }

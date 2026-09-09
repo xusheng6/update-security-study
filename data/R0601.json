@@ -42,5 +42,53 @@
       "line": 8,
       "text": "| Continue (CLI) | https://github.com/continuedev/continue.git | 5522c6f / 2026-07-20 | Y | Y (default true, silent) | Y | https (api.continue.dev, registry via npm CLI) | N | none (npm registry TLS only; no signature/hash check in Continue's own code) | N/A — unpinned | extensions/cli/src/services/UpdateService.ts:20-22 (autoUpdate:true, isAutoUpdate:true defaults), :44-98 (checkAndAutoUpdate calls performUpdate automatically when update available), :148 (`npm i -g @continuedev/cli` via execAsync, no confirmation), extensions/cli/src/version.ts:42 (GET https://api.continue.dev/cn/info) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AM1.md",
+      "source_line": 8,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/continuedev/continue.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "5522c6f / 2026-07-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (default true, silent)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (api.continue.dev, registry via npm CLI)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (npm registry TLS only; no signature/hash check in Continue's own code)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A — unpinned"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "extensions/cli/src/services/UpdateService.ts:20-22 (autoUpdate:true, isAutoUpdate:true defaults), :44-98 (checkAndAutoUpdate calls performUpdate automatically when update available), :148 (`npm i -g @continuedev/cli` via execAsync, no confirmation), extensions/cli/src/version.ts:42 (GET https://api.continue.dev/cn/info)"
+        }
+      ]
+    }
   ]
 }

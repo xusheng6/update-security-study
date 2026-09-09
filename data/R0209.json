@@ -41,5 +41,53 @@
       "line": 9,
       "text": "| OWASP ZAP | github.com/zaproxy/zaproxy | Java (add-on marketplace via `ExtensionAutoUpdate`) | Y — full add-on marketplace/updater | chk: auto by default (`CHECK_ADDON_UPDATES` default **true**, throttled to once/day); dl/inst: **manual by default** (`INSTALL_ADDON_UPDATES` default **false**, `DOWNLOAD_NEW_RELEASE` default **false**) — user-configurable to fully automatic | Y — downloads `.zap` add-on JARs and loads them into the running JVM (`AddOnLoader`/`AddOnClassLoader`) | https (manifest + add-on package URLs; e.g. GitHub Releases URLs as seen in the shipped add-ons list); scheme not enforced in code, relies on URL supplied by manifest | no — manifest (ZapVersions.xml-style config) is plain XML/HTTP response, not independently signed | hash-from-manifest — SHA-256 (or other algo) embedded as `\"<ALGORITHM>:<HASH>\"` string inside each add-on's manifest entry, computed over the downloaded file and compared post-download | none — the \"trusted\" hash comes from the same unsigned manifest/transport as the payload itself (no independent signing key / root of trust) | `zap/src/main/java/org/zaproxy/zap/extension/autoupdate/Downloader.java:82-128` (`validateHashDownload`, SHA compare); `zap/src/main/java/org/zaproxy/zap/control/AddOn.java:594,1601` (`hash` field sourced from manifest entry); `zap/src/main/java/org/zaproxy/zap/extension/autoupdate/OptionsParamCheckForUpdates.java:43-57,82-83` (default flags); `zap/src/main/main-add-ons.yml:12-25` (example manifest entries: `url:` + `hash: \"SHA-256:...\"`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-M2.md",
+      "source_line": 9,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/zaproxy/zaproxy"
+        },
+        {
+          "label": "framework",
+          "value": "Java (add-on marketplace via `ExtensionAutoUpdate`)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y — full add-on marketplace/updater"
+        },
+        {
+          "label": "auto",
+          "value": "chk: auto by default (`CHECK_ADDON_UPDATES` default **true**, throttled to once/day); dl/inst: **manual by default** (`INSTALL_ADDON_UPDATES` default **false**, `DOWNLOAD_NEW_RELEASE` default **false**) — user-configurable to fully automatic"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — downloads `.zap` add-on JARs and loads them into the running JVM (`AddOnLoader`/`AddOnClassLoader`)"
+        },
+        {
+          "label": "transport",
+          "value": "https (manifest + add-on package URLs; e.g. GitHub Releases URLs as seen in the shipped add-ons list); scheme not enforced in code, relies on URL supplied by manifest"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "no — manifest (ZapVersions.xml-style config) is plain XML/HTTP response, not independently signed"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest — SHA-256 (or other algo) embedded as `\"<ALGORITHM>:<HASH>\"` string inside each add-on's manifest entry, computed over the downloaded file and compared post-download"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none — the \"trusted\" hash comes from the same unsigned manifest/transport as the payload itself (no independent signing key / root of trust)"
+        },
+        {
+          "label": "evidence",
+          "value": "`zap/src/main/java/org/zaproxy/zap/extension/autoupdate/Downloader.java:82-128` (`validateHashDownload`, SHA compare); `zap/src/main/java/org/zaproxy/zap/control/AddOn.java:594,1601` (`hash` field sourced from manifest entry); `zap/src/main/java/org/zaproxy/zap/extension/autoupdate/OptionsParamCheckForUpdates.java:43-57,82-83` (default flags); `zap/src/main/main-add-ons.yml:12-25` (example manifest entries: `url:` + `hash: \"SHA-256:...\"`)"
+        }
+      ]
+    }
   ]
 }

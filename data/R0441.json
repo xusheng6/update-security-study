@@ -43,5 +43,53 @@
       "line": 23,
       "text": "| Gladys Assistant | https://github.com/GladysAssistant/Gladys | 708274d / 2026-08-20 | Y | N (admin-triggered \"Upgrade\" in UI; runs on demand) | Y | https (Docker registry pull via dockerode; standard TLS, not disabled) | N | none — image pulled by tag, no digest pin, no signature check (delegates entirely to Watchtower's default `--run-once` pull-by-tag behavior) | server-supplied/unpinned | server/lib/system/system.installUpgrade.js:79-125 (spins up `nickfedor/watchtower:1.20.2` container against the Gladys container, no digest/signature verification); server/lib/system/system.pull.js:12-21 (`dockerode.pull(repoTag)`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC6.md",
+      "source_line": 23,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/GladysAssistant/Gladys"
+        },
+        {
+          "label": "commit/date",
+          "value": "708274d / 2026-08-20"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (admin-triggered \"Upgrade\" in UI; runs on demand)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (Docker registry pull via dockerode; standard TLS, not disabled)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — image pulled by tag, no digest pin, no signature check (delegates entirely to Watchtower's default `--run-once` pull-by-tag behavior)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "server/lib/system/system.installUpgrade.js:79-125 (spins up `nickfedor/watchtower:1.20.2` container against the Gladys container, no digest/signature verification); server/lib/system/system.pull.js:12-21 (`dockerode.pull(repoTag)`)"
+        }
+      ]
+    }
   ]
 }

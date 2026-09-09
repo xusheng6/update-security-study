@@ -43,5 +43,53 @@
       "line": 7,
       "text": "| Bottles | github.com/bottlesdevs/Bottles | GTK4/Libadwaita, Python, Flatpak-distributed | N (app self-update); Y (Wine/Proton runners, DXVK, dependencies = content-as-code) | manual (user-initiated component install; app itself relies on Flatpak for updates, no in-app self-updater found) | Y — downloads Wine/Proton runner archives, DXVK/VKD3D/NVAPI, and Windows dependency installers, extracts them, later executed inside bottles | HTTPS (`proxy.usebottles.com`, `raw.githubusercontent.com/bottlesdevs/*`); TLS enforced (pycurl/requests defaults, no verify=False found) | N (plain YAML catalog/component manifests over HTTPS, unsigned) | hash-from-manifest — SHA256 `file_checksum` field from manifest compared post-download; corrupted files removed and re-downloaded | N/A (checksum is a plain value in an unsigned YAML manifest, not a signature) | `bottles/backend/repos/component.py:391-410` (checksum compare in `ComponentManager.download`); `bottles/backend/managers/repository.py:41-58` (HTTPS repo URLs) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-I2.md",
+      "source_line": 7,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/bottlesdevs/Bottles"
+        },
+        {
+          "label": "framework",
+          "value": "GTK4/Libadwaita, Python, Flatpak-distributed"
+        },
+        {
+          "label": "has_updater",
+          "value": "N (app self-update); Y (Wine/Proton runners, DXVK, dependencies = content-as-code)"
+        },
+        {
+          "label": "auto",
+          "value": "manual (user-initiated component install; app itself relies on Flatpak for updates, no in-app self-updater found)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — downloads Wine/Proton runner archives, DXVK/VKD3D/NVAPI, and Windows dependency installers, extracts them, later executed inside bottles"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS (`proxy.usebottles.com`, `raw.githubusercontent.com/bottlesdevs/*`); TLS enforced (pycurl/requests defaults, no verify=False found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (plain YAML catalog/component manifests over HTTPS, unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest — SHA256 `file_checksum` field from manifest compared post-download; corrupted files removed and re-downloaded"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A (checksum is a plain value in an unsigned YAML manifest, not a signature)"
+        },
+        {
+          "label": "evidence",
+          "value": "`bottles/backend/repos/component.py:391-410` (checksum compare in `ComponentManager.download`); `bottles/backend/managers/repository.py:41-58` (HTTPS repo URLs)"
+        }
+      ]
+    }
   ]
 }

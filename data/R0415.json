@@ -41,5 +41,53 @@
       "line": 26,
       "text": "| Nextcloud Desktop Client | https://github.com/nextcloud/desktop | 8c026e378a96 / 2026-08-21 | Y | Y | Y (Win); Y via Sparkle (macOS); N/notify-only (Linux) | https (`updates.nextcloud.org/client/`, real Qt TLS validation — AccessManager sets no ignoreSslErrors/VerifyNone) | N (Windows: plain XML version feed); macOS Sparkle appcast payload is signed even though feed itself isn't | Windows: **NONE** — installer/MSI run directly with zero hash/signature check. macOS: EdDSA signature via Sparkle, key pinned in Info.plist. Linux: N/A (opens browser only) | macOS: pinned-in-binary (Sparkle SUPublicEDKey). Windows: none | src/gui/updater/ocupdater.cpp:202-233 (`slotStartInstaller` — `QProcess::startDetached`/`msiexec` run on the downloaded .exe/.msi with **no** verification step anywhere in the file); cmake/modules/MacOSXBundleInfo.plist.in:54 (`SUPublicEDKey`); src/gui/updater/updater.cpp:120-142 (`Updater::create` platform dispatch: SparkleUpdater/macOS, NSISUpdater/Windows, PassiveUpdateNotifier/Linux); NEXTCLOUD.cmake:22 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AA7.md",
+      "source_line": 26,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/nextcloud/desktop"
+        },
+        {
+          "label": "commit/date",
+          "value": "8c026e378a96 / 2026-08-21"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (Win); Y via Sparkle (macOS); N/notify-only (Linux)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`updates.nextcloud.org/client/`, real Qt TLS validation — AccessManager sets no ignoreSslErrors/VerifyNone)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (Windows: plain XML version feed); macOS Sparkle appcast payload is signed even though feed itself isn't"
+        },
+        {
+          "label": "payload_verification",
+          "value": "Windows: **NONE** — installer/MSI run directly with zero hash/signature check. macOS: EdDSA signature via Sparkle, key pinned in Info.plist. Linux: N/A (opens browser only)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "macOS: pinned-in-binary (Sparkle SUPublicEDKey). Windows: none"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/gui/updater/ocupdater.cpp:202-233 (`slotStartInstaller` — `QProcess::startDetached`/`msiexec` run on the downloaded .exe/.msi with **no** verification step anywhere in the file); cmake/modules/MacOSXBundleInfo.plist.in:54 (`SUPublicEDKey`); src/gui/updater/updater.cpp:120-142 (`Updater::create` platform dispatch: SparkleUpdater/macOS, NSISUpdater/Windows, PassiveUpdateNotifier/Linux); NEXTCLOUD.cmake:22"
+        }
+      ]
+    }
   ]
 }

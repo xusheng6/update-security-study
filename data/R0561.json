@@ -42,5 +42,53 @@
       "line": 16,
       "text": "| Tablet | https://github.com/CropGeeks/tablet | 2804f6e / 2023-06-14 | Y | Y (auto-checks every startup) but download/install gated on user accepting an `UpdateAlertComponent` dialog | Y (after user accepts) | https; no disabled-validation code found | not confirmed | **OS code signing** (mac + Windows Authenticode via install4j) | OS keystore | `src/tablet/gui/Tablet.java:71-79` `Install4j i4j = new Install4j(...); i4j.setURLs(\"https://bioinf.hutton.ac.uk/tablet/installers/updates.xml\", ...); i4j.doStartUpCheck(Tablet.class);` called from `main()`; `installer/Tablet.install4j:10` `<codeSigning macEnabled=\"true\" macPkcs12File=\"../keys/apple_cert.p12\" windowsEnabled=\"true\" windowsPkcs12File=\"../keys/OS201306044993.pfx\">`; `:529-531` `CheckForUpdateAction` with `url=https://bioinf.hutton.ac.uk/tablet/installers/updates.xml`; `:126` `UpdateAlertComponent` (user-facing, not silent) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AJ1.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/CropGeeks/tablet"
+        },
+        {
+          "label": "commit/date",
+          "value": "2804f6e / 2023-06-14"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (auto-checks every startup) but download/install gated on user accepting an `UpdateAlertComponent` dialog"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (after user accepts)"
+        },
+        {
+          "label": "transport",
+          "value": "https; no disabled-validation code found"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "not confirmed"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**OS code signing** (mac + Windows Authenticode via install4j)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/tablet/gui/Tablet.java:71-79` `Install4j i4j = new Install4j(...); i4j.setURLs(\"https://bioinf.hutton.ac.uk/tablet/installers/updates.xml\", ...); i4j.doStartUpCheck(Tablet.class);` called from `main()`; `installer/Tablet.install4j:10` `<codeSigning macEnabled=\"true\" macPkcs12File=\"../keys/apple_cert.p12\" windowsEnabled=\"true\" windowsPkcs12File=\"../keys/OS201306044993.pfx\">`; `:529-531` `CheckForUpdateAction` with `url=https://bioinf.hutton.ac.uk/tablet/installers/updates.xml`; `:126` `UpdateAlertComponent` (user-facing, not silent)"
+        }
+      ]
+    }
   ]
 }

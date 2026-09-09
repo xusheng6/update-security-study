@@ -42,5 +42,53 @@
       "line": 20,
       "text": "| Storyteller (Tauri desktop client) | https://gitlab.com/storyteller-platform/storyteller (GitHub mirror: github.com/smoores-dev/storyteller) | 6ff8da0 / 2026-08-23 | Y | Y (silent check at launch, plus manual \"check now\") | Y | https, TLS enforced | Y (minisign, all platform entries) | **verified** — standard `tauri-plugin-updater` end-to-end, entirely backend-driven Rust code, no custom bypass paths | pinned Ed25519/minisign pubkey in `tauri.conf.json`; CI signs artifacts with `TAURI_SIGNING_PRIVATE_KEY` | `applications/tauri/src-tauri/tauri.conf.json:63-66` pubkey + endpoint (GitLab generic package registry `.../packages/generic/storyteller-tauri/latest/latest.json`); `Cargo.toml:15` `tauri-plugin-updater = \"2\"`; `src/main.rs:46` plugin init, `:636` silent startup check, `:688-732` `check_for_updates()`→`updater.check()`; signing declared in `.gitlab/ci/publish-tauri.yml` header comment |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AF1.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://gitlab.com/storyteller-platform/storyteller (GitHub mirror: github.com/smoores-dev/storyteller)"
+        },
+        {
+          "label": "commit/date",
+          "value": "6ff8da0 / 2026-08-23"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (silent check at launch, plus manual \"check now\")"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (minisign, all platform entries)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**verified** — standard `tauri-plugin-updater` end-to-end, entirely backend-driven Rust code, no custom bypass paths"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned Ed25519/minisign pubkey in `tauri.conf.json`; CI signs artifacts with `TAURI_SIGNING_PRIVATE_KEY`"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "`applications/tauri/src-tauri/tauri.conf.json:63-66` pubkey + endpoint (GitLab generic package registry `.../packages/generic/storyteller-tauri/latest/latest.json`); `Cargo.toml:15` `tauri-plugin-updater = \"2\"`; `src/main.rs:46` plugin init, `:636` silent startup check, `:688-732` `check_for_updates()`→`updater.check()`; signing declared in `.gitlab/ci/publish-tauri.yml` header comment"
+        }
+      ]
+    }
   ]
 }

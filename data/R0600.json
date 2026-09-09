@@ -42,5 +42,53 @@
       "line": 7,
       "text": "| Aider | https://github.com/Aider-AI/aider.git | 5dc9490 / 2026-05-22 | Y | Y (confirm-gated, default \"y\") | Y | https (pypi.org, requests default TLS, not disabled) | N | none (relies on pip/PyPI TLS only, no hash/sig check in aider code) | N/A — server-supplied, unpinned | aider/versioncheck.py:78 (GET pypi.org/pypi/aider-chat/json), aider/versioncheck.py:49-55 (install_upgrade calls check_pip_install_extra self_update=True), aider/utils.py:298-320 (confirm_ask then `pip install aider-chat`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AM1.md",
+      "source_line": 7,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Aider-AI/aider.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "5dc9490 / 2026-05-22"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (confirm-gated, default \"y\")"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (pypi.org, requests default TLS, not disabled)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (relies on pip/PyPI TLS only, no hash/sig check in aider code)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A — server-supplied, unpinned"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "aider/versioncheck.py:78 (GET pypi.org/pypi/aider-chat/json), aider/versioncheck.py:49-55 (install_upgrade calls check_pip_install_extra self_update=True), aider/utils.py:298-320 (confirm_ask then `pip install aider-chat`)"
+        }
+      ]
+    }
   ]
 }

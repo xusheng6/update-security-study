@@ -43,5 +43,53 @@
       "line": 14,
       "text": "| KeepingYouAwake | newmarcel/KeepingYouAwake | Sparkle (direct-download build only; separate MAS build target has no Sparkle and relies on Apple's App Store update mechanism instead — two entitlements files / `KYA_APP_UPDATER_ENABLED=1` flag distinguish them) | Y (direct build) / N (MAS build) | chk: true by default (`SUEnableAutomaticChecks`); dl/inst: Sparkle standard prompt | Y (direct build) | https (`https://newmarcel.github.io/KeepingYouAwake/appcast.xml`, plus a prerelease variant) | **NONE** — no `SUPublicEDKey`/`SUPublicDSAKey` anywhere in repo | none | none | KeepingYouAwake/Info.plist:20-30; KeepingYouAwake/KYAAppUpdater/KYAAppUpdater.m:1-70; KeepingYouAwake.xcodeproj/project.pbxproj:1152,1180; dual entitlements files (`-Direct` vs MAS) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-K1.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "newmarcel/KeepingYouAwake"
+        },
+        {
+          "label": "framework",
+          "value": "Sparkle (direct-download build only; separate MAS build target has no Sparkle and relies on Apple's App Store update mechanism instead — two entitlements files / `KYA_APP_UPDATER_ENABLED=1` flag distinguish them)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (direct build) / N (MAS build)"
+        },
+        {
+          "label": "auto",
+          "value": "chk: true by default (`SUEnableAutomaticChecks`); dl/inst: Sparkle standard prompt"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (direct build)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`https://newmarcel.github.io/KeepingYouAwake/appcast.xml`, plus a prerelease variant)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "**NONE** — no `SUPublicEDKey`/`SUPublicDSAKey` anywhere in repo"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none"
+        },
+        {
+          "label": "evidence",
+          "value": "KeepingYouAwake/Info.plist:20-30; KeepingYouAwake/KYAAppUpdater/KYAAppUpdater.m:1-70; KeepingYouAwake.xcodeproj/project.pbxproj:1152,1180; dual entitlements files (`-Direct` vs MAS)"
+        }
+      ]
+    }
   ]
 }

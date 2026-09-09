@@ -44,5 +44,53 @@
       "line": 25,
       "text": "| AstroBox | https://github.com/AstroPrint/AstroBox.git | e7e3b8a7d33ea85fcb6b2696869c0d719ceb8b75 / 2021-06-30 (project defunct — AstroPrint cloud service shut down) | Y | N-ish (daily background check sets a flag; actual `updateSoftware()` install is invoked via a local/cloud API call, not unconditionally automatic) | Y | https (`roConfig('cloud.apiHost')`, e.g. AstroPrint cloud API; `requests.get(..., stream=True)`). No `verify=False`/TLS-bypass found. | N | weak — downloaded `.deb` is only checked with `apt.debfile.DebPackage.check()` (dependency/control-file sanity check), which does **not** verify any GPG/package signature; `pkg.install()` is called directly on the unsigned file | server-supplied/unpinned (AstroPrint cloud API decides `download_url`; no pinned key anywhere) | src/astroprint/software.py:184-198 (`_installPackage`, `requests.get(relData['download_url'], stream=True)`), :227-230 (`apt.debfile.DebPackage(releasePath)` + `pkg.check()` — no signature check), :257 (`pkg.install(...)`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-V6.md",
+      "source_line": 25,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/AstroPrint/AstroBox.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "e7e3b8a7d33ea85fcb6b2696869c0d719ceb8b75 / 2021-06-30 (project defunct — AstroPrint cloud service shut down)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N-ish (daily background check sets a flag; actual `updateSoftware()` install is invoked via a local/cloud API call, not unconditionally automatic)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`roConfig('cloud.apiHost')`, e.g. AstroPrint cloud API; `requests.get(..., stream=True)`). No `verify=False`/TLS-bypass found."
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "weak — downloaded `.deb` is only checked with `apt.debfile.DebPackage.check()` (dependency/control-file sanity check), which does **not** verify any GPG/package signature; `pkg.install()` is called directly on the unsigned file"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (AstroPrint cloud API decides `download_url`; no pinned key anywhere)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/astroprint/software.py:184-198 (`_installPackage`, `requests.get(relData['download_url'], stream=True)`), :227-230 (`apt.debfile.DebPackage(releasePath)` + `pkg.check()` — no signature check), :257 (`pkg.install(...)`)"
+        }
+      ]
+    }
   ]
 }

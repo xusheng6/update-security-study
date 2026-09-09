@@ -41,5 +41,53 @@
       "line": 20,
       "text": "| **Akaunting** | https://github.com/akaunting/akaunting.git | 24258529e0f7c4394ae3cd9d82c82d4ed309c6ef / 2026-08-20 | Y | N (admin-triggered from Settings > Updates) | Y (downloads a zip and extracts it over the live install, then runs `update:finish` artisan command) | **https URL, but TLS certificate validation explicitly DISABLED in code** (`'verify' => false`) | N | none (only ZipSlip/path-traversal filename filtering in `UnzipFile.php`; no hash or signature check of the zip contents) | none / server-supplied-unpinned | **`app/Traits/SiteApi.php:18`**: `$client = new Client(['verify' => false, 'base_uri' => static::$base_uri]);` where `base_uri = 'https://api.akaunting.com/'` (line 14); this exact client is used by `app/Jobs/Install/DownloadFile.php:35-45` (`getUrl()` builds `core/download/{version}/{php}/{mysql}` for the `alias == 'core'` case, i.e. the **app's own self-update**, not just marketplace modules) to fetch the update zip, which is then extracted by `app/Jobs/Install/UnzipFile.php:43-70` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-X2.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/akaunting/akaunting.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "24258529e0f7c4394ae3cd9d82c82d4ed309c6ef / 2026-08-20"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (admin-triggered from Settings > Updates)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y (downloads a zip and extracts it over the live install, then runs `update:finish` artisan command)"
+        },
+        {
+          "label": "transport",
+          "value": "**https URL, but TLS certificate validation explicitly DISABLED in code** (`'verify' => false`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (only ZipSlip/path-traversal filename filtering in `UnzipFile.php`; no hash or signature check of the zip contents)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none / server-supplied-unpinned"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "**`app/Traits/SiteApi.php:18`**: `$client = new Client(['verify' => false, 'base_uri' => static::$base_uri]);` where `base_uri = 'https://api.akaunting.com/'` (line 14); this exact client is used by `app/Jobs/Install/DownloadFile.php:35-45` (`getUrl()` builds `core/download/{version}/{php}/{mysql}` for the `alias == 'core'` case, i.e. the **app's own self-update**, not just marketplace modules) to fetch the update zip, which is then extracted by `app/Jobs/Install/UnzipFile.php:43-70`"
+        }
+      ]
+    }
   ]
 }

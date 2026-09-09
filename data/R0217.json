@@ -41,5 +41,53 @@
       "line": 11,
       "text": "| mRemoteNG | github.com/mRemoteNG/mRemoteNG | .NET (C#, WinForms) | Y | Y (startup check); download/install requires a user click, then executes automatically on app exit | Y | https (default `UpdateAddress=https://mremoteng.org/`; manifest/changelog/installer URLs observed use `https://github.com/...` and `https://raw.githubusercontent.com/...`) — standard `HttpClient`, no custom cert-validation bypass found | N (manifest is a plain `key: value` text file, e.g. `Version/dURL/clURL/CertificateThumbprint/Checksum` — no digital signature on the manifest itself; trust relies solely on TLS to `mremoteng.org`) | Y — dual check before install: (1) Windows Authenticode signature verify with pinned thumbprint (2) SHA-512 checksum compare | Authenticode thumbprint + SHA-512 checksum are both supplied by the (HTTPS-delivered, unsigned) manifest itself — not hardcoded/pinned in the app binary | `mRemoteNG/App/Checks/AppUpdater.cs:166-189` (Authenticode `RequireThumbprintMatch`/`ThumbprintToMatch` then `SHA512` compare, throws on mismatch); `mRemoteNG/App/Checks/UpdateInfo.cs:17,41,66-73` (thumbprint/checksum parsed from manifest); `mRemoteNG/App/Info/UpdateChannelInfo.cs:68-72` + `mRemoteNG/Properties/OptionsUpdatesPage.settings:11-13` (`UpdateAddress=https://mremoteng.org/`) and `:33-35` (`CheckForUpdatesOnStartup=True` default); `mRemoteNG/UI/Window/UpdateWindow.cs:88-89` (`btnDownload_Click` is user-initiated); `mRemoteNG/App/Shutdown.cs:123-127` (`Process.Start` executes the downloaded installer automatically at app quit, after `PathValidator.ValidateExecutablePathOrThrow`). |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-N7.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/mRemoteNG/mRemoteNG"
+        },
+        {
+          "label": "framework",
+          "value": ".NET (C#, WinForms)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (startup check); download/install requires a user click, then executes automatically on app exit"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (default `UpdateAddress=https://mremoteng.org/`; manifest/changelog/installer URLs observed use `https://github.com/...` and `https://raw.githubusercontent.com/...`) — standard `HttpClient`, no custom cert-validation bypass found"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (manifest is a plain `key: value` text file, e.g. `Version/dURL/clURL/CertificateThumbprint/Checksum` — no digital signature on the manifest itself; trust relies solely on TLS to `mremoteng.org`)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "Y — dual check before install: (1) Windows Authenticode signature verify with pinned thumbprint (2) SHA-512 checksum compare"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "Authenticode thumbprint + SHA-512 checksum are both supplied by the (HTTPS-delivered, unsigned) manifest itself — not hardcoded/pinned in the app binary"
+        },
+        {
+          "label": "evidence",
+          "value": "`mRemoteNG/App/Checks/AppUpdater.cs:166-189` (Authenticode `RequireThumbprintMatch`/`ThumbprintToMatch` then `SHA512` compare, throws on mismatch); `mRemoteNG/App/Checks/UpdateInfo.cs:17,41,66-73` (thumbprint/checksum parsed from manifest); `mRemoteNG/App/Info/UpdateChannelInfo.cs:68-72` + `mRemoteNG/Properties/OptionsUpdatesPage.settings:11-13` (`UpdateAddress=https://mremoteng.org/`) and `:33-35` (`CheckForUpdatesOnStartup=True` default); `mRemoteNG/UI/Window/UpdateWindow.cs:88-89` (`btnDownload_Click` is user-initiated); `mRemoteNG/App/Shutdown.cs:123-127` (`Process.Start` executes the downloaded installer automatically at app quit, after `PathValidator.ValidateExecutablePathOrThrow`)."
+        }
+      ]
+    }
   ]
 }

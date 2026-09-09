@@ -41,5 +41,53 @@
       "line": 25,
       "text": "| Vimac | github.com/nchudleigh/vimac | **Sparkle (EdDSA = A)**, legacy `SUUpdater` 1.x API (CocoaPod `Sparkle (1.24.0)`) — **feed endpoint currently dead (HTTP 410)** | **Y** | **Y** (silent background check called automatically, not just a menu item) | **Y** (by code) — but non-functional today since the feed 410s | https | TLS-only (appcast itself unsigned) | signature[EdDSA] (by code); **currently unreachable in practice** | embedded in Info.plist (`SUPublicEDKey`) | `vimac/ViMac-Swift/Info.plist`: `SUFeedURL` = `https://api.appcenter.ms/v0.1/public/sparkle/apps/d28ff448-1768-4ee9-ab61-49f20cf5323e`, `SUPublicEDKey` = `OtDAJPNO6QsDcZeyySlbD9caJgxWoV/BA+rW9rfTKHM=`; `vimac/ViMac-Swift/AppDelegate.swift:84` `self.checkForUpdatesInBackground()` (called from `onAXPermissionGranted()`, i.e. on every normal launch), `:274-277` `func checkForUpdatesInBackground() { SUUpdater.shared()?.delegate = self; SUUpdater.shared()?.sendsSystemProfile = true; SUUpdater.shared()?.checkForUpdatesInBackground() }`; `vimac/ViMac-Swift/StatusItemManager.swift:42,72-73` \"Check for updates\" menu item → `SUUpdater.shared()?.checkForUpdates(nil)`; `Podfile.lock:12` `Sparkle (1.24.0)`. Live check `curl -s -o /dev/null -w \"%{http_code}\" https://api.appcenter.ms/v0.1/public/sparkle/apps/d28ff448-1768-4ee9-ab61-49f20cf5323e` → **410** (Microsoft App Center's public service was retired/shut down; the Sparkle-compatible relay Vimac's feed depends on no longer exists). No Homebrew cask (404 on `Casks/v/vimac.rb`). |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-R1.md",
+      "source_line": 25,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/nchudleigh/vimac"
+        },
+        {
+          "label": "framework",
+          "value": "**Sparkle (EdDSA = A)**, legacy `SUUpdater` 1.x API (CocoaPod `Sparkle (1.24.0)`) — **feed endpoint currently dead (HTTP 410)**"
+        },
+        {
+          "label": "has_updater",
+          "value": "**Y**"
+        },
+        {
+          "label": "auto",
+          "value": "**Y** (silent background check called automatically, not just a menu item)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y** (by code) — but non-functional today since the feed 410s"
+        },
+        {
+          "label": "transport",
+          "value": "https"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "TLS-only (appcast itself unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature[EdDSA] (by code); **currently unreachable in practice**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "embedded in Info.plist (`SUPublicEDKey`)"
+        },
+        {
+          "label": "evidence",
+          "value": "`vimac/ViMac-Swift/Info.plist`: `SUFeedURL` = `https://api.appcenter.ms/v0.1/public/sparkle/apps/d28ff448-1768-4ee9-ab61-49f20cf5323e`, `SUPublicEDKey` = `OtDAJPNO6QsDcZeyySlbD9caJgxWoV/BA+rW9rfTKHM=`; `vimac/ViMac-Swift/AppDelegate.swift:84` `self.checkForUpdatesInBackground()` (called from `onAXPermissionGranted()`, i.e. on every normal launch), `:274-277` `func checkForUpdatesInBackground() { SUUpdater.shared()?.delegate = self; SUUpdater.shared()?.sendsSystemProfile = true; SUUpdater.shared()?.checkForUpdatesInBackground() }`; `vimac/ViMac-Swift/StatusItemManager.swift:42,72-73` \"Check for updates\" menu item → `SUUpdater.shared()?.checkForUpdates(nil)`; `Podfile.lock:12` `Sparkle (1.24.0)`. Live check `curl -s -o /dev/null -w \"%{http_code}\" https://api.appcenter.ms/v0.1/public/sparkle/apps/d28ff448-1768-4ee9-ab61-49f20cf5323e` → **410** (Microsoft App Center's public service was retired/shut down; the Sparkle-compatible relay Vimac's feed depends on no longer exists). No Homebrew cask (404 on `Casks/v/vimac.rb`)."
+        }
+      ]
+    }
   ]
 }

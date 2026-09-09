@@ -43,5 +43,53 @@
       "line": 24,
       "text": "| rclone-browser (kapitainsky fork) | https://github.com/kapitainsky/RcloneBrowser | 45bf7411839b / 2020-12-30 | Y | Y (checks once/day) | N (link-out only) | https (api.github.com) | N/A | none (notify-only) | N/A | src/main_window.cpp:536-596 (rclone version check via `api.github.com/repos/rclone/rclone/releases/latest`, shows QMessageBox linking to downloads page); src/main_window.cpp:614-662 (self-version check, same GitHub-API-notify pattern, no download) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AA7.md",
+      "source_line": 24,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/kapitainsky/RcloneBrowser"
+        },
+        {
+          "label": "commit/date",
+          "value": "45bf7411839b / 2020-12-30"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (checks once/day)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N (link-out only)"
+        },
+        {
+          "label": "transport",
+          "value": "https (api.github.com)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (notify-only)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/main_window.cpp:536-596 (rclone version check via `api.github.com/repos/rclone/rclone/releases/latest`, shows QMessageBox linking to downloads page); src/main_window.cpp:614-662 (self-version check, same GitHub-API-notify pattern, no download)"
+        }
+      ]
+    }
   ]
 }

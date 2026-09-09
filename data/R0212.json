@@ -41,5 +41,53 @@
       "line": 7,
       "text": "| FinalBurn Neo | github.com/finalburnneo/FBNeo @2810627 | libretro core + native SDL/macOS/Win front-ends | Y (macOS build only; Win/SDL/libretro builds: N) | Y (Sparkle default is automatic background checks unless overridden; no `SUEnableAutomaticChecks=NO` override found in this Info.plist) | Y (Sparkle downloads and installs/replaces the app bundle on user confirm) | https (appcast feed) | appcast feed itself not separately signed, fetched over https | Y — legacy DSA (Sparkle 1.24 `SUPublicDSAKeyFile`) signature on the update enclosure | embedded PEM at `projectfiles/xcode/Emulator/dsa_pub.pem` (checked into repo) | `projectfiles/xcode/Emulator/Info.plist:80-83` (`SUFeedURL` = `https://www.akop.org/su-updates/fbn.xml`, `SUPublicDSAKeyFile` = `dsa_pub.pem`); Sparkle.framework vendored at `projectfiles/xcode/Sparkle.framework` (v1.24.0, `Versions/A/Resources/Info.plist`); linked into build in `projectfiles/xcode/Emulator.xcodeproj/project.pbxproj:1081-1082,1207-1215,3002,5529,5643` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-N6.md",
+      "source_line": 7,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/finalburnneo/FBNeo @2810627"
+        },
+        {
+          "label": "framework",
+          "value": "libretro core + native SDL/macOS/Win front-ends"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (macOS build only; Win/SDL/libretro builds: N)"
+        },
+        {
+          "label": "auto",
+          "value": "Y (Sparkle default is automatic background checks unless overridden; no `SUEnableAutomaticChecks=NO` override found in this Info.plist)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (Sparkle downloads and installs/replaces the app bundle on user confirm)"
+        },
+        {
+          "label": "transport",
+          "value": "https (appcast feed)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "appcast feed itself not separately signed, fetched over https"
+        },
+        {
+          "label": "payload_verification",
+          "value": "Y — legacy DSA (Sparkle 1.24 `SUPublicDSAKeyFile`) signature on the update enclosure"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "embedded PEM at `projectfiles/xcode/Emulator/dsa_pub.pem` (checked into repo)"
+        },
+        {
+          "label": "evidence",
+          "value": "`projectfiles/xcode/Emulator/Info.plist:80-83` (`SUFeedURL` = `https://www.akop.org/su-updates/fbn.xml`, `SUPublicDSAKeyFile` = `dsa_pub.pem`); Sparkle.framework vendored at `projectfiles/xcode/Sparkle.framework` (v1.24.0, `Versions/A/Resources/Info.plist`); linked into build in `projectfiles/xcode/Emulator.xcodeproj/project.pbxproj:1081-1082,1207-1215,3002,5529,5643`"
+        }
+      ]
+    }
   ]
 }

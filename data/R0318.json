@@ -44,5 +44,53 @@
       "line": 21,
       "text": "| WoeUSB-ng | https://github.com/WoeUSB/WoeUSB-ng | cc52ffc / 2026-01-25 | N (no self-update) | Y (silent, automatic during normal \"create bootable USB\" workflow) | Y (downloads and writes a UEFI bootloader image executed by firmware at boot) | https, cert validation enforced (default `urllib.request`, no `ssl.CERT_NONE`/`check_hostname=False` found anywhere in the codebase) | N | none — file is written to the boot partition with zero hash/signature check | server-supplied/unpinned (trusts whatever bytes GitHub raw returns) | `src/WoeUSB/core.py:375` `urllib.request.urlretrieve(\"https://github.com/pbatard/rufus/raw/master/res/uefi/uefi-ntfs.img\", \"uefi-ntfs.img\")` inside `install_uefi_ntfs_support_partition()` (`core.py:361`), whose own docstring admits: \"FIXME: Currently this requires internet access to download the image from GitHub directly, it should be replaced by including the image in our datadir.\" The downloaded file is `shutil.copy2()`'d straight onto the UEFI:NTFS boot partition (`core.py:381`) with no checksum or signature check — a compromised GitHub raw CDN or a MITM of that one HTTPS connection (if TLS is ever broken) directly yields a malicious UEFI bootloader on the target device. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-V8.md",
+      "source_line": 21,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/WoeUSB/WoeUSB-ng"
+        },
+        {
+          "label": "commit/date",
+          "value": "cc52ffc / 2026-01-25"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "N (no self-update)"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (silent, automatic during normal \"create bootable USB\" workflow)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y (downloads and writes a UEFI bootloader image executed by firmware at boot)"
+        },
+        {
+          "label": "transport",
+          "value": "https, cert validation enforced (default `urllib.request`, no `ssl.CERT_NONE`/`check_hostname=False` found anywhere in the codebase)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — file is written to the boot partition with zero hash/signature check"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (trusts whatever bytes GitHub raw returns)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/WoeUSB/core.py:375` `urllib.request.urlretrieve(\"https://github.com/pbatard/rufus/raw/master/res/uefi/uefi-ntfs.img\", \"uefi-ntfs.img\")` inside `install_uefi_ntfs_support_partition()` (`core.py:361`), whose own docstring admits: \"FIXME: Currently this requires internet access to download the image from GitHub directly, it should be replaced by including the image in our datadir.\" The downloaded file is `shutil.copy2()`'d straight onto the UEFI:NTFS boot partition (`core.py:381`) with no checksum or signature check — a compromised GitHub raw CDN or a MITM of that one HTTPS connection (if TLS is ever broken) directly yields a malicious UEFI bootloader on the target device."
+        }
+      ]
+    }
   ]
 }

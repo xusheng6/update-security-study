@@ -42,5 +42,53 @@
       "line": 12,
       "text": "| MicroSIP | https://github.com/nirzaf/MicroSIP-3.19.27-src (community archive of official 3.19.27 source; upstream has no public repo) | f074ced / 2020-03-12 | Y | Y (interval combobox: daily/monthly/quarterly/never, checked from mainDlg on startup/timer) | N (prompts MessageBox \"Update Available\" then `OpenURL()` → `ShellExecute` opens URL in default browser; user must manually download/run) | **HTTP — plaintext, not TLS at all** | N | none (crude version compare via `inet_addr()` IP-trick on unauthenticated HTTP text body; server-supplied URL/version/notes trusted verbatim) | server-supplied/unpinned (no key of any kind) | mainDlg.cpp:4487-4495 (`url = _T(\"http://update.microsip.org/softphone-update.txt\")`), mainDlg.cpp:4498-4539 (`OnUpdateCheckerLoaded`, opens `url` from response body on user click Yes), global.cpp:282-287 (`OpenURL` → `rundll32.exe url.dll,FileProtocolHandler`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AD1.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/nirzaf/MicroSIP-3.19.27-src (community archive of official 3.19.27 source; upstream has no public repo)"
+        },
+        {
+          "label": "commit/date",
+          "value": "f074ced / 2020-03-12"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (interval combobox: daily/monthly/quarterly/never, checked from mainDlg on startup/timer)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N (prompts MessageBox \"Update Available\" then `OpenURL()` → `ShellExecute` opens URL in default browser; user must manually download/run)"
+        },
+        {
+          "label": "transport",
+          "value": "**HTTP — plaintext, not TLS at all**"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (crude version compare via `inet_addr()` IP-trick on unauthenticated HTTP text body; server-supplied URL/version/notes trusted verbatim)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (no key of any kind)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "mainDlg.cpp:4487-4495 (`url = _T(\"http://update.microsip.org/softphone-update.txt\")`), mainDlg.cpp:4498-4539 (`OnUpdateCheckerLoaded`, opens `url` from response body on user click Yes), global.cpp:282-287 (`OpenURL` → `rundll32.exe url.dll,FileProtocolHandler`)"
+        }
+      ]
+    }
   ]
 }

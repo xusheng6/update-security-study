@@ -43,5 +43,53 @@
       "line": 11,
       "text": "| AFFiNE | https://github.com/toeverything/AFFiNE.git | 3feb17c / 2026-08-21 | Y | Y (auto-download on update-available by default config) | Y | https (custom feed `affine.pro/api/worker/releases` → GitHub release assets), TLS enforced | no (latest.yml, unsigned) | hash (sha512 in latest.yml) + OS code-sign check (electron-updater default, not overridden) | OS keystore (Authenticode/codesign) | packages/frontend/apps/electron/src/main/updater/electron-updater.ts:30 (autoDownloadUpdate default true) & :86 (auto-download on update-available); affine-update-provider.ts (custom GitHub-releases provider); windows-updater.ts (no verifyUpdateCodeSignature override) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U7.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/toeverything/AFFiNE.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "3feb17c / 2026-08-21"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (auto-download on update-available by default config)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (custom feed `affine.pro/api/worker/releases` → GitHub release assets), TLS enforced"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "no (latest.yml, unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (sha512 in latest.yml) + OS code-sign check (electron-updater default, not overridden)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore (Authenticode/codesign)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "packages/frontend/apps/electron/src/main/updater/electron-updater.ts:30 (autoDownloadUpdate default true) & :86 (auto-download on update-available); affine-update-provider.ts (custom GitHub-releases provider); windows-updater.ts (no verifyUpdateCodeSignature override)"
+        }
+      ]
+    }
   ]
 }

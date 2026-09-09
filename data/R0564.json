@@ -42,5 +42,53 @@
       "line": 17,
       "text": "| V (vlang) | https://github.com/vlang/v.git | d934e4beafd3c071edc976684773bb880fe05ef8 / 2026-08-23 | Y | N (manual `v up`) | Y | https (git pull over https; git enforces TLS by default, no override found) | N/A (no manifest) | none — relies solely on git's SHA-1 object-integrity chain; no GPG-signed-commit verification, no release signature, no hash pinning | N/A — unauthenticated, trust is \"whatever `https://github.com/vlang/v` `master` HEAD currently is\" | `cmd/tools/vup.v:83-99` `update_from_master()` runs `git pull --rebase https://github.com/vlang/v master` (or on first run `git remote add origin …; git fetch; git reset --hard origin/master`), then `recompile_v()` (`:123-146`) executes `v self` / `make`, i.e. compiles and will subsequently run the newly-fetched, newly-compiled source — self-update-and-execute. Additionally `cmd/tools/vup.v:260-278` `install_git()`, invoked when git is missing on Windows, downloads a hardcoded installer `https://github.com/git-for-windows/git/releases/download/v2.30.0.windows.2/Git-2.30.0.2-32-bit.exe` via `bitsadmin.exe /transfer` and then **directly executes it** (`os.execute(os.quoted_path(...))` at `:273`) with **zero hash/signature verification**. `v up` is a manual/opt-in command (not auto-triggered). |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AK3.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/vlang/v.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "d934e4beafd3c071edc976684773bb880fe05ef8 / 2026-08-23"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual `v up`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (git pull over https; git enforces TLS by default, no override found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A (no manifest)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — relies solely on git's SHA-1 object-integrity chain; no GPG-signed-commit verification, no release signature, no hash pinning"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A — unauthenticated, trust is \"whatever `https://github.com/vlang/v` `master` HEAD currently is\""
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`cmd/tools/vup.v:83-99` `update_from_master()` runs `git pull --rebase https://github.com/vlang/v master` (or on first run `git remote add origin …; git fetch; git reset --hard origin/master`), then `recompile_v()` (`:123-146`) executes `v self` / `make`, i.e. compiles and will subsequently run the newly-fetched, newly-compiled source — self-update-and-execute. Additionally `cmd/tools/vup.v:260-278` `install_git()`, invoked when git is missing on Windows, downloads a hardcoded installer `https://github.com/git-for-windows/git/releases/download/v2.30.0.windows.2/Git-2.30.0.2-32-bit.exe` via `bitsadmin.exe /transfer` and then **directly executes it** (`os.execute(os.quoted_path(...))` at `:273`) with **zero hash/signature verification**. `v up` is a manual/opt-in command (not auto-triggered)."
+        }
+      ]
+    }
   ]
 }

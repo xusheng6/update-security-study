@@ -41,5 +41,53 @@
       "line": 19,
       "text": "| QFlipper | https://github.com/flipperdevices/qFlipper | 1d26683 / 2024-06-11 | Y | Y (periodic background channel check) | Y (downloads + DFU-flashes firmware to Flipper Zero) | https, cert validation enforced (no ignoreSslErrors/setPeerVerifyMode/VerifyNone found) | N | none — only DFU container magic-byte format checks and device-side MD5 (storage integrity, not authenticity) | none/unpinned | backend/applicationbackend.cpp:37 (`https://update.flipperzero.one/firmware/directory.json`); backend/updateregistry.cpp:20-79 (JSON channel parsing, no signature field); dfu/dfusefile.cpp:25,56,79,93 (\"signature\" = DfuSe format magic bytes only, not crypto) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Z7.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/flipperdevices/qFlipper"
+        },
+        {
+          "label": "commit/date",
+          "value": "1d26683 / 2024-06-11"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (periodic background channel check)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (downloads + DFU-flashes firmware to Flipper Zero)"
+        },
+        {
+          "label": "transport",
+          "value": "https, cert validation enforced (no ignoreSslErrors/setPeerVerifyMode/VerifyNone found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — only DFU container magic-byte format checks and device-side MD5 (storage integrity, not authenticity)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none/unpinned"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "backend/applicationbackend.cpp:37 (`https://update.flipperzero.one/firmware/directory.json`); backend/updateregistry.cpp:20-79 (JSON channel parsing, no signature field); dfu/dfusefile.cpp:25,56,79,93 (\"signature\" = DfuSe format magic bytes only, not crypto)"
+        }
+      ]
+    }
   ]
 }

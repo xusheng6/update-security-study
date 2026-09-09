@@ -41,5 +41,53 @@
       "line": 23,
       "text": "| Bioclipse | https://github.com/bioclipse/bioclipse.core | 74232eb6e (2021-06-11) | Y | Y (`org.eclipse.equinox.p2.ui.sdk.scheduler/autoUpdateInit=true` — standard Eclipse p2 auto-update scheduler enabled by default) | Y (standard Eclipse p2 behavior: downloads and installs updated OSGi bundles once accepted) | **http, plaintext** — every default repository URL actually vendored in this repo is `http://`; no `<repositories>` block exists in `bioclipse.product`/`p2.inf` to show what the core auto-scheduler itself targets (that config appears to live in the separate, uncloned `bioclipse/bioclipse.update` repo) | p2 metadata (artifacts.xml/content.xml) would be fetched over the same plaintext channel if these are the operative repos | hash-in-p2-metadata only, served over plaintext HTTP — no separate signing found in this repo | server-supplied/unpinned, and transport itself unauthenticated | `plugins/net.bioclipse.ui/plugin_customization.ini:1` (`autoUpdateInit=true`), `plugins/net.bioclipse.ui.install/plugin.xml:18` (`value=\"http://pele.farmbio.uu.se/bioclipse/releases/2.6\"`), `:36` (`.../bioclipse/data`), `:61` (`.../bioclipse/dsmodels`), `plugins/net.bioclipse.ui/src/net/bioclipse/ui/prefs/UpdateSitesEditDialog.java:54` (help text: \"URL should start with http:// or file://\" — HTTPS isn't even the documented expectation) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Y4.md",
+      "source_line": 23,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/bioclipse/bioclipse.core"
+        },
+        {
+          "label": "commit/date",
+          "value": "74232eb6e (2021-06-11)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (`org.eclipse.equinox.p2.ui.sdk.scheduler/autoUpdateInit=true` — standard Eclipse p2 auto-update scheduler enabled by default)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (standard Eclipse p2 behavior: downloads and installs updated OSGi bundles once accepted)"
+        },
+        {
+          "label": "transport",
+          "value": "**http, plaintext** — every default repository URL actually vendored in this repo is `http://`; no `<repositories>` block exists in `bioclipse.product`/`p2.inf` to show what the core auto-scheduler itself targets (that config appears to live in the separate, uncloned `bioclipse/bioclipse.update` repo)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "p2 metadata (artifacts.xml/content.xml) would be fetched over the same plaintext channel if these are the operative repos"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-in-p2-metadata only, served over plaintext HTTP — no separate signing found in this repo"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned, and transport itself unauthenticated"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`plugins/net.bioclipse.ui/plugin_customization.ini:1` (`autoUpdateInit=true`), `plugins/net.bioclipse.ui.install/plugin.xml:18` (`value=\"http://pele.farmbio.uu.se/bioclipse/releases/2.6\"`), `:36` (`.../bioclipse/data`), `:61` (`.../bioclipse/dsmodels`), `plugins/net.bioclipse.ui/src/net/bioclipse/ui/prefs/UpdateSitesEditDialog.java:54` (help text: \"URL should start with http:// or file://\" — HTTPS isn't even the documented expectation)"
+        }
+      ]
+    }
   ]
 }

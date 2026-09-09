@@ -43,5 +43,53 @@
       "line": 15,
       "text": "| Wavebox (classic) | https://github.com/wavebox/waveboxapp.git | 7ab0ef6 / 2026-08-13 | Y | Y (12h interval, `UPDATE_CHECK_INTERVAL`) | Y (Squirrel `quitAndInstall`) | https (`waveboxio.com/squirrel/...`) | B (Squirrel.Mac/Squirrel.Windows OS code-sign check) | OS code signature (Squirrel refuses on `isSigningFailureException`) | **OS keystore** (macOS code signature verified by Squirrel.Mac; Windows via Squirrel/Update.exe) | classic/src/app/src/AppUpdater/AppUpdater.js:1,52-65,137-139 (`electron.autoUpdater`, `setFeedURL`/`checkForUpdates`, `quitAndInstall`), classic/src/shared/constants.js:129-131 (`UPDATE_FEED_DARWIN/WIN32 = https://waveboxio.com/squirrel/...`), classic/src/scenes/mailboxes/src/stores/updater/updaterStore.js:300-350 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AM7.md",
+      "source_line": 15,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/wavebox/waveboxapp.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "7ab0ef6 / 2026-08-13"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (12h interval, `UPDATE_CHECK_INTERVAL`)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y (Squirrel `quitAndInstall`)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`waveboxio.com/squirrel/...`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "B (Squirrel.Mac/Squirrel.Windows OS code-sign check)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "OS code signature (Squirrel refuses on `isSigningFailureException`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**OS keystore** (macOS code signature verified by Squirrel.Mac; Windows via Squirrel/Update.exe)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "classic/src/app/src/AppUpdater/AppUpdater.js:1,52-65,137-139 (`electron.autoUpdater`, `setFeedURL`/`checkForUpdates`, `quitAndInstall`), classic/src/shared/constants.js:129-131 (`UPDATE_FEED_DARWIN/WIN32 = https://waveboxio.com/squirrel/...`), classic/src/scenes/mailboxes/src/stores/updater/updaterStore.js:300-350"
+        }
+      ]
+    }
   ]
 }

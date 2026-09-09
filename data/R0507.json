@@ -41,5 +41,53 @@
       "line": 16,
       "text": "| October CMS | https://github.com/octobercms/october.git | b608633a7e8922487d91a8161499020121c3b3bf / 2026-08-21 | Y | N (admin/console triggered via System > Updates, or `php artisan october:update`) | Y | https, TLS enforced (Laravel `Http` facade / Guzzle, default cert verification, no override found) | N | none (no signature/checksum of theme/plugin/app zip contents beyond the HMAC-signed *request*, which authenticates the client to the server, not the response) | server-supplied/unpinned (`gateway.octobercms.com`/marketplace, config-overridable via `system.update_gateway`) | `modules/system/classes/updatemanager/HasGatewayAccess.php:41-95` (`requestServerData`/`requestServerFile`, HMAC-SHA512 signs the *outgoing* request only), `:132-176` (`makeHttpRequest`, Laravel Http, no verify=false); `modules/system/classes/updatemanager/ManagesThemes.php:103-127` (`downloadTheme`→`extractTheme` unzips with no hash check). Core app/plugins updated via Composer (`composer update`), also HTTPS/no code-signature. Marketplace add-ons are a content-as-code channel — same C-equivalent risk. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AF7.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/octobercms/october.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "b608633a7e8922487d91a8161499020121c3b3bf / 2026-08-21"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (admin/console triggered via System > Updates, or `php artisan october:update`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (Laravel `Http` facade / Guzzle, default cert verification, no override found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (no signature/checksum of theme/plugin/app zip contents beyond the HMAC-signed *request*, which authenticates the client to the server, not the response)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (`gateway.octobercms.com`/marketplace, config-overridable via `system.update_gateway`)"
+        },
+        {
+          "label": "evidence",
+          "value": "`modules/system/classes/updatemanager/HasGatewayAccess.php:41-95` (`requestServerData`/`requestServerFile`, HMAC-SHA512 signs the *outgoing* request only), `:132-176` (`makeHttpRequest`, Laravel Http, no verify=false); `modules/system/classes/updatemanager/ManagesThemes.php:103-127` (`downloadTheme`→`extractTheme` unzips with no hash check). Core app/plugins updated via Composer (`composer update`), also HTTPS/no code-signature. Marketplace add-ons are a content-as-code channel — same C-equivalent risk."
+        }
+      ]
+    }
   ]
 }

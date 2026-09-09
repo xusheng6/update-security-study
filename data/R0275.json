@@ -42,5 +42,53 @@
       "line": 10,
       "text": "| OpenMPT | https://github.com/OpenMPT/openmpt.git | 0eafb12 / 2026-08-19 | Y | Y (auto-check by default, \"suitable moment\" heuristic) | **Y** — downloads installer/archive and launches it via `ShellExecute` (or generates & runs a PowerShell/VBS updater script) | **https**, cert validation enforced (WinInet; only HTTP downgrade path is gated behind `IsBefore(WinVista)` legacy XP check) | Y — JWS (RSASSA-PSS) signature over the update-info JSON | signature (RSA-PSS JWS) + secondary checksum; signature check is on by default (`UpdateSkipSignatureVerificationUNSECURE` defaults `false`) | **server-supplied** — signing public keys are fetched at check-time via HTTPS from configurable \"root anchor\" URLs (`https://update.openmpt.de/update/`, `https://demo-scene.de/openmpt/update/` → `signingkeys.jwkset.json`); **not pinned in the binary** | `mptrack/UpdateCheck.h:61-62,438-452`; `mptrack/UpdateCheck.cpp:1153-1215` (fetch+verify), `:1356,1404,1434` (`ShellExecute` launch of downloaded installer/script) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U1.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/OpenMPT/openmpt.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "0eafb12 / 2026-08-19"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (auto-check by default, \"suitable moment\" heuristic)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y** — downloads installer/archive and launches it via `ShellExecute` (or generates & runs a PowerShell/VBS updater script)"
+        },
+        {
+          "label": "transport",
+          "value": "**https**, cert validation enforced (WinInet; only HTTP downgrade path is gated behind `IsBefore(WinVista)` legacy XP check)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y — JWS (RSASSA-PSS) signature over the update-info JSON"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (RSA-PSS JWS) + secondary checksum; signature check is on by default (`UpdateSkipSignatureVerificationUNSECURE` defaults `false`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**server-supplied** — signing public keys are fetched at check-time via HTTPS from configurable \"root anchor\" URLs (`https://update.openmpt.de/update/`, `https://demo-scene.de/openmpt/update/` → `signingkeys.jwkset.json`); **not pinned in the binary**"
+        },
+        {
+          "label": "evidence",
+          "value": "`mptrack/UpdateCheck.h:61-62,438-452`; `mptrack/UpdateCheck.cpp:1153-1215` (fetch+verify), `:1356,1404,1434` (`ShellExecute` launch of downloaded installer/script)"
+        }
+      ]
+    }
   ]
 }

@@ -44,5 +44,53 @@
       "line": 23,
       "text": "| Psi+ | https://github.com/psi-plus/psi-plus-snapshots | d58b29d / 2026-08-20 | Y (mac only, opt-in) | Y if enabled (`auto-update.check-on-startup`) | Y (mac only, via Sparkle, when `USE_SPARKLE=ON`) | https (feed `psi-im.org/appcast/psi-mac.xml`, system TLS, no bypass found) | not configured in tree | none found in tree — `SUPublicEDKey`/`SUPublicDSAKey` absent from `mac/Info.plist.in`, so Sparkle's mandatory signature pinning isn't wired up in this source tree | none pinned in repo | src/psicon.cpp:464-468; src/AutoUpdater/SparkleAutoUpdater.mm:1-31; src/applicationinfo.cpp:49; mac/Info.plist.in; CMakeLists.txt:105 (`USE_SPARKLE` OFF by default) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U8.md",
+      "source_line": 23,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/psi-plus/psi-plus-snapshots"
+        },
+        {
+          "label": "commit/date",
+          "value": "d58b29d / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (mac only, opt-in)"
+        },
+        {
+          "label": "auto",
+          "value": "Y if enabled (`auto-update.check-on-startup`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (mac only, via Sparkle, when `USE_SPARKLE=ON`)"
+        },
+        {
+          "label": "transport",
+          "value": "https (feed `psi-im.org/appcast/psi-mac.xml`, system TLS, no bypass found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "not configured in tree"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none found in tree — `SUPublicEDKey`/`SUPublicDSAKey` absent from `mac/Info.plist.in`, so Sparkle's mandatory signature pinning isn't wired up in this source tree"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none pinned in repo"
+        },
+        {
+          "label": "evidence",
+          "value": "src/psicon.cpp:464-468; src/AutoUpdater/SparkleAutoUpdater.mm:1-31; src/applicationinfo.cpp:49; mac/Info.plist.in; CMakeLists.txt:105 (`USE_SPARKLE` OFF by default)"
+        }
+      ]
+    }
   ]
 }

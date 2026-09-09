@@ -41,5 +41,53 @@
       "line": 17,
       "text": "| GitButler | https://github.com/gitbutlerapp/gitbutler.git | 505372c485 / 2026-08-20 | Y | Y (auto-checks on startup) | Y | https (`app.gitbutler.com`) | Y | **minisign signature** verified by Tauri updater plugin | pinned-in-binary (base64 minisign pubkey embedded in `tauri.conf.json`, consistent across release/nightly configs) | crates/gitbutler-tauri/tauri.conf.json:44-50 (`plugins.updater.endpoints`+`pubkey`), same in tauri.conf.release.json:19-24 and tauri.conf.nightly.json:19-24; apps/desktop/src/lib/updater/updater.ts:105 (auto `checkUpdate()`), :142-169 (`downloadAndInstall`→`update.install()`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W4.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/gitbutlerapp/gitbutler.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "505372c485 / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (auto-checks on startup)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`app.gitbutler.com`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**minisign signature** verified by Tauri updater plugin"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (base64 minisign pubkey embedded in `tauri.conf.json`, consistent across release/nightly configs)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "crates/gitbutler-tauri/tauri.conf.json:44-50 (`plugins.updater.endpoints`+`pubkey`), same in tauri.conf.release.json:19-24 and tauri.conf.nightly.json:19-24; apps/desktop/src/lib/updater/updater.ts:105 (auto `checkUpdate()`), :142-169 (`downloadAndInstall`→`update.install()`)"
+        }
+      ]
+    }
   ]
 }

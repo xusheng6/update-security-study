@@ -42,5 +42,53 @@
       "line": 16,
       "text": "| n | https://github.com/tj/n.git | f52d217 / 2025-05-21 | Y | N | Y | https (`nodejs.org/dist`), TLS enforced by default; `--insecure` CLI flag exists to opt out | N | **none** | N/A | `n/bin/n:75` `N_NODE_MIRROR=https://nodejs.org/dist`; zero occurrences of sha/checksum/gpg/shasum in `n/bin/n` (`grep -c` = 0) — downloaded tarball is extracted directly. `n/bin/n:187-188,1700` `--insecure`→`curl --insecure`/`wget --no-check-certificate` (opt-in, disabled by default). |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AK4.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/tj/n.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "f52d217 / 2025-05-21"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`nodejs.org/dist`), TLS enforced by default; `--insecure` CLI flag exists to opt out"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`n/bin/n:75` `N_NODE_MIRROR=https://nodejs.org/dist`; zero occurrences of sha/checksum/gpg/shasum in `n/bin/n` (`grep -c` = 0) — downloaded tarball is extracted directly. `n/bin/n:187-188,1700` `--insecure`→`curl --insecure`/`wget --no-check-certificate` (opt-in, disabled by default)."
+        }
+      ]
+    }
   ]
 }

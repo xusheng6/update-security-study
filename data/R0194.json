@@ -46,5 +46,99 @@
       "line": 11,
       "text": "| Cerebro (plugin channel) | github.com/KELiON/cerebro | npm-style plugin loader, JS executed in-process | Y (separate from app updater) | chk auto every 12h at startup; dl+inst auto, no user confirmation | Y — downloaded code is extracted straight into `node_modules` and loaded/executed inside the Electron main process | **http** for the registry metadata call; **https** (`https.get`) for the tarball itself, but the tarball URL is taken unvalidated from the http-fetched JSON | N (no signature) | **none** — no hash or signature check anywhere in install/update path | N/A | app/lib/plugins/npm.js:14 (`const API_BASE = 'http://registry.npmjs.org/'`); npm.js:88 (`fetch(`${API_BASE}${name}`)` over plain HTTP); npm.js:37 (`https.get(tarPath, ...)` — URL for this https call is taken from the unauthenticated http response, so an on-path attacker can redirect it); npm.js:28-53 (extract tar directly to plugin dir, no checksum/signature check at any point); app/plugins/core/plugins/initializeAsync.js:26-43 (`checkForUpdates` runs at startup and every 12h and calls `client.update()` automatically for any plugin with `isUpdateAvailable`, no prompt) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-L2.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/KELiON/cerebro"
+        },
+        {
+          "label": "framework",
+          "value": "Electron (Node/JS), electron-updater"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "chk/dl auto (10s after launch, then hourly); inst auto on quit"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub Releases via electron-updater generic \"github\" provider)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (plain `latest*.yml` served over HTTPS, no separate signature on the manifest itself)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (SHA512 in `latest.yml`/`latest-mac.yml`, checked by electron-updater); macOS additionally subject to OS Gatekeeper/code-signing on the .dmg"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A (hash embedded in HTTPS-fetched YAML; no independent signing key)"
+        },
+        {
+          "label": "evidence",
+          "value": "app/initAutoUpdater.js:1-26 (auto chk 10s+1h, no autoDownload override so electron-updater default `autoDownload:true` applies); app/main/main.js:43-45 (\"will be automatically installed on quit\"); app/main/createWindow/checkForUpdates.js:2,28-56 (manual \"Check for Updates\" menu path, opens external browser as fallback); electron-builder.json:93-97 (`\"publish\":{\"provider\":\"github\"}`)"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-L2.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/KELiON/cerebro"
+        },
+        {
+          "label": "framework",
+          "value": "npm-style plugin loader, JS executed in-process"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (separate from app updater)"
+        },
+        {
+          "label": "auto",
+          "value": "chk auto every 12h at startup; dl+inst auto, no user confirmation"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — downloaded code is extracted straight into `node_modules` and loaded/executed inside the Electron main process"
+        },
+        {
+          "label": "transport",
+          "value": "**http** for the registry metadata call; **https** (`https.get`) for the tarball itself, but the tarball URL is taken unvalidated from the http-fetched JSON"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no signature)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — no hash or signature check anywhere in install/update path"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence",
+          "value": "app/lib/plugins/npm.js:14 (`const API_BASE = 'http://registry.npmjs.org/'`); npm.js:88 (`fetch(`${API_BASE}${name}`)` over plain HTTP); npm.js:37 (`https.get(tarPath, ...)` — URL for this https call is taken from the unauthenticated http response, so an on-path attacker can redirect it); npm.js:28-53 (extract tar directly to plugin dir, no checksum/signature check at any point); app/plugins/core/plugins/initializeAsync.js:26-43 (`checkForUpdates` runs at startup and every 12h and calls `client.update()` automatically for any plugin with `isUpdateAvailable`, no prompt)"
+        }
+      ]
+    }
   ]
 }

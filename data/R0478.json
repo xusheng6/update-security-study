@@ -42,5 +42,53 @@
       "line": 21,
       "text": "| nala | https://gitlab.com/volian/nala.git | 6d84cb1dda4f8b19fb7aa938f32ff45d55232b8 / 2026-08-09 | N | N | Y | https (Acquire), TLS enforced by rust-apt/libapt-pkg | Y (APT Release file GPG-signed) | hash (SHA256/SHA512 from signed Release metadata; MD5/SHA1 explicitly rejected) + GPG on Release; unauthenticated fetch blocked unless opted in | OS keystore `/etc/apt/trusted.gpg.d` | `src/hashsum.rs:1-131`; `src/download/downloader.rs:71-93` `untrusted_error()` blocks install unless `config.allow_unauthenticated()`; `src/config/configuration.rs:254-257` gated by explicit `--allow-unauthenticated` / `-o APT::Get::AllowUnauthenticated=true`; Cargo.toml binds `rust-apt` directly (no apt-get subprocess) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AE2.md",
+      "source_line": 21,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://gitlab.com/volian/nala.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "6d84cb1dda4f8b19fb7aa938f32ff45d55232b8 / 2026-08-09"
+        },
+        {
+          "label": "has_updater",
+          "value": "N"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (Acquire), TLS enforced by rust-apt/libapt-pkg"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (APT Release file GPG-signed)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (SHA256/SHA512 from signed Release metadata; MD5/SHA1 explicitly rejected) + GPG on Release; unauthenticated fetch blocked unless opted in"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore `/etc/apt/trusted.gpg.d`"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/hashsum.rs:1-131`; `src/download/downloader.rs:71-93` `untrusted_error()` blocks install unless `config.allow_unauthenticated()`; `src/config/configuration.rs:254-257` gated by explicit `--allow-unauthenticated` / `-o APT::Get::AllowUnauthenticated=true`; Cargo.toml binds `rust-apt` directly (no apt-get subprocess)"
+        }
+      ]
+    }
   ]
 }

@@ -43,5 +43,53 @@
       "line": 12,
       "text": "| AuthPass | https://github.com/authpass/authpass.git | def4e7c 2026-08-21 | Y (Windows only) | Y | Y | https, TLS enforced (no disabling found) | N (appcast.xml over HTTPS, not separately signed) | none configured — WinSparkle exposes `win_sparkle_set_dsa_pub_pem` but AuthPass never calls it | server-supplied/unpinned (no key set) | authpass/lib/utils/winsparkle_init.dart:17-20 (appcast URL set, no dsa_pub_pem call); clones-V3/winsparkle_flutter_dep/lib/src/typedefs.dart:72-80 (API exists, unused) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-V3.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/authpass/authpass.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "def4e7c 2026-08-21"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (Windows only)"
+        },
+        {
+          "label": "auto",
+          "value": "Y"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (no disabling found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (appcast.xml over HTTPS, not separately signed)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none configured — WinSparkle exposes `win_sparkle_set_dsa_pub_pem` but AuthPass never calls it"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (no key set)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "authpass/lib/utils/winsparkle_init.dart:17-20 (appcast URL set, no dsa_pub_pem call); clones-V3/winsparkle_flutter_dep/lib/src/typedefs.dart:72-80 (API exists, unused)"
+        }
+      ]
+    }
   ]
 }

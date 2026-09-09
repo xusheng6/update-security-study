@@ -41,5 +41,53 @@
       "line": 9,
       "text": "| Gear Lever | github.com/mijorus/gearlever | a2917f2a / 2026-07-22 | N (self) / Y (manages AppImage updates) | Y (background check via `--fetch-updates` at login/notify-only); download/install always user-triggered | Y (AppImage update pipeline) | HTTPS by default (`requests.get`, no `verify=False`/insecure flags found for API calls) but `http://` and anonymous `ftp://` explicitly accepted as configurable update sources | N/A | Weak/inconsistent: size-only sanity check on download (`src/models/StaticFileUpdater.py:92-117`); optional sha256/sha1 compare only used to decide \"update available\", never to gate install | server-supplied (GitHub/GitLab/Codeberg/Forgejo API JSON or `.zsync` control file over same channel); no GPG, no pinned key | `src/models/StaticFileUpdater.py:92,102-117`; `src/providers/AppImageProvider.py:255-256` (`can_install_file` = MIME-type check only) and `~68-71` (`set_trusted()` → `os.chmod(...,0o755)` with zero crypto check before exec); `src/models/FTPUpdater.py:70` (unauthenticated/unencrypted FTP as first-class source) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-X8.md",
+      "source_line": 9,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/mijorus/gearlever"
+        },
+        {
+          "label": "commit/date",
+          "value": "a2917f2a / 2026-07-22"
+        },
+        {
+          "label": "has_updater",
+          "value": "N (self) / Y (manages AppImage updates)"
+        },
+        {
+          "label": "auto",
+          "value": "Y (background check via `--fetch-updates` at login/notify-only); download/install always user-triggered"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (AppImage update pipeline)"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS by default (`requests.get`, no `verify=False`/insecure flags found for API calls) but `http://` and anonymous `ftp://` explicitly accepted as configurable update sources"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A"
+        },
+        {
+          "label": "payload_verification",
+          "value": "Weak/inconsistent: size-only sanity check on download (`src/models/StaticFileUpdater.py:92-117`); optional sha256/sha1 compare only used to decide \"update available\", never to gate install"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied (GitHub/GitLab/Codeberg/Forgejo API JSON or `.zsync` control file over same channel); no GPG, no pinned key"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/models/StaticFileUpdater.py:92,102-117`; `src/providers/AppImageProvider.py:255-256` (`can_install_file` = MIME-type check only) and `~68-71` (`set_trusted()` → `os.chmod(...,0o755)` with zero crypto check before exec); `src/models/FTPUpdater.py:70` (unauthenticated/unencrypted FTP as first-class source)"
+        }
+      ]
+    }
   ]
 }

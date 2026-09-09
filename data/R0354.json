@@ -42,5 +42,53 @@
       "line": 19,
       "text": "| BreakTimer | https://github.com/tom-james-watson/breaktimer-app.git | 6678a08 / 2026-08-04 | Y | Y (mac/Linux); notify-only (Windows) | Y (mac/Linux) | https, TLS enforced (electron-updater default) | Y (GitHub Releases provider + latest.yml) | hash (sha512 in latest-*.yml) on Win/Linux; **mac additionally OS-codesigned + notarized** | server-supplied (GitHub Releases, unpinned) for hash/yml; OS keystore for mac/win code signing | `app/main/index.ts:4`: `import { autoUpdater } from \"electron-updater\"`; `:44-46`: `shouldAutoInstall()` returns true for mac/linux; `:59`: `autoUpdater.checkForUpdatesAndNotify()` (auto download+install) on those platforms; `:63-82`: Windows path is notify-only, `shell.openExternal(getDownloadUrl())`; `package.json` `build.mac`: `notarize:true, hardenedRuntime:true`; `build.publish`: `{provider:\"github\", owner:\"tom-james-watson\", repo:\"breaktimer-app\"}`. Note: electron-updater's Linux/generic verification is sha512-from-yml served alongside the same GitHub release, not an independently pinned signing key — weaker than the mac code-signing path. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-X5.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/tom-james-watson/breaktimer-app.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "6678a08 / 2026-08-04"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (mac/Linux); notify-only (Windows)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (mac/Linux)"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (electron-updater default)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (GitHub Releases provider + latest.yml)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (sha512 in latest-*.yml) on Win/Linux; **mac additionally OS-codesigned + notarized**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied (GitHub Releases, unpinned) for hash/yml; OS keystore for mac/win code signing"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`app/main/index.ts:4`: `import { autoUpdater } from \"electron-updater\"`; `:44-46`: `shouldAutoInstall()` returns true for mac/linux; `:59`: `autoUpdater.checkForUpdatesAndNotify()` (auto download+install) on those platforms; `:63-82`: Windows path is notify-only, `shell.openExternal(getDownloadUrl())`; `package.json` `build.mac`: `notarize:true, hardenedRuntime:true`; `build.publish`: `{provider:\"github\", owner:\"tom-james-watson\", repo:\"breaktimer-app\"}`. Note: electron-updater's Linux/generic verification is sha512-from-yml served alongside the same GitHub release, not an independently pinned signing key — weaker than the mac code-signing path."
+        }
+      ]
+    }
   ]
 }

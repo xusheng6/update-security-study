@@ -41,5 +41,53 @@
       "line": 21,
       "text": "| DataWarrior | https://github.com/thsa/datawarrior | 772596aa7 (2026-08-20) | Y | Y-by-default-mode-\"Ask\" (auto-checks + prompts every startup, `getPostInstallInfoAndHandleUpdates`); a user-selectable \"Automatic\" preference (`PREFERENCES_UPDATE_MODE_AUTO`) skips the prompt and downloads+installs-on-next-launch unattended | **Y** — `downloadJarFile()` fetches a full replacement `datawarrior_vXX.XX.XX.jar`; `DataWarriorLauncher` auto-loads and executes the newest one on **every subsequent launch**. The identical mechanism is reused for a \"trusted plugins\" channel (content-as-code side channel, same flaw) | https (`URL1=\"https://dwversion.openmolecules.org\"`, `URL2=\"https://dwversion.datawarrior.org\"`, `DEFAULT_UPDATE_URL=\"https://openmolecules.org/datawarrior/update\"`); no TLS-bypass code found; the per-update `sourceURL` is taken verbatim from the HTTPS-fetched server response with no re-validation | N (plain Java `Properties` key/value response, no signature) | **hash-from-same-endpoint only** — MD5 (`PROPERTY_AUTO_UPDATE_MD5SUM`) is supplied by the very same HTTPS response that supplies the download URL; no independent/pinned signature | server-supplied/unpinned (the MD5 comes from the same origin being trusted — endpoint compromise defeats it) | `src/com/actelion/research/datawarrior/help/DEUpdateHandler.java:55-58` (server URLs), `:123-170` (background thread runs every launch), `:264-329` (`handleUpdate`, Ask vs Automatic mode), `:331-446` (`downloadJarFile`, MD5-only check at `:406-416`), `:448-506` (`handleTrustesPlugins` — same MD5-from-server pattern for plugin jars), `src/org/openmolecules/datawarrior/launcher/DataWarriorLauncher.java:43-54` (picks newest downloaded jar), `:85-94` (`URLClassLoader` loads it and invokes `main()` on every launch, no further check) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Y4.md",
+      "source_line": 21,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/thsa/datawarrior"
+        },
+        {
+          "label": "commit/date",
+          "value": "772596aa7 (2026-08-20)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y-by-default-mode-\"Ask\" (auto-checks + prompts every startup, `getPostInstallInfoAndHandleUpdates`); a user-selectable \"Automatic\" preference (`PREFERENCES_UPDATE_MODE_AUTO`) skips the prompt and downloads+installs-on-next-launch unattended"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y** — `downloadJarFile()` fetches a full replacement `datawarrior_vXX.XX.XX.jar`; `DataWarriorLauncher` auto-loads and executes the newest one on **every subsequent launch**. The identical mechanism is reused for a \"trusted plugins\" channel (content-as-code side channel, same flaw)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`URL1=\"https://dwversion.openmolecules.org\"`, `URL2=\"https://dwversion.datawarrior.org\"`, `DEFAULT_UPDATE_URL=\"https://openmolecules.org/datawarrior/update\"`); no TLS-bypass code found; the per-update `sourceURL` is taken verbatim from the HTTPS-fetched server response with no re-validation"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (plain Java `Properties` key/value response, no signature)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**hash-from-same-endpoint only** — MD5 (`PROPERTY_AUTO_UPDATE_MD5SUM`) is supplied by the very same HTTPS response that supplies the download URL; no independent/pinned signature"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (the MD5 comes from the same origin being trusted — endpoint compromise defeats it)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/com/actelion/research/datawarrior/help/DEUpdateHandler.java:55-58` (server URLs), `:123-170` (background thread runs every launch), `:264-329` (`handleUpdate`, Ask vs Automatic mode), `:331-446` (`downloadJarFile`, MD5-only check at `:406-416`), `:448-506` (`handleTrustesPlugins` — same MD5-from-server pattern for plugin jars), `src/org/openmolecules/datawarrior/launcher/DataWarriorLauncher.java:43-54` (picks newest downloaded jar), `:85-94` (`URLClassLoader` loads it and invokes `main()` on every launch, no further check)"
+        }
+      ]
+    }
   ]
 }

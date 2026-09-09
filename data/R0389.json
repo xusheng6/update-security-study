@@ -41,5 +41,53 @@
       "line": 28,
       "text": "| PyChess | https://github.com/pychess/pychess | d4d1090 / 2026-08-20 | Y (app: notify-only; external tools: real downloader) | N (manual opt-in checkboxes) | **Y** (external `scoutfish`/`chess_db` binaries) | https, but **TLS validation globally DISABLED on MSYS2 (Windows) builds** | N | **none** — no hash/signature on downloaded binaries | none | `lib/pychess/System/__init__.py:20` `ssl._create_default_https_context = ssl._create_unverified_context` (gated on `if MSYS2:`, i.e. the Windows build path); `lib/pychess/widgets/ExternalsDialog.py:107-116` (downloads `scoutfish`/`chess_db` from GitHub releases, `os.chmod(dest, stat.S_IEXEC\\|...)`, no integrity check); app-version notify-only in `lib/pychess/Utils/checkversion.py` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Y6.md",
+      "source_line": 28,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/pychess/pychess"
+        },
+        {
+          "label": "commit/date",
+          "value": "d4d1090 / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (app: notify-only; external tools: real downloader)"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual opt-in checkboxes)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y** (external `scoutfish`/`chess_db` binaries)"
+        },
+        {
+          "label": "transport",
+          "value": "https, but **TLS validation globally DISABLED on MSYS2 (Windows) builds**"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — no hash/signature on downloaded binaries"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none"
+        },
+        {
+          "label": "evidence",
+          "value": "`lib/pychess/System/__init__.py:20` `ssl._create_default_https_context = ssl._create_unverified_context` (gated on `if MSYS2:`, i.e. the Windows build path); `lib/pychess/widgets/ExternalsDialog.py:107-116` (downloads `scoutfish`/`chess_db` from GitHub releases, `os.chmod(dest, stat.S_IEXEC\\|...)`, no integrity check); app-version notify-only in `lib/pychess/Utils/checkversion.py`"
+        }
+      ]
+    }
   ]
 }

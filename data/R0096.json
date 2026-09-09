@@ -58,5 +58,191 @@
       "line": 20,
       "text": "| Transmission Remote CLI | https://github.com/fagga/transmission-remote-cli | 1e412a2 / 2017-01-15 | N | N | N | n/a | n/a | n/a | n/a | Python/curses RPC client for Transmission daemon; no updater code; last commit 2017, effectively unmaintained. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AN3.md",
+      "source_line": 9,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/transmission-remote-gtk/transmission-remote-gtk.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "9b1c650c 2026-07-26"
+        },
+        {
+          "label": "has_updater",
+          "value": "N"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N"
+        },
+        {
+          "label": "transport",
+          "value": "n/a"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "n/a"
+        },
+        {
+          "label": "payload_verification",
+          "value": "n/a"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "negative census: no sparkle/appcast/self_update/api.github.com hits anywhere in repo"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-AN3.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/mveinot/transmission-control.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "015c3615 2026-08-13"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (check only)"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N (notify-only, opens browser)"
+        },
+        {
+          "label": "transport",
+          "value": "https"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "n/a"
+        },
+        {
+          "label": "payload_verification",
+          "value": "n/a"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`updatechecker.cpp:42` queries `https://api.github.com/repos/%1/%2/releases/latest`; `updatecheckcontroller.cpp:61,92` `QDesktopServices::openUrl(releaseUrl)` — never downloads/executes an update itself"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-V2.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/transmission-remote-gui/transgui"
+        },
+        {
+          "label": "commit/date",
+          "value": "e47d82b / 2026-08-20"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (opt-in `cbCheckNewVersion`, default off; interval configurable)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "N (notify-only)"
+        },
+        {
+          "label": "transport",
+          "value": "https (raw.githubusercontent.com)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`about.pas:203` `FHttp.HTTPMethod('GET','https://raw.githubusercontent.com/transmission-remote-gui/transgui/master/VERSION.txt')` to get latest version string; `about.pas:161-167` on newer version just shows a dialog then `OpenURL('https://github.com/transmission-remote-gui/transgui/releases')` — opens system browser, never downloads/runs a binary itself. (Also has `DownloadGeoIpDatabase`/`acUpdateBlocklistExecute` — data-file downloads, not code, stays N.)"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-V2.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/fagga/transmission-remote-cli"
+        },
+        {
+          "label": "commit/date",
+          "value": "1e412a2 / 2017-01-15"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "N"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "N"
+        },
+        {
+          "label": "transport",
+          "value": "n/a"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "n/a"
+        },
+        {
+          "label": "payload_verification",
+          "value": "n/a"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "Python/curses RPC client for Transmission daemon; no updater code; last commit 2017, effectively unmaintained."
+        }
+      ]
+    }
   ]
 }

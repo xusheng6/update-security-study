@@ -48,5 +48,99 @@
       "line": 22,
       "text": "| gopass-ui | https://github.com/codecentric/gopass-ui.git | 6f4bcd3 2022-12-29 | Y (notify-only) | Y (hourly check) | N — only renders a link to the GitHub releases page | https (GitHub API) | N/A | N/A | N/A | src/renderer/explorer-app/components/LastVersionInfo.tsx:14-25,39-40 (`GithubService.getTagsOfRepository`, then `<ExternalLink url='.../releases/latest'>`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-H6.md",
+      "source_line": 7,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/gopasspw/gopass"
+        },
+        {
+          "label": "framework",
+          "value": "Go CLI"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "manual only: no automatic download/install; a daily terminal reminder (\"You haven't checked for updates...\") prompts the user to run `gopass update`, which then does chk+dl+inst in one interactive flow (with an `IsUpdateable()` guard that refuses to run if the binary is externally managed, e.g. by a package manager)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (only when user explicitly runs `gopass update`)"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS: GitHub API `https://api.github.com/repos/%s/%s/releases/latest` for release metadata + GitHub release asset URLs for `SHA256SUMS`, `SHA256SUMS.sig`, and the platform tarball/zip; TLS validation ENFORCED and hardened — custom `http.Client` sets `tls.Config{MinVersion: tls.VersionTLS13}` (no `InsecureSkipVerify`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y — `SHA256SUMS` (the manifest of per-file hashes) is itself GPG-signed via a separate detached `SHA256SUMS.sig`, verified with `openpgp.CheckArmoredDetachedSignature` before any hash is trusted"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (OpenPGP detached signature over SHA256SUMS) + hash-from-manifest (SHA-256 of the downloaded binary tarball checked against the GPG-verified SHA256SUMS)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "embedded in source: hardcoded PGP public key(s) in `pubkeys` var (2025 release-signing key, \"GitHub Actions Only\")"
+        },
+        {
+          "label": "evidence",
+          "value": "internal/updater/update.go:1-4 (package doc: \"verify the GPG signature of the release\"), :25-50 (`Update()` calls `IsUpdateable`, `FetchLatestRelease`), :54-77 (downloads `SHA256SUMS` then `SHA256SUMS.sig`, calls `gpgVerify`, aborts on failure/`!ok`), :94-104 (SHA-256 of downloaded tarball compared against GPG-verified `SHA256SUMS` entry, `bytes.Equal` mismatch → hard error), internal/updater/verify.go:18-64 (hardcoded PGP public key block, comment \"To update see README.md\"), :84-118 (`gpgVerify`/`gpgVerifyAt` load keyring, `openpgp.CheckArmoredDetachedSignature`), internal/updater/download.go:20-30 (`httpClient` with `tls.Config{MinVersion: tls.VersionTLS13}`, no InsecureSkipVerify), internal/updater/github.go:20 (`BaseURL = \"https://api.github.com/repos/%s/%s/releases/latest\"`), internal/action/reminder.go:41-45 (daily notify-only reminder, never auto-runs update)"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-V3.md",
+      "source_line": 22,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/codecentric/gopass-ui.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "6f4bcd3 2022-12-29"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (notify-only)"
+        },
+        {
+          "label": "auto",
+          "value": "Y (hourly check)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N — only renders a link to the GitHub releases page"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub API)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A"
+        },
+        {
+          "label": "payload_verification",
+          "value": "N/A"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/renderer/explorer-app/components/LastVersionInfo.tsx:14-25,39-40 (`GithubService.getTagsOfRepository`, then `<ExternalLink url='.../releases/latest'>`)"
+        }
+      ]
+    }
   ]
 }

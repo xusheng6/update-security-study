@@ -54,5 +54,145 @@
       "line": 21,
       "text": "| sing-box — **external UI (Yacd-meta dashboard) downloader**, content-as-code side channel (C-equivalent) | (same repo) | | Y | Y (auto on first run if dir empty) or via clash-API `POST /upgrade/ui` | Y (downloads and serves a JS/HTML dashboard bundle) | https, TLS validated (`RootCAs: adapter.RootPoolFromContext`, no InsecureSkipVerify) | N | none | server-supplied / unpinned (no hash/signature check of the zip at all) | `experimental/clashapi/server_resources.go:22-83` (`downloadExternalUI`, default `https://github.com/MetaCubeX/Yacd-meta/archive/gh-pages.zip`, straight `zip.OpenReader` extraction with zero verification), `experimental/clashapi/api_meta_upgrade.go:1-32` (`/upgrade/ui` endpoint) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W6.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/SagerNet/sing-box"
+        },
+        {
+          "label": "commit/date",
+          "value": "2b12b99 / 2026-08-19"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (triggered via local gRPC/UI action; installer path handed to daemon, download step itself not in this repo)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "n/a for this repo (installer already on disk when handed to daemon)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (Authenticode)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (Authenticode via `WinVerifyTrust`) + **signer-continuity pinning**: extracted signer cert bytes must equal the signer of the *currently running* daemon"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore (Authenticode/WinTrust chain) **plus** self-referential pin (`daemonSigner` read from the running trusted binary at startup, not literally hardcoded)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`experimental/boxdd/update_windows.go:29-90` (`installUpdate`: NSIS structural check + Authenticode signer compared via `bytes.Equal(installerSigner, platform.daemonSigner)`), `experimental/boxdd/authenticode_windows.go:28-84` (`authenticodeSigner` uses real `WinVerifyTrustEx`), `experimental/boxdd/peer_windows.go:58-64` (`daemonSigner` derived from own running executable's Authenticode cert)"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-W6.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "(same repo)"
+        },
+        {
+          "label": "commit/date",
+          "value": ""
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (interval-based)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N (loaded as routing rules, not executed code)"
+        },
+        {
+          "label": "transport",
+          "value": "https by default via generic `httpClientManager` (standard Go TLS, no InsecureSkipVerify found for this path; `InsecureSkipVerify` hits elsewhere in repo are for user-configured outbound proxy TLS, e.g. REALITY, unrelated)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (routing rule data)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`route/rule/rule_set_updater.go:1-80` (loop updater), `route/rule/rule_set_remote.go:44-98,291-312` (http.Client via resolveTransport)"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-W6.md",
+      "source_line": 21,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "(same repo)"
+        },
+        {
+          "label": "commit/date",
+          "value": ""
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (auto on first run if dir empty) or via clash-API `POST /upgrade/ui`"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (downloads and serves a JS/HTML dashboard bundle)"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS validated (`RootCAs: adapter.RootPoolFromContext`, no InsecureSkipVerify)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied / unpinned (no hash/signature check of the zip at all)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`experimental/clashapi/server_resources.go:22-83` (`downloadExternalUI`, default `https://github.com/MetaCubeX/Yacd-meta/archive/gh-pages.zip`, straight `zip.OpenReader` extraction with zero verification), `experimental/clashapi/api_meta_upgrade.go:1-32` (`/upgrade/ui` endpoint)"
+        }
+      ]
+    }
   ]
 }

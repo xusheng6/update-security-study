@@ -41,5 +41,53 @@
       "line": 7,
       "text": "| Itsycal | https://github.com/sfsam/Itsycal | Sparkle 2 (vendored framework) | Y | Y (checks automatically; install requires user confirmation) | Y | https | TLS-only (appcast XML itself carries no signature; only the enclosure is signed) | signature[EdDSA] | pinned-in-binary (Sparkle-EdDSA) | `Itsycal/Info.plist:56-69` — `SUAllowsAutomaticUpdates=false`, `SUEnableAutomaticChecks=true`, `SUFeedURL=https://s3.amazonaws.com/itsycal/itsycal.xml`, `SUPublicEDKey=TxKIjUS10OYKgZaAQlRvDjFNEc28hG82wtRWlcNUYSc=`, `SUScheduledCheckInterval=345600`. Sparkle.framework vendored at `Itsycal/_frameworks/Sparkle.framework`. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-N2.md",
+      "source_line": 7,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/sfsam/Itsycal"
+        },
+        {
+          "label": "framework",
+          "value": "Sparkle 2 (vendored framework)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (checks automatically; install requires user confirmation)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "TLS-only (appcast XML itself carries no signature; only the enclosure is signed)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature[EdDSA]"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (Sparkle-EdDSA)"
+        },
+        {
+          "label": "evidence",
+          "value": "`Itsycal/Info.plist:56-69` — `SUAllowsAutomaticUpdates=false`, `SUEnableAutomaticChecks=true`, `SUFeedURL=https://s3.amazonaws.com/itsycal/itsycal.xml`, `SUPublicEDKey=TxKIjUS10OYKgZaAQlRvDjFNEc28hG82wtRWlcNUYSc=`, `SUScheduledCheckInterval=345600`. Sparkle.framework vendored at `Itsycal/_frameworks/Sparkle.framework`."
+        }
+      ]
+    }
   ]
 }

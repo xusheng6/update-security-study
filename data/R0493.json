@@ -41,5 +41,53 @@
       "line": 17,
       "text": "| Readest | https://github.com/readest/readest.git | 2796988 / 2026-08-23 | Y | Y (auto-check; stable-installer install requires user confirm) | Y | https, TLS enforced (Tauri http plugin, no disabled-validation found) | Y (minisign `.sig` per artifact, referenced from `latest.json`/`nightly/latest.json`) | **Split by channel/platform.** Stable macOS + Windows-NSIS + Linux(non-AppImage): verified via `check()`/`downloadAndInstall()` from `@tauri-apps/plugin-updater`, minisign signature checked against the pinned pubkey, fails closed. Nightly channel: verified for **all** platforms (incl. Windows-portable/Linux-AppImage/Android) via an explicit `verifyUpdateSignature()` Rust call, same pinned pubkey, fail-closed, unit-tested. **Stable-channel Windows-portable, Linux-AppImage, and Android APK: NOT verified** — downloads the artifact named in the manifest and directly launches/installs it with no signature-check call at all. | pinned-in-binary (Ed25519/minisign pubkey embedded in `tauri.conf.json` `plugins.updater.pubkey`, duplicated as `READEST_UPDATER_PUBKEY` in `src/services/constants.ts`) | `apps/readest-app/src-tauri/tauri.conf.json` `plugins.updater.pubkey`+`endpoints`; `src-tauri/Cargo.toml:164` `tauri-plugin-updater = \"2\"`; `src/helpers/updater.ts` (`check()` stable path); `src-tauri/src/nightly_update.rs:44-77` (fail-closed minisign verify); `src/components/UpdaterWindow.tsx:131` `checkAndroidUpdate`→`:181` `installPackage` (**no verify call**); `:221` `checkWindowsPortableUpdate`→`:241` spawn downloaded .exe (**no verify**); `:257` `checkAppImageUpdate`→`:276` chmod+launch (**no verify**); contrast `:295-355` `buildNightlyUpdate`, same 3 platform keys, `:342` `verifyUpdateSignature(...)` IS called |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AF1.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/readest/readest.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "2796988 / 2026-08-23"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (auto-check; stable-installer install requires user confirm)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (Tauri http plugin, no disabled-validation found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (minisign `.sig` per artifact, referenced from `latest.json`/`nightly/latest.json`)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**Split by channel/platform.** Stable macOS + Windows-NSIS + Linux(non-AppImage): verified via `check()`/`downloadAndInstall()` from `@tauri-apps/plugin-updater`, minisign signature checked against the pinned pubkey, fails closed. Nightly channel: verified for **all** platforms (incl. Windows-portable/Linux-AppImage/Android) via an explicit `verifyUpdateSignature()` Rust call, same pinned pubkey, fail-closed, unit-tested. **Stable-channel Windows-portable, Linux-AppImage, and Android APK: NOT verified** — downloads the artifact named in the manifest and directly launches/installs it with no signature-check call at all."
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (Ed25519/minisign pubkey embedded in `tauri.conf.json` `plugins.updater.pubkey`, duplicated as `READEST_UPDATER_PUBKEY` in `src/services/constants.ts`)"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "`apps/readest-app/src-tauri/tauri.conf.json` `plugins.updater.pubkey`+`endpoints`; `src-tauri/Cargo.toml:164` `tauri-plugin-updater = \"2\"`; `src/helpers/updater.ts` (`check()` stable path); `src-tauri/src/nightly_update.rs:44-77` (fail-closed minisign verify); `src/components/UpdaterWindow.tsx:131` `checkAndroidUpdate`→`:181` `installPackage` (**no verify call**); `:221` `checkWindowsPortableUpdate`→`:241` spawn downloaded .exe (**no verify**); `:257` `checkAppImageUpdate`→`:276` chmod+launch (**no verify**); contrast `:295-355` `buildNightlyUpdate`, same 3 platform keys, `:342` `verifyUpdateSignature(...)` IS called"
+        }
+      ]
+    }
   ]
 }

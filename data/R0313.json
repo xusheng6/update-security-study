@@ -44,5 +44,53 @@
       "line": 21,
       "text": "| Moonraker | https://github.com/Arksine/moonraker.git | d5ee17128bb88434aacdab90c2e9e990e2b64e4a / 2026-06-29 | Y | N (`enable_auto_refresh` defaults to `False`; actual install is triggered via `/machine/update/*` API, normally from a \"Update\" button in Mainsail/Fluidd/KlipperScreen) | Y | https (git+https for git_deploy; GitHub Releases `browser_download_url` for net_deploy, resolves to objects.githubusercontent.com). No TLS bypass found (`verify=False`/`CERT_NONE` grep clean). | N | none — **`git_deploy.py`**: plain `git fetch`/`git checkout`, no GPG signature verification of commits/tags, `_verify_repo()` only checks repo integrity/dirtiness, not authenticity. **`net_deploy.py`**: downloads release zip assets straight from `browser_download_url` and extracts them — zero checksum or signature check anywhere in the file | server-supplied/unpinned (github.com identity only) | moonraker/components/update_manager/net_deploy.py:293/482 (`browser_download_url`), :437 (`client.download_file`, no checksum arg); moonraker/components/update_manager/update_manager.py:77 (`enable_auto_refresh` default False); moonraker/components/update_manager/git_deploy.py (git clone/pull, `_verify_repo` is integrity-only) — **Moonraker's update_manager is the actual update engine for the entire Klipper ecosystem (Klipper, Moonraker itself, Mainsail, Fluidd, KlipperScreen, and any configured \"client\" app) and has no cryptographic authenticity check on any of it** |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-V6.md",
+      "source_line": 21,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Arksine/moonraker.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "d5ee17128bb88434aacdab90c2e9e990e2b64e4a / 2026-06-29"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (`enable_auto_refresh` defaults to `False`; actual install is triggered via `/machine/update/*` API, normally from a \"Update\" button in Mainsail/Fluidd/KlipperScreen)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (git+https for git_deploy; GitHub Releases `browser_download_url` for net_deploy, resolves to objects.githubusercontent.com). No TLS bypass found (`verify=False`/`CERT_NONE` grep clean)."
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — **`git_deploy.py`**: plain `git fetch`/`git checkout`, no GPG signature verification of commits/tags, `_verify_repo()` only checks repo integrity/dirtiness, not authenticity. **`net_deploy.py`**: downloads release zip assets straight from `browser_download_url` and extracts them — zero checksum or signature check anywhere in the file"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (github.com identity only)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "moonraker/components/update_manager/net_deploy.py:293/482 (`browser_download_url`), :437 (`client.download_file`, no checksum arg); moonraker/components/update_manager/update_manager.py:77 (`enable_auto_refresh` default False); moonraker/components/update_manager/git_deploy.py (git clone/pull, `_verify_repo` is integrity-only) — **Moonraker's update_manager is the actual update engine for the entire Klipper ecosystem (Klipper, Moonraker itself, Mainsail, Fluidd, KlipperScreen, and any configured \"client\" app) and has no cryptographic authenticity check on any of it**"
+        }
+      ]
+    }
   ]
 }

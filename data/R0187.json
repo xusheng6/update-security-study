@@ -43,5 +43,53 @@
       "line": 12,
       "text": "| Caprine | sindresorhus/caprine | Electron (`electron-updater`) | Y | auto (chk/dl/notify — `autoUpdater.checkForUpdatesAndNotify()` runs immediately at startup, then every 4 hours; installs on user quit/restart per electron-updater default, not forced) | Y | https (GitHub Releases via `electron-updater`'s GitHub provider) | manifest present (`latest*.yml` on GitHub Releases, served over TLS, not independently signed) | hash-from-manifest (electron-updater's standard sha512 check against `latest.yml`) — AND Windows code-signature verification is EXPLICITLY DISABLED | none effective on Windows (see below) / OS-trust-store on macOS (electron-updater macOS path still requires a valid Squirrel.Mac-compatible signed app) | `source/index.ts:17,68-77` (`import {autoUpdater} from 'electron-updater'`; `if (!is.development && config.get('autoUpdate')) { setInterval(...) checkForUpdatesAndNotify(); ... await autoUpdater.checkForUpdatesAndNotify(); }`); `package.json` build config: `\"win\": { \"verifyUpdateCodeSignature\": false }` — this explicitly turns off electron-builder/electron-updater's Windows Authenticode publisher-match check on downloaded installers, leaving only the sha512 hash pulled from the same (TLS-only, unsigned) `latest.yml` manifest as the sole integrity check on Windows; `\"mac\": { \"electronUpdaterCompatibility\": \">=4.5.2\" }`; publish target includes GitHub in `build.snap.publish` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-K3.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "sindresorhus/caprine"
+        },
+        {
+          "label": "framework",
+          "value": "Electron (`electron-updater`)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "auto (chk/dl/notify — `autoUpdater.checkForUpdatesAndNotify()` runs immediately at startup, then every 4 hours; installs on user quit/restart per electron-updater default, not forced)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub Releases via `electron-updater`'s GitHub provider)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "manifest present (`latest*.yml` on GitHub Releases, served over TLS, not independently signed)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (electron-updater's standard sha512 check against `latest.yml`) — AND Windows code-signature verification is EXPLICITLY DISABLED"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none effective on Windows (see below) / OS-trust-store on macOS (electron-updater macOS path still requires a valid Squirrel.Mac-compatible signed app)"
+        },
+        {
+          "label": "evidence",
+          "value": "`source/index.ts:17,68-77` (`import {autoUpdater} from 'electron-updater'`; `if (!is.development && config.get('autoUpdate')) { setInterval(...) checkForUpdatesAndNotify(); ... await autoUpdater.checkForUpdatesAndNotify(); }`); `package.json` build config: `\"win\": { \"verifyUpdateCodeSignature\": false }` — this explicitly turns off electron-builder/electron-updater's Windows Authenticode publisher-match check on downloaded installers, leaving only the sha512 hash pulled from the same (TLS-only, unsigned) `latest.yml` manifest as the sole integrity check on Windows; `\"mac\": { \"electronUpdaterCompatibility\": \">=4.5.2\" }`; publish target includes GitHub in `build.snap.publish`"
+        }
+      ]
+    }
   ]
 }

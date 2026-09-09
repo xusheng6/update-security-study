@@ -41,5 +41,53 @@
       "line": 14,
       "text": "| Dozer (menu-bar icon hider) | https://github.com/Mortennn/Dozer | Sparkle, legacy 1.x `SUUpdater` API | Y | Y, user-toggleable (`GeneralVC` checkbox bound directly to `SUUpdater.shared().automaticallyChecksForUpdates`) | Y (once user approves) | https (`SUFeedURL`=`https://raw.githubusercontent.com/Mortennn/Dozer/master/appcast.xml`) | Sparkle-EdDSA | signature (EdDSA) | pinned-in-binary (`SUPublicEDKey` in Info.plist) | Dozer/Other/Info.plist:33-36 (`SUFeedURL`, `SUPublicEDKey`=`97gvwr+B10rf6Exnj8yPuAXrYSu9yKikViJkYkvPMHY=`); Dozer/ViewControllers/GeneralVC.swift:39-73 (`SUUpdater.shared()!.automaticallyChecksForUpdates`); live fetch of the appcast on 2026-08-19 shows a single `<item>`, v4.0.0 (dated Aug 2019), with a valid `sparkle:edSignature` — key hygiene is fine but the feed itself appears stale/unmaintained (no releases posted since 2019 despite the GitHub repo still existing) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-M1.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/Mortennn/Dozer"
+        },
+        {
+          "label": "framework",
+          "value": "Sparkle, legacy 1.x `SUUpdater` API"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y, user-toggleable (`GeneralVC` checkbox bound directly to `SUUpdater.shared().automaticallyChecksForUpdates`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (once user approves)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`SUFeedURL`=`https://raw.githubusercontent.com/Mortennn/Dozer/master/appcast.xml`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Sparkle-EdDSA"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (EdDSA)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (`SUPublicEDKey` in Info.plist)"
+        },
+        {
+          "label": "evidence",
+          "value": "Dozer/Other/Info.plist:33-36 (`SUFeedURL`, `SUPublicEDKey`=`97gvwr+B10rf6Exnj8yPuAXrYSu9yKikViJkYkvPMHY=`); Dozer/ViewControllers/GeneralVC.swift:39-73 (`SUUpdater.shared()!.automaticallyChecksForUpdates`); live fetch of the appcast on 2026-08-19 shows a single `<item>`, v4.0.0 (dated Aug 2019), with a valid `sparkle:edSignature` — key hygiene is fine but the feed itself appears stale/unmaintained (no releases posted since 2019 despite the GitHub repo still existing)"
+        }
+      ]
+    }
   ]
 }

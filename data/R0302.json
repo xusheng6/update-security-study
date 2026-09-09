@@ -44,5 +44,53 @@
       "line": 15,
       "text": "| Plex Media Player | https://github.com/plexinc/plex-media-player.git | d9685b2749 / 2022-05-25 | Y | Y (`automaticUpdates` setting; timer every 3h, first check 10s after login) | Y | https (`https://plex.tv/updater/products/...`, redirect allow-list restricted to `nightlies.plex.tv`/`downloads.plex.tv`/`plex.tv`) | No (no manifest signature) | hash (SHA1) only | server-supplied/unpinned — `fileHash`/`manifestHash` are fields inside the same unauthenticated `check.xml` HTTPS response, no separate signature or pinned key | src/system/UpdaterComponent.cpp:62-106 (`checkForUpdate()` GETs `https://plex.tv/updater/products/%0/check.xml`); UpdaterComponent.cpp:295-376 (`parseUpdateData` pulls `fileHash`/`manifestHash` straight out of that XML); src/system/UpdaterComponent.h:88-112 (`Update::isReady()`/`hashFile()` — `QCryptographicHash::Sha1` compared to the server-supplied hash, nothing else) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-V1.md",
+      "source_line": 15,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/plexinc/plex-media-player.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "d9685b2749 / 2022-05-25"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (`automaticUpdates` setting; timer every 3h, first check 10s after login)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`https://plex.tv/updater/products/...`, redirect allow-list restricted to `nightlies.plex.tv`/`downloads.plex.tv`/`plex.tv`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "No (no manifest signature)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (SHA1) only"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned — `fileHash`/`manifestHash` are fields inside the same unauthenticated `check.xml` HTTPS response, no separate signature or pinned key"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/system/UpdaterComponent.cpp:62-106 (`checkForUpdate()` GETs `https://plex.tv/updater/products/%0/check.xml`); UpdaterComponent.cpp:295-376 (`parseUpdateData` pulls `fileHash`/`manifestHash` straight out of that XML); src/system/UpdaterComponent.h:88-112 (`Update::isReady()`/`hashFile()` — `QCryptographicHash::Sha1` compared to the server-supplied hash, nothing else)"
+        }
+      ]
+    }
   ]
 }

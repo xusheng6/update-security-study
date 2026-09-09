@@ -41,5 +41,53 @@
       "line": 10,
       "text": "| BambuStudio | github.com/bambulab/BambuStudio | wxWidgets/C++ (libcurl) | Y (app-version notify; separate auto-downloaded \"Bambu Network Plug-in\" binary) | app update: check automatic + notify, opens browser only (`wxLaunchDefaultBrowser`). Network Plugin: check+download+install fully automatic, unzipped straight into the app's plugin data dir and loaded into the process | Y (Bambu Network Plugin: `download_plugin`/`install_plugin` fetch a zip over HTTPS and `mz_zip_reader_extract_to_file` it directly into the plugin folder — a native shared library later loaded by the app; no hash/signature check found) | https (api.bambulab.com / api.bambulab.cn / etc.); TLS not overridden — no `VERIFYPEER`/`VERIFYHOST` disable found in src/slic3r/Utils/Http.cpp (grep negative) → enforced by curl default | N | none (grep for sha256/signature/checksum/HMAC/EVP_ across GUI_App.cpp and PresetUpdater.cpp = no matches) | n/a | src/slic3r/GUI/GUI_App.cpp:1615-1803 (`download_plugin`, no hash check), ~1805-1900 `install_plugin` (miniz `mz_zip_reader_extract_to_file` straight to plugin_folder, no verify), :1507-1598 (`get_http_url`/`get_plugin_url`, https:// domains), :3357 `wxLaunchDefaultBrowser(version_info.url)`, :5649-5718 `check_new_version`; src/slic3r/Utils/Http.cpp (grep negative for VERIFYPEER/VERIFYHOST override); src/slic3r/Utils/PresetUpdater.cpp (grep negative for sha256/signature) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-J1.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/bambulab/BambuStudio"
+        },
+        {
+          "label": "framework",
+          "value": "wxWidgets/C++ (libcurl)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (app-version notify; separate auto-downloaded \"Bambu Network Plug-in\" binary)"
+        },
+        {
+          "label": "auto",
+          "value": "app update: check automatic + notify, opens browser only (`wxLaunchDefaultBrowser`). Network Plugin: check+download+install fully automatic, unzipped straight into the app's plugin data dir and loaded into the process"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (Bambu Network Plugin: `download_plugin`/`install_plugin` fetch a zip over HTTPS and `mz_zip_reader_extract_to_file` it directly into the plugin folder — a native shared library later loaded by the app; no hash/signature check found)"
+        },
+        {
+          "label": "transport",
+          "value": "https (api.bambulab.com / api.bambulab.cn / etc.); TLS not overridden — no `VERIFYPEER`/`VERIFYHOST` disable found in src/slic3r/Utils/Http.cpp (grep negative) → enforced by curl default"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (grep for sha256/signature/checksum/HMAC/EVP_ across GUI_App.cpp and PresetUpdater.cpp = no matches)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence",
+          "value": "src/slic3r/GUI/GUI_App.cpp:1615-1803 (`download_plugin`, no hash check), ~1805-1900 `install_plugin` (miniz `mz_zip_reader_extract_to_file` straight to plugin_folder, no verify), :1507-1598 (`get_http_url`/`get_plugin_url`, https:// domains), :3357 `wxLaunchDefaultBrowser(version_info.url)`, :5649-5718 `check_new_version`; src/slic3r/Utils/Http.cpp (grep negative for VERIFYPEER/VERIFYHOST override); src/slic3r/Utils/PresetUpdater.cpp (grep negative for sha256/signature)"
+        }
+      ]
+    }
   ]
 }

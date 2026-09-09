@@ -43,5 +43,53 @@
       "line": 15,
       "text": "| LinearMouse | linearmouse/linearmouse | Sparkle | Y | chk: user-toggleable, `SUScheduledCheckInterval`=604800s (7 days) when enabled; dl/inst: Sparkle standard prompt | Y | https (`https://linearmouse.app/appcast.xml`) | **NONE** — no `SUPublicEDKey`/`SUPublicDSAKey` in Info.plist or repo | none | none | LinearMouse/Info.plist:33-36; LinearMouse/UI/CheckForUpdatesView.swift:14-75 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-K1.md",
+      "source_line": 15,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "linearmouse/linearmouse"
+        },
+        {
+          "label": "framework",
+          "value": "Sparkle"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "chk: user-toggleable, `SUScheduledCheckInterval`=604800s (7 days) when enabled; dl/inst: Sparkle standard prompt"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`https://linearmouse.app/appcast.xml`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "**NONE** — no `SUPublicEDKey`/`SUPublicDSAKey` in Info.plist or repo"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none"
+        },
+        {
+          "label": "evidence",
+          "value": "LinearMouse/Info.plist:33-36; LinearMouse/UI/CheckForUpdatesView.swift:14-75"
+        }
+      ]
+    }
   ]
 }

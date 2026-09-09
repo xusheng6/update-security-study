@@ -44,5 +44,53 @@
       "line": 12,
       "text": "| Kap | https://github.com/wulkano/Kap.git | c42692fa63ac71ed192e01684beb78a1b864aa88 / 2024-02-14 | Y | Y | Y | https (electron-updater default provider, GitHub Releases) | OS code-signing (macOS Gatekeeper/notarization + Squirrel.Mac signature-identity check via electron-updater), not a separate app-level manifest signature | electron-updater — relies on HTTPS delivery + hardened-runtime/notarized code signature validated by Squirrel.Mac at install time | OS keystore (Apple code-signing identity / notarization, enforced by macOS, not an app-pinned key) | main/index.ts:4 (`import {autoUpdater} from 'electron-updater'`), :57-77 (hourly `setInterval(checkForUpdates, ...)` + on-launch check), :124; package.json:52 (`electron-updater` dep), :258-262 (`mac.hardenedRuntime`, `afterSign: electron-builder-notarize`). Side note (content-as-code, scored separately, C-equivalent): main/plugins/index.ts:6,40-59 — in-app plugin manager shells out via `execa`/yarn to `npm install` arbitrary plugin packages from the public npm registry and loads them into the Electron main process; no additional package-signature check beyond npm registry TLS. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-V4.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/wulkano/Kap.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "c42692fa63ac71ed192e01684beb78a1b864aa88 / 2024-02-14"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (electron-updater default provider, GitHub Releases)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "OS code-signing (macOS Gatekeeper/notarization + Squirrel.Mac signature-identity check via electron-updater), not a separate app-level manifest signature"
+        },
+        {
+          "label": "payload_verification",
+          "value": "electron-updater — relies on HTTPS delivery + hardened-runtime/notarized code signature validated by Squirrel.Mac at install time"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore (Apple code-signing identity / notarization, enforced by macOS, not an app-pinned key)"
+        },
+        {
+          "label": "evidence",
+          "value": "main/index.ts:4 (`import {autoUpdater} from 'electron-updater'`), :57-77 (hourly `setInterval(checkForUpdates, ...)` + on-launch check), :124; package.json:52 (`electron-updater` dep), :258-262 (`mac.hardenedRuntime`, `afterSign: electron-builder-notarize`). Side note (content-as-code, scored separately, C-equivalent): main/plugins/index.ts:6,40-59 — in-app plugin manager shells out via `execa`/yarn to `npm install` arbitrary plugin packages from the public npm registry and loads them into the Electron main process; no additional package-signature check beyond npm registry TLS."
+        }
+      ]
+    }
   ]
 }

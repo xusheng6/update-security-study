@@ -43,5 +43,53 @@
       "line": 17,
       "text": "| brackets | adobe/brackets | d55ac606ac44 / 2021-03-18 (archived) | Y | N (24h auto-check, manual install) | Y | https, TLS enforced Y | N | hash (SHA-256) | server-supplied (same feed as download URL) | src/extensions/default/AutoUpdate/node/AutoUpdateDomain.js:128-146 (validateChecksum), :272-281 (downloadInstaller); src/config.json:26 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U4.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "adobe/brackets"
+        },
+        {
+          "label": "commit/date",
+          "value": "d55ac606ac44 / 2021-03-18 (archived)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (24h auto-check, manual install)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced Y"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (SHA-256)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied (same feed as download URL)"
+        },
+        {
+          "label": "evidence",
+          "value": "src/extensions/default/AutoUpdate/node/AutoUpdateDomain.js:128-146 (validateChecksum), :272-281 (downloadInstaller); src/config.json:26"
+        }
+      ]
+    }
   ]
 }

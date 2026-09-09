@@ -43,5 +43,53 @@
       "line": 24,
       "text": "| MaryTTS | https://github.com/marytts/marytts.git | f3389a19 / 2025-01-17 | Y | N (user-initiated, GUI installer) | Y | https (component list) + locations embedded per-package (scheme not enforced) | N | hash (MD5) | server-supplied/unpinned | `marytts-runtime/src/main/java/marytts/tools/install/InstallerGUI.java:183` — component list fetched from `https://raw.github.com/marytts/marytts/master/download/marytts-components.xml`; `ComponentDescription.java:668-708` downloads each component via `HttpURLConnection` from URLs listed in that same XML (`CreateComponentXML.java:250` shows the generator historically producing `http://mary.dfki.de/download/...`, i.e. plaintext-HTTP-capable); `ComponentDescription.java:781-793` computes MD5 of the downloaded archive and compares against `packageMD5` — but that MD5 is itself sourced from the same unauthenticated components XML (`packageMD5 = packageElement.getAttribute(\"md5sum\")`, line 150). Downloaded voice/language packages are zip archives whose contents (voice `.config` + Java classes) are loaded into the running JVM's classpath at runtime — a genuine content-as-code channel. **Tier: C** (real self-updater/installer, MD5-only, unsigned manifest, unauthenticated key source — endpoint/CDN compromise of either the GitHub-raw XML or the download mirror ⇒ code load into the MaryTTS JVM). |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AD2.md",
+      "source_line": 24,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/marytts/marytts.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "f3389a19 / 2025-01-17"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (user-initiated, GUI installer)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (component list) + locations embedded per-package (scheme not enforced)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (MD5)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`marytts-runtime/src/main/java/marytts/tools/install/InstallerGUI.java:183` — component list fetched from `https://raw.github.com/marytts/marytts/master/download/marytts-components.xml`; `ComponentDescription.java:668-708` downloads each component via `HttpURLConnection` from URLs listed in that same XML (`CreateComponentXML.java:250` shows the generator historically producing `http://mary.dfki.de/download/...`, i.e. plaintext-HTTP-capable); `ComponentDescription.java:781-793` computes MD5 of the downloaded archive and compares against `packageMD5` — but that MD5 is itself sourced from the same unauthenticated components XML (`packageMD5 = packageElement.getAttribute(\"md5sum\")`, line 150). Downloaded voice/language packages are zip archives whose contents (voice `.config` + Java classes) are loaded into the running JVM's classpath at runtime — a genuine content-as-code channel. **Tier: C** (real self-updater/installer, MD5-only, unsigned manifest, unauthenticated key source — endpoint/CDN compromise of either the GitHub-raw XML or the download mirror ⇒ code load into the MaryTTS JVM)."
+        }
+      ]
+    }
   ]
 }

@@ -42,5 +42,53 @@
       "line": 9,
       "text": "| Cline (CLI) | https://github.com/cline/cline.git | be8b984 / 2026-08-23 | Y | Y (default true, silent) | Y | https (registry.npmjs.org) | N | none (npm registry TLS only; `--min-release-age=0` explicitly bypasses npm's minimum-release-age safety gate) | N/A — unpinned | sdk/packages/core/src/services/global-settings.ts:64 (`autoUpdateEnabled: z.boolean().default(true)`), apps/cli/src/commands/update.ts:187-188 (GET registry.npmjs.org/{pkg}/{tag}), :146-172 (`withMinimumReleaseAgeBypass` adds `--min-release-age=0` to `npm update -g cline`), :310-331 (`autoUpdateOnStartup` — non-blocking, no prompt), :401-439 (`applyDeferredUpdate` spawns detached shell install with no confirmation). Also silently auto-updates a second npm package \"kanban\" the same way (:198-200, :578-597) — side channel, same tier. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AM1.md",
+      "source_line": 9,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/cline/cline.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "be8b984 / 2026-08-23"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (default true, silent)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (registry.npmjs.org)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (npm registry TLS only; `--min-release-age=0` explicitly bypasses npm's minimum-release-age safety gate)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A — unpinned"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "sdk/packages/core/src/services/global-settings.ts:64 (`autoUpdateEnabled: z.boolean().default(true)`), apps/cli/src/commands/update.ts:187-188 (GET registry.npmjs.org/{pkg}/{tag}), :146-172 (`withMinimumReleaseAgeBypass` adds `--min-release-age=0` to `npm update -g cline`), :310-331 (`autoUpdateOnStartup` — non-blocking, no prompt), :401-439 (`applyDeferredUpdate` spawns detached shell install with no confirmation). Also silently auto-updates a second npm package \"kanban\" the same way (:198-200, :578-597) — side channel, same tier."
+        }
+      ]
+    }
   ]
 }

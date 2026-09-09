@@ -41,5 +41,49 @@
       "line": 8,
       "text": "| **autorestic** (github.com/cupcakearmy/autorestic) | Y | N (manual `autorestic upgrade` CLI command only; not run automatically at startup) | Y (downloads a `.bz2` archive from the latest GitHub release and overwrites its own binary at `/usr/local/bin`, and also can drive `restic self-update`) | https in practice (URLs come from `api.github.com` and GitHub `browser_download_url`), but code uses plain Go `http.Get` with **no explicit scheme enforcement, no TLS pinning, and no cert-verification hardening** | N (no manifest, no signature file of any kind is fetched — only raw GitHub Releases JSON) | **none** — archive is decompressed and installed with zero checksum or signature check | n/a (no key exists in this flow) | `autorestic/internal/bins/bins.go:34` (`http.Get` for JSON), `:60-116` (`downloadAndInstallAsset` — bzip2 decompress → `os.Rename` straight into install path, no hash check anywhere), `:125` (restic release URL), `:156` (autorestic release URL); CLI wiring: `autorestic/cmd/upgrade.go:8-21` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-P5.md",
+      "source_line": 8,
+      "fields": [
+        {
+          "label": "Project",
+          "value": "**autorestic** (github.com/cupcakearmy/autorestic)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual `autorestic upgrade` CLI command only; not run automatically at startup)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (downloads a `.bz2` archive from the latest GitHub release and overwrites its own binary at `/usr/local/bin`, and also can drive `restic self-update`)"
+        },
+        {
+          "label": "transport",
+          "value": "https in practice (URLs come from `api.github.com` and GitHub `browser_download_url`), but code uses plain Go `http.Get` with **no explicit scheme enforcement, no TLS pinning, and no cert-verification hardening**"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no manifest, no signature file of any kind is fetched — only raw GitHub Releases JSON)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — archive is decompressed and installed with zero checksum or signature check"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a (no key exists in this flow)"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "`autorestic/internal/bins/bins.go:34` (`http.Get` for JSON), `:60-116` (`downloadAndInstallAsset` — bzip2 decompress → `os.Rename` straight into install path, no hash check anywhere), `:125` (restic release URL), `:156` (autorestic release URL); CLI wiring: `autorestic/cmd/upgrade.go:8-21`"
+        }
+      ]
+    }
   ]
 }

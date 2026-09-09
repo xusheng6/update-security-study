@@ -41,5 +41,53 @@
       "line": 14,
       "text": "| DevDocs-desktop | https://github.com/egoist/devdocs-desktop | Electron (Chromium/Node.js) | Y | Y — `autoUpdater.checkForUpdatesAndNotify()` (electron-updater) downloads the update in the background automatically and prompts to restart & install; **disabled** in dev mode and on Linux | Y — electron-updater downloads the new installer/package and, on relaunch/accept, applies (executes) it; this is the standard electron-builder update-and-install flow | https, via GitHub Releases (electron-builder's default `\"github\"` publish provider, inferred from `package.json` `repository` field — no explicit `publish` block found overriding this) | unknown — electron-updater's auto-generated `latest.yml`/`latest-mac.yml` manifest is not separately GPG/detached-signed in anything visible in this repo; it only embeds a sha512 hash of the installer | partial/unknown — electron-updater's default behavior checks the manifest's sha512 hash against the downloaded installer (integrity only, not independent authenticity); on macOS, Squirrel.Mac additionally requires the new app bundle be code-signed with the same Team ID as the running app (OS-enforced), but no explicit code-signing identity/`CSC_LINK` config is present in `package.json`'s `build` block — signing likely depends on CI secrets not present in source. `scripts/notarize.js` shows macOS notarization is wired up, implying signed release builds, but this cannot be confirmed from source alone | macOS: Apple code-signing Team ID (via Squirrel.Mac, if the shipped app is actually signed — identity supplied externally via CI, not in repo); Windows: none found (`nsis`/`win` config in `package.json` has no signing certificate reference) | app/updater.js:1-13 (`autoUpdater.checkForUpdatesAndNotify()`, guarded by `isDev \\|\\| process.platform === 'linux'`); app/index.js:7,120 (`updater.init()` called unconditionally at startup); app/package.json:36 (`\"electron-updater\": \"^4.3.8\"` — a **runtime** dependency declared only in `app/package.json`, not in the root `package.json`); package.json:62-95 (`build` config: `mac`/`win`/`linux` targets, `hardenedRuntime: true`, no explicit `publish`/code-signing-identity block); scripts/notarize.js (macOS notarization script, referenced from electron-builder's `afterSign` hook conventionally, confirms a signing pipeline exists but its key material is external to the repo) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-L8.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/egoist/devdocs-desktop"
+        },
+        {
+          "label": "framework",
+          "value": "Electron (Chromium/Node.js)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y — `autoUpdater.checkForUpdatesAndNotify()` (electron-updater) downloads the update in the background automatically and prompts to restart & install; **disabled** in dev mode and on Linux"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — electron-updater downloads the new installer/package and, on relaunch/accept, applies (executes) it; this is the standard electron-builder update-and-install flow"
+        },
+        {
+          "label": "transport",
+          "value": "https, via GitHub Releases (electron-builder's default `\"github\"` publish provider, inferred from `package.json` `repository` field — no explicit `publish` block found overriding this)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "unknown — electron-updater's auto-generated `latest.yml`/`latest-mac.yml` manifest is not separately GPG/detached-signed in anything visible in this repo; it only embeds a sha512 hash of the installer"
+        },
+        {
+          "label": "payload_verification",
+          "value": "partial/unknown — electron-updater's default behavior checks the manifest's sha512 hash against the downloaded installer (integrity only, not independent authenticity); on macOS, Squirrel.Mac additionally requires the new app bundle be code-signed with the same Team ID as the running app (OS-enforced), but no explicit code-signing identity/`CSC_LINK` config is present in `package.json`'s `build` block — signing likely depends on CI secrets not present in source. `scripts/notarize.js` shows macOS notarization is wired up, implying signed release builds, but this cannot be confirmed from source alone"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "macOS: Apple code-signing Team ID (via Squirrel.Mac, if the shipped app is actually signed — identity supplied externally via CI, not in repo); Windows: none found (`nsis`/`win` config in `package.json` has no signing certificate reference)"
+        },
+        {
+          "label": "evidence",
+          "value": "app/updater.js:1-13 (`autoUpdater.checkForUpdatesAndNotify()`, guarded by `isDev \\|\\| process.platform === 'linux'`); app/index.js:7,120 (`updater.init()` called unconditionally at startup); app/package.json:36 (`\"electron-updater\": \"^4.3.8\"` — a **runtime** dependency declared only in `app/package.json`, not in the root `package.json`); package.json:62-95 (`build` config: `mac`/`win`/`linux` targets, `hardenedRuntime: true`, no explicit `publish`/code-signing-identity block); scripts/notarize.js (macOS notarization script, referenced from electron-builder's `afterSign` hook conventionally, confirms a signing pipeline exists but its key material is external to the repo)"
+        }
+      ]
+    }
   ]
 }

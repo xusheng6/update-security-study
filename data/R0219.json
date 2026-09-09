@@ -46,5 +46,99 @@
       "line": 10,
       "text": "| GDevelop (Extension Store / Asset Store content channel) | github.com/4ian/GDevelop | Electron/React IDE | Y (content channel: extensions are JSON event-graphs compiled/executed by GDevelop's JS runtime; assets are mostly images/sounds) | N (user searches/installs manually) | Y (extensions); assets are largely non-executable media | HTTPS (`api.gdevelop.io/asset`, `api.gdevelop.io` extension registry, `asset-resources.gdevelop.io`, `private-assets.gdevelop.io`, etc. — all hardcoded https) | N | none found — no hash/signature check in install code, relies solely on HTTPS transport trust to GDevelop's own API/CDN | n/a | newIDE/app/src/Utils/GDevelopServices/ApiConfigs.js (all `https://` base URLs); newIDE/app/src/AssetStore/ExtensionStore/InstallExtension.js (fetches registry JSON directly, no hash field/check); newIDE/app/src/AssetStore/InstallAsset.js (no hash check in `installResource`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-N8.md",
+      "source_line": 9,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/4ian/GDevelop"
+        },
+        {
+          "label": "framework",
+          "value": "Electron (electron-updater 6.3.9)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (`autoUpdater.checkForUpdatesAndNotify()` with `autoDownload=true`, invoked from renderer via IPC, also runs on a background schedule)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (downloads installer, `autoUpdater.quitAndInstall()` installs and relaunches)"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS via GitHub Releases (`publish: [{provider: \"github\"}]`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Partial — electron-builder auto-generates `latest*.yml` with per-artifact SHA-512, fetched over HTTPS; no separate detached cryptographic signature on that manifest itself"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (SHA-512, electron-builder-generated) + OS-code-signing (Windows Authenticode via signtool; macOS hardenedRuntime + entitlements + notarization)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "Windows: cert referenced by `GD_SIGNTOOL_SUBJECT_NAME`/`GD_SIGNTOOL_THUMBPRINT` env vars (external signtool); macOS: Apple Developer ID cert used by `afterSign` notarization script"
+        },
+        {
+          "label": "evidence",
+          "value": "newIDE/electron-app/app/main.js:12 (`require('electron-updater').autoUpdater`), :741-742 (`autoUpdater.autoDownload = true; autoUpdater.checkForUpdatesAndNotify()`), :757 (`autoUpdater.quitAndInstall()`); newIDE/electron-app/electron-builder-config.js:11 (`publish:[{provider:'github'}]`), win.signtoolOptions / mac.hardenedRuntime block"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-N8.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/4ian/GDevelop"
+        },
+        {
+          "label": "framework",
+          "value": "Electron/React IDE"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (content channel: extensions are JSON event-graphs compiled/executed by GDevelop's JS runtime; assets are mostly images/sounds)"
+        },
+        {
+          "label": "auto",
+          "value": "N (user searches/installs manually)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (extensions); assets are largely non-executable media"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS (`api.gdevelop.io/asset`, `api.gdevelop.io` extension registry, `asset-resources.gdevelop.io`, `private-assets.gdevelop.io`, etc. — all hardcoded https)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none found — no hash/signature check in install code, relies solely on HTTPS transport trust to GDevelop's own API/CDN"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence",
+          "value": "newIDE/app/src/Utils/GDevelopServices/ApiConfigs.js (all `https://` base URLs); newIDE/app/src/AssetStore/ExtensionStore/InstallExtension.js (fetches registry JSON directly, no hash field/check); newIDE/app/src/AssetStore/InstallAsset.js (no hash check in `installResource`)"
+        }
+      ]
+    }
   ]
 }

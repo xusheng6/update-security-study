@@ -42,5 +42,53 @@
       "line": 13,
       "text": "| Chamilo (core \"System Update\") | https://github.com/chamilo/chamilo-lms.git | ad99fce / 2026-08-22 | Y | N (admin-triggered via `SystemUpdateController` / CLI commands) | Y (`UpdateFileApplier::apply()` copies staged files over live source tree) | https (Symfony `HttpClientInterface`, default cert verification, no `verify_peer:false` found) | Conditional — signature is OPTIONAL per-manifest | **sha256 always checked; Minisign signature checked only IF the manifest's `signature.type` field is present** — a manifest that omits the `signature` block downgrades verification to hash-only. Additionally, `OFFICIAL_MINISIGN_PUBLIC_KEYS` is shipped **empty** (`= []`) in this snapshot, so even when a manifest does request signature verification, no production key is currently pinned (fails closed in that case, but the unsigned/hash-only path remains live) | pinned-in-binary *by design* (Minisign pubkey hardcoded in `UpdateTrustedKeyring`), but the trusted-key list is currently EMPTY for production; only a dev/test key is trusted, gated behind `ENABLE_DEVELOPMENT_UPDATE_TOOLS=false` (disabled) | `src/CoreBundle/Service/Update/UpdateConfiguration.php:13` (manifest source `https://updates.chamilo.org/2.x/stable.json`); `src/CoreBundle/Service/Update/UpdateTrustedKeyring.php:22-23` (`OFFICIAL_MINISIGN_PUBLIC_KEYS = []`); `src/CoreBundle/Service/Update/Dto/UpdateManifest.php:122-125` (`requiresSignature()` returns true only if optional `signature.type` set); `src/CoreBundle/Service/Update/UpdatePackageVerifier.php:62-81` (sha256 always compared; signature branch only `elseif ($manifest->requiresSignature())`, else just a warning); `src/CoreBundle/Service/Update/Signature/MinisignSignatureVerifier.php:22-65` (shells out to `minisign -Vm`); `src/CoreBundle/Service/Update/UpdateStagingManager.php:104` (`$zip->extractTo`); `src/CoreBundle/Service/Update/UpdateFileApplier.php:488` (`copy($operation['source_path'], $operation['target_path'])` — live deployment) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AI6.md",
+      "source_line": 13,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/chamilo/chamilo-lms.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "ad99fce / 2026-08-22"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (admin-triggered via `SystemUpdateController` / CLI commands)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (`UpdateFileApplier::apply()` copies staged files over live source tree)"
+        },
+        {
+          "label": "transport",
+          "value": "https (Symfony `HttpClientInterface`, default cert verification, no `verify_peer:false` found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Conditional — signature is OPTIONAL per-manifest"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**sha256 always checked; Minisign signature checked only IF the manifest's `signature.type` field is present** — a manifest that omits the `signature` block downgrades verification to hash-only. Additionally, `OFFICIAL_MINISIGN_PUBLIC_KEYS` is shipped **empty** (`= []`) in this snapshot, so even when a manifest does request signature verification, no production key is currently pinned (fails closed in that case, but the unsigned/hash-only path remains live)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary *by design* (Minisign pubkey hardcoded in `UpdateTrustedKeyring`), but the trusted-key list is currently EMPTY for production; only a dev/test key is trusted, gated behind `ENABLE_DEVELOPMENT_UPDATE_TOOLS=false` (disabled)"
+        },
+        {
+          "label": "evidence",
+          "value": "`src/CoreBundle/Service/Update/UpdateConfiguration.php:13` (manifest source `https://updates.chamilo.org/2.x/stable.json`); `src/CoreBundle/Service/Update/UpdateTrustedKeyring.php:22-23` (`OFFICIAL_MINISIGN_PUBLIC_KEYS = []`); `src/CoreBundle/Service/Update/Dto/UpdateManifest.php:122-125` (`requiresSignature()` returns true only if optional `signature.type` set); `src/CoreBundle/Service/Update/UpdatePackageVerifier.php:62-81` (sha256 always compared; signature branch only `elseif ($manifest->requiresSignature())`, else just a warning); `src/CoreBundle/Service/Update/Signature/MinisignSignatureVerifier.php:22-65` (shells out to `minisign -Vm`); `src/CoreBundle/Service/Update/UpdateStagingManager.php:104` (`$zip->extractTo`); `src/CoreBundle/Service/Update/UpdateFileApplier.php:488` (`copy($operation['source_path'], $operation['target_path'])` — live deployment)"
+        }
+      ]
+    }
   ]
 }

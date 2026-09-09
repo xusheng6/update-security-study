@@ -41,5 +41,53 @@
       "line": 15,
       "text": "| Yate | https://github.com/yatevoip/yate | 7d86cb1 / 2026-06-18 | Y (Qt-4 client \"updater\" plugin; opt-in via `client.updateurl` + `policy`, default policy=Never) | Y (when policy≥Check, auto-checks on client startup; policy=Install auto-launches pending update on next startup) | **Y** — downloads to temp file with **exec bit explicitly set**, renamed, then `QProcess::startDetached(cmd)` executes it and `Engine::halt(0)` restarts into the installer | **HTTP — code explicitly REQUIRES the returned redirect URL's protocol be literally `\"http\"`** (`url.getProtocol()==\"http\"`); uses legacy `QHttp` class which has no TLS support in this path | N | none (only a `MIN_SIZE..MAX_SIZE` byte-count sanity check; no hash/signature) | none | modules/qt4/updater.cpp:337-364 (`QHttp`, `setHost(qurl.host(), qurl.port(80))`), :226-241 (`url.getProtocol()==\"http\"` gate), :208-218 (`file->setPermissions(...QFile::ExeOwner)`), :281-304 (`startInstalling()`: `QProcess::startDetached`, `Engine::halt`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AD1.md",
+      "source_line": 15,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/yatevoip/yate"
+        },
+        {
+          "label": "commit/date",
+          "value": "7d86cb1 / 2026-06-18"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (Qt-4 client \"updater\" plugin; opt-in via `client.updateurl` + `policy`, default policy=Never)"
+        },
+        {
+          "label": "auto",
+          "value": "Y (when policy≥Check, auto-checks on client startup; policy=Install auto-launches pending update on next startup)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y** — downloads to temp file with **exec bit explicitly set**, renamed, then `QProcess::startDetached(cmd)` executes it and `Engine::halt(0)` restarts into the installer"
+        },
+        {
+          "label": "transport",
+          "value": "**HTTP — code explicitly REQUIRES the returned redirect URL's protocol be literally `\"http\"`** (`url.getProtocol()==\"http\"`); uses legacy `QHttp` class which has no TLS support in this path"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (only a `MIN_SIZE..MAX_SIZE` byte-count sanity check; no hash/signature)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "modules/qt4/updater.cpp:337-364 (`QHttp`, `setHost(qurl.host(), qurl.port(80))`), :226-241 (`url.getProtocol()==\"http\"` gate), :208-218 (`file->setPermissions(...QFile::ExeOwner)`), :281-304 (`startInstalling()`: `QProcess::startDetached`, `Engine::halt`)"
+        }
+      ]
+    }
   ]
 }

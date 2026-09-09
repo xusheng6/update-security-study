@@ -42,5 +42,53 @@
       "line": 9,
       "text": "| FreshRSS | https://github.com/FreshRSS/FreshRSS.git | 95842d8 / 2026-08-21 | Y | N (admin must click \"Check for updates\" then \"Apply\") | Y | https, TLS validation ENFORCED (`CURLOPT_SSL_VERIFYPEER`=true, `CURLOPT_SSL_VERIFYHOST`=2) for the non-git path; git path uses plain `git fetch`/`git reset --hard` over whatever remote is configured | N | none (raw `UPDATE <version>\\n<script>` body is `file_put_contents`'d then `require`'d and executed as PHP — no hash/signature check; git path has no GPG-signed-commit verification) | server-supplied/unpinned (`https://update.freshrss.org`, config `auto_update_url`) | app/Controllers/updateController.php:216-292 (curl download of update script, TLS enforced), :295-357 (`require UPDATE_FILENAME; do_post_update()/apply_update()` — executes downloaded PHP), :101-128 (`gitPull()`: `exec('git fetch --prune')` + `exec('git reset --hard FETCH_HEAD')`), config.default.php:23 (`auto_update_url` default) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AN2.md",
+      "source_line": 9,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/FreshRSS/FreshRSS.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "95842d8 / 2026-08-21"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (admin must click \"Check for updates\" then \"Apply\")"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS validation ENFORCED (`CURLOPT_SSL_VERIFYPEER`=true, `CURLOPT_SSL_VERIFYHOST`=2) for the non-git path; git path uses plain `git fetch`/`git reset --hard` over whatever remote is configured"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (raw `UPDATE <version>\\n<script>` body is `file_put_contents`'d then `require`'d and executed as PHP — no hash/signature check; git path has no GPG-signed-commit verification)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (`https://update.freshrss.org`, config `auto_update_url`)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "app/Controllers/updateController.php:216-292 (curl download of update script, TLS enforced), :295-357 (`require UPDATE_FILENAME; do_post_update()/apply_update()` — executes downloaded PHP), :101-128 (`gitPull()`: `exec('git fetch --prune')` + `exec('git reset --hard FETCH_HEAD')`), config.default.php:23 (`auto_update_url` default)"
+        }
+      ]
+    }
   ]
 }

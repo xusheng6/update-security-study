@@ -41,5 +41,53 @@
       "line": 23,
       "text": "| Evans (gRPC client, TUI/REPL) | https://github.com/ktr0731/evans.git | 5efe5f5 / 2023-12-02 | Y | Y (opt-in via `meta.autoUpdate` config, default false) | **Y** | https (GitHub Releases API + release-asset download via `github.com/ktr0731/go-updater` + `google/go-github`) | N | **none found** — binary asset is downloaded and directly `syscall.Exec`'d to replace the running binary; no checksum/signature check in app code (external `go-updater` dep not vendored, so its internals could not be fully audited from this shallow clone) | none pinned — trust rests entirely on GitHub Releases API/CDN + TLS | app/update.go:62-141 (download+exec flow), app/means.go:11-14 (GitHub-release means) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AH1.md",
+      "source_line": 23,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/ktr0731/evans.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "5efe5f5 / 2023-12-02"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (opt-in via `meta.autoUpdate` config, default false)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y**"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub Releases API + release-asset download via `github.com/ktr0731/go-updater` + `google/go-github`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none found** — binary asset is downloaded and directly `syscall.Exec`'d to replace the running binary; no checksum/signature check in app code (external `go-updater` dep not vendored, so its internals could not be fully audited from this shallow clone)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none pinned — trust rests entirely on GitHub Releases API/CDN + TLS"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "app/update.go:62-141 (download+exec flow), app/means.go:11-14 (GitHub-release means)"
+        }
+      ]
+    }
   ]
 }

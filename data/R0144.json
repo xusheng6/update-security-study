@@ -41,5 +41,53 @@
       "line": 15,
       "text": "| SameBoy (macOS) | github.com/LIJI32/SameBoy | Cocoa (Objective-C) macOS app | Y | **auto chk** (opt-in prompt on first launch — \"Should SameBoy check for updates when launched?\" — defaults the setting from the user's answer, `GBAutoUpdatesEnabled`) + **manual dl/inst** (user clicks \"Yes\"/\"Install\" in the update dialog to trigger download and, separately, install) | **Y — confirmed.** `installUpdate:` downloads a ZIP via `NSURLSession downloadTaskWithURL:` from a URL returned by the (unsigned) version-check response, shells out to `/usr/bin/unzip` via `NSTask` to extract it, then `performUpgrade` moves the extracted `SameBoy.app/Contents` directory over the running app bundle's own `Contents`, **explicitly strips the `com.apple.quarantine` extended attribute recursively from the entire bundle** (\"so we don't have to escape translocation\"), and relaunches via `execl(...,\"--update-launch\",...)`. If GateKeeper is on or the bundle isn't writable, it acquires root via the legacy `AuthorizationExecuteWithPrivileges` API and `chown -R`s the bundle to the current user first | HTTPS (`#define UPDATE_SERVER \"https://sameboy.github.io\"`, GitHub Pages) via `NSURLSession`; no `ignoreSslErrors`/custom trust-evaluation delegate found — TLS validation appears enforced | N — `checkForUpdates` GETs `UPDATE_SERVER/latest_version`, a plain-text response parsed as `\"<version>|<url>\"` split on `\\|`; no signature over this manifest | **none** — repo-wide grep for `SecStaticCodeCheckValidity`, `CC_SHA*`, `codesign`, `SecCode`, `SHA256`, `checksum` in `Cocoa/GBApp.m` returns zero matches; the downloaded ZIP/app bundle is never hashed or code-signature-checked before being installed and the quarantine flag is affirmatively removed | N/A (no key exists — no signature scheme is used at all) | `Cocoa/GBApp.m:14` (`#define UPDATE_SERVER \"https://sameboy.github.io\"`); `:447-467` (`checkForUpdates`, unsigned `\"ver|url\"` manifest); `:533-620` (`installUpdate:` — `NSURLSession downloadTaskWithURL:_updateURL`, `/usr/bin/unzip` via `NSTask`, `AuthorizationExecuteWithPrivileges`/`chown -R` for GateKeeper/write-access); `:622-684` (`performUpgrade` — swaps `Contents`, then `removexattr(bundlePath.UTF8String, \"com.apple.quarantine\", 0)` recursively over every file in the bundle, then `execl(...)` relaunch) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-I1.md",
+      "source_line": 15,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/LIJI32/SameBoy"
+        },
+        {
+          "label": "framework",
+          "value": "Cocoa (Objective-C) macOS app"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "**auto chk** (opt-in prompt on first launch — \"Should SameBoy check for updates when launched?\" — defaults the setting from the user's answer, `GBAutoUpdatesEnabled`) + **manual dl/inst** (user clicks \"Yes\"/\"Install\" in the update dialog to trigger download and, separately, install)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y — confirmed.** `installUpdate:` downloads a ZIP via `NSURLSession downloadTaskWithURL:` from a URL returned by the (unsigned) version-check response, shells out to `/usr/bin/unzip` via `NSTask` to extract it, then `performUpgrade` moves the extracted `SameBoy.app/Contents` directory over the running app bundle's own `Contents`, **explicitly strips the `com.apple.quarantine` extended attribute recursively from the entire bundle** (\"so we don't have to escape translocation\"), and relaunches via `execl(...,\"--update-launch\",...)`. If GateKeeper is on or the bundle isn't writable, it acquires root via the legacy `AuthorizationExecuteWithPrivileges` API and `chown -R`s the bundle to the current user first"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS (`#define UPDATE_SERVER \"https://sameboy.github.io\"`, GitHub Pages) via `NSURLSession`; no `ignoreSslErrors`/custom trust-evaluation delegate found — TLS validation appears enforced"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N — `checkForUpdates` GETs `UPDATE_SERVER/latest_version`, a plain-text response parsed as `\"<version>|<url>\"` split on `\\|`; no signature over this manifest"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — repo-wide grep for `SecStaticCodeCheckValidity`, `CC_SHA*`, `codesign`, `SecCode`, `SHA256`, `checksum` in `Cocoa/GBApp.m` returns zero matches; the downloaded ZIP/app bundle is never hashed or code-signature-checked before being installed and the quarantine flag is affirmatively removed"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A (no key exists — no signature scheme is used at all)"
+        },
+        {
+          "label": "evidence",
+          "value": "`Cocoa/GBApp.m:14` (`#define UPDATE_SERVER \"https://sameboy.github.io\"`); `:447-467` (`checkForUpdates`, unsigned `\"ver|url\"` manifest); `:533-620` (`installUpdate:` — `NSURLSession downloadTaskWithURL:_updateURL`, `/usr/bin/unzip` via `NSTask`, `AuthorizationExecuteWithPrivileges`/`chown -R` for GateKeeper/write-access); `:622-684` (`performUpgrade` — swaps `Contents`, then `removexattr(bundlePath.UTF8String, \"com.apple.quarantine\", 0)` recursively over every file in the bundle, then `execl(...)` relaunch)"
+        }
+      ]
+    }
   ]
 }

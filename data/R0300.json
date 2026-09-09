@@ -44,5 +44,53 @@
       "line": 17,
       "text": "| Stremio (stremio-shell) | https://github.com/Stremio/stremio-shell.git | c3a8bcbf857d / 2026-03-27 | Y | Y (`--autoupdater-force` optional; normal periodic check) | Y | https (`https://www.stremio.com/updater/check`, per README) | Yes | signature (RSA-SHA256 via OpenSSL `EVP_DigestVerify*`) on the version-descriptor JSON, plus per-file SHA-256 checksum from that signed descriptor | **pinned in binary** — RSA public key hardcoded as a PEM string in `publickey.h`, compiled in | publickey.h:1-13 (embedded `-----BEGIN PUBLIC KEY-----` RSA key); verifysig.c:5-15 (`init_public_key()` loads it via `PEM_read_bio_PUBKEY`), verifysig.c:17-79 (`verify_sig` = `EVP_DigestVerifyInit/Update/Final`); autoupdater.cpp:189-207 (`updateFromVersionDescFinished` rejects if `verify_sig(...) != 0`, emits `\"Unable to verify update signature\"`); autoupdater.cpp:214-247 (`prepareUpdate` extracts per-file `url`+`checksum` from the *signed* descriptor); autoupdater.cpp:320-329 (`downloadFinished` compares SHA-256 checksum before accepting the file) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-V1.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Stremio/stremio-shell.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "c3a8bcbf857d / 2026-03-27"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (`--autoupdater-force` optional; normal periodic check)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`https://www.stremio.com/updater/check`, per README)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Yes"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (RSA-SHA256 via OpenSSL `EVP_DigestVerify*`) on the version-descriptor JSON, plus per-file SHA-256 checksum from that signed descriptor"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned in binary** — RSA public key hardcoded as a PEM string in `publickey.h`, compiled in"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "publickey.h:1-13 (embedded `-----BEGIN PUBLIC KEY-----` RSA key); verifysig.c:5-15 (`init_public_key()` loads it via `PEM_read_bio_PUBKEY`), verifysig.c:17-79 (`verify_sig` = `EVP_DigestVerifyInit/Update/Final`); autoupdater.cpp:189-207 (`updateFromVersionDescFinished` rejects if `verify_sig(...) != 0`, emits `\"Unable to verify update signature\"`); autoupdater.cpp:214-247 (`prepareUpdate` extracts per-file `url`+`checksum` from the *signed* descriptor); autoupdater.cpp:320-329 (`downloadFinished` compares SHA-256 checksum before accepting the file)"
+        }
+      ]
+    }
   ]
 }

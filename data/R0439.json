@@ -48,5 +48,99 @@
       "line": 25,
       "text": "| homebridge-config-ui-x (content channel — plugin install/update UI + Homebridge self-update) | https://github.com/homebridge/homebridge-config-ui-x | afe70ac / 2026-08-19 | Y | N (user-initiated via UI, though scheduled checks exist) | Y | https to npm registry via spawned npm CLI (default TLS, not disabled) | N | hash from npm registry metadata (same endpoint) | unpinned / npm registry-supplied | src/modules/plugins/plugins.service.ts:2600-2671 (`runNpmCommand` spawns npm install/update); :1002 (`updateHomebridgePackage`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC6.md",
+      "source_line": 24,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/homebridge/homebridge"
+        },
+        {
+          "label": "commit/date",
+          "value": "ab1e8c4 / 2026-08-16"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "N (no self-updater or plugin installer in core; that lives in homebridge-config-ui-x)"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "N"
+        },
+        {
+          "label": "transport",
+          "value": "N/A"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A"
+        },
+        {
+          "label": "payload_verification",
+          "value": "N/A"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/pluginManager.ts has no npm/exec calls; negative census confirms"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-AC6.md",
+      "source_line": 25,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/homebridge/homebridge-config-ui-x"
+        },
+        {
+          "label": "commit/date",
+          "value": "afe70ac / 2026-08-19"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (user-initiated via UI, though scheduled checks exist)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https to npm registry via spawned npm CLI (default TLS, not disabled)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash from npm registry metadata (same endpoint)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "unpinned / npm registry-supplied"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/modules/plugins/plugins.service.ts:2600-2671 (`runNpmCommand` spawns npm install/update); :1002 (`updateHomebridgePackage`)"
+        }
+      ]
+    }
   ]
 }

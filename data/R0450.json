@@ -41,5 +41,53 @@
       "line": 32,
       "text": "| FHEM | https://github.com/fhem/fhem-mirror | f422756 / 2026-08-21 | Y | Y (`update` command; can be scheduled via `checktime`/cron notify) | Y | **HTTPS with TLS certificate validation DISABLED BY DEFAULT** — `SSL_verify_mode` is forced to `0` (SSL_VERIFY_NONE) unless the caller explicitly passes `sslargs.SSL_verify_mode`, and the update module (98_update.pm) never sets `sslargs` | N | NONE — the `controls_fhem.txt` manifest only records per-file timestamp + byte length (`UPD <ts> <len> <file>`), not a cryptographic hash; length-check can even be disabled via `updateNoFileCheck` attribute | N/A | fhem/FHEM/HttpUtils.pm:648-649 (`$par{SSL_verify_mode} = 0 if(!$hash->{sslargs} || !defined($hash->{sslargs}{SSL_verify_mode}));`); fhem/FHEM/98_update.pm:280-298 (control-file format is `UPD/CRE <ts> <len> <file>`, no hash field); fhem/FHEM/98_update.pm:111 (default source `https://fhem.de/fhemupdate/controls_fhem.txt`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC6.md",
+      "source_line": 32,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/fhem/fhem-mirror"
+        },
+        {
+          "label": "commit/date",
+          "value": "f422756 / 2026-08-21"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (`update` command; can be scheduled via `checktime`/cron notify)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "**HTTPS with TLS certificate validation DISABLED BY DEFAULT** — `SSL_verify_mode` is forced to `0` (SSL_VERIFY_NONE) unless the caller explicitly passes `sslargs.SSL_verify_mode`, and the update module (98_update.pm) never sets `sslargs`"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "NONE — the `controls_fhem.txt` manifest only records per-file timestamp + byte length (`UPD <ts> <len> <file>`), not a cryptographic hash; length-check can even be disabled via `updateNoFileCheck` attribute"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "fhem/FHEM/HttpUtils.pm:648-649 (`$par{SSL_verify_mode} = 0 if(!$hash->{sslargs} || !defined($hash->{sslargs}{SSL_verify_mode}));`); fhem/FHEM/98_update.pm:280-298 (control-file format is `UPD/CRE <ts> <len> <file>`, no hash field); fhem/FHEM/98_update.pm:111 (default source `https://fhem.de/fhemupdate/controls_fhem.txt`)"
+        }
+      ]
+    }
   ]
 }

@@ -41,5 +41,53 @@
       "line": 30,
       "text": "| rodeo | https://github.com/yhat/rodeo.git | aa1929b1596d1161cd81c930603636a929462ea3 / 2017-01-03 | Y | N (wired to an IPC/menu \"check for updates\" action; no auto-invocation on `app.on('ready')` found) | Y (Squirrel `autoUpdater` downloads + `quitAndInstall()`) | **plaintext HTTP** — `getUpdateUrl()` returns `http://bareback.s.yhat.com/update/{platform}/{version}` (not https!) | N | relies on Squirrel platform code-signing nominally, but delivered over unauthenticated HTTP so feed/redirect/payload can be tampered with in transit | OS keystore (nominal), moot given broken transport | `src/node/services/updater.js:24-32` (`getUpdateUrl`, plaintext `http://` feed host), `:59-60` (`setFeedURL`/`checkForUpdates`), `:71` (`quitAndInstall`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AG8.md",
+      "source_line": 30,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/yhat/rodeo.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "aa1929b1596d1161cd81c930603636a929462ea3 / 2017-01-03"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (wired to an IPC/menu \"check for updates\" action; no auto-invocation on `app.on('ready')` found)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (Squirrel `autoUpdater` downloads + `quitAndInstall()`)"
+        },
+        {
+          "label": "transport",
+          "value": "**plaintext HTTP** — `getUpdateUrl()` returns `http://bareback.s.yhat.com/update/{platform}/{version}` (not https!)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "relies on Squirrel platform code-signing nominally, but delivered over unauthenticated HTTP so feed/redirect/payload can be tampered with in transit"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore (nominal), moot given broken transport"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/node/services/updater.js:24-32` (`getUpdateUrl`, plaintext `http://` feed host), `:59-60` (`setFeedURL`/`checkForUpdates`), `:71` (`quitAndInstall`)"
+        }
+      ]
+    }
   ]
 }

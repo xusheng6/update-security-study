@@ -41,5 +41,49 @@
       "line": 12,
       "text": "| **UrBackup** (github.com/uroni/urbackup_backend, client+server) | **Y** | **Y** — enabled by default (`autoupdate_clients` setting defaults to `\"true\"`); server periodically fetches new client-agent builds and pushes them to connected clients with no admin interaction required | Y — server downloads `UrBackupUpdate.exe` / `UrBackupUpdateLinux.sh`, pushes to client over its protocol; client verifies then **executes it** as an installer/update binary | **plain HTTP** (`http://update.urbackup.org/2.5.x/`), no TLS at all for the download; integrity relies entirely on the offline signature, not transport security | Y — a detached signature file (`.sig2`, plus legacy `.sig`) is fetched alongside the payload and verified before install | **signature** — ECDSA (EC2N binary-field curve) + SHA-256 via Crypto++ (`CryptoPP::ECDSA<CryptoPP::EC2N, CryptoPP::SHA256>`), plus a separate SHA-512 \"already-applied\" hash check to prevent replay/downgrade of a previously-used update | verifying key is a **bundled/pinned public-key file shipped with the client install**, `urbackup_ecdsa409k1.pub` (found at `urbackup_backend/urbackupserver/urbackup_ecdsa409k1.pub` and `urbackup_backend/urbackupserver_installer_win/data_common/urbackup_ecdsa409k1.pub`; loaded client-side from `share/urbackup/urbackup_ecdsa409k1.pub` on macOS or `UPDATE_SIGNATURE_PREFIX \"urbackup_ecdsa409k1.pub\"` elsewhere) — not fetched over the network at update time | Update fetch (HTTP, no TLS): `urbackup_backend/urbackupserver/server_update.cpp:32` (URL), `:99-140` (downloads `.sig2`/`.sig` + payload). Auto-trigger: `urbackup_backend/urbackupserver/server_cleanup.cpp:253,332` (`upd.update_client()` called from periodic cleanup); default-on setting: `urbackup_backend/urbackupserver/server_settings.cpp:319` (`autoupdate_clients` default `\"true\"`). Client-side verification: `urbackup_backend/urbackupclient/ClientService.cpp:620-644` (`crypto_fak->verifyFile(pubkey, ...)` then `checkHash(getSha512Hash(...))` then move into place as `.exe`/`.sh` and execute). Verification implementation: `urbackup_backend/cryptoplugin/CryptoFactory.cpp:173-196` (`CryptoFactory::verifyFile`, real ECDSA-SHA256 `SignatureVerificationFilter` via Crypto++, not a bare hash compare) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-P5.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "Project",
+          "value": "**UrBackup** (github.com/uroni/urbackup_backend, client+server)"
+        },
+        {
+          "label": "has_updater",
+          "value": "**Y**"
+        },
+        {
+          "label": "auto",
+          "value": "**Y** — enabled by default (`autoupdate_clients` setting defaults to `\"true\"`); server periodically fetches new client-agent builds and pushes them to connected clients with no admin interaction required"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — server downloads `UrBackupUpdate.exe` / `UrBackupUpdateLinux.sh`, pushes to client over its protocol; client verifies then **executes it** as an installer/update binary"
+        },
+        {
+          "label": "transport",
+          "value": "**plain HTTP** (`http://update.urbackup.org/2.5.x/`), no TLS at all for the download; integrity relies entirely on the offline signature, not transport security"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y — a detached signature file (`.sig2`, plus legacy `.sig`) is fetched alongside the payload and verified before install"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**signature** — ECDSA (EC2N binary-field curve) + SHA-256 via Crypto++ (`CryptoPP::ECDSA<CryptoPP::EC2N, CryptoPP::SHA256>`), plus a separate SHA-512 \"already-applied\" hash check to prevent replay/downgrade of a previously-used update"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "verifying key is a **bundled/pinned public-key file shipped with the client install**, `urbackup_ecdsa409k1.pub` (found at `urbackup_backend/urbackupserver/urbackup_ecdsa409k1.pub` and `urbackup_backend/urbackupserver_installer_win/data_common/urbackup_ecdsa409k1.pub`; loaded client-side from `share/urbackup/urbackup_ecdsa409k1.pub` on macOS or `UPDATE_SIGNATURE_PREFIX \"urbackup_ecdsa409k1.pub\"` elsewhere) — not fetched over the network at update time"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "Update fetch (HTTP, no TLS): `urbackup_backend/urbackupserver/server_update.cpp:32` (URL), `:99-140` (downloads `.sig2`/`.sig` + payload). Auto-trigger: `urbackup_backend/urbackupserver/server_cleanup.cpp:253,332` (`upd.update_client()` called from periodic cleanup); default-on setting: `urbackup_backend/urbackupserver/server_settings.cpp:319` (`autoupdate_clients` default `\"true\"`). Client-side verification: `urbackup_backend/urbackupclient/ClientService.cpp:620-644` (`crypto_fak->verifyFile(pubkey, ...)` then `checkHash(getSha512Hash(...))` then move into place as `.exe`/`.sh` and execute). Verification implementation: `urbackup_backend/cryptoplugin/CryptoFactory.cpp:173-196` (`CryptoFactory::verifyFile`, real ECDSA-SHA256 `SignatureVerificationFilter` via Crypto++, not a bare hash compare)"
+        }
+      ]
+    }
   ]
 }

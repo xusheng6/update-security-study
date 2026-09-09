@@ -41,5 +41,53 @@
       "line": 21,
       "text": "| WonderCMS | https://github.com/WonderCMS/wondercms.git | f7501135e4f81502bd99675d0f0c58fde706e49f / 2026-01-01 | Y | N (admin clicks \"Update\" button) | Y | https, TLS enforced (cURL default verify, no `CURLOPT_SSL_VERIFYPEER=0` anywhere in `index.php`) | N | **none** | server-supplied/unpinned (raw.githubusercontent.com content trusted outright and written straight into the running app) | **Most severe finding in this batch.** `index.php:3272-3285` `updateAction()`: `$contents = $this->getFileFromRepo('index.php'); file_put_contents(__FILE__, $contents);` — the entire core CMS is a *single PHP file* that **overwrites itself** with raw content fetched over HTTPS from `raw.githubusercontent.com` (`WCMS_REPO` const at `:44`), with zero hash or signature verification before executing it as the live application. Any GitHub/CDN compromise or MITM using any CA the server trusts (no pinning) = instant RCE. Theme/plugin installer (`index.php:1681-1762`, `installUpdateModuleAction()`) downloads arbitrary `.zip` URLs (from a modules-cache manifest itself fetched over HTTPS unauthenticated) via cURL, has zip-slip path checks (`:1730-1746`) but **no payload signature/hash check** either — content-as-code channel, same C-equivalent risk. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AF7.md",
+      "source_line": 21,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/WonderCMS/wondercms.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "f7501135e4f81502bd99675d0f0c58fde706e49f / 2026-01-01"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (admin clicks \"Update\" button)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (cURL default verify, no `CURLOPT_SSL_VERIFYPEER=0` anywhere in `index.php`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (raw.githubusercontent.com content trusted outright and written straight into the running app)"
+        },
+        {
+          "label": "evidence",
+          "value": "**Most severe finding in this batch.** `index.php:3272-3285` `updateAction()`: `$contents = $this->getFileFromRepo('index.php'); file_put_contents(__FILE__, $contents);` — the entire core CMS is a *single PHP file* that **overwrites itself** with raw content fetched over HTTPS from `raw.githubusercontent.com` (`WCMS_REPO` const at `:44`), with zero hash or signature verification before executing it as the live application. Any GitHub/CDN compromise or MITM using any CA the server trusts (no pinning) = instant RCE. Theme/plugin installer (`index.php:1681-1762`, `installUpdateModuleAction()`) downloads arbitrary `.zip` URLs (from a modules-cache manifest itself fetched over HTTPS unauthenticated) via cURL, has zip-slip path checks (`:1730-1746`) but **no payload signature/hash check** either — content-as-code channel, same C-equivalent risk."
+        }
+      ]
+    }
   ]
 }

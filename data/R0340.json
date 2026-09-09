@@ -42,5 +42,53 @@
       "line": 17,
       "text": "| flyctl | https://github.com/superfly/flyctl | 0eb5a81 / 2026-08-20 | Y | Y (default `cfg.AutoUpdate=true`) | Y | https, TLS validation enforced (default `http.DefaultClient`, no `InsecureSkipVerify`/custom `tls.Config` found) | no | none in-repo — auto-update shells out to `curl -L https://fly.io/install.sh \\| sh` (or `iwr ... \\| iex` on Windows, or `brew upgrade`); the actual verification (if any) happens inside that external install script, which lives outside this repo and was not audited | N/A (delegated to external, unaudited install script) | `internal/command/command.go:372-449` (`promptAndAutoUpdate` runs before every command, auto-updates when `cfg.AutoUpdate` and severely out of date); `internal/config/config.go:192` (`AutoUpdate` defaults to `true`); `internal/update/update.go:247-267` (`upgradeCommand`/`UpgradeInPlace` build and exec `curl\\|sh`, `iwr\\|iex`, or `brew upgrade`); `internal/update/update.go:99,142,168` (plain `http.DefaultClient`, no checksum/signature check anywhere in `internal/update/update.go`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W7.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/superfly/flyctl"
+        },
+        {
+          "label": "commit/date",
+          "value": "0eb5a81 / 2026-08-20"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (default `cfg.AutoUpdate=true`)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS validation enforced (default `http.DefaultClient`, no `InsecureSkipVerify`/custom `tls.Config` found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "no"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none in-repo — auto-update shells out to `curl -L https://fly.io/install.sh \\| sh` (or `iwr ... \\| iex` on Windows, or `brew upgrade`); the actual verification (if any) happens inside that external install script, which lives outside this repo and was not audited"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A (delegated to external, unaudited install script)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`internal/command/command.go:372-449` (`promptAndAutoUpdate` runs before every command, auto-updates when `cfg.AutoUpdate` and severely out of date); `internal/config/config.go:192` (`AutoUpdate` defaults to `true`); `internal/update/update.go:247-267` (`upgradeCommand`/`UpgradeInPlace` build and exec `curl\\|sh`, `iwr\\|iex`, or `brew upgrade`); `internal/update/update.go:99,142,168` (plain `http.DefaultClient`, no checksum/signature check anywhere in `internal/update/update.go`)"
+        }
+      ]
+    }
   ]
 }

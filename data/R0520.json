@@ -41,5 +41,53 @@
       "line": 22,
       "text": "| CouchPotato | https://github.com/CouchPotato/CouchPotatoServer | 7260c12 / 2020-02-04 (project abandoned — last commit 2020) | Y | Y (opt-in, `conf('automatic')`) | Y | https to `api.couchpota.to` (server-controlled indirection); download itself follows a URL returned by that API, no TLS override found | N | none — extracts zip/tar and overwrites app dir, no hash/signature check | server-supplied/unpinned — even the download URL is fetched from CouchPotato's own API (`cp.source_url` → `https://api.couchpota.to/updater/?...`), a single compromised/hijacked endpoint fully controls what code gets installed | `couchpotato/core/_base/updater/main.py:79-109` (`autoUpdate` — automatic install+restart when `conf('automatic')` set); `couchpotato/core/_base/updater/main.py:299-337` (`SourceUpdater.doUpdate` — downloads via `file.download` event, extracts zip/tar, `replaceWith()` overwrites app_dir with no verification); `couchpotato/core/media/movie/providers/info/couchpotatoapi.py:25,59-64` (`urls['updater'] = 'https://api.couchpota.to/updater/?%s'` supplies the actual download URL) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AG7.md",
+      "source_line": 22,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/CouchPotato/CouchPotatoServer"
+        },
+        {
+          "label": "commit/date",
+          "value": "7260c12 / 2020-02-04 (project abandoned — last commit 2020)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (opt-in, `conf('automatic')`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https to `api.couchpota.to` (server-controlled indirection); download itself follows a URL returned by that API, no TLS override found"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — extracts zip/tar and overwrites app dir, no hash/signature check"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned — even the download URL is fetched from CouchPotato's own API (`cp.source_url` → `https://api.couchpota.to/updater/?...`), a single compromised/hijacked endpoint fully controls what code gets installed"
+        },
+        {
+          "label": "evidence",
+          "value": "`couchpotato/core/_base/updater/main.py:79-109` (`autoUpdate` — automatic install+restart when `conf('automatic')` set); `couchpotato/core/_base/updater/main.py:299-337` (`SourceUpdater.doUpdate` — downloads via `file.download` event, extracts zip/tar, `replaceWith()` overwrites app_dir with no verification); `couchpotato/core/media/movie/providers/info/couchpotatoapi.py:25,59-64` (`urls['updater'] = 'https://api.couchpota.to/updater/?%s'` supplies the actual download URL)"
+        }
+      ]
+    }
   ]
 }

@@ -42,5 +42,53 @@
       "line": 23,
       "text": "| Snap! | https://github.com/jmoenig/Snap.git | 00ca029 / 2026-08-09 | N/A — pure client-side web app / PWA (no native installer in this repo) | N | **Y (content channel — confirmed)** | n/a for app self-update; extension fetch uses whatever scheme is embedded in the project (often plain `http://` allowed) | n/a | none | none — raw `<script src=url>` injection, no integrity check | `src/gui.js:7303-7338` — `IDE_Morph.prototype.autoLoadExtensions`: reads global vars named `__module__*` from a loaded Snap! project, and for each URL value does `document.createElement('script'); scriptElement.src = url; document.head.appendChild(scriptElement);` with **no signature/hash check** — arbitrary JS execution from opening an untrusted `.xml`/project file. Gated only by `Process.prototype.enableJS` or an allow-list (`SnapExtensions.urls`), both of which are user/app configurable, not a security boundary |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-X3.md",
+      "source_line": 23,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/jmoenig/Snap.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "00ca029 / 2026-08-09"
+        },
+        {
+          "label": "has_updater",
+          "value": "N/A — pure client-side web app / PWA (no native installer in this repo)"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y (content channel — confirmed)**"
+        },
+        {
+          "label": "transport",
+          "value": "n/a for app self-update; extension fetch uses whatever scheme is embedded in the project (often plain `http://` allowed)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "n/a"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none — raw `<script src=url>` injection, no integrity check"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/gui.js:7303-7338` — `IDE_Morph.prototype.autoLoadExtensions`: reads global vars named `__module__*` from a loaded Snap! project, and for each URL value does `document.createElement('script'); scriptElement.src = url; document.head.appendChild(scriptElement);` with **no signature/hash check** — arbitrary JS execution from opening an untrusted `.xml`/project file. Gated only by `Process.prototype.enableJS` or an allow-list (`SnapExtensions.urls`), both of which are user/app configurable, not a security boundary"
+        }
+      ]
+    }
   ]
 }

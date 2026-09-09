@@ -42,5 +42,53 @@
       "line": 31,
       "text": "| gitify | https://github.com/gitify-app/gitify.git | 01f215a / 2026-08-22 | Y | Y (initial check on launch + periodic `setInterval`) | Y | https (GitHub Releases provider via electron-updater) | delegated to OS code-signing, not a separate signed manifest | OS code-signing (macOS Developer-ID + notarization; Windows nsis/Authenticode via electron-updater) | OS keystore (Apple code-signing identity `Adam Setch (5KD23H9729)` + notarization ticket; Windows Authenticode chain) | `src/main/updater.ts:37-51,115-143` (`autoUpdater.checkForUpdatesAndNotify()` on launch + periodic, `quitAndInstall()` on confirm); `electron-builder.js:26-33` (mac `identity`, `notarize:false` handled in afterSign, `hardenedRuntime:true`), `:62-66` (`publish: {provider:'github', owner:'gitify-app', repo:'gitify'}`); `scripts/afterSign.js:1-27` (`@electron/notarize`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AH3.md",
+      "source_line": 31,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/gitify-app/gitify.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "01f215a / 2026-08-22"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (initial check on launch + periodic `setInterval`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub Releases provider via electron-updater)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "delegated to OS code-signing, not a separate signed manifest"
+        },
+        {
+          "label": "payload_verification",
+          "value": "OS code-signing (macOS Developer-ID + notarization; Windows nsis/Authenticode via electron-updater)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore (Apple code-signing identity `Adam Setch (5KD23H9729)` + notarization ticket; Windows Authenticode chain)"
+        },
+        {
+          "label": "evidence",
+          "value": "`src/main/updater.ts:37-51,115-143` (`autoUpdater.checkForUpdatesAndNotify()` on launch + periodic, `quitAndInstall()` on confirm); `electron-builder.js:26-33` (mac `identity`, `notarize:false` handled in afterSign, `hardenedRuntime:true`), `:62-66` (`publish: {provider:'github', owner:'gitify-app', repo:'gitify'}`); `scripts/afterSign.js:1-27` (`@electron/notarize`)"
+        }
+      ]
+    }
   ]
 }

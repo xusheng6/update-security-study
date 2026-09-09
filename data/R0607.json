@@ -42,5 +42,53 @@
       "line": 16,
       "text": "| calibre-web | https://github.com/janeczku/calibre-web | e1f04638 / 2026-08-23 | Y | N (admin clicks \"update\" button in web UI) | Y | https, TLS enforced (default `requests` `verify=True`; no `verify=False`/insecure flags found anywhere in repo) | N | none | server-supplied/unpinned (GitHub API `https://api.github.com/repos/janeczku/calibre-web`) | `cps/updater.py:38` (`_REPOSITORY_API_URL`), `:82` (`requests.get` downloads release zip), `:87-92` (`zipfile.ZipFile(...).extractall`), `:263-313` (`update_source`/`move_all_files` overwrite live app source files), `:100-107` (server restarted after copy, no restart triggers install) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AM3.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/janeczku/calibre-web"
+        },
+        {
+          "label": "commit/date",
+          "value": "e1f04638 / 2026-08-23"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (admin clicks \"update\" button in web UI)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (default `requests` `verify=True`; no `verify=False`/insecure flags found anywhere in repo)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (GitHub API `https://api.github.com/repos/janeczku/calibre-web`)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`cps/updater.py:38` (`_REPOSITORY_API_URL`), `:82` (`requests.get` downloads release zip), `:87-92` (`zipfile.ZipFile(...).extractall`), `:263-313` (`update_source`/`move_all_files` overwrite live app source files), `:100-107` (server restarted after copy, no restart triggers install)"
+        }
+      ]
+    }
   ]
 }

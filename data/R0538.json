@@ -41,5 +41,53 @@
       "line": 23,
       "text": "| RainLoop Webmail | https://github.com/RainLoop/rainloop-webmail | 9bf8fa5b63d7e6871ee533126a7e1b1c85ee45b5 / 2022-09-01 (project archived) | Y | N (admin-triggered) | Y | https, **TLS cert validation explicitly DISABLED** (hardcoded, not conditional) | N | none | none | `rainloop/v/0.0.0/app/libraries/RainLoop/Actions.php:4570-4592` (`DoAdminUpdateCoreData`), `:4635-4659` (`downloadRemotePackageByUrl` → `MailSo\\Base\\Http::SaveUrlToFile`), `:4700-4728` (plugin install, same pattern); `rainloop/v/0.0.0/app/libraries/RainLoop/Providers/Version.php:82-187` (`UpdateCore` extracts zip via PclZip and overwrites live `index.php`/`rainloop/` tree with zero signature/hash check); `rainloop/v/0.0.0/app/libraries/MailSo/Base/Http.php:580` (`CURLOPT_SSL_VERIFYPEER => false` inside `SaveUrlToFile`, the function used to fetch the update/plugin package) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AI7.md",
+      "source_line": 23,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/RainLoop/rainloop-webmail"
+        },
+        {
+          "label": "commit/date",
+          "value": "9bf8fa5b63d7e6871ee533126a7e1b1c85ee45b5 / 2022-09-01 (project archived)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (admin-triggered)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, **TLS cert validation explicitly DISABLED** (hardcoded, not conditional)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`rainloop/v/0.0.0/app/libraries/RainLoop/Actions.php:4570-4592` (`DoAdminUpdateCoreData`), `:4635-4659` (`downloadRemotePackageByUrl` → `MailSo\\Base\\Http::SaveUrlToFile`), `:4700-4728` (plugin install, same pattern); `rainloop/v/0.0.0/app/libraries/RainLoop/Providers/Version.php:82-187` (`UpdateCore` extracts zip via PclZip and overwrites live `index.php`/`rainloop/` tree with zero signature/hash check); `rainloop/v/0.0.0/app/libraries/MailSo/Base/Http.php:580` (`CURLOPT_SSL_VERIFYPEER => false` inside `SaveUrlToFile`, the function used to fetch the update/plugin package)"
+        }
+      ]
+    }
   ]
 }

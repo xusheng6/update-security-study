@@ -41,5 +41,53 @@
       "line": 14,
       "text": "| SwiftBar | https://github.com/swiftbar/SwiftBar | Sparkle 2 (SPM dependency; **disabled entirely in the Mac App Store build variant**) | Y (direct/non-MAS build only; N for the `MAC_APP_STORE` build variant, which stubs out `SPUUpdaterDelegate`/`SPUStandardUserDriverDelegate` and never imports Sparkle) | Y (checks automatically; standard Sparkle UI) | Y (non-MAS build) | https | TLS-only | **none** — appcast enclosures carry no `sparkle:edSignature`/`sparkle:dsaSignature`, and no `SUPublicEDKey`/`SUPublicDSAKey` is set anywhere in the app (Info.plist or code), so Sparkle has no pinned key to verify against | none (no key pinned anywhere in the repo) | `SwiftBar/AppDelegate.swift:5-11` — `#if MAC_APP_STORE` stubs Sparkle protocols, `#else import Sparkle`. `SwiftBar/AppDelegate.swift:129` — `SPUUpdater(hostBundle:applicationBundle:userDriver:delegate:)`. `SwiftBar/AppDelegate.swift:276-280` — `feedURLString(for:)` returns `https://swiftbar.github.io/SwiftBar/appcast-beta.xml` or `https://swiftbar.github.io/SwiftBar/appcast.xml`. `SwiftBar/Resources/Info.plist:48-52` — `NSAppTransportSecurity` → `NSAllowsArbitraryLoads=true` (ATS disabled app-wide, though the hardcoded feed URLs are https). Repo-wide `grep -rn \"SUPublicEDKey|SUPublicDSAKey\"` returns zero hits. Live appcast `https://swiftbar.github.io/SwiftBar/appcast.xml` (fetched via WebFetch) items for v2.1.1/2.1.0/2.0.1 all lack signature attributes, enclosures point to `github.com/swiftbar/SwiftBar/releases/download/...`. `SwiftBar.xcodeproj/project.pbxproj:1019-1025` — SPM dependency on `https://github.com/sparkle-project/Sparkle`, `>= 2.0.0`. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-N2.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/swiftbar/SwiftBar"
+        },
+        {
+          "label": "framework",
+          "value": "Sparkle 2 (SPM dependency; **disabled entirely in the Mac App Store build variant**)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (direct/non-MAS build only; N for the `MAC_APP_STORE` build variant, which stubs out `SPUUpdaterDelegate`/`SPUStandardUserDriverDelegate` and never imports Sparkle)"
+        },
+        {
+          "label": "auto",
+          "value": "Y (checks automatically; standard Sparkle UI)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (non-MAS build)"
+        },
+        {
+          "label": "transport",
+          "value": "https"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "TLS-only"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — appcast enclosures carry no `sparkle:edSignature`/`sparkle:dsaSignature`, and no `SUPublicEDKey`/`SUPublicDSAKey` is set anywhere in the app (Info.plist or code), so Sparkle has no pinned key to verify against"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none (no key pinned anywhere in the repo)"
+        },
+        {
+          "label": "evidence",
+          "value": "`SwiftBar/AppDelegate.swift:5-11` — `#if MAC_APP_STORE` stubs Sparkle protocols, `#else import Sparkle`. `SwiftBar/AppDelegate.swift:129` — `SPUUpdater(hostBundle:applicationBundle:userDriver:delegate:)`. `SwiftBar/AppDelegate.swift:276-280` — `feedURLString(for:)` returns `https://swiftbar.github.io/SwiftBar/appcast-beta.xml` or `https://swiftbar.github.io/SwiftBar/appcast.xml`. `SwiftBar/Resources/Info.plist:48-52` — `NSAppTransportSecurity` → `NSAllowsArbitraryLoads=true` (ATS disabled app-wide, though the hardcoded feed URLs are https). Repo-wide `grep -rn \"SUPublicEDKey|SUPublicDSAKey\"` returns zero hits. Live appcast `https://swiftbar.github.io/SwiftBar/appcast.xml` (fetched via WebFetch) items for v2.1.1/2.1.0/2.0.1 all lack signature attributes, enclosures point to `github.com/swiftbar/SwiftBar/releases/download/...`. `SwiftBar.xcodeproj/project.pbxproj:1019-1025` — SPM dependency on `https://github.com/sparkle-project/Sparkle`, `>= 2.0.0`."
+        }
+      ]
+    }
   ]
 }

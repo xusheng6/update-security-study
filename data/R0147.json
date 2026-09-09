@@ -41,5 +41,53 @@
       "line": 15,
       "text": "| Simplenote | https://github.com/Automattic/simplenote-electron | Electron (electron-updater 6.3.9) | Y | mac/win/AppImage: chk+dl automatic in background, install on user confirm (\"Update & Restart\" dialog); Linux deb/rpm/tar.gz: notify-only manual (opens browser to GitHub Releases page, no in-app download) | Y on mac/win/AppImage (electron-updater's `autoUpdater.quitAndInstall()` runs the downloaded installer); N on other Linux package formats (external browser only) | https — electron-updater's default GitHub provider (derived from `package.json` `repository` field, no explicit `publish` block in `electron-builder.json`) fetching `latest.yml`/release assets from github.com; Linux manual-updater path also calls `api.github.com/repos/automattic/simplenote-electron/releases/latest` and the `latest.yml` asset directly. No TLS-verification bypass found anywhere in the repo — TLS enforced. | N — `latest.yml` (electron-updater's update manifest) is a plain, unsigned YAML file; no GPG/signature on the manifest itself | hash-from-manifest (electron-updater validates the `sha512` field embedded in `latest.yml` against the downloaded installer) + OS-code-signing as an additional layer on mac/win (mac: `hardenedRuntime`+entitlements+notarization via `after_sign_hook.js`; win: NSIS installer signed, `publisherName` set to \"Automattic, Inc.\") — this signing/verification logic lives inside the `electron-updater` dependency itself, not in this app repo, so is asserted per electron-updater's documented default behavior rather than independently re-verified here | sha512 hash sourced from the unsigned `latest.yml` published alongside the GitHub release (not a public-key signature); code-signing certs are Automattic's Apple Developer ID / Authenticode certs, checked by the OS at install time | `desktop/updater/auto-updater/index.js:6` (`const { autoUpdater } = require('electron-updater')`), `:30` (`autoUpdater.checkForUpdates()`), `:42` (`autoUpdater.quitAndInstall()`); `desktop/updater/manual-updater/index.js:38-71` (fetch GitHub API → fetch `latest.yml` asset → `yaml.load` → `semver.lt` compare), `:88-90` (`onConfirm(){ shell.openExternal(this.downloadUrl) }`); `desktop/config-updater.json:3-5` (`downloadUrl`/`changelogUrl`/`apiUrl` all `github.com`/`api.github.com`); `package.json:23-26` (`repository.url` = `git://github.com/Automattic/simplenote-electron.git`), `package.json:130` (`\"electron-updater\": \"6.3.9\"`); `desktop/updater/index.js:13-28` (platform branch: mac/win/APPIMAGE → AutoUpdater, else → ManualUpdater) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-I4.md",
+      "source_line": 15,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/Automattic/simplenote-electron"
+        },
+        {
+          "label": "framework",
+          "value": "Electron (electron-updater 6.3.9)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "mac/win/AppImage: chk+dl automatic in background, install on user confirm (\"Update & Restart\" dialog); Linux deb/rpm/tar.gz: notify-only manual (opens browser to GitHub Releases page, no in-app download)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y on mac/win/AppImage (electron-updater's `autoUpdater.quitAndInstall()` runs the downloaded installer); N on other Linux package formats (external browser only)"
+        },
+        {
+          "label": "transport",
+          "value": "https — electron-updater's default GitHub provider (derived from `package.json` `repository` field, no explicit `publish` block in `electron-builder.json`) fetching `latest.yml`/release assets from github.com; Linux manual-updater path also calls `api.github.com/repos/automattic/simplenote-electron/releases/latest` and the `latest.yml` asset directly. No TLS-verification bypass found anywhere in the repo — TLS enforced."
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N — `latest.yml` (electron-updater's update manifest) is a plain, unsigned YAML file; no GPG/signature on the manifest itself"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (electron-updater validates the `sha512` field embedded in `latest.yml` against the downloaded installer) + OS-code-signing as an additional layer on mac/win (mac: `hardenedRuntime`+entitlements+notarization via `after_sign_hook.js`; win: NSIS installer signed, `publisherName` set to \"Automattic, Inc.\") — this signing/verification logic lives inside the `electron-updater` dependency itself, not in this app repo, so is asserted per electron-updater's documented default behavior rather than independently re-verified here"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "sha512 hash sourced from the unsigned `latest.yml` published alongside the GitHub release (not a public-key signature); code-signing certs are Automattic's Apple Developer ID / Authenticode certs, checked by the OS at install time"
+        },
+        {
+          "label": "evidence",
+          "value": "`desktop/updater/auto-updater/index.js:6` (`const { autoUpdater } = require('electron-updater')`), `:30` (`autoUpdater.checkForUpdates()`), `:42` (`autoUpdater.quitAndInstall()`); `desktop/updater/manual-updater/index.js:38-71` (fetch GitHub API → fetch `latest.yml` asset → `yaml.load` → `semver.lt` compare), `:88-90` (`onConfirm(){ shell.openExternal(this.downloadUrl) }`); `desktop/config-updater.json:3-5` (`downloadUrl`/`changelogUrl`/`apiUrl` all `github.com`/`api.github.com`); `package.json:23-26` (`repository.url` = `git://github.com/Automattic/simplenote-electron.git`), `package.json:130` (`\"electron-updater\": \"6.3.9\"`); `desktop/updater/index.js:13-28` (platform branch: mac/win/APPIMAGE → AutoUpdater, else → ManualUpdater)"
+        }
+      ]
+    }
   ]
 }

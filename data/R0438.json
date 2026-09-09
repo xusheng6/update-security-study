@@ -48,5 +48,99 @@
       "line": 20,
       "text": "| openHAB Marketplace/Add-on installer (content channel — Karaf KAR add-ons) | (same repo) | b9c3646 / 2026-08-20 | Y | N (user-triggered install via UI) | Y | https URL fetched via `URL.openStream()` (Java default, cert validation not disabled) | N | NONE — no hash/signature check at all | N/A | bundles/org.openhab.core.addon.marketplace.karaf/.../CommunityKarafAddonHandler.java:110-155 (install() → addKarToCache() → `sourceUrl.openStream()` → `Files.copy()`, then `karService.install()` with zero integrity check) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC6.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/openhab/openhab-core"
+        },
+        {
+          "label": "commit/date",
+          "value": "b9c3646 / 2026-08-20"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "N (self-distro update via apt/docker only; no in-app self-updater for the app itself)"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "N"
+        },
+        {
+          "label": "transport",
+          "value": "N/A"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A"
+        },
+        {
+          "label": "payload_verification",
+          "value": "N/A"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "negative census: no checkForUpdate/self-update string for openHAB itself; only device \"FirmwareUpdateService\" (device firmware, out of scope)"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-AC6.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "(same repo)"
+        },
+        {
+          "label": "commit/date",
+          "value": "b9c3646 / 2026-08-20"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (user-triggered install via UI)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https URL fetched via `URL.openStream()` (Java default, cert validation not disabled)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "NONE — no hash/signature check at all"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "bundles/org.openhab.core.addon.marketplace.karaf/.../CommunityKarafAddonHandler.java:110-155 (install() → addKarToCache() → `sourceUrl.openStream()` → `Files.copy()`, then `karService.install()` with zero integrity check)"
+        }
+      ]
+    }
   ]
 }

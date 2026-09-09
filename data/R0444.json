@@ -49,5 +49,99 @@
       "line": 34,
       "text": "| Jeedom Market (content channel — plugin install/update) | (same repo) | f2a4188 / 2026-08-20 | Y | N (user-triggered) | Y | https (delegated to `repo_market` plugin class, not in this repo; core-side has no TLS override) | N | NONE — `doUpdate()` only checks `filesize($tmp) < 100` and that the extension is `.zip`; no hash/signature check | N/A | core/class/update.class.php:303-374 (`doUpdate()`: downloads via `$class::downloadObject($this)`, checks only size and `.zip` extension, then `ZipArchive::extractTo()` directly into `plugins/<id>`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC6.md",
+      "source_line": 33,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/jeedom/core"
+        },
+        {
+          "label": "commit/date",
+          "value": "f2a4188 / 2026-08-20"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (can be scheduled; also admin-triggered)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`wget` to `github.com/jeedom/core/archive/<branch>.zip`, no `--no-check-certificate` flag — TLS validation not disabled)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "NONE — only `filesize($tmp) < 100` sanity check before extracting the zip over the live install and running `install/update.php` (with sudo)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "install/update.php:108-130 (`$url = 'https://github.com/jeedom/core/archive/' . config::byKey('core::branch') . '.zip'; ... exec('wget ... ' . $url . ' -O ' . $tmp);`); :143-146 (`filesize($tmp) < 100` is the only check before `ZipArchive::extractTo`)"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-AC6.md",
+      "source_line": 34,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "(same repo)"
+        },
+        {
+          "label": "commit/date",
+          "value": "f2a4188 / 2026-08-20"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (user-triggered)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (delegated to `repo_market` plugin class, not in this repo; core-side has no TLS override)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "NONE — `doUpdate()` only checks `filesize($tmp) < 100` and that the extension is `.zip`; no hash/signature check"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "core/class/update.class.php:303-374 (`doUpdate()`: downloads via `$class::downloadObject($this)`, checks only size and `.zip` extension, then `ZipArchive::extractTo()` directly into `plugins/<id>`)"
+        }
+      ]
+    }
   ]
 }

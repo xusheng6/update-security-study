@@ -41,5 +41,53 @@
       "line": 14,
       "text": "| ExplorerPatcher | github.com/valinet/ExplorerPatcher | Native C/C++ (DLL injected into `explorer.exe` + companion `ep_setup.exe`), GitHub-only distribution (no Store/winget) | Y — custom in-app/in-DLL updater (`ExplorerPatcher/updates.cpp`, `updates.h`) | Default policy is \"notify\" (`UPDATE_POLICY_DEFAULT UPDATE_POLICY_NOTIFY`, user-configurable to Auto/Notify/Manual via registry); the periodic check itself runs on a background thread (`CheckForUpdatesThread`) without user action | Y — on update, downloads `ep_setup.exe` (or staging asset) via WinInet to disk, then runs it with `ShellExecuteExW(lpVerb=L\"runas\", lpParameters=L\"/update_silent\")`, i.e. an elevated (UAC) silent install; if `UpdateUseLocal` is set it instead pipes a remote PowerShell script (`irm .../ep_make_safe.ps1 \\| iex`) into `powershell.exe` | HTTPS via WinInet (`InternetOpenUrlW`/`InternetReadFile`) against `https://github.com/valinet/ExplorerPatcher/releases/latest/download/<setup-name>` (stable) or `https://api.github.com/repos/valinet/ExplorerPatcher/releases?per_page=1` (staging, JSON-parsed for `browser_download_url`); default WinInet cert validation, no `INTERNET_FLAG_IGNORE_CERT_*` overrides found; the base update URL is itself read from a user/registry-writable `HKCU...UpdateURL` value, so any local process able to write that key can redirect updates | N (no manifest — direct binary download; the staging path parses raw GitHub API JSON, also unsigned) | none — the app reads only the first ~32 bytes of the incoming stream to (a) confirm an `MZ` (PE) header and (b) extract an embedded version string, comparing it to a locally computed value (`GetHardcodedHash`/`ComputeFileHash2`, itself just `fileVersion + MD5(local module)` used as a version fingerprint, not a manifest-supplied trust anchor); this is a version/sanity check, not a cryptographic integrity or authenticity check of the downloaded installer before it is executed with `runas` | n/a — no `WinVerifyTrust`/`CryptQueryObject`/Authenticode check exists anywhere in `updates.cpp`; whatever code-signing is on the actual EXE is never validated by ExplorerPatcher itself before execution | ExplorerPatcher/updates.h:35-37 (`UPDATES_RELEASE_INFO_URL_STABLE`, `UPDATES_RELEASE_INFO_URL_STAGING`); ExplorerPatcher/updates.cpp:369-393 (`InternetOpenUrlW` + `InternetReadFile` reading first bytes, `hash[0]==0x4D && hash[1]==0x5A` MZ check); :614-663 (download loop writing to `wszPath` via `InternetReadFile`/`fwrite`); :759-765 (`ShExecInfo.lpVerb = L\"runas\"`, `lpParameters = L\"/update_silent\"`, `ShellExecuteExW(&ShExecInfo)`); :925 (`szCheckAgainst` passed to `IsUpdateAvailableHelper`); ExplorerPatcher/utility.c:274 (`CryptCreateHash(hProv, CALG_MD5, ...)` — local-file version fingerprint, not payload verification), :329-347 (`ComputeFileHash2`, builds `\"%d.%d.%d.%d.\" + MD5hex` string) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-O6.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/valinet/ExplorerPatcher"
+        },
+        {
+          "label": "framework",
+          "value": "Native C/C++ (DLL injected into `explorer.exe` + companion `ep_setup.exe`), GitHub-only distribution (no Store/winget)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y — custom in-app/in-DLL updater (`ExplorerPatcher/updates.cpp`, `updates.h`)"
+        },
+        {
+          "label": "auto",
+          "value": "Default policy is \"notify\" (`UPDATE_POLICY_DEFAULT UPDATE_POLICY_NOTIFY`, user-configurable to Auto/Notify/Manual via registry); the periodic check itself runs on a background thread (`CheckForUpdatesThread`) without user action"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — on update, downloads `ep_setup.exe` (or staging asset) via WinInet to disk, then runs it with `ShellExecuteExW(lpVerb=L\"runas\", lpParameters=L\"/update_silent\")`, i.e. an elevated (UAC) silent install; if `UpdateUseLocal` is set it instead pipes a remote PowerShell script (`irm .../ep_make_safe.ps1 \\| iex`) into `powershell.exe`"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS via WinInet (`InternetOpenUrlW`/`InternetReadFile`) against `https://github.com/valinet/ExplorerPatcher/releases/latest/download/<setup-name>` (stable) or `https://api.github.com/repos/valinet/ExplorerPatcher/releases?per_page=1` (staging, JSON-parsed for `browser_download_url`); default WinInet cert validation, no `INTERNET_FLAG_IGNORE_CERT_*` overrides found; the base update URL is itself read from a user/registry-writable `HKCU...UpdateURL` value, so any local process able to write that key can redirect updates"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no manifest — direct binary download; the staging path parses raw GitHub API JSON, also unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — the app reads only the first ~32 bytes of the incoming stream to (a) confirm an `MZ` (PE) header and (b) extract an embedded version string, comparing it to a locally computed value (`GetHardcodedHash`/`ComputeFileHash2`, itself just `fileVersion + MD5(local module)` used as a version fingerprint, not a manifest-supplied trust anchor); this is a version/sanity check, not a cryptographic integrity or authenticity check of the downloaded installer before it is executed with `runas`"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a — no `WinVerifyTrust`/`CryptQueryObject`/Authenticode check exists anywhere in `updates.cpp`; whatever code-signing is on the actual EXE is never validated by ExplorerPatcher itself before execution"
+        },
+        {
+          "label": "evidence",
+          "value": "ExplorerPatcher/updates.h:35-37 (`UPDATES_RELEASE_INFO_URL_STABLE`, `UPDATES_RELEASE_INFO_URL_STAGING`); ExplorerPatcher/updates.cpp:369-393 (`InternetOpenUrlW` + `InternetReadFile` reading first bytes, `hash[0]==0x4D && hash[1]==0x5A` MZ check); :614-663 (download loop writing to `wszPath` via `InternetReadFile`/`fwrite`); :759-765 (`ShExecInfo.lpVerb = L\"runas\"`, `lpParameters = L\"/update_silent\"`, `ShellExecuteExW(&ShExecInfo)`); :925 (`szCheckAgainst` passed to `IsUpdateAvailableHelper`); ExplorerPatcher/utility.c:274 (`CryptCreateHash(hProv, CALG_MD5, ...)` — local-file version fingerprint, not payload verification), :329-347 (`ComputeFileHash2`, builds `\"%d.%d.%d.%d.\" + MD5hex` string)"
+        }
+      ]
+    }
   ]
 }

@@ -42,5 +42,53 @@
       "line": 18,
       "text": "| Mudlet | https://github.com/Mudlet/Mudlet.git | a7cf7a2dbb92 / 2026-08-22 | Y | Y (opt-in toggle, on by default per `dblsqd::UpdateDialog::autoDownloadEnabled(true, ...)`) | Y | https (GitHub Releases API + release assets; `QNetworkRequest::RedirectPolicyAttribute` set to `NoLessSafeRedirectPolicy`, no TLS-verification-disable found) | N/A (no code-signed manifest; GitHub Releases JSON is unsigned) | **hash (SHA256)** — required by default (`requireChecksums=true`); download is rejected if no checksum published or if it fails to match | server-supplied/unpinned — the SHA256SUMS file is fetched from the *same* GitHub Releases endpoint as the binary itself (no separate signing key, no pinned public key in the binary) | `src/updater.cpp:324` `feed->downloadRelease(release, /*requireChecksums=*/true)`; `src/updater/Feed.cpp:222-228` refuses to install if no checksums; `src/updater/Feed.cpp:271-318` `fetchChecksums()`; `src/updater/Feed.cpp:492-509` computes `QCryptographicHash::Sha256` over the downloaded file and rejects on mismatch |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AK1.md",
+      "source_line": 18,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Mudlet/Mudlet.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "a7cf7a2dbb92 / 2026-08-22"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (opt-in toggle, on by default per `dblsqd::UpdateDialog::autoDownloadEnabled(true, ...)`)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub Releases API + release assets; `QNetworkRequest::RedirectPolicyAttribute` set to `NoLessSafeRedirectPolicy`, no TLS-verification-disable found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A (no code-signed manifest; GitHub Releases JSON is unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**hash (SHA256)** — required by default (`requireChecksums=true`); download is rejected if no checksum published or if it fails to match"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned — the SHA256SUMS file is fetched from the *same* GitHub Releases endpoint as the binary itself (no separate signing key, no pinned public key in the binary)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/updater.cpp:324` `feed->downloadRelease(release, /*requireChecksums=*/true)`; `src/updater/Feed.cpp:222-228` refuses to install if no checksums; `src/updater/Feed.cpp:271-318` `fetchChecksums()`; `src/updater/Feed.cpp:492-509` computes `QCryptographicHash::Sha256` over the downloaded file and rejects on mismatch"
+        }
+      ]
+    }
   ]
 }

@@ -41,5 +41,53 @@
       "line": 20,
       "text": "| ShareX | https://github.com/ShareX/ShareX.git | db2bba61 / 2026-08-22 | Y | Y (hourly timer `GitHubUpdateManager.ConfigureAutoUpdate`, `AutoUpdateEnabled=true` by default; after one \"update?\" prompt, download+install both auto-start) | Y | https (api.github.com + GitHub release asset CDN), TLS default (`HttpClientFactory.Create()`, no bypass found) | N | none — GitHub Release JSON has no checksum/signature field parsed; app never hashes or verifies the downloaded `setup.exe` before running it | server-supplied/unpinned (none at all) | ShareX.HelpersLib/UpdateChecker/GitHubUpdateChecker.cs:145-208 (`UpdateReleaseInfo`, picks `setup*.exe` asset, no hash field), ShareX.HelpersLib/Presentation/UpdateChecker/DownloaderWindow.axaml.cs:247-279 (`RunInstaller`: `Process.Start` on the downloaded exe with `/SILENT`, `Verb=\"runas\"`), ShareX.HelpersLib/UpdateChecker/GitHubUpdateManager.cs:36,58-74 (`AutoUpdateEnabled=true` default, hourly `Timer`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AL6.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/ShareX/ShareX.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "db2bba61 / 2026-08-22"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (hourly timer `GitHubUpdateManager.ConfigureAutoUpdate`, `AutoUpdateEnabled=true` by default; after one \"update?\" prompt, download+install both auto-start)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (api.github.com + GitHub release asset CDN), TLS default (`HttpClientFactory.Create()`, no bypass found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — GitHub Release JSON has no checksum/signature field parsed; app never hashes or verifies the downloaded `setup.exe` before running it"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (none at all)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "ShareX.HelpersLib/UpdateChecker/GitHubUpdateChecker.cs:145-208 (`UpdateReleaseInfo`, picks `setup*.exe` asset, no hash field), ShareX.HelpersLib/Presentation/UpdateChecker/DownloaderWindow.axaml.cs:247-279 (`RunInstaller`: `Process.Start` on the downloaded exe with `/SILENT`, `Verb=\"runas\"`), ShareX.HelpersLib/UpdateChecker/GitHubUpdateManager.cs:36,58-74 (`AutoUpdateEnabled=true` default, hourly `Timer`)"
+        }
+      ]
+    }
   ]
 }

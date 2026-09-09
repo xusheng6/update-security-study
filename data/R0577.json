@@ -42,5 +42,53 @@
       "line": 25,
       "text": "| mangadex-downloader | https://github.com/mansuf/mangadex-downloader | a0c28102 / 2026-02-07 | Y | N (only via explicit `--update`/`-U` CLI flag) | Y (frozen exe: downloads zip, extracts, then runs a generated `install.bat` via `os.system`; non-frozen: `pip install -U`) | https (api.github.com) | N | hash (sha256) | server-supplied/unpinned — expected hash is regex-parsed out of the **GitHub release body text**, i.e. same origin/trust domain as the artifact itself | mangadex_downloader/update.py:68-95,142-215; mangadex_downloader/cli/args_parser.py:87-91 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AK7.md",
+      "source_line": 25,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/mansuf/mangadex-downloader"
+        },
+        {
+          "label": "commit/date",
+          "value": "a0c28102 / 2026-02-07"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (only via explicit `--update`/`-U` CLI flag)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (frozen exe: downloads zip, extracts, then runs a generated `install.bat` via `os.system`; non-frozen: `pip install -U`)"
+        },
+        {
+          "label": "transport",
+          "value": "https (api.github.com)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (sha256)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned — expected hash is regex-parsed out of the **GitHub release body text**, i.e. same origin/trust domain as the artifact itself"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "mangadex_downloader/update.py:68-95,142-215; mangadex_downloader/cli/args_parser.py:87-91"
+        }
+      ]
+    }
   ]
 }

@@ -41,5 +41,53 @@
       "line": 26,
       "text": "| Piwigo | https://github.com/Piwigo/Piwigo.git | cb1a748 / 2026-07-31 | Y | Y (admin-triggered, one click; also a scheduled notify-only version check) | Y | http+https mixed: core self-update fetches over `PHPWG_URL` (https, `fetchRemote()` uses curl with no `CURLOPT_SSL_VERIFYPEER`/`VERIFYHOST` override → TLS enforced by curl defaults); extension/PEM catalog config default (`PEM_URL`) is also https by default | none | payload integrity check is **filesize>0 only** — no hash, no signature | N/A (server-supplied zip, unauthenticated) | `admin/include/updates.class.php:502-645` (`updates::upgrade_to()`: downloads update zip in base64 chunks from `PHPWG_URL.'/download/dlcounter.php?code=...'`, writes to disk, then `PclZip::extract()` straight into `PHPWG_ROOT_PATH` — only check before/after is `filesize($filename)` truthy and per-file extract status, no hash/signature); `include/common.inc.php:219` (`PHPWG_URL = 'https://'+PHPWG_DOMAIN`); `admin/include/functions.php:2445-2515` (`fetchRemote()` curl, no TLS-disable flags found). **Side channel (score separately, C-equivalent):** plugin/theme \"PEM\" extension installer also downloads+extracts zips with the same no-signature model — `admin/include/plugins.class.php:655-671` (`extract_plugin_files` → `PclZip`), `admin/include/updates.class.php:273-372` (`get_server_extensions()` against `PEM_URL`). |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AI2.md",
+      "source_line": 26,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Piwigo/Piwigo.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "cb1a748 / 2026-07-31"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (admin-triggered, one click; also a scheduled notify-only version check)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "http+https mixed: core self-update fetches over `PHPWG_URL` (https, `fetchRemote()` uses curl with no `CURLOPT_SSL_VERIFYPEER`/`VERIFYHOST` override → TLS enforced by curl defaults); extension/PEM catalog config default (`PEM_URL`) is also https by default"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "none"
+        },
+        {
+          "label": "payload_verification",
+          "value": "payload integrity check is **filesize>0 only** — no hash, no signature"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A (server-supplied zip, unauthenticated)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`admin/include/updates.class.php:502-645` (`updates::upgrade_to()`: downloads update zip in base64 chunks from `PHPWG_URL.'/download/dlcounter.php?code=...'`, writes to disk, then `PclZip::extract()` straight into `PHPWG_ROOT_PATH` — only check before/after is `filesize($filename)` truthy and per-file extract status, no hash/signature); `include/common.inc.php:219` (`PHPWG_URL = 'https://'+PHPWG_DOMAIN`); `admin/include/functions.php:2445-2515` (`fetchRemote()` curl, no TLS-disable flags found). **Side channel (score separately, C-equivalent):** plugin/theme \"PEM\" extension installer also downloads+extracts zips with the same no-signature model — `admin/include/plugins.class.php:655-671` (`extract_plugin_files` → `PclZip`), `admin/include/updates.class.php:273-372` (`get_server_extensions()` against `PEM_URL`)."
+        }
+      ]
+    }
   ]
 }

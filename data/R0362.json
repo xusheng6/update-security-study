@@ -42,5 +42,53 @@
       "line": 9,
       "text": "| youtube-dl-gui | https://github.com/MrS0m30n3/youtube-dl-gui | c5c18e5 / 2018-10-11 | Y | N (user clicks \"Update youtube-dl\") | Y (downloads binary, then subprocess-executes it for every download) | https, urllib2.urlopen — Python2 urllib2 does not enforce hostname/cert validation by default pre-2.7.9 and app does not pass an explicit SSLContext, so enforcement is not demonstrable in code | N | none | N/A (no hash/sig at all) | youtube_dl_gui/updatemanager.py:48-73 (`LATEST_YOUTUBE_DL='https://yt-dl.org/latest/'`, `urlopen`, writes raw bytes to `youtube-dl(.exe)`, no checksum); youtube_dl_gui/utils.py:35-37 (YOUTUBEDL_BIN executed via subprocess for downloads) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-X4.md",
+      "source_line": 9,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/MrS0m30n3/youtube-dl-gui"
+        },
+        {
+          "label": "commit/date",
+          "value": "c5c18e5 / 2018-10-11"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (user clicks \"Update youtube-dl\")"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (downloads binary, then subprocess-executes it for every download)"
+        },
+        {
+          "label": "transport",
+          "value": "https, urllib2.urlopen — Python2 urllib2 does not enforce hostname/cert validation by default pre-2.7.9 and app does not pass an explicit SSLContext, so enforcement is not demonstrable in code"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A (no hash/sig at all)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "youtube_dl_gui/updatemanager.py:48-73 (`LATEST_YOUTUBE_DL='https://yt-dl.org/latest/'`, `urlopen`, writes raw bytes to `youtube-dl(.exe)`, no checksum); youtube_dl_gui/utils.py:35-37 (YOUTUBEDL_BIN executed via subprocess for downloads)"
+        }
+      ]
+    }
   ]
 }

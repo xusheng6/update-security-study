@@ -41,5 +41,53 @@
       "line": 29,
       "text": "| Tunnelblick | https://github.com/Tunnelblick/Tunnelblick | 9e5afa8 / 2026-08-20 | Y | Y | Y | https via `NSURLConnection` with no custom authentication-challenge/trust override found (default macOS cert validation enforced) | Y (custom appcast, not vanilla Sparkle) | signature (ECDSA/SHA-256, X9.62 format) on **both** the appcast XML and the update .zip payload | **pinned-in-binary** (`SUPublicDSAKey` embedded in the signed app's `Info.plist`, loaded via `TunnelblickInfo.m`, only overridable by a local admin-forced preference — not network-supplied) | `tunnelblick/Info.plist:129-130` (`SUPublicDSAKey`), `tunnelblick/TunnelblickInfo.m:232-242` (`updateTunnelblickPublicDSAKey` reads `SUPublicDSAKey` from Info.plist), `tunnelblick/TBValidator.m:75-252` (`validateAppcastData`/`validateUpdateData`, both call `UpdateSigning verifyData:signatureBase64:publicKeyBase64:`), `tunnelblick/TBDownloader.m:97` (plain `NSURLConnection`, no trust bypass) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W6.md",
+      "source_line": 29,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Tunnelblick/Tunnelblick"
+        },
+        {
+          "label": "commit/date",
+          "value": "9e5afa8 / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https via `NSURLConnection` with no custom authentication-challenge/trust override found (default macOS cert validation enforced)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (custom appcast, not vanilla Sparkle)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (ECDSA/SHA-256, X9.62 format) on **both** the appcast XML and the update .zip payload"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned-in-binary** (`SUPublicDSAKey` embedded in the signed app's `Info.plist`, loaded via `TunnelblickInfo.m`, only overridable by a local admin-forced preference — not network-supplied)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`tunnelblick/Info.plist:129-130` (`SUPublicDSAKey`), `tunnelblick/TunnelblickInfo.m:232-242` (`updateTunnelblickPublicDSAKey` reads `SUPublicDSAKey` from Info.plist), `tunnelblick/TBValidator.m:75-252` (`validateAppcastData`/`validateUpdateData`, both call `UpdateSigning verifyData:signatureBase64:publicKeyBase64:`), `tunnelblick/TBDownloader.m:97` (plain `NSURLConnection`, no trust bypass)"
+        }
+      ]
+    }
   ]
 }

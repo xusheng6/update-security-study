@@ -43,5 +43,53 @@
       "line": 16,
       "text": "| Whisparr | Whisparr/Whisparr | .NET (C#, Servarr/NzbDrone fork of Radarr) | Y | identical mechanism to Sonarr, with one extra guard: on non-Windows hosts auto-install additionally requires `UpdateAutomatically` regardless of trigger (`OsInfo.IsNotWindows && !UpdateAutomatically`) | Y (fully automatic when auto-install enabled) | https, host `https://whisparr.servarr.com/v1/`; TLS enforced by default, no bypass found in update path | no | hash-from-manifest (SHA256) | n/a | src/NzbDrone.Common/Cloud/WhisparrCloudRequestBuilder.cs:16 (`https://whisparr.servarr.com/v1/`); src/NzbDrone.Core/Update/UpdateVerification.cs:24-26 (SHA256 compare); src/NzbDrone.Core/Update/InstallUpdateService.cs:172, :246/:325 (auto-install gate) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-J6.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "Whisparr/Whisparr"
+        },
+        {
+          "label": "framework",
+          "value": ".NET (C#, Servarr/NzbDrone fork of Radarr)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "identical mechanism to Sonarr, with one extra guard: on non-Windows hosts auto-install additionally requires `UpdateAutomatically` regardless of trigger (`OsInfo.IsNotWindows && !UpdateAutomatically`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (fully automatic when auto-install enabled)"
+        },
+        {
+          "label": "transport",
+          "value": "https, host `https://whisparr.servarr.com/v1/`; TLS enforced by default, no bypass found in update path"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "no"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (SHA256)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence",
+          "value": "src/NzbDrone.Common/Cloud/WhisparrCloudRequestBuilder.cs:16 (`https://whisparr.servarr.com/v1/`); src/NzbDrone.Core/Update/UpdateVerification.cs:24-26 (SHA256 compare); src/NzbDrone.Core/Update/InstallUpdateService.cs:172, :246/:325 (auto-install gate)"
+        }
+      ]
+    }
   ]
 }

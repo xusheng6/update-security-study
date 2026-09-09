@@ -43,5 +43,53 @@
       "line": 8,
       "text": "| Tor Browser | gitlab.torproject.org/tpo/applications/tor-browser (Firefox ESR fork); build/update config in gitlab.torproject.org/tpo/applications/tor-browser-build | Firefox/Gecko (native, MAR updater retained) | Y | auto chk/dl (Firefox background update service, standard Gecko behavior) + apply on restart, matching upstream Firefox defaults | Y (applies signed MAR patch/full update to the install directory, then relaunches) | HTTPS to Tor Project's own update server, NOT Mozilla's: `updater_url: 'https://aus1.torproject.org/torbrowser/update_3/'`; downloads additionally traverse the Tor network itself; TLS validation follows unmodified Gecko network-stack behavior (no bypass found in the build/update config reviewed) | N (the `update.xml` manifest served by AUS is not separately signed beyond HTTPS transport, same as upstream Firefox design) | signature (MAR embedded PKCS7/RSA signature, verified via NSS in the retained Firefox `updater` component) — Tor Browser keeps Firefox's MAR verification code path but swaps in its own signing certificate(s), and further restricts acceptance via a project-specific MAR channel ID so a validly-signed-but-wrong-channel MAR (e.g. stock Firefox) is rejected | embedded certificate baked into the binary: Tor Project's own `marsigner.der` replaces Mozilla's default cert in `toolkit/mozapps/update/updater/release_secondary.der` and `nightly_aurora_level3_secondary.der` (not Mozilla's default MAR signing key) | tor-browser-build:projects/firefox/config:40 (`updater_url: 'https://aus1.torproject.org/torbrowser/update_3/'`), :41-42 (`mar_id_prefix: 'torbrowser-torproject'`, `mar_channel_id` derived per-channel), :38-39,45-47 (comment: overriding the updater URL \"will also override the certificate\", confirming URL+cert are paired/pinned per build), projects/firefox/mozconfig.in:91-94 (`--with-updater-url=` set from `updater_url`/`override_updater_url`), :109-110 (`MAR_CHANNEL_ID`/`ACCEPTED_MAR_CHANNEL_IDS` set to the Tor-specific channel id, rejecting other-channel MARs even if validly signed), projects/firefox/build:90-94 (`cp $rootdir/marsigner.der toolkit/mozapps/update/updater/release_secondary.der` and `.../nightly_aurora_level3_secondary.der` — replaces Mozilla's embedded MAR cert with Tor Project's own), tools/marsigning_check.sh:46,94 (`signmar` / NSS cert named `marsigner` used to sign/verify MARs) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-H6.md",
+      "source_line": 8,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "gitlab.torproject.org/tpo/applications/tor-browser (Firefox ESR fork); build/update config in gitlab.torproject.org/tpo/applications/tor-browser-build"
+        },
+        {
+          "label": "framework",
+          "value": "Firefox/Gecko (native, MAR updater retained)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "auto chk/dl (Firefox background update service, standard Gecko behavior) + apply on restart, matching upstream Firefox defaults"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (applies signed MAR patch/full update to the install directory, then relaunches)"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS to Tor Project's own update server, NOT Mozilla's: `updater_url: 'https://aus1.torproject.org/torbrowser/update_3/'`; downloads additionally traverse the Tor network itself; TLS validation follows unmodified Gecko network-stack behavior (no bypass found in the build/update config reviewed)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (the `update.xml` manifest served by AUS is not separately signed beyond HTTPS transport, same as upstream Firefox design)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (MAR embedded PKCS7/RSA signature, verified via NSS in the retained Firefox `updater` component) — Tor Browser keeps Firefox's MAR verification code path but swaps in its own signing certificate(s), and further restricts acceptance via a project-specific MAR channel ID so a validly-signed-but-wrong-channel MAR (e.g. stock Firefox) is rejected"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "embedded certificate baked into the binary: Tor Project's own `marsigner.der` replaces Mozilla's default cert in `toolkit/mozapps/update/updater/release_secondary.der` and `nightly_aurora_level3_secondary.der` (not Mozilla's default MAR signing key)"
+        },
+        {
+          "label": "evidence",
+          "value": "tor-browser-build:projects/firefox/config:40 (`updater_url: 'https://aus1.torproject.org/torbrowser/update_3/'`), :41-42 (`mar_id_prefix: 'torbrowser-torproject'`, `mar_channel_id` derived per-channel), :38-39,45-47 (comment: overriding the updater URL \"will also override the certificate\", confirming URL+cert are paired/pinned per build), projects/firefox/mozconfig.in:91-94 (`--with-updater-url=` set from `updater_url`/`override_updater_url`), :109-110 (`MAR_CHANNEL_ID`/`ACCEPTED_MAR_CHANNEL_IDS` set to the Tor-specific channel id, rejecting other-channel MARs even if validly signed), projects/firefox/build:90-94 (`cp $rootdir/marsigner.der toolkit/mozapps/update/updater/release_secondary.der` and `.../nightly_aurora_level3_secondary.der` — replaces Mozilla's embedded MAR cert with Tor Project's own), tools/marsigning_check.sh:46,94 (`signmar` / NSS cert named `marsigner` used to sign/verify MARs)"
+        }
+      ]
+    }
   ]
 }

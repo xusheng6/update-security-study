@@ -42,5 +42,53 @@
       "line": 28,
       "text": "| Cocoa Rest Client (macOS native REST client) | https://github.com/mmattozzi/cocoa-rest-client.git | 51e0e75 / 2024-10-13 | Y | Y (Sparkle `automaticallyChecksForUpdates`/`automaticallyDownloadsUpdates`, user-configurable) | **Y** (Sparkle downloads and installs the update package) | **https** appcast URL: `https://mmattozzi.github.io/cocoa-rest-client/appcast.xml` | Y | **signature** — Sparkle legacy DSA signature on the update enclosure | **pinned-in-binary** — `SUPublicDSAKeyFile` = `dsa_pub.pem`, bundled at `English.lproj/dsa_pub.pem` (real 20-line PEM key, not a placeholder) | CocoaRestClient-Info.plist (SUFeedURL, SUPublicDSAKeyFile keys), English.lproj/dsa_pub.pem, CocoaRestClientAppDelegate.m:310-312 (SUUpdater usage) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AH1.md",
+      "source_line": 28,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/mmattozzi/cocoa-rest-client.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "51e0e75 / 2024-10-13"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (Sparkle `automaticallyChecksForUpdates`/`automaticallyDownloadsUpdates`, user-configurable)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y** (Sparkle downloads and installs the update package)"
+        },
+        {
+          "label": "transport",
+          "value": "**https** appcast URL: `https://mmattozzi.github.io/cocoa-rest-client/appcast.xml`"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**signature** — Sparkle legacy DSA signature on the update enclosure"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned-in-binary** — `SUPublicDSAKeyFile` = `dsa_pub.pem`, bundled at `English.lproj/dsa_pub.pem` (real 20-line PEM key, not a placeholder)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "CocoaRestClient-Info.plist (SUFeedURL, SUPublicDSAKeyFile keys), English.lproj/dsa_pub.pem, CocoaRestClientAppDelegate.m:310-312 (SUUpdater usage)"
+        }
+      ]
+    }
   ]
 }

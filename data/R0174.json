@@ -41,5 +41,53 @@
       "line": 12,
       "text": "| MonitorControl | MonitorControl/MonitorControl | Sparkle | Y | chk: default true on first launch (`setDefaultPrefs`), user-toggleable; dl/inst: Sparkle standard prompt | Y | https (`https://monitorcontrol.app/appcast2.xml`) | Sparkle-EdDSA (no DSA key) | signature[EdDSA] | pinned-in-binary | MonitorControl/Info.plist:35-38; MonitorControl/Support/AppDelegate.swift:110-115; .../MainPrefsViewController.swift:58,85-87 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-K1.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "MonitorControl/MonitorControl"
+        },
+        {
+          "label": "framework",
+          "value": "Sparkle"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "chk: default true on first launch (`setDefaultPrefs`), user-toggleable; dl/inst: Sparkle standard prompt"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`https://monitorcontrol.app/appcast2.xml`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Sparkle-EdDSA (no DSA key)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature[EdDSA]"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary"
+        },
+        {
+          "label": "evidence",
+          "value": "MonitorControl/Info.plist:35-38; MonitorControl/Support/AppDelegate.swift:110-115; .../MainPrefsViewController.swift:58,85-87"
+        }
+      ]
+    }
   ]
 }

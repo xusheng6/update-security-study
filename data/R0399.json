@@ -41,5 +41,53 @@
       "line": 12,
       "text": "| QGroundControl | https://github.com/mavlink/qgroundcontrol | 1301709 / 2026-08-20 | N (self) / Y (firmware channel) | N | Y (flashes vehicle firmware) | **http** (unenforced — plaintext by default for SiK radio/PX4) | N | none (CRC only, write-integrity not authenticity) | none/unpinned | src/Vehicle/VehicleSetup/FirmwareUpgradeController.cc:339 (`http://px4-travis.s3.amazonaws.com/SiK/stable/...`), :351 (`http://px4-travis.s3.amazonaws.com/Firmware/%1/%2.px4` — default path for all recognized PX4 boards); src/Vehicle/VehicleSetup/Bootloader.cc:486-693 (`verify()`/`_verifyCRC()` — CRC32 write-integrity check only, no signature) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Z7.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/mavlink/qgroundcontrol"
+        },
+        {
+          "label": "commit/date",
+          "value": "1301709 / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "N (self) / Y (firmware channel)"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (flashes vehicle firmware)"
+        },
+        {
+          "label": "transport",
+          "value": "**http** (unenforced — plaintext by default for SiK radio/PX4)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (CRC only, write-integrity not authenticity)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none/unpinned"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/Vehicle/VehicleSetup/FirmwareUpgradeController.cc:339 (`http://px4-travis.s3.amazonaws.com/SiK/stable/...`), :351 (`http://px4-travis.s3.amazonaws.com/Firmware/%1/%2.px4` — default path for all recognized PX4 boards); src/Vehicle/VehicleSetup/Bootloader.cc:486-693 (`verify()`/`_verifyCRC()` — CRC32 write-integrity check only, no signature)"
+        }
+      ]
+    }
   ]
 }

@@ -46,5 +46,67 @@
       "line": 28,
       "text": "| Raven Reader | **B** | electron-updater with automatic check-and-install, backed by macOS notarization/hardened runtime (Apple Developer ID via OS trust store) plus a sha512 checksum in the update manifest. Standard, reasonably sound electron-updater posture — but the repo has been **archived since 2023**, so the update feed/infrastructure (GitHub Releases + a DigitalOcean Spaces bucket) may itself be stale or unmaintained going forward. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-S2.md",
+      "source_line": 15,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/hello-efficiency-inc/raven-reader.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "5e55819b3fd6e6149296c6d07202a259d6cb1f1a / 2023-09-28 (**repo archived**, no updates since)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "**Y (automatic)**"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y**"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS (GitHub Releases + DigitalOcean Spaces)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (latest.yml/latest-mac.yml carry sha512 checksum only, not independently signed)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "sha512 manifest checksum + **OS code-signing** (macOS hardenedRuntime + notarization confirmed; Windows signing cert not present in repo, presumably injected at CI time)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "Apple Developer ID cert via OS/Apple trust store (not app-pinned)"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "package.json:38,92,95; src/background.js:22 (`import { autoUpdater } from 'electron-updater'`), 101 (`checkForUpdatesAndNotify()` called unconditionally at startup), 652-659 (`quitAndInstall()` fires regardless of dialog response); vue.config.js:34-90 (publish targets)"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-S2.md",
+      "source_line": 28,
+      "fields": [
+        {
+          "label": "Tier",
+          "value": "**B**"
+        },
+        {
+          "label": "Notes",
+          "value": "electron-updater with automatic check-and-install, backed by macOS notarization/hardened runtime (Apple Developer ID via OS trust store) plus a sha512 checksum in the update manifest. Standard, reasonably sound electron-updater posture — but the repo has been **archived since 2023**, so the update feed/infrastructure (GitHub Releases + a DigitalOcean Spaces bucket) may itself be stale or unmaintained going forward."
+        }
+      ]
+    }
   ]
 }

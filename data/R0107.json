@@ -43,5 +43,53 @@
       "line": 8,
       "text": "| zotero | zotero/zotero | Firefox/XUL (Mozilla Gecko toolkit, \"AppUpdate\"/AUS+MAR) | Y | auto (chk/dl/inst) — standard Mozilla `nsIApplicationUpdateService`, `app.update.auto=true` | Y (Mozilla toolkit updater downloads and applies MAR update packages) | https (AppUpdate URL is https-only in application.ini); TLS validation delegated to Mozilla/NSS toolkit code not present in this JS-level repo (validation=unknown-external — the actual updater/verifier binary source lives in the upstream Gecko/mozilla-central toolkit that Zotero vendors as a prebuilt runtime, not in this repo) | scheme[MAR/PKCS7, Mozilla toolkit] — NOT independently confirmed in this repo since the MAR-signing cert (.der) and updater binary source are not present here; `app.update.cert.errors`/`app.update.backgroundErrors` prefs referenced confirm the Mozilla AUS cert/update-verification pipeline is wired up in the UI layer | signature[Mozilla MAR/PKCS7] believed retained (standard toolkit behavior; MAR_CHANNEL_ID is set at packaging time) — not directly verifiable in this repo | OS-trust-store for the HTTPS transport layer; MAR signature verification key would be Mozilla-toolkit-embedded (pinned-in-binary) per standard Gecko updater design, unconfirmed in this repo | app/assets/application.ini:17-18 (`[AppUpdate] URL=https://www.zotero.org/download/client/update/%VERSION%/%BUILD_ID%/%BUILD_TARGET%/%LOCALE%/%CHANNEL%/%OS_VERSION%/update.xml`); app/assets/prefs.js:109-134 (`app.update.auto`=true, `app.update.channel`, `app.update.interval`); chrome/content/zotero/update/updates.js:17-27 (`nsIApplicationUpdateService`, `PREF_APP_UPDATE_CERT_ERRORS`); app/update-packaging/build_autoupdate.sh:324 (`MAR_CHANNEL_ID`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-G3.md",
+      "source_line": 8,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "zotero/zotero"
+        },
+        {
+          "label": "framework",
+          "value": "Firefox/XUL (Mozilla Gecko toolkit, \"AppUpdate\"/AUS+MAR)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "auto (chk/dl/inst) — standard Mozilla `nsIApplicationUpdateService`, `app.update.auto=true`"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (Mozilla toolkit updater downloads and applies MAR update packages)"
+        },
+        {
+          "label": "transport",
+          "value": "https (AppUpdate URL is https-only in application.ini); TLS validation delegated to Mozilla/NSS toolkit code not present in this JS-level repo (validation=unknown-external — the actual updater/verifier binary source lives in the upstream Gecko/mozilla-central toolkit that Zotero vendors as a prebuilt runtime, not in this repo)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "scheme[MAR/PKCS7, Mozilla toolkit] — NOT independently confirmed in this repo since the MAR-signing cert (.der) and updater binary source are not present here; `app.update.cert.errors`/`app.update.backgroundErrors` prefs referenced confirm the Mozilla AUS cert/update-verification pipeline is wired up in the UI layer"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature[Mozilla MAR/PKCS7] believed retained (standard toolkit behavior; MAR_CHANNEL_ID is set at packaging time) — not directly verifiable in this repo"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS-trust-store for the HTTPS transport layer; MAR signature verification key would be Mozilla-toolkit-embedded (pinned-in-binary) per standard Gecko updater design, unconfirmed in this repo"
+        },
+        {
+          "label": "evidence",
+          "value": "app/assets/application.ini:17-18 (`[AppUpdate] URL=https://www.zotero.org/download/client/update/%VERSION%/%BUILD_ID%/%BUILD_TARGET%/%LOCALE%/%CHANNEL%/%OS_VERSION%/update.xml`); app/assets/prefs.js:109-134 (`app.update.auto`=true, `app.update.channel`, `app.update.interval`); chrome/content/zotero/update/updates.js:17-27 (`nsIApplicationUpdateService`, `PREF_APP_UPDATE_CERT_ERRORS`); app/update-packaging/build_autoupdate.sh:324 (`MAR_CHANNEL_ID`)"
+        }
+      ]
+    }
   ]
 }

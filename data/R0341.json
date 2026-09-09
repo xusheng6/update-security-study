@@ -42,5 +42,53 @@
       "line": 18,
       "text": "| cloudflared | https://github.com/cloudflare/cloudflared | 733bfb9 / 2026-08-14 | Y | Y (background `AutoUpdater` ticks every 24h by default when running as a service, not from a shell/Windows/package-manager install) | Y | https, TLS validation enforced (default `http.Client`, no `InsecureSkipVerify` found in updater code) | no | hash only — SHA checksum compared against `v.checksum`, but that checksum is delivered in the *same* JSON checkin response as the download URL, from the *same* server (`update.argotunnel.com`) | server-supplied/unpinned (checksum comes from `update.argotunnel.com` JSON response, not a signature against any pinned key) | `cmd/cloudflared/updater/update.go:24-34` (`UpdateURL = \"https://update.argotunnel.com\"`), `cmd/cloudflared/updater/update.go:202-276` (`AutoUpdater.Run`, ticks every `DefaultCheckUpdateFreq = 24h`, enabled unless Windows/package-manager-install/interactive-shell), `cmd/cloudflared/updater/workers_service.go:24-30` (`VersionResponse.Checksum` field from JSON checkin), `cmd/cloudflared/updater/workers_update.go:83-113` (`Apply()` downloads, computes `cliutil.FileChecksum`, compares to server-supplied `v.checksum` — no signature check) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W7.md",
+      "source_line": 18,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/cloudflare/cloudflared"
+        },
+        {
+          "label": "commit/date",
+          "value": "733bfb9 / 2026-08-14"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (background `AutoUpdater` ticks every 24h by default when running as a service, not from a shell/Windows/package-manager install)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS validation enforced (default `http.Client`, no `InsecureSkipVerify` found in updater code)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "no"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash only — SHA checksum compared against `v.checksum`, but that checksum is delivered in the *same* JSON checkin response as the download URL, from the *same* server (`update.argotunnel.com`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (checksum comes from `update.argotunnel.com` JSON response, not a signature against any pinned key)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`cmd/cloudflared/updater/update.go:24-34` (`UpdateURL = \"https://update.argotunnel.com\"`), `cmd/cloudflared/updater/update.go:202-276` (`AutoUpdater.Run`, ticks every `DefaultCheckUpdateFreq = 24h`, enabled unless Windows/package-manager-install/interactive-shell), `cmd/cloudflared/updater/workers_service.go:24-30` (`VersionResponse.Checksum` field from JSON checkin), `cmd/cloudflared/updater/workers_update.go:83-113` (`Apply()` downloads, computes `cliutil.FileChecksum`, compares to server-supplied `v.checksum` — no signature check)"
+        }
+      ]
+    }
   ]
 }

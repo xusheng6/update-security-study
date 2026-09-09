@@ -41,5 +41,53 @@
       "line": 12,
       "text": "| sqlmap | github.com/sqlmapproject/sqlmap | Python | Y (`--update` flag) | manual — only runs when `--update`/`conf.updateAll` is explicitly passed; never automatic | Y — overwrites the running application's own `.py` source tree (via `git pull`, or via zipball extraction directly over `sqlmap.py` and all files) | https — `git pull` against `GIT_REPOSITORY = \"https://github.com/sqlmapproject/sqlmap.git\"`; zipball fallback via `ZIPBALL_PAGE = \"https://github.com/sqlmapproject/sqlmap/zipball/master\"`; `pip install -U sqlmap` path relies on PyPI/pip's own transport | no | **none** for the zipball path — `urllib.request.urlretrieve()` downloads the zip and `zipfile.ZipFile.extract()` writes it straight over the live install with **no hash/signature check**; `git pull` path relies only on git's own transport/object integrity (no app-level check); `pip` path relies on pip/PyPI's built-in mechanisms | none (app-level) | `lib/core/update.py:34-169` (full `update()` function, all 3 paths); `lib/core/settings.py:32,35` (`GIT_REPOSITORY`, `ZIPBALL_PAGE` constants); `lib/core/update.py:100-107` (`urlretrieve` + `zipfile` extraction, no checksum) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-M2.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/sqlmapproject/sqlmap"
+        },
+        {
+          "label": "framework",
+          "value": "Python"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (`--update` flag)"
+        },
+        {
+          "label": "auto",
+          "value": "manual — only runs when `--update`/`conf.updateAll` is explicitly passed; never automatic"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — overwrites the running application's own `.py` source tree (via `git pull`, or via zipball extraction directly over `sqlmap.py` and all files)"
+        },
+        {
+          "label": "transport",
+          "value": "https — `git pull` against `GIT_REPOSITORY = \"https://github.com/sqlmapproject/sqlmap.git\"`; zipball fallback via `ZIPBALL_PAGE = \"https://github.com/sqlmapproject/sqlmap/zipball/master\"`; `pip install -U sqlmap` path relies on PyPI/pip's own transport"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "no"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** for the zipball path — `urllib.request.urlretrieve()` downloads the zip and `zipfile.ZipFile.extract()` writes it straight over the live install with **no hash/signature check**; `git pull` path relies only on git's own transport/object integrity (no app-level check); `pip` path relies on pip/PyPI's built-in mechanisms"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none (app-level)"
+        },
+        {
+          "label": "evidence",
+          "value": "`lib/core/update.py:34-169` (full `update()` function, all 3 paths); `lib/core/settings.py:32,35` (`GIT_REPOSITORY`, `ZIPBALL_PAGE` constants); `lib/core/update.py:100-107` (`urlretrieve` + `zipfile` extraction, no checksum)"
+        }
+      ]
+    }
   ]
 }

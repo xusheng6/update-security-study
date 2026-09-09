@@ -39,5 +39,53 @@
       "line": 13,
       "text": "| HTTPie Desktop | httpie/desktop | Electron (source closed — repo publishes releases only) | Y (per README claim; implementation not independently verifiable, closed source) | chk/dl/inst: automatic per README (\"The app continuously auto-updates after the initial installation\") — underlying code not public | Y (implied; unverifiable) | https via GitHub Releases (github.com/httpie/desktop/releases); TLS enforcement unknown (no source available) | N (latest.yml is plain YAML, sha512 field only, no detached signature asset found) | hash-from-manifest (sha512 in latest.yml, confirmed by direct fetch); OS-code-signing status not verifiable from public source | unknown (closed source) | README.md (\"continuously auto-updates\" line); `gh api repos/httpie/desktop/releases/latest` asset list for v2025.2.0 (latest.yml, latest-mac.yml, latest-linux.yml, latest-linux-arm64.yml, *.blockmap, HTTPie-Setup-2025.2.0.exe — standard electron-builder/electron-updater artifact set); fetched content of `https://github.com/httpie/desktop/releases/download/v2025.2.0/latest.yml` shows `sha512:` hash field only |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-I8.md",
+      "source_line": 13,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "httpie/desktop"
+        },
+        {
+          "label": "framework",
+          "value": "Electron (source closed — repo publishes releases only)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (per README claim; implementation not independently verifiable, closed source)"
+        },
+        {
+          "label": "auto",
+          "value": "chk/dl/inst: automatic per README (\"The app continuously auto-updates after the initial installation\") — underlying code not public"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (implied; unverifiable)"
+        },
+        {
+          "label": "transport",
+          "value": "https via GitHub Releases (github.com/httpie/desktop/releases); TLS enforcement unknown (no source available)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (latest.yml is plain YAML, sha512 field only, no detached signature asset found)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (sha512 in latest.yml, confirmed by direct fetch); OS-code-signing status not verifiable from public source"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "unknown (closed source)"
+        },
+        {
+          "label": "evidence",
+          "value": "README.md (\"continuously auto-updates\" line); `gh api repos/httpie/desktop/releases/latest` asset list for v2025.2.0 (latest.yml, latest-mac.yml, latest-linux.yml, latest-linux-arm64.yml, *.blockmap, HTTPie-Setup-2025.2.0.exe — standard electron-builder/electron-updater artifact set); fetched content of `https://github.com/httpie/desktop/releases/download/v2025.2.0/latest.yml` shows `sha512:` hash field only"
+        }
+      ]
+    }
   ]
 }

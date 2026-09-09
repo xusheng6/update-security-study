@@ -44,5 +44,53 @@
       "line": 17,
       "text": "| Waydroid | https://github.com/waydroid/waydroid.git | e7d73e7ff9d23003356d716e5a40fa5ca7ad17e0 / 2026-07-21 | Y | N (manual `waydroid upgrade` CLI command only, not backgrounded/automatic) | Y (downloads Android system/vendor image zips and extracts+mounts them into the running container) | https (ota.waydro.id), TLS validation via Python urllib default context — ENFORCED, no bypass found | N (OTA channel JSON list is unsigned) | hash (SHA-256) | **server-supplied** — the expected SHA-256 is the `id` field from the very same OTA JSON response just fetched over the same channel, not a value pinned independently in the client | tools/helpers/images.py:24-49 get(); tools/config/__init__.py:78-79 (`https://ota.waydro.id/system`, `/vendor`); tools/helpers/http.py (urllib.request, no ssl bypass) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U6.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/waydroid/waydroid.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "e7d73e7ff9d23003356d716e5a40fa5ca7ad17e0 / 2026-07-21"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual `waydroid upgrade` CLI command only, not backgrounded/automatic)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (downloads Android system/vendor image zips and extracts+mounts them into the running container)"
+        },
+        {
+          "label": "transport",
+          "value": "https (ota.waydro.id), TLS validation via Python urllib default context — ENFORCED, no bypass found"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (OTA channel JSON list is unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (SHA-256)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**server-supplied** — the expected SHA-256 is the `id` field from the very same OTA JSON response just fetched over the same channel, not a value pinned independently in the client"
+        },
+        {
+          "label": "evidence",
+          "value": "tools/helpers/images.py:24-49 get(); tools/config/__init__.py:78-79 (`https://ota.waydro.id/system`, `/vendor`); tools/helpers/http.py (urllib.request, no ssl bypass)"
+        }
+      ]
+    }
   ]
 }

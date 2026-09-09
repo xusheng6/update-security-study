@@ -43,5 +43,53 @@
       "line": 15,
       "text": "| Rambox (community-edition) | ramboxapp/community-edition | Electron (`electron-updater`) | Y | manual (no automatic startup or interval check found; `checkForUpdates` is wired only to a \"Migrate now\" button on a deprecation banner telling users this CE build is unsupported and pushing them to the paid/hosted Rambox) | Y (once triggered) | https (GitHub Releases via `electron-updater`; feed hardcoded in code to `ramboxapp/download`, while `package.json`'s `build.publish` points at `ramboxapp/community-edition` — a mismatch between build-time publish config and the runtime-overridden feed) | manifest present (`latest.yml`/`latest-mac.yml` on GitHub Releases, TLS only, not independently signed) | hash-from-manifest (default electron-updater sha512 check); Windows Authenticode verification NOT disabled (no `verifyUpdateCodeSignature: false` present, unlike Caprine/Station, so default `true` applies on the NSIS target) | OS-trust-store (Windows Authenticode publisher check, default electron-updater behavior since not overridden) | `electron/updater.js:1-27` (`autoUpdater.setFeedURL({provider:'github', owner:'ramboxapp', repo:'download', vPrefixedTagName:true})`; `ipcMain.on('autoUpdater:quit-and-install', ...) => autoUpdater.quitAndInstall(true,true)`); `app/view/main/Main.js:265-274` (\"Migrate now\" button → `Rambox.app.checkUpdate()`, the only call site found); `app/Application.js:249-251` (`checkUpdate` just forwards `autoUpdater:check-for-updates` over IPC); `package.json` build config `\"publish\":[{\"provider\":\"github\",\"owner\":\"ramboxapp\",\"repo\":\"community-edition\",\"vPrefixedTagName\":false}]` (no `win.verifyUpdateCodeSignature` override present) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-K3.md",
+      "source_line": 15,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "ramboxapp/community-edition"
+        },
+        {
+          "label": "framework",
+          "value": "Electron (`electron-updater`)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "manual (no automatic startup or interval check found; `checkForUpdates` is wired only to a \"Migrate now\" button on a deprecation banner telling users this CE build is unsupported and pushing them to the paid/hosted Rambox)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (once triggered)"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub Releases via `electron-updater`; feed hardcoded in code to `ramboxapp/download`, while `package.json`'s `build.publish` points at `ramboxapp/community-edition` — a mismatch between build-time publish config and the runtime-overridden feed)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "manifest present (`latest.yml`/`latest-mac.yml` on GitHub Releases, TLS only, not independently signed)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (default electron-updater sha512 check); Windows Authenticode verification NOT disabled (no `verifyUpdateCodeSignature: false` present, unlike Caprine/Station, so default `true` applies on the NSIS target)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS-trust-store (Windows Authenticode publisher check, default electron-updater behavior since not overridden)"
+        },
+        {
+          "label": "evidence",
+          "value": "`electron/updater.js:1-27` (`autoUpdater.setFeedURL({provider:'github', owner:'ramboxapp', repo:'download', vPrefixedTagName:true})`; `ipcMain.on('autoUpdater:quit-and-install', ...) => autoUpdater.quitAndInstall(true,true)`); `app/view/main/Main.js:265-274` (\"Migrate now\" button → `Rambox.app.checkUpdate()`, the only call site found); `app/Application.js:249-251` (`checkUpdate` just forwards `autoUpdater:check-for-updates` over IPC); `package.json` build config `\"publish\":[{\"provider\":\"github\",\"owner\":\"ramboxapp\",\"repo\":\"community-edition\",\"vPrefixedTagName\":false}]` (no `win.verifyUpdateCodeSignature` override present)"
+        }
+      ]
+    }
   ]
 }

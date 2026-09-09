@@ -43,5 +43,21 @@
       "line": 56,
       "text": "| Mumble | `Mumble (app)` / `Mumble (plugins)` | Main app: Tier B, Windows snapshot builds only — HTTPS-fetched installer verified via `WinVerifyTrust` (Authenticode) before launch, revocation checking disabled (`WTD_REVOKE_NONE`); release builds / non-Windows: N. **Separately, confirmed by direct source read**: Mumble's **plugin auto-updater** (`src/mumble/PluginUpdater.cpp`) downloads a native `.so`/`.dll` from a URL supplied by the plugin itself (`plugin->getUpdateDownloadURL()`), not forced to HTTPS, and hands it straight to `PluginInstaller::install()` with **no hash/signature check anywhere in `PluginInstaller.cpp`**. It does require a user click in a confirmation dialog (`PluginUpdater::promptAndUpdate()`, `exec() == QDialog::Accepted`) before downloading — not fully silent — but the app gives the user zero cryptographic assurance either way. Content-as-code side channel, Tier C-equivalent. Evidence: PluginUpdater.cpp:66-94,355-388; PluginInstaller.cpp (no verify/hash/signature references). |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U8.md",
+      "source_line": 56,
+      "fields": [
+        {
+          "label": "already covered as",
+          "value": "`Mumble (app)` / `Mumble (plugins)`"
+        },
+        {
+          "label": "tier / notable finding",
+          "value": "Main app: Tier B, Windows snapshot builds only — HTTPS-fetched installer verified via `WinVerifyTrust` (Authenticode) before launch, revocation checking disabled (`WTD_REVOKE_NONE`); release builds / non-Windows: N. **Separately, confirmed by direct source read**: Mumble's **plugin auto-updater** (`src/mumble/PluginUpdater.cpp`) downloads a native `.so`/`.dll` from a URL supplied by the plugin itself (`plugin->getUpdateDownloadURL()`), not forced to HTTPS, and hands it straight to `PluginInstaller::install()` with **no hash/signature check anywhere in `PluginInstaller.cpp`**. It does require a user click in a confirmation dialog (`PluginUpdater::promptAndUpdate()`, `exec() == QDialog::Accepted`) before downloading — not fully silent — but the app gives the user zero cryptographic assurance either way. Content-as-code side channel, Tier C-equivalent. Evidence: PluginUpdater.cpp:66-94,355-388; PluginInstaller.cpp (no verify/hash/signature references)."
+        }
+      ]
+    }
   ]
 }

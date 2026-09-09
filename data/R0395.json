@@ -41,5 +41,53 @@
       "line": 12,
       "text": "| LDtk | https://github.com/deepnight/ldtk | 6d69bd1d6be92f01ac30778f6a934f0da8448b16 / 2026-07-12 | Y | Y (settings.v.autoInstallUpdates → checkAndInstall) | Y | https (GitHub releases via electron-updater), TLS enforced, no disabling found | N (no code-signing cert config in electron-builder.json or CI workflows) | hash (sha512 in electron-updater's latest.yml, default electron-updater flow) | server-supplied/unpinned (latest.yml fetched from same GitHub release as the installer) | app/package.json:34 (electron-updater dep); src/electron.renderer/App.hx:305-377 (initAutoUpdater/checkForUpdate/checkAndInstall); app/electron-builder.json:42-52 (nsis+github publish, no cert/CSC_LINK anywhere in repo) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Z2.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/deepnight/ldtk"
+        },
+        {
+          "label": "commit/date",
+          "value": "6d69bd1d6be92f01ac30778f6a934f0da8448b16 / 2026-07-12"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (settings.v.autoInstallUpdates → checkAndInstall)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub releases via electron-updater), TLS enforced, no disabling found"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no code-signing cert config in electron-builder.json or CI workflows)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (sha512 in electron-updater's latest.yml, default electron-updater flow)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (latest.yml fetched from same GitHub release as the installer)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "app/package.json:34 (electron-updater dep); src/electron.renderer/App.hx:305-377 (initAutoUpdater/checkForUpdate/checkAndInstall); app/electron-builder.json:42-52 (nsis+github publish, no cert/CSC_LINK anywhere in repo)"
+        }
+      ]
+    }
   ]
 }

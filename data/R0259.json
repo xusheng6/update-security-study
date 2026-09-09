@@ -41,5 +41,53 @@
       "line": 20,
       "text": "| Scroll Reverser | github.com/pilotmoon/Scroll-Reverser | **Sparkle (EdDSA = A)** | **Y** | **Y** (`SUEnableAutomaticChecks=true`) | **Y** | https | TLS-only (appcast itself unsigned) | signature[EdDSA] | embedded in Info.plist (`SUPublicEDKey`) | `Scroll-Reverser/ScrollReverser-Info.plist`: `SUEnableAutomaticChecks` = `true`; `SUPublicEDKey` = `heX4o1mDXEKmelow1XbATuXM5amRCWGhQMFR6cnHy/k=`; `Scroll-Reverser/AppDelegate.m:40-41` `@property SPUUpdater *updater; @property SPUStandardUserDriver *updaterUserDriver;`, `:59-76` `+ (NSString *)sparkleFeedURLString` → `\"https://softwareupdate.pilotmoon.com/update/scrollreverser/appcast.xml\"`, `:176-183` `self.updater = [[SPUUpdater alloc] initWithHostBundle:...]; [self.updater startUpdater:&error]`; `ScrollReverser.xcodeproj/project.pbxproj:35-36` `Sparkle.framework` linked + `CodeSignOnCopy`. Homebrew cask (`Casks/s/scroll-reverser.rb`): `auto_updates true`, `livecheck strategy :sparkle`. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-R1.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/pilotmoon/Scroll-Reverser"
+        },
+        {
+          "label": "framework",
+          "value": "**Sparkle (EdDSA = A)**"
+        },
+        {
+          "label": "has_updater",
+          "value": "**Y**"
+        },
+        {
+          "label": "auto",
+          "value": "**Y** (`SUEnableAutomaticChecks=true`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y**"
+        },
+        {
+          "label": "transport",
+          "value": "https"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "TLS-only (appcast itself unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature[EdDSA]"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "embedded in Info.plist (`SUPublicEDKey`)"
+        },
+        {
+          "label": "evidence",
+          "value": "`Scroll-Reverser/ScrollReverser-Info.plist`: `SUEnableAutomaticChecks` = `true`; `SUPublicEDKey` = `heX4o1mDXEKmelow1XbATuXM5amRCWGhQMFR6cnHy/k=`; `Scroll-Reverser/AppDelegate.m:40-41` `@property SPUUpdater *updater; @property SPUStandardUserDriver *updaterUserDriver;`, `:59-76` `+ (NSString *)sparkleFeedURLString` → `\"https://softwareupdate.pilotmoon.com/update/scrollreverser/appcast.xml\"`, `:176-183` `self.updater = [[SPUUpdater alloc] initWithHostBundle:...]; [self.updater startUpdater:&error]`; `ScrollReverser.xcodeproj/project.pbxproj:35-36` `Sparkle.framework` linked + `CodeSignOnCopy`. Homebrew cask (`Casks/s/scroll-reverser.rb`): `auto_updates true`, `livecheck strategy :sparkle`."
+        }
+      ]
+    }
   ]
 }

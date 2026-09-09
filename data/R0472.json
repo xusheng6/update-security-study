@@ -42,5 +42,53 @@
       "line": 28,
       "text": "| chatd | https://github.com/BruceMacD/chatd | a216098 / 2024-05-26 | Y (Electron `autoUpdater`, macOS only — Windows path explicitly disabled due to a known bug) | Y (checks hourly via `setInterval`) | Y | https (`chatd.ai/api/update`, TLS enforced) | Squirrel-validated bundle (mac) | OS code-signing (Squirrel.Mac) | OS keystore (mac codesign identity) | `src/index.js:30,102-123` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AE1.md",
+      "source_line": 28,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/BruceMacD/chatd"
+        },
+        {
+          "label": "commit/date",
+          "value": "a216098 / 2024-05-26"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y (Electron `autoUpdater`, macOS only — Windows path explicitly disabled due to a known bug)"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (checks hourly via `setInterval`)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`chatd.ai/api/update`, TLS enforced)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Squirrel-validated bundle (mac)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "OS code-signing (Squirrel.Mac)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore (mac codesign identity)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/index.js:30,102-123`"
+        }
+      ]
+    }
   ]
 }

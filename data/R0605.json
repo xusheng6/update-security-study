@@ -42,5 +42,53 @@
       "line": 22,
       "text": "| subfinder | https://github.com/projectdiscovery/subfinder.git | 51e9b90 / 2026-08-23 | Y | **N** (explicit `-update`/`-up` flag; a separate lightweight *notify-only* version check runs automatically unless `-duc`) | **Y** (when `-update` is passed, replaces the running binary) | https; the asset-download client (`google/go-github`) uses Go's default TLS (enforced). **BUT** the *sibling* version-check HTTP client in the very same shared update package hard-codes `InsecureSkipVerify: true` | N | sha256 checksum matched against a `checksums.txt` file fetched from the **same** GitHub release (self-referential, unauthenticated; no independent signature) | server-supplied/unpinned (checksum sourced from the same untrusted release artifact set) | `pkg/runner/options.go:121-122,198-205`; `pkg/runner/banners.go:28-34` (calls `updateutils.GetUpdateToolCallback`); vendored dep `github.com/projectdiscovery/utils` `update/update.go:42-113` (self-update via `minio/selfupdate`, comment at line 73: *\"TODO: selfupdate has support for checksum validation, code signing verification etc. implement them after discussion\"*), `update/update.go:189-197` (`InsecureSkipVerify: true` at line 194, in `init()` for `DefaultHttpClient`, used only by `GetToolVersionCallback`), `update/gh.go:161-186` (`GetExecutableFromAsset` checksum check against `checksums.txt` in the same release) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AM2.md",
+      "source_line": 22,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/projectdiscovery/subfinder.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "51e9b90 / 2026-08-23"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "**N** (explicit `-update`/`-up` flag; a separate lightweight *notify-only* version check runs automatically unless `-duc`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y** (when `-update` is passed, replaces the running binary)"
+        },
+        {
+          "label": "transport",
+          "value": "https; the asset-download client (`google/go-github`) uses Go's default TLS (enforced). **BUT** the *sibling* version-check HTTP client in the very same shared update package hard-codes `InsecureSkipVerify: true`"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "sha256 checksum matched against a `checksums.txt` file fetched from the **same** GitHub release (self-referential, unauthenticated; no independent signature)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (checksum sourced from the same untrusted release artifact set)"
+        },
+        {
+          "label": "evidence",
+          "value": "`pkg/runner/options.go:121-122,198-205`; `pkg/runner/banners.go:28-34` (calls `updateutils.GetUpdateToolCallback`); vendored dep `github.com/projectdiscovery/utils` `update/update.go:42-113` (self-update via `minio/selfupdate`, comment at line 73: *\"TODO: selfupdate has support for checksum validation, code signing verification etc. implement them after discussion\"*), `update/update.go:189-197` (`InsecureSkipVerify: true` at line 194, in `init()` for `DefaultHttpClient`, used only by `GetToolVersionCallback`), `update/gh.go:161-186` (`GetExecutableFromAsset` checksum check against `checksums.txt` in the same release)"
+        }
+      ]
+    }
   ]
 }

@@ -42,5 +42,53 @@
       "line": 27,
       "text": "| Notepad++ | https://github.com/notepad-plus-plus/notepad-plus-plus.git | a6c46fd4cb0 / 2026-08-20 | Y | Y (prompts, then launches updater automatically) | Y | https (`INFO_URL = https://notepad-plus-plus.org/update/getDownloadUrl.php`) | n/a (URL response, not a signed manifest) | signature (Authenticode, pinned cert identity) | **pinned-in-binary** (hardcoded key-id/subject/display-name, checked before every launch of the updater component) | `PowerEditor/src/resource.h:33` (INFO_URL); `PowerEditor/src/winmain.cpp:817-829` (`SecurityGuard::checkModule(updaterFullPath, nm_gup)` gates launching `gup.exe`); `PowerEditor/src/MISC/Common/verifySignedfile.cpp:130-395` (`verifySignedBinary`: `WinVerifyTrust` + compares `_signer_display_name`/`_signer_subject`/`_signer_key_id`); `PowerEditor/src/MISC/Common/verifySignedfile.h:75-77` (`_signer_key_id = L\"CC0D94922CDA3A18A7D286138525AF9C3942E9E7\"`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-X7.md",
+      "source_line": 27,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/notepad-plus-plus/notepad-plus-plus.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "a6c46fd4cb0 / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (prompts, then launches updater automatically)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`INFO_URL = https://notepad-plus-plus.org/update/getDownloadUrl.php`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "n/a (URL response, not a signed manifest)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (Authenticode, pinned cert identity)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned-in-binary** (hardcoded key-id/subject/display-name, checked before every launch of the updater component)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`PowerEditor/src/resource.h:33` (INFO_URL); `PowerEditor/src/winmain.cpp:817-829` (`SecurityGuard::checkModule(updaterFullPath, nm_gup)` gates launching `gup.exe`); `PowerEditor/src/MISC/Common/verifySignedfile.cpp:130-395` (`verifySignedBinary`: `WinVerifyTrust` + compares `_signer_display_name`/`_signer_subject`/`_signer_key_id`); `PowerEditor/src/MISC/Common/verifySignedfile.h:75-77` (`_signer_key_id = L\"CC0D94922CDA3A18A7D286138525AF9C3942E9E7\"`)"
+        }
+      ]
+    }
   ]
 }

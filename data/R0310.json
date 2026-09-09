@@ -44,5 +44,53 @@
       "line": 13,
       "text": "| MatterControl | https://github.com/MatterHackers/MatterControl.git | 8b27fad2cdc7b18db2e81b7e1b4fdd15dad21147 / 2026-03-04 | Y | N (user must click \"Download Now\"; auto-install not forced) | Y | https, TLS validation not disabled anywhere in code (default .NET `WebClient`/`WebRequest`, no `ServerCertificateValidationCallback` override found) | N (no manifest — JSON API response with a bare build-token string) | none (installer .exe/.pkg/.deb downloaded via `WebClient.DownloadFileAsync` and directly `Process.Start()`'d — no hash, no signature check in-app) | server-supplied/unpinned (trusts `https://mattercontrol.appspot.com` JSON response + raw file bytes) | MatterControlLib/DialogPages/UpdateControlData.cs:271 (build download URL), :301 (DownloadFileAsync), :404-406 (Process.Start on unverified file); MatterControlLib/MatterControlApplication.cs:43-47 (MCWSBaseUri https) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-V6.md",
+      "source_line": 13,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/MatterHackers/MatterControl.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "8b27fad2cdc7b18db2e81b7e1b4fdd15dad21147 / 2026-03-04"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (user must click \"Download Now\"; auto-install not forced)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS validation not disabled anywhere in code (default .NET `WebClient`/`WebRequest`, no `ServerCertificateValidationCallback` override found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no manifest — JSON API response with a bare build-token string)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (installer .exe/.pkg/.deb downloaded via `WebClient.DownloadFileAsync` and directly `Process.Start()`'d — no hash, no signature check in-app)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (trusts `https://mattercontrol.appspot.com` JSON response + raw file bytes)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "MatterControlLib/DialogPages/UpdateControlData.cs:271 (build download URL), :301 (DownloadFileAsync), :404-406 (Process.Start on unverified file); MatterControlLib/MatterControlApplication.cs:43-47 (MCWSBaseUri https)"
+        }
+      ]
+    }
   ]
 }

@@ -41,5 +41,53 @@
       "line": 8,
       "text": "| Kotatogram | kotatogram/kotatogram-desktop | Qt/C++ native (tdesktop fork) | Y | auto (identical chk/dl/inst logic inherited from tdesktop, `cAutoUpdate()`) | Y | https (`Local::readAutoupdatePrefix()` default `https://kotatogram.github.io`) | N (same plain-JSON manifest) | signature (same RSA-1024/SHA-1 `RSA_verify` code path, byte-for-byte identical to tdesktop) | pinned-in-binary — but fork REPLACES Telegram's keys with its own `UpdatesPublicKey` / `UpdatesPublicBetaKey` PEM literals | `Telegram/SourceFiles/config.h:45-59` (distinct RSA public keys vs. upstream tdesktop); `Telegram/SourceFiles/core/update_checker.cpp:340-405` (unchanged verify logic, `hSigLen=128`); default prefix `Telegram/SourceFiles/storage/localstorage.cpp:561` (`AutoupdatePrefix(\"https://kotatogram.github.io\")`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-K3.md",
+      "source_line": 8,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "kotatogram/kotatogram-desktop"
+        },
+        {
+          "label": "framework",
+          "value": "Qt/C++ native (tdesktop fork)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "auto (identical chk/dl/inst logic inherited from tdesktop, `cAutoUpdate()`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`Local::readAutoupdatePrefix()` default `https://kotatogram.github.io`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (same plain-JSON manifest)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (same RSA-1024/SHA-1 `RSA_verify` code path, byte-for-byte identical to tdesktop)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary — but fork REPLACES Telegram's keys with its own `UpdatesPublicKey` / `UpdatesPublicBetaKey` PEM literals"
+        },
+        {
+          "label": "evidence",
+          "value": "`Telegram/SourceFiles/config.h:45-59` (distinct RSA public keys vs. upstream tdesktop); `Telegram/SourceFiles/core/update_checker.cpp:340-405` (unchanged verify logic, `hSigLen=128`); default prefix `Telegram/SourceFiles/storage/localstorage.cpp:561` (`AutoupdatePrefix(\"https://kotatogram.github.io\")`)"
+        }
+      ]
+    }
   ]
 }

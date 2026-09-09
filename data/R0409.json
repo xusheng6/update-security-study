@@ -43,5 +43,53 @@
       "line": 20,
       "text": "| Daedalus (Cardano wallet) | https://github.com/input-output-hk/daedalus | 0061f3d / 2026-08-18 | Y | Y (news-feed driven auto-download + prompted install) | Y | https (`newsfeed.daedalus.io`, `newsfeed.daedaluswallet.io`; no TLS bypass found in externalRequest) | N/A (no OS code-signature check performed by this code path) | SHA-256 hash comparison only — hash value comes from the news-feed JSON itself (`softwareUpdate.hash`), cross-checked against a second, separately-hosted hash file (`newsfeed-verification/<network>/<timestamp>.txt`) on a *different* IOHK-controlled domain, but neither is a key baked into the binary | server-supplied/unpinned — hash originates from network-fetched newsfeed and a second network-fetched hash file; no embedded public key/signature verification in this flow | source/main/ipc/manageAppUpdateChannel.ts:59-79 (checkInstallerHash: sha256 compare only), 178-198 (spawn/openPath installer after hash check → download_and_execute=Y); source/renderer/app/stores/AppUpdateStore.ts:188-199 (`hash` taken straight from News feed item), 396-427 (`_installUpdate` sends filePath+hash over IPC); source/renderer/app/api/news/requests/getNewsHash.ts:15-25 (second-host hash fetch, still unpinned/network-supplied); source/renderer/app/config/urlsConfig.ts:18-27 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AA1.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/input-output-hk/daedalus"
+        },
+        {
+          "label": "commit/date",
+          "value": "0061f3d / 2026-08-18"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (news-feed driven auto-download + prompted install)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`newsfeed.daedalus.io`, `newsfeed.daedaluswallet.io`; no TLS bypass found in externalRequest)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A (no OS code-signature check performed by this code path)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "SHA-256 hash comparison only — hash value comes from the news-feed JSON itself (`softwareUpdate.hash`), cross-checked against a second, separately-hosted hash file (`newsfeed-verification/<network>/<timestamp>.txt`) on a *different* IOHK-controlled domain, but neither is a key baked into the binary"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned — hash originates from network-fetched newsfeed and a second network-fetched hash file; no embedded public key/signature verification in this flow"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "source/main/ipc/manageAppUpdateChannel.ts:59-79 (checkInstallerHash: sha256 compare only), 178-198 (spawn/openPath installer after hash check → download_and_execute=Y); source/renderer/app/stores/AppUpdateStore.ts:188-199 (`hash` taken straight from News feed item), 396-427 (`_installUpdate` sends filePath+hash over IPC); source/renderer/app/api/news/requests/getNewsHash.ts:15-25 (second-host hash fetch, still unpinned/network-supplied); source/renderer/app/config/urlsConfig.ts:18-27"
+        }
+      ]
+    }
   ]
 }

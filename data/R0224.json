@@ -41,5 +41,53 @@
       "line": 10,
       "text": "| Lume | lumeland/lume | Deno static site generator (CLI) | Y | N (explicit `lume upgrade` command only) | Y | https (`fetch()`/dynamic `import()` over HTTPS to jsdelivr, standard TLS only — no extra validation) | N — no signed manifest of any kind | none (no hash pinning, no signature check, no checksum comparison; relies solely on HTTPS/TLS transport to the CDN) | N/A (no verifying key exists) | `cli/upgrade.ts:1-6` imports `upgrade` from `../deps/init.ts` and calls it when the user runs `lume upgrade` (registered as a CLI subcommand in `cli.ts:4-18,109`). `deps/init.ts:1-11`: `fetch(\"https://data.jsdelivr.com/v1/package/gh/lumeland/init\")` retrieves the version list, picks `data.versions.shift()` (i.e., trusts the first entry returned by the CDN's JSON API with no signature/hash check), then does `await import(\\`https://cdn.jsdelivr.net/gh/lumeland/init@${version}/mod.ts\\`)` and `await import(\\`https://cdn.jsdelivr.net/gh/lumeland/init@${version}/upgrade.ts\\`)` — Deno's dynamic `import()` of a remote URL both downloads and executes that TypeScript/JS module directly, with only HTTPS/TLS as the integrity mechanism (no code signing, no checksum manifest). This is a real download-and-execute path, but it only fires on the explicit, user-invoked `lume upgrade` command — not automatically on every run. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-N5.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "lumeland/lume"
+        },
+        {
+          "label": "framework",
+          "value": "Deno static site generator (CLI)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (explicit `lume upgrade` command only)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`fetch()`/dynamic `import()` over HTTPS to jsdelivr, standard TLS only — no extra validation)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N — no signed manifest of any kind"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (no hash pinning, no signature check, no checksum comparison; relies solely on HTTPS/TLS transport to the CDN)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A (no verifying key exists)"
+        },
+        {
+          "label": "evidence",
+          "value": "`cli/upgrade.ts:1-6` imports `upgrade` from `../deps/init.ts` and calls it when the user runs `lume upgrade` (registered as a CLI subcommand in `cli.ts:4-18,109`). `deps/init.ts:1-11`: `fetch(\"https://data.jsdelivr.com/v1/package/gh/lumeland/init\")` retrieves the version list, picks `data.versions.shift()` (i.e., trusts the first entry returned by the CDN's JSON API with no signature/hash check), then does `await import(\\`https://cdn.jsdelivr.net/gh/lumeland/init@${version}/mod.ts\\`)` and `await import(\\`https://cdn.jsdelivr.net/gh/lumeland/init@${version}/upgrade.ts\\`)` — Deno's dynamic `import()` of a remote URL both downloads and executes that TypeScript/JS module directly, with only HTTPS/TLS as the integrity mechanism (no code signing, no checksum manifest). This is a real download-and-execute path, but it only fires on the explicit, user-invoked `lume upgrade` command — not automatically on every run."
+        }
+      ]
+    }
   ]
 }

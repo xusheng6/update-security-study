@@ -47,5 +47,99 @@
       "line": 18,
       "text": "| Solar2D — Linux runtime network stack (secondary finding, not the updater) | (same repo) | 7dbc7cc / 2026-07-02 | n/a | n/a | n/a | **http/https, TLS verification explicitly DISABLED** for the Linux `network.request`/`network.download` Lua API (used by the Simulator itself via `platform/resources/init.lua:559-561` and by every app built with Solar2D on Linux) | n/a | n/a | n/a | platform/linux/src/NetworkLibrary.cpp:340 `curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AK2.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/coronalabs/corona"
+        },
+        {
+          "label": "commit/date",
+          "value": "7dbc7cc / 2026-07-02"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "N (app itself) / Y (plugin content-channel)"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (plugin fetch is automatic during build)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y (downloads native plugin `.tgz` and links/loads it into built apps)"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS verify enforced for this path (curl default; no VERIFYPEER=0 found in the plugin/download HTTP client)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none found (no hash/signature check on the downloaded `.tgz` before caching/use)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (plain GitHub Releases / solar2dmarketplace.com URLs)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "platform/resources/CoronaBuilderPluginCollector.lua:191,206; tools/CoronaBuilder/Rtt_DownloadPluginsMain.cpp:40; platform/linux/src/Rtt_HTTPClientLinux.cpp:22-67"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-AK2.md",
+      "source_line": 18,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "(same repo)"
+        },
+        {
+          "label": "commit/date",
+          "value": "7dbc7cc / 2026-07-02"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "n/a"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "n/a"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "n/a"
+        },
+        {
+          "label": "transport",
+          "value": "**http/https, TLS verification explicitly DISABLED** for the Linux `network.request`/`network.download` Lua API (used by the Simulator itself via `platform/resources/init.lua:559-561` and by every app built with Solar2D on Linux)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "n/a"
+        },
+        {
+          "label": "payload_verification",
+          "value": "n/a"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "platform/linux/src/NetworkLibrary.cpp:340 `curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);`"
+        }
+      ]
+    }
   ]
 }

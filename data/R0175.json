@@ -41,5 +41,53 @@
       "line": 16,
       "text": "| Latest | mangerlahn/Latest | Sparkle (dual role: self-updates itself, AND acts as a generic Sparkle-appcast update engine for other installed apps on the user's Mac) | Y | unknown for self-update (no explicit `SUEnableAutomaticChecks`/`automaticallyChecksForUpdates` override found; likely default Sparkle first-run prompt) | Y — for itself via its own Info.plist keys; also for **third-party apps**: it instantiates `SPUUpdater(hostBundle: <target app's bundle>, ...)` and performs their downloads/installs, inheriting each target app's own Sparkle key config (verification for those varies per target, not assessed here) | https (`https://max.codes/latest/update.xml` for itself) | Sparkle-EdDSA (legacy `SUPublicDSAKeyFile` dsa_pub.pem also present) for its own updates | signature[EdDSA] for its own updates; for third-party apps, depends entirely on that app's own configured key | pinned-in-binary (own SUPublicEDKey) for itself | Latest/Resources/Info.plist:42-47; Latest/Model/Updater/SparkleUpdateOperation.swift:44-67; Latest/Model/Update Checker Extensions/Sparkle/SparkleCheckerOperation.swift:72; Latest/Model/Sparkle/Sparkle.swift:11-38 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-K1.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "mangerlahn/Latest"
+        },
+        {
+          "label": "framework",
+          "value": "Sparkle (dual role: self-updates itself, AND acts as a generic Sparkle-appcast update engine for other installed apps on the user's Mac)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "unknown for self-update (no explicit `SUEnableAutomaticChecks`/`automaticallyChecksForUpdates` override found; likely default Sparkle first-run prompt)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — for itself via its own Info.plist keys; also for **third-party apps**: it instantiates `SPUUpdater(hostBundle: <target app's bundle>, ...)` and performs their downloads/installs, inheriting each target app's own Sparkle key config (verification for those varies per target, not assessed here)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`https://max.codes/latest/update.xml` for itself)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Sparkle-EdDSA (legacy `SUPublicDSAKeyFile` dsa_pub.pem also present) for its own updates"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature[EdDSA] for its own updates; for third-party apps, depends entirely on that app's own configured key"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (own SUPublicEDKey) for itself"
+        },
+        {
+          "label": "evidence",
+          "value": "Latest/Resources/Info.plist:42-47; Latest/Model/Updater/SparkleUpdateOperation.swift:44-67; Latest/Model/Update Checker Extensions/Sparkle/SparkleCheckerOperation.swift:72; Latest/Model/Sparkle/Sparkle.swift:11-38"
+        }
+      ]
+    }
   ]
 }

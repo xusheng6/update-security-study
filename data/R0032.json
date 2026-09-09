@@ -53,5 +53,145 @@
       "line": 9,
       "text": "| hyperfine | https://github.com/sharkdp/hyperfine | f12f3d9 / 2026-04-30 | N | N/A | N/A | N/A | N/A | none | N/A | negative census as above across `**/*.rs`, no updater code found. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AH5.md",
+      "source_line": 23,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/untitaker/hyperlink"
+        },
+        {
+          "label": "commit/date",
+          "value": "cdfc6408b2ee179748fac238b0fce26b9ea4222 / 2026-07-30"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "N"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "N"
+        },
+        {
+          "label": "transport",
+          "value": "n/a — no network code"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "n/a"
+        },
+        {
+          "label": "payload_verification",
+          "value": "n/a"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "Despite the name, this is an offline HTML link-checker (reads local `.html` files and validates internal hrefs/anchors) — it does not itself make outbound HTTP requests or check for updates. `Cargo.lock` has no HTTP client crate; grep for updater keywords = 0 hits"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-O2.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/hyperspacedev/hyperspace"
+        },
+        {
+          "label": "framework",
+          "value": "Electron (React/TypeScript)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (`autoUpdater.checkForUpdatesAndNotify()` runs unconditionally at startup — electron-updater's default background-download + install-on-quit behavior)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (electron-updater default: downloads update artifact in background and installs it automatically when the app next quits/relaunches)"
+        },
+        {
+          "label": "transport",
+          "value": "https, electron-updater's default GitHub Releases provider (inferred from `package.json:7` `\"repository\": \"https://github.com/hyperspacedev/hyperspace.git\"`; no explicit `publish:` block found in `ebuild/standard.yml`, and `-p 'never'` in build scripts only suppresses publishing during the build step, not the runtime provider)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "unknown (no code-signing certs/config evidence in repo; `ebuild/standard.yml` sets `dmg: {sign: false}` and calls `afterSign: desktop/notarize.js`, but actual release-time signing status can't be determined from source)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (electron-updater's documented default: SHA512 hash embedded in the auto-generated `latest.yml`/`latest-mac.yml`/`latest-linux.yml` is compared against the downloaded artifact; optional Windows publisher-name check only applies if the binary is code-signed, which is unconfirmed here)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "electron-updater default (SHA512 field in GitHub Releases `latest*.yml`); no custom verification key/logic implemented in app code"
+        },
+        {
+          "label": "evidence",
+          "value": "`package.json:43` `\"electron-updater\": \"^4.3.1\"`; `public/electron.js:14` `const { autoUpdater } = require(\"electron-updater\");` and `public/electron.js:18` `autoUpdater.checkForUpdatesAndNotify();`. NOTE: project appears abandoned — `git log -1` on default branch shows last commit 2021-01-07, so this updater path is very likely dead/untested against current GitHub Releases infrastructure."
+        }
+      ]
+    },
+    {
+      "source_file": "batch-W7.md",
+      "source_line": 9,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/sharkdp/hyperfine"
+        },
+        {
+          "label": "commit/date",
+          "value": "f12f3d9 / 2026-04-30"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "N"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N/A"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "N/A"
+        },
+        {
+          "label": "transport",
+          "value": "N/A"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "negative census as above across `**/*.rs`, no updater code found."
+        }
+      ]
+    }
   ]
 }

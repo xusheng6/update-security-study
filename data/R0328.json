@@ -44,5 +44,53 @@
       "line": 22,
       "text": "| Tabby | https://github.com/Eugeny/tabby | 14e2d60 / 2026-07-13 | Y | Y | Y | https (GitHub Releases via electron-updater default provider; no `publish:` override or insecure-TLS flags found in `electron-builder.yml`) | Y (electron-builder `latest.yml`/`latest-mac.yml` manifest, generated at release time, contains sha512 hash of the installer) | hash-from-manifest + OS code-signing of the installed binary (electron-updater default: verifies downloaded installer's sha512 against the manifest fetched from the same GitHub release, then relies on Authenticode/notarization for the actual code-signing trust root) | server-supplied manifest (unpinned) for the hash check; OS keystore (Windows cert store / Apple notarization) for the code-signing trust root | `tabby/app/lib/window.ts:2,492-516` (`import { autoUpdater } from 'electron-updater'`; `autoUpdater.autoDownload = true`, `autoInstallOnAppQuit = true`, `checkForUpdates()`); `tabby/app/package.json:26` (`\"electron-updater\": \"^5.2.1\"`); code signing evidence: `tabby/.github/workflows/build.yml:89,433` (`CSC_LINK`/`WIN_CSC_LINK` secrets), `tabby/electron-builder.yml` `mac.hardenedRuntime: true` (implies notarization). |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W1.md",
+      "source_line": 22,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Eugeny/tabby"
+        },
+        {
+          "label": "commit/date",
+          "value": "14e2d60 / 2026-07-13"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub Releases via electron-updater default provider; no `publish:` override or insecure-TLS flags found in `electron-builder.yml`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (electron-builder `latest.yml`/`latest-mac.yml` manifest, generated at release time, contains sha512 hash of the installer)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest + OS code-signing of the installed binary (electron-updater default: verifies downloaded installer's sha512 against the manifest fetched from the same GitHub release, then relies on Authenticode/notarization for the actual code-signing trust root)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied manifest (unpinned) for the hash check; OS keystore (Windows cert store / Apple notarization) for the code-signing trust root"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`tabby/app/lib/window.ts:2,492-516` (`import { autoUpdater } from 'electron-updater'`; `autoUpdater.autoDownload = true`, `autoInstallOnAppQuit = true`, `checkForUpdates()`); `tabby/app/package.json:26` (`\"electron-updater\": \"^5.2.1\"`); code signing evidence: `tabby/.github/workflows/build.yml:89,433` (`CSC_LINK`/`WIN_CSC_LINK` secrets), `tabby/electron-builder.yml` `mac.hardenedRuntime: true` (implies notarization)."
+        }
+      ]
+    }
   ]
 }

@@ -43,5 +43,53 @@
       "line": 11,
       "text": "| Bazelisk (bazelbuild/bazelisk) | https://github.com/bazelbuild/bazelisk.git | 5a7ff3892fdbd05672e6b8e60f139e05b2b76940 / 2026-04-27 | Y | Y | Y | https, TLS enforced (Go `http.DefaultTransport`, no InsecureSkipVerify found) | Y (release/rolling path only) | GPG detached signature (`.sig`) checked with `openpgp.CheckDetachedSignature` for the **default** LTS-release and rolling-release download paths | **pinned in binary** — `//go:embed bazel-release.pub.gpg` embedded public key (`httputil/httputil.go:45`) | `httputil/httputil.go:196-283` (DownloadBinary + verifySignature); call sites: `repositories/gcs.go:199` (DownloadLTS, verify=true, default path for a normal `USE_BAZEL_VERSION`), `repositories/gcs.go:277` (DownloadRolling, verify=true); **but** `repositories/gcs.go:228` (DownloadAtCommit/`--last_green`, verify=false) and `repositories/github.go:94` (fork-hosted Bazel binaries, verify=false) skip verification entirely; `core/repositories.go:31` wires `CreateRepositories(gcs, gitHub, gcs, gcs, true)` so LTS=gcs(verified) is the default |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AD5.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/bazelbuild/bazelisk.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "5a7ff3892fdbd05672e6b8e60f139e05b2b76940 / 2026-04-27"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (Go `http.DefaultTransport`, no InsecureSkipVerify found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (release/rolling path only)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "GPG detached signature (`.sig`) checked with `openpgp.CheckDetachedSignature` for the **default** LTS-release and rolling-release download paths"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned in binary** — `//go:embed bazel-release.pub.gpg` embedded public key (`httputil/httputil.go:45`)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`httputil/httputil.go:196-283` (DownloadBinary + verifySignature); call sites: `repositories/gcs.go:199` (DownloadLTS, verify=true, default path for a normal `USE_BAZEL_VERSION`), `repositories/gcs.go:277` (DownloadRolling, verify=true); **but** `repositories/gcs.go:228` (DownloadAtCommit/`--last_green`, verify=false) and `repositories/github.go:94` (fork-hosted Bazel binaries, verify=false) skip verification entirely; `core/repositories.go:31` wires `CreateRepositories(gcs, gitHub, gcs, gcs, true)` so LTS=gcs(verified) is the default"
+        }
+      ]
+    }
   ]
 }

@@ -42,5 +42,53 @@
       "line": 37,
       "text": "| Lucas Chess R2 | https://github.com/lukasmonk/lucaschessR2 | b3ab767 / 2026-06-17 | Y | N (`x_check_for_update` defaults **False**; even when on, requires clicking \"Update now\") | **Y** | https (`lucaschess.pythonanywhere.com`), default urllib → enforced (no SSL context override found) | N (plain-text manifest: `base version url filesize`) | **size-check only, not cryptographic** — `if tam != Util.filesize(local_file): return False` | none | `bin/Code/Update.py:10-20` (WEBUPDATES URLs), `:44` (`urllib.request.urlretrieve`), `:51` (file-size-only check), `:57-59` (`zp.extractall(...)` then **`exec(open(\"actual/act.py\").read())`** — arbitrary code execution gated only by a byte-count match); wired from `bin/Code/Procesador.py:194-195,1293` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Y6.md",
+      "source_line": 37,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/lukasmonk/lucaschessR2"
+        },
+        {
+          "label": "commit/date",
+          "value": "b3ab767 / 2026-06-17"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (`x_check_for_update` defaults **False**; even when on, requires clicking \"Update now\")"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y**"
+        },
+        {
+          "label": "transport",
+          "value": "https (`lucaschess.pythonanywhere.com`), default urllib → enforced (no SSL context override found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (plain-text manifest: `base version url filesize`)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**size-check only, not cryptographic** — `if tam != Util.filesize(local_file): return False`"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none"
+        },
+        {
+          "label": "evidence",
+          "value": "`bin/Code/Update.py:10-20` (WEBUPDATES URLs), `:44` (`urllib.request.urlretrieve`), `:51` (file-size-only check), `:57-59` (`zp.extractall(...)` then **`exec(open(\"actual/act.py\").read())`** — arbitrary code execution gated only by a byte-count match); wired from `bin/Code/Procesador.py:194-195,1293`"
+        }
+      ]
+    }
   ]
 }

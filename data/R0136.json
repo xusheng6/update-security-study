@@ -41,5 +41,53 @@
       "line": 12,
       "text": "| butler (itch.io CLI/patcher) | github.com/itchio/butler | Go | Y (self, via `cmd/operate/upgrade.go` using itch.io API); also drives **game** downloads/patches for the itch app | game-install path: auto (invoked by itch app / `butlerd`) | Y — downloads and applies game build patches, executing the resulting game binaries when launched | HTTPS (`https://api.itch.io`); no `InsecureSkipVerify` found in source | N/A (wharf patch/signature files are itch.io-API-delivered alongside the patch, not independently signed with a separate PKI) | **hash-from-manifest**, but stronger than typical: the \"wharf\" protocol (`cmd/verify/verify.go`, `cmd/apply/apply.go`, `cmd/diff/diff.go`) verifies every applied block/file against per-block SHA-1/SHA-256 hashes embedded in a `.sig` \"signature\" file fetched over HTTPS from itch.io's API before/while applying patches | N/A (hashes come from itch.io's own API response, not a separate cryptographic key) | `cmd/verify/verify.go:1-60` (\"Use a signature to verify the integrity of a directory\"); `cmd/apply/apply.go`, `cmd/operate/upgrade.go:1-40` (wharf `pwr` patcher); `mansion/context_test.go:16` (`https://api.itch.io`); no `InsecureSkipVerify` hits |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-I2.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/itchio/butler"
+        },
+        {
+          "label": "framework",
+          "value": "Go"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (self, via `cmd/operate/upgrade.go` using itch.io API); also drives **game** downloads/patches for the itch app"
+        },
+        {
+          "label": "auto",
+          "value": "game-install path: auto (invoked by itch app / `butlerd`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — downloads and applies game build patches, executing the resulting game binaries when launched"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS (`https://api.itch.io`); no `InsecureSkipVerify` found in source"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A (wharf patch/signature files are itch.io-API-delivered alongside the patch, not independently signed with a separate PKI)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**hash-from-manifest**, but stronger than typical: the \"wharf\" protocol (`cmd/verify/verify.go`, `cmd/apply/apply.go`, `cmd/diff/diff.go`) verifies every applied block/file against per-block SHA-1/SHA-256 hashes embedded in a `.sig` \"signature\" file fetched over HTTPS from itch.io's API before/while applying patches"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A (hashes come from itch.io's own API response, not a separate cryptographic key)"
+        },
+        {
+          "label": "evidence",
+          "value": "`cmd/verify/verify.go:1-60` (\"Use a signature to verify the integrity of a directory\"); `cmd/apply/apply.go`, `cmd/operate/upgrade.go:1-40` (wharf `pwr` patcher); `mansion/context_test.go:16` (`https://api.itch.io`); no `InsecureSkipVerify` hits"
+        }
+      ]
+    }
   ]
 }

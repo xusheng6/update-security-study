@@ -46,5 +46,99 @@
       "line": 15,
       "text": "| Umbrel (umbrelOS — self-hosted node OS + app store) | github.com/getumbrel/umbrel (umbreld; formerly separate getumbrel/umbrel-os, now archived) | Node.js/TypeScript backend (`umbreld`) + React/TS frontend, Linux OS image (rugix/mender-based) | Y (both OS-level and per-app updates) | N (both are user-triggered via authenticated tRPC mutations `system.update` / `apps.update`/`apps.updateAll`, clicked from Settings UI; no cron/background auto-trigger found in `packages/umbreld/source`) | Y — **OS update**: `performUpdate()` fetches an `updateScript` URL and executes its contents directly via `bash -c ${updateScriptContents}` (remote-script execution, no signature check on the script itself); that script then downloads a `.update` bundle and installs it via `rugix-ctrl`/`mender`. **App updates**: `AppRepository.atomicClone()` does an `isomorphic-git` HTTPS clone/pull of the app-store repo (manifests are YAML/Docker Compose, not executed directly but define containers/scripts that are); actual app binaries come from `docker.pull(image, ...)` (Dockerode) — mutable-tag image pulls, no digest pinning found. | HTTPS throughout: update-check API `https://api.umbrel.com/latest-release`; update script fetched via plain `fetch(updateScript)` (URL supplied by that same JSON response, no scheme/host allow-list seen); OS bundle URLs hardcoded to `https://download.umbrel.com/release/<ver>/umbrelos-*.update`; app-store repo default `https://github.com/getumbrel/umbrel-apps.git` (isomorphic-git over HTTPS) | N — the `/latest-release` JSON response (containing `version`, `updateScript` URL, etc.) is not itself signed; no detached signature or manifest-signing step found anywhere in `packages/umbreld/source/modules/system/update.ts` | **none found for the primary (rugix) path** — the bootstrap script explicitly runs `rugix-ctrl update install --reboot set --insecure-skip-bundle-verification \"${update_url}\"`, i.e. cryptographic bundle verification is deliberately disabled. Legacy path (`mender install \"${update_url}\"`) relies on Mender's own artifact-signing support, but no `ArtifactVerifyKey`/mender.conf key configuration was found in this repo (likely lives in a separate OS-image-build repo not covered here) — marked **unknown** for that path. App-store git clone and Docker image pulls rely solely on HTTPS/TLS transport trust; no GPG-signed commits/tags, no image digest pinning, no Docker Content Trust configuration found. | n/a for the rugix path (verification explicitly skipped); unknown/not-found-in-this-repo for legacy mender path; n/a for git-clone/docker-pull app channel (no signature scheme used) | `packages/umbreld/source/modules/system/update.ts:49-63` (`https://api.umbrel.com/latest-release` fetch, no signature check on response); `:75-88` (`const {updateScript} = await getLatestRelease(...)`; `const result = await fetch(updateScript, ...)`; `` const process = $`bash -c ${updateSCriptContents}` `` — direct execution of remotely-fetched script); `scripts/update-script:9` (`download_prefix=\"https://download.umbrel.com/release/1.7.4\"`); `scripts/update-script:78` (`rugix-ctrl update install --reboot set --insecure-skip-bundle-verification \"${update_url}\"`); `packages/umbreld/source/constants.ts:2` (`UMBREL_APP_STORE_REPO = 'https://github.com/getumbrel/umbrel-apps.git'`); `packages/umbreld/source/modules/apps/app-repository.ts:68-80` (`git.clone({fs, http, url: this.url, dir: temporaryPath, depth: 1, singleBranch: true})`); `packages/umbreld/source/modules/utilities/docker-pull.ts:9-15` (`docker.pull(image, ...)`, plain Dockerode pull, no digest/signature check); `packages/umbreld/source/modules/system/routes.ts:53-58` (`checkUpdate: privateProcedure.query(...)`), `:88-99` (`update: privateProcedure.mutation(...)` — user-triggered, not scheduled) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-I6.md",
+      "source_line": 21,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://invent.kde.org/sdk/umbrello"
+        },
+        {
+          "label": "framework",
+          "value": "native C++ (Qt/KDE)"
+        },
+        {
+          "label": "has_updater",
+          "value": "N"
+        },
+        {
+          "label": "auto",
+          "value": "N/A"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N/A"
+        },
+        {
+          "label": "transport",
+          "value": "N/A"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A"
+        },
+        {
+          "label": "payload_verification",
+          "value": "N/A"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence",
+          "value": "Exhaustive negative grep of full depth-1 clone (53MB); only unrelated hit is a code comment \"Update check box of parent items\" in `umbrello/debug/debug_utils.cpp:307`."
+        }
+      ]
+    },
+    {
+      "source_file": "batch-O4.md",
+      "source_line": 15,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/getumbrel/umbrel (umbreld; formerly separate getumbrel/umbrel-os, now archived)"
+        },
+        {
+          "label": "framework",
+          "value": "Node.js/TypeScript backend (`umbreld`) + React/TS frontend, Linux OS image (rugix/mender-based)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (both OS-level and per-app updates)"
+        },
+        {
+          "label": "auto",
+          "value": "N (both are user-triggered via authenticated tRPC mutations `system.update` / `apps.update`/`apps.updateAll`, clicked from Settings UI; no cron/background auto-trigger found in `packages/umbreld/source`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — **OS update**: `performUpdate()` fetches an `updateScript` URL and executes its contents directly via `bash -c ${updateScriptContents}` (remote-script execution, no signature check on the script itself); that script then downloads a `.update` bundle and installs it via `rugix-ctrl`/`mender`. **App updates**: `AppRepository.atomicClone()` does an `isomorphic-git` HTTPS clone/pull of the app-store repo (manifests are YAML/Docker Compose, not executed directly but define containers/scripts that are); actual app binaries come from `docker.pull(image, ...)` (Dockerode) — mutable-tag image pulls, no digest pinning found."
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS throughout: update-check API `https://api.umbrel.com/latest-release`; update script fetched via plain `fetch(updateScript)` (URL supplied by that same JSON response, no scheme/host allow-list seen); OS bundle URLs hardcoded to `https://download.umbrel.com/release/<ver>/umbrelos-*.update`; app-store repo default `https://github.com/getumbrel/umbrel-apps.git` (isomorphic-git over HTTPS)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N — the `/latest-release` JSON response (containing `version`, `updateScript` URL, etc.) is not itself signed; no detached signature or manifest-signing step found anywhere in `packages/umbreld/source/modules/system/update.ts`"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none found for the primary (rugix) path** — the bootstrap script explicitly runs `rugix-ctrl update install --reboot set --insecure-skip-bundle-verification \"${update_url}\"`, i.e. cryptographic bundle verification is deliberately disabled. Legacy path (`mender install \"${update_url}\"`) relies on Mender's own artifact-signing support, but no `ArtifactVerifyKey`/mender.conf key configuration was found in this repo (likely lives in a separate OS-image-build repo not covered here) — marked **unknown** for that path. App-store git clone and Docker image pulls rely solely on HTTPS/TLS transport trust; no GPG-signed commits/tags, no image digest pinning, no Docker Content Trust configuration found."
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a for the rugix path (verification explicitly skipped); unknown/not-found-in-this-repo for legacy mender path; n/a for git-clone/docker-pull app channel (no signature scheme used)"
+        },
+        {
+          "label": "evidence",
+          "value": "`packages/umbreld/source/modules/system/update.ts:49-63` (`https://api.umbrel.com/latest-release` fetch, no signature check on response); `:75-88` (`const {updateScript} = await getLatestRelease(...)`; `const result = await fetch(updateScript, ...)`; `` const process = $`bash -c ${updateSCriptContents}` `` — direct execution of remotely-fetched script); `scripts/update-script:9` (`download_prefix=\"https://download.umbrel.com/release/1.7.4\"`); `scripts/update-script:78` (`rugix-ctrl update install --reboot set --insecure-skip-bundle-verification \"${update_url}\"`); `packages/umbreld/source/constants.ts:2` (`UMBREL_APP_STORE_REPO = 'https://github.com/getumbrel/umbrel-apps.git'`); `packages/umbreld/source/modules/apps/app-repository.ts:68-80` (`git.clone({fs, http, url: this.url, dir: temporaryPath, depth: 1, singleBranch: true})`); `packages/umbreld/source/modules/utilities/docker-pull.ts:9-15` (`docker.pull(image, ...)`, plain Dockerode pull, no digest/signature check); `packages/umbreld/source/modules/system/routes.ts:53-58` (`checkUpdate: privateProcedure.query(...)`), `:88-99` (`update: privateProcedure.mutation(...)` — user-triggered, not scheduled)"
+        }
+      ]
+    }
   ]
 }

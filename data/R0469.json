@@ -43,5 +43,53 @@
       "line": 18,
       "text": "| Lobe Chat (desktop) | https://github.com/lobehub/lobe-chat | ca3d7fd3 / 2026-08-23 | Y (`apps/desktop`, electron-updater) | Y (`autoCheckUpdate:true`, `autoDownloadUpdate:true`, hourly) | Y | https (`releases.lobehub.com`, TLS enforced) | effectively yes — electron-builder `latest.yml` + code-signed installer | OS code-signing (electron-updater codesign check) + sha512 in manifest | OS keystore (Apple/Windows code-signing trust) | `apps/desktop/src/main/core/infrastructure/UpdaterManager.ts:9`, `apps/desktop/src/main/modules/updater/configs.ts:18-24` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AE1.md",
+      "source_line": 18,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/lobehub/lobe-chat"
+        },
+        {
+          "label": "commit/date",
+          "value": "ca3d7fd3 / 2026-08-23"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y (`apps/desktop`, electron-updater)"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (`autoCheckUpdate:true`, `autoDownloadUpdate:true`, hourly)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`releases.lobehub.com`, TLS enforced)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "effectively yes — electron-builder `latest.yml` + code-signed installer"
+        },
+        {
+          "label": "payload_verification",
+          "value": "OS code-signing (electron-updater codesign check) + sha512 in manifest"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore (Apple/Windows code-signing trust)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`apps/desktop/src/main/core/infrastructure/UpdaterManager.ts:9`, `apps/desktop/src/main/modules/updater/configs.ts:18-24`"
+        }
+      ]
+    }
   ]
 }

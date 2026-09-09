@@ -43,5 +43,53 @@
       "line": 20,
       "text": "| pnpm | https://github.com/pnpm/pnpm | 03fd4ca / 2026-08-21 | Y (`pnpm self-update`, plus automatic engine-version-switch when a repo pins a different pnpm via `packageManager`/`devEngines`) | N for `self-update` itself (manual); the engine-version-switch path (same verification code) triggers automatically when entering a project pinned to a different pnpm version | Y | https (npm registry, `registry.npmjs.org` by default; explicitly routes self-update through the trusted bootstrap config so a project `.npmrc` cannot redirect it) | packument-level npm registry signatures (`dist.signatures`), fail-closed if unverifiable from the canonical registry | signature — ECDSA registry signature verified via `verifyInstalledPackageSignatures`, combined with sha512 integrity pin from the lockfile | **pinned-in-binary**: `NPM_SIGNING_KEYS` array hardcoded in source (refreshed by CI workflow at build time, not fetched live at runtime) | `pnpm11/deps/security/signatures/src/npmSigningKeys.ts:8-22` (hardcoded `NPM_SIGNING_KEYS` ECDSA keys), `pnpm11/engine/pm/commands/src/self-updater/verifyPnpmEngineIdentity.ts:77-127` (`verifyPnpmEngineIdentity`, `trustedKeys = getNpmSigningKeys()`, fails closed with `PNPM_ENGINE_IDENTITY_UNVERIFIABLE`/`_MISMATCH` on any failure not explicitly tolerable), `pnpm11/engine/pm/commands/src/self-updater/selfUpdate.ts:92-96` (routes through trusted bootstrap config, not project `.npmrc`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W7.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/pnpm/pnpm"
+        },
+        {
+          "label": "commit/date",
+          "value": "03fd4ca / 2026-08-21"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y (`pnpm self-update`, plus automatic engine-version-switch when a repo pins a different pnpm via `packageManager`/`devEngines`)"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N for `self-update` itself (manual); the engine-version-switch path (same verification code) triggers automatically when entering a project pinned to a different pnpm version"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (npm registry, `registry.npmjs.org` by default; explicitly routes self-update through the trusted bootstrap config so a project `.npmrc` cannot redirect it)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "packument-level npm registry signatures (`dist.signatures`), fail-closed if unverifiable from the canonical registry"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature — ECDSA registry signature verified via `verifyInstalledPackageSignatures`, combined with sha512 integrity pin from the lockfile"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned-in-binary**: `NPM_SIGNING_KEYS` array hardcoded in source (refreshed by CI workflow at build time, not fetched live at runtime)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`pnpm11/deps/security/signatures/src/npmSigningKeys.ts:8-22` (hardcoded `NPM_SIGNING_KEYS` ECDSA keys), `pnpm11/engine/pm/commands/src/self-updater/verifyPnpmEngineIdentity.ts:77-127` (`verifyPnpmEngineIdentity`, `trustedKeys = getNpmSigningKeys()`, fails closed with `PNPM_ENGINE_IDENTITY_UNVERIFIABLE`/`_MISMATCH` on any failure not explicitly tolerable), `pnpm11/engine/pm/commands/src/self-updater/selfUpdate.ts:92-96` (routes through trusted bootstrap config, not project `.npmrc`)"
+        }
+      ]
+    }
   ]
 }

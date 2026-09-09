@@ -41,5 +41,53 @@
       "line": 15,
       "text": "| The Powder Toy | https://github.com/The-Powder-Toy/The-Powder-Toy.git | b31f4462bc7d217159b83859a35405db9b640455 / 2026-08-21 | Y | N (user must click \"Run Updater\" confirm) | Y | https, TLS enforced (`src/client/http/requestmanager/Libcurl.cpp:496-499` pins `CURLOPT_PROTOCOLS_STR=\"https\"` + `CURLOPT_SSLVERSION=TLSv1_2`; no VERIFYPEER=0 found) | N | none (4-byte \"BuTT\" magic check + bz2 decompress only) | N/A | `src/gui/update/UpdateActivity.cpp:36-114` (no hash/sig check, `Platform::UpdateStart(res)` at 106); `src/common/platform/Windows.cpp:313-341` (writes downloaded bytes straight over the running exe, then `ShellExecute`s it); `src/client/http/StartupRequest.cpp:9` (unauthenticated `Startup.json` manifest). |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AI4.md",
+      "source_line": 15,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/The-Powder-Toy/The-Powder-Toy.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "b31f4462bc7d217159b83859a35405db9b640455 / 2026-08-21"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (user must click \"Run Updater\" confirm)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (`src/client/http/requestmanager/Libcurl.cpp:496-499` pins `CURLOPT_PROTOCOLS_STR=\"https\"` + `CURLOPT_SSLVERSION=TLSv1_2`; no VERIFYPEER=0 found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (4-byte \"BuTT\" magic check + bz2 decompress only)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/gui/update/UpdateActivity.cpp:36-114` (no hash/sig check, `Platform::UpdateStart(res)` at 106); `src/common/platform/Windows.cpp:313-341` (writes downloaded bytes straight over the running exe, then `ShellExecute`s it); `src/client/http/StartupRequest.cpp:9` (unauthenticated `Startup.json` manifest)."
+        }
+      ]
+    }
   ]
 }

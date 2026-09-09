@@ -41,5 +41,53 @@
       "line": 10,
       "text": "| Pika | https://github.com/superhighfives/pika | Sparkle 2 | Y | Y (`SUEnableAutomaticChecks=true`; no `SUAllowsAutomaticUpdates` override so default Sparkle prompt-before-install behavior applies) | Y | https | TLS-only | signature[EdDSA] | pinned-in-binary (Sparkle-EdDSA) | `Pika/Info.plist:56-61` — `SUEnableAutomaticChecks=true`, `SUFeedURL=https://superhighfives.com/releases/pika`, `SUPublicEDKey=+hHTCW8zfGxSQeowmFxlZzE4N/fxolLQRpA7zLlzBvk=`. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-N2.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/superhighfives/pika"
+        },
+        {
+          "label": "framework",
+          "value": "Sparkle 2"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (`SUEnableAutomaticChecks=true`; no `SUAllowsAutomaticUpdates` override so default Sparkle prompt-before-install behavior applies)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "TLS-only"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature[EdDSA]"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (Sparkle-EdDSA)"
+        },
+        {
+          "label": "evidence",
+          "value": "`Pika/Info.plist:56-61` — `SUEnableAutomaticChecks=true`, `SUFeedURL=https://superhighfives.com/releases/pika`, `SUPublicEDKey=+hHTCW8zfGxSQeowmFxlZzE4N/fxolLQRpA7zLlzBvk=`."
+        }
+      ]
+    }
   ]
 }

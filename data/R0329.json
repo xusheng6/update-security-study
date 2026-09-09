@@ -44,5 +44,53 @@
       "line": 11,
       "text": "| MongoDB Compass | https://github.com/mongodb-js/compass.git | 179cd3f6d8 / 2026-08-20 | Y | Y | Y | https (endpoint compass.mongodb.com), TLS enforced (no rejectUnauthorized:false found) | OS-signed | OS code-signing (Squirrel.Mac signature match / Windows Squirrel+Authenticode) | OS keystore (real signing infra) | packages/compass/src/main/auto-update-manager.ts:7 (`import { autoUpdater } from 'electron'`), :432-458 (`autoUpdater.setFeedURL`+`checkForUpdates()`), :580 (`autoUpdater.quitAndInstall()`); packages/hadron-build/src/lib/signtool.ts:1-80 (real Garasign signing: jsign for .exe/.msi, gpg for archives) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W4.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/mongodb-js/compass.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "179cd3f6d8 / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (endpoint compass.mongodb.com), TLS enforced (no rejectUnauthorized:false found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "OS-signed"
+        },
+        {
+          "label": "payload_verification",
+          "value": "OS code-signing (Squirrel.Mac signature match / Windows Squirrel+Authenticode)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore (real signing infra)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "packages/compass/src/main/auto-update-manager.ts:7 (`import { autoUpdater } from 'electron'`), :432-458 (`autoUpdater.setFeedURL`+`checkForUpdates()`), :580 (`autoUpdater.quitAndInstall()`); packages/hadron-build/src/lib/signtool.ts:1-80 (real Garasign signing: jsign for .exe/.msi, gpg for archives)"
+        }
+      ]
+    }
   ]
 }

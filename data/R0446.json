@@ -44,5 +44,53 @@
       "line": 18,
       "text": "| flacon | https://github.com/flacon/flacon.git | 2dcc83e / 2026-07-26 | Y (macOS only) | Y (`checkForUpdatesInBackground` on startup if enabled) | Y (Sparkle installs the downloaded update) | https (`SUFeedURL` = `https://flacon.github.io/download/feed.xml`) | unknown — no `SUPublicEDKey`/`SUPublicDSAKey` found anywhere in repo | not verifiable from source (Sparkle w/o a pinned EdDSA key in `Info.plist.in` would not cryptographically verify the payload; key may be injected at release-CI time but is absent from this repo) | not pinned in repo — cannot confirm | updater/updater.h, updater/updater.mm (wraps Sparkle `SUUpdater`, `#if MAC_UPDATER` only); CMakeLists.txt:258-262 (`MAC_UPDATE_URL = \"https://flacon.github.io/download/feed.xml\"`, `find_package(Sparkle REQUIRED)`); misc/Info.plist.in:94-95 (`SUFeedURL` present, no `SUPublicEDKey` key anywhere in the file); Windows/Linux builds have no updater code at all |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC7.md",
+      "source_line": 18,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/flacon/flacon.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "2dcc83e / 2026-07-26"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (macOS only)"
+        },
+        {
+          "label": "auto",
+          "value": "Y (`checkForUpdatesInBackground` on startup if enabled)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (Sparkle installs the downloaded update)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`SUFeedURL` = `https://flacon.github.io/download/feed.xml`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "unknown — no `SUPublicEDKey`/`SUPublicDSAKey` found anywhere in repo"
+        },
+        {
+          "label": "payload_verification",
+          "value": "not verifiable from source (Sparkle w/o a pinned EdDSA key in `Info.plist.in` would not cryptographically verify the payload; key may be injected at release-CI time but is absent from this repo)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "not pinned in repo — cannot confirm"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "updater/updater.h, updater/updater.mm (wraps Sparkle `SUUpdater`, `#if MAC_UPDATER` only); CMakeLists.txt:258-262 (`MAC_UPDATE_URL = \"https://flacon.github.io/download/feed.xml\"`, `find_package(Sparkle REQUIRED)`); misc/Info.plist.in:94-95 (`SUFeedURL` present, no `SUPublicEDKey` key anywhere in the file); Windows/Linux builds have no updater code at all"
+        }
+      ]
+    }
   ]
 }

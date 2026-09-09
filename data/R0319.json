@@ -41,5 +41,53 @@
       "line": 21,
       "text": "| iTerm2 | https://github.com/gnachman/iTerm2 | 14c75a3 / 2026-08-20 | Y | Y | Y | https, TLS validation not disabled anywhere in `sources/` (no `NSAllowsArbitraryLoads` overrides for the Sparkle feed found) | Y (Sparkle appcast is Ed25519-signed) | signature (Sparkle EdDSA over the downloaded update archive) | pinned-in-binary (Info.plist `SUPublicEDKey`, baked into the app bundle at build time) | Bundled Sparkle framework/submodule at `iterm2/ThirdParty/Sparkle.framework` and `iterm2/submodules/Sparkle`; feed config in `iterm2/plists/release-iTerm2.plist:398-407` — `SUPublicEDKey` = `xdqAa0KXBPhMbUrutVTe87i6U7yWf7WKaCeRG7AAZ0w=`, `SUFeedURL` = `https://iterm2.com/appcasts/final_modern.xml`; auto-check pref key wired at `iterm2/sources/Settings/iTermPreferences.m:50` (`SUEnableAutomaticChecks`); manual trigger at `iterm2/sources/AppKit/iTermApplicationDelegate.m:2355,2503`. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W1.md",
+      "source_line": 21,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/gnachman/iTerm2"
+        },
+        {
+          "label": "commit/date",
+          "value": "14c75a3 / 2026-08-20"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS validation not disabled anywhere in `sources/` (no `NSAllowsArbitraryLoads` overrides for the Sparkle feed found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (Sparkle appcast is Ed25519-signed)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (Sparkle EdDSA over the downloaded update archive)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (Info.plist `SUPublicEDKey`, baked into the app bundle at build time)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "Bundled Sparkle framework/submodule at `iterm2/ThirdParty/Sparkle.framework` and `iterm2/submodules/Sparkle`; feed config in `iterm2/plists/release-iTerm2.plist:398-407` — `SUPublicEDKey` = `xdqAa0KXBPhMbUrutVTe87i6U7yWf7WKaCeRG7AAZ0w=`, `SUFeedURL` = `https://iterm2.com/appcasts/final_modern.xml`; auto-check pref key wired at `iterm2/sources/Settings/iTermPreferences.m:50` (`SUEnableAutomaticChecks`); manual trigger at `iterm2/sources/AppKit/iTermApplicationDelegate.m:2355,2503`."
+        }
+      ]
+    }
   ]
 }

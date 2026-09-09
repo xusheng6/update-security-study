@@ -40,4 +40,9 @@ assert geogebra['description'] == 'Windows auto-updater silently downloads+loads
 assert geogebra['transport'] == 'https (validated)'
 assert geogebra['payload_verification'] == 'none'
 assert geogebra['review_basis'] == 'original-claude-code-analysis'
+assert len(geogebra['structured_evidence']) == 1
+geogebra_fields = {f['label']: f['value'] for f in geogebra['structured_evidence'][0]['fields']}
+assert geogebra_fields['transport'].startswith('https')
+assert 'GeoGebraFrame.java:529-577' in geogebra_fields['evidence']
+assert '| GeoGebra (desktop) |' not in (OUT / 'records' / 'R0207.html').read_text()
 print(f'Validated local links and data for {len(rows):,} records.')

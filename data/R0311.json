@@ -44,5 +44,53 @@
       "line": 17,
       "text": "| KIAUH (Klipper Installation And Update Helper) | https://github.com/dw-0/kiauh.git | d3e538de7b3163abe27fdf8116a60716d4db31ce / 2026-08-03 | Y | N (interactive menu-driven CLI tool; user selects \"Update\" per component) | Y | https (`git clone`/`git pull` over https:// remotes, e.g. github.com/Klipper3d/klipper; `https://api.github.com/repos/...` for tag lookups). No TLS bypass found. | N (no signed manifest; relies on plain git history) | none — plain `git clone`/`git pull`, no GPG commit/tag signature verification, no checksum of resulting tree before the code is installed as systemd services (Klipper, Moonraker, etc.) | server-supplied/unpinned (whatever `github.com/<owner>/<repo>` HEAD currently serves) | kiauh/utils/git_utils.py:23 (git_clone_wrapper), :60 (git_pull_wrapper), :316 (git_cmd_clone using plain `git clone`), :202-222 (get_remote_tags via `https://api.github.com/repos/...`) — **this tool is the de facto updater/installer for the whole Klipper stack on most user setups; it directly clones-and-runs arbitrary upstream/fork branches with zero cryptographic verification** |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-V6.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/dw-0/kiauh.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "d3e538de7b3163abe27fdf8116a60716d4db31ce / 2026-08-03"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (interactive menu-driven CLI tool; user selects \"Update\" per component)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`git clone`/`git pull` over https:// remotes, e.g. github.com/Klipper3d/klipper; `https://api.github.com/repos/...` for tag lookups). No TLS bypass found."
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no signed manifest; relies on plain git history)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — plain `git clone`/`git pull`, no GPG commit/tag signature verification, no checksum of resulting tree before the code is installed as systemd services (Klipper, Moonraker, etc.)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (whatever `github.com/<owner>/<repo>` HEAD currently serves)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "kiauh/utils/git_utils.py:23 (git_clone_wrapper), :60 (git_pull_wrapper), :316 (git_cmd_clone using plain `git clone`), :202-222 (get_remote_tags via `https://api.github.com/repos/...`) — **this tool is the de facto updater/installer for the whole Klipper stack on most user setups; it directly clones-and-runs arbitrary upstream/fork branches with zero cryptographic verification**"
+        }
+      ]
+    }
   ]
 }

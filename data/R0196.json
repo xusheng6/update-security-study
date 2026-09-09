@@ -41,5 +41,53 @@
       "line": 9,
       "text": "| Specter Desktop | github.com/cryptoadvance/specter-desktop | Python/Flask backend + Electron desktop wrapper (pyinstaller/electron) | N (no mechanism checks a remote server for a *newer* app version; no electron-updater/autoUpdater present) | N/A for self-update — however at first run/repair the Electron wrapper unconditionally downloads the \"specterd\" companion daemon binary matching the version already pinned in the shipped app bundle | Y (downloads `specterd-<version>-<platform>.zip` from GitHub Releases, extracts it, and executes it as the backend daemon) | https (github.com/.../releases/download/... via Node `request` lib, standard TLS/OS trust store, no pinning) | N (`version-data.json` is a plain JSON file bundled inside the app package at build time by `set-version.js`; it is not independently/detachedly signed) | hash-from-manifest (downloaded specterd's SHA-256 is compared against the hash baked into the bundled `version-data.json`) | none (hash only, no signature/key; the manifest's own integrity rests solely on the outer Electron app package's code signing, e.g. mac \"identity\": \"Kim Neunert\" in electron-builder config, not on any key checked by this download logic) | pyinstaller/electron/downloadloc.js:1-14 (GitHub releases URL builder); pyinstaller/electron/src/download.js:31-78 (download→extract→SHA256 compare→execute); pyinstaller/electron/set-version.js:1-59 (hash baked into version-data.json at build time) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-L1.md",
+      "source_line": 9,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/cryptoadvance/specter-desktop"
+        },
+        {
+          "label": "framework",
+          "value": "Python/Flask backend + Electron desktop wrapper (pyinstaller/electron)"
+        },
+        {
+          "label": "has_updater",
+          "value": "N (no mechanism checks a remote server for a *newer* app version; no electron-updater/autoUpdater present)"
+        },
+        {
+          "label": "auto",
+          "value": "N/A for self-update — however at first run/repair the Electron wrapper unconditionally downloads the \"specterd\" companion daemon binary matching the version already pinned in the shipped app bundle"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (downloads `specterd-<version>-<platform>.zip` from GitHub Releases, extracts it, and executes it as the backend daemon)"
+        },
+        {
+          "label": "transport",
+          "value": "https (github.com/.../releases/download/... via Node `request` lib, standard TLS/OS trust store, no pinning)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (`version-data.json` is a plain JSON file bundled inside the app package at build time by `set-version.js`; it is not independently/detachedly signed)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (downloaded specterd's SHA-256 is compared against the hash baked into the bundled `version-data.json`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none (hash only, no signature/key; the manifest's own integrity rests solely on the outer Electron app package's code signing, e.g. mac \"identity\": \"Kim Neunert\" in electron-builder config, not on any key checked by this download logic)"
+        },
+        {
+          "label": "evidence",
+          "value": "pyinstaller/electron/downloadloc.js:1-14 (GitHub releases URL builder); pyinstaller/electron/src/download.js:31-78 (download→extract→SHA256 compare→execute); pyinstaller/electron/set-version.js:1-59 (hash baked into version-data.json at build time)"
+        }
+      ]
+    }
   ]
 }

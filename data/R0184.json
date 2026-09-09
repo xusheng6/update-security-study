@@ -43,5 +43,53 @@
       "line": 10,
       "text": "| SiYuan | siyuan-note/siyuan | Electron shell + Go kernel (custom updater, no electron-updater/Squirrel) | Y | auto-check + auto-download in background; install requires user confirmation (`confirmDialog`) on app exit, or is skipped if user declines | Y | HTTPS — `req` client with `.DisableInsecureSkipVerify()` explicitly set (TLS verified) | N — checksum source is a plain JSON field (`checksums` map from b3log \"Rhy\" cloud API) or GitHub Releases API asset `digest` / an unsigned `SHA256SUMS.txt` manifest file; none of these are cryptographically signed | hash-from-manifest (SHA-256) | none (no crypto key/signature; only SHA-256 string comparison against value returned by b3log's Rhy API or GitHub Releases API/asset digest/SHA256SUMS.txt) | kernel/model/updater.go:44,73,90-104,136-185 (auto dl + sha256 verify in `downloadInstallPkg`); kernel/model/updater_release.go:138-148,190-201,363-416 (checksum sourced from unsigned API JSON / GH asset digest / SHA256SUMS.txt); app/electron/main.js:654-687 (`launchUpdateInstallPackage` spawns/opens the downloaded installer on quit); app/src/dialog/processSystem.ts:239-244 (`confirmDialog` gates install) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-K4.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "siyuan-note/siyuan"
+        },
+        {
+          "label": "framework",
+          "value": "Electron shell + Go kernel (custom updater, no electron-updater/Squirrel)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "auto-check + auto-download in background; install requires user confirmation (`confirmDialog`) on app exit, or is skipped if user declines"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS — `req` client with `.DisableInsecureSkipVerify()` explicitly set (TLS verified)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N — checksum source is a plain JSON field (`checksums` map from b3log \"Rhy\" cloud API) or GitHub Releases API asset `digest` / an unsigned `SHA256SUMS.txt` manifest file; none of these are cryptographically signed"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (SHA-256)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none (no crypto key/signature; only SHA-256 string comparison against value returned by b3log's Rhy API or GitHub Releases API/asset digest/SHA256SUMS.txt)"
+        },
+        {
+          "label": "evidence",
+          "value": "kernel/model/updater.go:44,73,90-104,136-185 (auto dl + sha256 verify in `downloadInstallPkg`); kernel/model/updater_release.go:138-148,190-201,363-416 (checksum sourced from unsigned API JSON / GH asset digest / SHA256SUMS.txt); app/electron/main.js:654-687 (`launchUpdateInstallPackage` spawns/opens the downloaded installer on quit); app/src/dialog/processSystem.ts:239-244 (`confirmDialog` gates install)"
+        }
+      ]
+    }
   ]
 }

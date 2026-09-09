@@ -41,5 +41,53 @@
       "line": 19,
       "text": "| SteamTinkerLaunch | github.com/sonic2kk/steamtinkerlaunch | 8550ab26 / 2025-07-14 | Y (Steam Deck only) | **Y, default-on** (`STEAMDECK_AUTOUP=\"1\"`, line 3249) | Y (self via `git pull`, plus dozens of tool downloads: GE-Proton, Winetricks, ReShade, SpecialK, Conty, Vortex, Arch-package deps) | HTTPS (git/wget/curl to github.com/reshade.me/archive.archlinux.org/nightly.link); no `-k`/`--insecure`/`--no-check-certificate` found anywhere in the ~27k-line script | N/A | **None** for self-update (plain `git pull`/`git clone`, no commit/tag signature check, `lib` `gitUpdate()` line 6947-6963); for GE-Proton/Conty/Vortex/FWS: sha512/sha256/md5 checksum fetched from the *same* GitHub host, and on mismatch `dlCheck`/`chkFile` only logs a WARN and **still extracts the archive** (`chkFile` line 842-864, `dlCustomProton` line 4409-4469) | none (no GPG anywhere in the codebase; `grep -n \"gpg\\|signature\\|pubkey\"` returns no genuine hits) | `steamtinkerlaunch:26560-26584` (`installFilesSteamDeck`); `:6947-6963` (`gitUpdate`); `:4409-4469` (`dlCustomProton`); `:842-864` (`chkFile`, non-blocking checksum) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-X8.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/sonic2kk/steamtinkerlaunch"
+        },
+        {
+          "label": "commit/date",
+          "value": "8550ab26 / 2025-07-14"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (Steam Deck only)"
+        },
+        {
+          "label": "auto",
+          "value": "**Y, default-on** (`STEAMDECK_AUTOUP=\"1\"`, line 3249)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (self via `git pull`, plus dozens of tool downloads: GE-Proton, Winetricks, ReShade, SpecialK, Conty, Vortex, Arch-package deps)"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS (git/wget/curl to github.com/reshade.me/archive.archlinux.org/nightly.link); no `-k`/`--insecure`/`--no-check-certificate` found anywhere in the ~27k-line script"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**None** for self-update (plain `git pull`/`git clone`, no commit/tag signature check, `lib` `gitUpdate()` line 6947-6963); for GE-Proton/Conty/Vortex/FWS: sha512/sha256/md5 checksum fetched from the *same* GitHub host, and on mismatch `dlCheck`/`chkFile` only logs a WARN and **still extracts the archive** (`chkFile` line 842-864, `dlCustomProton` line 4409-4469)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none (no GPG anywhere in the codebase; `grep -n \"gpg\\|signature\\|pubkey\"` returns no genuine hits)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`steamtinkerlaunch:26560-26584` (`installFilesSteamDeck`); `:6947-6963` (`gitUpdate`); `:4409-4469` (`dlCustomProton`); `:842-864` (`chkFile`, non-blocking checksum)"
+        }
+      ]
+    }
   ]
 }

@@ -41,5 +41,53 @@
       "line": 8,
       "text": "| PrusaSlicer | github.com/prusa3d/PrusaSlicer | wxWidgets/C++ (libcurl) | Y (app updater `AppUpdater` + preset/profile `PresetUpdater`) | check: automatic on startup + notify dialog. download: user click in `AppUpdateDownloadDialog`. run: optional user checkbox \"run after download\" | Y (Windows: `run_downloaded_file`→`run_file`→`GUI::create_process` launches the downloaded installer if user opted in; macOS just mounts the dmg for manual install) | https (files.prusa3d.com); TLS not overridden — no `CURLOPT_SSL_VERIFYPEER`/`VERIFYHOST` disable found in `Http.cpp` (only `CURLSSLOPT_REVOKE_BEST_EFFORT` set) → enforced by curl default | N | none — only a declared file-size check (expected size from the version manifest vs. downloaded bytes), not cryptographic | n/a | src/slic3r/Utils/AppUpdater.cpp:42-56 (run_file/create_process), :204-326 (download_file, size-only check), :334-358 (version_check); src/libslic3r/AppConfig.cpp:41,753-756 (VERSION_CHECK_URL=\"https://files.prusa3d.com/.../PrusaSlicer.version\"); src/slic3r/Utils/PresetUpdater.cpp (grep for sha256/signature/verify/checksum = no matches) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-J1.md",
+      "source_line": 8,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/prusa3d/PrusaSlicer"
+        },
+        {
+          "label": "framework",
+          "value": "wxWidgets/C++ (libcurl)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (app updater `AppUpdater` + preset/profile `PresetUpdater`)"
+        },
+        {
+          "label": "auto",
+          "value": "check: automatic on startup + notify dialog. download: user click in `AppUpdateDownloadDialog`. run: optional user checkbox \"run after download\""
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (Windows: `run_downloaded_file`→`run_file`→`GUI::create_process` launches the downloaded installer if user opted in; macOS just mounts the dmg for manual install)"
+        },
+        {
+          "label": "transport",
+          "value": "https (files.prusa3d.com); TLS not overridden — no `CURLOPT_SSL_VERIFYPEER`/`VERIFYHOST` disable found in `Http.cpp` (only `CURLSSLOPT_REVOKE_BEST_EFFORT` set) → enforced by curl default"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — only a declared file-size check (expected size from the version manifest vs. downloaded bytes), not cryptographic"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence",
+          "value": "src/slic3r/Utils/AppUpdater.cpp:42-56 (run_file/create_process), :204-326 (download_file, size-only check), :334-358 (version_check); src/libslic3r/AppConfig.cpp:41,753-756 (VERSION_CHECK_URL=\"https://files.prusa3d.com/.../PrusaSlicer.version\"); src/slic3r/Utils/PresetUpdater.cpp (grep for sha256/signature/verify/checksum = no matches)"
+        }
+      ]
+    }
   ]
 }

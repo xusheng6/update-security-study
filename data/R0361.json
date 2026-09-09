@@ -42,5 +42,53 @@
       "line": 17,
       "text": "| Tautulli | https://github.com/Tautulli/Tautulli | c7153de / 2026-06-16 | Y | Y (`PLEXPY_AUTO_UPDATE` config: scheduler calls `check_github()` then `plexpy.shutdown(restart=True, update=True)` fully unattended for git/source installs) | Y (git install: `git pull --ff-only`; source install: downloads GitHub tarball over HTTPS and `tarfile.extractall()`s it directly over the live program directory, then restarts into the new code) | https, `requests` with `verify=bool(CONFIG.VERIFY_SSL_CERT)` — **default is enabled (1)** but is a user-toggleable config option that silently disables cert validation network-wide (including the update-tarball fetch) if turned off | N | none — no hash or signature check anywhere in `update()` before the tarball is extracted and files overwritten | N/A | plexpy/versioncheck.py:284-287 (auto-update trigger from scheduler), :318-347 (`request.request_content(tar_download_url)` → `tarfile.extractall` → `os.renames` over PROG_DIR, no checksum/signature step); plexpy/request.py:55-56,147-148 (`verify=bool(CONFIG.VERIFY_SSL_CERT)`); plexpy/config.py:197 (default `VERIFY_SSL_CERT=1`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-X4.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Tautulli/Tautulli"
+        },
+        {
+          "label": "commit/date",
+          "value": "c7153de / 2026-06-16"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (`PLEXPY_AUTO_UPDATE` config: scheduler calls `check_github()` then `plexpy.shutdown(restart=True, update=True)` fully unattended for git/source installs)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (git install: `git pull --ff-only`; source install: downloads GitHub tarball over HTTPS and `tarfile.extractall()`s it directly over the live program directory, then restarts into the new code)"
+        },
+        {
+          "label": "transport",
+          "value": "https, `requests` with `verify=bool(CONFIG.VERIFY_SSL_CERT)` — **default is enabled (1)** but is a user-toggleable config option that silently disables cert validation network-wide (including the update-tarball fetch) if turned off"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — no hash or signature check anywhere in `update()` before the tarball is extracted and files overwritten"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "plexpy/versioncheck.py:284-287 (auto-update trigger from scheduler), :318-347 (`request.request_content(tar_download_url)` → `tarfile.extractall` → `os.renames` over PROG_DIR, no checksum/signature step); plexpy/request.py:55-56,147-148 (`verify=bool(CONFIG.VERIFY_SSL_CERT)`); plexpy/config.py:197 (default `VERIFY_SSL_CERT=1`)"
+        }
+      ]
+    }
   ]
 }

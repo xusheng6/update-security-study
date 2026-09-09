@@ -41,5 +41,53 @@
       "line": 26,
       "text": "| Session Desktop | https://github.com/session-foundation/session-desktop | 37222b8 / 2026-08-18 | Y | Y (checks every 10 min once a newer release is seen) | Y (mac/win/AppImage; `.deb` builds explicitly excluded from auto-update, `canAutoUpdate()`) | https, TLS enforced for update path (an unrelated `rejectUnauthorized:false` exists only in the app's onion-routing/seed-node network layer, `ts/session/apis/seed_node_api/SeedNodeAPI.ts:82`, not the updater) | manifest present (`app-update.yml`), not independently signed | mac/win: OS code-sign (electron-updater default, no `verifyUpdateCodeSignature` override found); Linux AppImage: hash (SHA512 from same unsigned manifest, server-supplied) | mac/win: OS keystore; Linux: server-supplied | ts/updater/updater.ts:36-266; package.json (`electron-updater` dep, no `publish`/verify override found) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U8.md",
+      "source_line": 26,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/session-foundation/session-desktop"
+        },
+        {
+          "label": "commit/date",
+          "value": "37222b8 / 2026-08-18"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (checks every 10 min once a newer release is seen)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (mac/win/AppImage; `.deb` builds explicitly excluded from auto-update, `canAutoUpdate()`)"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced for update path (an unrelated `rejectUnauthorized:false` exists only in the app's onion-routing/seed-node network layer, `ts/session/apis/seed_node_api/SeedNodeAPI.ts:82`, not the updater)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "manifest present (`app-update.yml`), not independently signed"
+        },
+        {
+          "label": "payload_verification",
+          "value": "mac/win: OS code-sign (electron-updater default, no `verifyUpdateCodeSignature` override found); Linux AppImage: hash (SHA512 from same unsigned manifest, server-supplied)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "mac/win: OS keystore; Linux: server-supplied"
+        },
+        {
+          "label": "evidence",
+          "value": "ts/updater/updater.ts:36-266; package.json (`electron-updater` dep, no `publish`/verify override found)"
+        }
+      ]
+    }
   ]
 }

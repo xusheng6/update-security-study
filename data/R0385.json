@@ -41,5 +41,53 @@
       "line": 27,
       "text": "| Forge (MTG) | https://github.com/Card-Forge/forge | 339c1f1 / 2026-08-20 | Y | N (checks silently, then shows Update-Now/Later dialog) | **Y** | https (github.com releases, releases.cardforge.org); no custom TrustManager found → enforced | N (plain `version.txt` / `maven-metadata.xml`) | **none** — no hash, no signature before install | none | `forge-gui/src/main/java/forge/download/AutoUpdater.java:166` (packageUrl built from version.txt), `:221` (download), `:242-243` (`installer.setExecutable(true,false); desktop.open(installer);` — runs the downloaded jar with zero verification); mirrored logic in `forge-gui-mobile/src/forge/assets/AssetsDownloader.java:50-90` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Y6.md",
+      "source_line": 27,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/Card-Forge/forge"
+        },
+        {
+          "label": "commit/date",
+          "value": "339c1f1 / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (checks silently, then shows Update-Now/Later dialog)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y**"
+        },
+        {
+          "label": "transport",
+          "value": "https (github.com releases, releases.cardforge.org); no custom TrustManager found → enforced"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (plain `version.txt` / `maven-metadata.xml`)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — no hash, no signature before install"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none"
+        },
+        {
+          "label": "evidence",
+          "value": "`forge-gui/src/main/java/forge/download/AutoUpdater.java:166` (packageUrl built from version.txt), `:221` (download), `:242-243` (`installer.setExecutable(true,false); desktop.open(installer);` — runs the downloaded jar with zero verification); mirrored logic in `forge-gui-mobile/src/forge/assets/AssetsDownloader.java:50-90`"
+        }
+      ]
+    }
   ]
 }

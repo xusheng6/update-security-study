@@ -43,5 +43,53 @@
       "line": 9,
       "text": "| Antares SQL | antares-sql/antares | Electron (electron-updater) | Y | chk: automatic on renderer mount (`ipcRenderer.send('check-for-updates')`); Win/Linux(AppImage): `checkForUpdatesAndNotify()` → auto dl + notify, inst manual restart; macOS: `autoDownload=false`, only links to external download page (manual); Windows Store / non-AppImage Linux: updates disabled entirely | Y (Windows / AppImage-Linux only; N on macOS and store builds) | https, provider inferred from `repository` field (GitHub releases, no explicit `publish` block in package.json); TLS enforced (no bypass found) | N | hash-from-manifest only (sha512 in latest.yml); **no code signing found** for mac or Windows in package.json/workflows — explicit source comment \"Temporary solution on MacOS for unsigned app updates\" | none (unsigned builds) | src/main/ipc-handlers/updates.ts:1-59 (esp. comment at line ~25 \"unsigned app updates\"); src/renderer/App.vue:110 (`ipcRenderer.send('check-for-updates')` in onMounted); package.json `build` block — no `publish`/no CSC_*/signing keys; .github/workflows/build.yml has no signing secrets |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-I8.md",
+      "source_line": 9,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "antares-sql/antares"
+        },
+        {
+          "label": "framework",
+          "value": "Electron (electron-updater)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "chk: automatic on renderer mount (`ipcRenderer.send('check-for-updates')`); Win/Linux(AppImage): `checkForUpdatesAndNotify()` → auto dl + notify, inst manual restart; macOS: `autoDownload=false`, only links to external download page (manual); Windows Store / non-AppImage Linux: updates disabled entirely"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (Windows / AppImage-Linux only; N on macOS and store builds)"
+        },
+        {
+          "label": "transport",
+          "value": "https, provider inferred from `repository` field (GitHub releases, no explicit `publish` block in package.json); TLS enforced (no bypass found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest only (sha512 in latest.yml); **no code signing found** for mac or Windows in package.json/workflows — explicit source comment \"Temporary solution on MacOS for unsigned app updates\""
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none (unsigned builds)"
+        },
+        {
+          "label": "evidence",
+          "value": "src/main/ipc-handlers/updates.ts:1-59 (esp. comment at line ~25 \"unsigned app updates\"); src/renderer/App.vue:110 (`ipcRenderer.send('check-for-updates')` in onMounted); package.json `build` block — no `publish`/no CSC_*/signing keys; .github/workflows/build.yml has no signing secrets"
+        }
+      ]
+    }
   ]
 }

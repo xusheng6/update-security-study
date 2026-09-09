@@ -48,5 +48,99 @@
       "line": 15,
       "text": "| Pomatez — **Tauri build** (parallel migration path, same repo) | https://github.com/zidoro/pomatez | c272780 / 2026-05-19 | Y | Y (`check_for_updates` tauri command invoked from frontend) | Y | https (api.github.com release lookup, then GitHub Releases asset download) | Y (`tauri-updater.json` release asset, signed) | signature (Ed25519/minisign via `tauri-plugin-updater`) | **pinned-in-binary** (pubkey shipped in `release.conf.json`, merged into compiled config for release builds) | app/tauri/release.conf.json:2-4 (`\"pubkey\": \"dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6...\"`); app/tauri/src/updater.rs:1-95 (fetches `https://api.github.com/repos/zidoro/pomatez/releases/latest`, finds `tauri-updater.json` asset, builds updater with pinned pubkey, `update.download_and_install(...)`); .github/workflows/build-tauri.yml:110-112 (`TAURI_SIGNING_PRIVATE_KEY`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AN4.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/zidoro/pomatez"
+        },
+        {
+          "label": "commit/date",
+          "value": "c272780 / 2026-05-19"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (`autoUpdater.checkForUpdates()` fires unconditionally at startup)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (electron-updater, GitHub Releases provider), TLS enforced, no disabling found"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "latest.yml (electron-builder default: sha512 hash manifest, not detached-signed)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**Windows: hash only** (sha512 in latest.yml); **macOS: OS code-signing + notarization**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "Windows: server-supplied/unpinned (latest.yml hosted on same GH release as payload); macOS: OS keystore (Apple Developer ID cert + notarization, Gatekeeper-enforced)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "app/electron/src/helpers/autoUpdater.ts:1-41 (`import {autoUpdater} from \"electron-updater\"`; `autoUpdater.checkForUpdates()`); app/electron/src/main.ts:373-397; app/electron/package.json:12 (`\"repository\": \"https://github.com/zidoro/pomatez\"` → auto GH provider), :50-81 (mac/win/linux targets, **no Windows codesign config**); .github/workflows/build.yml:49-69 (`CSC_LINK`/`CSC_KEY_PASSWORD`/Apple notarization keys supplied **only** for the macOS matrix leg — the `windows-latest` build leg has no `WIN_CSC_LINK` equivalent, so Windows artifacts ship unsigned); electron-builder/afterSign.js (mac-only `@electron/notarize` call, `electronPlatformName !== \"darwin\"` → skip)"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-AN4.md",
+      "source_line": 15,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/zidoro/pomatez"
+        },
+        {
+          "label": "commit/date",
+          "value": "c272780 / 2026-05-19"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (`check_for_updates` tauri command invoked from frontend)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (api.github.com release lookup, then GitHub Releases asset download)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (`tauri-updater.json` release asset, signed)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (Ed25519/minisign via `tauri-plugin-updater`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned-in-binary** (pubkey shipped in `release.conf.json`, merged into compiled config for release builds)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "app/tauri/release.conf.json:2-4 (`\"pubkey\": \"dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6...\"`); app/tauri/src/updater.rs:1-95 (fetches `https://api.github.com/repos/zidoro/pomatez/releases/latest`, finds `tauri-updater.json` asset, builds updater with pinned pubkey, `update.download_and_install(...)`); .github/workflows/build-tauri.yml:110-112 (`TAURI_SIGNING_PRIVATE_KEY`)"
+        }
+      ]
+    }
   ]
 }

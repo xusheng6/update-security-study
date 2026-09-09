@@ -47,5 +47,99 @@
       "line": 20,
       "text": "| clipmenu (Linux, cdown) | https://github.com/cdown/clipmenu | e0ec3bc6608e / 2026-04-03 | N | - | - | - | - | - | - | negative census clean (C daemon + dmenu/rofi frontend, distro-distributed) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Z5.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/naotaka/ClipMenu"
+        },
+        {
+          "label": "commit/date",
+          "value": "e98e513cec38 / 2014-10-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (Sparkle)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "**http (plaintext), not https**"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (Sparkle 1.x DSA-signed enclosure)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (DSA)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (`dsa_pub.pem` bundled)"
+        },
+        {
+          "label": "evidence",
+          "value": "`Info.plist:46-51` — `SUFeedURL=http://feeds.feedburner.com/clipmenu-appcast`, `SUPreReleaseFeedURL=http://...`, `SUPublicDSAKeyFile=dsa_pub.pem`; key file at `resource/dsa_pub.pem`; appcast generator `script/generate_appcast.py`"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-Z5.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/cdown/clipmenu"
+        },
+        {
+          "label": "commit/date",
+          "value": "e0ec3bc6608e / 2026-04-03"
+        },
+        {
+          "label": "has_updater",
+          "value": "N"
+        },
+        {
+          "label": "auto",
+          "value": "-"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "-"
+        },
+        {
+          "label": "transport",
+          "value": "-"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "-"
+        },
+        {
+          "label": "payload_verification",
+          "value": "-"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "-"
+        },
+        {
+          "label": "evidence",
+          "value": "negative census clean (C daemon + dmenu/rofi frontend, distro-distributed)"
+        }
+      ]
+    }
   ]
 }

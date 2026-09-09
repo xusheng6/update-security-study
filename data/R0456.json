@@ -43,5 +43,53 @@
       "line": 13,
       "text": "| Blink | https://github.com/AGProjects/blink-qt | a6485ba / 2026-07-22 | Y (Windows only; `UpdateManager = Null` no-op on macOS/Linux) | Y (`winsparkle_init()` called on app start, background appcast fetch) | Y (WinSparkle downloads+launches installer on user confirm) | HTTPS (`https://blink.sipthor.net/BlinkQTAppcast.xml` default), enforced by OS TLS stack — no disabling found | N (no DSA/EdDSA pubkey wired up) | none — no `win_sparkle_set_dsa_pub_pem`/`set_ed_pub_key` call anywhere in repo | none/unpinned | blink/update/windows.py:34-77 (WinSparkle init/appcast, no pubkey call), blink/configuration/settings.py:72 (`updater_url` default) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AD1.md",
+      "source_line": 13,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/AGProjects/blink-qt"
+        },
+        {
+          "label": "commit/date",
+          "value": "a6485ba / 2026-07-22"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (Windows only; `UpdateManager = Null` no-op on macOS/Linux)"
+        },
+        {
+          "label": "auto",
+          "value": "Y (`winsparkle_init()` called on app start, background appcast fetch)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (WinSparkle downloads+launches installer on user confirm)"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS (`https://blink.sipthor.net/BlinkQTAppcast.xml` default), enforced by OS TLS stack — no disabling found"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no DSA/EdDSA pubkey wired up)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — no `win_sparkle_set_dsa_pub_pem`/`set_ed_pub_key` call anywhere in repo"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none/unpinned"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "blink/update/windows.py:34-77 (WinSparkle init/appcast, no pubkey call), blink/configuration/settings.py:72 (`updater_url` default)"
+        }
+      ]
+    }
   ]
 }

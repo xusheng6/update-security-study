@@ -46,5 +46,67 @@
       "line": 24,
       "text": "| Strawberry | **A** | macOS: Sparkle EdDSA signature checked against `SUPublicEDKey` pinned in `Info.plist`. Windows: qtsparkle mirrors the same appcast-signing design (external lib, not vendored, so its check code wasn't directly inspectable). Linux: no in-app updater at all. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-S3.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/strawberrymusicplayer/strawberry.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "b0b1e015c972d45558792c81b8b872024340adc5 (2026-08-17)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (no VerifyNone/InsecureSkipVerify in update path)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (EdDSA via Apple Sparkle.framework on macOS; qtsparkle-qt6 on Windows, external lib not vendored)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned in binary — `SUPublicEDKey` embedded in `Info.plist` inside the signed/notarized bundle"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "`dist/macos/Info.plist.in:37-40` (SUFeedURL https + SUPublicEDKey); `src/core/sparkleupdater.mm:63-77` (SPUStandardUpdaterController); `CMakeLists.txt:284-384` (updater gated to APPLE OR WIN32 only — **no Linux in-app updater**)"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-S3.md",
+      "source_line": 24,
+      "fields": [
+        {
+          "label": "Tier",
+          "value": "**A**"
+        },
+        {
+          "label": "Why",
+          "value": "macOS: Sparkle EdDSA signature checked against `SUPublicEDKey` pinned in `Info.plist`. Windows: qtsparkle mirrors the same appcast-signing design (external lib, not vendored, so its check code wasn't directly inspectable). Linux: no in-app updater at all."
+        }
+      ]
+    }
   ]
 }

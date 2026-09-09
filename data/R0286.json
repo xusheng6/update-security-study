@@ -43,5 +43,53 @@
       "line": 25,
       "text": "| shadps4-qtlauncher | https://github.com/shadps4-emu/shadps4-qtlauncher | a30486c / 2026-08-18 | Y | Y (prompt on startup, opt-in checkbox) | Y | https, TLS default (Qt `QNetworkAccessManager`, no `ignoreSslErrors`/insecure config found) | N | **none** — no hash, no signature on the downloaded zip at all | n/a (no verification exists) | src/qt_gui/check_update.cpp:48 (GitHub Releases API), 346-407 (`DownloadUpdate` writes zip straight to disk, no hash check), 409-601 (`Install()` generates and runs a PowerShell/bash script that extracts the zip and relaunches the new binary with no verification step) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U5.md",
+      "source_line": 25,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/shadps4-emu/shadps4-qtlauncher"
+        },
+        {
+          "label": "commit/date",
+          "value": "a30486c / 2026-08-18"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (prompt on startup, opt-in checkbox)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS default (Qt `QNetworkAccessManager`, no `ignoreSslErrors`/insecure config found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — no hash, no signature on the downloaded zip at all"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a (no verification exists)"
+        },
+        {
+          "label": "evidence",
+          "value": "src/qt_gui/check_update.cpp:48 (GitHub Releases API), 346-407 (`DownloadUpdate` writes zip straight to disk, no hash check), 409-601 (`Install()` generates and runs a PowerShell/bash script that extracts the zip and relaunches the new binary with no verification step)"
+        }
+      ]
+    }
   ]
 }

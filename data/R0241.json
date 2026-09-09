@@ -41,5 +41,53 @@
       "line": 19,
       "text": "| Firecamp | github.com/firecamp-dev/firecamp — `packages/firecamp-electron` | Y (`electron-updater`) | Check: Y automatic — `appUpdater.checkForUpdate(false)` called on every window `ready-to-show` event at launch. Download: Y automatic — `autoUpdater.on('update-available', ...)` immediately calls `autoUpdater.downloadUpdate()` with no user prompt. Install: N automatic — `update-downloaded` shows a dialog; `quitAndInstall` only fires from that dialog (in `dialogs.ts`, not shown here but referenced). | Y | HTTPS — electron-builder `publish` targets GitHub Releases (`firecamp-dev/firecamp`) and DigitalOcean Spaces CDN | **N (explicitly disabled)** — `\"verifyUpdateCodeSignature\": false` is set in the Windows NSIS build config, turning off electron-updater's default Authenticode publisher-name verification step for Windows updates | none beyond an unsigned electron-builder-generated `latest*.yml` — hash-from-manifest (SHA-512, standard electron-builder output) is the only integrity check for Windows; the additional code-signature cross-check that electron-updater normally performs is explicitly turned off | n/a (no signature scheme relied upon for Windows since the check is disabled) | packages/firecamp-electron/src/updater/updater.ts:7 (`from 'electron-updater'`), :32-33 (`autoUpdater.autoDownload = false; autoUpdater.allowDowngrade = false;` — note: set on the object but overridden by immediate manual `downloadUpdate()` call below), :42 (`autoUpdater.downloadUpdate()` inside `update-available` handler — no user gate), :81 (`autoUpdater.checkForUpdatesAndNotify()`); packages/firecamp-electron/src/main.ts:73-75 (`win.on('ready-to-show', ...)` → `appUpdater.checkForUpdate(false)` — automatic startup check); packages/firecamp-electron/package.json:133 (`\"verifyUpdateCodeSignature\": false`), :76-90 (`publish: [{provider:\"github\",...}, {provider:\"spaces\",...}]`) | The explicit `verifyUpdateCodeSignature: false` on Windows is a genuine negative finding: it removes electron-updater's built-in Authenticode publisher-match check, leaving only the unsigned SHA-512 hash in `latest.yml` (itself fetched over HTTPS, so an attacker would need to compromise the HTTPS channel/host, but there's no additional signature layer as defense-in-depth). |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-O7.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/firecamp-dev/firecamp — `packages/firecamp-electron`"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (`electron-updater`)"
+        },
+        {
+          "label": "auto",
+          "value": "Check: Y automatic — `appUpdater.checkForUpdate(false)` called on every window `ready-to-show` event at launch. Download: Y automatic — `autoUpdater.on('update-available', ...)` immediately calls `autoUpdater.downloadUpdate()` with no user prompt. Install: N automatic — `update-downloaded` shows a dialog; `quitAndInstall` only fires from that dialog (in `dialogs.ts`, not shown here but referenced)."
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS — electron-builder `publish` targets GitHub Releases (`firecamp-dev/firecamp`) and DigitalOcean Spaces CDN"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "**N (explicitly disabled)** — `\"verifyUpdateCodeSignature\": false` is set in the Windows NSIS build config, turning off electron-updater's default Authenticode publisher-name verification step for Windows updates"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none beyond an unsigned electron-builder-generated `latest*.yml` — hash-from-manifest (SHA-512, standard electron-builder output) is the only integrity check for Windows; the additional code-signature cross-check that electron-updater normally performs is explicitly turned off"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a (no signature scheme relied upon for Windows since the check is disabled)"
+        },
+        {
+          "label": "evidence",
+          "value": "packages/firecamp-electron/src/updater/updater.ts:7 (`from 'electron-updater'`), :32-33 (`autoUpdater.autoDownload = false; autoUpdater.allowDowngrade = false;` — note: set on the object but overridden by immediate manual `downloadUpdate()` call below), :42 (`autoUpdater.downloadUpdate()` inside `update-available` handler — no user gate), :81 (`autoUpdater.checkForUpdatesAndNotify()`); packages/firecamp-electron/src/main.ts:73-75 (`win.on('ready-to-show', ...)` → `appUpdater.checkForUpdate(false)` — automatic startup check); packages/firecamp-electron/package.json:133 (`\"verifyUpdateCodeSignature\": false`), :76-90 (`publish: [{provider:\"github\",...}, {provider:\"spaces\",...}]`)"
+        },
+        {
+          "label": "notes",
+          "value": "The explicit `verifyUpdateCodeSignature: false` on Windows is a genuine negative finding: it removes electron-updater's built-in Authenticode publisher-match check, leaving only the unsigned SHA-512 hash in `latest.yml` (itself fetched over HTTPS, so an attacker would need to compromise the HTTPS channel/host, but there's no additional signature layer as defense-in-depth)."
+        }
+      ]
+    }
   ]
 }

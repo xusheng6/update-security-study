@@ -42,5 +42,53 @@
       "line": 20,
       "text": "| UNetbootin | https://github.com/unetbootin/unetbootin | 48956c8 / 2023-06-28 | N (no self-update) | Y (silent, automatic during normal \"create USB\" workflow) | Y (downloads and writes bootable OS installer images/kernels to USB/HDD) | **plaintext HTTP** — hardcoded distro download URLs use `http://`, e.g. `http://archive.ubuntu.com/...`, `http://download.fedoraproject.org/...`, `http://download.opensuse.org/...`; QNetworkAccessManager used with no TLS at all on this path | none | none — no checksum/signature verification of downloaded ISO/kernel/initrd found | n/a | `src/unetbootin/distrolst.cpp:63-64` (Ubuntu netinst kernel/initrd over `http://archive.ubuntu.com`); dozens more `http://` distro URLs throughout `distrolst.cpp` (Fedora, openSUSE, Gentoo, etc.); download implementation `src/unetbootin/unetbootin.cpp:2611` `downloadfile()` via `QNetworkAccessManager` has no hash/signature check of the downloaded file before writing it to the boot media — the `.md5`/`.sha1` regexes at lines 50-53 are only file-exclusion patterns for what NOT to copy to the USB, not verification logic. **This is the worst finding in the batch: unauthenticated plaintext-HTTP delivery of a bootable OS installer, silently written to media the user then boots from.** |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-V8.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/unetbootin/unetbootin"
+        },
+        {
+          "label": "commit/date",
+          "value": "48956c8 / 2023-06-28"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "N (no self-update)"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (silent, automatic during normal \"create USB\" workflow)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y (downloads and writes bootable OS installer images/kernels to USB/HDD)"
+        },
+        {
+          "label": "transport",
+          "value": "**plaintext HTTP** — hardcoded distro download URLs use `http://`, e.g. `http://archive.ubuntu.com/...`, `http://download.fedoraproject.org/...`, `http://download.opensuse.org/...`; QNetworkAccessManager used with no TLS at all on this path"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "none"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — no checksum/signature verification of downloaded ISO/kernel/initrd found"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/unetbootin/distrolst.cpp:63-64` (Ubuntu netinst kernel/initrd over `http://archive.ubuntu.com`); dozens more `http://` distro URLs throughout `distrolst.cpp` (Fedora, openSUSE, Gentoo, etc.); download implementation `src/unetbootin/unetbootin.cpp:2611` `downloadfile()` via `QNetworkAccessManager` has no hash/signature check of the downloaded file before writing it to the boot media — the `.md5`/`.sha1` regexes at lines 50-53 are only file-exclusion patterns for what NOT to copy to the USB, not verification logic. **This is the worst finding in the batch: unauthenticated plaintext-HTTP delivery of a bootable OS installer, silently written to media the user then boots from.**"
+        }
+      ]
+    }
   ]
 }

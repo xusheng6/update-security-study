@@ -41,5 +41,53 @@
       "line": 7,
       "text": "| Gramps | https://github.com/gramps-project/gramps.git | a32b463b / 2026-07-03 | Y (addon manager only; core app has no self-updater — distro/installer managed) | N (manual \"Install Addon(s)\" click) | Y (addon `.gpr.py` registration files are `exec()`'d directly after download) | https for addon list/download BUT code contains an explicit macOS branch that fully disables TLS verification (`CERT_NONE`, `check_hostname=False`) | N | none (no hash/signature check on downloaded addon zip/tarball contents) | server-supplied/unpinned (addon catalog + files served from gramps-project.org wiki, unauthenticated) | `gramps/gen/plug/utils.py:194-214` (`urlopen_maybe_no_check_cert` — CERT_NONE on mac()), `gramps/gen/plug/utils.py:337-394` (`load_addon_file` downloads zip/tar and `exec(contents, env)` on each `.gpr.py`), `gramps/gui/plug/_windows.py:1476-1484` (`__get_addon` UI entry point) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AF5.md",
+      "source_line": 7,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/gramps-project/gramps.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "a32b463b / 2026-07-03"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (addon manager only; core app has no self-updater — distro/installer managed)"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual \"Install Addon(s)\" click)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (addon `.gpr.py` registration files are `exec()`'d directly after download)"
+        },
+        {
+          "label": "transport",
+          "value": "https for addon list/download BUT code contains an explicit macOS branch that fully disables TLS verification (`CERT_NONE`, `check_hostname=False`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (no hash/signature check on downloaded addon zip/tarball contents)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (addon catalog + files served from gramps-project.org wiki, unauthenticated)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`gramps/gen/plug/utils.py:194-214` (`urlopen_maybe_no_check_cert` — CERT_NONE on mac()), `gramps/gen/plug/utils.py:337-394` (`load_addon_file` downloads zip/tar and `exec(contents, env)` on each `.gpr.py`), `gramps/gui/plug/_windows.py:1476-1484` (`__get_addon` UI entry point)"
+        }
+      ]
+    }
   ]
 }

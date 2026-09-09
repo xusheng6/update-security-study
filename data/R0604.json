@@ -42,5 +42,53 @@
       "line": 21,
       "text": "| feroxbuster | https://github.com/epi052/feroxbuster.git | 378d759 / 2026-04-15 | Y | **N** (requires explicit `-U`/`--update` flag; opt-in only) | **Y** (replaces the running binary in place) | https, GitHub Releases API (`self_update` crate's default HTTP client; TLS enforced by default, no override found) | N | **none** — no checksum/signature feature enabled | N/A — no verification performed | `src/main.rs:44,232-234,621-637` (`update_app`, calls `self_update::backends::github::Update`); `src/parser.rs:728` (`--update`/`-U` flag def); `src/banner/container.rs:16` (`UPDATE_URL`); `Cargo.toml:62-67` (`self_update = {version=\"0.40\", features=[\"archive-tar\",\"compression-flate2\",\"archive-zip\",\"compression-zip-deflate\"]}` — note the absence of any checksum/`verifying_keys` feature) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AM2.md",
+      "source_line": 21,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/epi052/feroxbuster.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "378d759 / 2026-04-15"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "**N** (requires explicit `-U`/`--update` flag; opt-in only)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y** (replaces the running binary in place)"
+        },
+        {
+          "label": "transport",
+          "value": "https, GitHub Releases API (`self_update` crate's default HTTP client; TLS enforced by default, no override found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — no checksum/signature feature enabled"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A — no verification performed"
+        },
+        {
+          "label": "evidence",
+          "value": "`src/main.rs:44,232-234,621-637` (`update_app`, calls `self_update::backends::github::Update`); `src/parser.rs:728` (`--update`/`-U` flag def); `src/banner/container.rs:16` (`UPDATE_URL`); `Cargo.toml:62-67` (`self_update = {version=\"0.40\", features=[\"archive-tar\",\"compression-flate2\",\"archive-zip\",\"compression-zip-deflate\"]}` — note the absence of any checksum/`verifying_keys` feature)"
+        }
+      ]
+    }
   ]
 }

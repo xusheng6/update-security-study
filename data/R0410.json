@@ -42,5 +42,53 @@
       "line": 16,
       "text": "| xpipe | https://github.com/xpipe-io/xpipe | 00d9147230 / 2026-08-07 | Y | Y(check)/N(install requires click \"install\") | Y | https to api.xpipe.io (version query) + https to github.com (installer download), TLS enforced | N (JSON from `api.xpipe.io`, unsigned) | none (bytes written straight to disk, no hash/sig check) | none enforced in-app; relies on OS installer trust which is **not actually enforced**: Windows `msiexec /i ... /qb` (no Authenticode check forced), Linux `sudo apt install \"<file>.deb\"` / `sudo rpm -U -v --force \"<file>.rpm\"` (rpm `--force` explicitly skips signature/conflict checks; local .deb install bypasses APT repo GPG trust), macOS `sudo installer -pkg ... -target /` (bypasses Gatekeeper's quarantine-triggered signature check) | `app/src/main/java/io/xpipe/app/update/AppDownloads.java:26-50` (download, `Files.write`, no verification); `app/src/main/java/io/xpipe/app/update/AppRelease.java` (URL built from tag returned by api.xpipe.io); `app/src/main/java/io/xpipe/app/update/AppInstaller.java:59-243` (installLocal for Msi/Debian/Rpm/Pkg — all run installer directly, `rpm -U -v --force` at line ~186) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AA2.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/xpipe-io/xpipe"
+        },
+        {
+          "label": "commit/date",
+          "value": "00d9147230 / 2026-08-07"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y(check)/N(install requires click \"install\")"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https to api.xpipe.io (version query) + https to github.com (installer download), TLS enforced"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (JSON from `api.xpipe.io`, unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (bytes written straight to disk, no hash/sig check)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none enforced in-app; relies on OS installer trust which is **not actually enforced**: Windows `msiexec /i ... /qb` (no Authenticode check forced), Linux `sudo apt install \"<file>.deb\"` / `sudo rpm -U -v --force \"<file>.rpm\"` (rpm `--force` explicitly skips signature/conflict checks; local .deb install bypasses APT repo GPG trust), macOS `sudo installer -pkg ... -target /` (bypasses Gatekeeper's quarantine-triggered signature check)"
+        },
+        {
+          "label": "evidence",
+          "value": "`app/src/main/java/io/xpipe/app/update/AppDownloads.java:26-50` (download, `Files.write`, no verification); `app/src/main/java/io/xpipe/app/update/AppRelease.java` (URL built from tag returned by api.xpipe.io); `app/src/main/java/io/xpipe/app/update/AppInstaller.java:59-243` (installLocal for Msi/Debian/Rpm/Pkg — all run installer directly, `rpm -U -v --force` at line ~186)"
+        }
+      ]
+    }
   ]
 }

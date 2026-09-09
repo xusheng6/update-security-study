@@ -46,5 +46,67 @@
       "line": 27,
       "text": "| Vorta | **B** | macOS-only Sparkle updater checks and (with user consent) downloads+installs updates over HTTPS, but no `SUPublicEDKey` is configured in `Info.plist`, so Sparkle 2's EdDSA payload-signature verification (which would be Tier A, key pinned in the binary) is not active — it falls back to Sparkle's code-signing-identity check, anchored in the Apple Developer ID cert used to codesign+notarize the app in CI. That's an OS-code-signing trust anchor, not an app-pinned key, hence Tier B rather than A. Linux/Windows have no in-app updater at all (`updater.py:47-48`, and no Windows build workflow exists). |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-T2.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/borgbase/vorta.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "7f83935f25c672e24d3241cf968679b9c939ea72 (2026-08-16)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (macOS only)"
+        },
+        {
+          "label": "auto",
+          "value": "Y (`sparkle.setAutomaticallyChecksForUpdates_(True)` + `checkForUpdatesInBackground()` when the \"check_for_updates\" setting is on)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (macOS only, after user confirms Sparkle's install prompt — `setAutomaticallyDownloadsUpdates_(False)` means silent auto-download is off, but Sparkle still downloads+installs once the user accepts)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`SUFeedURL` = `https://borgbase.github.io/vorta/appcast.xml`, GitHub Pages TLS); no TLS-bypass code found in `updater.py` (uses Apple's Sparkle.framework / NSURLSession, not a custom client)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Not verifiable from this repo — appcast.xml itself lives in a separate `gh-pages`-style feed not present in this clone"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature expected via Sparkle, but **no `SUPublicEDKey` is set anywhere** in `package/vorta.spec`'s `Info.plist` dict (only `SUFeedURL` is set, `package/vorta.spec:78`) → Sparkle 2.x's EdDSA-signature check is not configured, so it falls back to Sparkle's code-signing-identity verification (new update's Apple Developer ID/Team must match the running app's) rather than an app-pinned key"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore / Apple code-signing + notarization (Developer ID cert imported and used for `codesign`/`notarytool` in CI), not a key pinned in the binary"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "`src/vorta/updater.py:7-48` (Sparkle setup, `setAutomaticallyDownloadsUpdates_(False)` at :44, macOS-only — `else: return None` at :47-48 confirms **no Linux/Windows in-app updater** exists, TODO comment at :47); `package/vorta.spec:14,78` (`APP_APPCAST_URL`, `SUFeedURL`, **no `SUPublicEDKey` key present in the `info_plist` dict at all**); `.github/workflows/build-macos.yml:55,64` (`brew install --cask sparkle`, i.e. current Sparkle 2.x, copied into `Vorta.app/Contents/Frameworks`); `.github/workflows/build-macos.yml:69-87` and `package/macos-package-app.sh:15,20,23,43,50` (codesign with imported cert + `xcrun notarytool submit` + staple) confirm the real trust anchor is Apple code-signing, not an EdDSA key. No Windows build workflow exists in this repo."
+        }
+      ]
+    },
+    {
+      "source_file": "batch-T2.md",
+      "source_line": 27,
+      "fields": [
+        {
+          "label": "Tier",
+          "value": "**B**"
+        },
+        {
+          "label": "Why",
+          "value": "macOS-only Sparkle updater checks and (with user consent) downloads+installs updates over HTTPS, but no `SUPublicEDKey` is configured in `Info.plist`, so Sparkle 2's EdDSA payload-signature verification (which would be Tier A, key pinned in the binary) is not active — it falls back to Sparkle's code-signing-identity check, anchored in the Apple Developer ID cert used to codesign+notarize the app in CI. That's an OS-code-signing trust anchor, not an app-pinned key, hence Tier B rather than A. Linux/Windows have no in-app updater at all (`updater.py:47-48`, and no Windows build workflow exists)."
+        }
+      ]
+    }
   ]
 }

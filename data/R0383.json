@@ -43,5 +43,53 @@
       "line": 16,
       "text": "| Cytoscape (own update-check) | https://github.com/cytoscape/cytoscape-impl | 208c1015e (2026-07-16) | Y | Y (`CheckForUpdatesAction implements CyStartListener` — runs at app start) | N (notify-only, opens browser) | http (plaintext, both version-check and download-page URLs) | NA | none | NA | `swing-application-impl/src/.../task/GetLatestVersionTask.java:42` (`NEWS_URL=\"http://chianti.ucsd.edu/cytoscape-news/news.html\"`), `:132` (`Jsoup.connect(NEWS_URL)`, plain HTTP), `swing-application-impl/src/.../updater/UpdatesDialog.java:45` (`DOWNLOAD_URL=\"http://cytoscape.org/download.php\"`), `:196-203` (Download button just calls `OpenBrowser.openURL`), `swing-application-impl/src/.../actions/CheckForUpdatesAction.java:45` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Y4.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/cytoscape/cytoscape-impl"
+        },
+        {
+          "label": "commit/date",
+          "value": "208c1015e (2026-07-16)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (`CheckForUpdatesAction implements CyStartListener` — runs at app start)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N (notify-only, opens browser)"
+        },
+        {
+          "label": "transport",
+          "value": "http (plaintext, both version-check and download-page URLs)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "NA"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "NA"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`swing-application-impl/src/.../task/GetLatestVersionTask.java:42` (`NEWS_URL=\"http://chianti.ucsd.edu/cytoscape-news/news.html\"`), `:132` (`Jsoup.connect(NEWS_URL)`, plain HTTP), `swing-application-impl/src/.../updater/UpdatesDialog.java:45` (`DOWNLOAD_URL=\"http://cytoscape.org/download.php\"`), `:196-203` (Download button just calls `OpenBrowser.openURL`), `swing-application-impl/src/.../actions/CheckForUpdatesAction.java:45`"
+        }
+      ]
+    }
   ]
 }

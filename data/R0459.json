@@ -42,5 +42,53 @@
       "line": 8,
       "text": "| Pi-hole | https://github.com/pi-hole/pi-hole.git | f47b8ede5a8e38f9c703202d324a074dbdba4ca9 (2026-07-06) | Y | N (manual `pihole -up`; not cron-scheduled in this repo) | Y (FTL binary); core/web via `git pull`| https (git+curl), TLS enforced, no `-k`/insecure flags found | N | sha1 hash — fetched from same unauthenticated host/CDN as the binary (`ftl.pi-hole.net` or GH releases) | server-supplied/unpinned (no GPG signature, no pinned key) | `automated install/basic-install.sh:1877-1887` (download binary + `.sha1` from same URL, `sha1sum -c` only); `advanced/Scripts/update.sh:41-103` (`git fetch`/`git pull` core+web over https, no `git verify-commit`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AD3.md",
+      "source_line": 8,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/pi-hole/pi-hole.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "f47b8ede5a8e38f9c703202d324a074dbdba4ca9 (2026-07-06)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual `pihole -up`; not cron-scheduled in this repo)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (FTL binary); core/web via `git pull`"
+        },
+        {
+          "label": "transport",
+          "value": "https (git+curl), TLS enforced, no `-k`/insecure flags found"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "sha1 hash — fetched from same unauthenticated host/CDN as the binary (`ftl.pi-hole.net` or GH releases)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (no GPG signature, no pinned key)"
+        },
+        {
+          "label": "evidence",
+          "value": "`automated install/basic-install.sh:1877-1887` (download binary + `.sha1` from same URL, `sha1sum -c` only); `advanced/Scripts/update.sh:41-103` (`git fetch`/`git pull` core+web over https, no `git verify-commit`)"
+        }
+      ]
+    }
   ]
 }

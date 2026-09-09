@@ -41,5 +41,53 @@
       "line": 14,
       "text": "| Qalculate! (qalculate-gtk) | https://github.com/Qalculate/qalculate-gtk.git | 5393c17 / 2026-07-19 | Y (build-variant only) | N (user must click \"OK\" to accept update) | Y | https, TLS enforced (no verify-disable flags found) | N | none — no hash/signature check on downloaded tarball | N/A (unauthenticated) | qalculate-gtk/src/mainwindow.cc:606-693 (`auto_update()`), mainwindow.cc:696-758 (`check_for_new_version`), data/pkg/selfcontained-binary.patch:31 (`#define AUTO_UPDATE 1`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AE5.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Qalculate/qalculate-gtk.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "5393c17 / 2026-07-19"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (build-variant only)"
+        },
+        {
+          "label": "auto",
+          "value": "N (user must click \"OK\" to accept update)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (no verify-disable flags found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — no hash/signature check on downloaded tarball"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A (unauthenticated)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "qalculate-gtk/src/mainwindow.cc:606-693 (`auto_update()`), mainwindow.cc:696-758 (`check_for_new_version`), data/pkg/selfcontained-binary.patch:31 (`#define AUTO_UPDATE 1`)"
+        }
+      ]
+    }
   ]
 }

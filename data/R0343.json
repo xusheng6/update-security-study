@@ -42,5 +42,53 @@
       "line": 20,
       "text": "| OpenTabletDriver | https://github.com/OpenTabletDriver/OpenTabletDriver.git | 3dfa1a265de020ad38f965e64ffa22098ce54726 / 2026-08-21 | **Y** | N (checked automatically at UX startup unless `--skipupdate`, but install requires explicit user action via `otd update`/`InstallUpdate` console command or clicking through the daemon RPC — no unattended auto-install path found) | **Y** | https to `api.github.com` (Octokit) for release metadata + https to GitHub release-asset CDN (`browser_download_url`) for the payload; default `HttpClient`/Octokit TLS validation, no `ServerCertificateCustomValidationCallback` override found anywhere in repo — TLS enforced | N/A (release JSON is plain, unsigned) | **none** — binary zip/tar.gz extracted straight to the app's own binary directory and later executed; no hash or signature check anywhere in `Updater.cs`/`GitHubUpdater.cs`/`WindowsUpdater.cs`/`MacOSUpdater.cs` | server-supplied/unpinned (trusts GitHub API + release CDN over TLS only) | OpenTabletDriver.Desktop/Updater/GitHubUpdater.cs:30-36 (`_github.Repository.Release.GetLatest`); OpenTabletDriver.Desktop/Updater/WindowsUpdater.cs:55-72 (`HttpClient.GetStreamAsync(asset.BrowserDownloadUrl)` → `ZipArchive.ExtractToDirectory` → elevated `RunElevated` relaunches `OpenTabletDriver.Daemon.exe update` to overwrite binaries, WindowsUpdater.cs:19-53); OpenTabletDriver.Desktop/Updater/MacOSUpdater.cs:32-51 (tar.gz extract) + PostInstall chmod +x (MacOSUpdater.cs:22-29); OpenTabletDriver.Desktop/Updater/Updater.cs:44-96 (`Install()` — no signature/hash check present); OpenTabletDriver.UX/MainForm.cs:96-97 (auto-check at startup unless `SkipUpdate`); OpenTabletDriver.Console/Program.Commands.cs:22-35 (`InstallUpdate` console command). **Separate content-as-code channel (score C-equivalent):** the Plugin Manager downloads and *loads* third-party plugin assemblies — `DesktopPluginManager.cs:186-200` (`DownloadPlugin`→`metadata.DownloadAsync`), verified against a SHA256 pulled from the **same** GitHub org's `Plugin-Repository` metadata tarball (`PluginMetadataCollection.cs:45-48`, `api.github.com/repos/OpenTabletDriver/Plugin-Repository/tarball`) — i.e. hash-from-same-endpoint, not a pinned key; and `PluginMetadata.cs:115-145` `DownloadAsync` has an outright bypass: `if (SHA256 == null || VerifySHA256(stream))` extracts the archive **without verification whenever the metadata's SHA256 field is absent**. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W8.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/OpenTabletDriver/OpenTabletDriver.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "3dfa1a265de020ad38f965e64ffa22098ce54726 / 2026-08-21"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "**Y**"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (checked automatically at UX startup unless `--skipupdate`, but install requires explicit user action via `otd update`/`InstallUpdate` console command or clicking through the daemon RPC — no unattended auto-install path found)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "**Y**"
+        },
+        {
+          "label": "transport",
+          "value": "https to `api.github.com` (Octokit) for release metadata + https to GitHub release-asset CDN (`browser_download_url`) for the payload; default `HttpClient`/Octokit TLS validation, no `ServerCertificateCustomValidationCallback` override found anywhere in repo — TLS enforced"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A (release JSON is plain, unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — binary zip/tar.gz extracted straight to the app's own binary directory and later executed; no hash or signature check anywhere in `Updater.cs`/`GitHubUpdater.cs`/`WindowsUpdater.cs`/`MacOSUpdater.cs`"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (trusts GitHub API + release CDN over TLS only)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "OpenTabletDriver.Desktop/Updater/GitHubUpdater.cs:30-36 (`_github.Repository.Release.GetLatest`); OpenTabletDriver.Desktop/Updater/WindowsUpdater.cs:55-72 (`HttpClient.GetStreamAsync(asset.BrowserDownloadUrl)` → `ZipArchive.ExtractToDirectory` → elevated `RunElevated` relaunches `OpenTabletDriver.Daemon.exe update` to overwrite binaries, WindowsUpdater.cs:19-53); OpenTabletDriver.Desktop/Updater/MacOSUpdater.cs:32-51 (tar.gz extract) + PostInstall chmod +x (MacOSUpdater.cs:22-29); OpenTabletDriver.Desktop/Updater/Updater.cs:44-96 (`Install()` — no signature/hash check present); OpenTabletDriver.UX/MainForm.cs:96-97 (auto-check at startup unless `SkipUpdate`); OpenTabletDriver.Console/Program.Commands.cs:22-35 (`InstallUpdate` console command). **Separate content-as-code channel (score C-equivalent):** the Plugin Manager downloads and *loads* third-party plugin assemblies — `DesktopPluginManager.cs:186-200` (`DownloadPlugin`→`metadata.DownloadAsync`), verified against a SHA256 pulled from the **same** GitHub org's `Plugin-Repository` metadata tarball (`PluginMetadataCollection.cs:45-48`, `api.github.com/repos/OpenTabletDriver/Plugin-Repository/tarball`) — i.e. hash-from-same-endpoint, not a pinned key; and `PluginMetadata.cs:115-145` `DownloadAsync` has an outright bypass: `if (SHA256 == null || VerifySHA256(stream))` extracts the archive **without verification whenever the metadata's SHA256 field is absent**."
+        }
+      ]
+    }
   ]
 }

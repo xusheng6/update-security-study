@@ -43,5 +43,53 @@
       "line": 29,
       "text": "| amiberry | https://github.com/BlitterStudio/amiberry | 0cce51c / 2026-08-20 | Y | Y (checkbox, `check_for_updates(channel)` on demand/startup) | Y (platform-gated: `UpdateMethod::SELF_UPDATE` on desktop builds, `NOTIFY_ONLY`/`DISABLED` on Flatpak/Android/LibRetro) | https, TLS **explicitly enforced**: `CURLOPT_SSL_VERIFYPEER,1` / `CURLOPT_SSL_VERIFYHOST,2` | N (plain GitHub Releases JSON) | hash (SHA256), server-supplied, **fail-open if absent** | server-supplied (`SHA256SUMS` asset published in the same GitHub release as the binary) | src/osdep/amiberry_update.cpp:43 (`api.github.com/repos/BlitterStudio/amiberry/releases`), 456-457 & 813-814 (VERIFYPEER/VERIFYHOST=1/2), 518-571 (parses `SHA256SUMS` asset), 850-868 (`verify_update_checksum` — \"SHA256 not provided, skipping verification, return true\" at line 852-855); src/osdep/imgui/about.cpp:109-126 (enforces the check result before `apply_update`, but only if a hash was supplied at all) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U5.md",
+      "source_line": 29,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/BlitterStudio/amiberry"
+        },
+        {
+          "label": "commit/date",
+          "value": "0cce51c / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (checkbox, `check_for_updates(channel)` on demand/startup)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (platform-gated: `UpdateMethod::SELF_UPDATE` on desktop builds, `NOTIFY_ONLY`/`DISABLED` on Flatpak/Android/LibRetro)"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS **explicitly enforced**: `CURLOPT_SSL_VERIFYPEER,1` / `CURLOPT_SSL_VERIFYHOST,2`"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (plain GitHub Releases JSON)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (SHA256), server-supplied, **fail-open if absent**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied (`SHA256SUMS` asset published in the same GitHub release as the binary)"
+        },
+        {
+          "label": "evidence",
+          "value": "src/osdep/amiberry_update.cpp:43 (`api.github.com/repos/BlitterStudio/amiberry/releases`), 456-457 & 813-814 (VERIFYPEER/VERIFYHOST=1/2), 518-571 (parses `SHA256SUMS` asset), 850-868 (`verify_update_checksum` — \"SHA256 not provided, skipping verification, return true\" at line 852-855); src/osdep/imgui/about.cpp:109-126 (enforces the check result before `apply_update`, but only if a hash was supplied at all)"
+        }
+      ]
+    }
   ]
 }

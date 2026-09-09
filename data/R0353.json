@@ -41,5 +41,53 @@
       "line": 19,
       "text": "| Frappe Books | https://github.com/frappe/books.git | 7c35767811762e59573f62bfff936cb9e3016bda / 2026-03-06 | Y | Y (auto-checks + auto-downloads on `update-available`, except a confirm prompt when jumping to a beta) | Y (`autoUpdater.quitAndInstall()`) | https (GitHub Releases via `electron-updater`) | Y (implicit — win NSIS signed w/ `publisherName`, mac `notarize`+`hardenedRuntime`, both from `electron-builder-config.mjs`) | signature (electron-updater default Authenticode/notarization check; `verifyUpdateCodeSignature` not disabled anywhere) | OS code-signing (Authenticode/notarization, not a pinned key) | `main/registerAutoUpdaterListeners.ts:1-65`; `electron-builder-config.mjs:33-92` (`publish: ['github']`, `win.publisherName`, `mac.notarize`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-X2.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/frappe/books.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "7c35767811762e59573f62bfff936cb9e3016bda / 2026-03-06"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (auto-checks + auto-downloads on `update-available`, except a confirm prompt when jumping to a beta)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y (`autoUpdater.quitAndInstall()`)"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub Releases via `electron-updater`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (implicit — win NSIS signed w/ `publisherName`, mac `notarize`+`hardenedRuntime`, both from `electron-builder-config.mjs`)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (electron-updater default Authenticode/notarization check; `verifyUpdateCodeSignature` not disabled anywhere)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS code-signing (Authenticode/notarization, not a pinned key)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`main/registerAutoUpdaterListeners.ts:1-65`; `electron-builder-config.mjs:33-92` (`publish: ['github']`, `win.publisherName`, `mac.notarize`)"
+        }
+      ]
+    }
   ]
 }

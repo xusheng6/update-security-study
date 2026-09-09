@@ -41,5 +41,53 @@
       "line": 13,
       "text": "| XDM / Xtreme Download Manager | github.com/subhra74/xdm | C#/.NET (WPF + GTK UI) | Y | app itself: chk automatic (5s after launch, then every 3h via `AppUpdater.QueryNewVersion`'s `Timer`) but notify + manual install (opens browser to download page); bundled yt-dlp \"component\": chk/dl/inst fully automatic, replacing the binary in `AppDir` with no user step beyond the update dialog | Y for the yt-dlp component (downloaded file is `File.Move`d into `AppDir`, `chmod +x`'d on Linux, and later executed by XDM as its downloader engine) | https (api.github.com, github.com/.../releases) but **TLS certificate validation is globally DISABLED** — `ServerCertificateCustomValidationCallback = (a,b,c,d) => true` is hard-coded (not conditional) in the shared HTTP client, plus a second blanket `ServicePointManager.ServerCertificateValidationCallback` override in both UI front-ends | N (GitHub Releases API JSON, unsigned) | **none** — no hash/signature check anywhere in `ComponentUpdaterUIController`/`UpdateChecker` before the downloaded yt-dlp binary replaces the old one and is marked executable | N/A | app/XDM/XDM.Core/Clients/Http/DotNetHttpClient.cs:56 (`ServerCertificateCustomValidationCallback = (a,b,c,d) => true`, unconditional); app/XDM/XDM.Wpf.UI/App.xaml.cs:32 and app/XDM/XDM.Gtk.UI/Program.cs:76 (`ServicePointManager.ServerCertificateValidationCallback += (a,b,c,d) => true`); app/XDM/XDM.Core/Updater/UpdateChecker.cs:205-215 (`FindNewYoutubeDLVersion` via GitHub releases asset); app/XDM/XDM.Core/UI/ComponentUpdaterUIController.cs:120-152 (download → `File.Move` into AppDir, `PlatformHelper.SetExecutable` on Linux, no hash check); app/XDM/XDM.Core/Application.cs:534-536 (app-level update just does `PlatformHelper.OpenBrowser(AppUpdater.UpdatePage)`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-I5.md",
+      "source_line": 13,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/subhra74/xdm"
+        },
+        {
+          "label": "framework",
+          "value": "C#/.NET (WPF + GTK UI)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "app itself: chk automatic (5s after launch, then every 3h via `AppUpdater.QueryNewVersion`'s `Timer`) but notify + manual install (opens browser to download page); bundled yt-dlp \"component\": chk/dl/inst fully automatic, replacing the binary in `AppDir` with no user step beyond the update dialog"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y for the yt-dlp component (downloaded file is `File.Move`d into `AppDir`, `chmod +x`'d on Linux, and later executed by XDM as its downloader engine)"
+        },
+        {
+          "label": "transport",
+          "value": "https (api.github.com, github.com/.../releases) but **TLS certificate validation is globally DISABLED** — `ServerCertificateCustomValidationCallback = (a,b,c,d) => true` is hard-coded (not conditional) in the shared HTTP client, plus a second blanket `ServicePointManager.ServerCertificateValidationCallback` override in both UI front-ends"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (GitHub Releases API JSON, unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — no hash/signature check anywhere in `ComponentUpdaterUIController`/`UpdateChecker` before the downloaded yt-dlp binary replaces the old one and is marked executable"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence",
+          "value": "app/XDM/XDM.Core/Clients/Http/DotNetHttpClient.cs:56 (`ServerCertificateCustomValidationCallback = (a,b,c,d) => true`, unconditional); app/XDM/XDM.Wpf.UI/App.xaml.cs:32 and app/XDM/XDM.Gtk.UI/Program.cs:76 (`ServicePointManager.ServerCertificateValidationCallback += (a,b,c,d) => true`); app/XDM/XDM.Core/Updater/UpdateChecker.cs:205-215 (`FindNewYoutubeDLVersion` via GitHub releases asset); app/XDM/XDM.Core/UI/ComponentUpdaterUIController.cs:120-152 (download → `File.Move` into AppDir, `PlatformHelper.SetExecutable` on Linux, no hash check); app/XDM/XDM.Core/Application.cs:534-536 (app-level update just does `PlatformHelper.OpenBrowser(AppUpdater.UpdatePage)`)"
+        }
+      ]
+    }
   ]
 }

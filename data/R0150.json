@@ -41,5 +41,53 @@
       "line": 9,
       "text": "| Gomuks | github.com/tulir/gomuks (desktop/ Electron wrapper) | Go (backend) + Electron (desktop client) | Y (desktop app only) | chk: auto (every 12h + on launch/menu click); dl: auto (electron `autoUpdater` default behavior downloads in background); inst: on relaunch (user prompted via notification, `notifyUser:true`) | Y | https (`update.gomuks.app`), TLS validation not observed disabled (default Node/Electron TLS stack) | N (plain JSON/zip manifest served over HTTPS, not independently signed) | OS-code-signing (macOS: Squirrel.Mac requires matching code-signing identity via Gatekeeper); Windows: `MakerSquirrel` remote-release feed is commented out (disabled), so Windows auto-update path is currently inert | Apple Developer ID cert (macOS, via OS Gatekeeper check); none active for Windows | desktop/src/main.ts:108-118 (`update-electron-app`, `UpdateSourceType.StaticStorage`, baseUrl `https://update.gomuks.app/desktop-${channel}/${platform}/${arch}`, `updateInterval: \"12 hours\"`); desktop/src/mainwindow.ts:18,149-158 (`autoUpdater.checkForUpdates()`); desktop/forge.config.ts (`MakerZIP` → `macUpdateManifestBaseUrl`; `MakerSquirrel` `remoteReleases` commented out) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-I3.md",
+      "source_line": 9,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/tulir/gomuks (desktop/ Electron wrapper)"
+        },
+        {
+          "label": "framework",
+          "value": "Go (backend) + Electron (desktop client)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (desktop app only)"
+        },
+        {
+          "label": "auto",
+          "value": "chk: auto (every 12h + on launch/menu click); dl: auto (electron `autoUpdater` default behavior downloads in background); inst: on relaunch (user prompted via notification, `notifyUser:true`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`update.gomuks.app`), TLS validation not observed disabled (default Node/Electron TLS stack)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (plain JSON/zip manifest served over HTTPS, not independently signed)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "OS-code-signing (macOS: Squirrel.Mac requires matching code-signing identity via Gatekeeper); Windows: `MakerSquirrel` remote-release feed is commented out (disabled), so Windows auto-update path is currently inert"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "Apple Developer ID cert (macOS, via OS Gatekeeper check); none active for Windows"
+        },
+        {
+          "label": "evidence",
+          "value": "desktop/src/main.ts:108-118 (`update-electron-app`, `UpdateSourceType.StaticStorage`, baseUrl `https://update.gomuks.app/desktop-${channel}/${platform}/${arch}`, `updateInterval: \"12 hours\"`); desktop/src/mainwindow.ts:18,149-158 (`autoUpdater.checkForUpdates()`); desktop/forge.config.ts (`MakerZIP` → `macUpdateManifestBaseUrl`; `MakerSquirrel` `remoteReleases` commented out)"
+        }
+      ]
+    }
   ]
 }

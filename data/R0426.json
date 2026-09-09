@@ -42,5 +42,53 @@
       "line": 14,
       "text": "| youtube-dl | https://github.com/ytdl-org/youtube-dl.git | 956b8c5 / 2025-11-26 | Y | N (manual `-U`/`--update` flag only) | Y (overwrites running exe/zip, self-replaces) | https, enforced by default (nocheckcertificate=False unless user passes `--no-check-certificate`) | Y | signature (RSA-2048 over `versions.json`) **and** SHA-256 hash of the actual downloaded binary checked against the hash embedded in that signed JSON | pinned-in-binary (`UPDATES_RSA_KEY` hardcoded modulus/exponent literal) | youtube_dl/update.py:20-31 `rsa_verify()`; :40 `UPDATES_RSA_KEY` pinned; :59-74 fetch+verify `versions.json` signature; :116-119 & :162-165 SHA-256 hash check of downloaded binary before write; youtube_dl/__init__.py:448-449 gated on `opts.update_self` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC1.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/ytdl-org/youtube-dl.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "956b8c5 / 2025-11-26"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual `-U`/`--update` flag only)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (overwrites running exe/zip, self-replaces)"
+        },
+        {
+          "label": "transport",
+          "value": "https, enforced by default (nocheckcertificate=False unless user passes `--no-check-certificate`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (RSA-2048 over `versions.json`) **and** SHA-256 hash of the actual downloaded binary checked against the hash embedded in that signed JSON"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (`UPDATES_RSA_KEY` hardcoded modulus/exponent literal)"
+        },
+        {
+          "label": "evidence",
+          "value": "youtube_dl/update.py:20-31 `rsa_verify()`; :40 `UPDATES_RSA_KEY` pinned; :59-74 fetch+verify `versions.json` signature; :116-119 & :162-165 SHA-256 hash check of downloaded binary before write; youtube_dl/__init__.py:448-449 gated on `opts.update_self`"
+        }
+      ]
+    }
   ]
 }

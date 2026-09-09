@@ -41,5 +41,53 @@
       "line": 14,
       "text": "| NAPS2 | https://github.com/cyanfish/naps2.git | ff72ae5 / 2026-08-20 | Y | N (check auto-runs weekly if user opts in via `CheckForUpdates` setting, default **false**; download+install requires user to click the notification) | Y | https (endpoint `https://www.naps2.com/api/v1/update`; download URL comes from that JSON, not independently pinned to https) — no TLS-validation-disabling code found anywhere in repo | N (no code-signing manifest check found; relies on its own scheme below) | hash+signature: SHA-256 of downloaded installer verified, then RSA-PKCS1 signature over that hash verified | **pinned-in-binary**: `naps2-public.cer` X.509 cert checked into repo (`NAPS2.Lib/naps2-public.cer`), embedded as a resource (`ClientCreds_.naps2_public`), RSA public key extracted from it at runtime — not fetched from network | NAPS2.Lib/Update/UpdateChecker.cs:11,44-52; NAPS2.Lib/Update/UpdateOperation.cs:82-93,158-173; NAPS2.Lib/ClientCreds_.resx:127-129; NAPS2.Lib/naps2-public.cer (present in repo) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Y8.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/cyanfish/naps2.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "ff72ae5 / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (check auto-runs weekly if user opts in via `CheckForUpdates` setting, default **false**; download+install requires user to click the notification)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (endpoint `https://www.naps2.com/api/v1/update`; download URL comes from that JSON, not independently pinned to https) — no TLS-validation-disabling code found anywhere in repo"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no code-signing manifest check found; relies on its own scheme below)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash+signature: SHA-256 of downloaded installer verified, then RSA-PKCS1 signature over that hash verified"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned-in-binary**: `naps2-public.cer` X.509 cert checked into repo (`NAPS2.Lib/naps2-public.cer`), embedded as a resource (`ClientCreds_.naps2_public`), RSA public key extracted from it at runtime — not fetched from network"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "NAPS2.Lib/Update/UpdateChecker.cs:11,44-52; NAPS2.Lib/Update/UpdateOperation.cs:82-93,158-173; NAPS2.Lib/ClientCreds_.resx:127-129; NAPS2.Lib/naps2-public.cer (present in repo)"
+        }
+      ]
+    }
   ]
 }

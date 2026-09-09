@@ -43,5 +43,53 @@
       "line": 22,
       "text": "| ioBroker (js-controller) | https://github.com/ioBroker/ioBroker.js-controller | 6602a78 / 2026-08-14 | Y | Y (adapter auto-update settings; controller self-update via admin UI) | Y | https to npm registry (default npm/registry TLS, not disabled in code) | N | hash from npm registry metadata (same endpoint) | unpinned / npm registry-supplied | packages/controller/src/lib/upgradeManager.ts:227 (`tools.installNodeModule('iobroker.js-controller@'+version, ...)`); packages/common-db/src/lib/common/tools.ts:1543 (installNodeModule → npm install) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC6.md",
+      "source_line": 22,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/ioBroker/ioBroker.js-controller"
+        },
+        {
+          "label": "commit/date",
+          "value": "6602a78 / 2026-08-14"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (adapter auto-update settings; controller self-update via admin UI)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https to npm registry (default npm/registry TLS, not disabled in code)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash from npm registry metadata (same endpoint)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "unpinned / npm registry-supplied"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "packages/controller/src/lib/upgradeManager.ts:227 (`tools.installNodeModule('iobroker.js-controller@'+version, ...)`); packages/common-db/src/lib/common/tools.ts:1543 (installNodeModule → npm install)"
+        }
+      ]
+    }
   ]
 }

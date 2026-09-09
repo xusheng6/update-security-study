@@ -42,5 +42,53 @@
       "line": 12,
       "text": "| Pomotroid | https://github.com/Splode/pomotroid | f9f0b26 / 2026-06-19 | Y | Y (auto-check toggle, checked when Settings opened; `system_toggle_check_updates` default described as automatic) | Y | https (raw.githubusercontent.com), TLS enforced, no disabling found | Y (signed `latest.json` manifest) | signature (Ed25519/minisign via `tauri-plugin-updater`) | **pinned-in-binary** (pubkey compiled into app config) | src-tauri/tauri.conf.json:34 (`\"pubkey\": \"dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6...\"`) and :36 (`endpoints: [\"https://raw.githubusercontent.com/Splode/pomotroid/main/latest.json\"]`); src-tauri/src/commands.rs:650-700 (`check_update`/`install_update` tauri commands); src-tauri/Cargo.toml:28 (`tauri-plugin-updater = \"2\"`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AN4.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Splode/pomotroid"
+        },
+        {
+          "label": "commit/date",
+          "value": "f9f0b26 / 2026-06-19"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (auto-check toggle, checked when Settings opened; `system_toggle_check_updates` default described as automatic)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (raw.githubusercontent.com), TLS enforced, no disabling found"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (signed `latest.json` manifest)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (Ed25519/minisign via `tauri-plugin-updater`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned-in-binary** (pubkey compiled into app config)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src-tauri/tauri.conf.json:34 (`\"pubkey\": \"dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6...\"`) and :36 (`endpoints: [\"https://raw.githubusercontent.com/Splode/pomotroid/main/latest.json\"]`); src-tauri/src/commands.rs:650-700 (`check_update`/`install_update` tauri commands); src-tauri/Cargo.toml:28 (`tauri-plugin-updater = \"2\"`)"
+        }
+      ]
+    }
   ]
 }

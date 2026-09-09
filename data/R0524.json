@@ -42,5 +42,53 @@
       "line": 27,
       "text": "| GeckoCIRCUITS (PLECS-alt) | https://github.com/geckocircuits/GeckoCIRCUITS.git | bb07d4160432836f55be0a99f21926795aa1efb9 / 2026-02-23 | Y | Y (auto-runs at startup, `checkForUpdateInterval()`, if user has enabled DAILY/WEEKLY; default is NEVER) | N (payload is downloaded to a user-chosen file on disk but not auto-extracted/executed by the app) | **plaintext http**, no TLS at all on either the version-check page or the zip download | N | none (no hash/signature on the .zip) | none | src/main/java/.../allg/DialogUpdate.java:89 (`PRO_URL = \"http://www.gecko-simulations.com/GeckoCIRCUITS/GeckoCIRCUITSreleaseHistory.html\"`), :129-141 (plain `URLConnection` GET, no TLS), :366 (`new URL(\"http://www.gecko-simulations.com/GeckoCIRCUITS/GeckoCIRCUITS.zip\")`, downloaded via plaintext HTTP to a user-picked save file, :376-380 writes bytes with no verification); src/main/java/.../allg/Fenster.java:272 (`DialogUpdate.checkForUpdateInterval()` called on startup) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AG4.md",
+      "source_line": 27,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/geckocircuits/GeckoCIRCUITS.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "bb07d4160432836f55be0a99f21926795aa1efb9 / 2026-02-23"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (auto-runs at startup, `checkForUpdateInterval()`, if user has enabled DAILY/WEEKLY; default is NEVER)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N (payload is downloaded to a user-chosen file on disk but not auto-extracted/executed by the app)"
+        },
+        {
+          "label": "transport",
+          "value": "**plaintext http**, no TLS at all on either the version-check page or the zip download"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (no hash/signature on the .zip)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/main/java/.../allg/DialogUpdate.java:89 (`PRO_URL = \"http://www.gecko-simulations.com/GeckoCIRCUITS/GeckoCIRCUITSreleaseHistory.html\"`), :129-141 (plain `URLConnection` GET, no TLS), :366 (`new URL(\"http://www.gecko-simulations.com/GeckoCIRCUITS/GeckoCIRCUITS.zip\")`, downloaded via plaintext HTTP to a user-picked save file, :376-380 writes bytes with no verification); src/main/java/.../allg/Fenster.java:272 (`DialogUpdate.checkForUpdateInterval()` called on startup)"
+        }
+      ]
+    }
   ]
 }

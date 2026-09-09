@@ -41,5 +41,53 @@
       "line": 33,
       "text": "| FlightGear | https://github.com/FlightGear/flightgear | 807e406dd3bc / 2025-02-27 | Y | N | N | https (`download.flightgear.org`) | N | none | n/a | `src/GUI/UpdateChecker.cxx:105` (`\"https://download.flightgear.org/builds/\" + _majorMinorVersion + \"/updates.xml\"`); only posts a QML notification (`NewVersionNotification.qml`), no in-app download/exec of the sim itself |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W3.md",
+      "source_line": 33,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/FlightGear/flightgear"
+        },
+        {
+          "label": "commit/date",
+          "value": "807e406dd3bc / 2025-02-27"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "N"
+        },
+        {
+          "label": "transport",
+          "value": "https (`download.flightgear.org`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/GUI/UpdateChecker.cxx:105` (`\"https://download.flightgear.org/builds/\" + _majorMinorVersion + \"/updates.xml\"`); only posts a QML notification (`NewVersionNotification.qml`), no in-app download/exec of the sim itself"
+        }
+      ]
+    }
   ]
 }

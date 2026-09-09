@@ -41,5 +41,53 @@
       "line": 12,
       "text": "| Revolt Desktop | https://github.com/revoltchat/desktop | d668949 / 2024-10-24 | Y | Y (`checkForUpdatesAndNotify`, autoDownload default true, installs on quit) | Y | https (GitHub Releases via electron-updater); no disabled-TLS-validation code found | N (`latest*.yml` electron-builder manifest, unsigned) | hash only — electron-updater's built-in sha512 check from `latest-*.yml`; no evidence in-repo of a configured code-signing cert (CSC_LINK/notarize step not present in source, may be injected by CI but unverifiable from repo) | server-supplied/unpinned (GitHub Releases endpoint + sha512 in manifest fetched from same origin; Windows Authenticode publisher-match only applies if build is actually code-signed, which can't be confirmed from source) | src/lib/updater.ts:1-17 (`autoUpdater.checkForUpdatesAndNotify()`); package.json:40-120 (electron-builder `build` config, `\"publish\":{\"provider\":\"github\"}`); package.json:148 (`electron-updater` dep) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-X6.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/revoltchat/desktop"
+        },
+        {
+          "label": "commit/date",
+          "value": "d668949 / 2024-10-24"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (`checkForUpdatesAndNotify`, autoDownload default true, installs on quit)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub Releases via electron-updater); no disabled-TLS-validation code found"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (`latest*.yml` electron-builder manifest, unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash only — electron-updater's built-in sha512 check from `latest-*.yml`; no evidence in-repo of a configured code-signing cert (CSC_LINK/notarize step not present in source, may be injected by CI but unverifiable from repo)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (GitHub Releases endpoint + sha512 in manifest fetched from same origin; Windows Authenticode publisher-match only applies if build is actually code-signed, which can't be confirmed from source)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/lib/updater.ts:1-17 (`autoUpdater.checkForUpdatesAndNotify()`); package.json:40-120 (electron-builder `build` config, `\"publish\":{\"provider\":\"github\"}`); package.json:148 (`electron-updater` dep)"
+        }
+      ]
+    }
   ]
 }

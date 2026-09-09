@@ -42,5 +42,53 @@
       "line": 23,
       "text": "| httpx | https://github.com/projectdiscovery/httpx.git | 50b901a / 2026-08-12 | Y | **N** (explicit `-update`/`-up` flag; automatic notify-only check unless `-duc`) | **Y** (when `-update` is passed, replaces the running binary) | same as subfinder: asset-download uses enforced TLS; sibling version-check client in the same shared lib has `InsecureSkipVerify: true` | N | same self-referential sha256 checksum from same-release `checksums.txt`, no independent signature | server-supplied/unpinned | `runner/options.go:493-495`; `runner/banner.go:27-31` (calls `updateutils.GetUpdateToolCallback(\"httpx\", ...)`); same vendored-dep evidence as subfinder above |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AM2.md",
+      "source_line": 23,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/projectdiscovery/httpx.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "50b901a / 2026-08-12"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "**N** (explicit `-update`/`-up` flag; automatic notify-only check unless `-duc`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y** (when `-update` is passed, replaces the running binary)"
+        },
+        {
+          "label": "transport",
+          "value": "same as subfinder: asset-download uses enforced TLS; sibling version-check client in the same shared lib has `InsecureSkipVerify: true`"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "same self-referential sha256 checksum from same-release `checksums.txt`, no independent signature"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned"
+        },
+        {
+          "label": "evidence",
+          "value": "`runner/options.go:493-495`; `runner/banner.go:27-31` (calls `updateutils.GetUpdateToolCallback(\"httpx\", ...)`); same vendored-dep evidence as subfinder above"
+        }
+      ]
+    }
   ]
 }

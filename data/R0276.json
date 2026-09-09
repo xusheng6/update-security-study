@@ -42,5 +42,53 @@
       "line": 14,
       "text": "| VCV Rack | https://github.com/VCVRack/Rack.git | 061ccf6 / 2025-11-04 | Y (app, notify-only) / Y (plugin-content channel, auto-download) | app: N (opens browser only) / content: Y (once logged in, \"sync updates\" auto-downloads all outdated plugins) | app: **N** — only opens the download page in the system browser; content: **Y** — downloads and installs `.vcvplugin` packages (native code loaded into the process) with **no hash/signature check found** | https, cert validation enforced via libcurl `CURLOPT_SSL_VERIFYPEER = settings::verifyHttpsCerts` (default `true`, user-toggleable) | no | **none** for downloaded plugin packages (no checksum/signature verification located in `syncUpdate()`) | n/a | `include/library.hpp` (`checkAppUpdate`, `syncUpdate`); `src/library.cpp:67-104` (app-update check → browser only), `:350-395` (`syncUpdate` downloads `.vcvplugin` via `network::requestDownload`, no verification call); `src/app/MenuBar.cpp:1035-1037` (`system::openBrowser`); `src/network.cpp:44` (`CURLOPT_SSL_VERIFYPEER`); `src/settings.cpp:67` (default true) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U1.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/VCVRack/Rack.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "061ccf6 / 2025-11-04"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (app, notify-only) / Y (plugin-content channel, auto-download)"
+        },
+        {
+          "label": "auto",
+          "value": "app: N (opens browser only) / content: Y (once logged in, \"sync updates\" auto-downloads all outdated plugins)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "app: **N** — only opens the download page in the system browser; content: **Y** — downloads and installs `.vcvplugin` packages (native code loaded into the process) with **no hash/signature check found**"
+        },
+        {
+          "label": "transport",
+          "value": "https, cert validation enforced via libcurl `CURLOPT_SSL_VERIFYPEER = settings::verifyHttpsCerts` (default `true`, user-toggleable)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "no"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** for downloaded plugin packages (no checksum/signature verification located in `syncUpdate()`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence",
+          "value": "`include/library.hpp` (`checkAppUpdate`, `syncUpdate`); `src/library.cpp:67-104` (app-update check → browser only), `:350-395` (`syncUpdate` downloads `.vcvplugin` via `network::requestDownload`, no verification call); `src/app/MenuBar.cpp:1035-1037` (`system::openBrowser`); `src/network.cpp:44` (`CURLOPT_SSL_VERIFYPEER`); `src/settings.cpp:67` (default true)"
+        }
+      ]
+    }
   ]
 }

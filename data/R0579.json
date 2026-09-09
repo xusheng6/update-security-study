@@ -42,5 +42,53 @@
       "line": 14,
       "text": "| gvm | https://github.com/moovweb/gvm.git | dd65253 / 2023-08-14 | Y | N | Y | https (`go.dev/dl`), TLS enforced, no `--insecure` | N | **none** | N/A | `gvm/scripts/install:208-213` `GO_BINARY_BASE_URL=https://go.dev/dl`; `curl -s -f -L $GO_BINARY_URL > ${GO_BINARY_PATH}` with zero checksum/signature check anywhere in `gvm/scripts/`. Self-update (`gvm/scripts/update`) is a plain `git pull` (fine, git+https). |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AK4.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/moovweb/gvm.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "dd65253 / 2023-08-14"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`go.dev/dl`), TLS enforced, no `--insecure`"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`gvm/scripts/install:208-213` `GO_BINARY_BASE_URL=https://go.dev/dl`; `curl -s -f -L $GO_BINARY_URL > ${GO_BINARY_PATH}` with zero checksum/signature check anywhere in `gvm/scripts/`. Self-update (`gvm/scripts/update`) is a plain `git pull` (fine, git+https)."
+        }
+      ]
+    }
   ]
 }

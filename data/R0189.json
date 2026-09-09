@@ -41,5 +41,53 @@
       "line": 14,
       "text": "| ConEmu | https://github.com/Maximus5/ConEmu | native C++ Win32 | Y | chk (hourly automatic background check) / dl+inst gated by user-confirmation dialogs (ConfirmDownload, ConfirmUpdate); choosing \"Yes\" triggers automatic download-then-install on exit | Y — downloads installer/archive package to a temp file and writes/runs `ConEmuUpdate.cmd`, which executes the downloaded setup package on application exit | https declared (default `https://conemu.github.io/version.ini`, user-overridable via `-UpdateSrcSet`), but certificate validation is explicitly weakened: `INTERNET_FLAG_IGNORE_CERT_CN_INVALID \\| INTERNET_FLAG_IGNORE_CERT_DATE_INVALID` set on every HTTPS WinInet request (hostname/CN mismatch and cert-expiry/not-yet-valid checks are both disabled) | N (version.ini is a plain-text manifest fetched over the same weakened-TLS channel; not independently signed) | hash-from-manifest (CRC32 + exact byte size, both parsed out of the same version.ini that named the download URL — not a cryptographic signature, and sourced from the same channel being verified) | N/A — no key; CRC32 expected value comes from the manifest itself, not an out-of-band trust anchor | src/ConEmu/UpdateSet.cpp:41-56 (default update-info URL, https); src/ConEmu/Update.cpp:667-750 (parses `nSrcLen`/`nSrcCRC` from version.ini); src/ConEmu/Update.cpp:779-856 (downloads package, verifies size+CRC32, confirmation prompts, retry loop); src/ConEmu/Update.cpp:1110-1135 (`CreateBatchFile` writes ConEmuUpdate.cmd that runs the installer); src/ConEmuC/Downloader.cpp:1095-1096 (`INTERNET_FLAG_IGNORE_CERT_CN_INVALID \\| INTERNET_FLAG_IGNORE_CERT_DATE_INVALID` passed to `HttpOpenRequestW`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-K2.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/Maximus5/ConEmu"
+        },
+        {
+          "label": "framework",
+          "value": "native C++ Win32"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "chk (hourly automatic background check) / dl+inst gated by user-confirmation dialogs (ConfirmDownload, ConfirmUpdate); choosing \"Yes\" triggers automatic download-then-install on exit"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — downloads installer/archive package to a temp file and writes/runs `ConEmuUpdate.cmd`, which executes the downloaded setup package on application exit"
+        },
+        {
+          "label": "transport",
+          "value": "https declared (default `https://conemu.github.io/version.ini`, user-overridable via `-UpdateSrcSet`), but certificate validation is explicitly weakened: `INTERNET_FLAG_IGNORE_CERT_CN_INVALID \\| INTERNET_FLAG_IGNORE_CERT_DATE_INVALID` set on every HTTPS WinInet request (hostname/CN mismatch and cert-expiry/not-yet-valid checks are both disabled)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (version.ini is a plain-text manifest fetched over the same weakened-TLS channel; not independently signed)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (CRC32 + exact byte size, both parsed out of the same version.ini that named the download URL — not a cryptographic signature, and sourced from the same channel being verified)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A — no key; CRC32 expected value comes from the manifest itself, not an out-of-band trust anchor"
+        },
+        {
+          "label": "evidence",
+          "value": "src/ConEmu/UpdateSet.cpp:41-56 (default update-info URL, https); src/ConEmu/Update.cpp:667-750 (parses `nSrcLen`/`nSrcCRC` from version.ini); src/ConEmu/Update.cpp:779-856 (downloads package, verifies size+CRC32, confirmation prompts, retry loop); src/ConEmu/Update.cpp:1110-1135 (`CreateBatchFile` writes ConEmuUpdate.cmd that runs the installer); src/ConEmuC/Downloader.cpp:1095-1096 (`INTERNET_FLAG_IGNORE_CERT_CN_INVALID \\| INTERNET_FLAG_IGNORE_CERT_DATE_INVALID` passed to `HttpOpenRequestW`)"
+        }
+      ]
+    }
   ]
 }

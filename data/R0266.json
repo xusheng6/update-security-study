@@ -52,5 +52,113 @@
       "line": 24,
       "text": "| RSS Guard | **C** | Downloads + `ShellExecute`s an unsigned, unhashed Windows installer fetched over HTTPS from a GitHub-Releases-API-discovered URL. Nothing stops a compromised/forged GitHub release or a MITM with a valid cert for the download host from achieving RCE. Dead code (commented out) that would disable TLS verification is a latent-risk flag. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-G2.md",
+      "source_line": 13,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/martinrotter/rssguard"
+        },
+        {
+          "label": "framework",
+          "value": "C++/Qt (native)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "**platform-dependent**: on Windows = auto-chk + manual-dl/inst (checks on startup automatically if enabled, but download/install of the chosen installer requires the user to click \"Download\"/\"Install\" in the FormUpdate dialog); on macOS/Linux = notify/manual only (self-update unsupported, dialog just offers \"Go to application website\")"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y (Windows only)**"
+        },
+        {
+          "label": "transport",
+          "value": "https — `RELEASES_LIST = \"https://api.github.com/repos/martinrotter/rssguard/releases\"`; installer asset fetched from GitHub's `browser_download_url` (also https, github release CDN). TLS-bypass code (`ssl_conf.setPeerVerifyMode(QSslSocket::PeerVerifyMode::VerifyNone)` and `reply->ignoreSslErrors(error)`) **exists in source but is commented out / dead code**, so validation=enforced (default Qt/OS TLS trust store; the bypass is present-but-inactive)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "HTTPS-only (GitHub Releases API JSON; no separate signed manifest — the \"manifest\" is just the GitHub releases JSON array, integrity relies on TLS to api.github.com)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — no hash or signature check performed on the downloaded installer in-app; on Windows it's saved to a temp dir and launched directly via `ShellExecute`; any protection would come solely from the executable's own OS code-signing (if present) being honored by Windows SmartScreen/AppLocker outside the app's control"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-TLS only (no in-app payload verification); OS-code-signing check, if any, is external to the app"
+        },
+        {
+          "label": "evidence",
+          "value": "src/librssguard/miscellaneous/systemfactory.h:51-52,89 and .cpp:435-478 (`checkForUpdates`, `checkForUpdatesOnStartup`, JSON parse of GitHub releases); src/librssguard/definitions/definitions.h:67 (`RELEASES_LIST` URL); src/librssguard/gui/dialogs/formupdate.cpp:221-260 (Windows-only `ShellExecute` launch of downloaded installer, no hash/signature check, `#if defined(Q_OS_WIN)` gates self-update); src/librssguard/network-web/basenetworkaccessmanager.cpp:64-67,117-124 (SSL-bypass code present but commented out)"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-S2.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/martinrotter/rssguard"
+        },
+        {
+          "label": "commit/date",
+          "value": "88cb4d089a6d0a4533db589a6d88e0a0b6d416b0 / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual \"Install\" click)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y (Windows only)**"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS (default Qt cert validation active; but disable-validation code exists **commented out**)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** (no hash/checksum/signature check)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "src/librssguard/gui/dialogs/formupdate.cpp:221-274,239-245 (`ShellExecute` on downloaded, unverified installer); systemfactory.cpp:435-451,501-536 (GitHub Releases API JSON parse); network-web/basenetworkaccessmanager.cpp:64-67,117-124 (commented-out `setPeerVerifyMode(VerifyNone)` / `ignoreSslErrors`); definitions.h:67"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-S2.md",
+      "source_line": 24,
+      "fields": [
+        {
+          "label": "Tier",
+          "value": "**C**"
+        },
+        {
+          "label": "Notes",
+          "value": "Downloads + `ShellExecute`s an unsigned, unhashed Windows installer fetched over HTTPS from a GitHub-Releases-API-discovered URL. Nothing stops a compromised/forged GitHub release or a MITM with a valid cert for the download host from achieving RCE. Dead code (commented out) that would disable TLS verification is a latent-risk flag."
+        }
+      ]
+    }
   ]
 }

@@ -43,5 +43,53 @@
       "line": 23,
       "text": "| Mesen2 | https://github.com/SourMesen/Mesen2 | b9fa69d / 2026-06-04 | Y | Y (prompted) | Y | https, TLS enforced (default .NET `HttpClient`, no `ServerCertificateValidationCallback` override found) | N (plain JSON) | hash (SHA256), server-supplied | server-supplied (same `mesen.ca` JSON that supplies the download URL also supplies the expected hash) | UI/ViewModels/UpdatePromptViewModel.cs:41-147 (fetch `https://www.mesen.ca/Services/v2/latestversion.json`, download, SHA256 compare at line 127-143); UI/Utilities/UpdateHelper.cs:22-104 (launches downloaded exe as external updater, self-replaces binary) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U5.md",
+      "source_line": 23,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/SourMesen/Mesen2"
+        },
+        {
+          "label": "commit/date",
+          "value": "b9fa69d / 2026-06-04"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (prompted)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (default .NET `HttpClient`, no `ServerCertificateValidationCallback` override found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (plain JSON)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (SHA256), server-supplied"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied (same `mesen.ca` JSON that supplies the download URL also supplies the expected hash)"
+        },
+        {
+          "label": "evidence",
+          "value": "UI/ViewModels/UpdatePromptViewModel.cs:41-147 (fetch `https://www.mesen.ca/Services/v2/latestversion.json`, download, SHA256 compare at line 127-143); UI/Utilities/UpdateHelper.cs:22-104 (launches downloaded exe as external updater, self-replaces binary)"
+        }
+      ]
+    }
   ]
 }

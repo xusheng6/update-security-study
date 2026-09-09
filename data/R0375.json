@@ -41,5 +41,53 @@
       "line": 33,
       "text": "| En Croissant | https://github.com/franciscoBSalgueiro/en-croissant | 9654961 / 2026-04-20 | Y | N (user must click \"yes\" to install) | **Y** | https (`https://www.encroissant.org/updates`), Tauri default → enforced | **Y** | **signature** — Tauri updater plugin verifies a minisign/ed25519 signature before install | **pinned in binary** — `tauri.conf.json` `plugins.updater.pubkey` (base64 minisign pubkey) compiled into the app | `src-tauri/tauri.conf.json` (`updater.pubkey`, `updater.endpoints`); `src-tauri/Cargo.toml:64` `tauri-plugin-updater = \"2.10.0\"`; `src-tauri/src/main.rs:241`; `src/App.tsx:119-134` (`check()` → confirm dialog → `update.downloadAndInstall()`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Y6.md",
+      "source_line": 33,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/franciscoBSalgueiro/en-croissant"
+        },
+        {
+          "label": "commit/date",
+          "value": "9654961 / 2026-04-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (user must click \"yes\" to install)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y**"
+        },
+        {
+          "label": "transport",
+          "value": "https (`https://www.encroissant.org/updates`), Tauri default → enforced"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "**Y**"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**signature** — Tauri updater plugin verifies a minisign/ed25519 signature before install"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned in binary** — `tauri.conf.json` `plugins.updater.pubkey` (base64 minisign pubkey) compiled into the app"
+        },
+        {
+          "label": "evidence",
+          "value": "`src-tauri/tauri.conf.json` (`updater.pubkey`, `updater.endpoints`); `src-tauri/Cargo.toml:64` `tauri-plugin-updater = \"2.10.0\"`; `src-tauri/src/main.rs:241`; `src/App.tsx:119-134` (`check()` → confirm dialog → `update.downloadAndInstall()`)"
+        }
+      ]
+    }
   ]
 }

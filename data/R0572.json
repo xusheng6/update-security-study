@@ -42,5 +42,53 @@
       "line": 16,
       "text": "| Titanium CLI (TiDev, appcelerator/titanium) | https://github.com/appcelerator/titanium.git | 4c7dbf004e7fe9047852dd6f128620d9d9dfea93 / 2026-08-22 | Y | N (explicit `ti sdk install`, though CLI prompts/suggests it when the project's required SDK is missing) | Y | https; TLS validation enforced by default (`rejectUnauthorized: true`), user-configurable to disable via `ticonfig` (`cli.rejectUnauthorized`) — opt-in only, not hardcoded off | N | **none** — no checksum/hash/signature anywhere on the SDK install path | none | `src/util/tisdk.js:235-246` (release manifests fetched over https from downloads.titaniumsdk.com); `src/commands/sdk.js:552-625` (`getInstallFile` downloads SDK/CI-build zip — arbitrary URL or GitHub release accepted — no hash check after download); `src/commands/sdk.js:628-700` (`extractSDK` extracts immediately, no verification step); `src/util/request.js:1-27` (rejectUnauthorized default true, configurable) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AK6.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/appcelerator/titanium.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "4c7dbf004e7fe9047852dd6f128620d9d9dfea93 / 2026-08-22"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (explicit `ti sdk install`, though CLI prompts/suggests it when the project's required SDK is missing)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https; TLS validation enforced by default (`rejectUnauthorized: true`), user-configurable to disable via `ticonfig` (`cli.rejectUnauthorized`) — opt-in only, not hardcoded off"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — no checksum/hash/signature anywhere on the SDK install path"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/util/tisdk.js:235-246` (release manifests fetched over https from downloads.titaniumsdk.com); `src/commands/sdk.js:552-625` (`getInstallFile` downloads SDK/CI-build zip — arbitrary URL or GitHub release accepted — no hash check after download); `src/commands/sdk.js:628-700` (`extractSDK` extracts immediately, no verification step); `src/util/request.js:1-27` (rejectUnauthorized default true, configurable)"
+        }
+      ]
+    }
   ]
 }

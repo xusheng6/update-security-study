@@ -41,5 +41,53 @@
       "line": 11,
       "text": "| Amethyst (window manager) | https://github.com/ianyh/Amethyst | Sparkle 2.9.5 (Swift Package Manager) | Y | Y for checks (Sparkle 2 default `automaticallyChecksForUpdates`=true, no override found); install-on-approval only (no auto-install key set) | Y (once user approves) | https (`SUFeedURL`=`https://ianyh.com/amethyst/appcast.xml`; separate `SUCanaryFeedURL`=`https://ianyh.com/amethyst/canary-appcast.xml` for beta channel) | TLS-only — **no `SUPublicEDKey`/`SUPublicDSAKey` in Info.plist** | none observed (no signature attribute on enclosures in the live feed) | none | Amethyst/Amethyst-Info.plist:33-36 (`SUCanaryFeedURL`, `SUFeedURL`; grep of full plist finds no `SUPublic*Key`); Amethyst.xcworkspace/xcshareddata/swiftpm/Package.resolved (pins `sparkle-project/Sparkle` v2.9.5); live fetch of `https://ianyh.com/amethyst/appcast.xml` on 2026-08-19 — newest entry v0.24.3 (Apr 2026) enclosure has no `sparkle:edSignature`/`dsaSignature` attribute (oldest 2013 entries also plain `http://`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-M1.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/ianyh/Amethyst"
+        },
+        {
+          "label": "framework",
+          "value": "Sparkle 2.9.5 (Swift Package Manager)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y for checks (Sparkle 2 default `automaticallyChecksForUpdates`=true, no override found); install-on-approval only (no auto-install key set)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (once user approves)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`SUFeedURL`=`https://ianyh.com/amethyst/appcast.xml`; separate `SUCanaryFeedURL`=`https://ianyh.com/amethyst/canary-appcast.xml` for beta channel)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "TLS-only — **no `SUPublicEDKey`/`SUPublicDSAKey` in Info.plist**"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none observed (no signature attribute on enclosures in the live feed)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none"
+        },
+        {
+          "label": "evidence",
+          "value": "Amethyst/Amethyst-Info.plist:33-36 (`SUCanaryFeedURL`, `SUFeedURL`; grep of full plist finds no `SUPublic*Key`); Amethyst.xcworkspace/xcshareddata/swiftpm/Package.resolved (pins `sparkle-project/Sparkle` v2.9.5); live fetch of `https://ianyh.com/amethyst/appcast.xml` on 2026-08-19 — newest entry v0.24.3 (Apr 2026) enclosure has no `sparkle:edSignature`/`dsaSignature` attribute (oldest 2013 entries also plain `http://`)"
+        }
+      ]
+    }
   ]
 }

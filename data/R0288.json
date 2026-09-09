@@ -43,5 +43,53 @@
       "line": 35,
       "text": "| EKA2L1 | https://github.com/EKA2L1/EKA2L1 | 193557f / 2026-08-21 | Y (Windows Qt build only) | Y (dialog offers update, user confirms) | Y | https, TLS default (Qt `QNetworkAccessManager`, `NoLessSafeRedirectPolicy` set, no insecure override found) | N | **none** — downloaded zip is extracted and copied over the install directory with no hash/signature check | n/a (no verification exists) | src/emu/qt/src/update_dialog.cpp:54-56 (`api.github.com/repos/eka2l1/eka2l1/...`), 315-316 (download request); src/emu/qt/src/updater.cpp:98-195 (`extract()` unzips straight into `..\\` install dir via miniz, no checksum anywhere), 213-222 (relaunches `eka2l1_qt.exe`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U5.md",
+      "source_line": 35,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/EKA2L1/EKA2L1"
+        },
+        {
+          "label": "commit/date",
+          "value": "193557f / 2026-08-21"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (Windows Qt build only)"
+        },
+        {
+          "label": "auto",
+          "value": "Y (dialog offers update, user confirms)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS default (Qt `QNetworkAccessManager`, `NoLessSafeRedirectPolicy` set, no insecure override found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — downloaded zip is extracted and copied over the install directory with no hash/signature check"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a (no verification exists)"
+        },
+        {
+          "label": "evidence",
+          "value": "src/emu/qt/src/update_dialog.cpp:54-56 (`api.github.com/repos/eka2l1/eka2l1/...`), 315-316 (download request); src/emu/qt/src/updater.cpp:98-195 (`extract()` unzips straight into `..\\` install dir via miniz, no checksum anywhere), 213-222 (relaunches `eka2l1_qt.exe`)"
+        }
+      ]
+    }
   ]
 }

@@ -47,5 +47,99 @@
       "line": 18,
       "text": "| Node-RED Palette Manager (content channel — installs/updates 3rd-party nodes) | (same repo) | 1f38dc8 / 2026-08-13 | Y | N (user-initiated install/update via UI) | Y | https to registry.npmjs.org via bundled npm-cli.js (standard npm TLS, not disabled) | N | hash from npm registry metadata (same endpoint) — npm's own integrity check, not app-added | unpinned / npm registry-supplied | packages/node_modules/@node-red/registry/lib/installer.js:35,237-238 (spawns npm-cli.js install) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC6.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/node-red/node-red"
+        },
+        {
+          "label": "commit/date",
+          "value": "1f38dc8 / 2026-08-13"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "N (no self-updater found; manual npm/docker upgrade)"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "N"
+        },
+        {
+          "label": "transport",
+          "value": "N/A"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A"
+        },
+        {
+          "label": "payload_verification",
+          "value": "N/A"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "negative census: no autoUpdater/Sparkle/checkForUpdate hits in packages/node_modules/@node-red/editor-api"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-AC6.md",
+      "source_line": 18,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "(same repo)"
+        },
+        {
+          "label": "commit/date",
+          "value": "1f38dc8 / 2026-08-13"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (user-initiated install/update via UI)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https to registry.npmjs.org via bundled npm-cli.js (standard npm TLS, not disabled)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash from npm registry metadata (same endpoint) — npm's own integrity check, not app-added"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "unpinned / npm registry-supplied"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "packages/node_modules/@node-red/registry/lib/installer.js:35,237-238 (spawns npm-cli.js install)"
+        }
+      ]
+    }
   ]
 }

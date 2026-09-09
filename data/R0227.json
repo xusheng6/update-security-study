@@ -41,5 +41,53 @@
       "line": 11,
       "text": "| Defold (Editor 2 self-updater) | github.com/defold/defold | Clojure/JVM desktop editor | Y | Y (hourly timer: `initial-update-delay 1000`, `update-delay 3600000` ms, started at editor launch via `start!`) | Y (downloads ZIP bundle of new editor build, extracts, sets executable bit on binaries, replaces install-dir contents, restarts) | HTTPS (`connection-properties` `:updater` URL templates all `https://%s/...`; `archive-domain` e.g. d.defold.com) | N | **none** — the `sha1` returned by the update-check JSON is used only as a version-id embedded in the download URL and as a local \"have we downloaded this\" marker file; the downloaded ZIP's actual hash is never recomputed/compared after download | n/a | editor/src/clj/editor/updater.clj `check!` (fetches `update-url` JSON, reads `:sha1`); `extract!` (`(spit update-sha1-file server-sha1)` — writes the server-supplied id without ever hashing `zip-file` for comparison); `(.setExecutable target-file true)` in `extract!`; editor/src/clj/editor/connection_properties.clj:24-27 (`https://%s/archive/%s/%s/editor2/Defold-%s.zip`, `https://%s/editor2/channels/%s/update-v4.json`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-N8.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/defold/defold"
+        },
+        {
+          "label": "framework",
+          "value": "Clojure/JVM desktop editor"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (hourly timer: `initial-update-delay 1000`, `update-delay 3600000` ms, started at editor launch via `start!`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (downloads ZIP bundle of new editor build, extracts, sets executable bit on binaries, replaces install-dir contents, restarts)"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS (`connection-properties` `:updater` URL templates all `https://%s/...`; `archive-domain` e.g. d.defold.com)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — the `sha1` returned by the update-check JSON is used only as a version-id embedded in the download URL and as a local \"have we downloaded this\" marker file; the downloaded ZIP's actual hash is never recomputed/compared after download"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence",
+          "value": "editor/src/clj/editor/updater.clj `check!` (fetches `update-url` JSON, reads `:sha1`); `extract!` (`(spit update-sha1-file server-sha1)` — writes the server-supplied id without ever hashing `zip-file` for comparison); `(.setExecutable target-file true)` in `extract!`; editor/src/clj/editor/connection_properties.clj:24-27 (`https://%s/archive/%s/%s/editor2/Defold-%s.zip`, `https://%s/editor2/channels/%s/update-v4.json`)"
+        }
+      ]
+    }
   ]
 }

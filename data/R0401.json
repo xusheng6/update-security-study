@@ -41,5 +41,53 @@
       "line": 14,
       "text": "| Bisq 2 | https://github.com/bisq-network/bisq2 | c47c0e9 / 2026-08-19 | Y | N (user-triggered `downloadAndVerify()` from update overlay) | Y | https (github.com release assets; standard HttpURLConnection, no TLS override) | N/A (jar/installer not OS-code-signed in this flow) | GPG signature verified (not just hash) against downloaded `.asc` detached signature | pinned-in-binary — bundled resource keys `evolution/src/main/resources/keys/387C8307.asc` and `E222AA02.asc`, required to independently verify the artifact (`checkSignatureWithKeyInResources`, only skippable via explicit `ignoreSigningKeyInResourcesCheck` config flag, default false) — in addition to a webpage-fetched key check | evolution/src/main/java/bisq/evolution/updater/DownloadedFilesVerification.java:36-77 (multi-source verify: resources key + webpage key + keyId allowlist); UpdaterUtils.java:29-37 (URLs); UpdaterService.java:196-225 (downloadAndVerify), 305-323 (verify call); resources at evolution/src/main/resources/keys/{387C8307,E222AA02}.asc |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AA1.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/bisq-network/bisq2"
+        },
+        {
+          "label": "commit/date",
+          "value": "c47c0e9 / 2026-08-19"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (user-triggered `downloadAndVerify()` from update overlay)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (github.com release assets; standard HttpURLConnection, no TLS override)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A (jar/installer not OS-code-signed in this flow)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "GPG signature verified (not just hash) against downloaded `.asc` detached signature"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary — bundled resource keys `evolution/src/main/resources/keys/387C8307.asc` and `E222AA02.asc`, required to independently verify the artifact (`checkSignatureWithKeyInResources`, only skippable via explicit `ignoreSigningKeyInResourcesCheck` config flag, default false) — in addition to a webpage-fetched key check"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "evolution/src/main/java/bisq/evolution/updater/DownloadedFilesVerification.java:36-77 (multi-source verify: resources key + webpage key + keyId allowlist); UpdaterUtils.java:29-37 (URLs); UpdaterService.java:196-225 (downloadAndVerify), 305-323 (verify call); resources at evolution/src/main/resources/keys/{387C8307,E222AA02}.asc"
+        }
+      ]
+    }
   ]
 }

@@ -42,5 +42,53 @@
       "line": 20,
       "text": "| Buildozer | https://github.com/kivy/buildozer.git | 105543da41f7a0c866a46ff07d10cb8137df2e7b / 2026-07-20 | Y | Y (auto-triggered whenever a required build tool is missing, no separate confirmation) | Y | https (dl.google.com, archive.apache.org); default Python `urllib`/SSL context (cert validation enforced), no `verify=False`/insecure bypass found | N | **none** — no checksum/hash/signature anywhere in the download/extract path | none | `buildozer/buildops.py:401-433` (`download()` — plain `urlopen`, writes bytes straight to disk, no hash check); `buildozer/targets/android.py:365-385` (`_install_apache_ant` — downloads+extracts Apache ANT tarball, no verification); `:388-420` (`_install_android_sdk` — downloads Android cmdline-tools zip from dl.google.com, no verification); `:432-480` (`_install_android_ndk` — downloads NDK zip, no verification); these tools (aapt, javac/ant, ndk-build, sdkmanager) are then directly invoked as part of the Android build toolchain |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AK6.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/kivy/buildozer.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "105543da41f7a0c866a46ff07d10cb8137df2e7b / 2026-07-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (auto-triggered whenever a required build tool is missing, no separate confirmation)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (dl.google.com, archive.apache.org); default Python `urllib`/SSL context (cert validation enforced), no `verify=False`/insecure bypass found"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — no checksum/hash/signature anywhere in the download/extract path"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`buildozer/buildops.py:401-433` (`download()` — plain `urlopen`, writes bytes straight to disk, no hash check); `buildozer/targets/android.py:365-385` (`_install_apache_ant` — downloads+extracts Apache ANT tarball, no verification); `:388-420` (`_install_android_sdk` — downloads Android cmdline-tools zip from dl.google.com, no verification); `:432-480` (`_install_android_ndk` — downloads NDK zip, no verification); these tools (aapt, javac/ant, ndk-build, sdkmanager) are then directly invoked as part of the Android build toolchain"
+        }
+      ]
+    }
   ]
 }

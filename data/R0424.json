@@ -43,5 +43,53 @@
       "line": 21,
       "text": "| **FieldWorks (FLEx)** | https://github.com/sillsdev/FieldWorks | 6f72671 / 2026-08-20 | **Y** | **Y** (background check + background download; install requires a Yes/No dialog but no further download step) | **Y** | https — `downloads.languagetechnology.org/fieldworks/UpdateInfo*.xml` (+ S3 bucket listing for nightly) | N (plain XML bucket listing, no signature field) | **none** — no hash, no Authenticode check before execution | N/A — trust is TLS-only, server-supplied file list | Src/Common/FwUtils/FwUpdater.cs:123-167 (fetch UpdateInfo.xml/S3 listing over https), :182-194 (`DownloadClient`/`WebClient` fetch installer, no checksum), :576-603 (`InstallDownloadedUpdate` → `Process.Start(installerRunner, ...)` runs the downloaded `.exe`/`.msp` with no signature verification); Src/Common/FwUtils/DownloadClient.cs:41-175 (plain `HttpWebRequest`, no cert pinning, no hash check) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AB5.md",
+      "source_line": 21,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/sillsdev/FieldWorks"
+        },
+        {
+          "label": "commit/date",
+          "value": "6f72671 / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "**Y**"
+        },
+        {
+          "label": "auto",
+          "value": "**Y** (background check + background download; install requires a Yes/No dialog but no further download step)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y**"
+        },
+        {
+          "label": "transport",
+          "value": "https — `downloads.languagetechnology.org/fieldworks/UpdateInfo*.xml` (+ S3 bucket listing for nightly)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (plain XML bucket listing, no signature field)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — no hash, no Authenticode check before execution"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A — trust is TLS-only, server-supplied file list"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "Src/Common/FwUtils/FwUpdater.cs:123-167 (fetch UpdateInfo.xml/S3 listing over https), :182-194 (`DownloadClient`/`WebClient` fetch installer, no checksum), :576-603 (`InstallDownloadedUpdate` → `Process.Start(installerRunner, ...)` runs the downloaded `.exe`/`.msp` with no signature verification); Src/Common/FwUtils/DownloadClient.cs:41-175 (plain `HttpWebRequest`, no cert pinning, no hash check)"
+        }
+      ]
+    }
   ]
 }

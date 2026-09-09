@@ -42,5 +42,53 @@
       "line": 18,
       "text": "| nvm | https://github.com/nvm-sh/nvm.git | 6798d1d / 2026-08-17 | Y | N | Y | https (`nodejs.org/dist`), TLS enforced, no insecure flags found | N | **hash (SHA256)**, fetched from same host at install time | server-supplied/unpinned (same endpoint as download) | `nvm/nvm.sh:2037-2044` `nvm_get_checksum()` downloads `${MIRROR}/${version}/SHASUMS256.txt` from the *same* nodejs.org mirror; `:1988-2019` `nvm_compare_checksum`; `:2699-2722` install fails/removes tarball on mismatch. No GPG/signature check anywhere (`grep .sig/gpg` = 0 hits) despite Node.js publishing `SHASUMS256.txt.sig`. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AK4.md",
+      "source_line": 18,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/nvm-sh/nvm.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "6798d1d / 2026-08-17"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`nodejs.org/dist`), TLS enforced, no insecure flags found"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**hash (SHA256)**, fetched from same host at install time"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (same endpoint as download)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`nvm/nvm.sh:2037-2044` `nvm_get_checksum()` downloads `${MIRROR}/${version}/SHASUMS256.txt` from the *same* nodejs.org mirror; `:1988-2019` `nvm_compare_checksum`; `:2699-2722` install fails/removes tarball on mismatch. No GPG/signature check anywhere (`grep .sig/gpg` = 0 hits) despite Node.js publishing `SHASUMS256.txt.sig`."
+        }
+      ]
+    }
   ]
 }

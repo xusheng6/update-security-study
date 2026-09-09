@@ -43,5 +43,53 @@
       "line": 16,
       "text": "| UVtools | https://github.com/sn4k3/UVtools.git | ae341e6 / 2026-08-20 | Y | N (prompts user; has explicit \"Auto update\" vs \"Manual update\" button) | Y (`DownloadAndInstallUpdateAsync`) | https (GitHub releases via `Updatum` NuGet pkg) | N (no signature check visible in this repo) | none visible in this repo — verification logic lives inside the external `Updatum` NuGet dependency (github.com/sn4k3/Updatum), not vendored here; `InstallUpdateCodesignMacOSApp=true` just ad-hoc re-signs the replaced macOS binary locally to satisfy Gatekeeper, it does not validate the *downloaded* payload against anything pinned | server-supplied/unpinned (GitHub API/releases over TLS) | `UVtools.UI/UVtools.UI.csproj:44` `<PackageReference Include=\"Updatum\" Version=\"1.4.0\"/>`; `App.axaml.cs:62-67` `UpdatumManager AppUpdater = new(...) { InstallUpdateCodesignMacOSApp = true, ... }`; `MainWindow.axaml.cs:1392-1440` `MenuNewVersionClicked()` → `AppUpdater.DownloadAndInstallUpdateAsync(release, ...)` on \"Auto update\" click. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AN7.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/sn4k3/UVtools.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "ae341e6 / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (prompts user; has explicit \"Auto update\" vs \"Manual update\" button)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (`DownloadAndInstallUpdateAsync`)"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub releases via `Updatum` NuGet pkg)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no signature check visible in this repo)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none visible in this repo — verification logic lives inside the external `Updatum` NuGet dependency (github.com/sn4k3/Updatum), not vendored here; `InstallUpdateCodesignMacOSApp=true` just ad-hoc re-signs the replaced macOS binary locally to satisfy Gatekeeper, it does not validate the *downloaded* payload against anything pinned"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (GitHub API/releases over TLS)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`UVtools.UI/UVtools.UI.csproj:44` `<PackageReference Include=\"Updatum\" Version=\"1.4.0\"/>`; `App.axaml.cs:62-67` `UpdatumManager AppUpdater = new(...) { InstallUpdateCodesignMacOSApp = true, ... }`; `MainWindow.axaml.cs:1392-1440` `MenuNewVersionClicked()` → `AppUpdater.DownloadAndInstallUpdateAsync(release, ...)` on \"Auto update\" click."
+        }
+      ]
+    }
   ]
 }

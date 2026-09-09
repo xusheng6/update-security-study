@@ -41,5 +41,53 @@
       "line": 15,
       "text": "| Restfox | flawiddsouza/Restfox | Electron (electron-forge + `update-electron-app`) | Y | chk/dl/inst: automatic — `update-electron-app` wraps Electron's built-in `autoUpdater` (Squirrel), default periodic check + auto-download + notify, install on quit/restart; invoked automatically on renderer mount unless user sets `disableAutoUpdate` flag | Y | https, default `update-electron-app` host (update.electronjs.org, proxies to GitHub releases); no custom host/TLS-bypass found in source | N (no separate signed manifest found; Squirrel-based feed) | OS-code-signing enforced on macOS via Squirrel.Mac (`osxSign` identity + `osxNotarize` configured); **Windows — no certificateFile/signing config found**, so Squirrel.Windows update payload is likely unsigned/unverified | Apple Developer ID Application cert \"Athanasios Plastiras (Y46L589C5C)\" for mac (via Apple trust chain/notarization); none identified for Windows | packages/electron/forge.config.js (`osxSign.identity`, `osxNotarize`, `makers:['@electron-forge/maker-squirrel', ...]`, `publishers:['@electron-forge/publisher-github']`); packages/electron/src/app.js:10 (`require('update-electron-app')`), :221-224 (ipc handler calling `updateElectronApp()`); packages/ui/src/App.vue:438-442 (auto-invoked on component mount unless `disableAutoUpdate` flag set) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-I8.md",
+      "source_line": 15,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "flawiddsouza/Restfox"
+        },
+        {
+          "label": "framework",
+          "value": "Electron (electron-forge + `update-electron-app`)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "chk/dl/inst: automatic — `update-electron-app` wraps Electron's built-in `autoUpdater` (Squirrel), default periodic check + auto-download + notify, install on quit/restart; invoked automatically on renderer mount unless user sets `disableAutoUpdate` flag"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, default `update-electron-app` host (update.electronjs.org, proxies to GitHub releases); no custom host/TLS-bypass found in source"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no separate signed manifest found; Squirrel-based feed)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "OS-code-signing enforced on macOS via Squirrel.Mac (`osxSign` identity + `osxNotarize` configured); **Windows — no certificateFile/signing config found**, so Squirrel.Windows update payload is likely unsigned/unverified"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "Apple Developer ID Application cert \"Athanasios Plastiras (Y46L589C5C)\" for mac (via Apple trust chain/notarization); none identified for Windows"
+        },
+        {
+          "label": "evidence",
+          "value": "packages/electron/forge.config.js (`osxSign.identity`, `osxNotarize`, `makers:['@electron-forge/maker-squirrel', ...]`, `publishers:['@electron-forge/publisher-github']`); packages/electron/src/app.js:10 (`require('update-electron-app')`), :221-224 (ipc handler calling `updateElectronApp()`); packages/ui/src/App.vue:438-442 (auto-invoked on component mount unless `disableAutoUpdate` flag set)"
+        }
+      ]
+    }
   ]
 }

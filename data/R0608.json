@@ -42,5 +42,53 @@
       "line": 17,
       "text": "| Calibre-Web-Automated | https://github.com/crocodilestick/Calibre-Web-Automated | 43718d85 / 2026-08-06 | Y (forked, largely unmodified updater) | N | Y | https enforced on update path; `verify=False` exists elsewhere but only on unrelated internal/local endpoints | N | none | server-supplied/unpinned — **still points at upstream `janeczku/calibre-web` repo, not the fork's own** | `cps/updater.py:27` (`_REPOSITORY_API_URL = 'https://api.github.com/repos/janeczku/calibre-web'`, unchanged from upstream fork point); same download/extract/overwrite logic as calibre-web `cps/updater.py:207-260`; unrelated `verify=False` at `cps/cwa_functions.py:1966,2106`, `cps/tasks/ops.py:37,50,104,115`, `scripts/ingest_processor.py:451,1224` (internal container-local API calls, not the update path) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AM3.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/crocodilestick/Calibre-Web-Automated"
+        },
+        {
+          "label": "commit/date",
+          "value": "43718d85 / 2026-08-06"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (forked, largely unmodified updater)"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https enforced on update path; `verify=False` exists elsewhere but only on unrelated internal/local endpoints"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned — **still points at upstream `janeczku/calibre-web` repo, not the fork's own**"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`cps/updater.py:27` (`_REPOSITORY_API_URL = 'https://api.github.com/repos/janeczku/calibre-web'`, unchanged from upstream fork point); same download/extract/overwrite logic as calibre-web `cps/updater.py:207-260`; unrelated `verify=False` at `cps/cwa_functions.py:1966,2106`, `cps/tasks/ops.py:37,50,104,115`, `scripts/ingest_processor.py:451,1224` (internal container-local API calls, not the update path)"
+        }
+      ]
+    }
   ]
 }

@@ -38,5 +38,53 @@
       "line": 22,
       "text": "| Jettison | closed source; no public repo (St. Clair Software, `stclairsoft.com/Jettison/`) | **Sparkle (EdDSA = A)** (confirmed via live appcast) | **Y** (inferred) | **Y** (cask `auto_updates true`) | **Y** (inferred, standard Sparkle) | https | TLS-only (appcast itself unsigned) | signature[EdDSA] | unknown exact value (closed source; conventionally `SUPublicEDKey` embedded in the shipped Info.plist per the `sparkle:edSignature` scheme observed) | Live fetch `https://stclairsoft.com/cgi-bin/sparkle.cgi?JT` (2026-08-06 pubDate): `<enclosure url=\"https://www.stclairsoft.com/download/Jettison-1.9.7.dmg\" sparkle:shortVersionString=\"1.9.7\" sparkle:version=\"4424\" sparkle:edSignature=\"0S/b0UhSJ+oKat8dsBHUhAZPWrQNOKLX01NjFGCbbcj5sehD3Lg6z/cDa/B+qa06zDNMFhZHdNV+IgCQnG/NDw==\" length=\"4641824\" type=\"application/octet-stream\" />`; `raw.githubusercontent.com/Homebrew/homebrew-cask/master/Casks/j/jettison.rb`: `auto_updates true`, `livecheck do url \"https://stclairsoft.com/cgi-bin/sparkle.cgi?JT\" strategy :sparkle end`. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-R1.md",
+      "source_line": 22,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "closed source; no public repo (St. Clair Software, `stclairsoft.com/Jettison/`)"
+        },
+        {
+          "label": "framework",
+          "value": "**Sparkle (EdDSA = A)** (confirmed via live appcast)"
+        },
+        {
+          "label": "has_updater",
+          "value": "**Y** (inferred)"
+        },
+        {
+          "label": "auto",
+          "value": "**Y** (cask `auto_updates true`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y** (inferred, standard Sparkle)"
+        },
+        {
+          "label": "transport",
+          "value": "https"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "TLS-only (appcast itself unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature[EdDSA]"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "unknown exact value (closed source; conventionally `SUPublicEDKey` embedded in the shipped Info.plist per the `sparkle:edSignature` scheme observed)"
+        },
+        {
+          "label": "evidence",
+          "value": "Live fetch `https://stclairsoft.com/cgi-bin/sparkle.cgi?JT` (2026-08-06 pubDate): `<enclosure url=\"https://www.stclairsoft.com/download/Jettison-1.9.7.dmg\" sparkle:shortVersionString=\"1.9.7\" sparkle:version=\"4424\" sparkle:edSignature=\"0S/b0UhSJ+oKat8dsBHUhAZPWrQNOKLX01NjFGCbbcj5sehD3Lg6z/cDa/B+qa06zDNMFhZHdNV+IgCQnG/NDw==\" length=\"4641824\" type=\"application/octet-stream\" />`; `raw.githubusercontent.com/Homebrew/homebrew-cask/master/Casks/j/jettison.rb`: `auto_updates true`, `livecheck do url \"https://stclairsoft.com/cgi-bin/sparkle.cgi?JT\" strategy :sparkle end`."
+        }
+      ]
+    }
   ]
 }

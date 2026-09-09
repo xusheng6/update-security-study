@@ -42,5 +42,53 @@
       "line": 16,
       "text": "| Chatty (Twitch chat client) | https://github.com/chatty/chatty.git | 48f0c9e / 2026-06-19 | Y | Y (`checkNewVersion` setting, default `true`, checked every 2 days) | Y (downloads installer via `FileDownloaderDialog`, then `RunUpdater.run()` spawns the InnoSetup `.exe` directly with `ProcessBuilder`) | https (`api.github.com/repos/chatty/chatty/releases`) | N | **none** — checksums are published on a webpage (`tduva.com/chatty/checksums/...`) for **manual** user comparison only; nothing in code computes/compares a hash or signature before executing the downloaded installer | n/a | src/chatty/util/GitHub.java:20 (`https://api.github.com/repos/chatty/chatty/releases`), src/chatty/SettingsManager.java:125 (`checkNewVersion` default `true`), src/chatty/gui/components/updating/RunUpdater.java:27-73 (spawns downloaded installer via `ProcessBuilder`), src/chatty/gui/components/updating/UpdateDialog.java:320 (checksums link, informational only), src/chatty/gui/components/updating/FileDownloader.java (plain `HttpURLConnection` download, no digest check) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AM7.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/chatty/chatty.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "48f0c9e / 2026-06-19"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (`checkNewVersion` setting, default `true`, checked every 2 days)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y (downloads installer via `FileDownloaderDialog`, then `RunUpdater.run()` spawns the InnoSetup `.exe` directly with `ProcessBuilder`)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`api.github.com/repos/chatty/chatty/releases`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — checksums are published on a webpage (`tduva.com/chatty/checksums/...`) for **manual** user comparison only; nothing in code computes/compares a hash or signature before executing the downloaded installer"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/chatty/util/GitHub.java:20 (`https://api.github.com/repos/chatty/chatty/releases`), src/chatty/SettingsManager.java:125 (`checkNewVersion` default `true`), src/chatty/gui/components/updating/RunUpdater.java:27-73 (spawns downloaded installer via `ProcessBuilder`), src/chatty/gui/components/updating/UpdateDialog.java:320 (checksums link, informational only), src/chatty/gui/components/updating/FileDownloader.java (plain `HttpURLConnection` download, no digest check)"
+        }
+      ]
+    }
   ]
 }

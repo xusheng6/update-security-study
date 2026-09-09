@@ -38,5 +38,53 @@
       "line": 24,
       "text": "| Muzzle | closed source; no public repo (Incident57, `muzzleapp.com`) | **Sparkle (legacy DSA)** — pre-EdDSA scheme | **Y** (inferred; **stale/abandoned** — last shipped update 2021) | **Y** (cask `auto_updates true`, though feed hasn't moved in 5+ years) | **Y** (inferred, standard Sparkle) | https | TLS-only (appcast itself unsigned) | signature[DSA] (legacy 1024-bit DSA — the scheme Sparkle's own docs deprecated in favor of EdDSA due to weaker security margins) | unknown exact value (closed source; conventionally `SUPublicDSAKey` embedded in the shipped Info.plist per the `sparkle:dsaSignature` scheme observed) | Live fetch `https://muzzleapp.com/api/1/appcast.xml`: newest item is `<title>Version 1.9</title>` `pubDate Mon, 21 Jun 2021`, `<enclosure url=\"https://muzzleapp.com/binaries/muzzle-426.zip\" sparkle:version=\"426\" sparkle:shortVersionString=\"1.9\" length=\"5646079\" sparkle:dsaSignature=\"MCwCFAu2BUkOLYXgcTH2f39brqwQORbpAhR05QYhOtpCdiO2LHpxodQu+p1+0w==\"/>`; `raw.githubusercontent.com/Homebrew/homebrew-cask/master/Casks/m/muzzle.rb`: `auto_updates true`, `livecheck do url \"https://muzzleapp.com/api/1/appcast.xml\" strategy :sparkle end`. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-R1.md",
+      "source_line": 24,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "closed source; no public repo (Incident57, `muzzleapp.com`)"
+        },
+        {
+          "label": "framework",
+          "value": "**Sparkle (legacy DSA)** — pre-EdDSA scheme"
+        },
+        {
+          "label": "has_updater",
+          "value": "**Y** (inferred; **stale/abandoned** — last shipped update 2021)"
+        },
+        {
+          "label": "auto",
+          "value": "**Y** (cask `auto_updates true`, though feed hasn't moved in 5+ years)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y** (inferred, standard Sparkle)"
+        },
+        {
+          "label": "transport",
+          "value": "https"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "TLS-only (appcast itself unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature[DSA] (legacy 1024-bit DSA — the scheme Sparkle's own docs deprecated in favor of EdDSA due to weaker security margins)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "unknown exact value (closed source; conventionally `SUPublicDSAKey` embedded in the shipped Info.plist per the `sparkle:dsaSignature` scheme observed)"
+        },
+        {
+          "label": "evidence",
+          "value": "Live fetch `https://muzzleapp.com/api/1/appcast.xml`: newest item is `<title>Version 1.9</title>` `pubDate Mon, 21 Jun 2021`, `<enclosure url=\"https://muzzleapp.com/binaries/muzzle-426.zip\" sparkle:version=\"426\" sparkle:shortVersionString=\"1.9\" length=\"5646079\" sparkle:dsaSignature=\"MCwCFAu2BUkOLYXgcTH2f39brqwQORbpAhR05QYhOtpCdiO2LHpxodQu+p1+0w==\"/>`; `raw.githubusercontent.com/Homebrew/homebrew-cask/master/Casks/m/muzzle.rb`: `auto_updates true`, `livecheck do url \"https://muzzleapp.com/api/1/appcast.xml\" strategy :sparkle end`."
+        }
+      ]
+    }
   ]
 }

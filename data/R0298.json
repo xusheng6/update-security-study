@@ -44,5 +44,53 @@
       "line": 27,
       "text": "| Franz | https://github.com/meetfranz/franz | 94b1ef2 / 2026-06-12 | Y | Y (`setInterval` in `AppStore.js:143`) | Y (mac/win/AppImage) | https, TLS enforced, no bypass found | manifest present (electron-builder default), not independently signed | mac/win: OS code-sign (electron-updater default); Linux AppImage: hash (server-supplied) | mac/win: OS keystore; Linux: server-supplied | src/electron/ipc-api/autoUpdate.js:1-60; src/stores/AppStore.js:143 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U8.md",
+      "source_line": 27,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/meetfranz/franz"
+        },
+        {
+          "label": "commit/date",
+          "value": "94b1ef2 / 2026-06-12"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (`setInterval` in `AppStore.js:143`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (mac/win/AppImage)"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced, no bypass found"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "manifest present (electron-builder default), not independently signed"
+        },
+        {
+          "label": "payload_verification",
+          "value": "mac/win: OS code-sign (electron-updater default); Linux AppImage: hash (server-supplied)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "mac/win: OS keystore; Linux: server-supplied"
+        },
+        {
+          "label": "evidence",
+          "value": "src/electron/ipc-api/autoUpdate.js:1-60; src/stores/AppStore.js:143"
+        }
+      ]
+    }
   ]
 }

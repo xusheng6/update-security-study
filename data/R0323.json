@@ -44,5 +44,53 @@
       "line": 17,
       "text": "| NetBird | https://github.com/netbirdio/netbird | 4a6efbb / 2026-08-20 | Y | Y | Y | https, TLS validated (`http.DefaultClient`, no InsecureSkipVerify) | Y | signature (Ed25519, chained: root key → rotatable artifact-signing keys → artifact sig, + revocation-list check) | **pinned-in-binary** (`//go:embed certs` embeds `root-pub.pem` Ed25519 root key at compile time; that root key then authenticates server-supplied intermediate signing keys) | `client/internal/updater/reposign/root.go` (root key/ed25519), `client/internal/updater/reposign/verify.go:57-146` (chain: revocation list → artifact keys → artifact sig, all keyed off `a.rootKeys` loaded from embedded certs), `client/internal/updater/reposign/embed_prod.go` (`//go:embed certs`), `client/internal/updater/reposign/certs/root-pub.pem`, `client/internal/updater/installer/repourl_prod.go:7` (`https://publickeys.netbird.io/artifact-signatures`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W6.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/netbirdio/netbird"
+        },
+        {
+          "label": "commit/date",
+          "value": "4a6efbb / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS validated (`http.DefaultClient`, no InsecureSkipVerify)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (Ed25519, chained: root key → rotatable artifact-signing keys → artifact sig, + revocation-list check)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned-in-binary** (`//go:embed certs` embeds `root-pub.pem` Ed25519 root key at compile time; that root key then authenticates server-supplied intermediate signing keys)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`client/internal/updater/reposign/root.go` (root key/ed25519), `client/internal/updater/reposign/verify.go:57-146` (chain: revocation list → artifact keys → artifact sig, all keyed off `a.rootKeys` loaded from embedded certs), `client/internal/updater/reposign/embed_prod.go` (`//go:embed certs`), `client/internal/updater/reposign/certs/root-pub.pem`, `client/internal/updater/installer/repourl_prod.go:7` (`https://publickeys.netbird.io/artifact-signatures`)"
+        }
+      ]
+    }
   ]
 }

@@ -42,5 +42,53 @@
       "line": 26,
       "text": "| gnome-packagekit | https://gitlab.gnome.org/GNOME/gnome-packagekit.git | c628672988f4df70001ca84d6b6bbf391c4c30b5 / 2026-06-13 | N | N | Y (via PackageKit, delegated) | N/A — zero direct HTTP/HTTPS calls anywhere in `src/`; all network access is inside the PackageKit daemon, outside this codebase | delegated to whichever PackageKit backend is configured | none independent — pure `PkClient`/`PkTask` D-Bus GUI; no ONLY_TRUSTED flag ever cleared in code (only SIMULATE flag found) | whatever the configured PackageKit backend trusts (never pinned/stored in this app) | `src/gpk-application.c:1646` (`pk_task_install_packages_async`); `src/gpk-task.c:88-140` (`gpk_task_untrusted_question` shows modal \"not signed by a trusted provider... Are you sure?\" dialog — user-confirmed override via upstream PkTask vfunc, not a silent code-level bypass) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AE2.md",
+      "source_line": 26,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://gitlab.gnome.org/GNOME/gnome-packagekit.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "c628672988f4df70001ca84d6b6bbf391c4c30b5 / 2026-06-13"
+        },
+        {
+          "label": "has_updater",
+          "value": "N"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (via PackageKit, delegated)"
+        },
+        {
+          "label": "transport",
+          "value": "N/A — zero direct HTTP/HTTPS calls anywhere in `src/`; all network access is inside the PackageKit daemon, outside this codebase"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "delegated to whichever PackageKit backend is configured"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none independent — pure `PkClient`/`PkTask` D-Bus GUI; no ONLY_TRUSTED flag ever cleared in code (only SIMULATE flag found)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "whatever the configured PackageKit backend trusts (never pinned/stored in this app)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/gpk-application.c:1646` (`pk_task_install_packages_async`); `src/gpk-task.c:88-140` (`gpk_task_untrusted_question` shows modal \"not signed by a trusted provider... Are you sure?\" dialog — user-confirmed override via upstream PkTask vfunc, not a silent code-level bypass)"
+        }
+      ]
+    }
   ]
 }

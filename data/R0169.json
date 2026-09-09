@@ -41,5 +41,53 @@
       "line": 9,
       "text": "| 64Gram | TDesktop-x64/tdesktop | Qt/C++ native (tdesktop fork) | Y | auto (same tdesktop update_checker.cpp mechanism unchanged) | Y | https (default prefix `https://updates.64gr.am`) | N (same plain-JSON manifest) | signature (identical RSA-1024/SHA-1 `RSA_verify`, `hSigLen=128`) | pinned-in-binary — fork also REPLACES both stable and beta RSA public keys with its own | `Telegram/SourceFiles/config.h:45-59` (own PEM keys, differ from both tdesktop and Kotatogram); `Telegram/SourceFiles/core/update_checker.cpp:340-405` (unchanged verify code); default prefix `Telegram/SourceFiles/storage/localstorage.cpp:568` (`AutoupdatePrefix(\"https://updates.64gr.am\")`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-K3.md",
+      "source_line": 9,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "TDesktop-x64/tdesktop"
+        },
+        {
+          "label": "framework",
+          "value": "Qt/C++ native (tdesktop fork)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "auto (same tdesktop update_checker.cpp mechanism unchanged)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (default prefix `https://updates.64gr.am`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (same plain-JSON manifest)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (identical RSA-1024/SHA-1 `RSA_verify`, `hSigLen=128`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary — fork also REPLACES both stable and beta RSA public keys with its own"
+        },
+        {
+          "label": "evidence",
+          "value": "`Telegram/SourceFiles/config.h:45-59` (own PEM keys, differ from both tdesktop and Kotatogram); `Telegram/SourceFiles/core/update_checker.cpp:340-405` (unchanged verify code); default prefix `Telegram/SourceFiles/storage/localstorage.cpp:568` (`AutoupdatePrefix(\"https://updates.64gr.am\")`)"
+        }
+      ]
+    }
   ]
 }

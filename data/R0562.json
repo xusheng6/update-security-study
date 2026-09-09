@@ -43,5 +43,53 @@
       "line": 26,
       "text": "| MEGAN (Community Edition) | https://github.com/husonlab/megan-ce | 9b36523 / 2024-06-27 | Y | N (menu command \"Check For Updates...\") | Y (install4j `UpdateChecker` + `ApplicationLauncher.launchApplicationInProcess` hands off to a separate install4j updater app which downloads and installs) | https (`programURL` is https; no disabled-validation code found in this repo) | not confirmed | not confirmed — this repo does not vendor the install4j project file, so code-signing config (unlike IGB/Tablet, where it's visible in-repo) can't be verified from source alone | server-supplied/unpinned (unconfirmed) | `src/megan/main/CheckForUpdate.java:37` `public static final String programURL = \"https://software-ab.cs.uni-tuebingen.de/download/megan6\";`; `:44-46` builds `url = programURL + \"/updates.xml\"`; `:50` `UpdateChecker.getUpdateDescriptor(url, ...)`; `:66-73` `ApplicationLauncher.launchApplicationInProcess(updaterApplicationId, ...)`; only call site is the menu command `src/megan/commands/show/ShowCheckForUpdateCommand.java:38` (`NAME = \"Check For Updates...\"`), `:83` `CheckForUpdate.apply();` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AJ1.md",
+      "source_line": 26,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/husonlab/megan-ce"
+        },
+        {
+          "label": "commit/date",
+          "value": "9b36523 / 2024-06-27"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (menu command \"Check For Updates...\")"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (install4j `UpdateChecker` + `ApplicationLauncher.launchApplicationInProcess` hands off to a separate install4j updater app which downloads and installs)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`programURL` is https; no disabled-validation code found in this repo)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "not confirmed"
+        },
+        {
+          "label": "payload_verification",
+          "value": "not confirmed — this repo does not vendor the install4j project file, so code-signing config (unlike IGB/Tablet, where it's visible in-repo) can't be verified from source alone"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (unconfirmed)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/megan/main/CheckForUpdate.java:37` `public static final String programURL = \"https://software-ab.cs.uni-tuebingen.de/download/megan6\";`; `:44-46` builds `url = programURL + \"/updates.xml\"`; `:50` `UpdateChecker.getUpdateDescriptor(url, ...)`; `:66-73` `ApplicationLauncher.launchApplicationInProcess(updaterApplicationId, ...)`; only call site is the menu command `src/megan/commands/show/ShowCheckForUpdateCommand.java:38` (`NAME = \"Check For Updates...\"`), `:83` `CheckForUpdate.apply();`"
+        }
+      ]
+    }
   ]
 }

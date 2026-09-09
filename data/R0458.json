@@ -42,5 +42,53 @@
       "line": 7,
       "text": "| AdGuard Home | https://github.com/AdguardTeam/AdGuardHome.git | 5c113ec4c565a8911f4531b3701a9013e066c433 (2026-08-19) | Y | N (user clicks \"Update now\"; version-check poll is automatic every 8h) | Y | https, TLS validation enforced (default `http.Client`, no `InsecureSkipVerify` outside test files) | N | none — no hash, no signature field anywhere in `version.json` schema | none | `internal/updater/check.go:24-35` (VersionInfo struct has no hash/sig field); `internal/updater/updater.go:398-434` (`downloadPackageFile` writes body straight to disk, no checksum check); `internal/updater/updater.go:347-382` (`replace` renames downloaded exe straight over the running binary) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AD3.md",
+      "source_line": 7,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/AdguardTeam/AdGuardHome.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "5c113ec4c565a8911f4531b3701a9013e066c433 (2026-08-19)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (user clicks \"Update now\"; version-check poll is automatic every 8h)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS validation enforced (default `http.Client`, no `InsecureSkipVerify` outside test files)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — no hash, no signature field anywhere in `version.json` schema"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none"
+        },
+        {
+          "label": "evidence",
+          "value": "`internal/updater/check.go:24-35` (VersionInfo struct has no hash/sig field); `internal/updater/updater.go:398-434` (`downloadPackageFile` writes body straight to disk, no checksum check); `internal/updater/updater.go:347-382` (`replace` renames downloaded exe straight over the running binary)"
+        }
+      ]
+    }
   ]
 }

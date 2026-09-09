@@ -42,5 +42,53 @@
       "line": 15,
       "text": "| **qsv** | https://github.com/dathere/qsv | 02eccc7 / 2026-08-23 | **Y** | N (explicit flag required; background check is notify-only) | **Y** (with `-u`/`-U`) | https, TLS validation enforced (reqwest default; no `danger_accept_invalid_certs`/disabled-verify found) | N (no separate manifest; binary itself is signed) | **signature** — ed25519 via `zipsign`, verified by `self_update`'s `verifying_keys()` | **pinned-in-binary** — `include_bytes!(\"qsv-zipsign-public.key\")`, 32-byte Ed25519 pubkey shipped in `src/` and compiled into the binary | `src/util.rs:1585-1656` (release list + `Update::configure()...verifying_keys([*include_bytes!(\"qsv-zipsign-public.key\")])`); key file `src/qsv-zipsign-public.key`; flags `src/main.rs:58-59,354` (`--update`/`-u`, `--updatenow`/`-U`); throttled background *check-only* notify at `src/util.rs:1696-1725`, `src/main.rs:368,615` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AN8.md",
+      "source_line": 15,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/dathere/qsv"
+        },
+        {
+          "label": "commit/date",
+          "value": "02eccc7 / 2026-08-23"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "**Y**"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (explicit flag required; background check is notify-only)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "**Y** (with `-u`/`-U`)"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS validation enforced (reqwest default; no `danger_accept_invalid_certs`/disabled-verify found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no separate manifest; binary itself is signed)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**signature** — ed25519 via `zipsign`, verified by `self_update`'s `verifying_keys()`"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned-in-binary** — `include_bytes!(\"qsv-zipsign-public.key\")`, 32-byte Ed25519 pubkey shipped in `src/` and compiled into the binary"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/util.rs:1585-1656` (release list + `Update::configure()...verifying_keys([*include_bytes!(\"qsv-zipsign-public.key\")])`); key file `src/qsv-zipsign-public.key`; flags `src/main.rs:58-59,354` (`--update`/`-u`, `--updatenow`/`-U`); throttled background *check-only* notify at `src/util.rs:1696-1725`, `src/main.rs:368,615`"
+        }
+      ]
+    }
   ]
 }

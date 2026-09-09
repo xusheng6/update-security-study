@@ -42,5 +42,53 @@
       "line": 10,
       "text": "| Syncthing Tray | https://github.com/Martchus/syncthingtray.git | 92d9395 / 2026-08-23 | Y | Y (opt-in notification setting, off by default per README) | Y (via update dialog) | https (GitHub releases) | **Y** | **signature** (ECDSA, verified before install) | **pinned in binary** — public key compiled into `main.cpp` (`SigningKeys::stsigtool`/`SigningKeys::openssl`), verified via `CppUtilities::verifySignature` | tray/application/main.cpp:492-524 (`UpdateHandler`, `setVerifier`, rejects if `update.signature.empty()` or verification fails), tray/application/main.cpp:120-129 (`SYNCTHINGTRAY_SIGNING_KEYS` macro), README.md:487-490,511-514 (\"executable is signed in addition using ECDSA for verification by the updater. The public key can be found in the source code\") |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AM7.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Martchus/syncthingtray.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "92d9395 / 2026-08-23"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (opt-in notification setting, off by default per README)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y (via update dialog)"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub releases)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "**Y**"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**signature** (ECDSA, verified before install)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned in binary** — public key compiled into `main.cpp` (`SigningKeys::stsigtool`/`SigningKeys::openssl`), verified via `CppUtilities::verifySignature`"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "tray/application/main.cpp:492-524 (`UpdateHandler`, `setVerifier`, rejects if `update.signature.empty()` or verification fails), tray/application/main.cpp:120-129 (`SYNCTHINGTRAY_SIGNING_KEYS` macro), README.md:487-490,511-514 (\"executable is signed in addition using ECDSA for verification by the updater. The public key can be found in the source code\")"
+        }
+      ]
+    }
   ]
 }

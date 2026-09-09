@@ -41,5 +41,53 @@
       "line": 15,
       "text": "| ProtonPlus | github.com/Vysp3r/ProtonPlus | b148751b / 2026-08-15 | N (self, Flathub-only) | N/A | Y (compat-tool channel: Proton-GE/Wine-GE/DXVK/VKD3D/etc.) | HTTPS via `Soup.Session` (`src/utils/web.vala`), no insecure/ssl-strict-false flags found | N/A | Digest (md5/sha1/sha256/sha384/sha512) IF the release API supplies one — `archive_matches_asset()` treats `asset.digest==\"\"` as automatically matching/verified (`src/services/archive-workflow-support.vala:148-190`), so verification is silently skipped whenever the provider omits the field | Same GitHub/GitLab/Codeberg release-API response that supplies the download URL (same-origin, not independent) | `src/models/providers/definitions/proton.vala:8`; `src/services/archive-workflow-support.vala:148-220`; `src/providers/sources/github-compatible-release-parser.vala:78` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-X8.md",
+      "source_line": 15,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/Vysp3r/ProtonPlus"
+        },
+        {
+          "label": "commit/date",
+          "value": "b148751b / 2026-08-15"
+        },
+        {
+          "label": "has_updater",
+          "value": "N (self, Flathub-only)"
+        },
+        {
+          "label": "auto",
+          "value": "N/A"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (compat-tool channel: Proton-GE/Wine-GE/DXVK/VKD3D/etc.)"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS via `Soup.Session` (`src/utils/web.vala`), no insecure/ssl-strict-false flags found"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A"
+        },
+        {
+          "label": "payload_verification",
+          "value": "Digest (md5/sha1/sha256/sha384/sha512) IF the release API supplies one — `archive_matches_asset()` treats `asset.digest==\"\"` as automatically matching/verified (`src/services/archive-workflow-support.vala:148-190`), so verification is silently skipped whenever the provider omits the field"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "Same GitHub/GitLab/Codeberg release-API response that supplies the download URL (same-origin, not independent)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/models/providers/definitions/proton.vala:8`; `src/services/archive-workflow-support.vala:148-220`; `src/providers/sources/github-compatible-release-parser.vala:78`"
+        }
+      ]
+    }
   ]
 }

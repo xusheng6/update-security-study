@@ -42,5 +42,53 @@
       "line": 14,
       "text": "| Hyphanet (Freenet) — fred | https://github.com/hyphanet/fred.git | e1705ee5 2026-08-16 | Y | N by default (`autoupdate` config defaults to `false`; `debian/freenet.ini:12` ships `false`), Y once user/installer enables it | Y (replaces the running node's jar and can auto-restart) | **not HTTP/HTTPS** — fetched over Freenet's own darknet/opennet P2P protocol via a signed USK key, not TLS | Y — inherent to the USK key type (content is rejected by the fetch layer unless it verifies against the key embedded in the URI) | cryptographic signature verified against the **updater pubkey hash embedded in the USK URI itself, hard-coded in source → compiled into the binary**; separate `REVOCATION_URI` allows blowing a compromised key | `src/freenet/node/updater/NodeUpdateManager.java:86` (`UPDATE_URI = \"USK@vCKGjQtKuticcaZ-dwOgmkYPVLj~N1dm9mb3j3Smg4Y,...\"`), `:100` (`REVOCATION_URI`), `:247-251` (`autoupdate` config, default `false`), `:1099-1106` (`armed \\|\\| isAutoUpdateAllowed` gates deployment); `debian/freenet.ini:12` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AE4.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/hyphanet/fred.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "e1705ee5 2026-08-16"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N by default (`autoupdate` config defaults to `false`; `debian/freenet.ini:12` ships `false`), Y once user/installer enables it"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (replaces the running node's jar and can auto-restart)"
+        },
+        {
+          "label": "transport",
+          "value": "**not HTTP/HTTPS** — fetched over Freenet's own darknet/opennet P2P protocol via a signed USK key, not TLS"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y — inherent to the USK key type (content is rejected by the fetch layer unless it verifies against the key embedded in the URI)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "cryptographic signature verified against the **updater pubkey hash embedded in the USK URI itself, hard-coded in source → compiled into the binary**; separate `REVOCATION_URI` allows blowing a compromised key"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "not separately recorded"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/freenet/node/updater/NodeUpdateManager.java:86` (`UPDATE_URI = \"USK@vCKGjQtKuticcaZ-dwOgmkYPVLj~N1dm9mb3j3Smg4Y,...\"`), `:100` (`REVOCATION_URI`), `:247-251` (`autoupdate` config, default `false`), `:1099-1106` (`armed \\|\\| isAutoUpdateAllowed` gates deployment); `debian/freenet.ini:12`"
+        }
+      ]
+    }
   ]
 }

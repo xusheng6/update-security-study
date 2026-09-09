@@ -43,5 +43,53 @@
       "line": 14,
       "text": "| MacPass | https://github.com/MacPass/MacPass.git | eb4a554 2025-05-07 | Y | Y (SUEnableAutomaticChecks unless disabled) | Y | https (SUFeedURL), TLS enforced (no disabling found) | N (appcast XML over HTTPS only) | none — no `SUPublicEDKey`/`SUPublicDSAKey` anywhere in repo; relies only on Sparkle 2.6.4's default handling | server-supplied/unpinned | MacPass/MacPass-Info.plist:96-97 (SUFeedURL, no SUPublicEDKey key present anywhere in repo — grepped) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-V3.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/MacPass/MacPass.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "eb4a554 2025-05-07"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (SUEnableAutomaticChecks unless disabled)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (SUFeedURL), TLS enforced (no disabling found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (appcast XML over HTTPS only)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — no `SUPublicEDKey`/`SUPublicDSAKey` anywhere in repo; relies only on Sparkle 2.6.4's default handling"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "MacPass/MacPass-Info.plist:96-97 (SUFeedURL, no SUPublicEDKey key present anywhere in repo — grepped)"
+        }
+      ]
+    }
   ]
 }

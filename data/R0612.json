@@ -43,5 +43,53 @@
       "line": 21,
       "text": "| Icy | https://github.com/icy-imaging/icy | 04edbe2f / 2026-03-05 | Y | Y (silent auto-update path exists) | Y | **https, but TLS certificate + hostname validation are globally disabled by the app itself** | N | none | N/A | icy/src/main/java/icy/network/NetworkUtil.java:288 (`installTruster()` called unconditionally at network init, comment \"accept all HTTPS connections by default\"); :336 (`HttpsURLConnection.setDefaultHostnameVerifier(new FakeHostnameVerifier())` — verify() always returns true); :339-392 (custom `X509ExtendedTrustManager` with empty/no-op `checkServerTrusted`/`checkClientTrusted` — installed as the JVM default SSLContext); icy/src/main/java/icy/update/IcyUpdater.java:404-426 (`downloadAndSaveForUpdate` writes downloaded bytes straight to disk, no hash/signature check) and :449-488 (`launchUpdater` → `SystemUtil.execJAR(Updater.UPDATER_NAME,...)` — executes the downloaded updater jar) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AM8.md",
+      "source_line": 21,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/icy-imaging/icy"
+        },
+        {
+          "label": "commit/date",
+          "value": "04edbe2f / 2026-03-05"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (silent auto-update path exists)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "**https, but TLS certificate + hostname validation are globally disabled by the app itself**"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence",
+          "value": "icy/src/main/java/icy/network/NetworkUtil.java:288 (`installTruster()` called unconditionally at network init, comment \"accept all HTTPS connections by default\"); :336 (`HttpsURLConnection.setDefaultHostnameVerifier(new FakeHostnameVerifier())` — verify() always returns true); :339-392 (custom `X509ExtendedTrustManager` with empty/no-op `checkServerTrusted`/`checkClientTrusted` — installed as the JVM default SSLContext); icy/src/main/java/icy/update/IcyUpdater.java:404-426 (`downloadAndSaveForUpdate` writes downloaded bytes straight to disk, no hash/signature check) and :449-488 (`launchUpdater` → `SystemUtil.execJAR(Updater.UPDATER_NAME,...)` — executes the downloaded updater jar)"
+        }
+      ]
+    }
   ]
 }

@@ -44,5 +44,53 @@
       "line": 11,
       "text": "| Keybase (Desktop client) | https://github.com/keybase/client | 463c4ce / 2026-08-20 | Y | Y (auto-update defaults true when unset) | Y | https, TLS enforced, **pinned CA cert** (`libkb.APICA`) via custom `x509.CertPool`, MinVersion TLS1.2, no disabled-validation flags found | N (manifest JSON itself unsigned; only asset digest+signature fields inside it) | hash (digest) **and** signature — saltpack detached signature verified over the downloaded asset | **pinned-in-binary**: hardcoded map of valid saltpack signing KIDs (`validCodeSigningKIDs`) checked in `Verify()` | go/updater/updater.go:172-179,233-239 (verify+digest flow); go/updater/keybase/context.go:16-24 (pinned KIDs), :137-139 (`Verify` calls `saltpack.VerifyDetachedFileAtPath`); go/updater/keybase/https.go:16-37 (pinned CA, TLS1.2 min); go/updater/keybase/context.go:55-58 (https:// endpoints) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-X6.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/keybase/client"
+        },
+        {
+          "label": "commit/date",
+          "value": "463c4ce / 2026-08-20"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (auto-update defaults true when unset)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced, **pinned CA cert** (`libkb.APICA`) via custom `x509.CertPool`, MinVersion TLS1.2, no disabled-validation flags found"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (manifest JSON itself unsigned; only asset digest+signature fields inside it)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (digest) **and** signature — saltpack detached signature verified over the downloaded asset"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned-in-binary**: hardcoded map of valid saltpack signing KIDs (`validCodeSigningKIDs`) checked in `Verify()`"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "go/updater/updater.go:172-179,233-239 (verify+digest flow); go/updater/keybase/context.go:16-24 (pinned KIDs), :137-139 (`Verify` calls `saltpack.VerifyDetachedFileAtPath`); go/updater/keybase/https.go:16-37 (pinned CA, TLS1.2 min); go/updater/keybase/context.go:55-58 (https:// endpoints)"
+        }
+      ]
+    }
   ]
 }

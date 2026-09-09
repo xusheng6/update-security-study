@@ -43,5 +43,53 @@
       "line": 8,
       "text": "| gallery-dl | github.com/mikf/gallery-dl | Python CLI | Y | manual trigger (`-U`/`--update`/`--update-check`); dl+replace automatic once invoked | Y (overwrites `sys.executable` in place) | https (api.github.com, github.com); TLS enforced (default, no verify=False found) | N/A (no manifest beyond GitHub release JSON) | **none** — no checksum/signature check anywhere in update path (confirmed by negative grep for sha256/checksum/gpg/signature in update.py and downloader/) | N/A | gallery_dl/update.py:44-117 (`UpdateJob.handle_url` downloads asset and `os.replace`s executable, no hash check present), :212-213 (https download URL build) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-I5.md",
+      "source_line": 8,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/mikf/gallery-dl"
+        },
+        {
+          "label": "framework",
+          "value": "Python CLI"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "manual trigger (`-U`/`--update`/`--update-check`); dl+replace automatic once invoked"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (overwrites `sys.executable` in place)"
+        },
+        {
+          "label": "transport",
+          "value": "https (api.github.com, github.com); TLS enforced (default, no verify=False found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A (no manifest beyond GitHub release JSON)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — no checksum/signature check anywhere in update path (confirmed by negative grep for sha256/checksum/gpg/signature in update.py and downloader/)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence",
+          "value": "gallery_dl/update.py:44-117 (`UpdateJob.handle_url` downloads asset and `os.replace`s executable, no hash check present), :212-213 (https download URL build)"
+        }
+      ]
+    }
   ]
 }

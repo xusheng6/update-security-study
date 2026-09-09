@@ -41,5 +41,53 @@
       "line": 18,
       "text": "| AzuraCast | https://github.com/AzuraCast/AzuraCast | 2cb84e2 / 2026-08-19 | Y | N (admin clicks \"update\" in web UI; underlying Watchtower sidecar could also poll on its own schedule, not exercised by this app code) | Y (triggers Watchtower to pull a new Docker image & restart containers = new code executed) | app→sidecar leg is plaintext HTTP over the internal docker network (`http://updater:8080`, not internet-exposed); the actual image pull is done by Docker's own registry client (HTTPS, TLS enforced by Docker, not by this codebase) | N (no Docker Content Trust / cosign / notation references anywhere in repo) | none (app-level: no hash/signature check of the pulled image; relies entirely on Docker's default, unauthenticated-content registry pull) | server-supplied/unpinned (whatever image is served by the configured registry over TLS; no pinned digest/key) | `backend/src/Service/WebUpdater.php:37-64` (`ping()`/`triggerUpdate()` → `http://updater:8080/v1/update` with hardcoded bearer token `azur4c457`); `backend/src/Controller/Api/Admin/Updates/PutUpdatesAction.php:36`; `docker-compose.sample.yml:20` (`com.centurylinklabs.watchtower.scope=azuracast`); version-check (notify only) via HTTPS in `backend/src/Service/AzuraCastCentral.php:33-70` (`POST https://central.azuracast.com/api/update`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AH7.md",
+      "source_line": 18,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/AzuraCast/AzuraCast"
+        },
+        {
+          "label": "commit/date",
+          "value": "2cb84e2 / 2026-08-19"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (admin clicks \"update\" in web UI; underlying Watchtower sidecar could also poll on its own schedule, not exercised by this app code)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (triggers Watchtower to pull a new Docker image & restart containers = new code executed)"
+        },
+        {
+          "label": "transport",
+          "value": "app→sidecar leg is plaintext HTTP over the internal docker network (`http://updater:8080`, not internet-exposed); the actual image pull is done by Docker's own registry client (HTTPS, TLS enforced by Docker, not by this codebase)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no Docker Content Trust / cosign / notation references anywhere in repo)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (app-level: no hash/signature check of the pulled image; relies entirely on Docker's default, unauthenticated-content registry pull)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (whatever image is served by the configured registry over TLS; no pinned digest/key)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`backend/src/Service/WebUpdater.php:37-64` (`ping()`/`triggerUpdate()` → `http://updater:8080/v1/update` with hardcoded bearer token `azur4c457`); `backend/src/Controller/Api/Admin/Updates/PutUpdatesAction.php:36`; `docker-compose.sample.yml:20` (`com.centurylinklabs.watchtower.scope=azuracast`); version-check (notify only) via HTTPS in `backend/src/Service/AzuraCastCentral.php:33-70` (`POST https://central.azuracast.com/api/update`)"
+        }
+      ]
+    }
   ]
 }

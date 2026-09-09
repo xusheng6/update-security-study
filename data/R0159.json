@@ -43,5 +43,53 @@
       "line": 11,
       "text": "| Lidarr | Lidarr/Lidarr | .NET (C#, Servarr/NzbDrone fork of Sonarr) | Y | identical mechanism/gating to Sonarr | Y (fully automatic when auto-install enabled) | https, host `https://lidarr.servarr.com/v1/`; TLS enforced by default, no bypass found in update path | no | hash-from-manifest (SHA256) | n/a | src/NzbDrone.Common/Cloud/LidarrCloudRequestBuilder.cs:16 (`https://lidarr.servarr.com/v1/`); src/NzbDrone.Core/Update/UpdateVerification.cs:24-26 (SHA256 compare); src/NzbDrone.Core/Update/InstallUpdateService.cs:172, :253/:331 (`UpdateAutomatically` gate) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-J6.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "Lidarr/Lidarr"
+        },
+        {
+          "label": "framework",
+          "value": ".NET (C#, Servarr/NzbDrone fork of Sonarr)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "identical mechanism/gating to Sonarr"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (fully automatic when auto-install enabled)"
+        },
+        {
+          "label": "transport",
+          "value": "https, host `https://lidarr.servarr.com/v1/`; TLS enforced by default, no bypass found in update path"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "no"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (SHA256)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence",
+          "value": "src/NzbDrone.Common/Cloud/LidarrCloudRequestBuilder.cs:16 (`https://lidarr.servarr.com/v1/`); src/NzbDrone.Core/Update/UpdateVerification.cs:24-26 (SHA256 compare); src/NzbDrone.Core/Update/InstallUpdateService.cs:172, :253/:331 (`UpdateAutomatically` gate)"
+        }
+      ]
+    }
   ]
 }

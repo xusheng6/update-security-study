@@ -41,5 +41,53 @@
       "line": 12,
       "text": "| KTurtle | https://invent.kde.org/education/kturtle.git | 7db567b / 2026-08-15 | N (app itself) | N | **Y (content channel)** | https (KNewStuff/OCS provider list) | N | none seen at app level (KNS framework-level, not pinned in this repo) | server-supplied/unpinned (OCS provider) | `src/mainwindow.cpp:34,198-200` (`KNSWidgets::Action` w/ `kturtle.knsrc`); `src/kturtle.knsrc` (`Categories=KTurtle Script`, `ProvidersUrl=https://autoconfig.kde.org/ocs/providers.xml`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-X3.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://invent.kde.org/education/kturtle.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "7db567b / 2026-08-15"
+        },
+        {
+          "label": "has_updater",
+          "value": "N (app itself)"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y (content channel)**"
+        },
+        {
+          "label": "transport",
+          "value": "https (KNewStuff/OCS provider list)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none seen at app level (KNS framework-level, not pinned in this repo)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (OCS provider)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/mainwindow.cpp:34,198-200` (`KNSWidgets::Action` w/ `kturtle.knsrc`); `src/kturtle.knsrc` (`Categories=KTurtle Script`, `ProvidersUrl=https://autoconfig.kde.org/ocs/providers.xml`)"
+        }
+      ]
+    }
   ]
 }

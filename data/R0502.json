@@ -42,5 +42,53 @@
       "line": 25,
       "text": "| SASPlanet | https://github.com/sasgis/sas.planet.src.git | 98e31caeaa7c28f49e9e105f2e30ae49a232f5e4 / 2026-08-01 | Y | N (manual, via Update Checker dialog — not found wired to any startup/timer path in this snapshot, see note) | Y (downloads to disk) / N (does not auto-execute the installer) | **HTTP (plaintext) + HTTPS mixed, and the HTTP source can win** | N/A | **none — no hash or signature check on the downloaded file** | N/A (no verification at all) | `Src/UpdateChecker/u_UpdateChecker.pas:99-107` defines 3 sources queried in parallel — GitHub API (HTTPS), BitBucket (HTTPS), and **`http://www.sasgis.org/programs/sasplanet/{nightly,release}.php`** (plaintext HTTP); `Src/UpdateChecker/u_UpdateCheckerThread.pas:113-121` fires `Perform()` on *all* sources simultaneously; `Src/UpdateChecker/u_UpdateCheckerFunc.pas:143-158` `LatestResultFromArray` picks whichever response reports the newest date/revision **regardless of which source it came from** — an on-path attacker against the plaintext `sasgis.org` endpoint can inject a fake \"newer\" release pointing anywhere (including back to `http://...`) and win the race. `Src/UpdateChecker/u_UpdateDownloaderThread.pas:96-165` downloads the chosen URL and writes it straight to disk with **zero hash/signature verification**. `Src/UpdateChecker/frm_UpdateChecker.pas:390-396` (`psFinished`) just shows an info box with the saved file path — it does **not** auto-launch the installer, so full RCE requires the user to double-click the dropped file, but the file itself is fully attacker-controlled under MITM of the plaintext channel with no integrity check. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AF6.md",
+      "source_line": 25,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/sasgis/sas.planet.src.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "98e31caeaa7c28f49e9e105f2e30ae49a232f5e4 / 2026-08-01"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual, via Update Checker dialog — not found wired to any startup/timer path in this snapshot, see note)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (downloads to disk) / N (does not auto-execute the installer)"
+        },
+        {
+          "label": "transport",
+          "value": "**HTTP (plaintext) + HTTPS mixed, and the HTTP source can win**"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none — no hash or signature check on the downloaded file**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A (no verification at all)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`Src/UpdateChecker/u_UpdateChecker.pas:99-107` defines 3 sources queried in parallel — GitHub API (HTTPS), BitBucket (HTTPS), and **`http://www.sasgis.org/programs/sasplanet/{nightly,release}.php`** (plaintext HTTP); `Src/UpdateChecker/u_UpdateCheckerThread.pas:113-121` fires `Perform()` on *all* sources simultaneously; `Src/UpdateChecker/u_UpdateCheckerFunc.pas:143-158` `LatestResultFromArray` picks whichever response reports the newest date/revision **regardless of which source it came from** — an on-path attacker against the plaintext `sasgis.org` endpoint can inject a fake \"newer\" release pointing anywhere (including back to `http://...`) and win the race. `Src/UpdateChecker/u_UpdateDownloaderThread.pas:96-165` downloads the chosen URL and writes it straight to disk with **zero hash/signature verification**. `Src/UpdateChecker/frm_UpdateChecker.pas:390-396` (`psFinished`) just shows an info box with the saved file path — it does **not** auto-launch the installer, so full RCE requires the user to double-click the dropped file, but the file itself is fully attacker-controlled under MITM of the plaintext channel with no integrity check."
+        }
+      ]
+    }
   ]
 }

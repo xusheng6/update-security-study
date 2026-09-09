@@ -42,5 +42,53 @@
       "line": 13,
       "text": "| mkbrr | https://github.com/autobrr/mkbrr.git | e99dc06e 2026-08-18 | Y | N (manual `mkbrr update`) | Y | https | N | none configured | server-supplied/unpinned (GitHub Releases API) | `cmd/update.go:34,52` uses `github.com/creativeprojects/go-selfupdate`, `selfupdate.DetectLatest(...ParseSlug(\"autobrr/mkbrr\"))` + `selfupdate.UpdateTo(...)` — no validator/checksum-signature configured |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AN3.md",
+      "source_line": 13,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/autobrr/mkbrr.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "e99dc06e 2026-08-18"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual `mkbrr update`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none configured"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (GitHub Releases API)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`cmd/update.go:34,52` uses `github.com/creativeprojects/go-selfupdate`, `selfupdate.DetectLatest(...ParseSlug(\"autobrr/mkbrr\"))` + `selfupdate.UpdateTo(...)` — no validator/checksum-signature configured"
+        }
+      ]
+    }
   ]
 }

@@ -43,5 +43,53 @@
       "line": 9,
       "text": "| HandBrake | https://github.com/HandBrake/HandBrake.git | ecc74204 / 2026-08-22 | Y | Y (periodic background appcast check; install is one click) | Y | https, TLS enforced (no bypass found) | N (appcast XML itself unsigned, but download-URL host is allowlisted to handbrake.fr/download.handbrake.fr/github.com/HandBrake) | signature — RSA-4096/SHA256 (`RSA.VerifyData`, PKCS1) over the downloaded installer | pinned-in-binary (embedded resource `HandBrakeWPF.public.4096.key`, RSA-4096 pub key compiled into assembly) | win/CS/HandBrakeWPF/Services/UpdateService.cs:200-233 (VerifyDownload/RSA), :117-130 (host allowlist), win/CS/HandBrakeWPF/public.4096.key:1 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AL6.md",
+      "source_line": 9,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/HandBrake/HandBrake.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "ecc74204 / 2026-08-22"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (periodic background appcast check; install is one click)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (no bypass found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (appcast XML itself unsigned, but download-URL host is allowlisted to handbrake.fr/download.handbrake.fr/github.com/HandBrake)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature — RSA-4096/SHA256 (`RSA.VerifyData`, PKCS1) over the downloaded installer"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (embedded resource `HandBrakeWPF.public.4096.key`, RSA-4096 pub key compiled into assembly)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "win/CS/HandBrakeWPF/Services/UpdateService.cs:200-233 (VerifyDownload/RSA), :117-130 (host allowlist), win/CS/HandBrakeWPF/public.4096.key:1"
+        }
+      ]
+    }
   ]
 }

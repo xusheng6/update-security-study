@@ -42,5 +42,53 @@
       "line": 17,
       "text": "| comic-universe | https://github.com/PabloVSouza/comic-universe | c753d597 / 2025-10-07 | Y | Y (Linux only, auto-download+notify; Win/Mac: manual browser link only) | Y (Linux only) | https, TLS enforced (electron-updater/GitHub) | N (unsigned: mac `identity:null`,`notarize:false`; win uses a CI-regenerated **self-signed** cert, password `comicuniverse` hardcoded) | hash (sha512 in `latest-linux.yml`) | server-supplied/unpinned (yml hosted alongside the binary on the same GitHub release) | src/electron/utils/UpdateManager.ts:35-38,364-365; src/electron/windows/MainWindow.ts:64-100,120-134,238-245; electron-builder.yml (mac identity/notarize, win cscKeyPassword) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AK7.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/PabloVSouza/comic-universe"
+        },
+        {
+          "label": "commit/date",
+          "value": "c753d597 / 2025-10-07"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (Linux only, auto-download+notify; Win/Mac: manual browser link only)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (Linux only)"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (electron-updater/GitHub)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (unsigned: mac `identity:null`,`notarize:false`; win uses a CI-regenerated **self-signed** cert, password `comicuniverse` hardcoded)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (sha512 in `latest-linux.yml`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (yml hosted alongside the binary on the same GitHub release)"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "src/electron/utils/UpdateManager.ts:35-38,364-365; src/electron/windows/MainWindow.ts:64-100,120-134,238-245; electron-builder.yml (mac identity/notarize, win cscKeyPassword)"
+        }
+      ]
+    }
   ]
 }

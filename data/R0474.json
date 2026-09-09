@@ -41,5 +41,53 @@
       "line": 24,
       "text": "| RWKV-Runner | https://github.com/josStorer/RWKV-Runner | 3e10340 / 2026-07-07 | Y (custom Wails self-updater) | Y (`checkUpdate()` runs at startup in `startup.ts:93`; download+apply triggered by single toast click) | Y | https (GitHub or Gitee mirror release asset URL; TLS enforced, no `InsecureSkipVerify` found) | N | **none** — `selfupdate.Apply(updateFile, selfupdate.Options{})` called with empty Options: no checksum, no signature, no verifier of any kind | none — trust is HTTPS+GitHub/Gitee identity only | `backend-golang/app.go:227,279` (`selfupdate.Apply(updateFile, selfupdate.Options{})`), `frontend/src/utils/index.tsx:566-583,619` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AE1.md",
+      "source_line": 24,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/josStorer/RWKV-Runner"
+        },
+        {
+          "label": "commit/date",
+          "value": "3e10340 / 2026-07-07"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y (custom Wails self-updater)"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (`checkUpdate()` runs at startup in `startup.ts:93`; download+apply triggered by single toast click)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub or Gitee mirror release asset URL; TLS enforced, no `InsecureSkipVerify` found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — `selfupdate.Apply(updateFile, selfupdate.Options{})` called with empty Options: no checksum, no signature, no verifier of any kind"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none — trust is HTTPS+GitHub/Gitee identity only"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`backend-golang/app.go:227,279` (`selfupdate.Apply(updateFile, selfupdate.Options{})`), `frontend/src/utils/index.tsx:566-583,619`"
+        }
+      ]
+    }
   ]
 }

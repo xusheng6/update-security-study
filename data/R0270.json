@@ -46,5 +46,67 @@
       "line": 29,
       "text": "| Nuclear | **A** | Tauri updater with Ed25519 (minisign) signature verified against a pubkey pinned in `tauri.conf.json`, independent of OS code-signing (macOS build is even ad-hoc/unnotarized). Auto-install is opt-in. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-S3.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/nukeop/nuclear.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "274f4074122f51c4b66714a29420c4100b7cc25a (2026-08-16)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (opt-in setting)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (manifest JSON itself unsigned, but each artifact entry inside it carries a detached signature)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "Ed25519 (minisign) signature verified by `tauri-plugin-updater` against pinned pubkey before install"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned in binary** — pubkey embedded in `tauri.conf.json`, compiled into app"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "`packages/player/src-tauri/tauri.conf.json:64-70` (`plugins.updater.pubkey=...`, endpoint `https://github.com/nukeop/nuclear/releases/latest/download/latest.json`); `packages/player/package.json` `\"@tauri-apps/plugin-updater\":\"~2.10.0\"`; `packages/player/src/stores/updaterStore.ts:36-65` (check → optional auto `downloadAndInstall()` gated by `core.updates.autoInstall`)"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-S3.md",
+      "source_line": 29,
+      "fields": [
+        {
+          "label": "Tier",
+          "value": "**A**"
+        },
+        {
+          "label": "Why",
+          "value": "Tauri updater with Ed25519 (minisign) signature verified against a pubkey pinned in `tauri.conf.json`, independent of OS code-signing (macOS build is even ad-hoc/unnotarized). Auto-install is opt-in."
+        }
+      ]
+    }
   ]
 }

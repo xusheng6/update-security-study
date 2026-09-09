@@ -41,5 +41,53 @@
       "line": 22,
       "text": "| Athens | https://github.com/athensresearch/athens | b463a97 / 2022-12-12 (repo appears unmaintained — last commit 2022) | Y | Y (auto-check on startup + polling; download is user-confirmed via IPC, but install auto-fires as soon as download completes) | Y | https via electron-updater's GitHub provider; no TLS-disabling code found | manifest (`latest*.yml`) itself unsigned — plain electron-builder auto-update metadata | macOS: OS code-signature check by Squirrel.Mac (electron-updater validates the downloaded update's code signature/Team ID against the running app before applying) — enforced. Windows/Linux: sha512 hash from the same unpinned `latest.yml`/`latest-linux.yml`, no signature. | macOS: OS keystore (Apple Developer ID, via CI notarization). Windows/Linux: server-supplied/unpinned hash. | `src/cljs/athens/main/core.cljs:5,29-34` (electron-updater import; `autoDownload=false`, `autoInstallOnAppQuit=false`, `AUTO_UPDATE` default `true`); `:185-192` (`autoUpdater.checkForUpdates` called automatically on Electron `app \"ready\"`); `:161-168` (`ipcMain \"confirm-update\"` → `autoUpdater.downloadUpdate()`, the only user gate); `:155-158` (`\"update-downloaded\"` → `autoUpdater.quitAndInstall()` fires immediately, no further confirmation); `package.json:67-100` (`build.publish.provider=\"github\"`, `mac.afterSign=\"electron-builder-notarize\"`, `hardenedRuntime=true`; **no** `win.certificateFile`/codeSign block present); `.github/workflows/build.yml:170` (matrix includes `windows-latest`) and `:200` (only a *\"macOS code signing certificate\"* secret referenced — no Windows Authenticode signing found in CI). |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AF2.md",
+      "source_line": 22,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/athensresearch/athens"
+        },
+        {
+          "label": "commit/date",
+          "value": "b463a97 / 2022-12-12 (repo appears unmaintained — last commit 2022)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (auto-check on startup + polling; download is user-confirmed via IPC, but install auto-fires as soon as download completes)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https via electron-updater's GitHub provider; no TLS-disabling code found"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "manifest (`latest*.yml`) itself unsigned — plain electron-builder auto-update metadata"
+        },
+        {
+          "label": "payload_verification",
+          "value": "macOS: OS code-signature check by Squirrel.Mac (electron-updater validates the downloaded update's code signature/Team ID against the running app before applying) — enforced. Windows/Linux: sha512 hash from the same unpinned `latest.yml`/`latest-linux.yml`, no signature."
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "macOS: OS keystore (Apple Developer ID, via CI notarization). Windows/Linux: server-supplied/unpinned hash."
+        },
+        {
+          "label": "evidence",
+          "value": "`src/cljs/athens/main/core.cljs:5,29-34` (electron-updater import; `autoDownload=false`, `autoInstallOnAppQuit=false`, `AUTO_UPDATE` default `true`); `:185-192` (`autoUpdater.checkForUpdates` called automatically on Electron `app \"ready\"`); `:161-168` (`ipcMain \"confirm-update\"` → `autoUpdater.downloadUpdate()`, the only user gate); `:155-158` (`\"update-downloaded\"` → `autoUpdater.quitAndInstall()` fires immediately, no further confirmation); `package.json:67-100` (`build.publish.provider=\"github\"`, `mac.afterSign=\"electron-builder-notarize\"`, `hardenedRuntime=true`; **no** `win.certificateFile`/codeSign block present); `.github/workflows/build.yml:170` (matrix includes `windows-latest`) and `:200` (only a *\"macOS code signing certificate\"* secret referenced — no Windows Authenticode signing found in CI)."
+        }
+      ]
+    }
   ]
 }

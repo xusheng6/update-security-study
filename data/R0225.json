@@ -41,5 +41,53 @@
       "line": 11,
       "text": "| Loop | https://github.com/MrKai77/Loop | **Custom in-house updater** (no Sparkle at all; only incidental hits for the word \"sparkle\" are an SF Symbol name `\"sparkles\"` and a code comment) | Y | Y (checks automatically on a schedule; downloads new build; then installs via a privileged XPC helper) | Y | https (`api.github.com` REST API + GitHub Releases asset/CDN URLs) | TLS-only (update \"manifest\" = raw GitHub Releases JSON over HTTPS; no cryptographic signature over the manifest itself) | checksum(SHA-256, value sourced from GitHub's own release-asset `digest` field in the same HTTPS response) **+** OS-code-signing check that validates internal signature consistency only, with **no anchor/Team-ID pinning** (`SecStaticCodeCheckValidity` called with a `nil` requirement) | none — no pinned public key anywhere; trust root is TLS to `api.github.com`/GitHub release CDN plus an un-pinned Apple code-signature validity check | `Loop/Updater/UpdaterModels.swift:30-34` — `githubReleasesEndpoint` = `https://api.github.com/repos/MrKai77/Loop/releases/latest` (stable) / `.../releases` (dev). `Loop/Updater/UpdateChecker.swift:80-101` — selects the `.zip` asset and extracts `asset.digest` (`sha256:...`) as the expected checksum straight from the same JSON payload. `Loop/Updater/Utilities/ChecksumVerifier.swift:16-27` — streams SHA-256 and does a plain string compare, throwing `UpdateError.checksumMismatch` on mismatch. `Loop/Updater/UpdateInstaller.swift:433-452` — `validateAppCodeSignature` creates a `SecStaticCode` and calls `SecStaticCodeCheckValidity(staticCode, validationFlags, nil)` — the `nil` third argument means no `SecRequirement` (e.g., anchor cert / Team ID) is enforced, so any validly-signed app (not necessarily signed by Loop's own developer identity) would pass this check. `Loop/Updater/UpdaterAuthorizationCoordinator.swift` implements a separate privileged-helper XPC install flow (`atomicSwap`, `restoreFromBackup`) for applying the update with elevated rights. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-N2.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/MrKai77/Loop"
+        },
+        {
+          "label": "framework",
+          "value": "**Custom in-house updater** (no Sparkle at all; only incidental hits for the word \"sparkle\" are an SF Symbol name `\"sparkles\"` and a code comment)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (checks automatically on a schedule; downloads new build; then installs via a privileged XPC helper)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`api.github.com` REST API + GitHub Releases asset/CDN URLs)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "TLS-only (update \"manifest\" = raw GitHub Releases JSON over HTTPS; no cryptographic signature over the manifest itself)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "checksum(SHA-256, value sourced from GitHub's own release-asset `digest` field in the same HTTPS response) **+** OS-code-signing check that validates internal signature consistency only, with **no anchor/Team-ID pinning** (`SecStaticCodeCheckValidity` called with a `nil` requirement)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none — no pinned public key anywhere; trust root is TLS to `api.github.com`/GitHub release CDN plus an un-pinned Apple code-signature validity check"
+        },
+        {
+          "label": "evidence",
+          "value": "`Loop/Updater/UpdaterModels.swift:30-34` — `githubReleasesEndpoint` = `https://api.github.com/repos/MrKai77/Loop/releases/latest` (stable) / `.../releases` (dev). `Loop/Updater/UpdateChecker.swift:80-101` — selects the `.zip` asset and extracts `asset.digest` (`sha256:...`) as the expected checksum straight from the same JSON payload. `Loop/Updater/Utilities/ChecksumVerifier.swift:16-27` — streams SHA-256 and does a plain string compare, throwing `UpdateError.checksumMismatch` on mismatch. `Loop/Updater/UpdateInstaller.swift:433-452` — `validateAppCodeSignature` creates a `SecStaticCode` and calls `SecStaticCodeCheckValidity(staticCode, validationFlags, nil)` — the `nil` third argument means no `SecRequirement` (e.g., anchor cert / Team ID) is enforced, so any validly-signed app (not necessarily signed by Loop's own developer identity) would pass this check. `Loop/Updater/UpdaterAuthorizationCoordinator.swift` implements a separate privileged-helper XPC install flow (`atomicSwap`, `restoreFromBackup`) for applying the update with elevated rights."
+        }
+      ]
+    }
   ]
 }

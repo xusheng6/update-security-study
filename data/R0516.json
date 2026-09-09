@@ -41,5 +41,53 @@
       "line": 18,
       "text": "| Watcher3 | https://github.com/nosmokingbandit/Watcher3 | 0217e75 / 2018-10-04 (repo appears unmaintained/stale — last commit 2018) | Y | Y (opt-in, `installupdates`, default `false`) | Y | http/https — code uses `Url.open()` wrapper; TLS verification controlled by `Server.verifyssl` config, **default `true`** in `core/base_config.cfg:347`, but helper falls back to `verify=False` if key absent (`core/helpers.py:79`) | N | none — no hash/signature check on downloaded ZIP | server-supplied/unpinned (GitHub archive ZIP for branch, no pinning) | `core/version.py:440-521` (`ZipUpdater.execute_update` — downloads `{GIT_URL}/archive/{branch}.zip` via `Url.open`, extracts with `zipfile`, overwrites files, no verification); `core/version.py:55-68` (`installupdates` gate, fully automatic when enabled); `core/helpers.py:61-81` (`Url.open`, `verify=verifySSL` with insecure fallback default); `core/base_config.cfg:332-347` (`checkupdates:true, installupdates:false, verifyssl:true` defaults) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AG7.md",
+      "source_line": 18,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/nosmokingbandit/Watcher3"
+        },
+        {
+          "label": "commit/date",
+          "value": "0217e75 / 2018-10-04 (repo appears unmaintained/stale — last commit 2018)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (opt-in, `installupdates`, default `false`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "http/https — code uses `Url.open()` wrapper; TLS verification controlled by `Server.verifyssl` config, **default `true`** in `core/base_config.cfg:347`, but helper falls back to `verify=False` if key absent (`core/helpers.py:79`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — no hash/signature check on downloaded ZIP"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (GitHub archive ZIP for branch, no pinning)"
+        },
+        {
+          "label": "evidence",
+          "value": "`core/version.py:440-521` (`ZipUpdater.execute_update` — downloads `{GIT_URL}/archive/{branch}.zip` via `Url.open`, extracts with `zipfile`, overwrites files, no verification); `core/version.py:55-68` (`installupdates` gate, fully automatic when enabled); `core/helpers.py:61-81` (`Url.open`, `verify=verifySSL` with insecure fallback default); `core/base_config.cfg:332-347` (`checkupdates:true, installupdates:false, verifyssl:true` defaults)"
+        }
+      ]
+    }
   ]
 }

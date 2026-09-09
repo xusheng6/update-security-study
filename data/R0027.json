@@ -43,5 +43,53 @@
       "line": 19,
       "text": "| **MuseScore Studio** | https://github.com/musescore/MuseScore.git (+ submodule https://github.com/musescore/muse_framework.git) | MuseScore 7b54ffea / 2026-08-20; muse_framework HEAD / 2026-08-20 | **Y** | **Y** (auto-checked at startup — `src/appshell/internal/startupscenario.cpp:116-117` `if (appUpdateScenario()->needCheckForUpdate()) checkForUpdate(/*manual*/ false)`) | **Y** — downloads the platform installer (.msi/.dmg/.appimage) and opens/executes it | https (`updates.musescore.org`) — no disabled cert-validation code found in `framework/network/` | n/a — plain JSON manifest, no signature | **NONE.** `ReleaseInfo` struct (`muse_framework/framework/update/updatetypes.h:45-58`) has no hash/signature field at all; `AppUpdateService::parseRelease()` (`muse_framework/framework/update/internal/appupdateservice.cpp:339-365`) only extracts `fileName`/`fileUrl`/`version`/`notes` from the JSON — no checksum or signature is parsed or checked anywhere in the download/install path | server-supplied/unpinned (no key at all — payload integrity rests entirely on TLS to the update server + whatever incidental OS Gatekeeper/SmartScreen check may or may not fire on a file the app itself wrote to disk, since it wasn't downloaded through a browser and may lack the quarantine attribute) | `muse_framework/framework/update/internal/appupdateservice.cpp:230-266` `downloadRelease()` GETs `info.fileUrl` and writes it straight to `installerPath` with **no verification step**; `muse_framework/framework/update/internal/appupdatescenario.cpp:214,217` `quitAllAndRunInstallation(installerPath)` → `MultiProcessProvider::quitAllAndRunInstallation` (`multiprocessprovider.cpp:493-502`) → dispatches `\"quit\"` action with the path → `src/appshell/internal/appshellcommandscontroller.cpp:290-307` calls `platformInteractive()->openUrl(QUrl::fromLocalFile(installerPath))`, i.e. shell-opens/executes the downloaded installer after quitting |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Z6.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/musescore/MuseScore.git (+ submodule https://github.com/musescore/muse_framework.git)"
+        },
+        {
+          "label": "commit/date",
+          "value": "MuseScore 7b54ffea / 2026-08-20; muse_framework HEAD / 2026-08-20"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "**Y**"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "**Y** (auto-checked at startup — `src/appshell/internal/startupscenario.cpp:116-117` `if (appUpdateScenario()->needCheckForUpdate()) checkForUpdate(/*manual*/ false)`)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "**Y** — downloads the platform installer (.msi/.dmg/.appimage) and opens/executes it"
+        },
+        {
+          "label": "transport",
+          "value": "https (`updates.musescore.org`) — no disabled cert-validation code found in `framework/network/`"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "n/a — plain JSON manifest, no signature"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**NONE.** `ReleaseInfo` struct (`muse_framework/framework/update/updatetypes.h:45-58`) has no hash/signature field at all; `AppUpdateService::parseRelease()` (`muse_framework/framework/update/internal/appupdateservice.cpp:339-365`) only extracts `fileName`/`fileUrl`/`version`/`notes` from the JSON — no checksum or signature is parsed or checked anywhere in the download/install path"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (no key at all — payload integrity rests entirely on TLS to the update server + whatever incidental OS Gatekeeper/SmartScreen check may or may not fire on a file the app itself wrote to disk, since it wasn't downloaded through a browser and may lack the quarantine attribute)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`muse_framework/framework/update/internal/appupdateservice.cpp:230-266` `downloadRelease()` GETs `info.fileUrl` and writes it straight to `installerPath` with **no verification step**; `muse_framework/framework/update/internal/appupdatescenario.cpp:214,217` `quitAllAndRunInstallation(installerPath)` → `MultiProcessProvider::quitAllAndRunInstallation` (`multiprocessprovider.cpp:493-502`) → dispatches `\"quit\"` action with the path → `src/appshell/internal/appshellcommandscontroller.cpp:290-307` calls `platformInteractive()->openUrl(QUrl::fromLocalFile(installerPath))`, i.e. shell-opens/executes the downloaded installer after quitting"
+        }
+      ]
+    }
   ]
 }

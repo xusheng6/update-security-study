@@ -41,5 +41,53 @@
       "line": 8,
       "text": "| webtrees | https://github.com/fisharebest/webtrees.git | f2a4bb69 / 2026-08-21 | Y | N (admin-triggered \"Upgrade Wizard\", multi-step, requires clicks) | Y (downloads `webtrees.zip`, extracts, overwrites live PHP app files that execute on next request) | https, cert validation enforced (Guzzle default, no disabling flags found) | N | none — no hash/signature check on the downloaded zip anywhere in `UpgradeService.php` | server-supplied/unpinned (`dev.webtrees.net/build/latest-version.txt` supplies both version and download URL, unauthenticated) | `app/Services/UpgradeService.php:70` (`UPDATE_URL`), `:122-153` (`downloadFile`), `:85-93` (`extractWebtreesZip`), `app/Http/Controllers/UpgradeWizardStep.php` (admin-gated wizard) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AF5.md",
+      "source_line": 8,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/fisharebest/webtrees.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "f2a4bb69 / 2026-08-21"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (admin-triggered \"Upgrade Wizard\", multi-step, requires clicks)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (downloads `webtrees.zip`, extracts, overwrites live PHP app files that execute on next request)"
+        },
+        {
+          "label": "transport",
+          "value": "https, cert validation enforced (Guzzle default, no disabling flags found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — no hash/signature check on the downloaded zip anywhere in `UpgradeService.php`"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (`dev.webtrees.net/build/latest-version.txt` supplies both version and download URL, unauthenticated)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`app/Services/UpgradeService.php:70` (`UPDATE_URL`), `:122-153` (`downloadFile`), `:85-93` (`extractWebtreesZip`), `app/Http/Controllers/UpgradeWizardStep.php` (admin-gated wizard)"
+        }
+      ]
+    }
   ]
 }

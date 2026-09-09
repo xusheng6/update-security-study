@@ -42,5 +42,53 @@
       "line": 30,
       "text": "| SyncTrayzor | https://github.com/canton7/SyncTrayzor | 234ff60a160f / 2025-08-24 | Y | Y (auto check+download; install prompts user unless auto-install configured) | Y | https (`App.config:17` → `https://synctrayzor.antonymale.co.uk/version-check`); note code-level fallback default is plaintext `http://` if config missing | Y — sha512sum manifest is PGP clear-signed | signature (PGP) + hash (SHA512 of installer checked against PGP-verified manifest) | **pinned-in-binary** (embedded assembly resource) | src/SyncTrayzor/Services/UpdateManagement/UpdateDownloader.cs:22,40-59 (downloads `sha512sum-{version}.txt.asc`, PGP-verifies it, then SHA512-checks the installer against it); InstallerCertificateVerifier.cs:15-41 (`certificateName = \"SyncTrayzor.Resources.synctrayzor_releases_cert.asc\"`, `PgpClearsignUtilities.ReadAndVerifyFile`); security/synctrayzor_releases_cert.asc (pinned pubkey present in repo); src/SyncTrayzor/App.config:17 (https); src/SyncTrayzor/Services/Config/AppSettings.cs:36 (plaintext-http code default — minor hardening gap, overridden by shipped App.config) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AA7.md",
+      "source_line": 30,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/canton7/SyncTrayzor"
+        },
+        {
+          "label": "commit/date",
+          "value": "234ff60a160f / 2025-08-24"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (auto check+download; install prompts user unless auto-install configured)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`App.config:17` → `https://synctrayzor.antonymale.co.uk/version-check`); note code-level fallback default is plaintext `http://` if config missing"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y — sha512sum manifest is PGP clear-signed"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (PGP) + hash (SHA512 of installer checked against PGP-verified manifest)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned-in-binary** (embedded assembly resource)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/SyncTrayzor/Services/UpdateManagement/UpdateDownloader.cs:22,40-59 (downloads `sha512sum-{version}.txt.asc`, PGP-verifies it, then SHA512-checks the installer against it); InstallerCertificateVerifier.cs:15-41 (`certificateName = \"SyncTrayzor.Resources.synctrayzor_releases_cert.asc\"`, `PgpClearsignUtilities.ReadAndVerifyFile`); security/synctrayzor_releases_cert.asc (pinned pubkey present in repo); src/SyncTrayzor/App.config:17 (https); src/SyncTrayzor/Services/Config/AppSettings.cs:36 (plaintext-http code default — minor hardening gap, overridden by shipped App.config)"
+        }
+      ]
+    }
   ]
 }

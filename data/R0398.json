@@ -41,5 +41,53 @@
       "line": 20,
       "text": "| Betaflight Configurator | https://github.com/betaflight/betaflight-configurator | dd520a0 / 2026-08-21 | N (self) / Y (firmware channel) | N | Y (downloads + DFU-flashes firmware to flight controller) | https | N | none found (only post-write readback \"verify\") | none/unpinned | src-tauri/Cargo.toml — no `tauri-plugin-updater` dependency present; src/js/data_storage.js:28 (`latestVersionReleaseUrl` → manual GitHub releases page only, no auto-download of the app itself); src/js/BuildApi.js:9 (`https://build.betaflight.com`) — firmware fetch, no sha256/signature check found in FirmwareFlasherTab.vue around the download/flash path |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Z7.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/betaflight/betaflight-configurator"
+        },
+        {
+          "label": "commit/date",
+          "value": "dd520a0 / 2026-08-21"
+        },
+        {
+          "label": "has_updater",
+          "value": "N (self) / Y (firmware channel)"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (downloads + DFU-flashes firmware to flight controller)"
+        },
+        {
+          "label": "transport",
+          "value": "https"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none found (only post-write readback \"verify\")"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none/unpinned"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src-tauri/Cargo.toml — no `tauri-plugin-updater` dependency present; src/js/data_storage.js:28 (`latestVersionReleaseUrl` → manual GitHub releases page only, no auto-download of the app itself); src/js/BuildApi.js:9 (`https://build.betaflight.com`) — firmware fetch, no sha256/signature check found in FirmwareFlasherTab.vue around the download/flash path"
+        }
+      ]
+    }
   ]
 }

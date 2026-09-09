@@ -41,5 +41,53 @@
       "line": 29,
       "text": "| Leantime | https://github.com/Leantime/leantime | 9a9f49f / 2026-08-15 | Y | N (admin-run CLI command `php artisan system:update`, not triggered automatically) | Y | https (github.com releases; default PHP stream-context / Laravel `Http::sink()` — no `verify=>false`/insecure option set anywhere in the file) | N | none — no hash or signature check of the downloaded zip before it is extracted and `cp -r`'d over the live app tree | N/A | `app/Command/UpdateLeantime.php:56-72` (fetch latest release JSON + build download URL), `:98-101` (`Http::sink($zipFile)->get($downloadUrl)` with zero integrity check), `:104-116` (`ZipArchive::extractTo` then `exec('cp -r ... APP_ROOT')` — extracted files copied straight over the running app with no verification step at any point) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AI3.md",
+      "source_line": 29,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Leantime/leantime"
+        },
+        {
+          "label": "commit/date",
+          "value": "9a9f49f / 2026-08-15"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (admin-run CLI command `php artisan system:update`, not triggered automatically)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (github.com releases; default PHP stream-context / Laravel `Http::sink()` — no `verify=>false`/insecure option set anywhere in the file)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — no hash or signature check of the downloaded zip before it is extracted and `cp -r`'d over the live app tree"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`app/Command/UpdateLeantime.php:56-72` (fetch latest release JSON + build download URL), `:98-101` (`Http::sink($zipFile)->get($downloadUrl)` with zero integrity check), `:104-116` (`ZipArchive::extractTo` then `exec('cp -r ... APP_ROOT')` — extracted files copied straight over the running app with no verification step at any point)"
+        }
+      ]
+    }
   ]
 }

@@ -43,5 +43,53 @@
       "line": 16,
       "text": "| Arduino IDE (v2) | arduino/arduino-ide | Electron + Theia | Y | check: automatic on launch (`autoDownload = false`); download and install require explicit user action (`downloadUpdate()` then `quitAndInstall()`) | Y — downloads the full installer via `electron-updater` and executes/installs it once the user confirms | HTTPS, `generic` provider at `https://downloads.arduino.cc/arduino-ide` (default; a preference, but ships HTTPS); no `rejectUnauthorized`/insecure overrides found anywhere in the extension | N — electron-updater's generic-provider manifest (`latest.yml`/`latest-mac.yml`/`latest-linux.yml`) is a plain unsigned YAML file fetched over HTTPS, not itself signed | hash-from-manifest (SHA512 in `latest*.yml`) **plus** OS-code-signing: Windows installer is Authenticode-signed (`electron-app/package.json` → `win.sign: \"./scripts/windowsCustomSign.js\"`, electron-updater's default `verifyUpdateCodeSignature` compares publisher cert) and macOS build is hardened-runtime + notarized (`afterSign: \"scripts/notarize.js\"`) | OS trust store / code-signing certificate embedded in the installer (Windows Authenticode publisher cert, Apple Developer ID used for notarization) — not an app-specific key | `arduino-ide-extension/src/electron-main/ide-updater/ide-updater-impl.ts:15,42-49,55-98,100-115` (autoUpdater wiring, `autoDownload=false`, `setFeedURL({provider:'generic',...})`, `downloadUpdate`/`quitAndInstall`); `electron-app/package.json:107-203` (win.sign, mac hardenedRuntime+notarize, s3 publish); `arduino-ide-extension/src/browser/arduino-preferences.ts:181` (default base URL) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-H4.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "arduino/arduino-ide"
+        },
+        {
+          "label": "framework",
+          "value": "Electron + Theia"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "check: automatic on launch (`autoDownload = false`); download and install require explicit user action (`downloadUpdate()` then `quitAndInstall()`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — downloads the full installer via `electron-updater` and executes/installs it once the user confirms"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS, `generic` provider at `https://downloads.arduino.cc/arduino-ide` (default; a preference, but ships HTTPS); no `rejectUnauthorized`/insecure overrides found anywhere in the extension"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N — electron-updater's generic-provider manifest (`latest.yml`/`latest-mac.yml`/`latest-linux.yml`) is a plain unsigned YAML file fetched over HTTPS, not itself signed"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (SHA512 in `latest*.yml`) **plus** OS-code-signing: Windows installer is Authenticode-signed (`electron-app/package.json` → `win.sign: \"./scripts/windowsCustomSign.js\"`, electron-updater's default `verifyUpdateCodeSignature` compares publisher cert) and macOS build is hardened-runtime + notarized (`afterSign: \"scripts/notarize.js\"`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS trust store / code-signing certificate embedded in the installer (Windows Authenticode publisher cert, Apple Developer ID used for notarization) — not an app-specific key"
+        },
+        {
+          "label": "evidence",
+          "value": "`arduino-ide-extension/src/electron-main/ide-updater/ide-updater-impl.ts:15,42-49,55-98,100-115` (autoUpdater wiring, `autoDownload=false`, `setFeedURL({provider:'generic',...})`, `downloadUpdate`/`quitAndInstall`); `electron-app/package.json:107-203` (win.sign, mac hardenedRuntime+notarize, s3 publish); `arduino-ide-extension/src/browser/arduino-preferences.ts:181` (default base URL)"
+        }
+      ]
+    }
   ]
 }

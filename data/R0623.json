@@ -43,5 +43,53 @@
       "line": 14,
       "text": "| OctoFarm | https://github.com/OctoFarm/OctoFarm.git | f22996b / 2022-10-07 | Y | N (manual \"Update\" button; auto-check-only notification exists) | Y | https (git+https via simple-git; no TLS override found) | N (no GPG signature check on commits) | none (bare `git pull`, optionally `git reset --hard` then pull; no hash/signature) | server-supplied/unpinned (GitHub over TLS) | `server/utils/git.utils.js:6` `simpleGit(mainRepo)`; `:58-61` `pullLatestRepository(force)` → `git.reset(\"hard\")` + `git.pull()`; `server/services/server-commands.service.js:114` `await pullLatestRepository(force.forcePull)`, `:117` `installNpmDependency()`, `:28` `exec(\"pm2 restart OctoFarm\")` (executes newly-pulled code). `client/js/pages/system/server.actions.js:371-447` wires the \"Update OctoFarm\" UI button + auto update-check notification. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AN7.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/OctoFarm/OctoFarm.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "f22996b / 2022-10-07"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual \"Update\" button; auto-check-only notification exists)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (git+https via simple-git; no TLS override found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no GPG signature check on commits)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (bare `git pull`, optionally `git reset --hard` then pull; no hash/signature)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (GitHub over TLS)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`server/utils/git.utils.js:6` `simpleGit(mainRepo)`; `:58-61` `pullLatestRepository(force)` → `git.reset(\"hard\")` + `git.pull()`; `server/services/server-commands.service.js:114` `await pullLatestRepository(force.forcePull)`, `:117` `installNpmDependency()`, `:28` `exec(\"pm2 restart OctoFarm\")` (executes newly-pulled code). `client/js/pages/system/server.actions.js:371-447` wires the \"Update OctoFarm\" UI button + auto update-check notification."
+        }
+      ]
+    }
   ]
 }

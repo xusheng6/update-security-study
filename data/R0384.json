@@ -42,5 +42,53 @@
       "line": 9,
       "text": "| Shutter Encoder | https://github.com/paulpacifico/shutter-encoder | e8b7e8b 2026-08-20 | Y | N (user must click Yes on 2 dialogs) | **Y** | https, TLS enforced (default `java.net.URL`/Jsoup, no disabling found) | N | **none** | none (raw HTTP body of the download page trusted) | `src/shutterencoder/ui/others/Update.java:236-260` (scrape shutterencoder.com HTML for version+link), `:409` (`HTTPDownload` fetches installer/zip), `:419-422` (Windows: `new ProcessBuilder(appPath).start()` **directly executes the downloaded .exe with zero hash/signature check**), `:425` (Mac/Linux/portable: `Desktop.getDesktop().open(appPath)` launches installer/AppImage/dmg) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Y5.md",
+      "source_line": 9,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/paulpacifico/shutter-encoder"
+        },
+        {
+          "label": "commit/date",
+          "value": "e8b7e8b 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (user must click Yes on 2 dialogs)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y**"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (default `java.net.URL`/Jsoup, no disabling found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none (raw HTTP body of the download page trusted)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/shutterencoder/ui/others/Update.java:236-260` (scrape shutterencoder.com HTML for version+link), `:409` (`HTTPDownload` fetches installer/zip), `:419-422` (Windows: `new ProcessBuilder(appPath).start()` **directly executes the downloaded .exe with zero hash/signature check**), `:425` (Mac/Linux/portable: `Desktop.getDesktop().open(appPath)` launches installer/AppImage/dmg)"
+        }
+      ]
+    }
   ]
 }

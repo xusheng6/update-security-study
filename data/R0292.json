@@ -43,5 +43,53 @@
       "line": 8,
       "text": "| MarkText | https://github.com/marktext/marktext.git | e52106f / 2026-07-27 | Y | Y (auto-check; download on user confirm) | Y | https, TLS enforced (no bypass found) | no (uses electron-builder `latest.yml`, unsigned) | hash (sha512 in latest.yml) + OS code-sign check (default electron-updater `verifyUpdateCodeSignature`, not overridden) | OS keystore (Windows Authenticode / macOS codesign) | packages/desktop/src/main/menu/actions/marktext.ts:1-11 (autoUpdater import/use); packages/desktop/electron-builder.yml (no publish/verify override) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U7.md",
+      "source_line": 8,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/marktext/marktext.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "e52106f / 2026-07-27"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (auto-check; download on user confirm)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (no bypass found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "no (uses electron-builder `latest.yml`, unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (sha512 in latest.yml) + OS code-sign check (default electron-updater `verifyUpdateCodeSignature`, not overridden)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore (Windows Authenticode / macOS codesign)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "packages/desktop/src/main/menu/actions/marktext.ts:1-11 (autoUpdater import/use); packages/desktop/electron-builder.yml (no publish/verify override)"
+        }
+      ]
+    }
   ]
 }

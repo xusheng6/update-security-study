@@ -41,5 +41,53 @@
       "line": 15,
       "text": "| torrent-file-editor | https://github.com/torrent-file-editor/torrent-file-editor | C++/Qt | Y | Y on macOS (Sparkle `checkForUpdatesInBackground` called unconditionally at every launch, `SUEnableAutomaticChecks=true`, `SUScheduledCheckInterval=86400`); N on Windows (manual \"Check for update\" button in About dialog, `Q_OS_WIN`-only, no periodic timer found); N/A on Linux (`checkupdate.cpp` is compiled only under `Q_OS_WIN`, no updater path exists for Linux at all) | Y — macOS path uses the Sparkle framework, whose default legacy (`SUUpdater`) behavior is to download and install the update package automatically (outside this repo, inside the external Sparkle framework); Windows path is display-only (N: shows a clickable version/link, `Q_UNUSED(url)`/no download call in `aboutdlg.cpp`) | macOS: https appcast at `SUFeedURL = https://torrent-file-editor.github.io/appcast/appcast.xml`, delivered/verified by the external Sparkle framework (verification logic itself not in this repo); Windows: https `appcast.json` at `https://torrent-file-editor.github.io/appcast/appcast.json`, fetched via raw WinINet (`InternetOpenUrl`), no TLS-pinning/cert-checks beyond OS defaults visible in code | macOS: Sparkle appcast items are typically per-item DSA/EdDSA-signed (standard Sparkle behavior; this repo configures `SUPublicDSAKeyFile`, implying legacy DSA-signed enclosures); Windows: N (plain JSON `appcast.json`, no signature field parsed at all) | macOS: signature (DSA via Sparkle, `SUPublicDSAKeyFile = dsa_pub.pem`) — **but the matching DSA PRIVATE key is committed in this same repository** at `cmake/dsa_priv.pem` and is actively used by the release build (`cmake/Dmg.cmake:11`, `openssl dgst -dss1 -sign cmake/dsa_priv.pem`) to sign the DMG, meaning anyone who clones this public repo can forge a validly-signed malicious update; Windows: none | `dsa_pub.pem` (repo root, public key) paired with `cmake/dsa_priv.pem` (repo, **private** key — critical exposure); the public key is also installed into the app bundle at `CMakeLists.txt:511` | `main.cpp:258-262` (`#ifdef Q_OS_MAC` block: `SparkleAutoUpdater *updater = new SparkleAutoUpdater; updater->checkForUpdates();` runs on every launch); `sparkleautoupdater.mm:32-49` (wraps `[SUUpdater sharedUpdater] checkForUpdatesInBackground]`, legacy Sparkle 1.x API); `MacOSXBundleInfo.plist.in:61-68` (`SUFeedURL=https://torrent-file-editor.github.io/appcast/appcast.xml`, `SUPublicDSAKeyFile=dsa_pub.pem`, `SUScheduledCheckInterval=86400`, `SUEnableAutomaticChecks=true`); **`cmake/dsa_priv.pem:1-39` — full PEM-encoded DSA private signing key checked into the public repository**; `cmake/Dmg.cmake:11` (`openssl dgst -dss1 -sign \"${CMAKE_CURRENT_LIST_DIR}/dsa_priv.pem\"` — build script actively signs release DMGs with this committed private key); `dsa_pub.pem` (repo root, matching public key) and `CMakeLists.txt:511` (`install(FILES \"dsa_pub.pem\" DESTINATION \"${PROJECT_NAME}.app/Contents/Resources\" ...)`); `checkupdate.cpp:14-81` (Windows path: `CAST_URL = \"https://torrent-file-editor.github.io/appcast/appcast.json\"`, raw `wininet.h` `InternetOpen`/`InternetOpenUrl`/`InternetReadFile`, parses `version`/`url-win-x64` fields, emits `finished(version, url)` — no signature/hash field is read or checked); `aboutdlg.cpp:174-220` (`checkUpdate()` is `#ifdef Q_OS_WIN`-only and fires solely from the About dialog's button click, `ui->btCheckUpdate`; `showUpdate()` only sets label text with an `<a href>` link — no download/execution of the update). |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-O3.md",
+      "source_line": 15,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/torrent-file-editor/torrent-file-editor"
+        },
+        {
+          "label": "framework",
+          "value": "C++/Qt"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y on macOS (Sparkle `checkForUpdatesInBackground` called unconditionally at every launch, `SUEnableAutomaticChecks=true`, `SUScheduledCheckInterval=86400`); N on Windows (manual \"Check for update\" button in About dialog, `Q_OS_WIN`-only, no periodic timer found); N/A on Linux (`checkupdate.cpp` is compiled only under `Q_OS_WIN`, no updater path exists for Linux at all)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — macOS path uses the Sparkle framework, whose default legacy (`SUUpdater`) behavior is to download and install the update package automatically (outside this repo, inside the external Sparkle framework); Windows path is display-only (N: shows a clickable version/link, `Q_UNUSED(url)`/no download call in `aboutdlg.cpp`)"
+        },
+        {
+          "label": "transport",
+          "value": "macOS: https appcast at `SUFeedURL = https://torrent-file-editor.github.io/appcast/appcast.xml`, delivered/verified by the external Sparkle framework (verification logic itself not in this repo); Windows: https `appcast.json` at `https://torrent-file-editor.github.io/appcast/appcast.json`, fetched via raw WinINet (`InternetOpenUrl`), no TLS-pinning/cert-checks beyond OS defaults visible in code"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "macOS: Sparkle appcast items are typically per-item DSA/EdDSA-signed (standard Sparkle behavior; this repo configures `SUPublicDSAKeyFile`, implying legacy DSA-signed enclosures); Windows: N (plain JSON `appcast.json`, no signature field parsed at all)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "macOS: signature (DSA via Sparkle, `SUPublicDSAKeyFile = dsa_pub.pem`) — **but the matching DSA PRIVATE key is committed in this same repository** at `cmake/dsa_priv.pem` and is actively used by the release build (`cmake/Dmg.cmake:11`, `openssl dgst -dss1 -sign cmake/dsa_priv.pem`) to sign the DMG, meaning anyone who clones this public repo can forge a validly-signed malicious update; Windows: none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "`dsa_pub.pem` (repo root, public key) paired with `cmake/dsa_priv.pem` (repo, **private** key — critical exposure); the public key is also installed into the app bundle at `CMakeLists.txt:511`"
+        },
+        {
+          "label": "evidence",
+          "value": "`main.cpp:258-262` (`#ifdef Q_OS_MAC` block: `SparkleAutoUpdater *updater = new SparkleAutoUpdater; updater->checkForUpdates();` runs on every launch); `sparkleautoupdater.mm:32-49` (wraps `[SUUpdater sharedUpdater] checkForUpdatesInBackground]`, legacy Sparkle 1.x API); `MacOSXBundleInfo.plist.in:61-68` (`SUFeedURL=https://torrent-file-editor.github.io/appcast/appcast.xml`, `SUPublicDSAKeyFile=dsa_pub.pem`, `SUScheduledCheckInterval=86400`, `SUEnableAutomaticChecks=true`); **`cmake/dsa_priv.pem:1-39` — full PEM-encoded DSA private signing key checked into the public repository**; `cmake/Dmg.cmake:11` (`openssl dgst -dss1 -sign \"${CMAKE_CURRENT_LIST_DIR}/dsa_priv.pem\"` — build script actively signs release DMGs with this committed private key); `dsa_pub.pem` (repo root, matching public key) and `CMakeLists.txt:511` (`install(FILES \"dsa_pub.pem\" DESTINATION \"${PROJECT_NAME}.app/Contents/Resources\" ...)`); `checkupdate.cpp:14-81` (Windows path: `CAST_URL = \"https://torrent-file-editor.github.io/appcast/appcast.json\"`, raw `wininet.h` `InternetOpen`/`InternetOpenUrl`/`InternetReadFile`, parses `version`/`url-win-x64` fields, emits `finished(version, url)` — no signature/hash field is read or checked); `aboutdlg.cpp:174-220` (`checkUpdate()` is `#ifdef Q_OS_WIN`-only and fires solely from the About dialog's button click, `ui->btCheckUpdate`; `showUpdate()` only sets label text with an `<a href>` link — no download/execution of the update)."
+        }
+      ]
+    }
   ]
 }

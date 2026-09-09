@@ -48,5 +48,99 @@
       "line": 17,
       "text": "| Forma LMS — plugin download/update *(side channel, scored separately)* | same | same | Y | N (admin-triggered \"update online\" action) | Y (`unpackPlugin()` extracts zip directly into the live `plugins/` directory) | **scheme unconstrained** — `fopen($link,'r')` where `$link = $info['update'].'?action=download&plugin='.$name` is built from a URL taken verbatim from the plugin's own `manifest.xml`; nothing in code forces `https://` or validates the scheme | No | **none whatsoever** — no hash, no signature, no size/type sanity check before `ZipArchive::extractTo()` | N/A (no verifying key of any kind exists in this code path) | `html/appCore/models/PluginmanagerAdm.php:657-666` (`downloadPlugin()`: `fopen($link,'r')` → `file_put_contents(...'temp_update.zip'...)`, no hash/sig check); `:679-696` (`unpackPlugin()`: `ZipArchive::open()` + `extractTo(_plugins_)` directly, then deletes the zip) — this is worse than the C-equivalent floor (no hash at all, transport not pinned to TLS) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AI6.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/formalms/formalms.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "446a77a / 2026-07-17"
+        },
+        {
+          "label": "has_updater",
+          "value": "N (core)"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N"
+        },
+        {
+          "label": "transport",
+          "value": "N/A"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A"
+        },
+        {
+          "label": "payload_verification",
+          "value": "N/A"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence",
+          "value": "No core self-update path found; `install/` wizard is local, first-run only"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-AI6.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "same"
+        },
+        {
+          "label": "commit/date",
+          "value": "same"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (admin-triggered \"update online\" action)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (`unpackPlugin()` extracts zip directly into the live `plugins/` directory)"
+        },
+        {
+          "label": "transport",
+          "value": "**scheme unconstrained** — `fopen($link,'r')` where `$link = $info['update'].'?action=download&plugin='.$name` is built from a URL taken verbatim from the plugin's own `manifest.xml`; nothing in code forces `https://` or validates the scheme"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "No"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none whatsoever** — no hash, no signature, no size/type sanity check before `ZipArchive::extractTo()`"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A (no verifying key of any kind exists in this code path)"
+        },
+        {
+          "label": "evidence",
+          "value": "`html/appCore/models/PluginmanagerAdm.php:657-666` (`downloadPlugin()`: `fopen($link,'r')` → `file_put_contents(...'temp_update.zip'...)`, no hash/sig check); `:679-696` (`unpackPlugin()`: `ZipArchive::open()` + `extractTo(_plugins_)` directly, then deletes the zip) — this is worse than the C-equivalent floor (no hash at all, transport not pinned to TLS)"
+        }
+      ]
+    }
   ]
 }

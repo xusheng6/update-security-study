@@ -42,5 +42,53 @@
       "line": 11,
       "text": "| CPod | https://github.com/z-------------/CPod | 6a26215 / 2024-01-12 | Y | N (prompts user; `autoDownload=false`) | Y | https, TLS enforced (no rejectUnauthorized:false found) | N (no CSC_LINK/certificateFile in build config or Travis CI — unsigned NSIS/AppImage/dmg) | hash-only, sha512 from `latest.yml` served on same GitHub Releases channel (electron-updater default) | server-supplied/unpinned (GitHub Releases, unsigned) | main.js:4,298-307,359,391-408; package.json:66-108 (no sign config); .travis.yml (no CSC_LINK) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AA4.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/z-------------/CPod"
+        },
+        {
+          "label": "commit/date",
+          "value": "6a26215 / 2024-01-12"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (prompts user; `autoDownload=false`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (no rejectUnauthorized:false found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no CSC_LINK/certificateFile in build config or Travis CI — unsigned NSIS/AppImage/dmg)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-only, sha512 from `latest.yml` served on same GitHub Releases channel (electron-updater default)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (GitHub Releases, unsigned)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "main.js:4,298-307,359,391-408; package.json:66-108 (no sign config); .travis.yml (no CSC_LINK)"
+        }
+      ]
+    }
   ]
 }

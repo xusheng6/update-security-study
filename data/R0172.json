@@ -41,5 +41,53 @@
       "line": 9,
       "text": "| AltTab | lwouis/alt-tab-macos | Sparkle | Y | chk: auto=true by default (`SUEnableAutomaticChecks`); dl/inst: user-selectable policy (`automaticallyDownloadsUpdates` set from an autoInstall preference) | Y | https (`https://alt-tab.app/appcast.xml`, domain from xcconfig) | Sparkle-EdDSA (no DSA key found) | signature[EdDSA] | pinned-in-binary | Info.plist:61-64; src/api/Endpoints.swift:6-7; config/base.xcconfig:24-25; src/vendors/SparkleDelegate.swift:26-28; src/events/PreferencesEvents.swift:85 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-K1.md",
+      "source_line": 9,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "lwouis/alt-tab-macos"
+        },
+        {
+          "label": "framework",
+          "value": "Sparkle"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "chk: auto=true by default (`SUEnableAutomaticChecks`); dl/inst: user-selectable policy (`automaticallyDownloadsUpdates` set from an autoInstall preference)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`https://alt-tab.app/appcast.xml`, domain from xcconfig)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Sparkle-EdDSA (no DSA key found)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature[EdDSA]"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary"
+        },
+        {
+          "label": "evidence",
+          "value": "Info.plist:61-64; src/api/Endpoints.swift:6-7; config/base.xcconfig:24-25; src/vendors/SparkleDelegate.swift:26-28; src/events/PreferencesEvents.swift:85"
+        }
+      ]
+    }
   ]
 }

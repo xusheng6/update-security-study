@@ -43,5 +43,53 @@
       "line": 7,
       "text": "| Flutter (flutter CLI) | https://github.com/flutter/flutter.git | 4ebf37fe7df0a130ba5bee17315b98f905c10b34 / 2026-08-22 | Y | Y (artifact/Dart-SDK auto-fetched on cache miss during normal commands; `flutter upgrade` is user-invoked git pull) | Y | https, TLS validation enforced (Dart `HttpClient`/`curl` defaults; no `badCertificateCallback`/insecure bypass found) | N | Dart SDK zip: **none**. Engine-cache artifacts: MD5 checksum read from the download response's own `x-goog-hash` header (server-supplied, same endpoint) | none (Dart SDK) / server-supplied-unpinned (engine cache MD5) | `bin/internal/update_dart_sdk.sh:124-214` (curl→unzip→install, zero integrity check); `packages/flutter_tools/lib/src/cache.dart:1381-1409` (`_expectedMd5` reads `x-goog-hash` from same GCS response, no pinned/external hash); `packages/flutter_tools/lib/src/commands/upgrade.dart:180-244` (`flutter upgrade` = git fetch/pull of the flutter/flutter repo, no GPG/commit-signature check) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AK6.md",
+      "source_line": 7,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/flutter/flutter.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "4ebf37fe7df0a130ba5bee17315b98f905c10b34 / 2026-08-22"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (artifact/Dart-SDK auto-fetched on cache miss during normal commands; `flutter upgrade` is user-invoked git pull)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS validation enforced (Dart `HttpClient`/`curl` defaults; no `badCertificateCallback`/insecure bypass found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "Dart SDK zip: **none**. Engine-cache artifacts: MD5 checksum read from the download response's own `x-goog-hash` header (server-supplied, same endpoint)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none (Dart SDK) / server-supplied-unpinned (engine cache MD5)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`bin/internal/update_dart_sdk.sh:124-214` (curl→unzip→install, zero integrity check); `packages/flutter_tools/lib/src/cache.dart:1381-1409` (`_expectedMd5` reads `x-goog-hash` from same GCS response, no pinned/external hash); `packages/flutter_tools/lib/src/commands/upgrade.dart:180-244` (`flutter upgrade` = git fetch/pull of the flutter/flutter repo, no GPG/commit-signature check)"
+        }
+      ]
+    }
   ]
 }

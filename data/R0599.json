@@ -43,5 +43,53 @@
       "line": 19,
       "text": "| Singlebox (via atomery/juli shared codebase) | https://github.com/atomery/juli.git | 9164c92 / 2022-04-04 | Y | Y (same pattern as WebCatalog, same author/codebase) | Y (`autoUpdater.quitAndInstall`) | https (electron-updater default provider) | B (electron-updater OS code-sign) | OS code signature | **OS keystore** | src/electron/libs/electron-updater.js:1-153 (identical `electron-updater` wiring to WebCatalog's `updater.js`); README.md of the original `atomery/singlebox` repo confirms \"development is unified with the WebCatalog project\" and code lives in `atomery/juli` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AM7.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/atomery/juli.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "9164c92 / 2022-04-04"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (same pattern as WebCatalog, same author/codebase)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y (`autoUpdater.quitAndInstall`)"
+        },
+        {
+          "label": "transport",
+          "value": "https (electron-updater default provider)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "B (electron-updater OS code-sign)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "OS code signature"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**OS keystore**"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/electron/libs/electron-updater.js:1-153 (identical `electron-updater` wiring to WebCatalog's `updater.js`); README.md of the original `atomery/singlebox` repo confirms \"development is unified with the WebCatalog project\" and code lives in `atomery/juli`"
+        }
+      ]
+    }
   ]
 }

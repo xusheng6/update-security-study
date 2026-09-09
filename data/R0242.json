@@ -41,5 +41,53 @@
       "line": 20,
       "text": "| Veloren — Airshipper launcher (HIGH INTEREST) | github.com/veloren/Airshipper (mirror of gitlab.com/veloren/airshipper) | Y | **Y fully automatic** — on every launch/refresh the client fetches the remote version and, if different, downloads and syncs the game build with no explicit user confirmation step in the code path (`update()` stream runs straight through `evaluate()` → `sync()` → `final_cleanup()`) | **Y** — downloads a zip of the full game (client+server binaries), extracts it, `chmod`s `veroren-voxygen`/`veloren-server-cli` to `0o755`, and the launcher's own \"Play\" action runs `Command::new(profile.voxygen_path())` on that freshly-downloaded binary | **HTTPS** — `Server::Production` hardcoded to `\"https://download.veloren.net\"`; `reqwest::Client` built with `.use_rustls_tls()`, default certificate validation, no `danger_accept_invalid_certs` or any TLS override found anywhere in the repo | **N — no signed manifest anywhere** | **hash-from-manifest, but non-cryptographic and self-referential** — the \"remozipsy\" sync engine compares each file's **CRC32** (taken from the remote zip's own embedded per-file CRC32 in its central directory) against the local copy's CRC32 to decide what to (re)download; this is a corruption/change-detection checksum, not an authenticity mechanism, and it's delivered by the same server as the payload | none — grepped the entire client+server crate for `signature`, `pubkey`, `minisign`, `ed25519`, `sigstore`, `gpg` and found **zero** matches | client/src/update.rs:74-155 (`evaluate()` — fetches remote file list, computes CRC32 diff via `remozipsy`, no hash/signature check beyond the zip's own CRC32); client/src/update.rs:220-252 (`final_cleanup()` — `perm.set_mode(0o755)` on `VOXYGEN_FILE`/`SERVER_CLI_FILE`); client/src/profiles.rs:184 (`Server::Production => \"https://download.veloren.net\"`); client/src/profiles.rs:282-289 (`download_url()`); client/src/profiles.rs:389 (`Command::new(profile.voxygen_path())` — launches the just-downloaded binary); client/src/net/client.rs:9-16 (`reqwest::Client::builder()...use_rustls_tls()`, no cert-override) | The single biggest gap found in this whole batch for a launcher whose entire job is \"auto-download and run a native binary\": TLS-to-a-single-hardcoded-host is the *only* trust anchor. There is no code-signing check, no detached signature, no independently-published hash to compare against — compromise of `download.veloren.net` (or its TLS keys/CA) is sufficient to get arbitrary native code auto-executed on every user's machine with no further gate. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-O8.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/veloren/Airshipper (mirror of gitlab.com/veloren/airshipper)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "**Y fully automatic** — on every launch/refresh the client fetches the remote version and, if different, downloads and syncs the game build with no explicit user confirmation step in the code path (`update()` stream runs straight through `evaluate()` → `sync()` → `final_cleanup()`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y** — downloads a zip of the full game (client+server binaries), extracts it, `chmod`s `veroren-voxygen`/`veloren-server-cli` to `0o755`, and the launcher's own \"Play\" action runs `Command::new(profile.voxygen_path())` on that freshly-downloaded binary"
+        },
+        {
+          "label": "transport",
+          "value": "**HTTPS** — `Server::Production` hardcoded to `\"https://download.veloren.net\"`; `reqwest::Client` built with `.use_rustls_tls()`, default certificate validation, no `danger_accept_invalid_certs` or any TLS override found anywhere in the repo"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "**N — no signed manifest anywhere**"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**hash-from-manifest, but non-cryptographic and self-referential** — the \"remozipsy\" sync engine compares each file's **CRC32** (taken from the remote zip's own embedded per-file CRC32 in its central directory) against the local copy's CRC32 to decide what to (re)download; this is a corruption/change-detection checksum, not an authenticity mechanism, and it's delivered by the same server as the payload"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none — grepped the entire client+server crate for `signature`, `pubkey`, `minisign`, `ed25519`, `sigstore`, `gpg` and found **zero** matches"
+        },
+        {
+          "label": "evidence",
+          "value": "client/src/update.rs:74-155 (`evaluate()` — fetches remote file list, computes CRC32 diff via `remozipsy`, no hash/signature check beyond the zip's own CRC32); client/src/update.rs:220-252 (`final_cleanup()` — `perm.set_mode(0o755)` on `VOXYGEN_FILE`/`SERVER_CLI_FILE`); client/src/profiles.rs:184 (`Server::Production => \"https://download.veloren.net\"`); client/src/profiles.rs:282-289 (`download_url()`); client/src/profiles.rs:389 (`Command::new(profile.voxygen_path())` — launches the just-downloaded binary); client/src/net/client.rs:9-16 (`reqwest::Client::builder()...use_rustls_tls()`, no cert-override)"
+        },
+        {
+          "label": "notes",
+          "value": "The single biggest gap found in this whole batch for a launcher whose entire job is \"auto-download and run a native binary\": TLS-to-a-single-hardcoded-host is the *only* trust anchor. There is no code-signing check, no detached signature, no independently-published hash to compare against — compromise of `download.veloren.net` (or its TLS keys/CA) is sufficient to get arbitrary native code auto-executed on every user's machine with no further gate."
+        }
+      ]
+    }
   ]
 }

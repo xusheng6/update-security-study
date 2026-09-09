@@ -41,5 +41,53 @@
       "line": 14,
       "text": "| Hyperspace | https://github.com/hyperspacedev/hyperspace | Electron (React/TypeScript) | Y | Y (`autoUpdater.checkForUpdatesAndNotify()` runs unconditionally at startup — electron-updater's default background-download + install-on-quit behavior) | Y (electron-updater default: downloads update artifact in background and installs it automatically when the app next quits/relaunches) | https, electron-updater's default GitHub Releases provider (inferred from `package.json:7` `\"repository\": \"https://github.com/hyperspacedev/hyperspace.git\"`; no explicit `publish:` block found in `ebuild/standard.yml`, and `-p 'never'` in build scripts only suppresses publishing during the build step, not the runtime provider) | unknown (no code-signing certs/config evidence in repo; `ebuild/standard.yml` sets `dmg: {sign: false}` and calls `afterSign: desktop/notarize.js`, but actual release-time signing status can't be determined from source) | hash-from-manifest (electron-updater's documented default: SHA512 hash embedded in the auto-generated `latest.yml`/`latest-mac.yml`/`latest-linux.yml` is compared against the downloaded artifact; optional Windows publisher-name check only applies if the binary is code-signed, which is unconfirmed here) | electron-updater default (SHA512 field in GitHub Releases `latest*.yml`); no custom verification key/logic implemented in app code | `package.json:43` `\"electron-updater\": \"^4.3.1\"`; `public/electron.js:14` `const { autoUpdater } = require(\"electron-updater\");` and `public/electron.js:18` `autoUpdater.checkForUpdatesAndNotify();`. NOTE: project appears abandoned — `git log -1` on default branch shows last commit 2021-01-07, so this updater path is very likely dead/untested against current GitHub Releases infrastructure. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-O2.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/hyperspacedev/hyperspace"
+        },
+        {
+          "label": "framework",
+          "value": "Electron (React/TypeScript)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (`autoUpdater.checkForUpdatesAndNotify()` runs unconditionally at startup — electron-updater's default background-download + install-on-quit behavior)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (electron-updater default: downloads update artifact in background and installs it automatically when the app next quits/relaunches)"
+        },
+        {
+          "label": "transport",
+          "value": "https, electron-updater's default GitHub Releases provider (inferred from `package.json:7` `\"repository\": \"https://github.com/hyperspacedev/hyperspace.git\"`; no explicit `publish:` block found in `ebuild/standard.yml`, and `-p 'never'` in build scripts only suppresses publishing during the build step, not the runtime provider)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "unknown (no code-signing certs/config evidence in repo; `ebuild/standard.yml` sets `dmg: {sign: false}` and calls `afterSign: desktop/notarize.js`, but actual release-time signing status can't be determined from source)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (electron-updater's documented default: SHA512 hash embedded in the auto-generated `latest.yml`/`latest-mac.yml`/`latest-linux.yml` is compared against the downloaded artifact; optional Windows publisher-name check only applies if the binary is code-signed, which is unconfirmed here)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "electron-updater default (SHA512 field in GitHub Releases `latest*.yml`); no custom verification key/logic implemented in app code"
+        },
+        {
+          "label": "evidence",
+          "value": "`package.json:43` `\"electron-updater\": \"^4.3.1\"`; `public/electron.js:14` `const { autoUpdater } = require(\"electron-updater\");` and `public/electron.js:18` `autoUpdater.checkForUpdatesAndNotify();`. NOTE: project appears abandoned — `git log -1` on default branch shows last commit 2021-01-07, so this updater path is very likely dead/untested against current GitHub Releases infrastructure."
+        }
+      ]
+    }
   ]
 }

@@ -42,5 +42,53 @@
       "line": 19,
       "text": "| nteract | https://github.com/nteract/nteract.git | 0b711d49571cfdc5708372d7d0cf2f18a4285cad / 2026-08-22 | Y | N (auto-checks on a timer, but install requires user click-through in the upgrade review screen) | Y (after user confirms) | https, TLS enforced (default Tauri/reqwest HTTP client, no disabling found) | Y (per-artifact minisign signature embedded in `latest.json` update manifest) | signature (Ed25519/minisign via `tauri-plugin-updater`) | pinned-in-binary (base64 minisign pubkey compiled into `tauri.conf.json` → binary) | `crates/notebook/tauri.conf.json:51-58` (pubkey+endpoint); `crates/notebook/src/lib.rs:4748` (plugin registered); `apps/notebook/upgrade/App.tsx:337` (`update.downloadAndInstall`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AG8.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/nteract/nteract.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "0b711d49571cfdc5708372d7d0cf2f18a4285cad / 2026-08-22"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (auto-checks on a timer, but install requires user click-through in the upgrade review screen)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (after user confirms)"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (default Tauri/reqwest HTTP client, no disabling found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (per-artifact minisign signature embedded in `latest.json` update manifest)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (Ed25519/minisign via `tauri-plugin-updater`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (base64 minisign pubkey compiled into `tauri.conf.json` → binary)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`crates/notebook/tauri.conf.json:51-58` (pubkey+endpoint); `crates/notebook/src/lib.rs:4748` (plugin registered); `apps/notebook/upgrade/App.tsx:337` (`update.downloadAndInstall`)"
+        }
+      ]
+    }
   ]
 }

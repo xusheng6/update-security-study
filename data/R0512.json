@@ -41,5 +41,53 @@
       "line": 24,
       "text": "| Devbox | https://github.com/jetify-com/devbox | f26266e0eddacb6d955a027b68b0ebef9515f0f7 / 2026-08-16 | Y | N (manual `devbox version update`) | Y | https (curl to `get.jetpack.io`, no `-k`/insecure flag observed) | N/A | none (no signature/hash check before piping to `bash`) | none | `internal/vercheck/vercheck.go:59-95` (`CheckVersion` is a passive notice-only check that sets an env var); `:111-119` (`selfUpdateLauncher`: `curl -fsSL https://get.jetpack.io/devbox \\| bash` or `wget -qO- ... \\| bash`, classic curl-pipe-bash with **no signature or checksum verification** of the script before execution) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AG2.md",
+      "source_line": 24,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/jetify-com/devbox"
+        },
+        {
+          "label": "commit/date",
+          "value": "f26266e0eddacb6d955a027b68b0ebef9515f0f7 / 2026-08-16"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual `devbox version update`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (curl to `get.jetpack.io`, no `-k`/insecure flag observed)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (no signature/hash check before piping to `bash`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "`internal/vercheck/vercheck.go:59-95` (`CheckVersion` is a passive notice-only check that sets an env var); `:111-119` (`selfUpdateLauncher`: `curl -fsSL https://get.jetpack.io/devbox \\| bash` or `wget -qO- ... \\| bash`, classic curl-pipe-bash with **no signature or checksum verification** of the script before execution)"
+        }
+      ]
+    }
   ]
 }

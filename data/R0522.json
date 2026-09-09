@@ -41,5 +41,53 @@
       "line": 24,
       "text": "| LazyLibrarian | https://gitlab.com/LazyLibrarian/LazyLibrarian | ac01658 / 2026-08-23 | Y | Y (opt-in, `Git.AUTO_UPDATE`, default `False`) | Y | https to GitLab API/tarball; TLS verification gated by `CONFIG['SSL_VERIFY']` (default `True`, `configdefs.py:114`) — falls back to `verify=False` only if URL isn't https or user disabled it | N | none — extracts tarball and overwrites files, no hash/signature check | server-supplied/unpinned (GitLab tarball for branch) | `lazylibrarian/versioncheck.py:486-630` (`update()` — downloads `tar_download_url` from GitLab, `verify=CONFIG['SSL_CERTS'] if CONFIG['SSL_CERTS'] else True` when https+SSL_VERIFY, else `verify=False` at line 604; extracts via `tarfile`, overwrites app dir); `lazylibrarian/configdefs.py:114,192` (`SSL_VERIFY` default `1`, `AUTO_UPDATE` default `False`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AG7.md",
+      "source_line": 24,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://gitlab.com/LazyLibrarian/LazyLibrarian"
+        },
+        {
+          "label": "commit/date",
+          "value": "ac01658 / 2026-08-23"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (opt-in, `Git.AUTO_UPDATE`, default `False`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https to GitLab API/tarball; TLS verification gated by `CONFIG['SSL_VERIFY']` (default `True`, `configdefs.py:114`) — falls back to `verify=False` only if URL isn't https or user disabled it"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — extracts tarball and overwrites files, no hash/signature check"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (GitLab tarball for branch)"
+        },
+        {
+          "label": "evidence",
+          "value": "`lazylibrarian/versioncheck.py:486-630` (`update()` — downloads `tar_download_url` from GitLab, `verify=CONFIG['SSL_CERTS'] if CONFIG['SSL_CERTS'] else True` when https+SSL_VERIFY, else `verify=False` at line 604; extracts via `tarfile`, overwrites app dir); `lazylibrarian/configdefs.py:114,192` (`SSL_VERIFY` default `1`, `AUTO_UPDATE` default `False`)"
+        }
+      ]
+    }
   ]
 }

@@ -41,5 +41,53 @@
       "line": 15,
       "text": "| TortoiseGit | https://github.com/tortoisegit/tortoisegit.git | acc10fc20a / 2026-06-27 | Y | N (manual \"Update\" button; check itself can be scheduled weekly) | Y | https (`versioncheck.tortoisegit.org`, download URLs) | Y | **OpenPGP RSA/DSA signature** on the downloaded installer/version-file, verified against a **key pinned in the binary** | pinned-in-binary (`tortoisegit_public_key` compiled into `src/version.h`) | src/TortoiseProc/CheckForUpdatesDlg.cpp:225-231 (download+`VerifyIntegrity` of version file), :477-540 (`OnBnClickedButtonUpdate` → `VerifyIntegrity()` then `ShellExecute` of installer); src/TortoiseProc/UpdateCrypto.cpp:983-1066 (`VerifyIntegrity`, RSA sig check against `tortoisegit_public_key`); src/version.h:58 (pinned key bytes) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W4.md",
+      "source_line": 15,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/tortoisegit/tortoisegit.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "acc10fc20a / 2026-06-27"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual \"Update\" button; check itself can be scheduled weekly)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`versioncheck.tortoisegit.org`, download URLs)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**OpenPGP RSA/DSA signature** on the downloaded installer/version-file, verified against a **key pinned in the binary**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (`tortoisegit_public_key` compiled into `src/version.h`)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/TortoiseProc/CheckForUpdatesDlg.cpp:225-231 (download+`VerifyIntegrity` of version file), :477-540 (`OnBnClickedButtonUpdate` → `VerifyIntegrity()` then `ShellExecute` of installer); src/TortoiseProc/UpdateCrypto.cpp:983-1066 (`VerifyIntegrity`, RSA sig check against `tortoisegit_public_key`); src/version.h:58 (pinned key bytes)"
+        }
+      ]
+    }
   ]
 }

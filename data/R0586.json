@@ -42,5 +42,53 @@
       "line": 27,
       "text": "| PowerToys | https://github.com/microsoft/PowerToys | 5759a62d4aef / 2026-08-21 | Y | Y (opt-in \"download automatically\", default triggers on periodic check; user still confirms install unless configured) | Y | https (`winrt::Windows::Web::Http::HttpClient` to `api.github.com` / GitHub release CDN; no cert-validation override found in src/common/utils/HttpClient.h) | n/a (installer itself is Authenticode-signed, not a JSON manifest) | Authenticode signature (WinVerifyTrust) + organization pin + product-identity pin (MSI UpgradeCode / exe version resource) | OS certificate store (Windows Trust/Authenticode chain to a trusted root CA) — not a key pinned in the PowerToys binary itself | src/common/updating/updating.cpp:18-19 (`https://api.github.com/repos/microsoft/PowerToys/releases[/latest]`), :161-187 (`download_new_version_async` → `HttpClient::download`); src/common/updating/installer.cpp:281-352 (`verify_installer_trust`: WinVerifyTrust + `verified_signer_is_microsoft` org-name pin at :83-113 + revocation check :121-145 + `is_expected_powertoys_installer` UpgradeCode/version-resource pin :215-278); src/Update/PowerToys.Update.cpp:263-266 calls `verify_installer_trust` before `ShellExecuteExW` elevated launch at :285, with an explicit TOCTOU-closing comment at :242-245. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AL2.md",
+      "source_line": 27,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/microsoft/PowerToys"
+        },
+        {
+          "label": "commit/date",
+          "value": "5759a62d4aef / 2026-08-21"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (opt-in \"download automatically\", default triggers on periodic check; user still confirms install unless configured)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`winrt::Windows::Web::Http::HttpClient` to `api.github.com` / GitHub release CDN; no cert-validation override found in src/common/utils/HttpClient.h)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "n/a (installer itself is Authenticode-signed, not a JSON manifest)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "Authenticode signature (WinVerifyTrust) + organization pin + product-identity pin (MSI UpgradeCode / exe version resource)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS certificate store (Windows Trust/Authenticode chain to a trusted root CA) — not a key pinned in the PowerToys binary itself"
+        },
+        {
+          "label": "evidence",
+          "value": "src/common/updating/updating.cpp:18-19 (`https://api.github.com/repos/microsoft/PowerToys/releases[/latest]`), :161-187 (`download_new_version_async` → `HttpClient::download`); src/common/updating/installer.cpp:281-352 (`verify_installer_trust`: WinVerifyTrust + `verified_signer_is_microsoft` org-name pin at :83-113 + revocation check :121-145 + `is_expected_powertoys_installer` UpgradeCode/version-resource pin :215-278); src/Update/PowerToys.Update.cpp:263-266 calls `verify_installer_trust` before `ShellExecuteExW` elevated launch at :285, with an explicit TOCTOU-closing comment at :242-245."
+        }
+      ]
+    }
   ]
 }

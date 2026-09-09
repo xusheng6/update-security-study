@@ -44,5 +44,53 @@
       "line": 12,
       "text": "| PhotoDemon | https://github.com/tannerhelland/PhotoDemon.git | 8357ce499 / 2026-08-18 | Y | Y (checked every session by default, `PDUF_EACH_SESSION`; user can set weekly/monthly/never) | **Y — fully automatic download + execute, no user confirmation required at the download/patch-apply step** | https to `tannerhelland.github.io` (GitHub Pages; `pdDownload.ctl` uses WinHTTP-backed async download — no TLS-bypass code found anywhere in repo) | N (plain HTML page on GitHub Pages with `<a id=\"pdv_*_start/end\">` tag markers, not signed) | **none** — the update-package download call passes no `checksumToVerify` argument (defaults to 0 = skip), so the only integrity mechanism the codebase supports (`pdDownload.ExpectedChecksum`, a non-cryptographic checksum) is never applied to the `.pdz2` update package itself | n/a (no signing key of any kind used for the self-update payload) | `Modules/UpdateEngine.bas:315,331,334` (`updateURL = \"https://tannerhelland.github.io/PhotoDemon-Updates-v2/auto/\" & track & \".pdz2\"`; `FormMain.RequestAsynchronousDownload(\"PD_UPDATE_PATCH\", updateURL, PD_PATCH_IDENTIFIER, vbAsyncReadForceUpdate, ...)` — **no checksum arg passed**), `:350-400` (`PatchProgramFiles()` extracts embedded `PD_Update_Patcher.exe` from the downloaded package and calls `ShellExecuteW` on it with no signature/hash check), `Controls/pdDownload.ctl:117-118,245-259` (`ExpectedChecksum As Long` — defaults 0 = \"checkSumPassed\" defaults TRUE / skipped), `Forms/MainWindow.frm:2630-2643` (`AsyncDownloader_FinishedOneItem` → on `PD_PATCH_IDENTIFIER` success calls `Updates.NotifyUpdatePackageAvailable`, which is applied automatically at next shutdown with no further gating). **Plugin/filter channel note:** PhotoDemon also supports loading native Photoshop-compatible `.8bf` filter plugins via a bundled `pspiHost.dll` (`Modules/Plugin_Management.bas:751`, `Forms/Effects_8bf.frm`) and ships UI text claiming it will \"download and configure\" optional codec libraries (libavif, libheif, etc.) on demand (`Forms/Tools_PluginManager.frm:731`), but no wired-up network-fetch call site for these optional DLLs was found in this snapshot — `GetPluginHomepage()`/`GetPluginLicenseURL()` only populate hyperlink controls pointing to the upstream project pages for manual user download, reusing none of the update-package download path. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W2.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/tannerhelland/PhotoDemon.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "8357ce499 / 2026-08-18"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (checked every session by default, `PDUF_EACH_SESSION`; user can set weekly/monthly/never)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "**Y — fully automatic download + execute, no user confirmation required at the download/patch-apply step**"
+        },
+        {
+          "label": "transport",
+          "value": "https to `tannerhelland.github.io` (GitHub Pages; `pdDownload.ctl` uses WinHTTP-backed async download — no TLS-bypass code found anywhere in repo)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (plain HTML page on GitHub Pages with `<a id=\"pdv_*_start/end\">` tag markers, not signed)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — the update-package download call passes no `checksumToVerify` argument (defaults to 0 = skip), so the only integrity mechanism the codebase supports (`pdDownload.ExpectedChecksum`, a non-cryptographic checksum) is never applied to the `.pdz2` update package itself"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a (no signing key of any kind used for the self-update payload)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`Modules/UpdateEngine.bas:315,331,334` (`updateURL = \"https://tannerhelland.github.io/PhotoDemon-Updates-v2/auto/\" & track & \".pdz2\"`; `FormMain.RequestAsynchronousDownload(\"PD_UPDATE_PATCH\", updateURL, PD_PATCH_IDENTIFIER, vbAsyncReadForceUpdate, ...)` — **no checksum arg passed**), `:350-400` (`PatchProgramFiles()` extracts embedded `PD_Update_Patcher.exe` from the downloaded package and calls `ShellExecuteW` on it with no signature/hash check), `Controls/pdDownload.ctl:117-118,245-259` (`ExpectedChecksum As Long` — defaults 0 = \"checkSumPassed\" defaults TRUE / skipped), `Forms/MainWindow.frm:2630-2643` (`AsyncDownloader_FinishedOneItem` → on `PD_PATCH_IDENTIFIER` success calls `Updates.NotifyUpdatePackageAvailable`, which is applied automatically at next shutdown with no further gating). **Plugin/filter channel note:** PhotoDemon also supports loading native Photoshop-compatible `.8bf` filter plugins via a bundled `pspiHost.dll` (`Modules/Plugin_Management.bas:751`, `Forms/Effects_8bf.frm`) and ships UI text claiming it will \"download and configure\" optional codec libraries (libavif, libheif, etc.) on demand (`Forms/Tools_PluginManager.frm:731`), but no wired-up network-fetch call site for these optional DLLs was found in this snapshot — `GetPluginHomepage()`/`GetPluginLicenseURL()` only populate hyperlink controls pointing to the upstream project pages for manual user download, reusing none of the update-package download path."
+        }
+      ]
+    }
   ]
 }

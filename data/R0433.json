@@ -42,5 +42,53 @@
       "line": 14,
       "text": "| XWiki (platform, own self-upgrade via Distribution Wizard) | https://github.com/xwiki/xwiki-platform + https://github.com/xwiki/xwiki-commons | platform 668fa71 / 2026-08-20, commons (latest) | Y | N (admin-triggered wizard) | Y | https (`extensions.xwiki.org`, `store.xwiki.com` — Apache HttpClient, no custom SSL context / no verify disabling found) | N | hash (Maven SHA1/MD5 checksum) — **not enforced**: policy is WARN not FAIL | server-supplied/unpinned (checksum published alongside artifact on same repo) | `xwiki-platform-core/.../extension-distribution/.../DistributionManager.java` + `DefaultDistributionJob.java` (self-upgrade orchestration reuses Extension Manager); checksum policy: `xwiki-commons-core/.../aether/internal/XWikiRepositorySystemSession.java:157` and `AetherExtensionRepository.java:372` both `setChecksumPolicy(RepositoryPolicy.CHECKSUM_POLICY_WARN)`; repo URLs `ExtensionXWikiOrgExtensionRepositorySource.java:79` (`https://extensions.xwiki.org/xwiki/rest/`), `StoreXWikiComExtensionRepositorySource.java:71` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC4.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/xwiki/xwiki-platform + https://github.com/xwiki/xwiki-commons"
+        },
+        {
+          "label": "commit/date",
+          "value": "platform 668fa71 / 2026-08-20, commons (latest)"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (admin-triggered wizard)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`extensions.xwiki.org`, `store.xwiki.com` — Apache HttpClient, no custom SSL context / no verify disabling found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (Maven SHA1/MD5 checksum) — **not enforced**: policy is WARN not FAIL"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (checksum published alongside artifact on same repo)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`xwiki-platform-core/.../extension-distribution/.../DistributionManager.java` + `DefaultDistributionJob.java` (self-upgrade orchestration reuses Extension Manager); checksum policy: `xwiki-commons-core/.../aether/internal/XWikiRepositorySystemSession.java:157` and `AetherExtensionRepository.java:372` both `setChecksumPolicy(RepositoryPolicy.CHECKSUM_POLICY_WARN)`; repo URLs `ExtensionXWikiOrgExtensionRepositorySource.java:79` (`https://extensions.xwiki.org/xwiki/rest/`), `StoreXWikiComExtensionRepositorySource.java:71`"
+        }
+      ]
+    }
   ]
 }

@@ -41,5 +41,53 @@
       "line": 3,
       "text": "| YesPlayMusic | https://github.com/qier222/YesPlayMusic | Electron (electron-builder + electron-updater, GitHub provider) | Y | Y (checkForUpdatesAndNotify runs on startup; autoDownload defaults true, not overridden) | Y (electron-updater downloads installer to temp dir; quitAndInstall triggered via built-in update-downloaded notification handler from checkForUpdatesAndNotify) | https (GitHub Releases API/CDN) | N (no separate signed manifest doc; latest.yml/latest-mac.yml served over HTTPS from GitHub Releases) | hash-from-manifest (electron-updater compares downloaded artifact's sha512 to value embedded in latest*.yml fetched from the release) | N/A — no signing key found; no CSC_LINK/code-signing secrets referenced in CI, so no OS code-signing layer confirmed | src/background.js:28 (`import { autoUpdater } from 'electron-updater'`); src/background.js:267-293 (`checkForUpdates()`, `autoUpdater.checkForUpdatesAndNotify()`, `update-available` handler); vue.config.js:95-97 (`publish: [{ provider: 'github' }]`); .github/workflows/build.yaml (no CSC_LINK/signing secrets present) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-P1.md",
+      "source_line": 3,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/qier222/YesPlayMusic"
+        },
+        {
+          "label": "framework",
+          "value": "Electron (electron-builder + electron-updater, GitHub provider)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (checkForUpdatesAndNotify runs on startup; autoDownload defaults true, not overridden)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (electron-updater downloads installer to temp dir; quitAndInstall triggered via built-in update-downloaded notification handler from checkForUpdatesAndNotify)"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub Releases API/CDN)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no separate signed manifest doc; latest.yml/latest-mac.yml served over HTTPS from GitHub Releases)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (electron-updater compares downloaded artifact's sha512 to value embedded in latest*.yml fetched from the release)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A — no signing key found; no CSC_LINK/code-signing secrets referenced in CI, so no OS code-signing layer confirmed"
+        },
+        {
+          "label": "evidence",
+          "value": "src/background.js:28 (`import { autoUpdater } from 'electron-updater'`); src/background.js:267-293 (`checkForUpdates()`, `autoUpdater.checkForUpdatesAndNotify()`, `update-available` handler); vue.config.js:95-97 (`publish: [{ provider: 'github' }]`); .github/workflows/build.yaml (no CSC_LINK/signing secrets present)"
+        }
+      ]
+    }
   ]
 }

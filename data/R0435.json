@@ -42,5 +42,53 @@
       "line": 25,
       "text": "| upterm | https://github.com/owenthereal/upterm | 1a8b11e / 2026-07-12 | **Y** | N (manual `upterm upgrade` subcommand) | Y (replaces the running binary; executed on next launch) | https, TLS validation NOT disabled anywhere (no `InsecureSkipVerify`/custom `tls.Config` found in upterm or its `github.com/tj/go-update` dependency — default Go `net/http` client used) | N (no manifest signing; release metadata comes straight from unauthenticated GitHub REST API JSON) | **none** — tarball asset is downloaded via plain `http.Get(a.URL)` and unpacked/installed with zero hash or signature check | n/a (no verifying key exists at all) | `cmd/upterm/command/upgrade.go:44-98` builds an `update.Manager` (github.com/tj/go-update v2.2.4), calls `m.LatestReleases()` → GitHub API `GetLatestRelease`, finds an OS/arch tarball asset (`FindTarballWithVersion`, lines 112-122), downloads it (`a.DownloadProxy`) and calls `m.Install(tarball)` (line 96); dependency source `github.com/tj/go-update@update.go:148-187` (`DownloadProxy`: plain `http.Get`, no checksum) and `update.go:106-113` (`Install`→`InstallTo` at lines 57-103: unpacks tarball with `unpackit.Unpack`, `os.Chmod(bin,0755)`, then `os.Rename` over the live binary — no signature/hash check anywhere in the library) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC5.md",
+      "source_line": 25,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/owenthereal/upterm"
+        },
+        {
+          "label": "commit/date",
+          "value": "1a8b11e / 2026-07-12"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "**Y**"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (manual `upterm upgrade` subcommand)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y (replaces the running binary; executed on next launch)"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS validation NOT disabled anywhere (no `InsecureSkipVerify`/custom `tls.Config` found in upterm or its `github.com/tj/go-update` dependency — default Go `net/http` client used)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no manifest signing; release metadata comes straight from unauthenticated GitHub REST API JSON)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — tarball asset is downloaded via plain `http.Get(a.URL)` and unpacked/installed with zero hash or signature check"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a (no verifying key exists at all)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`cmd/upterm/command/upgrade.go:44-98` builds an `update.Manager` (github.com/tj/go-update v2.2.4), calls `m.LatestReleases()` → GitHub API `GetLatestRelease`, finds an OS/arch tarball asset (`FindTarballWithVersion`, lines 112-122), downloads it (`a.DownloadProxy`) and calls `m.Install(tarball)` (line 96); dependency source `github.com/tj/go-update@update.go:148-187` (`DownloadProxy`: plain `http.Get`, no checksum) and `update.go:106-113` (`Install`→`InstallTo` at lines 57-103: unpacks tarball with `unpackit.Unpack`, `os.Chmod(bin,0755)`, then `os.Rename` over the live binary — no signature/hash check anywhere in the library)"
+        }
+      ]
+    }
   ]
 }

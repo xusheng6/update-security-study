@@ -42,5 +42,53 @@
       "line": 11,
       "text": "| IPFS Desktop | https://github.com/ipfs/ipfs-desktop.git | 30022eed 2026-08-10 | Y | Y (bg check every 12h, auto-download, prompts before install) | Y | https, TLS enforced (no bypass found) | Y (electron-updater `latest.yml`/`latest-mac.yml` manifest) | OS code signature (mac Squirrel.Mac / win NSIS diff-update signature check) | OS keystore — mac: Developer ID cert + notarization (hardened runtime); win: Azure Trusted Signing, CN allow-list of 4 publisher names | `src/auto-updater/index.js:2,30-69,183-187`; `electron-builder.yml` (mac hardenedRuntime/notarize afterSign hook; win azureSignOptions multi-CN allow-list) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AE4.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/ipfs/ipfs-desktop.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "30022eed 2026-08-10"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (bg check every 12h, auto-download, prompts before install)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (no bypass found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (electron-updater `latest.yml`/`latest-mac.yml` manifest)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "OS code signature (mac Squirrel.Mac / win NSIS diff-update signature check)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore — mac: Developer ID cert + notarization (hardened runtime); win: Azure Trusted Signing, CN allow-list of 4 publisher names"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/auto-updater/index.js:2,30-69,183-187`; `electron-builder.yml` (mac hardenedRuntime/notarize afterSign hook; win azureSignOptions multi-CN allow-list)"
+        }
+      ]
+    }
   ]
 }

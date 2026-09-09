@@ -41,5 +41,53 @@
       "line": 7,
       "text": "| Electron Cash | github.com/Electron-Cash/Electron-Cash | Python/PyQt5 desktop (not actually Electron) | Y | notify (opt-in auto-check via `has_auto_update_check`/`set_auto_update_check`; also manual \"Check for Updates\" menu item); never auto-downloads/installs | N (only opens browser to static download page `electroncash.org/#download`) | https (raw.github.com, OS trust store, no cert pinning) | Y (each version string in the JSON dict is individually signed, not the file as a whole) | signature (Bitcoin/BCH message-signing, secp256k1 ECDSA) — verifies only the version-string announcement, not any binary payload | pinned-in-binary (`VERSION_ANNOUNCEMENT_SIGNING_ADDRESSES` hardcoded BCH addresses) | electroncash_gui/qt/update_checker.py:66-73 (URL + pinned addresses), :117-166 (`_process_server_reply` sig check via `bitcoin.verify_message`); electroncash_gui/qt/main_window.py:5179-5182 (auto-check toggle) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-L1.md",
+      "source_line": 7,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/Electron-Cash/Electron-Cash"
+        },
+        {
+          "label": "framework",
+          "value": "Python/PyQt5 desktop (not actually Electron)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "notify (opt-in auto-check via `has_auto_update_check`/`set_auto_update_check`; also manual \"Check for Updates\" menu item); never auto-downloads/installs"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N (only opens browser to static download page `electroncash.org/#download`)"
+        },
+        {
+          "label": "transport",
+          "value": "https (raw.github.com, OS trust store, no cert pinning)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (each version string in the JSON dict is individually signed, not the file as a whole)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (Bitcoin/BCH message-signing, secp256k1 ECDSA) — verifies only the version-string announcement, not any binary payload"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (`VERSION_ANNOUNCEMENT_SIGNING_ADDRESSES` hardcoded BCH addresses)"
+        },
+        {
+          "label": "evidence",
+          "value": "electroncash_gui/qt/update_checker.py:66-73 (URL + pinned addresses), :117-166 (`_process_server_reply` sig check via `bitcoin.verify_message`); electroncash_gui/qt/main_window.py:5179-5182 (auto-check toggle)"
+        }
+      ]
+    }
   ]
 }

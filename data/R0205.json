@@ -41,5 +41,53 @@
       "line": 10,
       "text": "| Hammerspoon | https://github.com/Hammerspoon/hammerspoon | Sparkle (bundled via CocoaPods, `Pods/Sparkle`) | Y | Y for checks (`SUEnableAutomaticChecks`=true, `SUScheduledCheckInterval`=21600s/6h); install still requires user confirmation via Sparkle's standard prompt (no `SUAutomaticallyUpdate`/silent-install key set) | Y (once user confirms the Sparkle prompt) | https (`SUFeedURL`=`https://raw.githubusercontent.com/Hammerspoon/hammerspoon/master/appcast.xml`; release enclosures point at `https://github.com/.../releases/download/...`) | TLS-only — **no `SUPublicEDKey` or `SUPublicDSAKey` present anywhere in Info.plist** | none observed (no `sparkle:edSignature`/`sparkle:dsaSignature` attribute on any enclosure in the live feed) | none (no key configured; falls back to whatever Sparkle's default unsigned-update handling does, which per Sparkle's own docs is a same-Team-ID code-signing check — not independently confirmed in this repo's source since Sparkle ships as a compiled framework, not source) | Hammerspoon/Hammerspoon-Info.plist:189-193 (`SUEnableAutomaticChecks` true, `SUFeedURL`, `SUScheduledCheckInterval` 21600; grep of full file confirms no `SUPublic*Key` key exists); live fetch of `https://raw.githubusercontent.com/Hammerspoon/hammerspoon/master/appcast.xml` on 2026-08-19 — enclosure for v1.1.1 (`sparkle:version=\"6936\"`) carries no signature attribute |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-M1.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/Hammerspoon/hammerspoon"
+        },
+        {
+          "label": "framework",
+          "value": "Sparkle (bundled via CocoaPods, `Pods/Sparkle`)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y for checks (`SUEnableAutomaticChecks`=true, `SUScheduledCheckInterval`=21600s/6h); install still requires user confirmation via Sparkle's standard prompt (no `SUAutomaticallyUpdate`/silent-install key set)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (once user confirms the Sparkle prompt)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`SUFeedURL`=`https://raw.githubusercontent.com/Hammerspoon/hammerspoon/master/appcast.xml`; release enclosures point at `https://github.com/.../releases/download/...`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "TLS-only — **no `SUPublicEDKey` or `SUPublicDSAKey` present anywhere in Info.plist**"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none observed (no `sparkle:edSignature`/`sparkle:dsaSignature` attribute on any enclosure in the live feed)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none (no key configured; falls back to whatever Sparkle's default unsigned-update handling does, which per Sparkle's own docs is a same-Team-ID code-signing check — not independently confirmed in this repo's source since Sparkle ships as a compiled framework, not source)"
+        },
+        {
+          "label": "evidence",
+          "value": "Hammerspoon/Hammerspoon-Info.plist:189-193 (`SUEnableAutomaticChecks` true, `SUFeedURL`, `SUScheduledCheckInterval` 21600; grep of full file confirms no `SUPublic*Key` key exists); live fetch of `https://raw.githubusercontent.com/Hammerspoon/hammerspoon/master/appcast.xml` on 2026-08-19 — enclosure for v1.1.1 (`sparkle:version=\"6936\"`) carries no signature attribute"
+        }
+      ]
+    }
   ]
 }

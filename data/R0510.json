@@ -42,5 +42,53 @@
       "line": 29,
       "text": "| kube-forwarder | https://github.com/pixel-point/kube-forwarder | 183fbfbe2183c0da4edb5b31fca38de736c9cd3d / 2021-04-01 (unmaintained since 2021) | Y | Y (checked on startup) | Y (after user confirms the \"Sure\" dialog) | https (electron-updater → GitHub Releases provider) | N (no separate signed manifest; relies on electron-updater's built-in OS-codesign check of the downloaded installer) | OS code signing (electron-updater / Squirrel.Mac / NSIS codesign check) | OS keystore (Authenticode / Apple code signing, verified by electron-updater at install time) | `src/main/appUpdater.js:1-13` (`electron-updater` `autoUpdater`, `autoDownload = false`); `:15-27` (`update-available` → confirmation dialog → `autoUpdater.downloadUpdate()`); `:40-47` (`update-downloaded` → `autoUpdater.quitAndInstall()`); `package.json:64-68` (`\"publish\": {\"provider\": \"github\", \"owner\": \"pixel-point\", \"repo\": \"kube-forwarder\"}`); `package.json:93` (`\"electron-updater\": \"^4.0.6\"`, an old but standard release) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AG2.md",
+      "source_line": 29,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/pixel-point/kube-forwarder"
+        },
+        {
+          "label": "commit/date",
+          "value": "183fbfbe2183c0da4edb5b31fca38de736c9cd3d / 2021-04-01 (unmaintained since 2021)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (checked on startup)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (after user confirms the \"Sure\" dialog)"
+        },
+        {
+          "label": "transport",
+          "value": "https (electron-updater → GitHub Releases provider)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no separate signed manifest; relies on electron-updater's built-in OS-codesign check of the downloaded installer)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "OS code signing (electron-updater / Squirrel.Mac / NSIS codesign check)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore (Authenticode / Apple code signing, verified by electron-updater at install time)"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "`src/main/appUpdater.js:1-13` (`electron-updater` `autoUpdater`, `autoDownload = false`); `:15-27` (`update-available` → confirmation dialog → `autoUpdater.downloadUpdate()`); `:40-47` (`update-downloaded` → `autoUpdater.quitAndInstall()`); `package.json:64-68` (`\"publish\": {\"provider\": \"github\", \"owner\": \"pixel-point\", \"repo\": \"kube-forwarder\"}`); `package.json:93` (`\"electron-updater\": \"^4.0.6\"`, an old but standard release)"
+        }
+      ]
+    }
   ]
 }

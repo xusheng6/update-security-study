@@ -43,5 +43,53 @@
       "line": 19,
       "text": "| Urbit | https://github.com/urbit/urbit.git | 08026c8 2026-07-29 | Y | Y-ish (kiln can be set to continuously sync a desk from a source ship; not a simple on/off toggle) | Y (OTA installs new kernel/app Hoon source and it executes inside the deterministic VM) | **not HTTP/HTTPS** — Ames, Urbit's own UDP-based encrypted P2P protocol; every packet is authenticated using the sending ship's keypair | Y, continuously (Ames authenticates every packet, not a discrete \"manifest\") | signature-equivalent: each peer ship's identity/pubkey is resolved via **Azimuth**, Urbit's on-chain (Ethereum L2) PKI — not a hard-coded pinned key in the binary, but not a bare unauthenticated HTTPS endpoint either | `pkg/arvo/gen/hood/ota.hoon:1-18` (`%kiln-install`/`%kiln-sync` generator, takes a source ship `her` to continuously merge from); `pkg/arvo/lib/hood/kiln.hoon` (sync engine) | "
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AE4.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/urbit/urbit.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "08026c8 2026-07-29"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y-ish (kiln can be set to continuously sync a desk from a source ship; not a simple on/off toggle)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (OTA installs new kernel/app Hoon source and it executes inside the deterministic VM)"
+        },
+        {
+          "label": "transport",
+          "value": "**not HTTP/HTTPS** — Ames, Urbit's own UDP-based encrypted P2P protocol; every packet is authenticated using the sending ship's keypair"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y, continuously (Ames authenticates every packet, not a discrete \"manifest\")"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature-equivalent: each peer ship's identity/pubkey is resolved via **Azimuth**, Urbit's on-chain (Ethereum L2) PKI — not a hard-coded pinned key in the binary, but not a bare unauthenticated HTTPS endpoint either"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "not separately recorded"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`pkg/arvo/gen/hood/ota.hoon:1-18` (`%kiln-install`/`%kiln-sync` generator, takes a source ship `her` to continuously merge from); `pkg/arvo/lib/hood/kiln.hoon` (sync engine)"
+        }
+      ]
+    }
   ]
 }

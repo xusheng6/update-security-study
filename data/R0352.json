@@ -44,5 +44,53 @@
       "line": 12,
       "text": "| Portfolio Performance | https://github.com/buchen/portfolio.git | 90b27560fc0804878386911227cac6d01b7a28fa / 2026-08-20 | Y | N (user must click Update, confirms install dialog) | Y | https, TLS enforced (no custom TrustManager/SSLContext found repo-wide) | Y (bundle jars code-signed via `maven-jarsigner-plugin` referenced in `name.abuchen.portfolio.ui/pom.xml:34`, using the same code-signing cert as the Windows/macOS installers) | signature (Eclipse p2 jar-signature verification against JRE trust store, prompts user with publisher identity) | OS/JRE keystore (Authenticode-analog; not pinned in binary) | `name.abuchen.portfolio.ui/src/.../update/UpdateHelper.java:195-254` (`UpdateOperation`/p2 provisioning), default update site `https://updates.portfolio-performance.info/portfolio` in `PreferencesInitializer.java:22` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-X2.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/buchen/portfolio.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "90b27560fc0804878386911227cac6d01b7a28fa / 2026-08-20"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (user must click Update, confirms install dialog)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (no custom TrustManager/SSLContext found repo-wide)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (bundle jars code-signed via `maven-jarsigner-plugin` referenced in `name.abuchen.portfolio.ui/pom.xml:34`, using the same code-signing cert as the Windows/macOS installers)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (Eclipse p2 jar-signature verification against JRE trust store, prompts user with publisher identity)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS/JRE keystore (Authenticode-analog; not pinned in binary)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`name.abuchen.portfolio.ui/src/.../update/UpdateHelper.java:195-254` (`UpdateOperation`/p2 provisioning), default update site `https://updates.portfolio-performance.info/portfolio` in `PreferencesInitializer.java:22`"
+        }
+      ]
+    }
   ]
 }

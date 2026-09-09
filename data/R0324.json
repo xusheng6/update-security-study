@@ -41,5 +41,53 @@
       "line": 25,
       "text": "| Clash Verge Rev | https://github.com/clash-verge-rev/clash-verge-rev | e71cf0e / 2026-08-20 | Y | Y (Tauri updater plugin, periodic + manual) | Y | https (3 endpoints, 2 of which are third-party GFW-circumvention proxy mirrors `update.hwdns.net`/`gh-proxy.org` fronting the real GitHub URL) | Y | signature (minisign/Ed25519, Tauri built-in updater) | **pinned-in-binary** (`pubkey` embedded in `tauri.conf.json`, compiled into the app at build time; verified regardless of which of the 3 mirror endpoints served the update manifest) | `src-tauri/tauri.conf.json:33-43` (`plugins.updater.pubkey` + `endpoints` array) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W6.md",
+      "source_line": 25,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/clash-verge-rev/clash-verge-rev"
+        },
+        {
+          "label": "commit/date",
+          "value": "e71cf0e / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (Tauri updater plugin, periodic + manual)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (3 endpoints, 2 of which are third-party GFW-circumvention proxy mirrors `update.hwdns.net`/`gh-proxy.org` fronting the real GitHub URL)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (minisign/Ed25519, Tauri built-in updater)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned-in-binary** (`pubkey` embedded in `tauri.conf.json`, compiled into the app at build time; verified regardless of which of the 3 mirror endpoints served the update manifest)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src-tauri/tauri.conf.json:33-43` (`plugins.updater.pubkey` + `endpoints` array)"
+        }
+      ]
+    }
   ]
 }

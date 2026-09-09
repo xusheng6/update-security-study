@@ -43,5 +43,53 @@
       "line": 24,
       "text": "| snap-store (Ubuntu Software/Snap Store, gnome-software fork) | https://git.launchpad.net/snap-store | 78a06f78408f6e4a7213eaa6c9604c933664a52 / 2022-04-28 | N | N | Y (via snapd/PackageKit, fully delegated) | https, TLS enforced (libsoup default; app's own HTTP use is icons/appstream/ODRS reviews only, not payloads) | delegated: snap assertions signed by snapd; apt/deb via PackageKit | **none done by this app itself** — snap plugin has zero verify/signature/gpg/sha256 code, talks only to snapd via `SnapdClient` (snapd-glib); no ONLY_TRUSTED bypass found in packagekit plugin | snap path = snapd's root/account/model signing keys (not in this app); apt/PackageKit path = distro keyring (not in this app) | `plugins/snap/gs-plugin-snap.c` (uses `SnapdClient` from `<snapd-glib/snapd-glib.h>`, no verification code); `plugins/packagekit/gs-plugin-packagekit-refine.c:600` (only SIMULATE flag used); confirmed via `gnome-software.doap` this is literally the gnome-software codebase shipped as Snap Store |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AE2.md",
+      "source_line": 24,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://git.launchpad.net/snap-store"
+        },
+        {
+          "label": "commit/date",
+          "value": "78a06f78408f6e4a7213eaa6c9604c933664a52 / 2022-04-28"
+        },
+        {
+          "label": "has_updater",
+          "value": "N"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (via snapd/PackageKit, fully delegated)"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (libsoup default; app's own HTTP use is icons/appstream/ODRS reviews only, not payloads)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "delegated: snap assertions signed by snapd; apt/deb via PackageKit"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none done by this app itself** — snap plugin has zero verify/signature/gpg/sha256 code, talks only to snapd via `SnapdClient` (snapd-glib); no ONLY_TRUSTED bypass found in packagekit plugin"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "snap path = snapd's root/account/model signing keys (not in this app); apt/PackageKit path = distro keyring (not in this app)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`plugins/snap/gs-plugin-snap.c` (uses `SnapdClient` from `<snapd-glib/snapd-glib.h>`, no verification code); `plugins/packagekit/gs-plugin-packagekit-refine.c:600` (only SIMULATE flag used); confirmed via `gnome-software.doap` this is literally the gnome-software codebase shipped as Snap Store"
+        }
+      ]
+    }
   ]
 }

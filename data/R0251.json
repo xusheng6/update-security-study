@@ -41,5 +41,53 @@
       "line": 4,
       "text": "| Listen1-desktop | https://github.com/listen1/listen1_desktop | Electron (electron-builder; electron-updater required directly, not in package.json deps) | Y | Y (`autoUpdater.checkForUpdatesAndNotify()` called unconditionally at module load) | Y (checkForUpdatesAndNotify is electron-updater's built-in download+notify+quitAndInstall flow) | https (defaults to GitHub provider via package.json \"repository\" field; electron-builder build config has no explicit \"publish\" block) | N (no separate signed manifest; latest*.yml served over HTTPS from GitHub Releases, same electron-updater default as above) | hash-from-manifest (sha512 field in latest*.yml, electron-updater default) | N/A — no CSC_LINK/mac_csc_link/win signing secrets in the sole CI workflow, so unsigned artifacts / no OS code-signing confirmed | app/main.js:13,20 (`const { autoUpdater } = require(\"electron-updater\"); autoUpdater.checkForUpdatesAndNotify();`); package.json:19-22 (\"repository\" github URL, no explicit \"publish\" config); .github/workflows/release.yml (uses samuelmeuli/action-electron-builder, no signing cert secrets referenced) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-P1.md",
+      "source_line": 4,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/listen1/listen1_desktop"
+        },
+        {
+          "label": "framework",
+          "value": "Electron (electron-builder; electron-updater required directly, not in package.json deps)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (`autoUpdater.checkForUpdatesAndNotify()` called unconditionally at module load)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (checkForUpdatesAndNotify is electron-updater's built-in download+notify+quitAndInstall flow)"
+        },
+        {
+          "label": "transport",
+          "value": "https (defaults to GitHub provider via package.json \"repository\" field; electron-builder build config has no explicit \"publish\" block)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no separate signed manifest; latest*.yml served over HTTPS from GitHub Releases, same electron-updater default as above)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (sha512 field in latest*.yml, electron-updater default)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A — no CSC_LINK/mac_csc_link/win signing secrets in the sole CI workflow, so unsigned artifacts / no OS code-signing confirmed"
+        },
+        {
+          "label": "evidence",
+          "value": "app/main.js:13,20 (`const { autoUpdater } = require(\"electron-updater\"); autoUpdater.checkForUpdatesAndNotify();`); package.json:19-22 (\"repository\" github URL, no explicit \"publish\" config); .github/workflows/release.yml (uses samuelmeuli/action-electron-builder, no signing cert secrets referenced)"
+        }
+      ]
+    }
   ]
 }

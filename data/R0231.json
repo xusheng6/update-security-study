@@ -41,5 +41,53 @@
       "line": 18,
       "text": "| Hoppscotch Desktop (Tauri) | github.com/hoppscotch/hoppscotch — `packages/hoppscotch-desktop` | Y (`tauri-plugin-updater` 2.3.1) | Check: Y automatic on app launch (`onMounted` → `checkForUpdates()`) unless user has set `disableUpdateChecks`. Download+Install: N automatic — UI shows an \"Install Update\" button (`UpdateFlow.vue`) the user must click, then a separate \"Restart Now\" button. | Y — `download_and_install_update` Tauri command downloads then installs; `restart_application` relaunches | HTTPS — updater endpoint `https://releases.hoppscotch.com/hoppscotch-selfhost-desktop.json` (verified live 2026-08-20, returns valid JSON); artifacts hosted at `github.com/hoppscotch/releases` releases | Y — each platform entry in the fetched JSON carries its own detached signature (\"`signature from tauri secret key`\", minisign format), verified confirmed live: e.g. `windows-x86_64.signature` present alongside its `.msi`/`.AppImage` URL | signature [minisign / Ed25519, via `tauri-plugin-updater`'s built-in verification] | pubkey pinned in `tauri.conf.json`, baked into the app binary at build time (`RWRYQfDU+OSdYG5D34gfcLq6tnvCvec87euieOJhCOY0Lws0cHVkYkx7` decoded from the base64 minisign key block) | packages/hoppscotch-desktop/src-tauri/tauri.conf.json:33-40 (`\"updater\": {\"active\": true, \"endpoints\": [\"https://releases.hoppscotch.com/hoppscotch-selfhost-desktop.json\"], \"dialog\": true, \"pubkey\": \"dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDYwOURFNEY4RDRGMDQxNTgK...\"}`); src-tauri/Cargo.toml (`tauri-plugin-updater = \"2.3.1\"`); src-tauri/src/updater.rs (`check_for_updates`, `download_and_install_update` commands); src/views/StandardHome.vue:150-165 (`onMounted` auto-check gated by `settings.disableUpdateChecks`); src/views/shared/UpdateFlow.vue (`Install Update` / `Restart Now` buttons — user-gated) | Solid implementation: pinned public key + per-artifact signatures + HTTPS, and destructive actions (download/install) require explicit user click. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-O7.md",
+      "source_line": 18,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/hoppscotch/hoppscotch — `packages/hoppscotch-desktop`"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (`tauri-plugin-updater` 2.3.1)"
+        },
+        {
+          "label": "auto",
+          "value": "Check: Y automatic on app launch (`onMounted` → `checkForUpdates()`) unless user has set `disableUpdateChecks`. Download+Install: N automatic — UI shows an \"Install Update\" button (`UpdateFlow.vue`) the user must click, then a separate \"Restart Now\" button."
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — `download_and_install_update` Tauri command downloads then installs; `restart_application` relaunches"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS — updater endpoint `https://releases.hoppscotch.com/hoppscotch-selfhost-desktop.json` (verified live 2026-08-20, returns valid JSON); artifacts hosted at `github.com/hoppscotch/releases` releases"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y — each platform entry in the fetched JSON carries its own detached signature (\"`signature from tauri secret key`\", minisign format), verified confirmed live: e.g. `windows-x86_64.signature` present alongside its `.msi`/`.AppImage` URL"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature [minisign / Ed25519, via `tauri-plugin-updater`'s built-in verification]"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pubkey pinned in `tauri.conf.json`, baked into the app binary at build time (`RWRYQfDU+OSdYG5D34gfcLq6tnvCvec87euieOJhCOY0Lws0cHVkYkx7` decoded from the base64 minisign key block)"
+        },
+        {
+          "label": "evidence",
+          "value": "packages/hoppscotch-desktop/src-tauri/tauri.conf.json:33-40 (`\"updater\": {\"active\": true, \"endpoints\": [\"https://releases.hoppscotch.com/hoppscotch-selfhost-desktop.json\"], \"dialog\": true, \"pubkey\": \"dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDYwOURFNEY4RDRGMDQxNTgK...\"}`); src-tauri/Cargo.toml (`tauri-plugin-updater = \"2.3.1\"`); src-tauri/src/updater.rs (`check_for_updates`, `download_and_install_update` commands); src/views/StandardHome.vue:150-165 (`onMounted` auto-check gated by `settings.disableUpdateChecks`); src/views/shared/UpdateFlow.vue (`Install Update` / `Restart Now` buttons — user-gated)"
+        },
+        {
+          "label": "notes",
+          "value": "Solid implementation: pinned public key + per-artifact signatures + HTTPS, and destructive actions (download/install) require explicit user click."
+        }
+      ]
+    }
   ]
 }

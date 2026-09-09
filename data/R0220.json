@@ -41,5 +41,53 @@
       "line": 29,
       "text": "| Fooocus | lllyasviel/Fooocus | Python (Gradio, ComfyUI-derived backend) | Y — built into the **documented, standard launch command** itself | **Y — fully automatic on every single startup, no prompt, no opt-out flag** | Y — `pygit2` `fetch()` + fast-forward `reset(..., GIT_RESET_HARD)` to latest `origin/<branch>` HEAD runs before Fooocus starts, then the freshly-pulled `launch.py` is imported and executed in the same process (`from launch import *`) | git protocol over the configured `origin` remote (typically `https://github.com/lllyasviel/Fooocus`); TLS only | N | none — no signature/commit-verification of any kind; whatever `origin/<branch>` currently contains is merged and immediately executed | n/a | `entry_with_update.py:1-46` (entire file — auto `fetch`+hard-reset+`from launch import *`); `readme.md:141,146,163,168,182,186,201,211,218,234,236,474,478,482` (every documented run command invokes `entry_with_update.py`, not `launch.py`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-N1.md",
+      "source_line": 29,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "lllyasviel/Fooocus"
+        },
+        {
+          "label": "framework",
+          "value": "Python (Gradio, ComfyUI-derived backend)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y — built into the **documented, standard launch command** itself"
+        },
+        {
+          "label": "auto",
+          "value": "**Y — fully automatic on every single startup, no prompt, no opt-out flag**"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — `pygit2` `fetch()` + fast-forward `reset(..., GIT_RESET_HARD)` to latest `origin/<branch>` HEAD runs before Fooocus starts, then the freshly-pulled `launch.py` is imported and executed in the same process (`from launch import *`)"
+        },
+        {
+          "label": "transport",
+          "value": "git protocol over the configured `origin` remote (typically `https://github.com/lllyasviel/Fooocus`); TLS only"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — no signature/commit-verification of any kind; whatever `origin/<branch>` currently contains is merged and immediately executed"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence",
+          "value": "`entry_with_update.py:1-46` (entire file — auto `fetch`+hard-reset+`from launch import *`); `readme.md:141,146,163,168,182,186,201,211,218,234,236,474,478,482` (every documented run command invokes `entry_with_update.py`, not `launch.py`)"
+        }
+      ]
+    }
   ]
 }

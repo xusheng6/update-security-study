@@ -42,5 +42,53 @@
       "line": 29,
       "text": "| datasette-app | https://github.com/simonw/datasette-app.git | 0369322103e655135af624319b626b21d3ec85c4 / 2024-08-27 | Y | Y (checks hourly, auto-downloads in background) | Y (auto-downloads; user just clicks \"Restart\" to apply) | https (`update.electronjs.org` → GitHub Releases proxy), enforced | N (no separate manifest signature scheme) | OS code-signing (Squirrel.Mac / Squirrel.Windows verify against Apple codesign / Authenticode) | OS keystore (not pinned in binary) | `main.js:25-27` (`require(\"update-electron-app\")({updateInterval: \"1 hour\"})`); `package.json` dependency `update-electron-app@^2.0.1` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AG8.md",
+      "source_line": 29,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/simonw/datasette-app.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "0369322103e655135af624319b626b21d3ec85c4 / 2024-08-27"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (checks hourly, auto-downloads in background)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (auto-downloads; user just clicks \"Restart\" to apply)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`update.electronjs.org` → GitHub Releases proxy), enforced"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no separate manifest signature scheme)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "OS code-signing (Squirrel.Mac / Squirrel.Windows verify against Apple codesign / Authenticode)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore (not pinned in binary)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`main.js:25-27` (`require(\"update-electron-app\")({updateInterval: \"1 hour\"})`); `package.json` dependency `update-electron-app@^2.0.1`"
+        }
+      ]
+    }
   ]
 }

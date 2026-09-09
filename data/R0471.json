@@ -42,5 +42,53 @@
       "line": 22,
       "text": "| ChatALL | https://github.com/sunner/ChatALL | 6d089c2 / 2025-09-26 | Y (`update-electron-app` → Electron `autoUpdater`) | Y (checks/downloads automatically) | Y | https (`update.electronjs.org` → GitHub releases) | Squirrel-validated bundle | OS code-signing (Squirrel.Mac signature match); Windows side is checksum-only | OS keystore (mac codesign identity) | `src/update.js:1-3,45-51`, `src/background.js:469` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AE1.md",
+      "source_line": 22,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/sunner/ChatALL"
+        },
+        {
+          "label": "commit/date",
+          "value": "6d089c2 / 2025-09-26"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y (`update-electron-app` → Electron `autoUpdater`)"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (checks/downloads automatically)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`update.electronjs.org` → GitHub releases)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Squirrel-validated bundle"
+        },
+        {
+          "label": "payload_verification",
+          "value": "OS code-signing (Squirrel.Mac signature match); Windows side is checksum-only"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore (mac codesign identity)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/update.js:1-3,45-51`, `src/background.js:469`"
+        }
+      ]
+    }
   ]
 }

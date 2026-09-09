@@ -41,5 +41,53 @@
       "line": 12,
       "text": "| Workrave | https://github.com/rcaelers/workrave.git | 8acff78 / 2026-08-18 | Y | Y (Windows builds only) | Y (Windows) | https, TLS enforced | Y | signature (Ed25519) + Authenticode + sigstore cert-transparency, layered | **pinned in binary** (Ed25519 pubkey hardcoded) + OS Authenticode | `ui/app/toolkits/qt/AutoUpdater.cc:57`: appcast `https://appcast.workrave.org/v1.12-qt/appcast.xml`; `:59`: `updater->set_signature_verification_key(\"MCowBQYDK2VwAyEAZ1I+iYYFpFMPcSj15BnHl6x7uow2CdxT0t2BmUzMGXk=\")` (pinned Ed25519 SPKI); `:88-92`: `pre_download_validation_callback` restricts download URL to `https://github.com/rcaelers/workrave/`; `:100-111`: `pre_install_validation_callback` requires Authenticode `is_signed && is_valid && subject_name==\"Rob Caelers\"`; `:114-119`: sigstore bundle validated against `oidc_issuer==\"https://github.com/login/oauth\"` + `subject_email==\"rob.caelers@gmail.com\"`. Uses own \"unfold\" auto-update library. Feature gated by `WITH_AUTO_UPDATE` CMake option, scoped inside `if(WIN32)` block (`CMakeLists.txt:1063-1066,1077`) — i.e. implemented and wired for official Windows releases; mirrored in GTK toolkit (`ui/app/toolkits/gtkmm/AutoUpdater.cc`). No plaintext/disabled-TLS found repo-wide. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-X5.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/rcaelers/workrave.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "8acff78 / 2026-08-18"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (Windows builds only)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (Windows)"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (Ed25519) + Authenticode + sigstore cert-transparency, layered"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned in binary** (Ed25519 pubkey hardcoded) + OS Authenticode"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`ui/app/toolkits/qt/AutoUpdater.cc:57`: appcast `https://appcast.workrave.org/v1.12-qt/appcast.xml`; `:59`: `updater->set_signature_verification_key(\"MCowBQYDK2VwAyEAZ1I+iYYFpFMPcSj15BnHl6x7uow2CdxT0t2BmUzMGXk=\")` (pinned Ed25519 SPKI); `:88-92`: `pre_download_validation_callback` restricts download URL to `https://github.com/rcaelers/workrave/`; `:100-111`: `pre_install_validation_callback` requires Authenticode `is_signed && is_valid && subject_name==\"Rob Caelers\"`; `:114-119`: sigstore bundle validated against `oidc_issuer==\"https://github.com/login/oauth\"` + `subject_email==\"rob.caelers@gmail.com\"`. Uses own \"unfold\" auto-update library. Feature gated by `WITH_AUTO_UPDATE` CMake option, scoped inside `if(WIN32)` block (`CMakeLists.txt:1063-1066,1077`) — i.e. implemented and wired for official Windows releases; mirrored in GTK toolkit (`ui/app/toolkits/gtkmm/AutoUpdater.cc`). No plaintext/disabled-TLS found repo-wide."
+        }
+      ]
+    }
   ]
 }

@@ -41,5 +41,49 @@
       "line": 7,
       "text": "| **rustic** (github.com/rustic-rs/rustic) | Y | N (manual `rustic self-update` subcommand; feature-gated, not in default build) | Y (downloads GitHub release binary/archive and replaces the running executable in place) | https (GitHub API + release-asset download via `reqwest` w/ `rustls`, standard TLS cert validation; no cert pinning) | unknown/no (no separate signed manifest — release metadata comes straight from GitHub Releases API) | none observed (rustic invokes the `self_update` crate's default GitHub backend flow and never calls the crate's optional `.verifying_keys()`/checksum APIs) | n/a (no verifying key configured) | `rustic/src/commands/self_update.rs:31-58` (self_update::backends::github::Update, `release.update()`); `rustic/Cargo.toml:36` (`self-update = [\"dep:self_update\",\"dep:semver\"]`, opt-in feature); `rustic/Cargo.toml:125` (`self_update = \"0.44.0\"`, features `rustls`,`reqwest`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-P5.md",
+      "source_line": 7,
+      "fields": [
+        {
+          "label": "Project",
+          "value": "**rustic** (github.com/rustic-rs/rustic)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual `rustic self-update` subcommand; feature-gated, not in default build)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (downloads GitHub release binary/archive and replaces the running executable in place)"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub API + release-asset download via `reqwest` w/ `rustls`, standard TLS cert validation; no cert pinning)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "unknown/no (no separate signed manifest — release metadata comes straight from GitHub Releases API)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none observed (rustic invokes the `self_update` crate's default GitHub backend flow and never calls the crate's optional `.verifying_keys()`/checksum APIs)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a (no verifying key configured)"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "`rustic/src/commands/self_update.rs:31-58` (self_update::backends::github::Update, `release.update()`); `rustic/Cargo.toml:36` (`self-update = [\"dep:self_update\",\"dep:semver\"]`, opt-in feature); `rustic/Cargo.toml:125` (`self_update = \"0.44.0\"`, features `rustls`,`reqwest`)"
+        }
+      ]
+    }
   ]
 }

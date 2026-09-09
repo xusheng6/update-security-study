@@ -41,5 +41,53 @@
       "line": 14,
       "text": "| HTMLy | https://github.com/danpros/htmly.git | c8b7ed9af39a266b256759becf26dba6a59e11e6 / 2026-01-25 | Y | N (admin clicks \"Update to X now\" link) | Y | https, TLS enforced (`verify_peer=true` + explicit `cafile` via Composer CaBundle; constructor throws if no HTTPS wrapper) | N | none (no hash/sig check on downloaded zipball) | server-supplied/unpinned (github.com API + zipball, standard CA trust) | `system/admin/views/update.html.php:8-46` builds `Kanti\\HubUpdater`; `system/htmly.php:2665-2675` route `/admin/update/now/:csrf` calls `$updater->update()`; `system/vendor/kanti/hub-updater/src/HubUpdater.php:90-116` (TLS setup), `:173-192` `update()` downloads `zipball_url` and unzips directly over the install (`unZip()` at `:225-249`) with no signature/hash verification of contents. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AF7.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/danpros/htmly.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "c8b7ed9af39a266b256759becf26dba6a59e11e6 / 2026-01-25"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (admin clicks \"Update to X now\" link)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (`verify_peer=true` + explicit `cafile` via Composer CaBundle; constructor throws if no HTTPS wrapper)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (no hash/sig check on downloaded zipball)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (github.com API + zipball, standard CA trust)"
+        },
+        {
+          "label": "evidence",
+          "value": "`system/admin/views/update.html.php:8-46` builds `Kanti\\HubUpdater`; `system/htmly.php:2665-2675` route `/admin/update/now/:csrf` calls `$updater->update()`; `system/vendor/kanti/hub-updater/src/HubUpdater.php:90-116` (TLS setup), `:173-192` `update()` downloads `zipball_url` and unzips directly over the install (`unZip()` at `:225-249`) with no signature/hash verification of contents."
+        }
+      ]
+    }
   ]
 }

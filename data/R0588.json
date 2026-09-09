@@ -43,5 +43,53 @@
       "line": 23,
       "text": "| massCode | https://github.com/massCodeIO/massCode | 9db02cb / 2026-08-17 | Y | Y (auto-download when same-major + user pref `updates.autoUpdate`; else notify-only) | Y | https, TLS enforced (no `rejectUnauthorized:false` on the update path — see note) | Y (electron-builder `latest.yml`/`latest-mac.yml` w/ SHA512) | hash (SHA512 in `latest*.yml`) + OS code signature (mac `notarize:true`, hardened runtime; win nsis/portable built by electron-builder, presumably Authenticode-signed by CI) | OS keystore (Gatekeeper/notarization ticket, Windows Authenticode cert chain) — not a key pinned in the massCode binary itself | `src/main/updates/index.ts:1-139` (`autoUpdater` from `electron-updater`, `checkForUpdates`/`downloadUpdate`/`quitAndInstall`); `electron-builder.json` (`publish.provider\":\"github\",\"owner\":\"massCodeIO\"`, `mac.notarize:true`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AL3.md",
+      "source_line": 23,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/massCodeIO/massCode"
+        },
+        {
+          "label": "commit/date",
+          "value": "9db02cb / 2026-08-17"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (auto-download when same-major + user pref `updates.autoUpdate`; else notify-only)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (no `rejectUnauthorized:false` on the update path — see note)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (electron-builder `latest.yml`/`latest-mac.yml` w/ SHA512)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (SHA512 in `latest*.yml`) + OS code signature (mac `notarize:true`, hardened runtime; win nsis/portable built by electron-builder, presumably Authenticode-signed by CI)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore (Gatekeeper/notarization ticket, Windows Authenticode cert chain) — not a key pinned in the massCode binary itself"
+        },
+        {
+          "label": "evidence",
+          "value": "`src/main/updates/index.ts:1-139` (`autoUpdater` from `electron-updater`, `checkForUpdates`/`downloadUpdate`/`quitAndInstall`); `electron-builder.json` (`publish.provider\":\"github\",\"owner\":\"massCodeIO\"`, `mac.notarize:true`)"
+        }
+      ]
+    }
   ]
 }

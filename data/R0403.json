@@ -41,5 +41,53 @@
       "line": 19,
       "text": "| Ledger Live (desktop) | https://github.com/LedgerHQ/ledger-live | 3bbaa09 / 2026-08-20 | Y | Y (autoDownload=true, autoInstallOnAppQuit=true) — disabled entirely for store distributions (`isStoreDistribution()`) | Y | https (electron-updater GitHub/S3 feed `https://resources.live.ledger.app/...`; extra fetch via `@ledgerhq/live-network`, no TLS override found) | Y (electron-updater's own OS-signature/hash check) PLUS an additional independent verification layer | SHA-512 hash of downloaded file verified against a hash file, whose signature is verified with RSA/EC pubkey chain-of-trust (key rotation: new keys must be signed by the previous key) | pinned-in-binary — `src/main/updater/ledger-pubkey.ts` hardcodes a PEM EC public key baked into the app, used as root of trust for `getNextKey`/`getNextKeySignature` chain | apps/ledger-live-desktop/src/main/updater/init.ts:1-74 (autoUpdater config, verify() call after update-downloaded); createElectronAppUpdater.ts:1-27 (hash+sig+pubkey URLs); createAppUpdater.ts:13-73 (verify hash+signature, key-rotation chain, throws on failure); ledger-pubkey.ts:1-6 (pinned PEM key) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AA1.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/LedgerHQ/ledger-live"
+        },
+        {
+          "label": "commit/date",
+          "value": "3bbaa09 / 2026-08-20"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (autoDownload=true, autoInstallOnAppQuit=true) — disabled entirely for store distributions (`isStoreDistribution()`)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (electron-updater GitHub/S3 feed `https://resources.live.ledger.app/...`; extra fetch via `@ledgerhq/live-network`, no TLS override found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (electron-updater's own OS-signature/hash check) PLUS an additional independent verification layer"
+        },
+        {
+          "label": "payload_verification",
+          "value": "SHA-512 hash of downloaded file verified against a hash file, whose signature is verified with RSA/EC pubkey chain-of-trust (key rotation: new keys must be signed by the previous key)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary — `src/main/updater/ledger-pubkey.ts` hardcodes a PEM EC public key baked into the app, used as root of trust for `getNextKey`/`getNextKeySignature` chain"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "apps/ledger-live-desktop/src/main/updater/init.ts:1-74 (autoUpdater config, verify() call after update-downloaded); createElectronAppUpdater.ts:1-27 (hash+sig+pubkey URLs); createAppUpdater.ts:13-73 (verify hash+signature, key-rotation chain, throws on failure); ledger-pubkey.ts:1-6 (pinned PEM key)"
+        }
+      ]
+    }
   ]
 }

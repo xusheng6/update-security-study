@@ -41,5 +41,53 @@
       "line": 20,
       "text": "| Signal Desktop | https://github.com/signalapp/Signal-Desktop | 57194b0 / 2026-08-19 | Y | Y | Y | https, TLS enforced **+ pinned CA cert** (`config/default.json:23`, Signal's own Root CA baked into config, used by `got.main.ts:23-46` for all update fetches — pins the CA, not just OS trust store) | No (release feed itself unsigned; app-level payload sig is what matters) | hash+sig (SHA-256 + Curve25519/XEdDSA) | pinned-in-binary (`config/default.json:12`; Linux AppImage build uses a separate pinned `appImageUpdatesPublicKey`, `config/default.json:13` / `ts/updater/linuxAppImage.main.ts:58-59`) | ts/updater/common.main.ts:311-312,423-436; ts/updater/signature.node.ts:39-42; config/default.json:12,13,23; ts/updater/got.main.ts:23-46 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U8.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/signalapp/Signal-Desktop"
+        },
+        {
+          "label": "commit/date",
+          "value": "57194b0 / 2026-08-19"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced **+ pinned CA cert** (`config/default.json:23`, Signal's own Root CA baked into config, used by `got.main.ts:23-46` for all update fetches — pins the CA, not just OS trust store)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "No (release feed itself unsigned; app-level payload sig is what matters)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash+sig (SHA-256 + Curve25519/XEdDSA)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (`config/default.json:12`; Linux AppImage build uses a separate pinned `appImageUpdatesPublicKey`, `config/default.json:13` / `ts/updater/linuxAppImage.main.ts:58-59`)"
+        },
+        {
+          "label": "evidence",
+          "value": "ts/updater/common.main.ts:311-312,423-436; ts/updater/signature.node.ts:39-42; config/default.json:12,13,23; ts/updater/got.main.ts:23-46"
+        }
+      ]
+    }
   ]
 }

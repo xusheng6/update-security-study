@@ -43,5 +43,53 @@
       "line": 4,
       "text": "| GitAhead | github.com/gitahead/gitahead | Qt/C++ (archived, last release ~2020) | Y | notify+manual by default; auto-download if `update/download` setting enabled and same major version | Y | HTTPS; TLS validation ENFORCED by default but user-bypassable (prompt \"Ignore\" persists `ssl/ignore=true`) | N (plain changelog.md, not a signed manifest) | none (no hash or signature check on downloaded installer/dmg/exe; relies only on HTTPS transport + implicit OS code-signing checks, e.g. macOS Gatekeeper on the .app / Windows ShellExecute of the .exe) | n/a (no signing key used by app) | src/update/Updater.cpp:47 (kLinkFmt github releases URL, HTTPS), :70 (sslErrors wired), :105-174 (update() fetches raw changelog.md over HTTPS, parses version, builds download link, no hash field), :176-222 (download() saves reply bytes directly to temp file, no checksum/signature check anywhere), src/update/Updater_win.cpp:22 (ShellExecuteW runs downloaded .exe directly), src/update/Updater_mac.mm:73-122 (mounts downloaded .dmg, copies .app over existing bundle, no codesign/notarization check in app code), src/app/Application.cpp:284-310 (handleSslErrors: `ssl/ignore` settings bypass, reply->ignoreSslErrors(errors)) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-H5.md",
+      "source_line": 4,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/gitahead/gitahead"
+        },
+        {
+          "label": "framework",
+          "value": "Qt/C++ (archived, last release ~2020)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "notify+manual by default; auto-download if `update/download` setting enabled and same major version"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS; TLS validation ENFORCED by default but user-bypassable (prompt \"Ignore\" persists `ssl/ignore=true`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (plain changelog.md, not a signed manifest)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (no hash or signature check on downloaded installer/dmg/exe; relies only on HTTPS transport + implicit OS code-signing checks, e.g. macOS Gatekeeper on the .app / Windows ShellExecute of the .exe)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a (no signing key used by app)"
+        },
+        {
+          "label": "evidence",
+          "value": "src/update/Updater.cpp:47 (kLinkFmt github releases URL, HTTPS), :70 (sslErrors wired), :105-174 (update() fetches raw changelog.md over HTTPS, parses version, builds download link, no hash field), :176-222 (download() saves reply bytes directly to temp file, no checksum/signature check anywhere), src/update/Updater_win.cpp:22 (ShellExecuteW runs downloaded .exe directly), src/update/Updater_mac.mm:73-122 (mounts downloaded .dmg, copies .app over existing bundle, no codesign/notarization check in app code), src/app/Application.cpp:284-310 (handleSslErrors: `ssl/ignore` settings bypass, reply->ignoreSslErrors(errors))"
+        }
+      ]
+    }
   ]
 }

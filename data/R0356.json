@@ -42,5 +42,53 @@
       "line": 21,
       "text": "| Invoice Ninja | https://github.com/invoiceninja/invoiceninja.git | dcc27c94dc0c463341676a0c19b89d927c3d1287 / 2026-08-12 | Y | N (POST `/self-update`, password-protected admin action) | Y (`PharData::extractTo()` over the live app, then runs migrations) | https, TLS enforced (plain PHP `copy()`/`file_get_contents()` against `https://` URLs use PHP's default stream-wrapper cert verification; no `verify_peer=false`/stream-context override found anywhere in the self-update path) | N | none (no hash/signature check of the downloaded `invoiceninja.tar`, just `PharData` extraction) | none / server-supplied-unpinned (target version comes from `https://pdf.invoicing.co/api/version`, a company-controlled but separate/unpinned endpoint, then spliced into a hardcoded `github.com/invoiceninja/invoiceninja/releases/download/...` URL) | `app/Http/Controllers/SelfUpdateController.php:47-141` (`update()`), `:200-216` (`checkVersion()`/`getDownloadUrl()`); route `routes/api.php:430-431` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-X2.md",
+      "source_line": 21,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/invoiceninja/invoiceninja.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "dcc27c94dc0c463341676a0c19b89d927c3d1287 / 2026-08-12"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (POST `/self-update`, password-protected admin action)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y (`PharData::extractTo()` over the live app, then runs migrations)"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (plain PHP `copy()`/`file_get_contents()` against `https://` URLs use PHP's default stream-wrapper cert verification; no `verify_peer=false`/stream-context override found anywhere in the self-update path)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (no hash/signature check of the downloaded `invoiceninja.tar`, just `PharData` extraction)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none / server-supplied-unpinned (target version comes from `https://pdf.invoicing.co/api/version`, a company-controlled but separate/unpinned endpoint, then spliced into a hardcoded `github.com/invoiceninja/invoiceninja/releases/download/...` URL)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`app/Http/Controllers/SelfUpdateController.php:47-141` (`update()`), `:200-216` (`checkVersion()`/`getDownloadUrl()`); route `routes/api.php:430-431`"
+        }
+      ]
+    }
   ]
 }

@@ -27,6 +27,22 @@ MEANINGS = {
     'N': 'The initial scan recorded no in-app updater or notification-only behavior. This is not a security rating.'
 }
 e = lambda value: html.escape(str(value), quote=True)
+def inline(value):
+    """Render the small, safe formatting subset used in evidence cells."""
+    value = e(value)
+    value = re.sub(r'`([^`]+)`', r'<code class="inline">\1</code>', value)
+    return re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', value)
+
+FIELD_LABELS = {
+    'repo': 'Repository', 'repo(clone url)': 'Repository',
+    'framework': 'Framework', 'commit/date': 'Revision',
+    'has_updater': 'Updater present', 'auto': 'Automatic behavior',
+    'downloads_and_executes': 'Downloads and executes',
+    'transport': 'Transport', 'manifest_signed': 'Manifest authentication',
+    'payload_verification': 'Payload verification',
+    'verifying_key_source': 'Trust root', 'evidence': 'Source evidence',
+    'evidence(file:line)': 'Source evidence'
+}
 rows = [json.loads(p.read_text()) for p in sorted((ROOT / 'data').glob('*.json'))]
 assert rows, 'No records'
 ids = set()
@@ -80,15 +96,25 @@ for r in rows:
     if not sources:
         sources = '<li>No source revision is attached to this record.</li>'
     limits = ''.join(f'<li>{e(v)}</li>' for v in r['limitations']) or '<li>This is a historical source observation, not a verification of every released binary or current upstream version.</li>'
-    evidence = ''.join(f'<li><strong>{e(v.get("file", "Original batch report"))}</strong><p>{e(v.get("text", ""))}</p></li>' for v in r.get('original_evidence', []))
+    evidence = ''
+    items = r.get('structured_evidence', [])
+    for number, item in enumerate(items, 1):
+        fields = ''
+        for field in item['fields']:
+            key = re.sub(r'\s+', ' ', field['label'].strip().lower())
+            label = FIELD_LABELS.get(key, field['label'].replace('_', ' ').strip().title())
+            fields += f'<div class="evidence-field"><dt>{e(label)}</dt><dd>{inline(field["value"])}</dd></div>'
+        suffix = f' {number}' if len(items) > 1 else ''
+        origin = f'{item["source_file"]}, line {item["source_line"]}'
+        evidence += f'<section class="evidence-card"><p class="evidence-origin">Original batch evidence{suffix} · {e(origin)}</p><dl class="evidence-grid">{fields}</dl></section>'
     if not evidence:
-        evidence = '<li>The retained record does not include a separate evidence excerpt. See the finding and propose a correction if the underlying code no longer matches it.</li>'
+        evidence = '<p class="muted">The retained record does not include a separate detailed evidence row. The updater facts and original finding above are the available original analysis.</p>'
     proposed = r['proposed_primary_tier']
     detail_facts = ''
     for label, key in [('Downloads / runs', 'downloads_and_runs'), ('Transport', 'transport'), ('Payload verification', 'payload_verification'), ('Trust root', 'trust_root')]:
         if r.get(key) is not None:
             detail_facts += f'<dt>{label}</dt><dd>{e(r[key])}</dd>'
-    content = f'''<main id="main" class="detail"><a class="back" href="../index.html">← All records</a><p class="eyebrow">RECORD {rid} · {e(r['category'])}</p><h1>{e(r['name'])}</h1><div class="record-meta">{badge(tier)}<span>Original classification</span><span class="review-status">{e(r['review_status'])}</span></div><div class="actions">{project}<a class="button" href="../data/{rid}.json">View record data</a></div><div class="detail-grid"><article><section class="panel"><p class="eyebrow">ORIGINAL ANALYSIS</p><h2>What the Claude Code analysis found</h2><p class="description">{e(r['description'])}</p></section><section class="panel"><h2>Original evidence record</h2><ul class="sources">{evidence}</ul></section><section class="panel"><h2>Scope and limitations</h2><ul>{limits}</ul></section><section class="panel"><h2>Source snapshots</h2><ul class="sources">{sources}</ul><p class="muted">Repository links identify retained study material. This does not certify every released binary or the latest upstream version.</p></section></article><aside><section class="panel facts"><h2>At a glance</h2><dl><dt>Original tier</dt><dd>{tier} · {LABELS[tier]}</dd>{detail_facts}<dt>Original channel label</dt><dd>{e(r['channel'])}</dd><dt>Displayed assessment</dt><dd>{e(proposed)}</dd><dt>Record snapshot</dt><dd>{e(r['snapshot_date'])}</dd><dt>Independently certified?</dt><dd>No — original AI source analysis</dd></dl></section><section class="panel tier-note tier-{tier}"><h2>What tier {tier} means</h2><p>{MEANINGS[tier]}</p><a href="../about.html">Read the definitions →</a></section><section class="panel"><h2>Something missing or incorrect?</h2><p>Help improve this record with the affected version, update channel, and supporting evidence.</p><div class="actions vertical">{actions}</div></section></aside></div></main>'''
+    content = f'''<main id="main" class="detail"><a class="back" href="../index.html">← All records</a><p class="eyebrow">RECORD {rid} · {e(r['category'])}</p><h1>{e(r['name'])}</h1><div class="record-meta">{badge(tier)}<span>Original classification</span><span class="review-status">{e(r['review_status'])}</span></div><div class="actions">{project}<a class="button" href="../data/{rid}.json">View record data</a></div><div class="detail-grid"><article><section class="panel"><p class="eyebrow">ORIGINAL ANALYSIS</p><h2>What the Claude Code analysis found</h2><p class="description">{e(r['description'])}</p></section><section class="panel"><h2>How the updater works</h2>{evidence}</section><section class="panel"><h2>Scope and limitations</h2><ul>{limits}</ul></section><section class="panel"><h2>Source snapshots</h2><ul class="sources">{sources}</ul><p class="muted">Repository links identify retained study material. This does not certify every released binary or the latest upstream version.</p></section></article><aside><section class="panel facts"><h2>At a glance</h2><dl><dt>Original tier</dt><dd>{tier} · {LABELS[tier]}</dd>{detail_facts}<dt>Original channel label</dt><dd>{e(r['channel'])}</dd><dt>Displayed assessment</dt><dd>{e(proposed)}</dd><dt>Record snapshot</dt><dd>{e(r['snapshot_date'])}</dd><dt>Independently certified?</dt><dd>No — original AI source analysis</dd></dl></section><section class="panel tier-note tier-{tier}"><h2>What tier {tier} means</h2><p>{MEANINGS[tier]}</p><a href="../about.html">Read the definitions →</a></section><section class="panel"><h2>Something missing or incorrect?</h2><p>Help improve this record with the affected version, update channel, and supporting evidence.</p><div class="actions vertical">{actions}</div></section></aside></div></main>'''
     (OUT / 'records' / f'{rid}.html').write_text(shell(content, f'{r["name"]} · {TITLE}', '../', r['category'] + ' — update authentication source review.'))
     (OUT / 'data').mkdir(exist_ok=True)
     shutil.copyfile(ROOT / 'data' / f'{rid}.json', OUT / 'data' / f'{rid}.json')

@@ -44,5 +44,53 @@
       "line": 16,
       "text": "| GanttProject | https://github.com/bardsoftware/ganttproject | cb6e8503c0c47312e8855ae2fd9703b97c0dd5ee / 2026-08-21 | Y | Y (isCheckEnabled default true) | Y (Eclipsito downloads + installs, applied on restart) | https (manifest at https://www.ganttproject.biz/dl/updates/ganttproject-3.0.json); eclipsito.jar itself is a prebuilt vendored dep, its internal HTTP client not inspectable from source | n/a (JSON manifest, not separately signed) | signature (PGP) — but CONDITIONAL | pinned-in-binary (classpath resource `/ganttproject-3.4.3390.pub.asc`, bundled in the app, not server-supplied) | biz/ganttproject/platform/PgpUtil.kt:130-151 (verifyFile against bundled pubkey); **bypass**: biz/ganttproject/platform/UpdateDialogModel.kt:264-268 — `if (signatureBody.isNullOrBlank()) { true } else { verifyFile(...); true }` — verification is skipped entirely if the server-supplied manifest entry omits `signatureBody` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC3.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/bardsoftware/ganttproject"
+        },
+        {
+          "label": "commit/date",
+          "value": "cb6e8503c0c47312e8855ae2fd9703b97c0dd5ee / 2026-08-21"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (isCheckEnabled default true)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y (Eclipsito downloads + installs, applied on restart)"
+        },
+        {
+          "label": "transport",
+          "value": "https (manifest at https://www.ganttproject.biz/dl/updates/ganttproject-3.0.json); eclipsito.jar itself is a prebuilt vendored dep, its internal HTTP client not inspectable from source"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "n/a (JSON manifest, not separately signed)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (PGP) — but CONDITIONAL"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (classpath resource `/ganttproject-3.4.3390.pub.asc`, bundled in the app, not server-supplied)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "biz/ganttproject/platform/PgpUtil.kt:130-151 (verifyFile against bundled pubkey); **bypass**: biz/ganttproject/platform/UpdateDialogModel.kt:264-268 — `if (signatureBody.isNullOrBlank()) { true } else { verifyFile(...); true }` — verification is skipped entirely if the server-supplied manifest entry omits `signatureBody`"
+        }
+      ]
+    }
   ]
 }

@@ -43,5 +43,53 @@
       "line": 10,
       "text": "| Stats | exelban/stats | Custom (not Sparkle) | Y | chk: auto, silent, on launch/periodic; dl/inst: manual — user must click the update notification to trigger download+install | Y (downloads a DMG, mounts it, and runs a bundled `updater.sh` shell script, elevating via `AuthorizationExecuteWithPrivileges` if the app dir isn't writable) | https (GitHub REST API `api.github.com`, and self-hosted `https://api.mac-stats.com`) | TLS-only (no cryptographic appcast/manifest signature — plain JSON over HTTPS) | OS-code-signing (`SecStaticCodeCheckValidity` + Team ID match between running app and mounted DMG before running the updater script — not a Sparkle-style detached signature) | none (no pinned EdDSA/DSA key; trust is TLS + Apple code-signing Team ID comparison at install time) | Kit/plugins/Updater.swift:64-67,169-320 (URLs, install/validateAppSignature/teamID); Stats/AppDelegate.swift:25,205-206; Stats/helpers.swift:147-184 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-K1.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "exelban/stats"
+        },
+        {
+          "label": "framework",
+          "value": "Custom (not Sparkle)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "chk: auto, silent, on launch/periodic; dl/inst: manual — user must click the update notification to trigger download+install"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (downloads a DMG, mounts it, and runs a bundled `updater.sh` shell script, elevating via `AuthorizationExecuteWithPrivileges` if the app dir isn't writable)"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub REST API `api.github.com`, and self-hosted `https://api.mac-stats.com`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "TLS-only (no cryptographic appcast/manifest signature — plain JSON over HTTPS)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "OS-code-signing (`SecStaticCodeCheckValidity` + Team ID match between running app and mounted DMG before running the updater script — not a Sparkle-style detached signature)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none (no pinned EdDSA/DSA key; trust is TLS + Apple code-signing Team ID comparison at install time)"
+        },
+        {
+          "label": "evidence",
+          "value": "Kit/plugins/Updater.swift:64-67,169-320 (URLs, install/validateAppSignature/teamID); Stats/AppDelegate.swift:25,205-206; Stats/helpers.swift:147-184"
+        }
+      ]
+    }
   ]
 }

@@ -42,5 +42,53 @@
       "line": 21,
       "text": "| hakuneko | https://github.com/manga-download/hakuneko | 128f3c77 / 2026-03-29 | Y | Y (runs automatically on app start) | Y (downloads a cache archive and applies it to the app's JS/HTML runtime bundle) | https (GitHub Pages) | Y — RSA-SHA256 signature over the payload | signature (RSA-SHA256) | **pinned-in-binary** — hardcoded PEM public key in source (`Configuration.js`), independent of the download host | src/app/Updater.js:20-31; src/app/UpdatePackageInfo.js:17-24; src/app/Configuration.js:5-13,51-53 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AK7.md",
+      "source_line": 21,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/manga-download/hakuneko"
+        },
+        {
+          "label": "commit/date",
+          "value": "128f3c77 / 2026-03-29"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (runs automatically on app start)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (downloads a cache archive and applies it to the app's JS/HTML runtime bundle)"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub Pages)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y — RSA-SHA256 signature over the payload"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (RSA-SHA256)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned-in-binary** — hardcoded PEM public key in source (`Configuration.js`), independent of the download host"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "src/app/Updater.js:20-31; src/app/UpdatePackageInfo.js:17-24; src/app/Configuration.js:5-13,51-53"
+        }
+      ]
+    }
   ]
 }

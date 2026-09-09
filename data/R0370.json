@@ -46,5 +46,99 @@
       "line": 16,
       "text": "| Bauh | github.com/vinifmor/bauh | b1ea479a / 2024-10-13 | Y (notify-only, self) | N | N (self) / Y (AppImage + Electron/NodeJS/nativefier channel) | HTTPS by default; `HttpClient.exists()` **hardcodes `verify=False`** (`bauh/api/http.py:109-121`); user-configurable `download.check_ssl` (default True) can globally disable TLS validation for every download, incl. appending axel's `-k` flag (`bauh/view/core/downloader.py:153-158`) | N/A | **None** for AppImage binaries (no hash/sig check anywhere in `bauh/gems/appimage/*.py`); NodeJS tarball extracted with zero checksum (`environment.py:52-96`); \"sha256\" field for Electron is actually just a boolean cache-hit flag, never a real digest compare (`environment.py:196-219`) | N/A | `bauh/gems/appimage/controller.py:557-589,650` (download → chmod a+x, no verification); `bauh/api/http.py:22-39,109-121`; `bauh/view/core/config.py:55` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-M6.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/vinifmor/bauh"
+        },
+        {
+          "label": "framework",
+          "value": "Python/PyQt5, \"gem\" plugins: arch(AUR)/debian/flatpak/snap/appimage/web"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (self — checks GitHub Releases API on startup/interval and shows a text notification; does not download/replace itself)"
+        },
+        {
+          "label": "auto",
+          "value": "N (notification only — user must click the release link and update manually/via their package manager)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N for self-update. Y for the AppImage gem: downloads the .AppImage binary from a per-app `url_download`, `chmod a+x`s it, and runs `--appimage-extract` / launches it, with no hash or signature check anywhere in the gem"
+        },
+        {
+          "label": "transport",
+          "value": "https — `api.github.com` (self-update check), `raw.githubusercontent.com/vinifmor/bauh-files` (curated AppImage catalog \"database\"), and arbitrary per-app `url_download` for the actual AppImage binaries"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N — self-update check has no signing (plain JSON API + tag-name string compare); the bauh-files AppImage catalog is plain HTTPS with no detached signature found"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — self-update is a version-string comparison only, no payload fetched; AppImage gem has no sha256/gpg/checksum/verify hit anywhere in `bauh/gems/appimage/*.py` before the file is chmod +x'd and executed"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence",
+          "value": "bauh/view/core/update.py:22-24,38-48 (`http_client.get_json('https://api.github.com/repos/vinifmor/bauh/releases')`, tag-name compare, notify-only — no download call); bauh/gems/appimage/__init__.py:16 (`URL_COMPRESSED_DATABASES = 'https://raw.githubusercontent.com/vinifmor/bauh-files/master/appimage/dbs.tar.gz'`); bauh/gems/appimage/controller.py:626-660 (`chmod a+x`, `--appimage-extract`, no hash/sig check in `install`/`_install`); zero hits for `sha256\\|gpg\\|signature\\|verify\\|checksum` in `bauh/gems/appimage/*.py`"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-X8.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/vinifmor/bauh"
+        },
+        {
+          "label": "commit/date",
+          "value": "b1ea479a / 2024-10-13"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (notify-only, self)"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N (self) / Y (AppImage + Electron/NodeJS/nativefier channel)"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS by default; `HttpClient.exists()` **hardcodes `verify=False`** (`bauh/api/http.py:109-121`); user-configurable `download.check_ssl` (default True) can globally disable TLS validation for every download, incl. appending axel's `-k` flag (`bauh/view/core/downloader.py:153-158`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**None** for AppImage binaries (no hash/sig check anywhere in `bauh/gems/appimage/*.py`); NodeJS tarball extracted with zero checksum (`environment.py:52-96`); \"sha256\" field for Electron is actually just a boolean cache-hit flag, never a real digest compare (`environment.py:196-219`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`bauh/gems/appimage/controller.py:557-589,650` (download → chmod a+x, no verification); `bauh/api/http.py:22-39,109-121`; `bauh/view/core/config.py:55`"
+        }
+      ]
+    }
   ]
 }

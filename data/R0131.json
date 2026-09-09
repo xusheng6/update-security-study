@@ -37,5 +37,53 @@
       "line": 18,
       "text": "| ClipGrab | clipgrab.org (official; source not hosted on GitHub) — inspected via community GPL mirror github.com/OpenHelios/clipgrab-qt5 (same upstream author/copyright, Qt5 port) | C++/Qt | Y | chk automatic on startup (`getUpdateInfo()`); dl requires user click (\"Confirm\" in update dialog); then auto-launches the downloaded installer | Y (`QDesktopServices::openUrl` on the local downloaded file hands it to the OS installer/handler for `.exe`/`.dmg`) | https (`https://clipgrab.org/update/<platform>/`); TLS validation enforced by default — `QSslSocket::VerifyNone` is set **only** under `#ifdef MAC_LEGACY` (old PowerPC/10.x Mac builds); separately, `http_handler.cpp`'s general video-download SSL-error handler defaults `IgnoreSSLErrors` to **true** on `Q_WS_MAC` (regular Mac, not just legacy) for its own HTTP traffic, but the updater's `QNetworkAccessManager` instances in clipgrab.cpp are never connected to that handler and so fail closed on TLS errors by default | N (XML manifest served over HTTPS only, no signature) | hash-from-manifest (SHA1, `QCryptographicHash::Sha1` compared against `sha1` attribute in the XML `<update>` element; mismatch aborts with an error dialog) | N/A (hash only, sourced from the same HTTPS-fetched XML manifest; SHA1 is cryptographically weak but this is the actual mechanism) | clipgrab.h:67-88 (`updateInfo` struct with `sha1` field); clipgrab.cpp:275 (`https://clipgrab.org/update/` + platform URL); clipgrab.cpp:336 (`newUpdateInfo.sha1 = update.attribute(\"sha1\")`); clipgrab.cpp:514-524 (`fileHash`/`updateSha1` comparison, `errorHandler` on mismatch); clipgrab.cpp:531 (`QDesktopServices::openUrl(QUrl::fromLocalFile(...))` executes the installer); clipgrab.cpp:240-244 (`VerifyNone` gated by `MAC_LEGACY`); http_handler.cpp:206-215 (`IgnoreSSLErrors` default true on `Q_WS_MAC` for general traffic) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-I5.md",
+      "source_line": 18,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "clipgrab.org (official; source not hosted on GitHub) — inspected via community GPL mirror github.com/OpenHelios/clipgrab-qt5 (same upstream author/copyright, Qt5 port)"
+        },
+        {
+          "label": "framework",
+          "value": "C++/Qt"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "chk automatic on startup (`getUpdateInfo()`); dl requires user click (\"Confirm\" in update dialog); then auto-launches the downloaded installer"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (`QDesktopServices::openUrl` on the local downloaded file hands it to the OS installer/handler for `.exe`/`.dmg`)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`https://clipgrab.org/update/<platform>/`); TLS validation enforced by default — `QSslSocket::VerifyNone` is set **only** under `#ifdef MAC_LEGACY` (old PowerPC/10.x Mac builds); separately, `http_handler.cpp`'s general video-download SSL-error handler defaults `IgnoreSSLErrors` to **true** on `Q_WS_MAC` (regular Mac, not just legacy) for its own HTTP traffic, but the updater's `QNetworkAccessManager` instances in clipgrab.cpp are never connected to that handler and so fail closed on TLS errors by default"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (XML manifest served over HTTPS only, no signature)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (SHA1, `QCryptographicHash::Sha1` compared against `sha1` attribute in the XML `<update>` element; mismatch aborts with an error dialog)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A (hash only, sourced from the same HTTPS-fetched XML manifest; SHA1 is cryptographically weak but this is the actual mechanism)"
+        },
+        {
+          "label": "evidence",
+          "value": "clipgrab.h:67-88 (`updateInfo` struct with `sha1` field); clipgrab.cpp:275 (`https://clipgrab.org/update/` + platform URL); clipgrab.cpp:336 (`newUpdateInfo.sha1 = update.attribute(\"sha1\")`); clipgrab.cpp:514-524 (`fileHash`/`updateSha1` comparison, `errorHandler` on mismatch); clipgrab.cpp:531 (`QDesktopServices::openUrl(QUrl::fromLocalFile(...))` executes the installer); clipgrab.cpp:240-244 (`VerifyNone` gated by `MAC_LEGACY`); http_handler.cpp:206-215 (`IgnoreSSLErrors` default true on `Q_WS_MAC` for general traffic)"
+        }
+      ]
+    }
   ]
 }

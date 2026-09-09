@@ -42,5 +42,53 @@
       "line": 19,
       "text": "| PyRadio | https://github.com/coderholic/pyradio | 4917dad / 2026-05-04 | Y | N (user-invoked `-U` / update menu; not automatic) | **Y** | https (github.com), TLS enforced via `requests.get()` default (no verify=False found) | N | **none** — plain zip source archive from GitHub tag/branch, no hash or signature check anywhere in `_download_file`/`_download_pyradio` | n/a (unauthenticated GitHub source archive) | pyradio/install.py:816 (ZIP_URL=github.com/coderholic/pyradio/archive/...), :1109-1142 (_download_pyradio: download+unzip), :1075-1080 (`subprocess.call('devel/build_install_pyradio ...', shell=True)` — **executes a script pulled from the just-downloaded, unverified archive**), :1206-1227 (_download_file: `requests.get(url)`, no cert/hash check) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AA4.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/coderholic/pyradio"
+        },
+        {
+          "label": "commit/date",
+          "value": "4917dad / 2026-05-04"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (user-invoked `-U` / update menu; not automatic)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y**"
+        },
+        {
+          "label": "transport",
+          "value": "https (github.com), TLS enforced via `requests.get()` default (no verify=False found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — plain zip source archive from GitHub tag/branch, no hash or signature check anywhere in `_download_file`/`_download_pyradio`"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a (unauthenticated GitHub source archive)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "pyradio/install.py:816 (ZIP_URL=github.com/coderholic/pyradio/archive/...), :1109-1142 (_download_pyradio: download+unzip), :1075-1080 (`subprocess.call('devel/build_install_pyradio ...', shell=True)` — **executes a script pulled from the just-downloaded, unverified archive**), :1206-1227 (_download_file: `requests.get(url)`, no cert/hash check)"
+        }
+      ]
+    }
   ]
 }

@@ -44,5 +44,53 @@
       "line": 23,
       "text": "| D-Fend Reloaded (DOSBox frontend/launcher) | https://github.com/osgamearchive/D-Fend-Reloaded.git (source-release mirror of the SourceForge project; archived) | ab7975a / 2019-08-06 | Y | Y (`VersionSpecificUpdateCheck` defaults `True`; `ProgramUpdateCheckUnit.pas:135` `RunUpdateCheckIfSetup`) | Y | **plaintext HTTP** | N | **none** | n/a | `Tools/UpdateCheck/UpdateCheck.txt:2`: update-info URL is `http://home.tu-clausthal.de/~ifalh/UpdateInfo.txt` (plain HTTP, not HTTPS); `Tools/UpdateCheck/UpdateCheck.nsi:161-196`: downloads `UpdateInfoFile` via `inetc::get` over that HTTP URL, parses `$ServerVersion`/`$UpdateFileURL` from it, downloads the installer to `$SetupTempFile`, then `Exec '\"$SetupTempFile\" /A /D=$UpdateInstallDir'` — no hash or signature check anywhere in the chain before executing the downloaded installer. Worst-case pattern: on-path attacker on plain HTTP can serve an arbitrary \"update\" and it is auto-executed |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC8.md",
+      "source_line": 23,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/osgamearchive/D-Fend-Reloaded.git (source-release mirror of the SourceForge project; archived)"
+        },
+        {
+          "label": "commit/date",
+          "value": "ab7975a / 2019-08-06"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (`VersionSpecificUpdateCheck` defaults `True`; `ProgramUpdateCheckUnit.pas:135` `RunUpdateCheckIfSetup`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "**plaintext HTTP**"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence",
+          "value": "`Tools/UpdateCheck/UpdateCheck.txt:2`: update-info URL is `http://home.tu-clausthal.de/~ifalh/UpdateInfo.txt` (plain HTTP, not HTTPS); `Tools/UpdateCheck/UpdateCheck.nsi:161-196`: downloads `UpdateInfoFile` via `inetc::get` over that HTTP URL, parses `$ServerVersion`/`$UpdateFileURL` from it, downloads the installer to `$SetupTempFile`, then `Exec '\"$SetupTempFile\" /A /D=$UpdateInstallDir'` — no hash or signature check anywhere in the chain before executing the downloaded installer. Worst-case pattern: on-path attacker on plain HTTP can serve an arbitrary \"update\" and it is auto-executed"
+        }
+      ]
+    }
   ]
 }

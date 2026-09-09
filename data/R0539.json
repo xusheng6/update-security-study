@@ -41,5 +41,53 @@
       "line": 22,
       "text": "| SnappyMail | https://github.com/the-djmaze/snappymail | c154d23cfeca1137647b0cf88dd492e3e29e164e / 2026-03-11 | Y | N (admin-triggered) | Y | https, **TLS cert validation NOT enforced** (verify_peer defaults false, never set true for repo/update requests) | N | none (no hash/signature checked before extraction) | none | `snappymail/v/0.0.0/app/libraries/snappymail/repository.php:8,12-24,29-56,140-153,256-307` (fetches `core.json`/`packages.json`/plugin archives from `https://snappymail.eu/repository/v2/` and downloads+extracts with zero integrity check); `snappymail/v/0.0.0/app/libraries/snappymail/upgrade.php:189-229` (`Upgrade::core()` extracts downloaded tar.gz straight over the live install via PharData/TAR, no signature check); `snappymail/v/0.0.0/app/libraries/snappymail/http/request.php:21` (`$verify_peer = false` default, never overridden by Repository class); `snappymail/v/0.0.0/app/libraries/snappymail/http/request/curl.php:37` (`CURLOPT_SSL_VERIFYPEER => ($this->verify_peer \\|\\| $this->ca_bundle)` — both false/null here) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AI7.md",
+      "source_line": 22,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/the-djmaze/snappymail"
+        },
+        {
+          "label": "commit/date",
+          "value": "c154d23cfeca1137647b0cf88dd492e3e29e164e / 2026-03-11"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (admin-triggered)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, **TLS cert validation NOT enforced** (verify_peer defaults false, never set true for repo/update requests)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (no hash/signature checked before extraction)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`snappymail/v/0.0.0/app/libraries/snappymail/repository.php:8,12-24,29-56,140-153,256-307` (fetches `core.json`/`packages.json`/plugin archives from `https://snappymail.eu/repository/v2/` and downloads+extracts with zero integrity check); `snappymail/v/0.0.0/app/libraries/snappymail/upgrade.php:189-229` (`Upgrade::core()` extracts downloaded tar.gz straight over the live install via PharData/TAR, no signature check); `snappymail/v/0.0.0/app/libraries/snappymail/http/request.php:21` (`$verify_peer = false` default, never overridden by Repository class); `snappymail/v/0.0.0/app/libraries/snappymail/http/request/curl.php:37` (`CURLOPT_SSL_VERIFYPEER => ($this->verify_peer \\|\\| $this->ca_bundle)` — both false/null here)"
+        }
+      ]
+    }
   ]
 }

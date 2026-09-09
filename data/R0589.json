@@ -42,5 +42,53 @@
       "line": 15,
       "text": "| MQTT Explorer | https://github.com/thomasnordquist/MQTT-Explorer | 35f31973c456a024a37450f5961e4610dc9a9ce0 / 2026-01-30 | Y | Y | Y | https (GitHub releases, no TLS override found) | N (latest.yml not separately signed) | sha512 hash from manifest (Win/Linux) **+** Windows Authenticode publisher check (electron-updater default, NSIS only) | server-supplied/unpinned (hash) + OS keystore (Authenticode, Windows only) | src/autoUpdater.ts:1-27, src/electron.ts:76,147-148, package.json:54-91 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AL7.md",
+      "source_line": 15,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/thomasnordquist/MQTT-Explorer"
+        },
+        {
+          "label": "commit/date",
+          "value": "35f31973c456a024a37450f5961e4610dc9a9ce0 / 2026-01-30"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub releases, no TLS override found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (latest.yml not separately signed)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "sha512 hash from manifest (Win/Linux) **+** Windows Authenticode publisher check (electron-updater default, NSIS only)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (hash) + OS keystore (Authenticode, Windows only)"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "src/autoUpdater.ts:1-27, src/electron.ts:76,147-148, package.json:54-91"
+        }
+      ]
+    }
   ]
 }

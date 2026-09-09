@@ -43,5 +43,53 @@
       "line": 26,
       "text": "| Webmin | https://github.com/webmin/webmin.git | 72f1e7dc32e07c9fb0f0a2500e996e95238275de / 2026-08-21 | Y | N (admin-triggered from \"Software Package Updates\" module, `update.cgi`) | Y (auto-downloads and installs `.wbm` module/core updates via `install_webmin_module`) | https **(and plain-HTTP fallback if `Net::SSLeay` is unavailable)**; TLS cert validation NOT enforced on the update path | Y — the per-file signature (`<url>-sig.asc`) is fetched and, on the default official channel, verification is mandatory | sig (GPG), verified against a **pinned** fingerprint for the official channel; **but silently skipped/best-effort for third-party channels if the signature fetch itself fails** | pinned-in-binary — `jcameron-key.asc` + hardcoded fingerprint `1719 003A CE3E 5A41 E2DE 70DF D97A 3AE9 11F6 3C51` in source | webmin/update.cgi:23,63-72 (auto-download+install flow); webmin/webmin-lib.pl:48-49 (pinned key fingerprint); webmin/webmin-lib.pl (`check_update_signature`, mandatory when `$sigmode==2`); web-lib-funcs.pl:3388-3447 `http_download`→`make_http_connection` never passes `$certreqs`, so `web-lib-funcs.pl` `CTX_set_verify`/`VERIFY_PEER` (~line 9874) is only wired up `if ($certreqs && $certreqs->{capath})`, which never happens on this path — TLS validation is a no-op for every update/module download |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U6.md",
+      "source_line": 26,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/webmin/webmin.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "72f1e7dc32e07c9fb0f0a2500e996e95238275de / 2026-08-21"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (admin-triggered from \"Software Package Updates\" module, `update.cgi`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (auto-downloads and installs `.wbm` module/core updates via `install_webmin_module`)"
+        },
+        {
+          "label": "transport",
+          "value": "https **(and plain-HTTP fallback if `Net::SSLeay` is unavailable)**; TLS cert validation NOT enforced on the update path"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y — the per-file signature (`<url>-sig.asc`) is fetched and, on the default official channel, verification is mandatory"
+        },
+        {
+          "label": "payload_verification",
+          "value": "sig (GPG), verified against a **pinned** fingerprint for the official channel; **but silently skipped/best-effort for third-party channels if the signature fetch itself fails**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary — `jcameron-key.asc` + hardcoded fingerprint `1719 003A CE3E 5A41 E2DE 70DF D97A 3AE9 11F6 3C51` in source"
+        },
+        {
+          "label": "evidence",
+          "value": "webmin/update.cgi:23,63-72 (auto-download+install flow); webmin/webmin-lib.pl:48-49 (pinned key fingerprint); webmin/webmin-lib.pl (`check_update_signature`, mandatory when `$sigmode==2`); web-lib-funcs.pl:3388-3447 `http_download`→`make_http_connection` never passes `$certreqs`, so `web-lib-funcs.pl` `CTX_set_verify`/`VERIFY_PEER` (~line 9874) is only wired up `if ($certreqs && $certreqs->{capath})`, which never happens on this path — TLS validation is a no-op for every update/module download"
+        }
+      ]
+    }
   ]
 }

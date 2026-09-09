@@ -42,5 +42,53 @@
       "line": 9,
       "text": "| OnlyKey App | https://github.com/trustcrypto/OnlyKey-App.git | b8918ce / 2025-08-28 | Y | Y (default on) | N (downloads then only opens file in Finder/Explorer; swap/auto-install code path is present but dead — commented out) | https (S3, cert validation not disabled — enforced) | N (manifest.json has no signature field) | none observed | n/a | app/scripts/updater.js:19-72 (checkForAppUpdate/nw-autoupdater), app/scripts/updater.js:63-72 (download then `nw.Shell.showItemInFolder`, swap/restart lines 67-69 commented out), manifest.json:27 (`manifestUrl\": \"https://s3.amazonaws.com/onlykey-app/releases/latest/manifest.json\"`), app/scripts/userPreferences.js:43-47 (getPropVal defaults to `true`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AM7.md",
+      "source_line": 9,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/trustcrypto/OnlyKey-App.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "b8918ce / 2025-08-28"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (default on)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "N (downloads then only opens file in Finder/Explorer; swap/auto-install code path is present but dead — commented out)"
+        },
+        {
+          "label": "transport",
+          "value": "https (S3, cert validation not disabled — enforced)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (manifest.json has no signature field)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none observed"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "app/scripts/updater.js:19-72 (checkForAppUpdate/nw-autoupdater), app/scripts/updater.js:63-72 (download then `nw.Shell.showItemInFolder`, swap/restart lines 67-69 commented out), manifest.json:27 (`manifestUrl\": \"https://s3.amazonaws.com/onlykey-app/releases/latest/manifest.json\"`), app/scripts/userPreferences.js:43-47 (getPropVal defaults to `true`)"
+        }
+      ]
+    }
   ]
 }

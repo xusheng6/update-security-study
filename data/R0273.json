@@ -61,5 +61,173 @@
       "line": 32,
       "text": "| Ulauncher — **extensions subsystem** | **C** (side channel, see below) | Downloads a git-ref-addressed tarball/repo over enforced HTTPS from GitHub/GitLab/Codeberg and directly executes it (`sys.executable extension_main`) with the user's full privileges. No code signing, no maintainer pubkey, no independent checksum — the only \"hash\" involved is the git commit id used purely as a version pointer, resolved via unauthenticated `git ls-remote`. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-L2.md",
+      "source_line": 18,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/Ulauncher/Ulauncher"
+        },
+        {
+          "label": "framework",
+          "value": "Python + GTK"
+        },
+        {
+          "label": "has_updater",
+          "value": "**N**"
+        },
+        {
+          "label": "auto",
+          "value": "N/A"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N/A"
+        },
+        {
+          "label": "transport",
+          "value": "N/A"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A"
+        },
+        {
+          "label": "payload_verification",
+          "value": "N/A"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence",
+          "value": "Negative evidence: no self-update code found anywhere in `ulauncher/` (grep for `self.?updat|check.?for.?update|autoupdat|pypi|apt-get|snapcraft|flatpak|AppImageUpdate` on core app code returns nothing relevant); no README present in this shallow clone; distribution is distro-package based (PPA/apt, Flatpak, AUR, etc., outside this repo)."
+        }
+      ]
+    },
+    {
+      "source_file": "batch-L2.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/Ulauncher/Ulauncher"
+        },
+        {
+          "label": "framework",
+          "value": "Python extensions run as subprocesses, fetched via `git`"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (manual trigger + confirm dialog)"
+        },
+        {
+          "label": "auto",
+          "value": "chk on demand; **dl+inst require explicit Yes in a confirmation dialog** (`_show_update_dialog`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — extension `main.py` is executed as a Python subprocess after install/update"
+        },
+        {
+          "label": "transport",
+          "value": "**https git only** — install rejects non-https/non-local URLs with an explicit error message; ssh (`git@`) form is rewritten to https"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no code-signing of extension content)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "commit-hash pinning via git object hashes: `_BareRepo` does `git clone --bare`/`git fetch` then `checkout <commit_hash>`, and update flow compares stored `commit_hash` against remote's before re-checking-out — integrity is provided by git's content-addressed objects over the HTTPS transport, not by any separate manifest signature"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A (git SHA object hash, not a signing key)"
+        },
+        {
+          "label": "evidence",
+          "value": "ulauncher/ui/preferences/utils/ext_handlers.py:78 (dialog placeholder \"https://github.com/user/repo.git\"); ext_handlers.py:184-192 (`_show_update_dialog` requires `Gtk.ResponseType.YES` before calling `update_extension`); ext_handlers.py:200-207 (`UrlError` message: \"should be a HTTPS git repository link or a path to a local git repository\"); ulauncher/modes/extensions/extension_remote.py:349,357,362 (scheme normalized to `https://`, `\"\"`/`\"file\"` only other allowed schemes for local paths); extension_registry.py:172-206 (`update()` re-resolves remote, compares `commit_hash`, calls `_install_from_remote`); extension_remote.py `_BareRepo._fetch` (`git clone --bare`) and `checkout` (`git checkout <commit_hash>`)"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-T1.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/Ulauncher/Ulauncher.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "c66c6a0d1775f721140df2b718291b964a7350c6 / 2026-08-10"
+        },
+        {
+          "label": "has_updater",
+          "value": "N (core app)"
+        },
+        {
+          "label": "auto",
+          "value": "N/A"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N/A"
+        },
+        {
+          "label": "transport",
+          "value": "N/A"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A"
+        },
+        {
+          "label": "payload_verification",
+          "value": "N/A"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "Full-tree grep for updater/appcast/Sparkle/checkForUpdate: 0 hits outside CI/PPA publish workflow (.github/workflows/publish-release.yml); no app-level update command in ulauncher/cli/commands/"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-T1.md",
+      "source_line": 31,
+      "fields": [
+        {
+          "label": "Tier",
+          "value": "**N**"
+        },
+        {
+          "label": "Rationale",
+          "value": "No core self-updater; relies on distro packages/PPA/Flatpak."
+        }
+      ]
+    },
+    {
+      "source_file": "batch-T1.md",
+      "source_line": 32,
+      "fields": [
+        {
+          "label": "Tier",
+          "value": "**C** (side channel, see below)"
+        },
+        {
+          "label": "Rationale",
+          "value": "Downloads a git-ref-addressed tarball/repo over enforced HTTPS from GitHub/GitLab/Codeberg and directly executes it (`sys.executable extension_main`) with the user's full privileges. No code signing, no maintainer pubkey, no independent checksum — the only \"hash\" involved is the git commit id used purely as a version pointer, resolved via unauthenticated `git ls-remote`."
+        }
+      ]
+    }
   ]
 }

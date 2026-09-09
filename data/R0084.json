@@ -43,5 +43,53 @@
       "line": 14,
       "text": "| Dolphin (file manager) | invent.kde.org/system/dolphin (HEAD ee7e50f) | Qt/KF6 | N (no self-updater) | N (manual — user clicks \"Download New Services\" in Settings) | **Y** — via the KNewStuff \"Service Menus\" content channel, downloaded archives are executed as installer scripts | HTTPS (`ProvidersUrl=https://autoconfig.kde.org/ocs/providers.xml`, actual payload host is provider-controlled/dynamic) | N | N (framework never checks the `checksum`/`signature` XML fields it parses) | none — `signature` field is parsed from the OCS feed but never validated against any GPG key anywhere in the framework | `dolphin/src/settings/contextmenu/servicemenu.knsrc` — `ContentWarning=Executables`, `InstallationCommand=servicemenuinstaller install %f`, `TargetDir=servicemenu-download`, `Uncompress=never`. `dolphin/src/settings/contextmenu/servicemenuinstaller/servicemenuinstaller.cpp:259-283` (`runScriptVariants`/`runScriptOnce`) chmod's the downloaded file `+x` (line 262) and runs it via `QProcess::start` (lines 219-247), searching for `install-it.sh`, `install.sh`, `installKDE4.sh`, etc. inside the downloaded archive (lines 330-364). This is a genuine download-and-execute path for arbitrary third-party service-menu packages from the KDE Store. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-K6.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "invent.kde.org/system/dolphin (HEAD ee7e50f)"
+        },
+        {
+          "label": "framework",
+          "value": "Qt/KF6"
+        },
+        {
+          "label": "has_updater",
+          "value": "N (no self-updater)"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual — user clicks \"Download New Services\" in Settings)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y** — via the KNewStuff \"Service Menus\" content channel, downloaded archives are executed as installer scripts"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS (`ProvidersUrl=https://autoconfig.kde.org/ocs/providers.xml`, actual payload host is provider-controlled/dynamic)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "N (framework never checks the `checksum`/`signature` XML fields it parses)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none — `signature` field is parsed from the OCS feed but never validated against any GPG key anywhere in the framework"
+        },
+        {
+          "label": "evidence",
+          "value": "`dolphin/src/settings/contextmenu/servicemenu.knsrc` — `ContentWarning=Executables`, `InstallationCommand=servicemenuinstaller install %f`, `TargetDir=servicemenu-download`, `Uncompress=never`. `dolphin/src/settings/contextmenu/servicemenuinstaller/servicemenuinstaller.cpp:259-283` (`runScriptVariants`/`runScriptOnce`) chmod's the downloaded file `+x` (line 262) and runs it via `QProcess::start` (lines 219-247), searching for `install-it.sh`, `install.sh`, `installKDE4.sh`, etc. inside the downloaded archive (lines 330-364). This is a genuine download-and-execute path for arbitrary third-party service-menu packages from the KDE Store."
+        }
+      ]
+    }
   ]
 }

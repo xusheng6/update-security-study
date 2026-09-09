@@ -43,5 +43,53 @@
       "line": 12,
       "text": "| Gradle (wrapper) | https://github.com/gradle/gradle.git | 4eefc0920a9431513536d238c0194bcf30b47894 / 2026-08-21 | Y | Y | Y | https (scheme enforced by `validateDistributionUrl`), TLS default JVM trust store, enforced | N by default | SHA-256 checksum **only if** `distributionSha256Sum` is set in `gradle-wrapper.properties`; Gradle's own generated wrapper file (`gradle/wrapper/gradle-wrapper.properties`) does **not** set it | none by default; when set, the hash is a plain-text value in a project file (TOFU per-repo, not pinned in the wrapper binary); on a corrupt-zip retry the wrapper will additionally auto-fetch the sha256 **from the same distribution server** (`<url>.sha256`) if the user never supplied one | `platforms/core-runtime/wrapper-shared/src/main/java/org/gradle/wrapper/Install.java:99-125` (verifyDownloadChecksum: `if (expectedSum == null) return;`), `Install.java:131-146` (fetchDistributionSha256Sum pulls hash from `distributionUrl + \".sha256\"`), default properties: `gradle/wrapper/gradle-wrapper.properties` (no `distributionSha256Sum` key) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AD5.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/gradle/gradle.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "4eefc0920a9431513536d238c0194bcf30b47894 / 2026-08-21"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (scheme enforced by `validateDistributionUrl`), TLS default JVM trust store, enforced"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N by default"
+        },
+        {
+          "label": "payload_verification",
+          "value": "SHA-256 checksum **only if** `distributionSha256Sum` is set in `gradle-wrapper.properties`; Gradle's own generated wrapper file (`gradle/wrapper/gradle-wrapper.properties`) does **not** set it"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none by default; when set, the hash is a plain-text value in a project file (TOFU per-repo, not pinned in the wrapper binary); on a corrupt-zip retry the wrapper will additionally auto-fetch the sha256 **from the same distribution server** (`<url>.sha256`) if the user never supplied one"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`platforms/core-runtime/wrapper-shared/src/main/java/org/gradle/wrapper/Install.java:99-125` (verifyDownloadChecksum: `if (expectedSum == null) return;`), `Install.java:131-146` (fetchDistributionSha256Sum pulls hash from `distributionUrl + \".sha256\"`), default properties: `gradle/wrapper/gradle-wrapper.properties` (no `distributionSha256Sum` key)"
+        }
+      ]
+    }
   ]
 }

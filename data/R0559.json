@@ -41,5 +41,53 @@
       "line": 22,
       "text": "| Mesquite (MesquiteCore) | https://github.com/MesquiteProject/MesquiteCore | 4a01994 / 2026-04-09 | Y | Y (auto phone-home populates an \"Available to Install or Update\" menu at startup) | **Y** (user then clicks the menu item; downloaded zips are unzipped directly into the app directory, and downloaded scripts can be executed after a confirm dialog) | **http (plaintext) — active release manifest URL** | n/a | **none** | n/a | `Source/mesquite/minimal/Installer/Installer.java:142` `return \"http://www.mesquiteproject.org/noticesAndUpdates/updates.xml\";` (active; the `https://raw.githubusercontent.com/...` URLs at `:144`/`:150`/`:152` are for prerelease/debug builds only); `:85-98` doc comment describing per-package `url`/`treatment` (asis/unzip) tags in the manifest; `:454` `MesquiteFile.downloadURLContents(url, directoryLocation+downloadAs, ...)`; `:482`/`:495` `AlertDialog.query(..., \"Execute Script?\", \"The installer has downloaded the following script to execute...\")`; `Source/mesquite/lib/MesquiteModule.java:185-195` all phone-home/version/error-report URLs (`startup.mesquiteproject.org`, `error.mesquiteproject.org`, `mesquiteproject.org/pyMesquite*`) are plaintext `http://`; no hash/signature check anywhere in `Installer.java` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AJ1.md",
+      "source_line": 22,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/MesquiteProject/MesquiteCore"
+        },
+        {
+          "label": "commit/date",
+          "value": "4a01994 / 2026-04-09"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (auto phone-home populates an \"Available to Install or Update\" menu at startup)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y** (user then clicks the menu item; downloaded zips are unzipped directly into the app directory, and downloaded scripts can be executed after a confirm dialog)"
+        },
+        {
+          "label": "transport",
+          "value": "**http (plaintext) — active release manifest URL**"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "n/a"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`Source/mesquite/minimal/Installer/Installer.java:142` `return \"http://www.mesquiteproject.org/noticesAndUpdates/updates.xml\";` (active; the `https://raw.githubusercontent.com/...` URLs at `:144`/`:150`/`:152` are for prerelease/debug builds only); `:85-98` doc comment describing per-package `url`/`treatment` (asis/unzip) tags in the manifest; `:454` `MesquiteFile.downloadURLContents(url, directoryLocation+downloadAs, ...)`; `:482`/`:495` `AlertDialog.query(..., \"Execute Script?\", \"The installer has downloaded the following script to execute...\")`; `Source/mesquite/lib/MesquiteModule.java:185-195` all phone-home/version/error-report URLs (`startup.mesquiteproject.org`, `error.mesquiteproject.org`, `mesquiteproject.org/pyMesquite*`) are plaintext `http://`; no hash/signature check anywhere in `Installer.java`"
+        }
+      ]
+    }
   ]
 }

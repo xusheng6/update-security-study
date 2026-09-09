@@ -43,5 +43,53 @@
       "line": 13,
       "text": "| Minigalaxy | github.com/sharkwouter/minigalaxy | GTK3, Python, distro packages/Flatpak | N (app self-update — none found); Y (GOG game installers = content-as-code) | manual (user-initiated game install/update) | Y — downloads GOG installer packages and runs them (via mojosetup/innoextract flow) to install games | HTTPS (`api.gog.com`, `embed.gog.com`, `auth.gog.com`, `gamesdb.gog.com`) | N | hash-from-manifest — MD5 fetched from GOG's checksum XML endpoint, verified against downloaded installer before use; corrupted files are discarded | N/A (MD5 value from GOG API JSON/XML, not a signature) | `minigalaxy/api.py:262-285` (fetch MD5 from checksum XML); `minigalaxy/installer.py:151-176` (`verify_installer_integrity`, `hashlib.md5`, `verify_checksum`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-I2.md",
+      "source_line": 13,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/sharkwouter/minigalaxy"
+        },
+        {
+          "label": "framework",
+          "value": "GTK3, Python, distro packages/Flatpak"
+        },
+        {
+          "label": "has_updater",
+          "value": "N (app self-update — none found); Y (GOG game installers = content-as-code)"
+        },
+        {
+          "label": "auto",
+          "value": "manual (user-initiated game install/update)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — downloads GOG installer packages and runs them (via mojosetup/innoextract flow) to install games"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS (`api.gog.com`, `embed.gog.com`, `auth.gog.com`, `gamesdb.gog.com`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest — MD5 fetched from GOG's checksum XML endpoint, verified against downloaded installer before use; corrupted files are discarded"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A (MD5 value from GOG API JSON/XML, not a signature)"
+        },
+        {
+          "label": "evidence",
+          "value": "`minigalaxy/api.py:262-285` (fetch MD5 from checksum XML); `minigalaxy/installer.py:151-176` (`verify_installer_integrity`, `hashlib.md5`, `verify_checksum`)"
+        }
+      ]
+    }
   ]
 }

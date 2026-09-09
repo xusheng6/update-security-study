@@ -43,5 +43,53 @@
       "line": 10,
       "text": "| Radarr | Radarr/Radarr | .NET (C#, Servarr/NzbDrone fork of Sonarr) | Y | identical mechanism/gating to Sonarr | Y (fully automatic when auto-install enabled) | https, host `https://radarr.servarr.com/v1/`; TLS enforced by default, no bypass found in update path (only Email.cs SMTP override, unrelated) | no | hash-from-manifest (SHA256) | n/a | src/NzbDrone.Common/Cloud/RadarrCloudRequestBuilder.cs:16 (`https://radarr.servarr.com/v1/`); src/NzbDrone.Core/Update/UpdateVerification.cs:24-26 (SHA256 compare); src/NzbDrone.Core/Update/InstallUpdateService.cs:172 (spawns update client), :252/:330 (`UpdateAutomatically` gate) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-J6.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "Radarr/Radarr"
+        },
+        {
+          "label": "framework",
+          "value": ".NET (C#, Servarr/NzbDrone fork of Sonarr)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "identical mechanism/gating to Sonarr"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (fully automatic when auto-install enabled)"
+        },
+        {
+          "label": "transport",
+          "value": "https, host `https://radarr.servarr.com/v1/`; TLS enforced by default, no bypass found in update path (only Email.cs SMTP override, unrelated)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "no"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (SHA256)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence",
+          "value": "src/NzbDrone.Common/Cloud/RadarrCloudRequestBuilder.cs:16 (`https://radarr.servarr.com/v1/`); src/NzbDrone.Core/Update/UpdateVerification.cs:24-26 (SHA256 compare); src/NzbDrone.Core/Update/InstallUpdateService.cs:172 (spawns update client), :252/:330 (`UpdateAutomatically` gate)"
+        }
+      ]
+    }
   ]
 }

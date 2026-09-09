@@ -41,5 +41,53 @@
       "line": 13,
       "text": "| xemu | https://github.com/xemu-project/xemu | C (QEMU-based) / Dear ImGui, libcurl | Y | chk: auto at startup (Windows builds only, gated by user-configurable setting, default checks enabled) + manual \"Check for Updates...\" menu item; dl/inst: manual (user must click \"Update\", then \"Restart\") | Y — downloads a `.zip` release asset, extracts in-place with miniz, renames/replaces `xemu.exe`, and `_execv`'s into the new binary | https — `https://api.github.com/repos/xemu-project/xemu/releases/latest` for metadata, GitHub `browser_download_url` for the asset, both via libcurl. TLS validation is ENFORCED by default: the disable-verification code path exists but is compiled out (`#define ALLOW_INSECURE_HOSTS 0`, hardcoded) | N (plain GitHub Releases API JSON, HTTPS-protected only, no signature) | none — no hash or signature check on the downloaded zip before extraction/execution | N/A | ui/xui/update.cc:32 (`releases_url`); :149-219 (`check_for_update_internal`, parses GitHub JSON, matches asset by expected filename, no verification); :248-316 (`update_internal` — http_get → miniz unzip → overwrite `xemu.exe`, lines 294-299); :322-329 (`restart_to_updated`, `_execv`); ui/xui/main.cc:151-155 (`#if defined(_WIN32)` startup auto-check gated by `g_config.general.updates.check`); util/http.c:29 (`#define ALLOW_INSECURE_HOSTS 0`); :101-104 and :150-153 (`CURLOPT_SSL_VERIFYPEER`/`VERIFYHOST` set to 0, but dead code under the above macro). |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-H8.md",
+      "source_line": 13,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/xemu-project/xemu"
+        },
+        {
+          "label": "framework",
+          "value": "C (QEMU-based) / Dear ImGui, libcurl"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "chk: auto at startup (Windows builds only, gated by user-configurable setting, default checks enabled) + manual \"Check for Updates...\" menu item; dl/inst: manual (user must click \"Update\", then \"Restart\")"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — downloads a `.zip` release asset, extracts in-place with miniz, renames/replaces `xemu.exe`, and `_execv`'s into the new binary"
+        },
+        {
+          "label": "transport",
+          "value": "https — `https://api.github.com/repos/xemu-project/xemu/releases/latest` for metadata, GitHub `browser_download_url` for the asset, both via libcurl. TLS validation is ENFORCED by default: the disable-verification code path exists but is compiled out (`#define ALLOW_INSECURE_HOSTS 0`, hardcoded)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (plain GitHub Releases API JSON, HTTPS-protected only, no signature)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — no hash or signature check on the downloaded zip before extraction/execution"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence",
+          "value": "ui/xui/update.cc:32 (`releases_url`); :149-219 (`check_for_update_internal`, parses GitHub JSON, matches asset by expected filename, no verification); :248-316 (`update_internal` — http_get → miniz unzip → overwrite `xemu.exe`, lines 294-299); :322-329 (`restart_to_updated`, `_execv`); ui/xui/main.cc:151-155 (`#if defined(_WIN32)` startup auto-check gated by `g_config.general.updates.check`); util/http.c:29 (`#define ALLOW_INSECURE_HOSTS 0`); :101-104 and :150-153 (`CURLOPT_SSL_VERIFYPEER`/`VERIFYHOST` set to 0, but dead code under the above macro)."
+        }
+      ]
+    }
   ]
 }

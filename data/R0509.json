@@ -42,5 +42,53 @@
       "line": 21,
       "text": "| livebook | https://github.com/livebook-dev/livebook.git | bab7c1460dd9be195ddffa6d77093c26be776158 / 2026-08-16 | Y | N (checks automatically on boot, but shows an OK/Cancel dialog before downloading/installing) | Y (after user clicks OK) | https, TLS enforced | Y (per-artifact minisign signature in `latest.json`) | signature (Ed25519/minisign via `tauri-plugin-updater`) | pinned-in-binary (`tauri.conf.json` pubkey) | `rel/app/src-tauri/tauri.conf.json:51-54` (pubkey+endpoint); `rel/app/src-tauri/src/lib.rs:580-605` (`check_for_updates_on_boot`, dialog, `download_and_install`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AG8.md",
+      "source_line": 21,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/livebook-dev/livebook.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "bab7c1460dd9be195ddffa6d77093c26be776158 / 2026-08-16"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (checks automatically on boot, but shows an OK/Cancel dialog before downloading/installing)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (after user clicks OK)"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (per-artifact minisign signature in `latest.json`)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (Ed25519/minisign via `tauri-plugin-updater`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (`tauri.conf.json` pubkey)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`rel/app/src-tauri/tauri.conf.json:51-54` (pubkey+endpoint); `rel/app/src-tauri/src/lib.rs:580-605` (`check_for_updates_on_boot`, dialog, `download_and_install`)"
+        }
+      ]
+    }
   ]
 }

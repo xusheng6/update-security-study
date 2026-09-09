@@ -41,5 +41,53 @@
       "line": 32,
       "text": "| Chatbox (Community Edition) | Bin-Huang/chatbox | Electron (`electron-updater`) | Y | **Y — fully automatic**: `autoDownload=true` and `autoInstallOnAppQuit=true` set unconditionally at construction; a background timer additionally checks on startup (+5s) and then hourly when the user's `autoUpdate` setting is on | Y — auto-downloaded and, per `autoInstallOnAppQuit=true`, installed automatically when the app next quits (in addition to the manual \"install-update\" IPC path) | HTTPS; tries an ordered list of 5 feed-URL hostnames (`chatboxai.app`, `api.chatboxai.app`, `api.ai-chatbox.com`, `api.chatboxapp.xyz`, `api.chatboxai.com`) until one responds | N — same as above, `electron-updater`'s manifest is unsigned | hash-from-manifest (sha512 in the fetched update manifest) **+ OS code-signing at install** (custom Windows signer `custom_win_sign.js`; macOS notarization via `.erb/scripts/notarize.js`) — **same `verifyUpdateCodeSignature: false` weakening on Windows as Cherry Studio** | Windows signing cert used by `custom_win_sign.js` (not inspected further); Apple Developer ID via `@electron/notarize` | `src/main/app-updater.ts:26-27` (`autoDownload=true`, `autoInstallOnAppQuit=true`); `src/main/app-updater.ts:84-92` (5s + hourly auto-check loop); `src/main/app-updater.ts:103-109` (multi-host feed URL fallback list); `electron-builder.yml:24` (`notarize: false`), `electron-builder.yml:52` (`verifyUpdateCodeSignature: false`), `electron-builder.yml:85-86` (`publish: provider: s3`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-N1.md",
+      "source_line": 32,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "Bin-Huang/chatbox"
+        },
+        {
+          "label": "framework",
+          "value": "Electron (`electron-updater`)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "**Y — fully automatic**: `autoDownload=true` and `autoInstallOnAppQuit=true` set unconditionally at construction; a background timer additionally checks on startup (+5s) and then hourly when the user's `autoUpdate` setting is on"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — auto-downloaded and, per `autoInstallOnAppQuit=true`, installed automatically when the app next quits (in addition to the manual \"install-update\" IPC path)"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS; tries an ordered list of 5 feed-URL hostnames (`chatboxai.app`, `api.chatboxai.app`, `api.ai-chatbox.com`, `api.chatboxapp.xyz`, `api.chatboxai.com`) until one responds"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N — same as above, `electron-updater`'s manifest is unsigned"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (sha512 in the fetched update manifest) **+ OS code-signing at install** (custom Windows signer `custom_win_sign.js`; macOS notarization via `.erb/scripts/notarize.js`) — **same `verifyUpdateCodeSignature: false` weakening on Windows as Cherry Studio**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "Windows signing cert used by `custom_win_sign.js` (not inspected further); Apple Developer ID via `@electron/notarize`"
+        },
+        {
+          "label": "evidence",
+          "value": "`src/main/app-updater.ts:26-27` (`autoDownload=true`, `autoInstallOnAppQuit=true`); `src/main/app-updater.ts:84-92` (5s + hourly auto-check loop); `src/main/app-updater.ts:103-109` (multi-host feed URL fallback list); `electron-builder.yml:24` (`notarize: false`), `electron-builder.yml:52` (`verifyUpdateCodeSignature: false`), `electron-builder.yml:85-86` (`publish: provider: s3`)"
+        }
+      ]
+    }
   ]
 }

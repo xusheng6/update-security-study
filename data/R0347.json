@@ -44,5 +44,53 @@
       "line": 27,
       "text": "| VCMI | https://github.com/vcmi/vcmi | eb693b66956f / 2026-08-20 | Y | N (notify + link only) | N | https (`raw.githubusercontent.com`) | N | none | n/a | `config/schemas/settings.json:780-782` (`updateConfigUrl` default `https://raw.githubusercontent.com/vcmi/vcmi-updates/master/vcmi-updates.json`); `launcher/updatedialog_moc.cpp:54-146` (only renders a \"Download page\" link, no `QProcess`/`startDetached`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W3.md",
+      "source_line": 27,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/vcmi/vcmi"
+        },
+        {
+          "label": "commit/date",
+          "value": "eb693b66956f / 2026-08-20"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (notify + link only)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "N"
+        },
+        {
+          "label": "transport",
+          "value": "https (`raw.githubusercontent.com`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`config/schemas/settings.json:780-782` (`updateConfigUrl` default `https://raw.githubusercontent.com/vcmi/vcmi-updates/master/vcmi-updates.json`); `launcher/updatedialog_moc.cpp:54-146` (only renders a \"Download page\" link, no `QProcess`/`startDetached`)"
+        }
+      ]
+    }
   ]
 }

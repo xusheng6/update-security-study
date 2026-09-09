@@ -43,5 +43,53 @@
       "line": 13,
       "text": "| octopi | https://github.com/aarnt/octopi.git | 0beadbf0f4b19151240657e6350ad9d5fd8b4702 / 2026-08-03 | N | N | Y | https, TLS enforced (default curl, no `-k`) | pacman path: Y (SigLevel keyring); AUR-bootstrap path: **none** | pacman path: GPG detached sig; AUR-bootstrap path: **none at all** | pacman path: OS keyring `/etc/pacman.d/gnupg`; AUR-bootstrap path: N/A — no verification exists | `src/globals.cpp:228-308` `downloadTempYayHelper()` (curl -L GitHub release tarball/binary → tar xzf, no gpg/sha check); `src/pacmanexec.cpp:1552` executes the downloaded `~/.config/octopi/yay` binary directly; `src/mainwindow_transaction.cpp:1713` triggers the chain from GUI |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AE2.md",
+      "source_line": 13,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/aarnt/octopi.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "0beadbf0f4b19151240657e6350ad9d5fd8b4702 / 2026-08-03"
+        },
+        {
+          "label": "has_updater",
+          "value": "N"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (default curl, no `-k`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "pacman path: Y (SigLevel keyring); AUR-bootstrap path: **none**"
+        },
+        {
+          "label": "payload_verification",
+          "value": "pacman path: GPG detached sig; AUR-bootstrap path: **none at all**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pacman path: OS keyring `/etc/pacman.d/gnupg`; AUR-bootstrap path: N/A — no verification exists"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/globals.cpp:228-308` `downloadTempYayHelper()` (curl -L GitHub release tarball/binary → tar xzf, no gpg/sha check); `src/pacmanexec.cpp:1552` executes the downloaded `~/.config/octopi/yay` binary directly; `src/mainwindow_transaction.cpp:1713` triggers the chain from GUI"
+        }
+      ]
+    }
   ]
 }

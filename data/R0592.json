@@ -41,5 +41,53 @@
       "line": 13,
       "text": "| input-leap | https://github.com/input-leap/input-leap (clone: repos/AL4/input-leap) | 34a34fb / 2025-11-28 | N (no self-updater for InputLeap itself) | N | **Y (side-channel: 3rd-party dependency installer)** | **http — PLAINTEXT, no TLS at all** | N | **none** | n/a | `src/gui/src/MainWindow.cpp:67` `bonjourBaseUrl = \"http://binaries.symless.com/bonjour/\"`; `:1289-1332` `downloadBonjour()` fetches `Bonjour.msi`/`Bonjour64.msi` over plain HTTP via `DataDownloader` (`src/gui/src/DataDownloader.cpp` uses bare `QNetworkAccessManager`, no cert/hash checks); `:1335-1372` `installBonjour()` writes the downloaded bytes straight to a temp file and launches `msiexec /i <file> /passive` with **zero hash or signature verification** of the downloaded MSI before execution. Triggered automatically when user enables \"Auto Config\" (`promptAutoConfig()` / `on_m_pCheckBoxAutoConfig_toggled`, same file ~1385-1430). |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AL4.md",
+      "source_line": 13,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/input-leap/input-leap (clone: repos/AL4/input-leap)"
+        },
+        {
+          "label": "commit/date",
+          "value": "34a34fb / 2025-11-28"
+        },
+        {
+          "label": "has_updater",
+          "value": "N (no self-updater for InputLeap itself)"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y (side-channel: 3rd-party dependency installer)**"
+        },
+        {
+          "label": "transport",
+          "value": "**http — PLAINTEXT, no TLS at all**"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/gui/src/MainWindow.cpp:67` `bonjourBaseUrl = \"http://binaries.symless.com/bonjour/\"`; `:1289-1332` `downloadBonjour()` fetches `Bonjour.msi`/`Bonjour64.msi` over plain HTTP via `DataDownloader` (`src/gui/src/DataDownloader.cpp` uses bare `QNetworkAccessManager`, no cert/hash checks); `:1335-1372` `installBonjour()` writes the downloaded bytes straight to a temp file and launches `msiexec /i <file> /passive` with **zero hash or signature verification** of the downloaded MSI before execution. Triggered automatically when user enables \"Auto Config\" (`promptAutoConfig()` / `on_m_pCheckBoxAutoConfig_toggled`, same file ~1385-1430)."
+        }
+      ]
+    }
   ]
 }

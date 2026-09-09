@@ -48,5 +48,67 @@
       "line": 53,
       "text": "| Element Desktop | `Element Desktop` | Tier B. Electron native `autoUpdater`, HTTPS; mac relies on Squirrel.Mac code-sign, win on Squirrel.Windows with no explicit payload sig check visible in-repo. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-K3.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "element-hq/element-desktop"
+        },
+        {
+          "label": "framework",
+          "value": "Electron (built-in Electron `autoUpdater`, i.e. Squirrel.Mac / Squirrel.Windows — not the `electron-updater` npm package)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "auto (background poll every hour after a 30s initial delay; downloads automatically; install happens via `quitAndInstall()` triggered from a UI \"restart to update\" action, not silently on its own)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (macOS: `${update_base_url}macos/releases.json`, JSON feed; Windows: `${update_base_url}win32/<arch>/`, Squirrel-style)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (feed JSON itself carries no separate signature; integrity relies on the OS-level updater mechanism below)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "OS-code-signing (Squirrel.Mac requires the downloaded update bundle be signed with the same Developer ID/Team as the running app or the update silently fails to apply; Squirrel.Windows relies on NuGet-style package + Update.exe, no explicit `verifyUpdateCodeSignature` call found — no `electron-updater` in this codebase, it uses Electron's built-in `autoUpdater` module)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS-trust-store (macOS Gatekeeper/code-signing identity match enforced by Squirrel.Mac/Electron, not an app-pinned key)"
+        },
+        {
+          "label": "evidence",
+          "value": "`src/updater.ts:74-116` (`start()` sets `autoUpdater.setFeedURL`, platform-specific JSON/base-path feeds, hourly `setInterval(pollForUpdates, UPDATE_POLL_INTERVAL_MS)`); `src/updater.ts:19-24` (`installUpdate()` calls `autoUpdater.quitAndInstall()`, wired to IPC `install_update`, i.e. user-triggered); `src/electron-main.ts:427-430` (`update_base_url` sourced from runtime `vectorConfig`, not hardcoded in this repo — publicly known official value is `https://packages.element.io/desktop/update/`); Windows Squirrel glue at `src/squirrelhooks.ts` (no signature check code present)"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-U8.md",
+      "source_line": 53,
+      "fields": [
+        {
+          "label": "already covered as",
+          "value": "`Element Desktop`"
+        },
+        {
+          "label": "tier / notable finding",
+          "value": "Tier B. Electron native `autoUpdater`, HTTPS; mac relies on Squirrel.Mac code-sign, win on Squirrel.Windows with no explicit payload sig check visible in-repo."
+        }
+      ]
+    }
   ]
 }

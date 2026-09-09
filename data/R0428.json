@@ -43,5 +43,53 @@
       "line": 15,
       "text": "| spotdl | https://github.com/spotDL/spotify-downloader.git | cd4a420 / 2026-07-20 | Y (two mechanisms: notify-only version check, and a native-binary dependency downloader) | N (both are opt-in CLI flags: `--check-for-updates`, `--download-ffmpeg`) | Y (ffmpeg binary downloaded and later `subprocess.Popen`-executed) | https (`requests` default cert validation, no disabling found) | N | none — zero hash/signature check on the downloaded ffmpeg binary | N/A (no key used at all) | spotdl/utils/ffmpeg.py:41-56 `FFMPEG_URLS` hardcoded per-platform GitHub release links (pinned to old tag `b4.4`); :244-247 `requests.get(url).content` written straight to disk; :250-251 `chmod +x`; spotdl/console/entry_point.py:89 `download_ffmpeg()` called from `--download-ffmpeg`; spotdl/utils/github.py:97 `check_for_updates()` is separately notify-only |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC1.md",
+      "source_line": 15,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/spotDL/spotify-downloader.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "cd4a420 / 2026-07-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (two mechanisms: notify-only version check, and a native-binary dependency downloader)"
+        },
+        {
+          "label": "auto",
+          "value": "N (both are opt-in CLI flags: `--check-for-updates`, `--download-ffmpeg`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (ffmpeg binary downloaded and later `subprocess.Popen`-executed)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`requests` default cert validation, no disabling found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — zero hash/signature check on the downloaded ffmpeg binary"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A (no key used at all)"
+        },
+        {
+          "label": "evidence",
+          "value": "spotdl/utils/ffmpeg.py:41-56 `FFMPEG_URLS` hardcoded per-platform GitHub release links (pinned to old tag `b4.4`); :244-247 `requests.get(url).content` written straight to disk; :250-251 `chmod +x`; spotdl/console/entry_point.py:89 `download_ffmpeg()` called from `--download-ffmpeg`; spotdl/utils/github.py:97 `check_for_updates()` is separately notify-only"
+        }
+      ]
+    }
   ]
 }

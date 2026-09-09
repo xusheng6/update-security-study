@@ -48,5 +48,99 @@
       "line": 12,
       "text": "| Moodle — plugin installer *(side channel, scored separately)* | same | same | Y | N (admin click \"Install now\") | Y | https, TLS enforced (`$skipcertverify=false`) | No | **hash only (MD5)**, unauthenticated, sourced live from same HTTPS endpoint as the download | server-supplied/unpinned (fresh MD5 fetched from download.moodle.org API at install time) | `public/lib/classes/update/code_manager.php:93-140` (`get_remote_plugin_zip($url,$md5)`: downloads, then `md5_file($tempfile) === $md5`, no signature check anywhere); `public/lib/classes/plugin_manager.php:1129-1169` (`get_remote_plugin_info`/`get_remote_plugin_zip` call live moodle.org API for URL+MD5); `code_manager.php:436` (`$skipcertverify = false` confirms TLS cert validation IS enforced for the download) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AI6.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/moodle/moodle.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "6216fe4 / 2026-08-18"
+        },
+        {
+          "label": "has_updater",
+          "value": "N (core)"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A"
+        },
+        {
+          "label": "payload_verification",
+          "value": "N/A (notify-only)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence",
+          "value": "`public/lib/classes/update/checker.php:416` (`https://download.moodle.org/api/1.3/updates.php`), version-check only, no core auto-download+apply"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-AI6.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "same"
+        },
+        {
+          "label": "commit/date",
+          "value": "same"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (admin click \"Install now\")"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (`$skipcertverify=false`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "No"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**hash only (MD5)**, unauthenticated, sourced live from same HTTPS endpoint as the download"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (fresh MD5 fetched from download.moodle.org API at install time)"
+        },
+        {
+          "label": "evidence",
+          "value": "`public/lib/classes/update/code_manager.php:93-140` (`get_remote_plugin_zip($url,$md5)`: downloads, then `md5_file($tempfile) === $md5`, no signature check anywhere); `public/lib/classes/plugin_manager.php:1129-1169` (`get_remote_plugin_info`/`get_remote_plugin_zip` call live moodle.org API for URL+MD5); `code_manager.php:436` (`$skipcertverify = false` confirms TLS cert validation IS enforced for the download)"
+        }
+      ]
+    }
   ]
 }

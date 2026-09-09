@@ -43,5 +43,53 @@
       "line": 8,
       "text": "| Universal Media Server | https://github.com/UniversalMediaServer/UniversalMediaServer | 7cbd908d3ccb / 2026-08-16 | Y | N (check is automatic at GUI startup; download+run requires user clicking \"Free\" button) | Y | https, TLS enforced (java.net.http.HttpClient, no custom TrustManager/HostnameVerifier found) | N (properties file fetched over HTTPS from raw.github.com, plain key=value, no signature) | none (no hash/signature check on the downloaded installer before execution) | N/A — no verifying key anywhere in the client | net/pms/external/update/AutoUpdater.java:206-218 (downloadUpdate, no checksum/sig check); :142-161 (launchExe -> Desktop.open(exe) executes downloaded installer directly); net/pms/external/update/AutoUpdaterServerProperties.java:45-48 (loadFrom trusts server-supplied properties blindly); net/pms/configuration/Build.java:34-45 (UPDATE_SERVER_URL = https://raw.github.com/.../latest_version.properties); src/main/java/net/pms/swing/gui/JavaGui.java:137 (autoUpdater.pollServer() called automatically at startup) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC2.md",
+      "source_line": 8,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/UniversalMediaServer/UniversalMediaServer"
+        },
+        {
+          "label": "commit/date",
+          "value": "7cbd908d3ccb / 2026-08-16"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (check is automatic at GUI startup; download+run requires user clicking \"Free\" button)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (java.net.http.HttpClient, no custom TrustManager/HostnameVerifier found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (properties file fetched over HTTPS from raw.github.com, plain key=value, no signature)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (no hash/signature check on the downloaded installer before execution)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A — no verifying key anywhere in the client"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "net/pms/external/update/AutoUpdater.java:206-218 (downloadUpdate, no checksum/sig check); :142-161 (launchExe -> Desktop.open(exe) executes downloaded installer directly); net/pms/external/update/AutoUpdaterServerProperties.java:45-48 (loadFrom trusts server-supplied properties blindly); net/pms/configuration/Build.java:34-45 (UPDATE_SERVER_URL = https://raw.github.com/.../latest_version.properties); src/main/java/net/pms/swing/gui/JavaGui.java:137 (autoUpdater.pollServer() called automatically at startup)"
+        }
+      ]
+    }
   ]
 }

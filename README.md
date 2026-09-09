@@ -8,7 +8,7 @@ The initial scan contains 3,006 records: 49 D, 332 C, 109 B, 134 A, and 2,382 N.
 
 ## Browse and contribute
 
-The website links project names to recorded project URLs. Each record has a permanent details page with the original finding, updater facts, retained evidence, source snapshots, and correction links.
+The website links project names to recorded project URLs. Each record has a permanent details page with the original finding, updater facts, retained evidence, source snapshots, and correction links. Original Markdown table rows are presented as labeled fields rather than raw table syntax.
 
 - **Report an error:** use the correction issue template.
 - **Propose an edit:** change the corresponding `data/Rxxxx.json` or `data/Nxxxx.json` file and open a pull request.

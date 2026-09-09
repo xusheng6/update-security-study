@@ -42,5 +42,53 @@
       "line": 14,
       "text": "| KLayout | https://github.com/KLayout/klayout.git | dcd1b48 / 2026-08-20 | N (app itself); separate \"Salt\" package manager present | N | Salt: Y (installs & runs Ruby/Python macro packages) | https via Qt (`tlHttpStreamQt.cc`) or curl (`tlHttpStreamCurl.cc`); Qt path only logs `sslErrors`, never calls `ignoreSslErrors()` → validation enforced | n/a | **none** — Salt downloads package spec/grain + payload from URLs in a package index with no hash/signature check found | n/a (server-supplied index/URLs only) | klayout/src/lay/lay/laySaltDownloadManager.cc (package fetch/install, no verify); klayout/src/tl/tl/tlHttpStreamQt.cc:533-547 (sslErrors only logged, not ignored) — CONTENT-SIDE-CHANNEL, not the app's own binary updater |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U3.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/KLayout/klayout.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "dcd1b48 / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "N (app itself); separate \"Salt\" package manager present"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Salt: Y (installs & runs Ruby/Python macro packages)"
+        },
+        {
+          "label": "transport",
+          "value": "https via Qt (`tlHttpStreamQt.cc`) or curl (`tlHttpStreamCurl.cc`); Qt path only logs `sslErrors`, never calls `ignoreSslErrors()` → validation enforced"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "n/a"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — Salt downloads package spec/grain + payload from URLs in a package index with no hash/signature check found"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a (server-supplied index/URLs only)"
+        },
+        {
+          "label": "evidence",
+          "value": "klayout/src/lay/lay/laySaltDownloadManager.cc (package fetch/install, no verify); klayout/src/tl/tl/tlHttpStreamQt.cc:533-547 (sslErrors only logged, not ignored) — CONTENT-SIDE-CHANNEL, not the app's own binary updater"
+        }
+      ]
+    }
   ]
 }

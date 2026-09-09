@@ -44,5 +44,53 @@
       "line": 22,
       "text": "| Batocera EmulationStation (batocera-linux fork) | https://github.com/batocera-linux/batocera-emulationstation.git | f839490 / 2026-08-19 | Y | N (menu \"START UPDATE\", user-initiated) | Y | https, TLS enforced (curl, no `-k`/`--insecure`) | N | **none** | n/a | `es-app/src/ApiSystem.cpp:251-263`: `updateSystem()` runs `curl --connect-timeout 10 -m 30 -L -f -s -o /tmp/batocera-upgrade https://github.com/batocera-linux/batocera.linux/raw/refs/heads/master/package/batocera/core/batocera-scripts/scripts/batocera-upgrade && chmod +x /tmp/batocera-upgrade`, then (`:277`) `popen(upgradeScriptPath + \" --upgrade\")` — the fetched shell script is executed with **zero hash or signature check** before being chmod+x'd and run. `es-app/src/guis/GuiUpdate.cpp` wires this to the \"START UPDATE\" menu action in `GuiMenu.cpp:1225`. Whatever the downloaded `batocera-upgrade` script itself later verifies (out of scope of this repo) is irrelevant — GitHub/CDN compromise of that one raw file = RCE |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC8.md",
+      "source_line": 22,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/batocera-linux/batocera-emulationstation.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "f839490 / 2026-08-19"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (menu \"START UPDATE\", user-initiated)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (curl, no `-k`/`--insecure`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence",
+          "value": "`es-app/src/ApiSystem.cpp:251-263`: `updateSystem()` runs `curl --connect-timeout 10 -m 30 -L -f -s -o /tmp/batocera-upgrade https://github.com/batocera-linux/batocera.linux/raw/refs/heads/master/package/batocera/core/batocera-scripts/scripts/batocera-upgrade && chmod +x /tmp/batocera-upgrade`, then (`:277`) `popen(upgradeScriptPath + \" --upgrade\")` — the fetched shell script is executed with **zero hash or signature check** before being chmod+x'd and run. `es-app/src/guis/GuiUpdate.cpp` wires this to the \"START UPDATE\" menu action in `GuiMenu.cpp:1225`. Whatever the downloaded `batocera-upgrade` script itself later verifies (out of scope of this repo) is irrelevant — GitHub/CDN compromise of that one raw file = RCE"
+        }
+      ]
+    }
   ]
 }

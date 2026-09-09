@@ -51,5 +51,145 @@
       "line": 24,
       "text": "| ComfyUI-Manager (custom-node channel) | Comfy-Org/ComfyUI-Manager (ComfyUI extension) | Python, installed as a ComfyUI custom node | Y — is itself the update/install mechanism for third-party \"custom nodes\" (content-as-code) | Partial — install/update of a given node is user-initiated via UI/API, but once triggered runs unattended: clone → auto pip-install `requirements.txt` → auto-run `install.py`, no per-package confirmation | Y (by design) — `git.Repo.clone_from()` / `git fetch`+merge to add or update a node's git repo, or `manager_downloader` fetches a zip from `registry.comfy.org`(CNR)/GitHub, extracts it, then unconditionally executes the node's `install.py` and pip-installs its `requirements.txt` | HTTP or HTTPS accepted — `is_valid_url()` only checks `urlparse` has scheme+netloc (or SSH syntax), does not require `https`; TLS verification can even be globally disabled via a `bypass_ssl` config flag (default off) | N — `custom-node-list.json`/`extension-node-map.json`/CNR registry responses are plain JSON over HTTP(S), not signed | none — no `hashlib`/`sha256`/signature check anywhere in `manager_core.py`/`cnr_utils.py`; sole \"security\" control is a hard-coded post-hoc blacklist (`security_check.py`) of previously-discovered malicious packages (e.g. ComfyUI_LLMVISION, lolMiner, compromised `ultralytics`/`litellm` pip releases) that only detects after install | n/a — no signing key used anywhere in the flow | `glob/manager_core.py:924-954` (`execute_install_script` auto pip-install + auto-run `install.py`); `glob/manager_core.py:1345-1385` (`repo_install`, git clone); `glob/manager_core.py:2286-2296` (`is_valid_url`, http allowed, no TLS enforcement); `glob/cnr_utils.py:166-193` (registry fetch, `verify=not bypass_ssl`); `glob/security_check.py:1-171` (blacklist-only, post-hoc) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-N1.md",
+      "source_line": 22,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "comfyanonymous/ComfyUI"
+        },
+        {
+          "label": "framework",
+          "value": "Python (aiohttp server, portable Windows build)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (Windows-portable \"update.py\" only; not present for pip/git users)"
+        },
+        {
+          "label": "auto",
+          "value": "N — user must double-click `update_comfyui.bat`/`update_comfyui_stable.bat`; no background/scheduled check"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — `git pull`/merge of arbitrary upstream commits, then auto `pip install -r requirements.txt` from the pulled tree, then optionally self-replaces its own `update.py` and re-executes"
+        },
+        {
+          "label": "transport",
+          "value": "git protocol over whatever the configured `origin` remote uses (typically https://github.com/...); TLS only, no extra validation"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N — no signed commit/tag/manifest check at all"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — plain `git fetch`+fast-forward merge to latest `origin/master` or latest `v*` tag; no hash/signature check of the resulting tree or of `requirements.txt` before `pip install`"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a (no verifying key used)"
+        },
+        {
+          "label": "evidence",
+          "value": "`.ci/update_windows/update.py:8-153` (git pull/merge, self-update copy, `pip install -r repo_req_path`); `.ci/update_windows/update_comfyui.bat` (manual entry point)"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-N1.md",
+      "source_line": 23,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "comfyanonymous/ComfyUI"
+        },
+        {
+          "label": "framework",
+          "value": "Python + GitHub Releases API"
+        },
+        {
+          "label": "has_updater",
+          "value": "N (only activated via explicit `--front-end-version owner/repo@version` CLI flag; default path just uses the pinned pip package `comfyui-frontend-package`)"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — downloads `dist.zip` release asset over HTTPS and `zipfile.extractall()`s it into `web_custom_versions/`, then serves it as the web UI (JS executed in the browser)"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS via `requests.get()` to `api.github.com` and the release asset URL"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — no checksum/signature check of `dist.zip` before extraction, relies solely on TLS to github.com"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence",
+          "value": "`app/frontend_management.py:127-202` (`release_url`, `download_release_asset_zip`), `app/frontend_management.py:374-415` (`init_frontend_unsafe`)"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-N1.md",
+      "source_line": 24,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "Comfy-Org/ComfyUI-Manager (ComfyUI extension)"
+        },
+        {
+          "label": "framework",
+          "value": "Python, installed as a ComfyUI custom node"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y — is itself the update/install mechanism for third-party \"custom nodes\" (content-as-code)"
+        },
+        {
+          "label": "auto",
+          "value": "Partial — install/update of a given node is user-initiated via UI/API, but once triggered runs unattended: clone → auto pip-install `requirements.txt` → auto-run `install.py`, no per-package confirmation"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (by design) — `git.Repo.clone_from()` / `git fetch`+merge to add or update a node's git repo, or `manager_downloader` fetches a zip from `registry.comfy.org`(CNR)/GitHub, extracts it, then unconditionally executes the node's `install.py` and pip-installs its `requirements.txt`"
+        },
+        {
+          "label": "transport",
+          "value": "HTTP or HTTPS accepted — `is_valid_url()` only checks `urlparse` has scheme+netloc (or SSH syntax), does not require `https`; TLS verification can even be globally disabled via a `bypass_ssl` config flag (default off)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N — `custom-node-list.json`/`extension-node-map.json`/CNR registry responses are plain JSON over HTTP(S), not signed"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — no `hashlib`/`sha256`/signature check anywhere in `manager_core.py`/`cnr_utils.py`; sole \"security\" control is a hard-coded post-hoc blacklist (`security_check.py`) of previously-discovered malicious packages (e.g. ComfyUI_LLMVISION, lolMiner, compromised `ultralytics`/`litellm` pip releases) that only detects after install"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a — no signing key used anywhere in the flow"
+        },
+        {
+          "label": "evidence",
+          "value": "`glob/manager_core.py:924-954` (`execute_install_script` auto pip-install + auto-run `install.py`); `glob/manager_core.py:1345-1385` (`repo_install`, git clone); `glob/manager_core.py:2286-2296` (`is_valid_url`, http allowed, no TLS enforcement); `glob/cnr_utils.py:166-193` (registry fetch, `verify=not bypass_ssl`); `glob/security_check.py:1-171` (blacklist-only, post-hoc)"
+        }
+      ]
+    }
   ]
 }

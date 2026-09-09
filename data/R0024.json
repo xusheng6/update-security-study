@@ -42,5 +42,53 @@
       "line": 16,
       "text": "| Motrix | https://github.com/agalwood/Motrix.git | 804891be 2026-08-24 | Y | N (autoDownload/autoInstallOnAppQuit forced false; user must click download+install) | Y | https | Y (electron-updater manifest + code signing) | code-signing (electron-updater standard flow; mac target requires valid signature/hardenedRuntime for Squirrel.Mac to apply update) | OS keystore/Authenticode+notarization | `src/main/core/update-manager.ts:73-74` (`autoDownload=false`, `autoInstallOnAppQuit=false`); `electron-builder.json:236-239` `publish: {provider: \"generic\", url: \"https://dl.motrix.app/releases/\"}`; `.github/workflows/release.yml` has separate `windows-release-signing`/`macos-release-signing` jobs. **Content-as-code side channel (A-tier, notably good)**: builtin-plugin \"hot updates\" are Ed25519-signature-verified against a key pinned in source: `src/core/plugin/update/signature.ts:9-28` (`verify(null, bytes, createPublicKey(pem), sig)`) against `src/shared/builtin-signing.ts:5-10` (`BUILTIN_SIGNING_PUBKEYS`, hard-coded PEM, comment: \"NEVER runtime-configurable\") |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AN3.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/agalwood/Motrix.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "804891be 2026-08-24"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (autoDownload/autoInstallOnAppQuit forced false; user must click download+install)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (electron-updater manifest + code signing)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "code-signing (electron-updater standard flow; mac target requires valid signature/hardenedRuntime for Squirrel.Mac to apply update)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore/Authenticode+notarization"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src/main/core/update-manager.ts:73-74` (`autoDownload=false`, `autoInstallOnAppQuit=false`); `electron-builder.json:236-239` `publish: {provider: \"generic\", url: \"https://dl.motrix.app/releases/\"}`; `.github/workflows/release.yml` has separate `windows-release-signing`/`macos-release-signing` jobs. **Content-as-code side channel (A-tier, notably good)**: builtin-plugin \"hot updates\" are Ed25519-signature-verified against a key pinned in source: `src/core/plugin/update/signature.ts:9-28` (`verify(null, bytes, createPublicKey(pem), sig)`) against `src/shared/builtin-signing.ts:5-10` (`BUILTIN_SIGNING_PUBKEYS`, hard-coded PEM, comment: \"NEVER runtime-configurable\")"
+        }
+      ]
+    }
   ]
 }

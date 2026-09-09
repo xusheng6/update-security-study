@@ -42,5 +42,53 @@
       "line": 26,
       "text": "| MacDown | https://github.com/MacDownApp/macdown.git | 3e2a2bf / 2021-04-29 | Y | N (user must approve install) | Y | https, TLS validation not disabled (no rejectUnauthorized/InsecureSkipVerify/etc. found) | Y (Sparkle DSA-signed appcast) | signature (Sparkle legacy DSA) | **pinned in binary** — `MacDown/Resources/dsa_pub.pem` bundled in app resources | `MacDown/MacDown-Info.plist:134-137` `SUFeedURL=https://macdown.uranusjr.com/sparkle/macdown/stable/appcast.xml`, `SUPublicDSAKeyFile=dsa_pub.pem`; `MacDown/Code/Application/MPMainController.m:11` `#import <Sparkle/SUUpdater.h>`; `Podfile` pins `pod 'Sparkle', '~> 1.18'` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AL5.md",
+      "source_line": 26,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/MacDownApp/macdown.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "3e2a2bf / 2021-04-29"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (user must approve install)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS validation not disabled (no rejectUnauthorized/InsecureSkipVerify/etc. found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (Sparkle DSA-signed appcast)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (Sparkle legacy DSA)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned in binary** — `MacDown/Resources/dsa_pub.pem` bundled in app resources"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`MacDown/MacDown-Info.plist:134-137` `SUFeedURL=https://macdown.uranusjr.com/sparkle/macdown/stable/appcast.xml`, `SUPublicDSAKeyFile=dsa_pub.pem`; `MacDown/Code/Application/MPMainController.m:11` `#import <Sparkle/SUUpdater.h>`; `Podfile` pins `pod 'Sparkle', '~> 1.18'`"
+        }
+      ]
+    }
   ]
 }

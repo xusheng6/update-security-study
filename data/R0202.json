@@ -41,5 +41,53 @@
       "line": 17,
       "text": "| Aerial (screensaver) | https://github.com/AerialScreensaver/Aerial (current app; the old `github.com/JohnCoates/Aerial` is now an explicitly-archived \"historical .saver\" repo — see note) | Sparkle 2.x (`SPUUpdater` with a custom \"gentle reminders\" delegate) | Y | Y for checks (`automaticallyChecksForUpdates` default true); auto-**install** is user-configurable, default off (`automaticallyDownloadsUpdates` defaults false → updates install only when user enables \"install on quit\") | Y (manual trigger, or automatic install-on-quit if the user opted in) | https (`SUFeedURL`=`https://aerialscreensaver.github.io/appcast.xml`) | Sparkle-EdDSA | signature (EdDSA) | pinned-in-binary (`SUPublicEDKey` in Info.plist) | Aerial/Info.plist:40-43 (`SUFeedURL`, `SUPublicEDKey`=`8VgyFnUp44Aj4mvoEyrhru/WHllgXNzmnls+jrZ1xiY=`); Aerial/AppDelegate.swift:157-162 (explicit updater start with error logging); Aerial/SparkleGentleDelegate.swift:37-119 (`SPUUpdaterDelegate`/`SPUStandardUserDriverDelegate` impl, `willInstallUpdateOnQuit`); Aerial/UI/SwiftUI/Settings/Panels/AutoUpdatesPanel.swift:77-189 (`automaticallyChecksForUpdates`/`automaticallyDownloadsUpdates` toggles, install default `.off`); live fetch of the appcast on 2026-08-19 shows current beta v4.1.0beta13 (12 Aug 2026) with valid `sparkle:edSignature` on both the full package and all delta-update enclosures. **NOTE on repo identity**: `github.com/JohnCoates/Aerial`'s README explicitly says it is \"the historical repository for Aerial distributed as a `.saver`\" and that v4.0+ moved to `github.com/AerialScreensaver/Aerial`; that old repo's own (now-dead) appcast.xml even contains a release note stating \"Sparkle updates are now deprecated\" in favor of the new Aerial.app |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-M1.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/AerialScreensaver/Aerial (current app; the old `github.com/JohnCoates/Aerial` is now an explicitly-archived \"historical .saver\" repo — see note)"
+        },
+        {
+          "label": "framework",
+          "value": "Sparkle 2.x (`SPUUpdater` with a custom \"gentle reminders\" delegate)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y for checks (`automaticallyChecksForUpdates` default true); auto-**install** is user-configurable, default off (`automaticallyDownloadsUpdates` defaults false → updates install only when user enables \"install on quit\")"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (manual trigger, or automatic install-on-quit if the user opted in)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`SUFeedURL`=`https://aerialscreensaver.github.io/appcast.xml`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Sparkle-EdDSA"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (EdDSA)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (`SUPublicEDKey` in Info.plist)"
+        },
+        {
+          "label": "evidence",
+          "value": "Aerial/Info.plist:40-43 (`SUFeedURL`, `SUPublicEDKey`=`8VgyFnUp44Aj4mvoEyrhru/WHllgXNzmnls+jrZ1xiY=`); Aerial/AppDelegate.swift:157-162 (explicit updater start with error logging); Aerial/SparkleGentleDelegate.swift:37-119 (`SPUUpdaterDelegate`/`SPUStandardUserDriverDelegate` impl, `willInstallUpdateOnQuit`); Aerial/UI/SwiftUI/Settings/Panels/AutoUpdatesPanel.swift:77-189 (`automaticallyChecksForUpdates`/`automaticallyDownloadsUpdates` toggles, install default `.off`); live fetch of the appcast on 2026-08-19 shows current beta v4.1.0beta13 (12 Aug 2026) with valid `sparkle:edSignature` on both the full package and all delta-update enclosures. **NOTE on repo identity**: `github.com/JohnCoates/Aerial`'s README explicitly says it is \"the historical repository for Aerial distributed as a `.saver`\" and that v4.0+ moved to `github.com/AerialScreensaver/Aerial`; that old repo's own (now-dead) appcast.xml even contains a release note stating \"Sparkle updates are now deprecated\" in favor of the new Aerial.app"
+        }
+      ]
+    }
   ]
 }

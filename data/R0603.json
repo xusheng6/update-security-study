@@ -42,5 +42,53 @@
       "line": 13,
       "text": "| Plandex | https://github.com/plandex-ai/plandex.git | e2d7720 / 2025-10-03 | Y | N (interactive confirm via `term.ConfirmYesNo`, but silent version-check runs on every invocation unless `PLANDEX_SKIP_UPGRADE` set) | Y | https (plandex.ai for version manifest; github.com/releases/download for binary — both via net/http default client, no TLS verification disabled found) | N (version manifest is a bare `cli-version.txt` plaintext string, unsigned) | **none** — `update.Apply(tarReader, update.Options{})` is called with a fully empty Options struct, i.e. no `Checksum` and no `Signature` set, so the downloaded tar.gz is applied to the live binary with zero integrity/authenticity check beyond TLS | N/A — no key at all, verification is skipped entirely | app/cli/upgrade.go:27-97 (`checkForUpgrade`: GET https://plandex.ai/v2/cli-version.txt, then `term.ConfirmYesNo`), app/cli/upgrade.go:99-159 (`doUpgrade`: GET https://github.com/plandex-ai/plandex/releases/download/... tar.gz, then :147 `update.Apply(tarReader, update.Options{})` — empty Options), app/cli/upgrade.go:161-186 (`restartPlandex` re-execs the just-patched binary) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AM1.md",
+      "source_line": 13,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/plandex-ai/plandex.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "e2d7720 / 2025-10-03"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (interactive confirm via `term.ConfirmYesNo`, but silent version-check runs on every invocation unless `PLANDEX_SKIP_UPGRADE` set)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (plandex.ai for version manifest; github.com/releases/download for binary — both via net/http default client, no TLS verification disabled found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (version manifest is a bare `cli-version.txt` plaintext string, unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — `update.Apply(tarReader, update.Options{})` is called with a fully empty Options struct, i.e. no `Checksum` and no `Signature` set, so the downloaded tar.gz is applied to the live binary with zero integrity/authenticity check beyond TLS"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A — no key at all, verification is skipped entirely"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "app/cli/upgrade.go:27-97 (`checkForUpgrade`: GET https://plandex.ai/v2/cli-version.txt, then `term.ConfirmYesNo`), app/cli/upgrade.go:99-159 (`doUpgrade`: GET https://github.com/plandex-ai/plandex/releases/download/... tar.gz, then :147 `update.Apply(tarReader, update.Options{})` — empty Options), app/cli/upgrade.go:161-186 (`restartPlandex` re-execs the just-patched binary)"
+        }
+      ]
+    }
   ]
 }

@@ -43,5 +43,53 @@
       "line": 13,
       "text": "| openscad/openscad | openscad/openscad | C++/Qt | Y (macOS only, `OPENSCAD_UPDATER` build flag; Sparkle framework) | auto chk configurable (`automaticallyChecksForUpdates`), download/install handled entirely inside the Sparkle framework (not in this repo) | Y (on macOS, via Sparkle) | https feed: `https://files.openscad.org/appcast[-snapshots].xml`; TLS handling is inside the vendored Sparkle framework, not this repo (validation=unknown-external, standard Sparkle default is enforced HTTPS) | signature[Sparkle legacy DSA] — Info.plist declares `SUPublicDSAKeyFile=dsa_pub.pem` (older Sparkle 1.x DSA scheme, not the newer EdDSA scheme), and `dsa_pub.pem` is present in-repo | signature[Sparkle DSA] enforced by the Sparkle framework at install time using the bundled public key | pinned-in-binary (`dsa_pub.pem` shipped inside the app bundle, referenced by `SUPublicDSAKeyFile`) | Info.plist.in:105-108 (`SUPublicDSAKeyFile=dsa_pub.pem`, `SUFeedURL=https://files.openscad.org/appcast.xml`); dsa_pub.pem (present at repo root); src/gui/SparkleAutoUpdater.mm:76-81 (`updateFeed()` builds `https://files.openscad.org/appcast%@.xml`, `[d->updater setFeedURL:...]`); src/gui/AutoUpdater.cc:7 (`#ifdef OPENSCAD_UPDATER` gate — non-mac builds have no updater UI) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-G3.md",
+      "source_line": 13,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "openscad/openscad"
+        },
+        {
+          "label": "framework",
+          "value": "C++/Qt"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (macOS only, `OPENSCAD_UPDATER` build flag; Sparkle framework)"
+        },
+        {
+          "label": "auto",
+          "value": "auto chk configurable (`automaticallyChecksForUpdates`), download/install handled entirely inside the Sparkle framework (not in this repo)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (on macOS, via Sparkle)"
+        },
+        {
+          "label": "transport",
+          "value": "https feed: `https://files.openscad.org/appcast[-snapshots].xml`; TLS handling is inside the vendored Sparkle framework, not this repo (validation=unknown-external, standard Sparkle default is enforced HTTPS)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "signature[Sparkle legacy DSA] — Info.plist declares `SUPublicDSAKeyFile=dsa_pub.pem` (older Sparkle 1.x DSA scheme, not the newer EdDSA scheme), and `dsa_pub.pem` is present in-repo"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature[Sparkle DSA] enforced by the Sparkle framework at install time using the bundled public key"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (`dsa_pub.pem` shipped inside the app bundle, referenced by `SUPublicDSAKeyFile`)"
+        },
+        {
+          "label": "evidence",
+          "value": "Info.plist.in:105-108 (`SUPublicDSAKeyFile=dsa_pub.pem`, `SUFeedURL=https://files.openscad.org/appcast.xml`); dsa_pub.pem (present at repo root); src/gui/SparkleAutoUpdater.mm:76-81 (`updateFeed()` builds `https://files.openscad.org/appcast%@.xml`, `[d->updater setFeedURL:...]`); src/gui/AutoUpdater.cc:7 (`#ifdef OPENSCAD_UPDATER` gate — non-mac builds have no updater UI)"
+        }
+      ]
+    }
   ]
 }

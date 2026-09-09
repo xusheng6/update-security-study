@@ -41,5 +41,53 @@
       "line": 17,
       "text": "| oh-my-posh | https://github.com/JanDeDobbeleer/oh-my-posh | 8be5a1370e4e30427c90c32cbed2995e4f5fac6a / 2026-08-18 | Y | Y (opt-in `--auto` flag, cache-interval gated) | Y | https (github.com or cdn.ohmyposh.dev) | Y — checksums.txt.sig | Ed25519 signature over checksums.txt + SHA-256 checksum match on the binary | pinned in binary — `//go:embed public_key.pem` compiled into the executable | src/cli/upgrade/verify.go:33-145 (downloads asset+checksums.txt+checksums.txt.sig, `ed25519.Verify` against embedded PEM pubkey, then SHA-256 match); src/cli/upgrade/install.go:17-89 (writes verified bytes to `.exe.new`, renames over the running executable — actually replaces+will-be-executed); src/runtime/http/client_default.go:12-23 (stock `http.Transport`, no `InsecureSkipVerify`, TLS validation enforced). SEPARATE DATA CHANNEL (stays N, not code): `oh-my-posh font install` downloads a font zip from a CDN with **no signature/hash check at all** (src/cli/font/font.go:30-47) — but font glyphs are data, not executable, per task rules. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Y7.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/JanDeDobbeleer/oh-my-posh"
+        },
+        {
+          "label": "commit/date",
+          "value": "8be5a1370e4e30427c90c32cbed2995e4f5fac6a / 2026-08-18"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (opt-in `--auto` flag, cache-interval gated)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (github.com or cdn.ohmyposh.dev)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y — checksums.txt.sig"
+        },
+        {
+          "label": "payload_verification",
+          "value": "Ed25519 signature over checksums.txt + SHA-256 checksum match on the binary"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned in binary — `//go:embed public_key.pem` compiled into the executable"
+        },
+        {
+          "label": "evidence",
+          "value": "src/cli/upgrade/verify.go:33-145 (downloads asset+checksums.txt+checksums.txt.sig, `ed25519.Verify` against embedded PEM pubkey, then SHA-256 match); src/cli/upgrade/install.go:17-89 (writes verified bytes to `.exe.new`, renames over the running executable — actually replaces+will-be-executed); src/runtime/http/client_default.go:12-23 (stock `http.Transport`, no `InsecureSkipVerify`, TLS validation enforced). SEPARATE DATA CHANNEL (stays N, not code): `oh-my-posh font install` downloads a font zip from a CDN with **no signature/hash check at all** (src/cli/font/font.go:30-47) — but font glyphs are data, not executable, per task rules."
+        }
+      ]
+    }
   ]
 }

@@ -41,5 +41,53 @@
       "line": 29,
       "text": "| LlamaChat | alexrozanski/LlamaChat | Swift/SwiftUI, macOS app, uses the Sparkle framework | Y | Y — `SPUStandardUpdaterController(startingUpdater: true, ...)` starts Sparkle's standard automatic-update lifecycle at launch, in addition to a manual \"Check for Updates\" action | Y (Sparkle downloads the update and, once verified, installs it — final install still requires the user to accept Sparkle's install prompt per Sparkle's standard UX) | https — `SUFeedURL` = `https://llamachat.app/api/appcast.xml` | Y — Sparkle appcast items are signed; the app embeds the corresponding public key for verification | signature — EdDSA/Ed25519, Sparkle's standard `SUPublicEDKey` scheme | embedded public key in `Info.plist` (`SUPublicEDKey`), not fetched over the network | `LlamaChat/Info.plist`: `SUFeedURL` = `https://llamachat.app/api/appcast.xml`; `SUPublicEDKey` = `kYcF5CTAVZ6ljL01giZNTfMtJCDUl/DUUQ5FsibYCx8=`; `LlamaChat/viewmodel/updates/CheckForUpdatesViewModel.swift:9` (`import Sparkle`); `:14-19` (`updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)`; `checkForUpdates()` → `updaterController.updater.checkForUpdates()`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-O1.md",
+      "source_line": 29,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "alexrozanski/LlamaChat"
+        },
+        {
+          "label": "framework",
+          "value": "Swift/SwiftUI, macOS app, uses the Sparkle framework"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y — `SPUStandardUpdaterController(startingUpdater: true, ...)` starts Sparkle's standard automatic-update lifecycle at launch, in addition to a manual \"Check for Updates\" action"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (Sparkle downloads the update and, once verified, installs it — final install still requires the user to accept Sparkle's install prompt per Sparkle's standard UX)"
+        },
+        {
+          "label": "transport",
+          "value": "https — `SUFeedURL` = `https://llamachat.app/api/appcast.xml`"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y — Sparkle appcast items are signed; the app embeds the corresponding public key for verification"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature — EdDSA/Ed25519, Sparkle's standard `SUPublicEDKey` scheme"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "embedded public key in `Info.plist` (`SUPublicEDKey`), not fetched over the network"
+        },
+        {
+          "label": "evidence",
+          "value": "`LlamaChat/Info.plist`: `SUFeedURL` = `https://llamachat.app/api/appcast.xml`; `SUPublicEDKey` = `kYcF5CTAVZ6ljL01giZNTfMtJCDUl/DUUQ5FsibYCx8=`; `LlamaChat/viewmodel/updates/CheckForUpdatesViewModel.swift:9` (`import Sparkle`); `:14-19` (`updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)`; `checkForUpdates()` → `updaterController.updater.checkForUpdates()`)"
+        }
+      ]
+    }
   ]
 }

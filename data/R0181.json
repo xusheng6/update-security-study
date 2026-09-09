@@ -43,5 +43,53 @@
       "line": 13,
       "text": "| Maccy | p0deje/Maccy | Sparkle | Y | chk: false by default (explicitly set in AppDelegate), user-toggleable; dl/inst: Sparkle standard prompt | Y | https (`https://raw.githubusercontent.com/p0deje/Maccy/master/appcast.xml`) | **NONE** — no `SUPublicEDKey`/`SUPublicDSAKey` anywhere in repo | none — Sparkle configured with no verifying key at all | none | Maccy/Info.plist:31-36 (only SUEnableDownloaderService/SUEnableInstallerLauncherService/SUFeedURL present); Maccy/AppDelegate.swift:44; Maccy/SoftwareUpdater.swift:5-30 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-K1.md",
+      "source_line": 13,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "p0deje/Maccy"
+        },
+        {
+          "label": "framework",
+          "value": "Sparkle"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "chk: false by default (explicitly set in AppDelegate), user-toggleable; dl/inst: Sparkle standard prompt"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`https://raw.githubusercontent.com/p0deje/Maccy/master/appcast.xml`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "**NONE** — no `SUPublicEDKey`/`SUPublicDSAKey` anywhere in repo"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — Sparkle configured with no verifying key at all"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none"
+        },
+        {
+          "label": "evidence",
+          "value": "Maccy/Info.plist:31-36 (only SUEnableDownloaderService/SUEnableInstallerLauncherService/SUFeedURL present); Maccy/AppDelegate.swift:44; Maccy/SoftwareUpdater.swift:5-30"
+        }
+      ]
+    }
   ]
 }

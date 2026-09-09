@@ -49,5 +49,99 @@
       "line": 31,
       "text": "| Outline Client (desktop, Electron) | https://github.com/Jigsaw-Code/outline-client | a95893d / 2026-08-04 | Y | Y (periodic 6h + on-launch check via `electron-updater`) | Y | https (electron-updater default GitHub-releases provider; no publish override found to alter this) | Y | signature (electron-updater's built-in code-signature verification of the downloaded installer against the running app's signer, Authenticode/macOS codesign) | OS keystore (electron-updater `verifyUpdateCodeSignature`) | `client/package.json:48` (`\"electron-updater\": \"^5.0.5\"`), `client/electron/index.ts:34` (`import {autoUpdater} from 'electron-updater'`), `:442-443` (`autoUpdater.checkForUpdates()`), `:498-500` (periodic `setInterval(checkForUpdates, 6*60*60*1000)`), `:617-620` (`update-downloaded` → notifies renderer to prompt restart), `client/electron/electron-builder.json` (no custom `publish`/signature-bypass config) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC4.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/outline/outline"
+        },
+        {
+          "label": "commit/date",
+          "value": "0f8f69d / 2026-08-19"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "N (notify-only)"
+        },
+        {
+          "label": "transport",
+          "value": "https (Docker Hub API, TLS enforced)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "n/a"
+        },
+        {
+          "label": "payload_verification",
+          "value": "n/a"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`server/utils/getInstallationInfo.ts:20-56` — `getVersionInfo()` fetches Docker Hub tag list, computes `versionsBehind`, never downloads/executes anything"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-W6.md",
+      "source_line": 31,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Jigsaw-Code/outline-client"
+        },
+        {
+          "label": "commit/date",
+          "value": "a95893d / 2026-08-04"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (periodic 6h + on-launch check via `electron-updater`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (electron-updater default GitHub-releases provider; no publish override found to alter this)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (electron-updater's built-in code-signature verification of the downloaded installer against the running app's signer, Authenticode/macOS codesign)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore (electron-updater `verifyUpdateCodeSignature`)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`client/package.json:48` (`\"electron-updater\": \"^5.0.5\"`), `client/electron/index.ts:34` (`import {autoUpdater} from 'electron-updater'`), `:442-443` (`autoUpdater.checkForUpdates()`), `:498-500` (periodic `setInterval(checkForUpdates, 6*60*60*1000)`), `:617-620` (`update-downloaded` → notifies renderer to prompt restart), `client/electron/electron-builder.json` (no custom `publish`/signature-bypass config)"
+        }
+      ]
+    }
   ]
 }

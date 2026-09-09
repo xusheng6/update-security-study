@@ -41,5 +41,53 @@
       "line": 29,
       "text": "| Adium | https://github.com/adium/adium | 0f7136b34698b09e886f8a41f64d81636c47c567 / 2021-03-13 | Y | N (checks silently, prompts before install — no `SUAutomaticallyUpdate`/auto-install flag found) | Y | https (`update.php` over TLS; no disabled-validation code found) | Y (DSA-signed appcast items, Sparkle 1.x convention) | signature (DSA) | **pinned in bundle** — `Resources/dsa_pub.pem` (public DSA key checked into repo/app Resources) | `Source/AIAdium.m:51` `#import <Sparkle/Sparkle.h>`; `:1086` `feedParametersForUpdater:` (SUUpdater delegate); `Resources/Info copy.plist:1-3` `SUFeedURL` = `https://www.adium.im/sparkle/update.php`, `SUPublicDSAKeyFile` = `dsa_pub.pem`; key file present at `Resources/dsa_pub.pem`. Project appears abandoned (last commit 2021) but the shipped mechanism was a properly key-pinned Sparkle DSA updater → tier A. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AB3.md",
+      "source_line": 29,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/adium/adium"
+        },
+        {
+          "label": "commit/date",
+          "value": "0f7136b34698b09e886f8a41f64d81636c47c567 / 2021-03-13"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (checks silently, prompts before install — no `SUAutomaticallyUpdate`/auto-install flag found)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`update.php` over TLS; no disabled-validation code found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (DSA-signed appcast items, Sparkle 1.x convention)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (DSA)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned in bundle** — `Resources/dsa_pub.pem` (public DSA key checked into repo/app Resources)"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "`Source/AIAdium.m:51` `#import <Sparkle/Sparkle.h>`; `:1086` `feedParametersForUpdater:` (SUUpdater delegate); `Resources/Info copy.plist:1-3` `SUFeedURL` = `https://www.adium.im/sparkle/update.php`, `SUPublicDSAKeyFile` = `dsa_pub.pem`; key file present at `Resources/dsa_pub.pem`. Project appears abandoned (last commit 2021) but the shipped mechanism was a properly key-pinned Sparkle DSA updater → tier A."
+        }
+      ]
+    }
   ]
 }

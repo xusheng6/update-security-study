@@ -44,5 +44,53 @@
       "line": 24,
       "text": "| Proton Pass (desktop, OSS) | https://github.com/ProtonMail/WebClients.git (subdir `applications/pass-desktop`) | e80dee4 2026-08-20 | Y | Y (hourly `setInterval`, plus on launch) | Y | https, TLS validation enforced **AND pinned**: custom `certificateVerifyProc` does SPKI public-key-hash pinning for `proton.me` (and subdomains) on top of normal chain validation, rejecting on mismatch | N (JSON manifests `version.json`/`RELEASES.json` over HTTPS only, not separately signed) | macOS: Electron `autoUpdater` (Squirrel.Mac) — code-signing/notarization checked by the OS updater framework. Windows: native Rust binding calls Windows `PackageManager.AddPackageByUriAsync` to install an MSIX package — OS-enforced Authenticode/MSIX signature validation. No app-level pinned payload signature (no A-tier crypto) beyond these OS mechanisms | OS keystore / Apple code-signing (mac) and Windows Trusted-Publisher store (win) — not an app-pinned key | src/tls.ts:9-14,25-52 (SPKI pin list + verifyProc); src/lib/updater/updater.ts:1,154-161 (macOS `autoUpdater.setFeedURL`/`checkForUpdates`), :127-151 (Windows `msix_updater.installUpdate`); native/napi/src/updater.rs:22-45 (`PackageManager.AddPackageByUriAsync`); src/lib/updater/store.ts:10-13 (`https://proton.me/download/...` — same domain as the TLS pin) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-V3.md",
+      "source_line": 24,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/ProtonMail/WebClients.git (subdir `applications/pass-desktop`)"
+        },
+        {
+          "label": "commit/date",
+          "value": "e80dee4 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (hourly `setInterval`, plus on launch)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS validation enforced **AND pinned**: custom `certificateVerifyProc` does SPKI public-key-hash pinning for `proton.me` (and subdomains) on top of normal chain validation, rejecting on mismatch"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (JSON manifests `version.json`/`RELEASES.json` over HTTPS only, not separately signed)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "macOS: Electron `autoUpdater` (Squirrel.Mac) — code-signing/notarization checked by the OS updater framework. Windows: native Rust binding calls Windows `PackageManager.AddPackageByUriAsync` to install an MSIX package — OS-enforced Authenticode/MSIX signature validation. No app-level pinned payload signature (no A-tier crypto) beyond these OS mechanisms"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore / Apple code-signing (mac) and Windows Trusted-Publisher store (win) — not an app-pinned key"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/tls.ts:9-14,25-52 (SPKI pin list + verifyProc); src/lib/updater/updater.ts:1,154-161 (macOS `autoUpdater.setFeedURL`/`checkForUpdates`), :127-151 (Windows `msix_updater.installUpdate`); native/napi/src/updater.rs:22-45 (`PackageManager.AddPackageByUriAsync`); src/lib/updater/store.ts:10-13 (`https://proton.me/download/...` — same domain as the TLS pin)"
+        }
+      ]
+    }
   ]
 }

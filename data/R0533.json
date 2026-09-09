@@ -43,5 +43,53 @@
       "line": 24,
       "text": "| SoapUI (open-source edition) | https://github.com/SmartBear/soapui.git | 452bc17 / 2026-06-08 | Y | N (auto-check on by default, but shows a confirmation dialog before installing — user must click \"Update\") | **Y** (via install4j's `ApplicationLauncher`, which downloads+installs and restarts the app) | **plaintext HTTP** — update descriptor fetched from `http://dl.eviware.com/version-update/soapui-updates-os.xml` | N (update descriptor is unauthenticated XML over HTTP) | none visible in this repo — actual download/verification is delegated to the closed-source install4j runtime, invoked via `ApplicationLauncher.launchApplication` | unknown / not pinned in this repo (install4j internal, closed-source) | soapui/soapui/src/main/java/com/eviware/soapui/autoupdate/SoapUISystemProperties.java:24 (HTTP URL), .../DefaultSoapUICore.java:355 (auto-check default true), .../Install4jSoapUIUpdateProvider.java:139-161 (download+relaunch) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AH1.md",
+      "source_line": 24,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/SmartBear/soapui.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "452bc17 / 2026-06-08"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (auto-check on by default, but shows a confirmation dialog before installing — user must click \"Update\")"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y** (via install4j's `ApplicationLauncher`, which downloads+installs and restarts the app)"
+        },
+        {
+          "label": "transport",
+          "value": "**plaintext HTTP** — update descriptor fetched from `http://dl.eviware.com/version-update/soapui-updates-os.xml`"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (update descriptor is unauthenticated XML over HTTP)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none visible in this repo — actual download/verification is delegated to the closed-source install4j runtime, invoked via `ApplicationLauncher.launchApplication`"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "unknown / not pinned in this repo (install4j internal, closed-source)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "soapui/soapui/src/main/java/com/eviware/soapui/autoupdate/SoapUISystemProperties.java:24 (HTTP URL), .../DefaultSoapUICore.java:355 (auto-check default true), .../Install4jSoapUIUpdateProvider.java:139-161 (download+relaunch)"
+        }
+      ]
+    }
   ]
 }

@@ -41,5 +41,53 @@
       "line": 31,
       "text": "| Cherry Studio | CherryHQ/cherry-studio | Electron (`electron-updater`) | Y | Y — auto-checks 5s after startup then every ~4h (±15% jitter) when `app.dist.auto_update.enabled` is set; `autoDownload` follows that same preference; install itself requires explicit user click (\"Install Now\" — `autoInstallOnAppQuit=false`) | Y — downloaded installer is executed by `autoUpdater.quitAndInstall()` | HTTPS, generic electron-builder provider at `https://releases.cherry-ai.com`; release-history JSON fetch is separately size-capped (1MB) and timeout-capped (10s) | N — no separate signature over the `latest*.yml` manifest itself (electron-updater's manifest is unsigned JSON/YAML served over plain HTTPS) | hash-from-manifest (electron-updater compares downloaded file's `sha512` against the value inside the HTTPS-fetched, unsigned `latest*.yml`) **+ OS code-signing at install** (Windows Authenticode via custom `scripts/win-sign.js`; macOS notarization via `scripts/notarize.js`, gated on CI secrets) — **but the extra electron-updater cross-check that the update's Authenticode signer matches the currently-installed app is explicitly disabled** (`verifyUpdateCodeSignature: false`) | Windows Authenticode cert used by `scripts/win-sign.js` (custom signer, not inspected further here); Apple Developer ID via `@electron/notarize` using CI-injected `APPLE_*` secrets | `src/main/services/AppUpdaterService.ts:62-135` (4h scheduled auto-check, `autoDownload` from preference, `autoInstallOnAppQuit=false`); `src/main/services/AppUpdaterService.ts:379-382` (`quitAndInstall`); `electron-builder.yml:103-105` (`verifyUpdateCodeSignature: false`); `electron-builder.yml:119-121,159` (`notarize: false` + custom `afterSign: scripts/notarize.js`); `electron-builder.yml:152-154` (`publish: provider: generic, url: https://releases.cherry-ai.com`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-N1.md",
+      "source_line": 31,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "CherryHQ/cherry-studio"
+        },
+        {
+          "label": "framework",
+          "value": "Electron (`electron-updater`)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y — auto-checks 5s after startup then every ~4h (±15% jitter) when `app.dist.auto_update.enabled` is set; `autoDownload` follows that same preference; install itself requires explicit user click (\"Install Now\" — `autoInstallOnAppQuit=false`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — downloaded installer is executed by `autoUpdater.quitAndInstall()`"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS, generic electron-builder provider at `https://releases.cherry-ai.com`; release-history JSON fetch is separately size-capped (1MB) and timeout-capped (10s)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N — no separate signature over the `latest*.yml` manifest itself (electron-updater's manifest is unsigned JSON/YAML served over plain HTTPS)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (electron-updater compares downloaded file's `sha512` against the value inside the HTTPS-fetched, unsigned `latest*.yml`) **+ OS code-signing at install** (Windows Authenticode via custom `scripts/win-sign.js`; macOS notarization via `scripts/notarize.js`, gated on CI secrets) — **but the extra electron-updater cross-check that the update's Authenticode signer matches the currently-installed app is explicitly disabled** (`verifyUpdateCodeSignature: false`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "Windows Authenticode cert used by `scripts/win-sign.js` (custom signer, not inspected further here); Apple Developer ID via `@electron/notarize` using CI-injected `APPLE_*` secrets"
+        },
+        {
+          "label": "evidence",
+          "value": "`src/main/services/AppUpdaterService.ts:62-135` (4h scheduled auto-check, `autoDownload` from preference, `autoInstallOnAppQuit=false`); `src/main/services/AppUpdaterService.ts:379-382` (`quitAndInstall`); `electron-builder.yml:103-105` (`verifyUpdateCodeSignature: false`); `electron-builder.yml:119-121,159` (`notarize: false` + custom `afterSign: scripts/notarize.js`); `electron-builder.yml:152-154` (`publish: provider: generic, url: https://releases.cherry-ai.com`)"
+        }
+      ]
+    }
   ]
 }

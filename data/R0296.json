@@ -44,5 +44,53 @@
       "line": 22,
       "text": "| HexChat | https://github.com/hexchat/hexchat | b544ac3 / 2024-02-09 | Y (Windows only, `upd` plugin, built by default per meson boolean default) | Y (WinSparkle auto-checks on interval via `win_sparkle_init()`, plus manual `/UPDCHK`) | Y (WinSparkle downloads+runs installer) | https (`APPCAST_URL = \"https://hexchat.github.io/appcast.xml\"`) | no DSA/EdDSA key pinned anywhere in repo (`win_sparkle_set_dsa_pub_pem`/`_eddsa_pub_pem` never called) | **none**, confirmed by reading WinSparkle's own source directly: `updatedownloader.cpp` initializes `signatureValid = true` and, when no key is configured, only logs `\"Using unsigned updates!\"` and proceeds to install anyway (no Authenticode fallback exists in WinSparkle at all — checked current vslavik/winsparkle source, only DSA/EdDSA paths exist) | none pinned in repo | plugins/upd/upd.c:23-53; CI pulls WinSparkle-20151011 (.github/workflows/windows-build.yml:43); cross-checked against vslavik/winsparkle src/updatedownloader.cpp:198-219 and src/signatureverifier.cpp (only DSA-SHA1/EdDSA methods exist, no cert-matching fallback) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U8.md",
+      "source_line": 22,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/hexchat/hexchat"
+        },
+        {
+          "label": "commit/date",
+          "value": "b544ac3 / 2024-02-09"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (Windows only, `upd` plugin, built by default per meson boolean default)"
+        },
+        {
+          "label": "auto",
+          "value": "Y (WinSparkle auto-checks on interval via `win_sparkle_init()`, plus manual `/UPDCHK`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (WinSparkle downloads+runs installer)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`APPCAST_URL = \"https://hexchat.github.io/appcast.xml\"`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "no DSA/EdDSA key pinned anywhere in repo (`win_sparkle_set_dsa_pub_pem`/`_eddsa_pub_pem` never called)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none**, confirmed by reading WinSparkle's own source directly: `updatedownloader.cpp` initializes `signatureValid = true` and, when no key is configured, only logs `\"Using unsigned updates!\"` and proceeds to install anyway (no Authenticode fallback exists in WinSparkle at all — checked current vslavik/winsparkle source, only DSA/EdDSA paths exist)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none pinned in repo"
+        },
+        {
+          "label": "evidence",
+          "value": "plugins/upd/upd.c:23-53; CI pulls WinSparkle-20151011 (.github/workflows/windows-build.yml:43); cross-checked against vslavik/winsparkle src/updatedownloader.cpp:198-219 and src/signatureverifier.cpp (only DSA-SHA1/EdDSA methods exist, no cert-matching fallback)"
+        }
+      ]
+    }
   ]
 }

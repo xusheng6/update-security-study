@@ -41,5 +41,53 @@
       "line": 12,
       "text": "| Twinkle Tray | github.com/xanderfrangos/twinkle-tray | Electron | Y — custom in-app updater (`checkForUpdates`/`getLatestUpdate`/`runUpdate` in `src/electron.js`), active only for the non-packaged (non-MSIX, non-portable) NSIS/direct-installer build (`isAppX === false && !isPortable`) | Y for the check — runs automatically once per day at startup and after certain events (`checkForUpdates()` gated by `settings.checkForUpdates` and a once-per-day `lastCheck`); download+run is user-initiated via `ipcMain.on('get-update', ...)` from the renderer UI, not silent | Y — downloads the GitHub release asset directly to `%LOCALAPPDATA%...\\update.exe` via `fetch(version.downloadURL)`, then `spawn(updatePath, {detached:true})` executes it and the app quits | HTTPS — release list from `https://api.github.com/repos/xanderfrangos/twinkle-tray/releases`; asset downloaded from `release.assets[0].browser_download_url` (GitHub-hosted, redirects to `objects.githubusercontent.com`), both via Node's `fetch` (default TLS validation, no pinning/overrides) | N (GitHub Releases API JSON, unsigned; no manifest signature) | none — the only integrity check is a byte-length comparison against the `size` field from the same unsigned release JSON (`if (size !== version.filesize) throw ...`); no cryptographic hash or signature of the downloaded `update.exe` is computed or checked before it is spawned and executed | n/a | src/electron.js:113 (`updatePath = path.join(configFilesDir, '\\\\update.exe')`); :4822-4870 (`checkForUpdates`, fetches `https://api.github.com/repos/xanderfrangos/twinkle-tray/releases`, picks `assets[0].browser_download_url`/`size`); :4873-4933 (`getLatestUpdate`, `fetch(version.downloadURL)` → `fs.createWriteStream(updatePath)`, size-only check at \"Update download was incomplete\"); :4937-4946 (`runUpdate`, `fileSize != expectedSize` check — size only, no hash); :4962-4970 (`spawn(updatePath, {detached:true, stdio:'ignore'})` then `app.quit()`); :3492-3495 (`ipcMain.on('get-update', ...) → getLatestUpdate(version)`, user-triggered) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-O6.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/xanderfrangos/twinkle-tray"
+        },
+        {
+          "label": "framework",
+          "value": "Electron"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y — custom in-app updater (`checkForUpdates`/`getLatestUpdate`/`runUpdate` in `src/electron.js`), active only for the non-packaged (non-MSIX, non-portable) NSIS/direct-installer build (`isAppX === false && !isPortable`)"
+        },
+        {
+          "label": "auto",
+          "value": "Y for the check — runs automatically once per day at startup and after certain events (`checkForUpdates()` gated by `settings.checkForUpdates` and a once-per-day `lastCheck`); download+run is user-initiated via `ipcMain.on('get-update', ...)` from the renderer UI, not silent"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — downloads the GitHub release asset directly to `%LOCALAPPDATA%...\\update.exe` via `fetch(version.downloadURL)`, then `spawn(updatePath, {detached:true})` executes it and the app quits"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS — release list from `https://api.github.com/repos/xanderfrangos/twinkle-tray/releases`; asset downloaded from `release.assets[0].browser_download_url` (GitHub-hosted, redirects to `objects.githubusercontent.com`), both via Node's `fetch` (default TLS validation, no pinning/overrides)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (GitHub Releases API JSON, unsigned; no manifest signature)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — the only integrity check is a byte-length comparison against the `size` field from the same unsigned release JSON (`if (size !== version.filesize) throw ...`); no cryptographic hash or signature of the downloaded `update.exe` is computed or checked before it is spawned and executed"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence",
+          "value": "src/electron.js:113 (`updatePath = path.join(configFilesDir, '\\\\update.exe')`); :4822-4870 (`checkForUpdates`, fetches `https://api.github.com/repos/xanderfrangos/twinkle-tray/releases`, picks `assets[0].browser_download_url`/`size`); :4873-4933 (`getLatestUpdate`, `fetch(version.downloadURL)` → `fs.createWriteStream(updatePath)`, size-only check at \"Update download was incomplete\"); :4937-4946 (`runUpdate`, `fileSize != expectedSize` check — size only, no hash); :4962-4970 (`spawn(updatePath, {detached:true, stdio:'ignore'})` then `app.quit()`); :3492-3495 (`ipcMain.on('get-update', ...) → getLatestUpdate(version)`, user-triggered)"
+        }
+      ]
+    }
   ]
 }

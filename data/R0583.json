@@ -42,5 +42,53 @@
       "line": 23,
       "text": "| tfenv | https://github.com/tfutils/tfenv.git | de6ce2e / 2026-04-28 | Y | N | Y | https (`releases.hashicorp.com`), TLS enforced, no insecure flags found | N (default path); optional (opt-in PGP-signed SHA256SUMS) | Default: **hash (SHA256)** from a `SHASUMS` file fetched from the *same* host. Opt-in: **PGP signature** over that SHASUMS file, verified via `gpg`/`gpgv`/keybase | Default: server-supplied/same-endpoint. Opt-in: **pinned-in-repo** (`tfenv/share/hashicorp-keys.pgp`, shipped in the clone) for the `use-gpgv` path | `tfenv/libexec/tfenv-install:249` `TFENV_REMOTE=https://releases.hashicorp.com`; `:259-301` downloads `terraform_${version}_SHA256SUMS`; `:318-376` PGP verification only runs if the user has created `${TFENV_CONFIG_DIR}/use-gnupg` or `use-gpgv` (or has keybase following hashicorp) — **absent any of those, line 376 logs a warning and skips signature verification entirely**, falling through to plain SHA256 compare at `:380-397`; `tfenv/share/hashicorp-keys.pgp` (5.6KB OpenPGP pubkey, present in the clone) is the pinned trust root used by the `use-gpgv` path at `:346-350`. `log 'error'` (`tfenv/lib/bashlog.sh:154-160`) calls `exit 1`, so a checksum/signature failure is fatal, not silently ignored. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AK4.md",
+      "source_line": 23,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/tfutils/tfenv.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "de6ce2e / 2026-04-28"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`releases.hashicorp.com`), TLS enforced, no insecure flags found"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (default path); optional (opt-in PGP-signed SHA256SUMS)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "Default: **hash (SHA256)** from a `SHASUMS` file fetched from the *same* host. Opt-in: **PGP signature** over that SHASUMS file, verified via `gpg`/`gpgv`/keybase"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "Default: server-supplied/same-endpoint. Opt-in: **pinned-in-repo** (`tfenv/share/hashicorp-keys.pgp`, shipped in the clone) for the `use-gpgv` path"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`tfenv/libexec/tfenv-install:249` `TFENV_REMOTE=https://releases.hashicorp.com`; `:259-301` downloads `terraform_${version}_SHA256SUMS`; `:318-376` PGP verification only runs if the user has created `${TFENV_CONFIG_DIR}/use-gnupg` or `use-gpgv` (or has keybase following hashicorp) — **absent any of those, line 376 logs a warning and skips signature verification entirely**, falling through to plain SHA256 compare at `:380-397`; `tfenv/share/hashicorp-keys.pgp` (5.6KB OpenPGP pubkey, present in the clone) is the pinned trust root used by the `use-gpgv` path at `:346-350`. `log 'error'` (`tfenv/lib/bashlog.sh:154-160`) calls `exit 1`, so a checksum/signature failure is fatal, not silently ignored."
+        }
+      ]
+    }
   ]
 }

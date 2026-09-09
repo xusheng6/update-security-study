@@ -41,5 +41,53 @@
       "line": 19,
       "text": "| Ancestris (unofficial GitHub mirror of the project's canonical self-hosted SVN; no official git repo exists) | https://github.com/PQYPLZXHGF/Ancestris.git | 36b1436c / 2016-05-10 | Y — but this **is** the application's own update mechanism: Ancestris is a NetBeans-RCP app composed entirely of modules, and its \"core\" module-set is served from the same Autoupdate provider as its plugins | N (NetBeans \"Check for Updates\" — user must review and click Install in the Plugins dialog) | Y — approved updates are `.nbm` module jars downloaded and loaded directly into the running JVM (this is literally how the app's own code, not just plugins, gets updated) | **plaintext HTTP** for both update centers — no TLS at all on the update path | N (no signature verification logic found in this repo's own config; relying on 3rd-party NetBeans autoupdate infra, itself unauthenticated here) | none found — no hash/signature verification wired up for the `updates.xml` catalog or the `.nbm` payloads in this codebase | server-supplied/unpinned, over unencrypted HTTP | `AncestrisCore/ancestris.app/src/ancestris/app/layer.xml:343` (`http://dl.ancestris.org/ancestris/nbm/trunk/extensions/updates.xml`), `:354` (`http://dl.ancestris.org/ancestris/nbm/trunk/core/updates.xml` — **core app modules**), both providers `enabled=true` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AF5.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/PQYPLZXHGF/Ancestris.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "36b1436c / 2016-05-10"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y — but this **is** the application's own update mechanism: Ancestris is a NetBeans-RCP app composed entirely of modules, and its \"core\" module-set is served from the same Autoupdate provider as its plugins"
+        },
+        {
+          "label": "auto",
+          "value": "N (NetBeans \"Check for Updates\" — user must review and click Install in the Plugins dialog)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — approved updates are `.nbm` module jars downloaded and loaded directly into the running JVM (this is literally how the app's own code, not just plugins, gets updated)"
+        },
+        {
+          "label": "transport",
+          "value": "**plaintext HTTP** for both update centers — no TLS at all on the update path"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no signature verification logic found in this repo's own config; relying on 3rd-party NetBeans autoupdate infra, itself unauthenticated here)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none found — no hash/signature verification wired up for the `updates.xml` catalog or the `.nbm` payloads in this codebase"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned, over unencrypted HTTP"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`AncestrisCore/ancestris.app/src/ancestris/app/layer.xml:343` (`http://dl.ancestris.org/ancestris/nbm/trunk/extensions/updates.xml`), `:354` (`http://dl.ancestris.org/ancestris/nbm/trunk/core/updates.xml` — **core app modules**), both providers `enabled=true`"
+        }
+      ]
+    }
   ]
 }

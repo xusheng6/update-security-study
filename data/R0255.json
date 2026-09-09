@@ -41,5 +41,53 @@
       "line": 19,
       "text": "| Lunar | github.com/alin23/Lunar | **Sparkle (EdDSA = A)** | **Y** | **Y** (default-on toggle) | **Y** | https | TLS-only (appcast2.xml itself unsigned; no legacy `SUPublicDSAKey`/DSA present) | signature[EdDSA] | embedded in Info.plist (`SUPublicEDKey`) | `Lunar/Lunar/Info.plist:97-100`: `SUFeedURL` = `https://files.lunar.fyi/appcast2.xml`, `SUPublicEDKey` = `lqnO6tg2A9evTIFo2SC9ArZ6NS84gtBshcAWdwh12xQ=`; `Lunar/Lunar.xcodeproj/project.pbxproj:105-106,326` (Sparkle.framework linked + embedded, `CodeSignOnCopy`); `Lunar/Lunar/AppDelegate.swift:325` `lazy var updater = SPUUpdater(...)`, `:611-612` `@IBAction func checkForUpdates(_:) { updater.checkForUpdates() }`; `Lunar/Lunar/Views/ProViews.swift:92,121` `@Default(.checkForUpdate) var checkForUpdates` bound to a user-facing \"Auto update\" `Toggle`. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Q1.md",
+      "source_line": 19,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/alin23/Lunar"
+        },
+        {
+          "label": "framework",
+          "value": "**Sparkle (EdDSA = A)**"
+        },
+        {
+          "label": "has_updater",
+          "value": "**Y**"
+        },
+        {
+          "label": "auto",
+          "value": "**Y** (default-on toggle)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y**"
+        },
+        {
+          "label": "transport",
+          "value": "https"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "TLS-only (appcast2.xml itself unsigned; no legacy `SUPublicDSAKey`/DSA present)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature[EdDSA]"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "embedded in Info.plist (`SUPublicEDKey`)"
+        },
+        {
+          "label": "evidence",
+          "value": "`Lunar/Lunar/Info.plist:97-100`: `SUFeedURL` = `https://files.lunar.fyi/appcast2.xml`, `SUPublicEDKey` = `lqnO6tg2A9evTIFo2SC9ArZ6NS84gtBshcAWdwh12xQ=`; `Lunar/Lunar.xcodeproj/project.pbxproj:105-106,326` (Sparkle.framework linked + embedded, `CodeSignOnCopy`); `Lunar/Lunar/AppDelegate.swift:325` `lazy var updater = SPUUpdater(...)`, `:611-612` `@IBAction func checkForUpdates(_:) { updater.checkForUpdates() }`; `Lunar/Lunar/Views/ProViews.swift:92,121` `@Default(.checkForUpdate) var checkForUpdates` bound to a user-facing \"Auto update\" `Toggle`."
+        }
+      ]
+    }
   ]
 }

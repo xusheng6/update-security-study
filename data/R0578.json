@@ -43,5 +43,53 @@
       "line": 12,
       "text": "| fnm | https://github.com/Schniz/fnm.git | 86adc96 / 2026-07-24 | Y | N | Y | https, TLS enforced (reqwest default; no `danger_accept_invalid_certs` anywhere) | N | **none** | N/A | `fnm/src/downloader.rs:90-113` — `crate::http::get(url)` response piped straight into `extract.extract_archive_into()`, zero checksum/signature check; `fnm/src/http.rs:13-18` plain `reqwest::blocking::Client`. No self-update command exists in this repo (`grep self_update/selfupdate` = 0 hits), contra the task brief's premise. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AK4.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Schniz/fnm.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "86adc96 / 2026-07-24"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (reqwest default; no `danger_accept_invalid_certs` anywhere)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`fnm/src/downloader.rs:90-113` — `crate::http::get(url)` response piped straight into `extract.extract_archive_into()`, zero checksum/signature check; `fnm/src/http.rs:13-18` plain `reqwest::blocking::Client`. No self-update command exists in this repo (`grep self_update/selfupdate` = 0 hits), contra the task brief's premise."
+        }
+      ]
+    }
   ]
 }

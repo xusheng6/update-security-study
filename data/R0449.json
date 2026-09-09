@@ -41,5 +41,53 @@
       "line": 21,
       "text": "| Domoticz | https://github.com/domoticz/domoticz | e7cb9dd / 2026-08-20 | Y | N (admin clicks \"Update Application\" in web UI; auto-check-only via UseAutoUpdate pref) | Y | **HTTP with TLS certificate validation explicitly DISABLED** (`wget --no-check-certificate`) | N | NONE — only `tar tzf` structural check, no hash/signature; a `ChecksumURL` is fetched by the app but never actually compared against the downloaded archive | N/A | main/WebServerCmds.cpp:3651-3657 (Cmd_ApplicationUpdate → `system(\"... setsid nohup \" + scriptname ...\")`); updaterelease:72-73 (`wget -4 -q ... --no-check-certificate \"https://www.domoticz.com/download.php?...\"`); updaterelease:116 (`tar xfz \"$ARCHIVE\"` — no verification) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC6.md",
+      "source_line": 21,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/domoticz/domoticz"
+        },
+        {
+          "label": "commit/date",
+          "value": "e7cb9dd / 2026-08-20"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "N (admin clicks \"Update Application\" in web UI; auto-check-only via UseAutoUpdate pref)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "**HTTP with TLS certificate validation explicitly DISABLED** (`wget --no-check-certificate`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "NONE — only `tar tzf` structural check, no hash/signature; a `ChecksumURL` is fetched by the app but never actually compared against the downloaded archive"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "main/WebServerCmds.cpp:3651-3657 (Cmd_ApplicationUpdate → `system(\"... setsid nohup \" + scriptname ...\")`); updaterelease:72-73 (`wget -4 -q ... --no-check-certificate \"https://www.domoticz.com/download.php?...\"`); updaterelease:116 (`tar xfz \"$ARCHIVE\"` — no verification)"
+        }
+      ]
+    }
   ]
 }

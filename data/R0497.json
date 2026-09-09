@@ -41,5 +41,53 @@
       "line": 17,
       "text": "| Owncast | https://github.com/owncast/owncast.git | b0de2e4 / 2026-08-17 | Y | Y (admin clicks \"update\", then fully automatic download+exec, no further checks) | Y | https, TLS cert validation NOT disabled in code (uses `http.Get` → Go stdlib default transport/verification; note: server also has a separate opt-in `OWNCAST_INSECURE_SKIP_VERIFY` env var but it is unused by the updater path) | N | none (installer script is piped straight to `bash` with zero hash or signature check) | server-supplied/unpinned (URL is a hardcoded HTTPS endpoint, but the fetched shell script itself is trusted with no verification) | webserver/handlers/admin/update.go:65-96 (`AutoUpdateStart` → `downloadInstaller()` does `http.Get(\"https://owncast.online/install.sh\")`, writes to temp file, then `exec.Command(\"bash\", updater)` with no checksum/signature verification anywhere in the file) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AF3.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/owncast/owncast.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "b0de2e4 / 2026-08-17"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (admin clicks \"update\", then fully automatic download+exec, no further checks)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS cert validation NOT disabled in code (uses `http.Get` → Go stdlib default transport/verification; note: server also has a separate opt-in `OWNCAST_INSECURE_SKIP_VERIFY` env var but it is unused by the updater path)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (installer script is piped straight to `bash` with zero hash or signature check)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (URL is a hardcoded HTTPS endpoint, but the fetched shell script itself is trusted with no verification)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "webserver/handlers/admin/update.go:65-96 (`AutoUpdateStart` → `downloadInstaller()` does `http.Get(\"https://owncast.online/install.sh\")`, writes to temp file, then `exec.Command(\"bash\", updater)` with no checksum/signature verification anywhere in the file)"
+        }
+      ]
+    }
   ]
 }

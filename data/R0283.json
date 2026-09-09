@@ -43,5 +43,53 @@
       "line": 18,
       "text": "| jupyterlab-desktop | jupyterlab/jupyterlab-desktop | 64ae7920fae7 / 2026-08-16 | Y | Y (macOS only) / N (win/linux notify-only) | Y (macOS via Squirrel.Mac) / N (win/linux) | https, TLS enforced Y | NA (version-only feed, not a signed manifest) | sig (macOS: OS code-sign check via Squirrel.Mac) / none (win/linux, just a link) | OS-keystore (Apple code signing) / NA | src/main/app.ts:288-298,542-578,665-671; package.json:220 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U4.md",
+      "source_line": 18,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "jupyterlab/jupyterlab-desktop"
+        },
+        {
+          "label": "commit/date",
+          "value": "64ae7920fae7 / 2026-08-16"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (macOS only) / N (win/linux notify-only)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (macOS via Squirrel.Mac) / N (win/linux)"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced Y"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "NA (version-only feed, not a signed manifest)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "sig (macOS: OS code-sign check via Squirrel.Mac) / none (win/linux, just a link)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS-keystore (Apple code signing) / NA"
+        },
+        {
+          "label": "evidence",
+          "value": "src/main/app.ts:288-298,542-578,665-671; package.json:220"
+        }
+      ]
+    }
   ]
 }

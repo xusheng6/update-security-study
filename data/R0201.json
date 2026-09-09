@@ -37,5 +37,53 @@
       "line": 16,
       "text": "| ClashX | repo removed — see note | Sparkle 2.x (`SPUStandardUpdaterController`) | Y | Y — updater is started automatically at app launch (`startingUpdater: true`), independent of any user action | Y (once user approves the Sparkle prompt) | https (`SUFeedURL`=`https://clashx-pro.github.io/ClashX/appcast.xml`) | Sparkle-EdDSA | signature (EdDSA) | pinned-in-binary (`SUPublicEDKey` in Info.plist) | ClashX/Info.plist:131-134 (`SUPublicEDKey`=`O+gNSh16a5FEGHwPrffpFzE35WbN/wjOctobXqHrUWU=`, `SUFeedURL`); ClashX/General/Managers/AutoUpgardeManager.swift:12-46 (`SPUStandardUpdaterController(startingUpdater: true, ...)`); live fetch of the appcast on 2026-08-19 shows current release v1.140.0 (24 Jul 2026) with a valid `sparkle:edSignature` — actively maintained. **NOTE on repo identity**: the originally-named `github.com/yichengchen/clashX` returns HTTP 404 (repo removed/private) as of this research date; `https://github.com/ClashX-Pro/ClashX` is the community-maintained continuation and is what the live `SUFeedURL` above actually serves from (`clashx-pro.github.io`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-M1.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "repo removed — see note"
+        },
+        {
+          "label": "framework",
+          "value": "Sparkle 2.x (`SPUStandardUpdaterController`)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y — updater is started automatically at app launch (`startingUpdater: true`), independent of any user action"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (once user approves the Sparkle prompt)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`SUFeedURL`=`https://clashx-pro.github.io/ClashX/appcast.xml`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Sparkle-EdDSA"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (EdDSA)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (`SUPublicEDKey` in Info.plist)"
+        },
+        {
+          "label": "evidence",
+          "value": "ClashX/Info.plist:131-134 (`SUPublicEDKey`=`O+gNSh16a5FEGHwPrffpFzE35WbN/wjOctobXqHrUWU=`, `SUFeedURL`); ClashX/General/Managers/AutoUpgardeManager.swift:12-46 (`SPUStandardUpdaterController(startingUpdater: true, ...)`); live fetch of the appcast on 2026-08-19 shows current release v1.140.0 (24 Jul 2026) with a valid `sparkle:edSignature` — actively maintained. **NOTE on repo identity**: the originally-named `github.com/yichengchen/clashX` returns HTTP 404 (repo removed/private) as of this research date; `https://github.com/ClashX-Pro/ClashX` is the community-maintained continuation and is what the live `SUFeedURL` above actually serves from (`clashx-pro.github.io`)"
+        }
+      ]
+    }
   ]
 }

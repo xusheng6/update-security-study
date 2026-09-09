@@ -41,5 +41,53 @@
       "line": 25,
       "text": "| OpenCPN | https://github.com/OpenCPN/OpenCPN | 01873e3 / 2026-08-19 | **Y** (native plugin manager) | N (manual, via Plugin Manager UI; not run at startup) | **Y** | **HTTPS URL, but TLS cert validation explicitly DISABLED in code** | N | SHA-256 hash, but **fail-open + hash sourced from the same unauthenticated channel** | none (hash delivered via same untrusted catalog fetch) | **`model/src/downloader.cpp:78`** and **`:124`**: `curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);` (preceded by `// FIXME -- Add correct certificates on host.`) in the shared `Downloader` class used for BOTH the plugin catalog fetch (`model/src/catalog_handler.cpp:116-130`, `DOWNLOAD_REPO=\"https://raw.githubusercontent.com/OpenCPN/plugins\"`) and the plugin tarball download (`gui/src/download_mgr.cpp:115-165`, `GuiDownloader` extends `Downloader`); `gui/src/download_mgr.cpp:67-98` `checksum_ok()` computes SHA-256 of the downloaded tarball and compares to `metadata.checksum` — but that checksum comes from the very same TLS-unverified catalog fetch, AND if `metadata.checksum == \"\"` the function returns `true` (`download_mgr.cpp:70-72`, fail-open, no check at all); `model/src/plugin_handler.cpp:1209-1238` `InstallPlugin()` then extracts the tarball and loads it as a native plugin. Net effect: any on-path attacker (no CA-trusted cert needed) can MITM both the catalog and the tarball and supply a matching forged checksum — full RCE, worse than typical CDN-compromise since TLS itself is defeated |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Y2.md",
+      "source_line": 25,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/OpenCPN/OpenCPN"
+        },
+        {
+          "label": "commit/date",
+          "value": "01873e3 / 2026-08-19"
+        },
+        {
+          "label": "has_updater",
+          "value": "**Y** (native plugin manager)"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual, via Plugin Manager UI; not run at startup)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y**"
+        },
+        {
+          "label": "transport",
+          "value": "**HTTPS URL, but TLS cert validation explicitly DISABLED in code**"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "SHA-256 hash, but **fail-open + hash sourced from the same unauthenticated channel**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none (hash delivered via same untrusted catalog fetch)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "**`model/src/downloader.cpp:78`** and **`:124`**: `curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);` (preceded by `// FIXME -- Add correct certificates on host.`) in the shared `Downloader` class used for BOTH the plugin catalog fetch (`model/src/catalog_handler.cpp:116-130`, `DOWNLOAD_REPO=\"https://raw.githubusercontent.com/OpenCPN/plugins\"`) and the plugin tarball download (`gui/src/download_mgr.cpp:115-165`, `GuiDownloader` extends `Downloader`); `gui/src/download_mgr.cpp:67-98` `checksum_ok()` computes SHA-256 of the downloaded tarball and compares to `metadata.checksum` — but that checksum comes from the very same TLS-unverified catalog fetch, AND if `metadata.checksum == \"\"` the function returns `true` (`download_mgr.cpp:70-72`, fail-open, no check at all); `model/src/plugin_handler.cpp:1209-1238` `InstallPlugin()` then extracts the tarball and loads it as a native plugin. Net effect: any on-path attacker (no CA-trusted cert needed) can MITM both the catalog and the tarball and supply a matching forged checksum — full RCE, worse than typical CDN-compromise since TLS itself is defeated"
+        }
+      ]
+    }
   ]
 }

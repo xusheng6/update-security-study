@@ -42,5 +42,53 @@
       "line": 14,
       "text": "| Stirling-PDF | https://github.com/Stirling-Tools/Stirling-PDF.git | e092b487ec7ddb8c216e8979f19233ced569ba90 / 2026-08-20 | Y | Y (configurable: disabled / prompt(default) / auto-headless) | Y | https, TLS validation enforced (no override found) | Y | signature (Ed25519 via minisign, through Tauri's official updater plugin) | **pinned in binary** — pubkey embedded in `tauri.conf.json`, which is compiled into the built Tauri app | `frontend/editor/src-tauri/tauri.conf.json:95-99` (`\"endpoints\":[\"https://github.com/Stirling-Tools/Stirling-PDF/releases/latest/download/latest.json\"]`, `\"pubkey\":\"dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6...\"` — decodes to a minisign Ed25519 public key); `frontend/editor/src-tauri/src/commands/updater.rs:52-151` (`app.updater().check()` / `download_and_install`); `frontend/editor/src/desktop/hooks/useDesktopUpdatePopup.ts:32-39` (auto mode is \"FULLY HEADLESS. We download + install + restart in the background\"). Note: this only applies to the newer Tauri desktop-editor build; the classic self-hosted Spring Boot server (app/core) has no self-updater, only a `showUpdate` admin-UI flag (`app/core/src/main/java/stirling/software/SPDF/config/AppUpdateService.java`) that links out to GitHub releases. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Z4.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Stirling-Tools/Stirling-PDF.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "e092b487ec7ddb8c216e8979f19233ced569ba90 / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (configurable: disabled / prompt(default) / auto-headless)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS validation enforced (no override found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (Ed25519 via minisign, through Tauri's official updater plugin)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned in binary** — pubkey embedded in `tauri.conf.json`, which is compiled into the built Tauri app"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`frontend/editor/src-tauri/tauri.conf.json:95-99` (`\"endpoints\":[\"https://github.com/Stirling-Tools/Stirling-PDF/releases/latest/download/latest.json\"]`, `\"pubkey\":\"dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6...\"` — decodes to a minisign Ed25519 public key); `frontend/editor/src-tauri/src/commands/updater.rs:52-151` (`app.updater().check()` / `download_and_install`); `frontend/editor/src/desktop/hooks/useDesktopUpdatePopup.ts:32-39` (auto mode is \"FULLY HEADLESS. We download + install + restart in the background\"). Note: this only applies to the newer Tauri desktop-editor build; the classic self-hosted Spring Boot server (app/core) has no self-updater, only a `showUpdate` admin-UI flag (`app/core/src/main/java/stirling/software/SPDF/config/AppUpdateService.java`) that links out to GitHub releases."
+        }
+      ]
+    }
   ]
 }

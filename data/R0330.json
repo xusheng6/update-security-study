@@ -44,5 +44,53 @@
       "line": 20,
       "text": "| Advanced REST Client (arc-electron) | https://github.com/advanced-rest-client/arc-electron.git | 4a40ffe7cb / 2022-03-02 (repo appears inactive/archived) | Y | Y (auto-checks 5s after start, default `autoDownload`) | Y | https (GitHub Releases via electron-updater) | Y | OS code-signing (Squirrel.Mac / Authenticode via electron-updater) | OS keystore (real signing: CI wires `mac_certs`/`windows_certs` secrets) | src/io/ApplicationUpdater.js:1 (`import { autoUpdater } from 'electron-updater'`), :104-120 (`start()` auto-checks after 5s unless disabled), :231-239 (`quitAndInstall()` on download-ready); package.json:150 (`forceCodeSigning: true`), :154 (`afterSign: electron-builder-notarize`); .github/workflows/test-and-publish.yml:61-64 (real `mac_certs`/`windows_certs` secrets passed to the publish action) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W4.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/advanced-rest-client/arc-electron.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "4a40ffe7cb / 2022-03-02 (repo appears inactive/archived)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (auto-checks 5s after start, default `autoDownload`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub Releases via electron-updater)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y"
+        },
+        {
+          "label": "payload_verification",
+          "value": "OS code-signing (Squirrel.Mac / Authenticode via electron-updater)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "OS keystore (real signing: CI wires `mac_certs`/`windows_certs` secrets)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/io/ApplicationUpdater.js:1 (`import { autoUpdater } from 'electron-updater'`), :104-120 (`start()` auto-checks after 5s unless disabled), :231-239 (`quitAndInstall()` on download-ready); package.json:150 (`forceCodeSigning: true`), :154 (`afterSign: electron-builder-notarize`); .github/workflows/test-and-publish.yml:61-64 (real `mac_certs`/`windows_certs` secrets passed to the publish action)"
+        }
+      ]
+    }
   ]
 }

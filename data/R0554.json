@@ -41,5 +41,53 @@
       "line": 21,
       "text": "| Statping-ng | https://github.com/statping-ng/statping-ng | c02149f0a5f67fec1e60cfa3537478cd50899b15 / 2025-06-04 | Y | N (admin must run `statping update` manually) | Y (when invoked) | https for `install.sh` fetch and GitHub release API | N | **N — no checksum/signature check** | N/A | `cmd/commands.go:23-52` — `updateCmd` does `curl -o- -L https://statping.com/install.sh \\| bash`, unsigned, no integrity check; version check only `cmd/cli.go:397-401` (`api.github.com/repos/.../releases/latest`); the `updateDisplay()` notice function (`cmd/cli.go:351-365`) is dead code, never called. No dynamic Go plugin loading exists anywhere (`plugin.Open`/`.so` — zero matches); notifiers are statically compiled in. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AI5.md",
+      "source_line": 21,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/statping-ng/statping-ng"
+        },
+        {
+          "label": "commit / date",
+          "value": "c02149f0a5f67fec1e60cfa3537478cd50899b15 / 2025-06-04"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (admin must run `statping update` manually)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (when invoked)"
+        },
+        {
+          "label": "transport",
+          "value": "https for `install.sh` fetch and GitHub release API"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**N — no checksum/signature check**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "`cmd/commands.go:23-52` — `updateCmd` does `curl -o- -L https://statping.com/install.sh \\| bash`, unsigned, no integrity check; version check only `cmd/cli.go:397-401` (`api.github.com/repos/.../releases/latest`); the `updateDisplay()` notice function (`cmd/cli.go:351-365`) is dead code, never called. No dynamic Go plugin loading exists anywhere (`plugin.Open`/`.so` — zero matches); notifiers are statically compiled in."
+        }
+      ]
+    }
   ]
 }

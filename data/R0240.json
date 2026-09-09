@@ -41,5 +41,53 @@
       "line": 17,
       "text": "| Insomnium | github.com/yokomohoyo/insomnium (fork of Kong/insomnia) | Y (unmodified Electron built-in `autoUpdater`, not the `electron-updater` npm package) | Check: N automatic — only triggered by `ipcMain.on('manualUpdateCheck', ...)`, i.e. user clicks \"Check Now\" in settings (no periodic/startup timer found in `init()`). Download: Y automatic once triggered (Squirrel `autoUpdater.checkForUpdates()` auto-downloads). Install: N automatic — user must click \"Restart\" in the shown dialog before `quitAndInstall()` runs. | Y — downloaded package is applied and app relaunched via `autoUpdater.quitAndInstall()` | HTTPS — `UpdateURL.mac = https://archgpt.dev/insomnium/builds/check/mac`, `UpdateURL.windows = https://archgpt.dev/insomnium/updates/win` (both on a third-party domain owned by the original, now-inactive project author, not by this fork's maintainer). **Verified live 2026-08-20: `GET https://archgpt.dev/insomnium/updates/win` → HTTP 404** (domain itself resolves via Vercel, but this update path is dead). | unknown / effectively N — Electron's built-in `autoUpdater` delegates to Squirrel.Mac (macOS) and Squirrel.Windows (Windows); neither uses an app-level signed JSON manifest the way `electron-updater`/Tauri do | macOS: OS-code-signing — Squirrel.Mac requires the downloaded update bundle be signed with the same Apple code-signing identity as the running app (enforced by macOS/Squirrel.Mac, not by app code). Windows: hash-from-manifest — Squirrel.Windows fetches a `RELEASES` file listing filename+SHA1+size and compares SHA1 of the downloaded `.nupkg`; no cryptographic signature scheme is invoked by the app itself. | macOS: the running app's own Apple Developer ID certificate (OS-enforced, not app-controlled). Windows: n/a — no key, only an unsigned SHA1 hash list. | packages/insomnia/src/main/updates.ts:1 (`import { autoUpdater, ... } from 'electron'`), :34 (`getUpdateUrl` uses `UpdateURL.windows`/`UpdateURL.mac`), :61-75 (`update-downloaded` handler shows dialog, `autoUpdater.quitAndInstall()` only on user click), :85-93 (`ipcMain.on('manualUpdateCheck', ...)` — only call site for `_checkForUpdates`), :100-101 (`autoUpdater.setFeedURL(...)`, `autoUpdater.checkForUpdates()`); packages/insomnia/src/common/constants.ts:130-133 (`UpdateURL` enum, `archgpt.dev` URLs) | Because this is a community fork of an abandoned project, the update feed still points at the original author's personal domain, which is not under the fork maintainer's control and is currently non-functional (404) — effectively no live auto-update path today, but the wiring/trust model is what's evaluated here. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-O7.md",
+      "source_line": 17,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/yokomohoyo/insomnium (fork of Kong/insomnia)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (unmodified Electron built-in `autoUpdater`, not the `electron-updater` npm package)"
+        },
+        {
+          "label": "auto",
+          "value": "Check: N automatic — only triggered by `ipcMain.on('manualUpdateCheck', ...)`, i.e. user clicks \"Check Now\" in settings (no periodic/startup timer found in `init()`). Download: Y automatic once triggered (Squirrel `autoUpdater.checkForUpdates()` auto-downloads). Install: N automatic — user must click \"Restart\" in the shown dialog before `quitAndInstall()` runs."
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — downloaded package is applied and app relaunched via `autoUpdater.quitAndInstall()`"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS — `UpdateURL.mac = https://archgpt.dev/insomnium/builds/check/mac`, `UpdateURL.windows = https://archgpt.dev/insomnium/updates/win` (both on a third-party domain owned by the original, now-inactive project author, not by this fork's maintainer). **Verified live 2026-08-20: `GET https://archgpt.dev/insomnium/updates/win` → HTTP 404** (domain itself resolves via Vercel, but this update path is dead)."
+        },
+        {
+          "label": "manifest_signed",
+          "value": "unknown / effectively N — Electron's built-in `autoUpdater` delegates to Squirrel.Mac (macOS) and Squirrel.Windows (Windows); neither uses an app-level signed JSON manifest the way `electron-updater`/Tauri do"
+        },
+        {
+          "label": "payload_verification",
+          "value": "macOS: OS-code-signing — Squirrel.Mac requires the downloaded update bundle be signed with the same Apple code-signing identity as the running app (enforced by macOS/Squirrel.Mac, not by app code). Windows: hash-from-manifest — Squirrel.Windows fetches a `RELEASES` file listing filename+SHA1+size and compares SHA1 of the downloaded `.nupkg`; no cryptographic signature scheme is invoked by the app itself."
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "macOS: the running app's own Apple Developer ID certificate (OS-enforced, not app-controlled). Windows: n/a — no key, only an unsigned SHA1 hash list."
+        },
+        {
+          "label": "evidence",
+          "value": "packages/insomnia/src/main/updates.ts:1 (`import { autoUpdater, ... } from 'electron'`), :34 (`getUpdateUrl` uses `UpdateURL.windows`/`UpdateURL.mac`), :61-75 (`update-downloaded` handler shows dialog, `autoUpdater.quitAndInstall()` only on user click), :85-93 (`ipcMain.on('manualUpdateCheck', ...)` — only call site for `_checkForUpdates`), :100-101 (`autoUpdater.setFeedURL(...)`, `autoUpdater.checkForUpdates()`); packages/insomnia/src/common/constants.ts:130-133 (`UpdateURL` enum, `archgpt.dev` URLs)"
+        },
+        {
+          "label": "notes",
+          "value": "Because this is a community fork of an abandoned project, the update feed still points at the original author's personal domain, which is not under the fork maintainer's control and is currently non-functional (404) — effectively no live auto-update path today, but the wiring/trust model is what's evaluated here."
+        }
+      ]
+    }
   ]
 }

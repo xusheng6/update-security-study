@@ -42,5 +42,53 @@
       "line": 15,
       "text": "| Steam ROM Manager | https://github.com/SteamGridDB/steam-rom-manager.git | 7f0f402 / 2026-08-06 | Y | Y (auto-check on launch; download is user-confirmed) | Y | https (electron default net stack; no rejectUnauthorized/NODE_TLS_REJECT_UNAUTHORIZED override found) | N (app is unsigned — no CSC_LINK/codesign step in `.github/workflows/`) | hash (SHA512 via electron-updater `latest.yml`) | server-supplied/unpinned (GitHub Releases, same channel as the hash manifest) | `src/main/app.ts:12` `import { autoUpdater } from \"electron-updater\"`; `:158-159` `autoUpdater.autoDownload=false`; `:222-243` update events; `:331` `autoUpdater.checkForUpdatesAndNotify()` on `dom-ready`; `:334` `autoUpdater.downloadUpdate()`; `:337` `autoUpdater.quitAndInstall()`; `package.json` `\"publish\": {\"provider\":\"github\"...}`. Also downloads SteamGridDB box art (data channel, not code) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC8.md",
+      "source_line": 15,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/SteamGridDB/steam-rom-manager.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "7f0f402 / 2026-08-06"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (auto-check on launch; download is user-confirmed)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (electron default net stack; no rejectUnauthorized/NODE_TLS_REJECT_UNAUTHORIZED override found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (app is unsigned — no CSC_LINK/codesign step in `.github/workflows/`)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (SHA512 via electron-updater `latest.yml`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (GitHub Releases, same channel as the hash manifest)"
+        },
+        {
+          "label": "evidence",
+          "value": "`src/main/app.ts:12` `import { autoUpdater } from \"electron-updater\"`; `:158-159` `autoUpdater.autoDownload=false`; `:222-243` update events; `:331` `autoUpdater.checkForUpdatesAndNotify()` on `dom-ready`; `:334` `autoUpdater.downloadUpdate()`; `:337` `autoUpdater.quitAndInstall()`; `package.json` `\"publish\": {\"provider\":\"github\"...}`. Also downloads SteamGridDB box art (data channel, not code)"
+        }
+      ]
+    }
   ]
 }

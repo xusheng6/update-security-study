@@ -41,5 +41,53 @@
       "line": 7,
       "text": "| IINA | iina/iina | Sparkle | Y | chk: user-toggle (bound to `automaticallyChecksForUpdates`); dl/inst: Sparkle standard (prompts unless user enables auto-install) | Y | https (`https://www.iina.io/appcast.xml`) | Sparkle-EdDSA (legacy DSA key also present; EdDSA takes precedence in modern Sparkle) | signature[EdDSA] | pinned-in-binary | iina/Info.plist:639-644 (SUFeedURL, SUPublicDSAKeyFile, SUPublicEDKey); iina/SettingsPageGeneral.swift:114 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-K1.md",
+      "source_line": 7,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "iina/iina"
+        },
+        {
+          "label": "framework",
+          "value": "Sparkle"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "chk: user-toggle (bound to `automaticallyChecksForUpdates`); dl/inst: Sparkle standard (prompts unless user enables auto-install)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`https://www.iina.io/appcast.xml`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Sparkle-EdDSA (legacy DSA key also present; EdDSA takes precedence in modern Sparkle)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature[EdDSA]"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary"
+        },
+        {
+          "label": "evidence",
+          "value": "iina/Info.plist:639-644 (SUFeedURL, SUPublicDSAKeyFile, SUPublicEDKey); iina/SettingsPageGeneral.swift:114"
+        }
+      ]
+    }
   ]
 }

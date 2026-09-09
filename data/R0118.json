@@ -43,5 +43,53 @@
       "line": 4,
       "text": "| Buttercup | github.com/buttercup/buttercup-desktop | Electron (electron-updater / electron-builder) | Y | auto chk (every 30 min via `setDelayedInterval`) + notify; `autoUpdater.autoDownload = false` so download/install require explicit user action (`startUpdate()` / `installUpdate()` → `quitAndInstall()`) | Y | HTTPS via GitHub Releases feed (`electron-updater`'s `github` provider, owner `buttercup`, repo `buttercup-desktop`); TLS validation ENFORCED (no `rejectUnauthorized`/TLS-bypass code found in source/) | N (electron-updater's `latest.yml`/`latest-mac.yml` manifest is plain YAML with a SHA-512 field, not separately signed) | hash-from-manifest (SHA-512 of the downloaded installer checked against the value in `latest*.yml`) + OS-code-signing (electron-updater's default `verifyUpdateCodeSignature`/Squirrel.Mac behavior requires the downloaded installer's Authenticode/code-signing identity to match the running app on Windows/macOS) | n/a for the manifest hash (unsigned, trust = GitHub HTTPS); code-signing identity check relies on the OS certificate store / running app's own signing cert, not an app-embedded key | source/main/services/update.ts:3 (`import { autoUpdater } from \"electron-updater\"`), :90-96 (`setFeedURL({provider:\"github\", owner:\"buttercup\", repo:\"buttercup-desktop\"})`, `autoDownload=false`), :106 (`checkForUpdates()`), :130-132 (`installUpdate()` → `autoUpdater.quitAndInstall()`), :139-141 (`startUpdate()` → `autoUpdater.downloadUpdate()`), :143-146 (`startUpdateWatcher` polls every `UPDATE_AUTO_CHECK = ms(\"30m\")`); package.json:248 (`\"electron-updater\": \"^6.1.8\"`); negative grep for rejectUnauthorized/NODE_TLS_REJECT_UNAUTHORIZED/checkServerIdentity across source/resources (verified 2026-08-19) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-H6.md",
+      "source_line": 4,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/buttercup/buttercup-desktop"
+        },
+        {
+          "label": "framework",
+          "value": "Electron (electron-updater / electron-builder)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "auto chk (every 30 min via `setDelayedInterval`) + notify; `autoUpdater.autoDownload = false` so download/install require explicit user action (`startUpdate()` / `installUpdate()` → `quitAndInstall()`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS via GitHub Releases feed (`electron-updater`'s `github` provider, owner `buttercup`, repo `buttercup-desktop`); TLS validation ENFORCED (no `rejectUnauthorized`/TLS-bypass code found in source/)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (electron-updater's `latest.yml`/`latest-mac.yml` manifest is plain YAML with a SHA-512 field, not separately signed)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (SHA-512 of the downloaded installer checked against the value in `latest*.yml`) + OS-code-signing (electron-updater's default `verifyUpdateCodeSignature`/Squirrel.Mac behavior requires the downloaded installer's Authenticode/code-signing identity to match the running app on Windows/macOS)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a for the manifest hash (unsigned, trust = GitHub HTTPS); code-signing identity check relies on the OS certificate store / running app's own signing cert, not an app-embedded key"
+        },
+        {
+          "label": "evidence",
+          "value": "source/main/services/update.ts:3 (`import { autoUpdater } from \"electron-updater\"`), :90-96 (`setFeedURL({provider:\"github\", owner:\"buttercup\", repo:\"buttercup-desktop\"})`, `autoDownload=false`), :106 (`checkForUpdates()`), :130-132 (`installUpdate()` → `autoUpdater.quitAndInstall()`), :139-141 (`startUpdate()` → `autoUpdater.downloadUpdate()`), :143-146 (`startUpdateWatcher` polls every `UPDATE_AUTO_CHECK = ms(\"30m\")`); package.json:248 (`\"electron-updater\": \"^6.1.8\"`); negative grep for rejectUnauthorized/NODE_TLS_REJECT_UNAUTHORIZED/checkServerIdentity across source/resources (verified 2026-08-19)"
+        }
+      ]
+    }
   ]
 }

@@ -41,5 +41,53 @@
       "line": 11,
       "text": "| Ice | jordanbaird/Ice | Sparkle | Y | chk/dl: both user-toggleable (`automaticallyChecksForUpdates` / `automaticallyDownloadsUpdates`) | Y | https (`https://jordanbaird.github.io/ice-releases/appcast.xml`) | Sparkle-EdDSA (no DSA) | signature[EdDSA] | pinned-in-binary | Ice/Info.plist:5-8; Ice/Updates/UpdatesManager.swift:34-51; Ice/Settings/SettingsPanes/AboutSettingsPane.swift:113,121 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-K1.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "jordanbaird/Ice"
+        },
+        {
+          "label": "framework",
+          "value": "Sparkle"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "chk/dl: both user-toggleable (`automaticallyChecksForUpdates` / `automaticallyDownloadsUpdates`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`https://jordanbaird.github.io/ice-releases/appcast.xml`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Sparkle-EdDSA (no DSA)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature[EdDSA]"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary"
+        },
+        {
+          "label": "evidence",
+          "value": "Ice/Info.plist:5-8; Ice/Updates/UpdatesManager.swift:34-51; Ice/Settings/SettingsPanes/AboutSettingsPane.swift:113,121"
+        }
+      ]
+    }
   ]
 }

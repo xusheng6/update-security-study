@@ -41,5 +41,53 @@
       "line": 14,
       "text": "| Alby Hub (self-hosted Lightning node/NWC service) | github.com/getAlby/hub | Go backend + React/TS frontend, distributed as tarball or Docker image | Y | N (user-initiated: in-app \"Update Available\" banner links out; actual update requires manually running `scripts/*/update.sh`, no scheduled/background auto-update job found) | Y (`update.sh` downloads a new release tarball and, unless `--skip-verify`, invokes `verify.sh` before extracting over the running install) | HTTPS — `ALBYHUB_URL=\"https://getalby.com/install/hub/server-linux-x86_64.tar.bz2\"`; manifest/signature at `https://getalby.com/install/hub/manifest.txt` and `manifest.txt.asc` | Y — single-signer GPG-signed manifest (`manifest.txt.asc` over `manifest.txt`), not a multisig/N-of-M scheme like LND | signature (GPG detached sig via `gpg --batch --verify manifest.txt.asc manifest.txt`) + hash-from-manifest (SHA-256 per-file entry looked up in `manifest.txt`, compared with `sha256sum`) | GPG public keys shipped in-repo at `scripts/keys/rolznz.asc` and `scripts/keys/im-adithya.asc`; per `scripts/keys/README.md` a single verified signer's key produces the release's `manifest.txt.asc`. Scripts call `gpg --batch --verify` assuming the key is already imported into the user's keyring — no automatic key-import/pinning step found in `install.sh`/`update.sh`, so first-run trust establishment is left to the user (TOFU via manually importing the `.asc` file from the repo). `--skip-verify` flag bypasses all of this. In-app UI update check is detection-only: `frontend/src/components/Banner.tsx:52-56` links to `https://getalby.com/update/hub?version=...`, no auto-download. | `scripts/linux-x86_64/update.sh` (`ALBYHUB_URL=...`, `wget -q \"$ALBYHUB_URL\"`, `./verify.sh ...`, `tar -xf ...`); `scripts/verify.sh:1-4,25-56` (`MANIFEST_URL`, `SIGNATURE_URL`, `gpg --batch --verify`, sha256sum compare); `scripts/keys/README.md`; `frontend/src/components/Banner.tsx:52-56` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-O4.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/getAlby/hub"
+        },
+        {
+          "label": "framework",
+          "value": "Go backend + React/TS frontend, distributed as tarball or Docker image"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (user-initiated: in-app \"Update Available\" banner links out; actual update requires manually running `scripts/*/update.sh`, no scheduled/background auto-update job found)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (`update.sh` downloads a new release tarball and, unless `--skip-verify`, invokes `verify.sh` before extracting over the running install)"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS — `ALBYHUB_URL=\"https://getalby.com/install/hub/server-linux-x86_64.tar.bz2\"`; manifest/signature at `https://getalby.com/install/hub/manifest.txt` and `manifest.txt.asc`"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y — single-signer GPG-signed manifest (`manifest.txt.asc` over `manifest.txt`), not a multisig/N-of-M scheme like LND"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (GPG detached sig via `gpg --batch --verify manifest.txt.asc manifest.txt`) + hash-from-manifest (SHA-256 per-file entry looked up in `manifest.txt`, compared with `sha256sum`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "GPG public keys shipped in-repo at `scripts/keys/rolznz.asc` and `scripts/keys/im-adithya.asc`; per `scripts/keys/README.md` a single verified signer's key produces the release's `manifest.txt.asc`. Scripts call `gpg --batch --verify` assuming the key is already imported into the user's keyring — no automatic key-import/pinning step found in `install.sh`/`update.sh`, so first-run trust establishment is left to the user (TOFU via manually importing the `.asc` file from the repo). `--skip-verify` flag bypasses all of this. In-app UI update check is detection-only: `frontend/src/components/Banner.tsx:52-56` links to `https://getalby.com/update/hub?version=...`, no auto-download."
+        },
+        {
+          "label": "evidence",
+          "value": "`scripts/linux-x86_64/update.sh` (`ALBYHUB_URL=...`, `wget -q \"$ALBYHUB_URL\"`, `./verify.sh ...`, `tar -xf ...`); `scripts/verify.sh:1-4,25-56` (`MANIFEST_URL`, `SIGNATURE_URL`, `gpg --batch --verify`, sha256sum compare); `scripts/keys/README.md`; `frontend/src/components/Banner.tsx:52-56`"
+        }
+      ]
+    }
   ]
 }

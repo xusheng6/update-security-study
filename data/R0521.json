@@ -41,5 +41,53 @@
       "line": 23,
       "text": "| Headphones | https://github.com/rembo10/headphones | 62757c0 / 2025-06-02 | Y | N (manual \"Update Now\" from web UI only; `CHECK_GITHUB` scheduler only sets a notify flag, does not auto-install) | Y (on explicit user request) | https (`https://github.com/%s/headphones/tarball/%s`), via `request.request_content` → `requests` with `verify=bool(CONFIG.VERIFY_SSL_CERT)`, default `1`/True | N | none — extracts tarball and overwrites files, no hash/signature check | server-supplied/unpinned (GitHub tarball for branch) | `headphones/versioncheck.py:175-222` (`update()` — non-git install path downloads tarball, extracts, `os.renames` files over PROG_DIR, no verification); `headphones/request.py:39-59` (`verify = bool(CONFIG.VERIFY_SSL_CERT)`); `headphones/config.py:306` (`VERIFY_SSL_CERT` default `1`); `headphones/__init__.py:673-676` (update only runs when explicit `update` flag passed from shutdown/restart handler, i.e. user-triggered) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AG7.md",
+      "source_line": 23,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/rembo10/headphones"
+        },
+        {
+          "label": "commit/date",
+          "value": "62757c0 / 2025-06-02"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual \"Update Now\" from web UI only; `CHECK_GITHUB` scheduler only sets a notify flag, does not auto-install)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (on explicit user request)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`https://github.com/%s/headphones/tarball/%s`), via `request.request_content` → `requests` with `verify=bool(CONFIG.VERIFY_SSL_CERT)`, default `1`/True"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — extracts tarball and overwrites files, no hash/signature check"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (GitHub tarball for branch)"
+        },
+        {
+          "label": "evidence",
+          "value": "`headphones/versioncheck.py:175-222` (`update()` — non-git install path downloads tarball, extracts, `os.renames` files over PROG_DIR, no verification); `headphones/request.py:39-59` (`verify = bool(CONFIG.VERIFY_SSL_CERT)`); `headphones/config.py:306` (`VERIFY_SSL_CERT` default `1`); `headphones/__init__.py:673-676` (update only runs when explicit `update` flag passed from shutdown/restart handler, i.e. user-triggered)"
+        }
+      ]
+    }
   ]
 }

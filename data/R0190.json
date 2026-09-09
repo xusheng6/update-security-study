@@ -41,5 +41,53 @@
       "line": 10,
       "text": "| Bisq | github.com/bisq-network/bisq | Java/JavaFX desktop | Y | notify (P2P network \"update alert\" triggers a dialog; user must click Download; nothing runs unattended) | N (downloads installer + sig, PGP-verifies it, opens the OS Downloads folder, then shuts Bisq down so the user installs manually — explicitly \"a downloader and verifier, not an automatic installer\" per project docs) | https (bisq.network domain, OS trust store, standard TLS, no additional pinning) | N/A (no separate manifest; each installer ships with its own detached `.asc` signature; `signingkey.asc` names which signer fingerprint was used) | signature (detached OpenPGP/RSA signature, verified via BouncyCastle `PGPSignature.verify()`) | pinned-in-binary (hardcoded fingerprints `FINGER_PRINT_GABRIEL_BERNARD`/`FINGER_PRINT_ALEJANDRO_GARCIA`/`FINGER_PRINT_HENRIK_JANNSEN`, matched against bundled local key resources under `/keys/*.asc`; the same keys are also re-fetched from `https://bisq.network/pubkey/` as a redundant cross-check, not as the sole trust anchor) | docs/in-app-update-download.md:1-30; desktop/src/main/java/bisq/desktop/main/overlays/windows/downloadupdate/BisqInstaller.java:60-64 (pinned fingerprints+URLs), :148-211 (`verifySignature`), :284-316 (`getKeyFileDescriptors`/`getLocalKeyFileDescriptor` bundled resource keys) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-L1.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/bisq-network/bisq"
+        },
+        {
+          "label": "framework",
+          "value": "Java/JavaFX desktop"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "notify (P2P network \"update alert\" triggers a dialog; user must click Download; nothing runs unattended)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N (downloads installer + sig, PGP-verifies it, opens the OS Downloads folder, then shuts Bisq down so the user installs manually — explicitly \"a downloader and verifier, not an automatic installer\" per project docs)"
+        },
+        {
+          "label": "transport",
+          "value": "https (bisq.network domain, OS trust store, standard TLS, no additional pinning)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A (no separate manifest; each installer ships with its own detached `.asc` signature; `signingkey.asc` names which signer fingerprint was used)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (detached OpenPGP/RSA signature, verified via BouncyCastle `PGPSignature.verify()`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (hardcoded fingerprints `FINGER_PRINT_GABRIEL_BERNARD`/`FINGER_PRINT_ALEJANDRO_GARCIA`/`FINGER_PRINT_HENRIK_JANNSEN`, matched against bundled local key resources under `/keys/*.asc`; the same keys are also re-fetched from `https://bisq.network/pubkey/` as a redundant cross-check, not as the sole trust anchor)"
+        },
+        {
+          "label": "evidence",
+          "value": "docs/in-app-update-download.md:1-30; desktop/src/main/java/bisq/desktop/main/overlays/windows/downloadupdate/BisqInstaller.java:60-64 (pinned fingerprints+URLs), :148-211 (`verifySignature`), :284-316 (`getKeyFileDescriptors`/`getLocalKeyFileDescriptor` bundled resource keys)"
+        }
+      ]
+    }
   ]
 }

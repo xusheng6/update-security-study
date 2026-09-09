@@ -41,5 +41,53 @@
       "line": 11,
       "text": "| Hedgewars | https://github.com/hedgewars/hw (GitHub mirror of canonical https://hg.hedgewars.org/hedgewars/) | Sparkle (macOS only) | Y on macOS only (`AutoUpdater`/`SparkleAutoUpdater` wraps Apple's Sparkle framework); no Windows/Linux self-updater found in source (no WinSparkle or equivalent present) | Partial — `checkForUpdatesInBackground` runs silently on startup, but Sparkle's stock UI still prompts the user to confirm install (not silent auto-install) | Y (Sparkle downloads and installs the update package once user accepts prompt) | https (`SUFeedURL` = `https://www.hedgewars.org/download/appcast.xml`) | Y — Sparkle DSA-signed appcast/enclosure scheme configured | Y (Sparkle framework verifies the downloaded update's DSA signature against the bundled public key before allowing install — standard Sparkle behavior; verification code itself lives in the (out-of-repo) Sparkle.framework, not in this repo) | Bundled public key file `share/dsa_pub.pem`, referenced via `SUPublicDSAKeyFile` | frontend-qt6/hwform.cpp:202 (`updater->checkForUpdates();`); frontend-qt6/util/platform/SparkleAutoUpdater.mm:32-54 (`[SUUpdater sharedUpdater]`, `checkForUpdatesInBackground`, `checkForUpdates:NULL`); share/Info.plist.in:50-53 (`SUPublicDSAKeyFile` → `dsa_pub.pem`, `SUFeedURL` → `https://www.hedgewars.org/download/appcast.xml`); share/dsa_pub.pem (key file present in repo) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-M7.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/hedgewars/hw (GitHub mirror of canonical https://hg.hedgewars.org/hedgewars/)"
+        },
+        {
+          "label": "framework",
+          "value": "Sparkle (macOS only)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y on macOS only (`AutoUpdater`/`SparkleAutoUpdater` wraps Apple's Sparkle framework); no Windows/Linux self-updater found in source (no WinSparkle or equivalent present)"
+        },
+        {
+          "label": "auto",
+          "value": "Partial — `checkForUpdatesInBackground` runs silently on startup, but Sparkle's stock UI still prompts the user to confirm install (not silent auto-install)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (Sparkle downloads and installs the update package once user accepts prompt)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`SUFeedURL` = `https://www.hedgewars.org/download/appcast.xml`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y — Sparkle DSA-signed appcast/enclosure scheme configured"
+        },
+        {
+          "label": "payload_verification",
+          "value": "Y (Sparkle framework verifies the downloaded update's DSA signature against the bundled public key before allowing install — standard Sparkle behavior; verification code itself lives in the (out-of-repo) Sparkle.framework, not in this repo)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "Bundled public key file `share/dsa_pub.pem`, referenced via `SUPublicDSAKeyFile`"
+        },
+        {
+          "label": "evidence",
+          "value": "frontend-qt6/hwform.cpp:202 (`updater->checkForUpdates();`); frontend-qt6/util/platform/SparkleAutoUpdater.mm:32-54 (`[SUUpdater sharedUpdater]`, `checkForUpdatesInBackground`, `checkForUpdates:NULL`); share/Info.plist.in:50-53 (`SUPublicDSAKeyFile` → `dsa_pub.pem`, `SUFeedURL` → `https://www.hedgewars.org/download/appcast.xml`); share/dsa_pub.pem (key file present in repo)"
+        }
+      ]
+    }
   ]
 }

@@ -42,5 +42,53 @@
       "line": 27,
       "text": "| Textual | https://github.com/Codeux-Software/Textual | 4f093128cef99c5c0478ea548b9f3e5fd2543510 / 2026-07-02 | Y | Y (allowed) | Y | https, TLS validation not disabled anywhere in repo | Y (Sparkle 2 appcast, EdDSA-signed by convention) | signature (Sparkle 2 EdDSA) | not committed to repo — likely injected at release-build time (standard Sparkle 2 practice; `SUPublicEDKey` absent from tracked `Info.plist`, could not confirm pin from source alone) | `Sources/App/Classes/Controllers/TXMenuController.m:2984-2989` (`SPUStandardUpdaterController` — Sparkle 2 API); `Sources/App/Resources/Property Lists/Application Properties/Info.plist:102-113` (`SUFeedURL` = `https://updates.textualapp.com/sparkle/feeds/v7/feed-one-merged.xml`, `SUAllowsAutomaticUpdates` = true). |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AB3.md",
+      "source_line": 27,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/Codeux-Software/Textual"
+        },
+        {
+          "label": "commit/date",
+          "value": "4f093128cef99c5c0478ea548b9f3e5fd2543510 / 2026-07-02"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (allowed)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS validation not disabled anywhere in repo"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (Sparkle 2 appcast, EdDSA-signed by convention)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (Sparkle 2 EdDSA)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "not committed to repo — likely injected at release-build time (standard Sparkle 2 practice; `SUPublicEDKey` absent from tracked `Info.plist`, could not confirm pin from source alone)"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "`Sources/App/Classes/Controllers/TXMenuController.m:2984-2989` (`SPUStandardUpdaterController` — Sparkle 2 API); `Sources/App/Resources/Property Lists/Application Properties/Info.plist:102-113` (`SUFeedURL` = `https://updates.textualapp.com/sparkle/feeds/v7/feed-one-merged.xml`, `SUAllowsAutomaticUpdates` = true)."
+        }
+      ]
+    }
   ]
 }

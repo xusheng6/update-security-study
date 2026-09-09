@@ -43,5 +43,53 @@
       "line": 24,
       "text": "| v2rayN | https://github.com/2dust/v2rayN | 14e27f3 / 2026-08-20 | Y | N (manual \"check update\" button; download+install then automatic) | Y (updates the GUI app itself, proxy cores [Xray/sing-box/etc.], **and** geosite/geoip data files) | https (GitHub releases / redirect chase), no TLS bypass found in `DownloadService.cs` | N | **none** — no sha256/checksum/signature check anywhere in the update path | n/a | `v2rayN/ServiceLib/Services/UpdateService.cs:1-200` (`CheckUpdateGuiN`, `CheckUpdateCore`, `UpdateGeoFileAll` — no verify calls at all, confirmed via grep for sha256/checksum/signature/gpg = 0 hits), `v2rayN/AmazTool/UpgradeApp.cs:1-125` (`Upgrade()`: kills running process, `ZipFile.OpenRead`, extracts straight over the app's own exe path with no verification), `v2rayN/ServiceLib/Common/Utils.cs:821-824` (`UpgradeAppExists` locates `AmazTool` helper) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W6.md",
+      "source_line": 24,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/2dust/v2rayN"
+        },
+        {
+          "label": "commit/date",
+          "value": "14e27f3 / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual \"check update\" button; download+install then automatic)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (updates the GUI app itself, proxy cores [Xray/sing-box/etc.], **and** geosite/geoip data files)"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub releases / redirect chase), no TLS bypass found in `DownloadService.cs`"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — no sha256/checksum/signature check anywhere in the update path"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`v2rayN/ServiceLib/Services/UpdateService.cs:1-200` (`CheckUpdateGuiN`, `CheckUpdateCore`, `UpdateGeoFileAll` — no verify calls at all, confirmed via grep for sha256/checksum/signature/gpg = 0 hits), `v2rayN/AmazTool/UpgradeApp.cs:1-125` (`Upgrade()`: kills running process, `ZipFile.OpenRead`, extracts straight over the app's own exe path with no verification), `v2rayN/ServiceLib/Common/Utils.cs:821-824` (`UpgradeAppExists` locates `AmazTool` helper)"
+        }
+      ]
+    }
   ]
 }

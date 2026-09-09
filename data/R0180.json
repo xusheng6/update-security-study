@@ -43,5 +43,53 @@
       "line": 16,
       "text": "| Boostnote | BoostIO/Boostnote (\"BoostNote-Legacy\" — the classic desktop app; update feed points at BoostIO/boost-releases). Superseded by BoostIO/BoostNote-App, not analyzed here. | Electron, `electron-gh-releases` v2 wrapping Electron's **built-in native `autoUpdater`** (Squirrel.Mac / Squirrel.Windows) | Y (macOS + Windows only; disabled on Linux) | auto-check (daily interval + 10s after launch, plus manual trigger) → renderer notified → user must click to confirm download (`update-download-confirm` IPC) → user must click to confirm install (`update-app-confirm` IPC) | Y | HTTPS — `github.com` API (latest release tag) + `raw.githubusercontent.com` (`auto_updater.json` manifest, macOS) or `github.com/…/releases/download/…` directly (Windows), via the `got` HTTP client (default TLS verification, no insecure-skip found) | N — `auto_updater.json` is a plain unsigned JSON pointer file; Windows Squirrel `RELEASES` manifest carries SHA1 hashes but no cryptographic signature | OS-code-signing (macOS: Squirrel.Mac requires the downloaded update's code-signing identity to match the running app before installing) / hash-from-manifest (Windows: Squirrel.Windows checks the package against the SHA1 hash in the `RELEASES` file; no code-signature enforcement by default) | macOS: the app's Developer ID code-signing certificate, enforced by the OS (`codesign`/Gatekeeper), not app-controlled; Windows: none — SHA1 hash comparison only, no cryptographic key | lib/main-app.js:5,31-36 (`GhReleases({repo:'BoostIO/boost-releases', ...})`); lib/main-app.js:40-96 (daily/startup `checkUpdate`, manual IPC gates `update-download-confirm`/`update-app-confirm`); electron-gh-releases (jenslind/electron-gh-releases) src/GhReleases.js:1-2,28-38,57-100,105-154 (wraps `require('electron').autoUpdater`; `setFeedURL` to `auto_updater.json` on mac, direct releases/download folder on Windows; `download()`→`checkForUpdates()`, `install()`→`quitAndInstall()`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-K4.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "BoostIO/Boostnote (\"BoostNote-Legacy\" — the classic desktop app; update feed points at BoostIO/boost-releases). Superseded by BoostIO/BoostNote-App, not analyzed here."
+        },
+        {
+          "label": "framework",
+          "value": "Electron, `electron-gh-releases` v2 wrapping Electron's **built-in native `autoUpdater`** (Squirrel.Mac / Squirrel.Windows)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (macOS + Windows only; disabled on Linux)"
+        },
+        {
+          "label": "auto",
+          "value": "auto-check (daily interval + 10s after launch, plus manual trigger) → renderer notified → user must click to confirm download (`update-download-confirm` IPC) → user must click to confirm install (`update-app-confirm` IPC)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS — `github.com` API (latest release tag) + `raw.githubusercontent.com` (`auto_updater.json` manifest, macOS) or `github.com/…/releases/download/…` directly (Windows), via the `got` HTTP client (default TLS verification, no insecure-skip found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N — `auto_updater.json` is a plain unsigned JSON pointer file; Windows Squirrel `RELEASES` manifest carries SHA1 hashes but no cryptographic signature"
+        },
+        {
+          "label": "payload_verification",
+          "value": "OS-code-signing (macOS: Squirrel.Mac requires the downloaded update's code-signing identity to match the running app before installing) / hash-from-manifest (Windows: Squirrel.Windows checks the package against the SHA1 hash in the `RELEASES` file; no code-signature enforcement by default)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "macOS: the app's Developer ID code-signing certificate, enforced by the OS (`codesign`/Gatekeeper), not app-controlled; Windows: none — SHA1 hash comparison only, no cryptographic key"
+        },
+        {
+          "label": "evidence",
+          "value": "lib/main-app.js:5,31-36 (`GhReleases({repo:'BoostIO/boost-releases', ...})`); lib/main-app.js:40-96 (daily/startup `checkUpdate`, manual IPC gates `update-download-confirm`/`update-app-confirm`); electron-gh-releases (jenslind/electron-gh-releases) src/GhReleases.js:1-2,28-38,57-100,105-154 (wraps `require('electron').autoUpdater`; `setFeedURL` to `auto_updater.json` on mac, direct releases/download folder on Windows; `download()`→`checkForUpdates()`, `install()`→`quitAndInstall()`)"
+        }
+      ]
+    }
   ]
 }

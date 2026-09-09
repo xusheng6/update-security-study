@@ -43,5 +43,53 @@
       "line": 11,
       "text": "| Chatterino2 | github.com/Chatterino/chatterino2 | C++/Qt | Y | Windows: chk automatic (on `betaUpdates` setting change / app flow) + dl automatic + inst on user click (\"download in background, run updater when finished\"); macOS/Linux: notify + manual (opens browser) | Y on Windows (writes `Update.exe`/`update.zip` to disk then `QProcess::startDetached` executes it, or hands off to `ChatterinoUpdater.exe` for portable) | https (`https://notitia.chatterino.com/version/chatterino/<os>/<branch>` for manifest; download URLs come from that JSON); TLS enforced — `ignoreSslErrors()` exists in the network API (`ignoreSslErrors=false` by default, documented \"for local eventsub\") but has **zero call sites** anywhere in src/ (confirmed by grep), so it is never actually invoked | N (plain JSON over HTTPS, no signature) | **none** — no hash/signature check of the downloaded `Update.exe`/`update.zip` before `QProcess::startDetached` executes it | N/A | src/singletons/Updates.cpp:334-337 (version-check URL), :150-227 (Windows portable: download zip → `QProcess::startDetached(updaterPath, {filename,\"restart\"})`), :238-293 (Windows normal: download exe, write file, `QProcess::startDetached(filePath, {})`, no hash check present), :135-149 (macOS/Linux: browser-only, no auto-install); src/common/network/NetworkTask.cpp:62-66 and NetworkRequest.hpp:84 (`ignoreSslErrors`, default false, no callers found in src/) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-I5.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/Chatterino/chatterino2"
+        },
+        {
+          "label": "framework",
+          "value": "C++/Qt"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Windows: chk automatic (on `betaUpdates` setting change / app flow) + dl automatic + inst on user click (\"download in background, run updater when finished\"); macOS/Linux: notify + manual (opens browser)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y on Windows (writes `Update.exe`/`update.zip` to disk then `QProcess::startDetached` executes it, or hands off to `ChatterinoUpdater.exe` for portable)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`https://notitia.chatterino.com/version/chatterino/<os>/<branch>` for manifest; download URLs come from that JSON); TLS enforced — `ignoreSslErrors()` exists in the network API (`ignoreSslErrors=false` by default, documented \"for local eventsub\") but has **zero call sites** anywhere in src/ (confirmed by grep), so it is never actually invoked"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (plain JSON over HTTPS, no signature)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — no hash/signature check of the downloaded `Update.exe`/`update.zip` before `QProcess::startDetached` executes it"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence",
+          "value": "src/singletons/Updates.cpp:334-337 (version-check URL), :150-227 (Windows portable: download zip → `QProcess::startDetached(updaterPath, {filename,\"restart\"})`), :238-293 (Windows normal: download exe, write file, `QProcess::startDetached(filePath, {})`, no hash check present), :135-149 (macOS/Linux: browser-only, no auto-install); src/common/network/NetworkTask.cpp:62-66 and NetworkRequest.hpp:84 (`ignoreSslErrors`, default false, no callers found in src/)"
+        }
+      ]
+    }
   ]
 }

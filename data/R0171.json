@@ -41,5 +41,53 @@
       "line": 8,
       "text": "| Rectangle | rxhanson/Rectangle | Sparkle | Y | chk: user-toggle via `SUEnableAutomaticChecks` default; dl/inst: Sparkle standard prompt | Y | https (`https://rectangleapp.com/downloads/updates.xml`) | Sparkle-EdDSA (no legacy DSA key) | signature[EdDSA] | pinned-in-binary | Rectangle/Info.plist:44-47; Rectangle/AppDelegate.swift:148; Rectangle/Defaults.swift:56 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-K1.md",
+      "source_line": 8,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "rxhanson/Rectangle"
+        },
+        {
+          "label": "framework",
+          "value": "Sparkle"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "chk: user-toggle via `SUEnableAutomaticChecks` default; dl/inst: Sparkle standard prompt"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`https://rectangleapp.com/downloads/updates.xml`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Sparkle-EdDSA (no legacy DSA key)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature[EdDSA]"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary"
+        },
+        {
+          "label": "evidence",
+          "value": "Rectangle/Info.plist:44-47; Rectangle/AppDelegate.swift:148; Rectangle/Defaults.swift:56"
+        }
+      ]
+    }
   ]
 }

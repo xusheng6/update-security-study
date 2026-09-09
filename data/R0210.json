@@ -41,5 +41,53 @@
       "line": 16,
       "text": "| Nuclei | github.com/projectdiscovery/nuclei | Go — binary self-update (`-update`/`-up`) **and** a separate automatic nuclei-templates channel | Y — two distinct channels (see auto column) | **Binary**: chk automatic every run (via pdtm API), but dl/inst strictly **manual** (`-update`/`-up` flag required). **Templates**: chk **and** dl/inst are **automatic by default on every single run** (`FreshInstallIfNotExists` + `UpdateIfOutdated` called unconditionally in `runner.New()`) unless disabled via `-duc`/`CanCheckForUpdates()` | Y — **templates**: downloaded YAML is loaded directly into the scan engine and drives execution (including protocols capable of running commands when such templates/flags are enabled), so a compromised template feed = executed scan logic, and this happens automatically with no user action. **Binary**: downloaded archive directly replaces the running executable via `github.com/minio/selfupdate.Apply()` (manual trigger only) | https — GitHub REST API via `go-github` client + signed asset redirect URLs (normal TLS cert validation) for both binary and template downloads. **However**, the separate `api.pdtm.sh` version-check/ignore-file client explicitly sets `TLSClientConfig{InsecureSkipVerify: true}` — TLS certificate validation is **disabled** for that channel | no — `checksums.txt` is just another unsigned GitHub release asset from the same repo/trust boundary; no GPG/cosign/code-signing anywhere (explicit TODO in source) | **Binary self-update**: hash-from-manifest, SHA-256 checked against a `checksums.txt` release asset — but **soft-fail**: if that asset is missing from the release, verification is silently skipped entirely (`expectedChecksum` stays empty ⇒ compare branch never runs). **Templates (automatic channel)**: **none** — `DownloadSourceWithCallback` unpacks the GitHub source zipball straight to disk with zero checksum/signature check; the local `.checksum` (MD5) file is computed *after the fact* from files already on disk purely to print a change-summary table, not to verify anything against a trusted value | none — TODO comment in source states code-signing verification (\"selfupdate...has support for checksum validation, code signing verification etc. implement them after discussion\") is **not implemented** | `pkg/installer/versioncheck.go:17-23,37-121` (pdtm API version check); `internal/runner/runner.go:128-159` (`NucleiVersionCheck`+`FreshInstallIfNotExists`+`UpdateIfOutdated`+`UpdateIgnoreFile` all unconditional unless disabled); `pkg/installer/template.go:127-149,152-234,322-379` (install/update templates via `DownloadSourceWithCallback`, no checksum step; MD5 `.checksum` file computed post-write for UI diff only, `template.go:582-660`); `cmd/nuclei/main.go:489,594-595` (`-update`/`-up` flag → `runner.NucleiToolUpdateCallback()`, manual); `internal/runner/banner.go:28-31`; external module `github.com/projectdiscovery/utils` `update/gh.go:111-195` (`GetExecutableFromAsset`: SHA-256 vs `checksums.txt`, soft-fail if absent) and `update/gh.go:230-253` (`DownloadSourceWithCallback`: zero verification); `update/update.go:72-73` (TODO: no code-signing) and `update/update.go:189-197` (`init()`: `InsecureSkipVerify: true`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-M2.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/projectdiscovery/nuclei"
+        },
+        {
+          "label": "framework",
+          "value": "Go — binary self-update (`-update`/`-up`) **and** a separate automatic nuclei-templates channel"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y — two distinct channels (see auto column)"
+        },
+        {
+          "label": "auto",
+          "value": "**Binary**: chk automatic every run (via pdtm API), but dl/inst strictly **manual** (`-update`/`-up` flag required). **Templates**: chk **and** dl/inst are **automatic by default on every single run** (`FreshInstallIfNotExists` + `UpdateIfOutdated` called unconditionally in `runner.New()`) unless disabled via `-duc`/`CanCheckForUpdates()`"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — **templates**: downloaded YAML is loaded directly into the scan engine and drives execution (including protocols capable of running commands when such templates/flags are enabled), so a compromised template feed = executed scan logic, and this happens automatically with no user action. **Binary**: downloaded archive directly replaces the running executable via `github.com/minio/selfupdate.Apply()` (manual trigger only)"
+        },
+        {
+          "label": "transport",
+          "value": "https — GitHub REST API via `go-github` client + signed asset redirect URLs (normal TLS cert validation) for both binary and template downloads. **However**, the separate `api.pdtm.sh` version-check/ignore-file client explicitly sets `TLSClientConfig{InsecureSkipVerify: true}` — TLS certificate validation is **disabled** for that channel"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "no — `checksums.txt` is just another unsigned GitHub release asset from the same repo/trust boundary; no GPG/cosign/code-signing anywhere (explicit TODO in source)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**Binary self-update**: hash-from-manifest, SHA-256 checked against a `checksums.txt` release asset — but **soft-fail**: if that asset is missing from the release, verification is silently skipped entirely (`expectedChecksum` stays empty ⇒ compare branch never runs). **Templates (automatic channel)**: **none** — `DownloadSourceWithCallback` unpacks the GitHub source zipball straight to disk with zero checksum/signature check; the local `.checksum` (MD5) file is computed *after the fact* from files already on disk purely to print a change-summary table, not to verify anything against a trusted value"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "none — TODO comment in source states code-signing verification (\"selfupdate...has support for checksum validation, code signing verification etc. implement them after discussion\") is **not implemented**"
+        },
+        {
+          "label": "evidence",
+          "value": "`pkg/installer/versioncheck.go:17-23,37-121` (pdtm API version check); `internal/runner/runner.go:128-159` (`NucleiVersionCheck`+`FreshInstallIfNotExists`+`UpdateIfOutdated`+`UpdateIgnoreFile` all unconditional unless disabled); `pkg/installer/template.go:127-149,152-234,322-379` (install/update templates via `DownloadSourceWithCallback`, no checksum step; MD5 `.checksum` file computed post-write for UI diff only, `template.go:582-660`); `cmd/nuclei/main.go:489,594-595` (`-update`/`-up` flag → `runner.NucleiToolUpdateCallback()`, manual); `internal/runner/banner.go:28-31`; external module `github.com/projectdiscovery/utils` `update/gh.go:111-195` (`GetExecutableFromAsset`: SHA-256 vs `checksums.txt`, soft-fail if absent) and `update/gh.go:230-253` (`DownloadSourceWithCallback`: zero verification); `update/update.go:72-73` (TODO: no code-signing) and `update/update.go:189-197` (`init()`: `InsecureSkipVerify: true`)"
+        }
+      ]
+    }
   ]
 }

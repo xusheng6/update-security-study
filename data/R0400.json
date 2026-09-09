@@ -41,5 +41,53 @@
       "line": 15,
       "text": "| Espruino Web IDE | https://github.com/espruino/EspruinoWebIDE | fffc1b2 / 2026-08-18 | N (self, nw.js app) | N | Y (flashes firmware to connected board) | **http** by default (upgrades to https only if IDE page itself is served over https) | N | none found in flasher path | server-supplied/unpinned | js/core/menuFlasher.js:187-190 (`if (window.location.protocol==\"https:\" && data.binary_url starts \"http:\") upgrade to https` — i.e. no upgrade under default nw.js/local context); no sha256/checksum/signature check found around `getBinaryURL`/flash write path |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Z7.md",
+      "source_line": 15,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/espruino/EspruinoWebIDE"
+        },
+        {
+          "label": "commit/date",
+          "value": "fffc1b2 / 2026-08-18"
+        },
+        {
+          "label": "has_updater",
+          "value": "N (self, nw.js app)"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (flashes firmware to connected board)"
+        },
+        {
+          "label": "transport",
+          "value": "**http** by default (upgrades to https only if IDE page itself is served over https)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none found in flasher path"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "js/core/menuFlasher.js:187-190 (`if (window.location.protocol==\"https:\" && data.binary_url starts \"http:\") upgrade to https` — i.e. no upgrade under default nw.js/local context); no sha256/checksum/signature check found around `getBinaryURL`/flash write path"
+        }
+      ]
+    }
   ]
 }

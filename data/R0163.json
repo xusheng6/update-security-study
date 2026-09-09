@@ -41,5 +41,53 @@
       "line": 14,
       "text": "| Jackett | Jackett/Jackett | .NET (C#, cross-platform incl. Mono) | Y | chk/dl/inst fully automatic by default — `ServerConfig.UpdateDisabled` defaults to `false` (bool default), checked 1h after startup then every 24h thereafter, no user interaction required | Y (downloads the release zip/tar.gz from GitHub, extracts it, launches `JackettUpdater(.exe)` as a new process, then calls `Environment.Exit(0)` on the running Jackett process) | https, `https://api.github.com/repos/Jackett/Jackett/releases` and each asset's `Browser_download_url` (github.com); TLS validation enforced by default (`ValidateCertificate` returns `sslPolicyErrors == SslPolicyErrors.None`) unless the user explicitly starts Jackett with the `--IgnoreSslErrors` runtime flag, which disables validation for **all** HTTP traffic including the updater | no (GitHub Releases API JSON is unsigned) | none — `DownloadRelease`/`StartUpdate` perform no hash or signature check of the downloaded archive before extraction and execution | n/a | src/Jackett.Common/Services/UpdateService.cs:86 (`serverConfig.UpdateDisabled` gate, default false), :118-123 (GitHub API URL), :63-72 (1h then 24h check loop), :210-296 (`DownloadRelease`, no verification), :298-355 (`StartUpdate` launches `JackettUpdater`, then `Environment.Exit(0)`); src/Jackett.Common/Utils/Clients/HttpWebClient.cs:32-55 (`ValidateCertificate`, `IgnoreSslErrors` bypass) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-J6.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "Jackett/Jackett"
+        },
+        {
+          "label": "framework",
+          "value": ".NET (C#, cross-platform incl. Mono)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "chk/dl/inst fully automatic by default — `ServerConfig.UpdateDisabled` defaults to `false` (bool default), checked 1h after startup then every 24h thereafter, no user interaction required"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (downloads the release zip/tar.gz from GitHub, extracts it, launches `JackettUpdater(.exe)` as a new process, then calls `Environment.Exit(0)` on the running Jackett process)"
+        },
+        {
+          "label": "transport",
+          "value": "https, `https://api.github.com/repos/Jackett/Jackett/releases` and each asset's `Browser_download_url` (github.com); TLS validation enforced by default (`ValidateCertificate` returns `sslPolicyErrors == SslPolicyErrors.None`) unless the user explicitly starts Jackett with the `--IgnoreSslErrors` runtime flag, which disables validation for **all** HTTP traffic including the updater"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "no (GitHub Releases API JSON is unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — `DownloadRelease`/`StartUpdate` perform no hash or signature check of the downloaded archive before extraction and execution"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence",
+          "value": "src/Jackett.Common/Services/UpdateService.cs:86 (`serverConfig.UpdateDisabled` gate, default false), :118-123 (GitHub API URL), :63-72 (1h then 24h check loop), :210-296 (`DownloadRelease`, no verification), :298-355 (`StartUpdate` launches `JackettUpdater`, then `Environment.Exit(0)`); src/Jackett.Common/Utils/Clients/HttpWebClient.cs:32-55 (`ValidateCertificate`, `IgnoreSslErrors` bypass)"
+        }
+      ]
+    }
   ]
 }

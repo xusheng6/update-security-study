@@ -42,5 +42,53 @@
       "line": 18,
       "text": "| Subler | https://github.com/SublerApp/Subler.git | 16e81d4 / 2026-08-19 | Y | Y (Sparkle framework, standard scheduled checks) | Y | https (`https://subler.org/appcast/appcast.xml`) | Y (Sparkle EdDSA) | signature (Sparkle EdDSA `SUPublicEDKey`) | **pinned in binary** (Info.plist `SUPublicEDKey` compiled into app bundle) | Info.plist:176-179 (`SUFeedURL` = https://subler.org/appcast/appcast.xml; `SUPublicEDKey` = 9M0JrgMq+5MrpLqTu7lT+ffThP8dRp78OQNTklwK/WE=); Subler.xcodeproj/project.pbxproj:1691-1705 (Sparkle SPM dependency, https://github.com/sparkle-project/Sparkle) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AB1.md",
+      "source_line": 18,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/SublerApp/Subler.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "16e81d4 / 2026-08-19"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (Sparkle framework, standard scheduled checks)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`https://subler.org/appcast/appcast.xml`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (Sparkle EdDSA)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (Sparkle EdDSA `SUPublicEDKey`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned in binary** (Info.plist `SUPublicEDKey` compiled into app bundle)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "Info.plist:176-179 (`SUFeedURL` = https://subler.org/appcast/appcast.xml; `SUPublicEDKey` = 9M0JrgMq+5MrpLqTu7lT+ffThP8dRp78OQNTklwK/WE=); Subler.xcodeproj/project.pbxproj:1691-1705 (Sparkle SPM dependency, https://github.com/sparkle-project/Sparkle)"
+        }
+      ]
+    }
   ]
 }

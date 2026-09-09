@@ -42,5 +42,53 @@
       "line": 26,
       "text": "| **Poedit** | https://github.com/vslavik/poedit | d6f6f62 / 2026-08-17 | **Y** | **Y** (`SUEnableAutomaticChecks=true` by default) | **Y** | https — macOS `SUFeedURL: https://poedit.com/updates_v2/osx/appcast`; Windows `win_sparkle_set_appcast_url(\"https://poedit.com/updates_v2/win/appcast\")` | appcast XML itself unsigned (TLS-only transport) | **signature (EdDSA)** on the actual update payload via Sparkle (macOS) / WinSparkle (Windows) | **pinned-in-binary** — same EdDSA public key baked into both platforms | macos/Poedit-Info.plist:208-211 (`SUFeedURL`, `SUPublicEDKey=JtKhfqlsV9+4nLuMD3U8RO06ZXGocWQYDDqVT/9ha7Y=`); src/poedit.rc:37-38 (`EdDSAPub EDDSA {\"JtKhfq...\"}` resource, same key); src/app_updates.cpp:94-95 (`SPUStandardUpdaterController`), :156-165 (`win_sparkle_set_appcast_url` + `win_sparkle_init`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AB5.md",
+      "source_line": 26,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/vslavik/poedit"
+        },
+        {
+          "label": "commit/date",
+          "value": "d6f6f62 / 2026-08-17"
+        },
+        {
+          "label": "has_updater",
+          "value": "**Y**"
+        },
+        {
+          "label": "auto",
+          "value": "**Y** (`SUEnableAutomaticChecks=true` by default)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y**"
+        },
+        {
+          "label": "transport",
+          "value": "https — macOS `SUFeedURL: https://poedit.com/updates_v2/osx/appcast`; Windows `win_sparkle_set_appcast_url(\"https://poedit.com/updates_v2/win/appcast\")`"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "appcast XML itself unsigned (TLS-only transport)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**signature (EdDSA)** on the actual update payload via Sparkle (macOS) / WinSparkle (Windows)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned-in-binary** — same EdDSA public key baked into both platforms"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "macos/Poedit-Info.plist:208-211 (`SUFeedURL`, `SUPublicEDKey=JtKhfqlsV9+4nLuMD3U8RO06ZXGocWQYDDqVT/9ha7Y=`); src/poedit.rc:37-38 (`EdDSAPub EDDSA {\"JtKhfq...\"}` resource, same key); src/app_updates.cpp:94-95 (`SPUStandardUpdaterController`), :156-165 (`win_sparkle_set_appcast_url` + `win_sparkle_init`)"
+        }
+      ]
+    }
   ]
 }

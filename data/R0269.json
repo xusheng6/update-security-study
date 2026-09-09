@@ -46,5 +46,67 @@
       "line": 25,
       "text": "| Clementine | **A** | macOS: legacy Sparkle 1.x, DSA signature checked against a pubkey file bundled in the app resources. Weak 1024-bit DSA algorithm is a caveat but the pinned-key architecture is intact. Windows menu entry is dead code; Linux has none. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-S3.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/clementine-player/Clementine.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "d6407152dc369b8925fa5702a1e307ccc527a4a8 (2026-08-13)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (macOS only, functional)"
+        },
+        {
+          "label": "auto",
+          "value": "Y"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (macOS only)"
+        },
+        {
+          "label": "transport",
+          "value": "https (SUFeedURL), TLS enforced"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (legacy Sparkle 1.x, 1024-bit DSA — weak/deprecated algorithm)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned key bundled as resource — `dist/sparkle_pub.pem` installed into `Contents/Resources`"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "`dist/Info.plist.in:37-40` (SUFeedURL + SUPublicDSAKeyFile); `dist/sparkle_pub.pem:1-5`; `src/core/mac_startup.mm:54-56,276-289`; **Windows menu entry is dead code** — `src/ui/mainwindow.cpp:2431-2434` `CheckForUpdates()` body is `#if defined(Q_OS_DARWIN)` only, so the Win32 menu item (`mainwindow.cpp:847-853`) silently no-ops"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-S3.md",
+      "source_line": 25,
+      "fields": [
+        {
+          "label": "Tier",
+          "value": "**A**"
+        },
+        {
+          "label": "Why",
+          "value": "macOS: legacy Sparkle 1.x, DSA signature checked against a pubkey file bundled in the app resources. Weak 1024-bit DSA algorithm is a caveat but the pinned-key architecture is intact. Windows menu entry is dead code; Linux has none."
+        }
+      ]
+    }
   ]
 }

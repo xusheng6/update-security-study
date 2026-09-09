@@ -41,5 +41,53 @@
       "line": 24,
       "text": "| Pixelorama | https://github.com/Orama-Interactive/Pixelorama | 52b5ecb / 2026-08-19 | N | N | N | n/a | n/a | n/a | n/a | No self-updater for the app binary (distributed via itch.io/Steam/GitHub releases manually) — see side-channel note below for its in-app Extension Explorer |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-U2.md",
+      "source_line": 24,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/Orama-Interactive/Pixelorama"
+        },
+        {
+          "label": "commit/date",
+          "value": "52b5ecb / 2026-08-19"
+        },
+        {
+          "label": "has_updater",
+          "value": "N"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N"
+        },
+        {
+          "label": "transport",
+          "value": "n/a"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "n/a"
+        },
+        {
+          "label": "payload_verification",
+          "value": "n/a"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence",
+          "value": "No self-updater for the app binary (distributed via itch.io/Steam/GitHub releases manually) — see side-channel note below for its in-app Extension Explorer"
+        }
+      ]
+    }
   ]
 }

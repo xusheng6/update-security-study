@@ -43,5 +43,53 @@
       "line": 10,
       "text": "| bitwarden/clients (desktop) | bitwarden/clients | Electron (electron-builder + electron-updater) | Y | auto (chk/dl/inst) by default — `autoUpdater.autoDownload` defaults true except during a manual \"check now\" (set false, re-enabled after); auto-installs via `quitAndInstall` after user confirms restart prompt | Y | https; publish provider `generic` at `https://artifacts.bitwarden.com/desktop`; no `rejectUnauthorized:false` / TLS-bypass code found in the desktop app source (validation=default-enforced, electron-updater default HTTPS behavior) | scheme[SHA512 in `latest.yml`/`latest-mac.yml`/`latest-linux.yml`] over HTTPS (generic provider — manifest itself only protected by TLS, no separate detached signature) | hash-from-manifest (SHA512 in electron-builder update metadata) + OS-code-signing (Windows: `signtoolOptions`/Authenticode via `sign.js`; macOS: `hardenedRuntime`, notarization implied by entitlements — enforced by electron-updater/Squirrel.Mac at apply time) | server-TLS for manifest delivery; OS-trust-store for code-signature checks (Authenticode CA on Win, Apple Developer ID CA on Mac) | apps/desktop/electron-builder.json:27-30 (`publish.provider=generic`, `url=https://artifacts.bitwarden.com/desktop`), :93-100 (win `signtoolOptions`, `publisherName`); apps/desktop/src/main/updater.main.ts:151,158 (`autoUpdater.autoDownload=false` only for manual \"withFeedback\" checks, reset back true at :162), :83 (`autoUpdater.downloadUpdate()`), :234 (`autoUpdater.quitAndInstall(true,true)`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-G3.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "bitwarden/clients"
+        },
+        {
+          "label": "framework",
+          "value": "Electron (electron-builder + electron-updater)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "auto (chk/dl/inst) by default — `autoUpdater.autoDownload` defaults true except during a manual \"check now\" (set false, re-enabled after); auto-installs via `quitAndInstall` after user confirms restart prompt"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https; publish provider `generic` at `https://artifacts.bitwarden.com/desktop`; no `rejectUnauthorized:false` / TLS-bypass code found in the desktop app source (validation=default-enforced, electron-updater default HTTPS behavior)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "scheme[SHA512 in `latest.yml`/`latest-mac.yml`/`latest-linux.yml`] over HTTPS (generic provider — manifest itself only protected by TLS, no separate detached signature)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (SHA512 in electron-builder update metadata) + OS-code-signing (Windows: `signtoolOptions`/Authenticode via `sign.js`; macOS: `hardenedRuntime`, notarization implied by entitlements — enforced by electron-updater/Squirrel.Mac at apply time)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-TLS for manifest delivery; OS-trust-store for code-signature checks (Authenticode CA on Win, Apple Developer ID CA on Mac)"
+        },
+        {
+          "label": "evidence",
+          "value": "apps/desktop/electron-builder.json:27-30 (`publish.provider=generic`, `url=https://artifacts.bitwarden.com/desktop`), :93-100 (win `signtoolOptions`, `publisherName`); apps/desktop/src/main/updater.main.ts:151,158 (`autoUpdater.autoDownload=false` only for manual \"withFeedback\" checks, reset back true at :162), :83 (`autoUpdater.downloadUpdate()`), :234 (`autoUpdater.quitAndInstall(true,true)`)"
+        }
+      ]
+    }
   ]
 }

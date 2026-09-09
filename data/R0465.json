@@ -42,5 +42,53 @@
       "line": 27,
       "text": "| NextChat (ChatGPTNextWeb) | https://github.com/ChatGPTNextWeb/NextChat | defdcdb / 2026-08-11 | Y (Tauri updater plugin) | Y (auto-checked; on new version `clientUpdate()` runs automatically, no user click needed beyond notification permission) | Y | https (`github.com/.../releases/latest/download/latest.json`, TLS enforced) | yes — Tauri updater manifest + package signed with minisign | signature (Ed25519/minisign, enforced by Tauri's Rust-side updater plugin regardless of JS `dialog` setting) | **pinned-in-binary** (`pubkey` embedded in `tauri.conf.json`, compiled into the app) | `src-tauri/tauri.conf.json` (`updater.pubkey`, `updater.endpoints`), `src-tauri/Cargo.toml:26`, `app/utils.ts:449-465`, `app/store/update.ts:123` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AE1.md",
+      "source_line": 27,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/ChatGPTNextWeb/NextChat"
+        },
+        {
+          "label": "commit/date",
+          "value": "defdcdb / 2026-08-11"
+        },
+        {
+          "label": "has_updater(Y/N)",
+          "value": "Y (Tauri updater plugin)"
+        },
+        {
+          "label": "auto(Y/N)",
+          "value": "Y (auto-checked; on new version `clientUpdate()` runs automatically, no user click needed beyond notification permission)"
+        },
+        {
+          "label": "downloads_and_executes(Y/N)",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`github.com/.../releases/latest/download/latest.json`, TLS enforced)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "yes — Tauri updater manifest + package signed with minisign"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (Ed25519/minisign, enforced by Tauri's Rust-side updater plugin regardless of JS `dialog` setting)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned-in-binary** (`pubkey` embedded in `tauri.conf.json`, compiled into the app)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`src-tauri/tauri.conf.json` (`updater.pubkey`, `updater.endpoints`), `src-tauri/Cargo.toml:26`, `app/utils.ts:449-465`, `app/store/update.ts:123`"
+        }
+      ]
+    }
   ]
 }

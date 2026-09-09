@@ -42,5 +42,53 @@
       "line": 13,
       "text": "| Clipy | https://github.com/Clipy/Clipy | d84fccbe1db0 / 2026-08-15 | Y | Y (default on, daily) | Y | https, TLS enforced (no disabled validation found) | Y (Sparkle 2 appcast, EdDSA-signed enclosure) | signature (EdDSA) | **pinned-in-binary** (`SUPublicEDKey` in Info.plist) | `Clipy/Supporting Files/Info.plist:35-40` (SUFeedURL=https://clipy-app.com/appcast.xml, SUPublicEDKey=IxLVywb2t...), `Clipy/Sources/Dependencies/Sparkle.swift:31-56`, `Clipy/Sources/Utility/CPYUtilities.swift:74-75` (defaults: auto-check=true, interval=86400) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Z5.md",
+      "source_line": 13,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/Clipy/Clipy"
+        },
+        {
+          "label": "commit/date",
+          "value": "d84fccbe1db0 / 2026-08-15"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (default on, daily)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (no disabled validation found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Y (Sparkle 2 appcast, EdDSA-signed enclosure)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (EdDSA)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned-in-binary** (`SUPublicEDKey` in Info.plist)"
+        },
+        {
+          "label": "evidence",
+          "value": "`Clipy/Supporting Files/Info.plist:35-40` (SUFeedURL=https://clipy-app.com/appcast.xml, SUPublicEDKey=IxLVywb2t...), `Clipy/Sources/Dependencies/Sparkle.swift:31-56`, `Clipy/Sources/Utility/CPYUtilities.swift:74-75` (defaults: auto-check=true, interval=86400)"
+        }
+      ]
+    }
   ]
 }

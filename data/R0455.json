@@ -43,5 +43,53 @@
       "line": 16,
       "text": "| Jitsi (SIP Communicator / Jitsi Desktop) | https://github.com/jitsi/jitsi | 7bde4ff / 2026-05-25 | Y (per-platform: Mac=Sparkle, Windows=custom Java updater) | Y (Mac: `SUScheduledCheckInterval`=86400s; Windows: interval/menu-triggered) | Y (Mac: Sparkle installs DMG; Windows: `FileUtils.download()` setup.exe then `new ProcessBuilder(command).start()`) | HTTPS both paths (`https://download.jitsi.org/...`); TLS enforced via Jitsi's own `CertificateVerificationService`/custom TrustManager (hostname check moved into the trust manager, not disabled) | **Mac = Y** (Sparkle appcast `sparkle:dsaSignature` enclosure attr); **Windows = N** (plain key=value `.properties` file, no signature field) | **Mac = DSA signature verified by Sparkle** against `SUPublicDSAKeyFile` bundled in app; **Windows = none** (no hash/sig check before executing downloaded setup.exe) | **Mac = pinned-in-binary** (`Contents/Resources/sparkle_dsa_pub.pem` shipped inside app bundle); **Windows = none/unpinned** | resources/install/mac/Info.plist (`SUPublicDSAKeyFile`, `SUFeedURL`), resources/install/src/mac/dist/Jitsi.app/Contents/Resources/sparkle_dsa_pub.pem, modules/plugin/update/src/main/java/.../UpdateServiceImpl.java:769-816 (download+`ProcessBuilder` exec, no verification), modules/service/httputil/src/main/java/.../HttpUtils.java:407-441 |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AD1.md",
+      "source_line": 16,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/jitsi/jitsi"
+        },
+        {
+          "label": "commit/date",
+          "value": "7bde4ff / 2026-05-25"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (per-platform: Mac=Sparkle, Windows=custom Java updater)"
+        },
+        {
+          "label": "auto",
+          "value": "Y (Mac: `SUScheduledCheckInterval`=86400s; Windows: interval/menu-triggered)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (Mac: Sparkle installs DMG; Windows: `FileUtils.download()` setup.exe then `new ProcessBuilder(command).start()`)"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS both paths (`https://download.jitsi.org/...`); TLS enforced via Jitsi's own `CertificateVerificationService`/custom TrustManager (hostname check moved into the trust manager, not disabled)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "**Mac = Y** (Sparkle appcast `sparkle:dsaSignature` enclosure attr); **Windows = N** (plain key=value `.properties` file, no signature field)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**Mac = DSA signature verified by Sparkle** against `SUPublicDSAKeyFile` bundled in app; **Windows = none** (no hash/sig check before executing downloaded setup.exe)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**Mac = pinned-in-binary** (`Contents/Resources/sparkle_dsa_pub.pem` shipped inside app bundle); **Windows = none/unpinned**"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "resources/install/mac/Info.plist (`SUPublicDSAKeyFile`, `SUFeedURL`), resources/install/src/mac/dist/Jitsi.app/Contents/Resources/sparkle_dsa_pub.pem, modules/plugin/update/src/main/java/.../UpdateServiceImpl.java:769-816 (download+`ProcessBuilder` exec, no verification), modules/service/httputil/src/main/java/.../HttpUtils.java:407-441"
+        }
+      ]
+    }
   ]
 }

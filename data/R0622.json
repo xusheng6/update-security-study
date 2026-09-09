@@ -43,5 +43,53 @@
       "line": 10,
       "text": "| moonraker-obico | https://github.com/TheSpaghettiDetective/moonraker-obico.git | 343be22 / 2026-06-01 | Y | Y (if user enables Moonraker's auto-update) | Y | https | N (no GPG-signed commits required) | none (git commit trust only, no hash/signature check) | server-supplied/unpinned (GitHub over TLS via git) | `moonraker-obico-update.cfg.sample:2-4` declares `type: git_repo`, `origin: https://github.com/TheSpaghettiDetective/moonraker-obico.git` — update is executed by Moonraker's `update_manager` (git fetch+pull, already covered separately as \"moonraker\"), then the systemd service is restarted (`install.sh` sets up `ExecStart=...python3 -m moonraker_obico.app`). Own `install.sh:134-136` `update()` function only re-installs pip deps, does not itself fetch. Side note: `scripts/webcam_capture` type local snapshot fetch uses `verify=False` at `moonraker_obico/webcam_capture.py:32` (local LAN, not update path). |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AN7.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/TheSpaghettiDetective/moonraker-obico.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "343be22 / 2026-06-01"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (if user enables Moonraker's auto-update)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no GPG-signed commits required)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (git commit trust only, no hash/signature check)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (GitHub over TLS via git)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`moonraker-obico-update.cfg.sample:2-4` declares `type: git_repo`, `origin: https://github.com/TheSpaghettiDetective/moonraker-obico.git` — update is executed by Moonraker's `update_manager` (git fetch+pull, already covered separately as \"moonraker\"), then the systemd service is restarted (`install.sh` sets up `ExecStart=...python3 -m moonraker_obico.app`). Own `install.sh:134-136` `update()` function only re-installs pip deps, does not itself fetch. Side note: `scripts/webcam_capture` type local snapshot fetch uses `verify=False` at `moonraker_obico/webcam_capture.py:32` (local LAN, not update path)."
+        }
+      ]
+    }
   ]
 }

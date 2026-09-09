@@ -42,5 +42,53 @@
       "line": 22,
       "text": "| nekoray | https://github.com/MatsuriDayo/nekoray | adef6cd / 2024-12-12 | Y | N (manual \"check for update\" action; download step then automatic) | Y | https (`api.github.com`, `browser_download_url`), no InsecureSkipVerify seen in the Go http client used | N | **none** | n/a | `go/grpc_server/update.go:19-115` (`Update()`: GETs `https://api.github.com/repos/MatsuriDayo/nekoray/releases`, downloads asset zip to `../nekoray.zip`, zero hash/sig check), `go/cmd/updater/updater.go:1-79` (`Updater()`: `extract.Zip`, then `Mv(\"./nekoray_update/nekoray\",\"./\")` overwriting the running binary/DLLs, no verification at any step) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W6.md",
+      "source_line": 22,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/MatsuriDayo/nekoray"
+        },
+        {
+          "label": "commit/date",
+          "value": "adef6cd / 2024-12-12"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual \"check for update\" action; download step then automatic)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (`api.github.com`, `browser_download_url`), no InsecureSkipVerify seen in the Go http client used"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none**"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`go/grpc_server/update.go:19-115` (`Update()`: GETs `https://api.github.com/repos/MatsuriDayo/nekoray/releases`, downloads asset zip to `../nekoray.zip`, zero hash/sig check), `go/cmd/updater/updater.go:1-79` (`Updater()`: `extract.Zip`, then `Mv(\"./nekoray_update/nekoray\",\"./\")` overwriting the running binary/DLLs, no verification at any step)"
+        }
+      ]
+    }
   ]
 }

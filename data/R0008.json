@@ -42,5 +42,53 @@
       "line": 10,
       "text": "| ScreenToGif | https://github.com/NickeManarin/ScreenToGif.git | a4d0a67c / 2026-07-28 | Y | Y (if `InstallUpdates` setting on, auto-downloads; else prompts) | Y | https (api.github.com + GitHub release asset CDN), TLS enforced via ServicePointManager Tls11/12/13, no bypass | N | none — only compares downloaded file size to the size reported by the GitHub API, no hash/signature (comment explicitly says a hash check would be needed) | server-supplied/unpinned (no verification at all) | ScreenToGif/ViewModel/ApplicationViewModel.cs:1204-1208 (\"I would need to check a hash\"), :1296 (ProcessHelper.StartWithShell executes installer), ScreenToGif.Util/GitHubHelper.cs:17 (api.github.com/repos/.../releases/latest) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AL6.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/NickeManarin/ScreenToGif.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "a4d0a67c / 2026-07-28"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (if `InstallUpdates` setting on, auto-downloads; else prompts)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (api.github.com + GitHub release asset CDN), TLS enforced via ServicePointManager Tls11/12/13, no bypass"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — only compares downloaded file size to the size reported by the GitHub API, no hash/signature (comment explicitly says a hash check would be needed)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (no verification at all)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "ScreenToGif/ViewModel/ApplicationViewModel.cs:1204-1208 (\"I would need to check a hash\"), :1296 (ProcessHelper.StartWithShell executes installer), ScreenToGif.Util/GitHubHelper.cs:17 (api.github.com/repos/.../releases/latest)"
+        }
+      ]
+    }
   ]
 }

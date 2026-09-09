@@ -41,5 +41,53 @@
       "line": 20,
       "text": "| Emacs | https://github.com/emacs-mirror/emacs.git | 73599f66e1d / 2026-08-20 | N (core has no self-updater) | N | N | n/a | n/a | n/a | n/a | no `checkForUpdate`/Sparkle/self_update in core; see content-as-code note below |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-X7.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/emacs-mirror/emacs.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "73599f66e1d / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "N (core has no self-updater)"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N"
+        },
+        {
+          "label": "transport",
+          "value": "n/a"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "n/a"
+        },
+        {
+          "label": "payload_verification",
+          "value": "n/a"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "no `checkForUpdate`/Sparkle/self_update in core; see content-as-code note below"
+        }
+      ]
+    }
   ]
 }

@@ -42,5 +42,53 @@
       "line": 13,
       "text": "| Kitty | https://github.com/kovidgoyal/kitty.git | 9b29654e9017aba6f8b28a8a7fc5ff8466defe4a / 2026-08-20 | Y (3 distinct mechanisms) | (A) Y official-frozen-builds only, default 24h; (B)/(C) N manual | (A) N notify-only; (B) `installer.sh` Y; (C) `kitten update-self` Y | HTTPS throughout — (A) `sw.kovidgoyal.net` via urllib default TLS; (B) github.com via curl/wget defaults; (C) github.com via Go net/http default. No TLS-bypass found in any of the three | N (all three) | (A) N/A no payload; (B) **none** — no checksum/GPG/minisign; (C) **none** — no hash check before `unix.Exec()` replaces running binary | N/A (no verification exists in any path) | kitty/kitty/update_check.py:44,90-116 (A, notify-only via urlopen); docs/installer.sh:87-92,140-164 (B, curl/wget download+install+exec, no hash check); tools/cmd/update_self/main.go:43-68, tools/utils/download_file.go:37,72-106 (C, http.Get + os.Rename + unix.Exec, no verification) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-T1.md",
+      "source_line": 13,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/kovidgoyal/kitty.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "9b29654e9017aba6f8b28a8a7fc5ff8466defe4a / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (3 distinct mechanisms)"
+        },
+        {
+          "label": "auto",
+          "value": "(A) Y official-frozen-builds only, default 24h; (B)/(C) N manual"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "(A) N notify-only; (B) `installer.sh` Y; (C) `kitten update-self` Y"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS throughout — (A) `sw.kovidgoyal.net` via urllib default TLS; (B) github.com via curl/wget defaults; (C) github.com via Go net/http default. No TLS-bypass found in any of the three"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (all three)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "(A) N/A no payload; (B) **none** — no checksum/GPG/minisign; (C) **none** — no hash check before `unix.Exec()` replaces running binary"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A (no verification exists in any path)"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "kitty/kitty/update_check.py:44,90-116 (A, notify-only via urlopen); docs/installer.sh:87-92,140-164 (B, curl/wget download+install+exec, no hash check); tools/cmd/update_self/main.go:43-68, tools/utils/download_file.go:37,72-106 (C, http.Get + os.Rename + unix.Exec, no verification)"
+        }
+      ]
+    }
   ]
 }

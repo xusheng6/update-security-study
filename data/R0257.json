@@ -41,5 +41,53 @@
       "line": 20,
       "text": "| atuin | atuinsh/atuin @ a3cc4015 (2026-08-19) | Y (opt-in, manual) | N (manual `atuin update` command; separate passive \"update available\" notice can be opportunistically on) | Y | HTTPS | N | N | N/A (no verification performed) | Cargo feature gate: `crates/atuin/Cargo.toml:61-67` (\"`atuin update`: self-update via the cargo-dist install receipt... only the official installer artifacts can self-update\"; `self-update = [\"dep:axoupdater\"]`). Command impl: `crates/atuin/src/command/client/update.rs:1-99` — only enabled if an install-receipt from the standalone `setup.atuin.sh` installer is present (line 28-33), user must explicitly run `atuin update`/`atuin update --check` (no autorun). Actual download+exec happens in the `axoupdater` crate it depends on (see next row) — atuin itself does not verify the installer it invokes. Separate, independently-gated **passive check-only** path: Cargo feature `check-update` (`crates/atuin-client/Cargo.toml:21`) hits `GET https://api.atuin.sh` (`crates/atuin-client/src/settings.rs:41-42`, `DEFAULT_SYNC_URL`) via `crates/atuin-client/src/api_client.rs:165-176` (`latest_version()`), throttled to once/hour (`crates/atuin-client/src/settings.rs:1331-1336`), and only *prints* a notice via `needs_update()` (`settings.rs:1371-1394`) — never downloads/executes a payload. |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Q5.md",
+      "source_line": 20,
+      "fields": [
+        {
+          "label": "Tool",
+          "value": "atuin"
+        },
+        {
+          "label": "Repo (commit cloned)",
+          "value": "atuinsh/atuin @ a3cc4015 (2026-08-19)"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (opt-in, manual)"
+        },
+        {
+          "label": "auto",
+          "value": "N (manual `atuin update` command; separate passive \"update available\" notice can be opportunistically on)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "N"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A (no verification performed)"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "Cargo feature gate: `crates/atuin/Cargo.toml:61-67` (\"`atuin update`: self-update via the cargo-dist install receipt... only the official installer artifacts can self-update\"; `self-update = [\"dep:axoupdater\"]`). Command impl: `crates/atuin/src/command/client/update.rs:1-99` — only enabled if an install-receipt from the standalone `setup.atuin.sh` installer is present (line 28-33), user must explicitly run `atuin update`/`atuin update --check` (no autorun). Actual download+exec happens in the `axoupdater` crate it depends on (see next row) — atuin itself does not verify the installer it invokes. Separate, independently-gated **passive check-only** path: Cargo feature `check-update` (`crates/atuin-client/Cargo.toml:21`) hits `GET https://api.atuin.sh` (`crates/atuin-client/src/settings.rs:41-42`, `DEFAULT_SYNC_URL`) via `crates/atuin-client/src/api_client.rs:165-176` (`latest_version()`), throttled to once/hour (`crates/atuin-client/src/settings.rs:1331-1336`), and only *prints* a notice via `needs_update()` (`settings.rs:1371-1394`) — never downloads/executes a payload."
+        }
+      ]
+    }
   ]
 }

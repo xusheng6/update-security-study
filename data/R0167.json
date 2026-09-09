@@ -41,5 +41,53 @@
       "line": 7,
       "text": "| Telegram Desktop | telegramdesktop/tdesktop | Qt/C++ native | Y | auto (chk/dl/inst — installs silently on next app start, no click required beyond restart) | Y | https (QNetworkRequest to `https://td.telegram.org/current[N]`, default `AutoupdatePrefix`) | N (version-manifest is plain JSON, not signed itself) | signature (RSA-1024 + SHA-1, `RSA_verify(NID_sha1, ...)` over the whole compressed/LZMA update blob; SHA-1 digest of payload also checked before RSA verify) | pinned-in-binary (two PEM RSA public keys, `UpdatesPublicKey` / `UpdatesPublicBetaKey`, hardcoded literals) | `Telegram/SourceFiles/core/update_checker.cpp:369-405` (RSA verify, `hSigLen=128`⇒1024-bit key, `NID_sha1`); keys at `Telegram/SourceFiles/config.h:45-59`; default host `Telegram/SourceFiles/storage/localstorage.cpp:557` (`AutoupdatePrefix(\"https://td.telegram.org\")`); auto-install gate `Telegram/SourceFiles/core/sandbox.cpp:426-431` (`Core::checkReadyUpdate()` → `cSetRestartingUpdate(true)` → quits and launches updater without prompting if `cAutoUpdate()` is on, default) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-K3.md",
+      "source_line": 7,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "telegramdesktop/tdesktop"
+        },
+        {
+          "label": "framework",
+          "value": "Qt/C++ native"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "auto (chk/dl/inst — installs silently on next app start, no click required beyond restart)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (QNetworkRequest to `https://td.telegram.org/current[N]`, default `AutoupdatePrefix`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (version-manifest is plain JSON, not signed itself)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (RSA-1024 + SHA-1, `RSA_verify(NID_sha1, ...)` over the whole compressed/LZMA update blob; SHA-1 digest of payload also checked before RSA verify)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "pinned-in-binary (two PEM RSA public keys, `UpdatesPublicKey` / `UpdatesPublicBetaKey`, hardcoded literals)"
+        },
+        {
+          "label": "evidence",
+          "value": "`Telegram/SourceFiles/core/update_checker.cpp:369-405` (RSA verify, `hSigLen=128`⇒1024-bit key, `NID_sha1`); keys at `Telegram/SourceFiles/config.h:45-59`; default host `Telegram/SourceFiles/storage/localstorage.cpp:557` (`AutoupdatePrefix(\"https://td.telegram.org\")`); auto-install gate `Telegram/SourceFiles/core/sandbox.cpp:426-431` (`Core::checkReadyUpdate()` → `cSetRestartingUpdate(true)` → quits and launches updater without prompting if `cAutoUpdate()` is on, default)"
+        }
+      ]
+    }
   ]
 }

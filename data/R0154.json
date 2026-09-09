@@ -41,5 +41,53 @@
       "line": 11,
       "text": "| SuperSlicer | github.com/supermerill/SuperSlicer (branch master_27) | wxWidgets/C++ (libcurl) — PrusaSlicer fork, same `AppUpdater.cpp` lineage | Y | check: automatic + notify. download/run: user-initiated via dialog, optional \"run after download\" checkbox (identical mechanism to PrusaSlicer) | Y (same opt-in `run_file`/`create_process` mechanism as PrusaSlicer) | https (api.github.com/repos/supermerill/superslicer/releases); TLS not overridden — no VERIFYPEER/VERIFYHOST disable in Http.cpp (grep negative) | N | none (size check only, same as PrusaSlicer; grep for sha256/signature/checksum/HMAC/EVP_ in PresetUpdater.cpp = no matches) | n/a | src/slic3r/Utils/AppUpdater.cpp:47 (run_file), :209 (download_file, size-only check); src/libslic3r/AppConfig.cpp:47 (VERSION_CHECK_URL=\"https://api.github.com/repos/supermerill/superslicer/releases\"); src/slic3r/Utils/Http.cpp (grep negative VERIFYPEER/VERIFYHOST); src/slic3r/Utils/PresetUpdater.cpp (grep negative) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-J1.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/supermerill/SuperSlicer (branch master_27)"
+        },
+        {
+          "label": "framework",
+          "value": "wxWidgets/C++ (libcurl) — PrusaSlicer fork, same `AppUpdater.cpp` lineage"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "check: automatic + notify. download/run: user-initiated via dialog, optional \"run after download\" checkbox (identical mechanism to PrusaSlicer)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (same opt-in `run_file`/`create_process` mechanism as PrusaSlicer)"
+        },
+        {
+          "label": "transport",
+          "value": "https (api.github.com/repos/supermerill/superslicer/releases); TLS not overridden — no VERIFYPEER/VERIFYHOST disable in Http.cpp (grep negative)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (size check only, same as PrusaSlicer; grep for sha256/signature/checksum/HMAC/EVP_ in PresetUpdater.cpp = no matches)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence",
+          "value": "src/slic3r/Utils/AppUpdater.cpp:47 (run_file), :209 (download_file, size-only check); src/libslic3r/AppConfig.cpp:47 (VERSION_CHECK_URL=\"https://api.github.com/repos/supermerill/superslicer/releases\"); src/slic3r/Utils/Http.cpp (grep negative VERIFYPEER/VERIFYHOST); src/slic3r/Utils/PresetUpdater.cpp (grep negative)"
+        }
+      ]
+    }
   ]
 }

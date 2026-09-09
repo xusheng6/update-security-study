@@ -44,5 +44,53 @@
       "line": 11,
       "text": "| fre:ac | https://github.com/enzo1982/freac.git | 486aa93 / 2026-08-20 | Y | Y (opt-in, asked at 2nd startup) | Y | https (feed XML) | unknown (external DLL) | unknown — verification logic lives in closed-source `eUpdate.dll`, not in this repo | server-supplied/unpinned (not verifiable from source) | src/jobs/other/checkforupdates.cpp:70-113 (Windows-only `ex_eUpdate_*` calls into `eUpdate.dll`); src/freac.cpp:81-83 (`updatePath = \"https://www.freac.org/eUpdate/eUpdate.xml\"`); src/dllinterfaces.cpp:29-45 (dynamic-loads `eUpdate.dll`, calls `eUpdate_AutomaticUpdate`) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AC7.md",
+      "source_line": 11,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/enzo1982/freac.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "486aa93 / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (opt-in, asked at 2nd startup)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (feed XML)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "unknown (external DLL)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "unknown — verification logic lives in closed-source `eUpdate.dll`, not in this repo"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (not verifiable from source)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/jobs/other/checkforupdates.cpp:70-113 (Windows-only `ex_eUpdate_*` calls into `eUpdate.dll`); src/freac.cpp:81-83 (`updatePath = \"https://www.freac.org/eUpdate/eUpdate.xml\"`); src/dllinterfaces.cpp:29-45 (dynamic-loads `eUpdate.dll`, calls `eUpdate_AutomaticUpdate`)"
+        }
+      ]
+    }
   ]
 }

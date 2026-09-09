@@ -41,5 +41,53 @@
       "line": 8,
       "text": "| ProtonUp-Qt | github.com/DavidoTek/ProtonUp-Qt | PySide6/Qt, Python, Flatpak/AppImage/AUR | N (app self-update — none found); Y (Proton-GE/Wine-GE compat tool downloader = content-as-code) | manual (user clicks Install for a specific compat-tool release) | Y — downloads Proton-GE/Wine-GE tarballs from GitHub/GitLab/Codeberg release assets and extracts them for use by Steam/Lutris/Heroic | HTTPS (GitHub/GitLab/Codeberg release APIs, `browser_download_url`); TLS enforced (default `requests`, no verify=False found) | N | **none** — a checksum-file URL is fetched and stored (`values['checksum']`) but is never read or compared against the downloaded bytes anywhere in the codebase (dead/unused field) | N/A | `pupgui2/util.py:700-740` (`fetch_project_release_data` stores checksum URL, never consumed); `pupgui2/networkutil.py:1-98` (`download_file` has no hash/signature check) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-I2.md",
+      "source_line": 8,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/DavidoTek/ProtonUp-Qt"
+        },
+        {
+          "label": "framework",
+          "value": "PySide6/Qt, Python, Flatpak/AppImage/AUR"
+        },
+        {
+          "label": "has_updater",
+          "value": "N (app self-update — none found); Y (Proton-GE/Wine-GE compat tool downloader = content-as-code)"
+        },
+        {
+          "label": "auto",
+          "value": "manual (user clicks Install for a specific compat-tool release)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — downloads Proton-GE/Wine-GE tarballs from GitHub/GitLab/Codeberg release assets and extracts them for use by Steam/Lutris/Heroic"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS (GitHub/GitLab/Codeberg release APIs, `browser_download_url`); TLS enforced (default `requests`, no verify=False found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — a checksum-file URL is fetched and stored (`values['checksum']`) but is never read or compared against the downloaded bytes anywhere in the codebase (dead/unused field)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence",
+          "value": "`pupgui2/util.py:700-740` (`fetch_project_release_data` stores checksum URL, never consumed); `pupgui2/networkutil.py:1-98` (`download_file` has no hash/signature check)"
+        }
+      ]
+    }
   ]
 }

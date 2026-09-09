@@ -41,5 +41,53 @@
       "line": 10,
       "text": "| PlayOnLinux (POL-POM-4) | github.com/PlayOnLinux/POL-POM-4 | fde00fec / 2026-02-22 | Y (notify-only, self) | N | Y (core install-script / Wine / gecko / mono channel) | **Broken**: `SITE=\"http://repository.playonlinux.com\"` plaintext HTTP for scripts/resources (`python/lib/Variables.py:19`); macOS `POL_WGET` uses `--no-check-certificate` (`Variables.py:43`) — TLS validation explicitly disabled; Wine builds fetched over HTTPS | N/A | GPG signature check exists but **fails open**: `POL_Bash()` still `bash \"$@\"`'s the script even when `POL_GPG_auth_script` returns not-TRUE, only shows a dismissible warning (`lib/playonlinux.lib:334-353`); resource/script MD5 checked against a hash fetched over the same plaintext HTTP channel, and skippable (`SERVER_MD5=\"NO_MD5\"` explicitly bypasses check, `lib/scripts.lib:552-559`); Wine-build SHA1 (HTTPS, same-origin) is actually enforced (`lib/wine.lib:704-715`) | Bundled `etc/playonlinux.gpg` (static, shipped in-tree) for scripts — moot due to fail-open bug; server-supplied hash for resources/scripts | `lib/playonlinux.lib:308-353`; `bash/install:47-54`; `python/lib/Variables.py:19,43`; `lib/scripts.lib:520-576` |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-X8.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/PlayOnLinux/POL-POM-4"
+        },
+        {
+          "label": "commit/date",
+          "value": "fde00fec / 2026-02-22"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (notify-only, self)"
+        },
+        {
+          "label": "auto",
+          "value": "N"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (core install-script / Wine / gecko / mono channel)"
+        },
+        {
+          "label": "transport",
+          "value": "**Broken**: `SITE=\"http://repository.playonlinux.com\"` plaintext HTTP for scripts/resources (`python/lib/Variables.py:19`); macOS `POL_WGET` uses `--no-check-certificate` (`Variables.py:43`) — TLS validation explicitly disabled; Wine builds fetched over HTTPS"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N/A"
+        },
+        {
+          "label": "payload_verification",
+          "value": "GPG signature check exists but **fails open**: `POL_Bash()` still `bash \"$@\"`'s the script even when `POL_GPG_auth_script` returns not-TRUE, only shows a dismissible warning (`lib/playonlinux.lib:334-353`); resource/script MD5 checked against a hash fetched over the same plaintext HTTP channel, and skippable (`SERVER_MD5=\"NO_MD5\"` explicitly bypasses check, `lib/scripts.lib:552-559`); Wine-build SHA1 (HTTPS, same-origin) is actually enforced (`lib/wine.lib:704-715`)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "Bundled `etc/playonlinux.gpg` (static, shipped in-tree) for scripts — moot due to fail-open bug; server-supplied hash for resources/scripts"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`lib/playonlinux.lib:308-353`; `bash/install:47-54`; `python/lib/Variables.py:19,43`; `lib/scripts.lib:520-576`"
+        }
+      ]
+    }
   ]
 }

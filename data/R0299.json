@@ -44,5 +44,53 @@
       "line": 18,
       "text": "| VLC | https://code.videolan.org/videolan/vlc.git (mirror: https://github.com/videolan/vlc.git) | 367f021c2930 / 2026-08-19 | Y | N by default (Qt \"Check for updates\" dialog is user-triggered; `checkOrDownload()` on button click) | Y (user confirms download; file is verified and deleted if invalid) | https (`https://update.videolan.org/vlc/status`) | Yes | signature (OpenPGP/DSA, custom minimal parser) — checks issuer key-id, signature type, and hash of the downloaded binary | **pinned in binary** — `videolan_public_key`/`videolan_public_key_longid` hardcoded in `include/vlc_pgpkey.h`, compiled into libvlccore | include/vlc_pgpkey.h:17-23 (`videolan_public_key_longid`, embedded ASCII-armored `videolan_public_key`); src/misc/update.c:78-80 (`UPDATE_VLC_STATUS_URL = \"https://update.videolan.org/vlc/status\"`); src/misc/update.c:309-316 (issuer long-id compared to pinned `videolan_public_key_longid`); src/misc/update.c:655-700 (`download_signature`, issuer/type checks, `hash_from_file` comparison, `vlc_unlink` deletes file \"was invalid\" on any mismatch); modules/gui/qt/dialogs/help/help.cpp:454-471 (`UpdateDialog::checkOrDownload`, user-driven) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-V1.md",
+      "source_line": 18,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://code.videolan.org/videolan/vlc.git (mirror: https://github.com/videolan/vlc.git)"
+        },
+        {
+          "label": "commit/date",
+          "value": "367f021c2930 / 2026-08-19"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N by default (Qt \"Check for updates\" dialog is user-triggered; `checkOrDownload()` on button click)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (user confirms download; file is verified and deleted if invalid)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`https://update.videolan.org/vlc/status`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "Yes"
+        },
+        {
+          "label": "payload_verification",
+          "value": "signature (OpenPGP/DSA, custom minimal parser) — checks issuer key-id, signature type, and hash of the downloaded binary"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "**pinned in binary** — `videolan_public_key`/`videolan_public_key_longid` hardcoded in `include/vlc_pgpkey.h`, compiled into libvlccore"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "include/vlc_pgpkey.h:17-23 (`videolan_public_key_longid`, embedded ASCII-armored `videolan_public_key`); src/misc/update.c:78-80 (`UPDATE_VLC_STATUS_URL = \"https://update.videolan.org/vlc/status\"`); src/misc/update.c:309-316 (issuer long-id compared to pinned `videolan_public_key_longid`); src/misc/update.c:655-700 (`download_signature`, issuer/type checks, `hash_from_file` comparison, `vlc_unlink` deletes file \"was invalid\" on any mismatch); modules/gui/qt/dialogs/help/help.cpp:454-471 (`UpdateDialog::checkOrDownload`, user-driven)"
+        }
+      ]
+    }
   ]
 }

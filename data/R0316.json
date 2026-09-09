@@ -45,5 +45,53 @@
       "line": 12,
       "text": "| KOReader | https://github.com/koreader/koreader.git (+ submodule https://github.com/koreader/koreader-base.git) | fbc4392 / 2026-08-20 | Y | Y (silent periodic check; download/install needs a confirm click) | Y | **http (plaintext, no TLS at all — LuaSocket `http.request`, not https)** | N | hash-only (SHA-family digest via `Hashoir`, sourced from the *same* unauthenticated plaintext manifest) | server-supplied/unpinned (hash lives in the JSON manifest fetched from the same `http://` OTA host) | `frontend/ui/otamanager.lua:27-37` (all `ota_servers` are `http://…`), `frontend/ui/otamanager.lua:113-130` (`socket.http` GET, \"link\" OTA path), `koreader-base/ffi/downloader.lua:1-70` (LuaSocket, no TLS wrapper), `koreader-base/ffi/kotasync.lua:596-604` (`entry.xz_hash ~= hashoir:hexdigest()` — integrity only, no signature), `frontend/device/generic/device.lua:504-524` (`Device:install()` → `UIManager:quit(85)`, launcher re-execs into the unpacked update on next start) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-V7.md",
+      "source_line": 12,
+      "fields": [
+        {
+          "label": "repo (clone url)",
+          "value": "https://github.com/koreader/koreader.git (+ submodule https://github.com/koreader/koreader-base.git)"
+        },
+        {
+          "label": "commit/date",
+          "value": "fbc4392 / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (silent periodic check; download/install needs a confirm click)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "**http (plaintext, no TLS at all — LuaSocket `http.request`, not https)**"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-only (SHA-family digest via `Hashoir`, sourced from the *same* unauthenticated plaintext manifest)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (hash lives in the JSON manifest fetched from the same `http://` OTA host)"
+        },
+        {
+          "label": "evidence (file:line)",
+          "value": "`frontend/ui/otamanager.lua:27-37` (all `ota_servers` are `http://…`), `frontend/ui/otamanager.lua:113-130` (`socket.http` GET, \"link\" OTA path), `koreader-base/ffi/downloader.lua:1-70` (LuaSocket, no TLS wrapper), `koreader-base/ffi/kotasync.lua:596-604` (`entry.xz_hash ~= hashoir:hexdigest()` — integrity only, no signature), `frontend/device/generic/device.lua:504-524` (`Device:install()` → `UIManager:quit(85)`, launcher re-execs into the unpacked update on next start)"
+        }
+      ]
+    }
   ]
 }

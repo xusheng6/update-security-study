@@ -44,5 +44,53 @@
       "line": 13,
       "text": "| Another Redis Desktop Manager | https://github.com/qishibo/AnotherRedisDesktopManager.git | c149855106 / 2026-08-20 | Y | N (user confirms via dialog) | Y | https (GitHub Releases via electron-updater) | mac: Y (notarized) / win: N (unsigned) | mac: OS code-signing (Squirrel.Mac); win: hash only from `latest.yml` on same GitHub Releases channel | mac: real Apple notarization (teamId 68JN8DV835, CSC_LINK+APPLEID CI secrets); win: **no signing secrets configured at all** | pack/electron/update.js:1-52 (`electron-updater` `checkForUpdates()`→user click→`downloadUpdate()`); pack/electron/package.json:14-70 (`afterSign: notarize.js`); .github/workflows/build_mac.yml:14-25 (real `CSC_LINK`/`APPLEID` secrets); .github/workflows/build_windows.yml (publish job has **zero** signing env vars — Windows NSIS installer ships unsigned) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W4.md",
+      "source_line": 13,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/qishibo/AnotherRedisDesktopManager.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "c149855106 / 2026-08-20"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (user confirms via dialog)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https (GitHub Releases via electron-updater)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "mac: Y (notarized) / win: N (unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "mac: OS code-signing (Squirrel.Mac); win: hash only from `latest.yml` on same GitHub Releases channel"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "mac: real Apple notarization (teamId 68JN8DV835, CSC_LINK+APPLEID CI secrets); win: **no signing secrets configured at all**"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "pack/electron/update.js:1-52 (`electron-updater` `checkForUpdates()`→user click→`downloadUpdate()`); pack/electron/package.json:14-70 (`afterSign: notarize.js`); .github/workflows/build_mac.yml:14-25 (real `CSC_LINK`/`APPLEID` secrets); .github/workflows/build_windows.yml (publish job has **zero** signing env vars — Windows NSIS installer ships unsigned)"
+        }
+      ]
+    }
   ]
 }

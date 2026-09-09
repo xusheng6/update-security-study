@@ -41,5 +41,53 @@
       "line": 18,
       "text": "| Rosalie's Mupen GUI (RMG) | github.com/Rosalie241/RMG | Qt desktop GUI wrapping Mupen64Plus | Y | **auto chk** (`checkForUpdates(true, false)` runs on every startup unless disabled in Settings) + **manual dl/inst** (user clicks \"Update\" in the `UpdateDialog`, which then downloads and — with no further prompt — installs) | **Y — confirmed, on all platforms.** `DownloadUpdateDialog` downloads the matching release asset via `QNetworkAccessManager`; `InstallUpdateDialog::install()` then, depending on platform: **Windows** — if a `.exe` installer asset was selected, writes and runs a `.bat` script that `taskkill`s the running RMG PID and silently launches the downloaded, unverified `.exe` (`/SILENT /DIR=...`); otherwise extracts a ZIP and `xcopy`s it over the install directory before relaunching `RMG.exe`. **Linux (AppImage build, `APPIMAGE_UPDATER`)** — downloads the new AppImage, `std::rename()`s it directly over the currently-running AppImage file (`$APPIMAGE` env var), preserves its permissions, and launches it detached | HTTPS (`https://api.github.com/repos/Rosalie241/RMG/releases/latest` for the check; GitHub Releases `browser_download_url` assets for the download) via `QNetworkAccessManager` with `NoLessSafeRedirectPolicy`; no `ignoreSslErrors`/`setPeerVerifyMode` found — TLS validation enforced | N (plain GitHub Releases API JSON, unsigned) | **none** — no hash or signature check anywhere in `DownloadUpdateDialog.cpp`/`InstallUpdateDialog.cpp` before the downloaded `.exe` is executed, the ZIP is extracted over the install directory, or the AppImage replaces the running binary | N/A | `Source/RMG/UserInterface/MainWindow.cpp:116` (`checkForUpdates(true,false)` at startup), `:1314` (`https://api.github.com/repos/Rosalie241/RMG/releases/latest`); `Source/RMG/UserInterface/Dialog/Update/UpdateDialog.cpp:67-118` (`accept()` — asset selection by filename pattern, no hash field parsed); `DownloadUpdateDialog.cpp:33-40` (`NoLessSafeRedirectPolicy`, no hash check), `:88-131` (`APPIMAGE_UPDATER`: `std::rename()` over running AppImage, `QProcess::startDetached`); `InstallUpdateDialog.cpp:64-85` (Windows `.exe`: `taskkill` + silent-run downloaded installer, no verification), `:87-133` (ZIP extract + `xcopy` over app dir, no verification) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-I1.md",
+      "source_line": 18,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "github.com/Rosalie241/RMG"
+        },
+        {
+          "label": "framework",
+          "value": "Qt desktop GUI wrapping Mupen64Plus"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "**auto chk** (`checkForUpdates(true, false)` runs on every startup unless disabled in Settings) + **manual dl/inst** (user clicks \"Update\" in the `UpdateDialog`, which then downloads and — with no further prompt — installs)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "**Y — confirmed, on all platforms.** `DownloadUpdateDialog` downloads the matching release asset via `QNetworkAccessManager`; `InstallUpdateDialog::install()` then, depending on platform: **Windows** — if a `.exe` installer asset was selected, writes and runs a `.bat` script that `taskkill`s the running RMG PID and silently launches the downloaded, unverified `.exe` (`/SILENT /DIR=...`); otherwise extracts a ZIP and `xcopy`s it over the install directory before relaunching `RMG.exe`. **Linux (AppImage build, `APPIMAGE_UPDATER`)** — downloads the new AppImage, `std::rename()`s it directly over the currently-running AppImage file (`$APPIMAGE` env var), preserves its permissions, and launches it detached"
+        },
+        {
+          "label": "transport",
+          "value": "HTTPS (`https://api.github.com/repos/Rosalie241/RMG/releases/latest` for the check; GitHub Releases `browser_download_url` assets for the download) via `QNetworkAccessManager` with `NoLessSafeRedirectPolicy`; no `ignoreSslErrors`/`setPeerVerifyMode` found — TLS validation enforced"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (plain GitHub Releases API JSON, unsigned)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — no hash or signature check anywhere in `DownloadUpdateDialog.cpp`/`InstallUpdateDialog.cpp` before the downloaded `.exe` is executed, the ZIP is extracted over the install directory, or the AppImage replaces the running binary"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A"
+        },
+        {
+          "label": "evidence",
+          "value": "`Source/RMG/UserInterface/MainWindow.cpp:116` (`checkForUpdates(true,false)` at startup), `:1314` (`https://api.github.com/repos/Rosalie241/RMG/releases/latest`); `Source/RMG/UserInterface/Dialog/Update/UpdateDialog.cpp:67-118` (`accept()` — asset selection by filename pattern, no hash field parsed); `DownloadUpdateDialog.cpp:33-40` (`NoLessSafeRedirectPolicy`, no hash check), `:88-131` (`APPIMAGE_UPDATER`: `std::rename()` over running AppImage, `QProcess::startDetached`); `InstallUpdateDialog.cpp:64-85` (Windows `.exe`: `taskkill` + silent-run downloaded installer, no verification), `:87-133` (ZIP extract + `xcopy` over app dir, no verification)"
+        }
+      ]
+    }
   ]
 }

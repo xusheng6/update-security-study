@@ -49,5 +49,99 @@
       "line": 28,
       "text": "| Mihomo — geoip/geosite database updater (data channel, noted) | (same repo) | | Y | Y | N | https, same TLS handling as above | N | \"hash\" comparison is old-vs-new **change detection only**, not authenticity | n/a | `component/updater/update_geo.go:53,84,117,147` (`data, hash, err := vehicle.Read(...); if oldHash.Equal(hash) { ignored }` — purely a cache/staleness check) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-W6.md",
+      "source_line": 27,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/MetaCubeX/mihomo (branch `Meta`)"
+        },
+        {
+          "label": "commit/date",
+          "value": "ac017cd / 2026-08-16"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (triggered via local REST API `POST /upgrade`, e.g. by a GUI front-end)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS validated (custom embedded CA bundle via `ca.Option{ZeroTrust:true}`; confirmed this does NOT set `InsecureSkipVerify` — it only swaps which root CA pool is trusted)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "**none** — no signature/checksum check of the downloaded core binary anywhere"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`hub/route/upgrade.go:15-53` (`POST /upgrade` → `upgradeCore` → `updater.DefaultCoreUpdater.Update`), `component/updater/update_core.go:83-172` (downloads `mihomo-<os>-<arch>-<ver>.zip/.gz` from `https://github.com/MetaCubeX/mihomo/releases/...`, unpacks, backs up, `copyFile` overwrites the running executable; on darwin only does an **ad-hoc self-`codesign --sign -`**, which is not authenticity verification), `component/ca/config.go:83-100` (`ZeroTrust` only changes RootCAs, not `InsecureSkipVerify`)"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-W6.md",
+      "source_line": 28,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "(same repo)"
+        },
+        {
+          "label": "commit/date",
+          "value": ""
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "N"
+        },
+        {
+          "label": "transport",
+          "value": "https, same TLS handling as above"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "\"hash\" comparison is old-vs-new **change detection only**, not authenticity"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "n/a"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "`component/updater/update_geo.go:53,84,117,147` (`data, hash, err := vehicle.Read(...); if oldHash.Equal(hash) { ignored }` — purely a cache/staleness check)"
+        }
+      ]
+    }
   ]
 }

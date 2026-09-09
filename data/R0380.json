@@ -42,5 +42,53 @@
       "line": 14,
       "text": "| PHD2 | https://github.com/OpenPHDGuiding/phd2.git | 18896d9317b6/2026-08-16 | Y | N (user clicks \"Go\" to install; check/download automatic) | Y (Windows: downloads + wxExecute's the installer) | https, TLS enforced (no VERIFYPEER override found) | N | hash (SHA1) | server-supplied/unpinned (SHA1 shipped in same plaintext response as version+URL, fetched from same HTTPS endpoint) | src/phdupdate.cpp:317-322 (ReleaseInfoURL https://openphdguiding.org/...), :349-378 (FetchVersionInfo parses ver/url/sha1 from one text blob), :424-461 (SHA1Valid), :491-529 (DownloadInstaller), :533-536 (RunInstaller → wxExecute \"/silent /launch\"), :853-864 (OnGoClicked → RunInstaller) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-Y3.md",
+      "source_line": 14,
+      "fields": [
+        {
+          "label": "repo(clone url)",
+          "value": "https://github.com/OpenPHDGuiding/phd2.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "18896d9317b6/2026-08-16"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (user clicks \"Go\" to install; check/download automatic)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (Windows: downloads + wxExecute's the installer)"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (no VERIFYPEER override found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash (SHA1)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (SHA1 shipped in same plaintext response as version+URL, fetched from same HTTPS endpoint)"
+        },
+        {
+          "label": "evidence(file:line)",
+          "value": "src/phdupdate.cpp:317-322 (ReleaseInfoURL https://openphdguiding.org/...), :349-378 (FetchVersionInfo parses ver/url/sha1 from one text blob), :424-461 (SHA1Valid), :491-529 (DownloadInstaller), :533-536 (RunInstaller → wxExecute \"/silent /launch\"), :853-864 (OnGoClicked → RunInstaller)"
+        }
+      ]
+    }
   ]
 }

@@ -41,5 +41,53 @@
       "line": 10,
       "text": "| Automad | https://github.com/marcantondahmen/automad.git | 79c05a0a5a1b2a094e93b79f9e08e113c6acb768 / 2026-08-22 | Y | N (admin clicks \"Update\" in dashboard) | Y | https, TLS enforced (default cURL verify, no CURLOPT_SSL_VERIFYPEER override found) | N | none (no hash/sig check on downloaded zip) | server-supplied/unpinned (raw.githubusercontent.com content trusted outright) | `automad/src/server/System/Update.php:57` (DOWNLOAD_URL=github.com/…/archive/…zip), `:131` getArchive() → `Fetch::download()`, `:145` unpack() extracts zip directly over app files, no verification step; `automad/src/server/System/Fetch.php:64-89` (cURL, no SSL_VERIFYPEER disable). Also has a Composer-based \"Package Manager\" (`PackageManagerController.php`) for 3rd-party packages/repos — same trust class (Composer/Packagist over HTTPS, no independent signature). |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-AF7.md",
+      "source_line": 10,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/marcantondahmen/automad.git"
+        },
+        {
+          "label": "commit/date",
+          "value": "79c05a0a5a1b2a094e93b79f9e08e113c6acb768 / 2026-08-22"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "N (admin clicks \"Update\" in dashboard)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y"
+        },
+        {
+          "label": "transport",
+          "value": "https, TLS enforced (default cURL verify, no CURLOPT_SSL_VERIFYPEER override found)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none (no hash/sig check on downloaded zip)"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "server-supplied/unpinned (raw.githubusercontent.com content trusted outright)"
+        },
+        {
+          "label": "evidence",
+          "value": "`automad/src/server/System/Update.php:57` (DOWNLOAD_URL=github.com/…/archive/…zip), `:131` getArchive() → `Fetch::download()`, `:145` unpack() extracts zip directly over app files, no verification step; `automad/src/server/System/Fetch.php:64-89` (cURL, no SSL_VERIFYPEER disable). Also has a Composer-based \"Package Manager\" (`PackageManagerController.php`) for 3rd-party packages/repos — same trust class (Composer/Packagist over HTTPS, no independent signature)."
+        }
+      ]
+    }
   ]
 }

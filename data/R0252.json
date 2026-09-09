@@ -46,5 +46,99 @@
       "line": 4,
       "text": "| Suwayomi-Server (extension/source channel) | https://github.com/Suwayomi/Suwayomi-Server | Kotlin/JVM server; extensions are Tachiyomi-format `.apk`/`.jar` plugins downloaded from user-added repo indexes | Y (content-as-code: extensions contain compiled JVM `Source`/`SourceFactory` classes that are dex2jar'd (if APK) and loaded into the running JVM via `URLClassLoader`, i.e. arbitrary code execution inside the server process) | N (no server-side scheduled task found for auto-installing/auto-updating extensions; install/update is invoked per-extension via the `ExtensionController`/GraphQL API, i.e. must be triggered by a client/user action; only grep hit for extension callers outside Extension.kt/ExtensionsList.kt is the controller) | Y — `installExtension`/`updateExtension` download the `.apk` or `.jar` over the network and immediately dex2jar + `URLClassLoader.loadClass` + instantiate the extension's main class inside the running server process | https/http depends on the repo URL the operator/user configured (no scheme enforcement found in the reviewed code); GitHub-hosted official repos use https | N (no manifest signing found for the repo index JSON) | none — the code computes an APK signing-certificate SHA-256 (`PackageTools.getSignatureHash`) but this value is never read/compared anywhere else in the codebase (confirmed via repo-wide grep — only defined, never called), i.e. it is dead code and provides no actual trust check; extensions are installed purely based on successfully parsing the AndroidManifest/APK and matching the expected Tachiyomi extension metadata fields | N/A — `getSignatureHash()` exists but its result is not pinned against any trusted/expected value anywhere in the codebase | server/src/main/kotlin/suwayomi/tachidesk/manga/impl/extension/Extension.kt:88-95 (`fetchExtensionFile`/`downloadExtension`, plain GET), :97-133 (`installExtension` dispatches on jarUrl/apkUrl), :212-220 (APK path: `dex2jar`, `extractAssetsFromApk`), :357-487 (`installExtension` core: loads jar via `PackageTools.loadExtensionSources`, no signature check gating install); server/src/main/kotlin/suwayomi/tachidesk/manga/impl/util/PackageTools.kt:145-152 (`getSignatureHash` computed but — confirmed by grep — never called elsewhere in the repo) |"
     }
+  ],
+  "structured_evidence": [
+    {
+      "source_file": "batch-P2.md",
+      "source_line": 3,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/Suwayomi/Suwayomi-Server"
+        },
+        {
+          "label": "framework",
+          "value": "Kotlin/JVM server (Javalin), self-hosted; separate Suwayomi-WebUI/VUI/preview frontend repos"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y"
+        },
+        {
+          "label": "auto",
+          "value": "Y (cron task `webUI-update-checker` scheduled whenever `webUIUpdateCheckInterval` > 0, which is the default; also runs a check on every server startup in `setupWebUI()`/`checkForUpdate()`)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y (downloads a zip of the served frontend from GitHub Releases, deletes the old `webUIRoot`, extracts the new one, and serves it to browser clients — an unattended content-replacement pipeline, not a native-code auto-exec)"
+        },
+        {
+          "label": "transport",
+          "value": "https (`api.github.com`, `github.com/.../releases/download/...`, `raw.githubusercontent.com`)"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N"
+        },
+        {
+          "label": "payload_verification",
+          "value": "hash-from-manifest (MD5) — but the MD5 is fetched via `GET \"{releaseDownloadUrl}/md5sum\"`, i.e. from the exact same GitHub release/host serving the zip, so it provides no protection against a compromised release or MITM of that host; it is not an independently-signed manifest"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A — no cryptographic signature; MD5 checksum sourced from the same untrusted release asset location as the payload"
+        },
+        {
+          "label": "evidence",
+          "value": "server/src/main/kotlin/suwayomi/tachidesk/server/util/WebInterfaceManager.kt:247-260 (`isAutoUpdateEnabled`, `scheduleWebUIUpdateCheck` sets up cron `\"0 */${updateInterval.inWholeHours} * * *\"`); :356-373 (startup auto-check + auto-adopt of newer bundled version); :475-494 (`checkForUpdate` → `downloadVersion`); :729-767 (`downloadVersion`: HTTP download, delete+extract into `webUIRoot`, no signature check); :519-543 (`isLocalWebUIValid` compares local MD5 to `fetchMD5SumFor`); :583-598 (`fetchMD5SumFor` GETs `\"${getDownloadUrlFor(flavor,version)}/md5sum\"` — same host/release as the zip); server/server-config/src/main/kotlin/suwayomi/tachidesk/graphql/types/WebUITypes.kt:30-32,38-40 (all URLs are `https://github.com/...`, `https://raw.githubusercontent.com/...`, `https://api.github.com/...`)"
+        }
+      ]
+    },
+    {
+      "source_file": "batch-P2.md",
+      "source_line": 4,
+      "fields": [
+        {
+          "label": "repo",
+          "value": "https://github.com/Suwayomi/Suwayomi-Server"
+        },
+        {
+          "label": "framework",
+          "value": "Kotlin/JVM server; extensions are Tachiyomi-format `.apk`/`.jar` plugins downloaded from user-added repo indexes"
+        },
+        {
+          "label": "has_updater",
+          "value": "Y (content-as-code: extensions contain compiled JVM `Source`/`SourceFactory` classes that are dex2jar'd (if APK) and loaded into the running JVM via `URLClassLoader`, i.e. arbitrary code execution inside the server process)"
+        },
+        {
+          "label": "auto",
+          "value": "N (no server-side scheduled task found for auto-installing/auto-updating extensions; install/update is invoked per-extension via the `ExtensionController`/GraphQL API, i.e. must be triggered by a client/user action; only grep hit for extension callers outside Extension.kt/ExtensionsList.kt is the controller)"
+        },
+        {
+          "label": "downloads_and_executes",
+          "value": "Y — `installExtension`/`updateExtension` download the `.apk` or `.jar` over the network and immediately dex2jar + `URLClassLoader.loadClass` + instantiate the extension's main class inside the running server process"
+        },
+        {
+          "label": "transport",
+          "value": "https/http depends on the repo URL the operator/user configured (no scheme enforcement found in the reviewed code); GitHub-hosted official repos use https"
+        },
+        {
+          "label": "manifest_signed",
+          "value": "N (no manifest signing found for the repo index JSON)"
+        },
+        {
+          "label": "payload_verification",
+          "value": "none — the code computes an APK signing-certificate SHA-256 (`PackageTools.getSignatureHash`) but this value is never read/compared anywhere else in the codebase (confirmed via repo-wide grep — only defined, never called), i.e. it is dead code and provides no actual trust check; extensions are installed purely based on successfully parsing the AndroidManifest/APK and matching the expected Tachiyomi extension metadata fields"
+        },
+        {
+          "label": "verifying_key_source",
+          "value": "N/A — `getSignatureHash()` exists but its result is not pinned against any trusted/expected value anywhere in the codebase"
+        },
+        {
+          "label": "evidence",
+          "value": "server/src/main/kotlin/suwayomi/tachidesk/manga/impl/extension/Extension.kt:88-95 (`fetchExtensionFile`/`downloadExtension`, plain GET), :97-133 (`installExtension` dispatches on jarUrl/apkUrl), :212-220 (APK path: `dex2jar`, `extractAssetsFromApk`), :357-487 (`installExtension` core: loads jar via `PackageTools.loadExtensionSources`, no signature check gating install); server/src/main/kotlin/suwayomi/tachidesk/manga/impl/util/PackageTools.kt:145-152 (`getSignatureHash` computed but — confirmed by grep — never called elsewhere in the repo)"
+        }
+      ]
+    }
   ]
 }
