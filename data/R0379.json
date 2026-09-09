@@ -1,0 +1,23 @@
+{
+  "id": "R0379",
+  "name": "JOSM",
+  "category": "OSM editor",
+  "historical_tier": "C",
+  "project_url": "https://github.com/openstreetmap/josm",
+  "channel": "plugin",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "JOSM’s reviewed plugin component checks JAR readability. That structural check does not establish publisher authentication or classify the core application updater.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study checkout; the cited evidence is limited to plugin downloads and does not establish the core application updater's notification behavior or release signing."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/openstreetmap/josm",
+      "commit": "1b1d53f148d4f978c8df9b0554f84b610749a15b"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

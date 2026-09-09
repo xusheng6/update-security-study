@@ -1,0 +1,23 @@
+{
+  "id": "R0552",
+  "name": "Matomo",
+  "category": "Web analytics",
+  "historical_tier": "C",
+  "project_url": "https://github.com/matomo-org/matomo",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Core update downloads and decompresses the archive, then performs file/path validation; no cryptographic signature is shown.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/matomo-org/matomo",
+      "commit": "1899a06743eafab7aaeb1f0a946355528b22b4a2"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

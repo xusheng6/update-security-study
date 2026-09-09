@@ -1,0 +1,23 @@
+{
+  "id": "R0408",
+  "name": "Wick Editor",
+  "category": "Animation tool (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/Wicklets/wick-editor",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the reviewed Wick Editor snapshot, the Electron main process calls electron-updater checkForUpdatesAndNotify at ready. Its builder config includes an afterSign notarization hook and hardened macOS settings; the checked Windows block specifies a target icon but does not establish released artifact signing or updater verification.",
+  "limitations": [
+    "New default-branch snapshot rather than original study checkout; release artifacts, generated manifests, Windows signing, and external electron-updater enforcement remain unverified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Wicklets/wick-editor",
+      "commit": "f34f0d9512d7165e74c1910ea1aba9173ab8dec2"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

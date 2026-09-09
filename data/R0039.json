@@ -1,0 +1,25 @@
+{
+  "id": "R0039",
+  "name": "HeidiSQL",
+  "category": "DB client (Delphi)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/HeidiSQL/HeidiSQL",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The source directly supports a narrow primary C observation: the update path uses HTTPS/application download code as configured elsewhere, but the inspected payload checks are existence and a minimum-size threshold; no hash or signature check appears before the updater copies the downloaded executable over the application.",
+  "limitations": [
+    "Newly retrieved snapshot at the recorded commit, not historical release verification.",
+    "The cited source does not establish the URL scheme/TLS policy inside THttpDownload or the release metadata source.",
+    "The embedded updater is a native executable represented by a retained binary plus source; only the Pascal control flow was inspected."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/HeidiSQL/HeidiSQL",
+      "commit": "25085163d04cd4e0494feefd3f77b78957135369"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

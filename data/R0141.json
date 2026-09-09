@@ -1,0 +1,25 @@
+{
+  "id": "R0141",
+  "name": "SimpleX Chat",
+  "category": "Secure messenger",
+  "historical_tier": "C",
+  "project_url": "https://github.com/simplex-chat/simplex-chat",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "SimpleX Chat’s desktop updater honors the update-channel preference and schedules delayed checks. The original installer and Gatekeeper claims remain unresolved from this source review.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+    "Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/simplex-chat/simplex-chat",
+      "commit": "4df04bdb3ff94059734ad2da7d2766de6dba2cc7"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

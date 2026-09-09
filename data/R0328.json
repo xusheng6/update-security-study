@@ -1,0 +1,26 @@
+{
+  "id": "R0328",
+  "name": "Tabby",
+  "category": "Terminal (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/Eugeny/tabby",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Tabby integrates electron-updater and platform packaging controls. The retained evidence does not establish complete runtime signature enforcement or released-artifact signing provenance.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout.",
+    "Source does not provide released artifact signatures, publisher identity, or a complete framework/OS verification trace.",
+    "Observation is limited to the primary electron-updater channel.",
+    "Newly retrieved default-branch snapshot, not the original study checkout. Source does not provide released artifact signatures, publisher identity, or a complete framework/OS verification trace. Observation is limited to the primary electron-updater channel."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Eugeny/tabby",
+      "commit": "14e2d60b9b6dee84a53c37f05eefeb803787de04"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

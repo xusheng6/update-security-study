@@ -1,0 +1,23 @@
+{
+  "id": "R0067",
+  "name": "Beekeeper Studio",
+  "category": "DB client",
+  "historical_tier": "B",
+  "project_url": "https://github.com/beekeeper-studio/beekeeper-studio",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Beekeeper Studio integrates electron-updater with automatic downloading disabled and an explicit download action. Dependency hash enforcement and macOS signing remain unestablished by this application-source review.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not original study checkout; framework internals and release-specific signing remain unverified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/beekeeper-studio/beekeeper-studio",
+      "commit": "1986478ccc6505a9e809c5d526fc9236083648f0"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

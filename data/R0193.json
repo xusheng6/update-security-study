@@ -1,0 +1,23 @@
+{
+  "id": "R0193",
+  "name": "MyMonero",
+  "category": "Monero wallet",
+  "historical_tier": "B",
+  "project_url": "https://github.com/mymonero/mymonero-app-js",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the retrieved MyMonero checkout, packaged non-Linux builds use electron-updater. The controller starts with download and install-on-quit disabled, checks for updates automatically, prompts before downloading when automatic download is off, and prompts before quitting to install. The build configuration names a Windows certificate subject and invokes a macOS notarization hook.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot rather than the original study release; packaging hooks/configuration do not prove that a particular published artifact was successfully signed or notarized, and electron-updater's internal enforcement is not reimplemented here."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/mymonero/mymonero-app-js",
+      "commit": "5c7455d30e4e20150962f5f74efd83477962a05e"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

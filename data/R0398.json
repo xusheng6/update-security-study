@@ -1,0 +1,23 @@
+{
+  "id": "R0398",
+  "name": "Betaflight Configurator",
+  "category": "Flight-controller tool",
+  "historical_tier": "C",
+  "project_url": "https://github.com/betaflight/betaflight-configurator",
+  "channel": "firmware",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Betaflight Configurator’s firmware workflow checks programmed data by comparing read-back bytes with the input. This is a firmware transfer-integrity observation, not independent publisher authentication or a primary-application update classification.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study checkout; this review did not establish the source and verification policy of remote firmware providers or the application's separate update behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/betaflight/betaflight-configurator",
+      "commit": "01d3418fe8c03e4cccbcc8b8dd58e0ab64b44295"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

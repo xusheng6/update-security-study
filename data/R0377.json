@@ -1,0 +1,23 @@
+{
+  "id": "R0377",
+  "name": "NAPS2",
+  "category": "Document scanner",
+  "historical_tier": "A",
+  "project_url": "https://github.com/cyanfish/naps2",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "NAPS2’s inspected updater requires SHA-256 metadata and an RSA signature verified with its bundled public certificate. The historical release and opt-in scheduling claim remain unestablished.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release; opt-in scheduling, release artifact provenance, and independent certificate publication were not verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/cyanfish/naps2",
+      "commit": "b43aa68f07d5e4c53ccc0d44950af1c00d17346d"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

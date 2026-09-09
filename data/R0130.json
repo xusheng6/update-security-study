@@ -1,0 +1,25 @@
+{
+  "id": "R0130",
+  "name": "VacuumTube",
+  "category": "YouTube app",
+  "historical_tier": "C",
+  "project_url": "https://github.com/shy1132/VacuumTube",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "VacuumTube uses electron-updater's checkForUpdatesAndNotify after startup and configures the shy1132/VacuumTube GitHub publisher for Windows and macOS artifacts. The reviewed package configuration has no explicit code-signing or notarization setting; electron-updater's SHA-512 behavior is dependency-provided and not independently established here.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; release artifacts and builder environment are not audited.",
+    "electron-updater internals and generated latest.yml/SHA-512 metadata were not part of review, so SHA-512 enforcement remains dependency-level evidence only.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; release artifacts and builder environment are not audited.; electron-updater internals and generated latest.yml/SHA-512 metadata were not part of review, so SHA-512 enforcement remains dependency-level evidence only."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/shy1132/VacuumTube",
+      "commit": "0365dead79d295294855f3dcc2f71702c0f8c427"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

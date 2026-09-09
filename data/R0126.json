@@ -1,0 +1,23 @@
+{
+  "id": "R0126",
+  "name": "XDM (Xtreme Download Manager)",
+  "category": "Download manager",
+  "historical_tier": "D",
+  "project_url": "https://github.com/subhra74/xdm",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The shared HTTP clients disable certificate validation globally, and the component updater handles the yt-dlp release in the application directory. The retained source supports this component updater channel; the app-level browser-only update is separate.",
+  "limitations": [
+    "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/subhra74/xdm",
+      "commit": "1ca5a25aae007826c859c81bea494e7c102e1242"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

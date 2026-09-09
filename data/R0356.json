@@ -1,0 +1,24 @@
+{
+  "id": "R0356",
+  "name": "Invoice Ninja",
+  "category": "Invoicing",
+  "historical_tier": "C",
+  "project_url": "https://github.com/invoiceninja/invoiceninja",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Invoice Ninja copies the release archive from its HTTPS URL and extracts it over the live app without a cryptographic check.",
+  "limitations": [
+    "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/invoiceninja/invoiceninja",
+      "commit": "dcc27c94dc0c463341676a0c19b89d927c3d1287"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

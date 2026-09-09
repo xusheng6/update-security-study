@@ -1,0 +1,24 @@
+{
+  "id": "R0343",
+  "name": "OpenTabletDriver",
+  "category": "Tablet driver",
+  "historical_tier": "C",
+  "project_url": "https://github.com/OpenTabletDriver/OpenTabletDriver",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Windows updater extracts the downloaded archive and relaunches the daemon with no hash/signature verification.",
+  "limitations": [
+    "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/OpenTabletDriver/OpenTabletDriver",
+      "commit": "fdeaa7b0c6d6f5260f511f19fb693ed33524af4e"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

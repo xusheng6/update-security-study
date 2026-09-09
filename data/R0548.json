@@ -1,0 +1,23 @@
+{
+  "id": "R0548",
+  "name": "The Powder Toy",
+  "category": "Physics sandbox game",
+  "historical_tier": "C",
+  "project_url": "https://github.com/The-Powder-Toy/The-Powder-Toy",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The updater accepts a format/magic check and decompresses the payload before handing it to Platform::UpdateStart; no cryptographic signature is checked.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/The-Powder-Toy/The-Powder-Toy",
+      "commit": "b31f4462bc7d217159b83859a35405db9b640455"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,25 @@
+{
+  "id": "R0098",
+  "name": "ONLYOFFICE (macOS)",
+  "category": "Office suite",
+  "historical_tier": "A",
+  "project_url": "https://github.com/ONLYOFFICE/desktop-apps",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "ONLYOFFICE’s inspected macOS desktop-apps target embeds a Sparkle EdDSA public key and wires its update menu to SUUpdater. The source supports this target’s configured trust key; shipped artifacts, other architectures and framework enforcement remain separate evidence requirements.",
+  "limitations": [
+    "Pinned source or archive snapshot, not independent verification of the original release artifact.",
+    "Configuration and integration observations do not certify every framework control or platform.",
+    "Pinned source or archive snapshot, not independent verification of the original release artifact.; Configuration and integration observations do not certify every framework control or platform."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/ONLYOFFICE/desktop-apps",
+      "commit": "8f452c7f703b795dcc09012ba6517df4ca47f9bc"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

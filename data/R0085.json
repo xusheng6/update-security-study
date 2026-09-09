@@ -1,0 +1,25 @@
+{
+  "id": "R0085",
+  "name": "BiglyBT",
+  "category": "Torrent (Azureus)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/BiglySoftware/BiglyBT",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "BiglyBT has update-checker infrastructure, but the recovered source review does not substantiate the claimed pinned RSA verification boundary for retrieved jars.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.",
+    "The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.; The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/BiglySoftware/BiglyBT",
+      "commit": "0245a66751d66588b83f080f0a8c99b5f93e7b51"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

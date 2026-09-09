@@ -1,0 +1,26 @@
+{
+  "id": "R0318",
+  "name": "WoeUSB-ng",
+  "category": "Windows USB creator",
+  "historical_tier": "C",
+  "project_url": "https://github.com/WoeUSB/WoeUSB-ng",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The inspected WoeUSB-ng component concerns boot-image acquisition rather than updates to WoeUSB-ng itself. Keep that content channel separate; its artifact-authentication policy remains unestablished.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout.",
+    "The evidence is limited to the UEFI:NTFS support routine and does not characterize every WoeUSB-ng input or bootloader path.",
+    "The source observation does not independently establish the security impact or historical release behavior.",
+    "Newly retrieved default-branch snapshot, not the original study checkout. The evidence is limited to the UEFI:NTFS support routine and does not characterize every WoeUSB-ng input or bootloader path. The source observation does not independently establish the security impact or historical release behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/WoeUSB/WoeUSB-ng",
+      "commit": "cc52ffc6aedad12540c2315c9101e4a4b919d4be"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0517",
+  "name": "Medusa",
+  "category": "TV automation",
+  "historical_tier": "C",
+  "project_url": "https://github.com/pymedusa/Medusa",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Medusa downloads a GitHub tarball, performs only tar-format validation, then extracts and overwrites application files without a digest/signature.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/pymedusa/Medusa",
+      "commit": "bbb1c9271692170c00eed3d5c573425bf6c91050"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

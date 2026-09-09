@@ -1,0 +1,23 @@
+{
+  "id": "R0253",
+  "name": "Houdoku",
+  "category": "Manga reader",
+  "historical_tier": "C",
+  "project_url": "https://github.com/xgi/houdoku",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The retained updater uses electron-updater’s HTTPS GitHub provider, downloads only after the user accepts, and relies on the release manifest SHA-512 without a separately signed manifest; this supports a narrow C classification.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot rather than the original study checkout; it does not certify current releases."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/xgi/houdoku",
+      "commit": "a0c69348d5d3cf018bb6d127de86c63434913d14"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0199",
+  "name": "Karabiner-Elements",
+  "category": "Keyboard tool (mac)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/pqrs-org/Karabiner-Elements",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the retrieved Karabiner-Elements checkout, the updater uses Sparkle with an appcast URL and a configured SUPublicEDKey. The updater-bundle plist disables Sparkle automatic checks and automatic updates, while the application exposes explicit stable/beta checks and a configurable background-check path.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not historical release re-verification; published bundle signing, feed contents, and Sparkle's internal signature enforcement remain outside this source-only review."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/pqrs-org/Karabiner-Elements",
+      "commit": "9312593e1a3bf72b94c63c524ebabe2637442e8a"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

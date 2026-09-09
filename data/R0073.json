@@ -1,0 +1,25 @@
+{
+  "id": "R0073",
+  "name": "Brave",
+  "category": "Browser",
+  "historical_tier": "A",
+  "project_url": "https://github.com/brave/brave-core",
+  "channel": "mixed",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Brave Core pins an ECDSA CUP key in its update-client integration; on macOS it integrates Sparkle with automatic checks/retrieves, while the current source describes Omaha 4 as a macOS migration and leaves the claimed Windows path and Sparkle EdDSA enforcement unestablished.",
+  "limitations": [
+    "Newly retrieved Brave Core default-branch snapshot, not the original study checkout; Sparkle's external framework verifier and platform-specific release packaging were not inspected.",
+    "The Brave Core request-sender file embeds the CUP key and includes upstream implementation; this source read does not independently show the delegated proof-verification routine.",
+    "Newly retrieved Brave Core default-branch snapshot, not the original study checkout; Sparkle's external framework verifier and platform-specific release packaging were not inspected.; The Brave Core request-sender file embeds the CUP key and includes upstream implementation; this source read does not independently show the delegated proof-verification routine."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/brave/brave-core",
+      "commit": "8e68e02d919d6b8898903cf1fc8263938edbf432"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,24 @@
+{
+  "id": "R0587",
+  "name": "bangle-io",
+  "category": "Notes app (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/bangle-io/bangle-io",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "B",
+  "description": "Targeted retained-source read supports the narrow primary updater classification: Bangle's desktop updater disables automatic download/install-on-quit, uses a GitHub feed, and prompts for download and installation.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in configuration.",
+    "Where electron-updater/Squirrel/install4j performs final verification, the external framework implementation is not vendored here."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/bangle-io/bangle-io",
+      "commit": "b5968cb09f6504813867f8099fbca6eb6e521565"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

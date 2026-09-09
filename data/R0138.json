@@ -1,0 +1,25 @@
+{
+  "id": "R0138",
+  "name": "ES-DE",
+  "category": "Emulator frontend",
+  "historical_tier": "C",
+  "project_url": "https://gitlab.com/es-de/emulationstation-de",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "ES-DE’s application updater compares retrieved content MD5 with its package metadata and rejects a mismatch. The checksum observation does not establish an independently authenticated manifest.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+    "Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified."
+  ],
+  "sources": [
+    {
+      "url": "https://gitlab.com/es-de/emulationstation-de",
+      "commit": "7245736f46d889e3e589d1cc2b2a47cbbcc8d436"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

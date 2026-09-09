@@ -1,0 +1,25 @@
+{
+  "id": "R0122",
+  "name": "Tor Browser",
+  "category": "Browser",
+  "historical_tier": "A",
+  "project_url": "https://gitlab.torproject.org/tpo/applications/tor-browser",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The recovered Tor Browser updater inherits MAR verification through compiled primary and secondary certificate data when signature verification is enabled, and rejects a MAR whose embedded channel does not match the configured product channel. This snapshot does not establish a Tor-specific marsigner.der or prove that the accepted certificates differ from stock Firefox's, so the stronger project-specific claim remains unresolved.",
+  "limitations": [
+    "Partial newly retrieved Tor Project checkout with toolkit updater files materialized, not the original study checkout or a built Tor Browser binary.",
+    "Generated certificate headers, release channel configuration, and Tor distribution signing assets needed to prove the Tor-specific trust root are absent from this snapshot.",
+    "Partial newly retrieved Tor Project checkout with toolkit updater files materialized, not the original study checkout or a built Tor Browser binary.; Generated certificate headers, release channel configuration, and Tor distribution signing assets needed to prove the Tor-specific trust root are absent from this snapshot."
+  ],
+  "sources": [
+    {
+      "url": "https://gitlab.torproject.org/tpo/applications/tor-browser",
+      "commit": "c76b89e2fd0e719eb012d5dccb507338bb122537"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

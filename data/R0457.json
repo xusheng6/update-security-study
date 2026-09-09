@@ -1,0 +1,25 @@
+{
+  "id": "R0457",
+  "name": "MaryTTS",
+  "category": "Text-to-speech (Java)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/marytts/marytts",
+  "channel": "package-manager",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "MaryTTS compares component archive MD5 values with its XML component descriptions. This is a content-integrity control; independent authentication of those descriptions is not established by the retained review.",
+  "limitations": [
+    "New default-branch snapshot, not the historical MaryTTS release under study.",
+    "The XML publisher/release-side authentication and any package-loading behavior after download were not independently audited; MD5 equality alone is not treated as publisher authentication.",
+    "New default-branch snapshot, not the historical MaryTTS release under study. The XML publisher/release-side authentication and any package-loading behavior after download were not independently audited; MD5 equality alone is not treated as publisher authentication."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/marytts/marytts",
+      "commit": "f3389a195015e28804cac44411489e87c8741f12"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

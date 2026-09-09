@@ -1,0 +1,24 @@
+{
+  "id": "R0570",
+  "name": "Mudlet",
+  "category": "MUD client",
+  "historical_tier": "C",
+  "project_url": "https://github.com/Mudlet/Mudlet",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports this narrow assessment: The primary updater calls downloadRelease with checksum enforcement enabled; the checksum is obtained from the GitHub release channel.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Mudlet/Mudlet",
+      "commit": "a7cf7a2dbb929dd8b310491e38c86c4d446fec7d"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

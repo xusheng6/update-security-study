@@ -1,0 +1,24 @@
+{
+  "id": "R0447",
+  "name": "Steam ROM Manager",
+  "category": "ROM launcher (Electron)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/SteamGridDB/steam-rom-manager",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The Electron main process configures electron-updater, disables automatic download, checks for updates after the window is ready, and only downloads/installs through explicit IPC actions. This supports a primary updater using the framework channel and manifest hash behavior recorded for the app, while the source does not establish a pinned signing key.",
+  "limitations": [
+    "electron-updater framework internals and released artifact signing are not contained in this checkout.",
+    "Snapshot is a newly retrieved default branch, not the historical study revision."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/SteamGridDB/steam-rom-manager",
+      "commit": "bd66e5f4ef1eb0b4855bbd216063f547f1468368"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

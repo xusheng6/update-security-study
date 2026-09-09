@@ -1,0 +1,19 @@
+{
+  "id": "R0201",
+  "name": "ClashX",
+  "category": "Proxy client (mac)",
+  "historical_tier": "A",
+  "project_url": "",
+  "channel": "unresolved",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Withdraw the original security classification. A matching historical ClashX source snapshot is not retained; a fork is not interchangeable evidence.",
+  "limitations": [
+    "No matching retained checkout or verified archive is available; a named fork was not treated as evidence for the original product.",
+    "A matching historical ClashX source snapshot is not retained; a fork is not interchangeable evidence. Reinstating the original classification requires that missing evidence."
+  ],
+  "sources": [],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

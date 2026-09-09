@@ -1,0 +1,23 @@
+{
+  "id": "R0209",
+  "name": "OWASP ZAP",
+  "category": "Web security scanner",
+  "historical_tier": "C",
+  "project_url": "https://github.com/zaproxy/zaproxy",
+  "channel": "plugin",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the reviewed ZAP add-on path, each add-on entry supplies a URL and an algorithm-qualified hash through ZapVersions.xml; the downloader computes that digest and only marks a matching file validated before installation. This is an integrity check tied to the retrieved manifest, not evidence that the manifest or its transport is cryptographically signed.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release re-verification; the reviewed source does not establish authentication or signing of ZapVersions.xml, and external release artifacts were not inspected."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/zaproxy/zaproxy",
+      "commit": "9d1970a436b1b189bfb588fc88864c80d9baf6a5"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

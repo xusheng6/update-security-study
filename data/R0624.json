@@ -1,0 +1,25 @@
+{
+  "id": "R0624",
+  "name": "UVtools",
+  "category": "Resin-print tool",
+  "historical_tier": "C",
+  "project_url": "https://github.com/sn4k3/UVtools",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The retained UVtools UI integrates the external Updatum package, checks for updates at startup when configured, and sets macOS code-signing validation in its manager configuration. Payload verification and released-artifact behavior remain delegated to the unvendored dependency and release pipeline.",
+  "limitations": [
+    "Newly recovered default-branch snapshot, not historical release re-verification.",
+    "Updatum package source, generated release metadata, non-macOS validation, and released artifact provenance were not audited.",
+    "Newly recovered default-branch snapshot, not historical release re-verification. Updatum package source, generated release metadata, non-macOS validation, and released artifact provenance were not audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/sn4k3/UVtools",
+      "commit": "ae341e6909ef3358d23c6559fa6527b7850ac737"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0513",
+  "name": "BALLView",
+  "category": "Molecular viewer",
+  "historical_tier": "C",
+  "project_url": "https://github.com/BALL-Project/ball",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Windows Sparkle setup registers the appcast URL and initializes WinSparkle, but no public-key registration call appears in this control flow.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/BALL-Project/ball",
+      "commit": "54e7895fc6b64e50a71cadc2a18b915755f17bbf"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

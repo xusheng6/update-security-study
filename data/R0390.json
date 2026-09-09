@@ -1,0 +1,24 @@
+{
+  "id": "R0390",
+  "name": "Stirling-PDF",
+  "category": "PDF toolkit (Tauri)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/Stirling-Tools/Stirling-PDF",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "A",
+  "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ.",
+    "The evidence is for the Tauri desktop editor; the server distribution is outside this updater scope."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Stirling-Tools/Stirling-PDF",
+      "commit": "f8bb81500ea7f0bdf9f77d8cad932f4af4c5afe8"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

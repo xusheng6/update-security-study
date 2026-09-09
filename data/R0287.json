@@ -1,0 +1,25 @@
+{
+  "id": "R0287",
+  "name": "amiberry",
+  "category": "Emulator (Amiga)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/BlitterStudio/amiberry",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Amiberry’s updater supports comparison with SHA-256 metadata supplied by a release. The check is conditional on an expected digest being available; independent publisher authentication and release-specific policy remain unresolved.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study release.",
+    "The cited source establishes a checksum control only; it does not establish publisher signatures or the complete released artifact channel.",
+    "Newly retrieved default-branch snapshot, not the original study release. The cited source establishes a checksum control only; it does not establish publisher signatures or the complete released artifact channel."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/BlitterStudio/amiberry",
+      "commit": "cf3654469f360d95da84cfbb7d6f92eb5ced9f40"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

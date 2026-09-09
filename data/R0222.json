@@ -1,0 +1,23 @@
+{
+  "id": "R0222",
+  "name": "Cherry Studio",
+  "category": "LLM client",
+  "historical_tier": "C",
+  "project_url": "https://github.com/CherryHQ/cherry-studio",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Cherry Studio’s updater reads its automatic-download preference and disables installation on quit. The original Windows code-signature configuration claim remains unresolved.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release re-verification; the full updater service/configuration and electron-builder generated artifacts were not sufficient here to establish the Windows signature setting or framework enforcement."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/CherryHQ/cherry-studio",
+      "commit": "6beb5e1b7e952915f649e5e09b940e08956da3b1"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

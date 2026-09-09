@@ -1,0 +1,25 @@
+{
+  "id": "R0027",
+  "name": "MuseScore (MuseSounds)",
+  "category": "Notation",
+  "historical_tier": "C",
+  "project_url": "https://github.com/musescore/MuseScore",
+  "channel": "unresolved",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Withdraw the original security classification for this record. The retained MuseScore checkout does not provide an auditable MuseSounds update implementation in the inspected path: the available service is a NotSupported stub. The missing implementation prevents a source-supported conclusion about artifact verification or the core updater. The retained evidence is insufficient to support the original full claim.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
+    "The actual MuseSounds distribution/service implementation and the claimed core notify-only path were not present in the inspected source location.",
+    "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/musescore/MuseScore",
+      "commit": "7991526152de746dcdcbbee130d5ab5f360f198e"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

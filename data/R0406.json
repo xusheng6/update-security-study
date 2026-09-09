@@ -1,0 +1,23 @@
+{
+  "id": "R0406",
+  "name": "Nault",
+  "category": "Nano wallet (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/Nault/Nault",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Nault integrates electron-updater with startup checks and a user prompt. Generated manifest integrity and release code-signing policy remain unestablished.",
+  "limitations": [
+    "New default-branch snapshot rather than original study checkout; generated update.yml/latest metadata, released artifacts, and OS publisher signatures were not independently audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Nault/Nault",
+      "commit": "7a6c13639808e58e3951097f368b7c19f15c59b0"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

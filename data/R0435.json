@@ -1,0 +1,24 @@
+{
+  "id": "R0435",
+  "name": "upterm",
+  "category": "Terminal sharing (CLI)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/owenthereal/upterm",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The inspected upterm application upgrade command delegates installation to go-update. The dependency authentication policy was not reviewed, so the original zero-verification classification is unsupported.",
+  "limitations": [
+    "Newly retrieved default-branch source, not the original released binary. go-update dependency implementation and release-side signatures/checksums were not reviewed; the original zero-verification assertion is not established.",
+    "This is newly retrieved default-branch source rather than the original released binary; go-update behavior and release-side signatures or checksums were not reviewed."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/owenthereal/upterm",
+      "commit": "3f56c8d0d18725c411880ee4d16556462f3fb947"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

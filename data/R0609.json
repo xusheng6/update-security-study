@@ -1,0 +1,24 @@
+{
+  "id": "R0609",
+  "name": "Chatty",
+  "category": "Twitch chat client (Java)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/chatty/chatty",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports this narrow assessment: Downloaded installer is launched with ProcessBuilder; published checksums are for manual comparison and are not computed by this path.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/chatty/chatty",
+      "commit": "48f0c9e75f91b57c440ef864d21ae09a0cf7737c"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

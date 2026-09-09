@@ -1,0 +1,23 @@
+{
+  "id": "R0270",
+  "name": "Nuclear",
+  "category": "Music streaming (Tauri)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/nukeop/nuclear",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "A",
+  "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/nukeop/nuclear",
+      "commit": "590383262b0c5a86dfcf9c9526d9760b0db7c2bb"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

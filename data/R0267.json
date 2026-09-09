@@ -1,0 +1,23 @@
+{
+  "id": "R0267",
+  "name": "Raven Reader",
+  "category": "RSS reader (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/hello-efficiency-inc/raven-reader",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the reviewed Raven Reader snapshot, the production main process calls electron-updater's checkForUpdatesAndNotify and prompts before quitAndInstall after an update is downloaded. The available source does not independently establish the claimed notarization, hardened-runtime, or release-signing controls.",
+  "limitations": [
+    "New default-branch snapshot; repository status and historical release artifacts were not treated as evidence of the original release's signing configuration."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/hello-efficiency-inc/raven-reader",
+      "commit": "5e55819b3fd6e6149296c6d07202a259d6cb1f1a"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

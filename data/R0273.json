@@ -1,0 +1,23 @@
+{
+  "id": "R0273",
+  "name": "Ulauncher",
+  "category": "Launcher (Python)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/Ulauncher/Ulauncher",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Ulauncher has a separate extension-content channel that resolves compatible Git refs to commits. The reviewed source does not establish independent publisher authentication for that channel or a primary-application self-updater.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release re-verification; extension URL parsing for non-GitHub hosts, server-side ref integrity, caller-supplied runtime commands, and shipped marketplace behavior remain outside this review."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Ulauncher/Ulauncher",
+      "commit": "d9aa63577edb1f04c26a29ed2e26c94011c1f27b"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

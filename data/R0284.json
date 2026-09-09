@@ -1,0 +1,25 @@
+{
+  "id": "R0284",
+  "name": "Onivim 2",
+  "category": "Code editor",
+  "historical_tier": "B",
+  "project_url": "https://github.com/onivim/oni2",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The reviewed Onivim 2 snapshot wires Sparkle on macOS release builds and WinSparkle on Windows release builds, with native bindings for feed URLs and update checks; appcast key pinning and artifact verification remain unresolved in the reviewed project source.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study release.",
+    "Sparkle/WinSparkle native verifier code and any appcast public-key configuration are outside the cited project bindings.",
+    "Newly retrieved default-branch snapshot, not the original study release. Sparkle/WinSparkle native verifier code and any appcast public-key configuration are outside the cited project bindings."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/onivim/oni2",
+      "commit": "161a92c2226728b37cd9a6f554b7397f4beb3d5e"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

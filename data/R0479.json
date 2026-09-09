@@ -1,0 +1,25 @@
+{
+  "id": "R0479",
+  "name": "snap-store",
+  "category": "App store (Snap)",
+  "historical_tier": "B",
+  "project_url": "https://git.launchpad.net/snap-store",
+  "channel": "package-manager",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Withdraw the original security classification for this record. The Snap Store plugin delegates store operations to snapd and supplies optional snap authentication data; assertion verification and the absence of an application self-update path require the active snapd backend and package configuration. The retained evidence is insufficient to support the original full claim.",
+  "limitations": [
+    "Source-at-commit snapshot; not the original study checkout.",
+    "Assertion verification is delegated to snapd and its active keyring, outside this checkout; no complete self-update inventory was established.",
+    "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+  ],
+  "sources": [
+    {
+      "url": "https://git.launchpad.net/snap-store",
+      "commit": "78a06f78408f6e4a7213eaa6c9604c933664a522"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

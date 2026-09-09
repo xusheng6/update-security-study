@@ -1,0 +1,24 @@
+{
+  "id": "R0528",
+  "name": "gitify",
+  "category": "GitHub-notifications app (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/gitify-app/gitify",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "B",
+  "description": "Targeted retained-source read supports the narrow primary updater classification: Gitify performs initial and periodic electron-updater checks; its release configuration publishes through GitHub and uses OS code-signing/notarization configuration.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in configuration.",
+    "Where electron-updater/Squirrel/install4j performs final verification, the external framework implementation is not vendored here."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/gitify-app/gitify",
+      "commit": "01f215a408e5b52283acc66ac02d2a788d243a94"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

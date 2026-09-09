@@ -1,0 +1,25 @@
+{
+  "id": "R0079",
+  "name": "Proton Mail Bridge",
+  "category": "Mail",
+  "historical_tier": "A",
+  "project_url": "https://github.com/ProtonMail/proton-bridge",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Proton Mail Bridge’s updater verifies the version file and selected update package through a supplied OpenPGP key ring before installation; TLS pinning is a separate transport control.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.",
+    "The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.; The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/ProtonMail/proton-bridge",
+      "commit": "5bccf64dd5118bbb220c25e924a63d7e1243d70b"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

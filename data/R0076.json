@@ -1,0 +1,23 @@
+{
+  "id": "R0076",
+  "name": "Waterfox",
+  "category": "Browser",
+  "historical_tier": "A",
+  "project_url": "https://github.com/WaterfoxCo/Waterfox",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Waterfox's inspected updater verifies MAR signatures against compiled primary/secondary certificate data when MOZ_VERIFY_MAR_SIGNATURE is enabled and checks MAR channel/version metadata; historical Classic-branch differences remain unresolved.",
+  "limitations": [
+    "Newly retrieved Waterfox default-branch snapshot, not the original study checkout; historical Classic branch behavior and release-specific build flags were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/WaterfoxCo/Waterfox",
+      "commit": "fd6662f3abfe6161e88b1b9cb4c70a963bdb345a"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

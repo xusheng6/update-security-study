@@ -1,0 +1,23 @@
+{
+  "id": "R0114",
+  "name": "Syncthing-GTK",
+  "category": "Sync GUI",
+  "historical_tier": "C",
+  "project_url": "https://github.com/syncthing/syncthing-gtk",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Syncthing-GTK extracts the daemon archive and stages it executable without payload verification.",
+  "limitations": [
+    "Newly retrieved/recovered source snapshot; this is not historical source re-verification. Released artifact behavior and external framework enforcement remain unverified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/syncthing/syncthing-gtk",
+      "commit": "d5dd0854d2837ad088bb50c9da3af3012e9c4fb4"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

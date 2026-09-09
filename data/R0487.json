@@ -1,0 +1,25 @@
+{
+  "id": "R0487",
+  "name": "Urbit",
+  "category": "P2P OS",
+  "historical_tier": "C",
+  "project_url": "https://github.com/urbit/urbit",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Withdraw the original security classification for this record. Urbit’s retained Kiln generator accepts a source ship for desk selection; this snippet does not establish the claimed continuous OTA authentication or Azimuth trust root. The retained evidence is insufficient to support the original full claim.",
+  "limitations": [
+    "Source-at-commit evidence only; released implementation and runtime Ames/Azimuth trust controls were not audited.",
+    "A broader review of the peer-authentication and OTA boundary is required before retaining the original claim.",
+    "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/urbit/urbit",
+      "commit": "08026c84b29e9ba47b1764d109f5a646e1db7ff2"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

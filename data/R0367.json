@@ -1,0 +1,23 @@
+{
+  "id": "R0367",
+  "name": "Neovim",
+  "category": "Text editor",
+  "historical_tier": "C",
+  "project_url": "https://github.com/neovim/neovim",
+  "channel": "plugin",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Neovim’s vim.pack manages Git-based plugin sources. This is a plugin channel; neither a primary-application self-updater nor its full publisher-authentication policy is established by this evidence.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release; plugin behavior is distinct from core self-updating and no independent release-signing review was performed."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/neovim/neovim",
+      "commit": "6cbde6a95f2da043ef8cb66b7e51daedd3bacffb"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0357",
+  "name": "KTurtle",
+  "category": "Education (programming)",
+  "historical_tier": "C",
+  "project_url": "https://invent.kde.org/education/kturtle",
+  "channel": "plugin",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "KTurtle exposes a KNewStuff example-content channel using an HTTPS KDE provider. The retained evidence does not establish independent content authentication or a core application self-updater.",
+  "limitations": [
+    "The record's unauthenticated-provider and unsigned-content conclusions require KNewStuff framework and provider behavior beyond this application checkout; the channel is plugin/example content rather than primary application updating."
+  ],
+  "sources": [
+    {
+      "url": "https://invent.kde.org/education/kturtle",
+      "commit": "a16f7e66611c43f9487d1a74ad00a4bf9ff20856"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

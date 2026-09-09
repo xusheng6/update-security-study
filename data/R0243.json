@@ -1,0 +1,23 @@
+{
+  "id": "R0243",
+  "name": "Unvanquished",
+  "category": "FPS game",
+  "historical_tier": "C",
+  "project_url": "https://github.com/Unvanquished/updater",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Unvanquished has a platform-specific updater-maintenance channel with archive structure checks. The reviewed evidence does not establish publisher authentication for that channel.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study release; the reviewed implementation does not establish cryptographic updater-archive authentication, and no game-content verification conclusion is made."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Unvanquished/updater",
+      "commit": "06ce270259b758c8c8188e3ae192b2ecebc94f2f"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,25 @@
+{
+  "id": "R0162",
+  "name": "Whisparr",
+  "category": "Media manager",
+  "historical_tier": "C",
+  "project_url": "https://github.com/Whisparr/Whisparr",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Whisparr compares the update package SHA-256 with the hash in its package metadata and rejects a mismatch. This is a source-level integrity observation; independent publisher authentication, automatic-update policy and historical release behavior are not certified here.",
+  "limitations": [
+    "The separately pinned retrieved checkout is not proof of the original study release.",
+    "This review supports the package checksum control, not a complete assessment of metadata authentication or automatic-update settings.",
+    "The separately pinned retrieved checkout is not proof of the original study release. This review supports the package checksum control, not a complete assessment of metadata authentication or automatic-update settings."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Whisparr/Whisparr",
+      "commit": "1a6005e594c8e3a30bd6a19d900f60177f68ac10"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,24 @@
+{
+  "id": "R0606",
+  "name": "httpx",
+  "category": "HTTP prober (CLI)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/projectdiscovery/httpx",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports this narrow assessment: The explicit update replaces the binary and uses a same-release checksum file; version checking is separate from asset download.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/projectdiscovery/httpx",
+      "commit": "50b901aeec5736a785f2ad155d998eeca67a42f3"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

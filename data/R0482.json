@@ -1,0 +1,24 @@
+{
+  "id": "R0482",
+  "name": "muon",
+  "category": "Package manager GUI (apt)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/KDE/muon",
+  "channel": "package-manager",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Targeted retained-source read supports the narrow package-manager behavior: Muon displays an explicit warning for unverifiable software and requires the user to continue before replying to the transaction; package verification remains in its backend.",
+  "limitations": [
+    "This application delegates payload verification to PackageKit/Flatpak/snapd/apt backends; the external backend version and active keyring are outside this checkout.",
+    "This evidence does not establish a complete primary self-updater classification."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/KDE/muon",
+      "commit": "a7cc1a313b3d75e2999613e674af7b7c4193b267"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

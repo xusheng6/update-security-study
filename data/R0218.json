@@ -1,0 +1,23 @@
+{
+  "id": "R0218",
+  "name": "Blockbench",
+  "category": "3D model editor",
+  "historical_tier": "B",
+  "project_url": "https://github.com/JannisX11/blockbench",
+  "channel": "plugin",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Blockbench disables automatic download and gates download on user approval; its plugin loader executes fetched plugin code without a separate integrity check.",
+  "limitations": [
+    "Newly recovered source snapshot; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/JannisX11/blockbench",
+      "commit": "47e633e4a1338f957ee7baa0acbcf54da11e77df"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0103",
+  "name": "Duplicati",
+  "category": "Backup",
+  "historical_tier": "A",
+  "project_url": "https://github.com/duplicati/duplicati",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Duplicati's updater retrieves a manifest from configured URLs, accepts it only when at least one configured RSA-SHA256 key verifies it, and checks retrieved package length and SHA-256 against signed manifest metadata. The reviewed code documents signature and hash checks; it does not by itself establish a fixed transport endpoint for every deployment.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; configured URL variants and installer-specific behavior were not exhaustively compared."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/duplicati/duplicati",
+      "commit": "9790d5b469578edabb40affc9200571212f73637"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

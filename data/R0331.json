@@ -1,0 +1,26 @@
+{
+  "id": "R0331",
+  "name": "AnotherRedisDesktopManager",
+  "category": "Redis GUI (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/qishibo/AnotherRedisDesktopManager",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "AnotherRedisDesktopManager integrates an application updater and packaging hooks. The retained evidence does not establish the original Windows or macOS signing classification.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "No retained release artifact, notarization record, or CI secret audit was available to substantiate the platform-specific publication assertions.",
+    "The updater dependency's manifest and signature enforcement were not independently verified from this repository.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout. No retained release artifact, notarization record, or CI secret audit was available to substantiate the platform-specific publication assertions. The updater dependency's manifest and signature enforcement were not independently verified from this repository."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/qishibo/AnotherRedisDesktopManager",
+      "commit": "c149855106628babcdfb7675a8e7ba9434d2492a"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

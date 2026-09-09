@@ -1,0 +1,25 @@
+{
+  "id": "R0180",
+  "name": "Boostnote",
+  "category": "Notes",
+  "historical_tier": "B",
+  "project_url": "https://github.com/BoostIO/Boostnote",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Boostnote uses electron-gh-releases with a BoostIO release repository and downloads/installs updates on packaged non-Linux builds after confirmation. The source review supports a Squirrel-era updater flow and signing-related build controls, but does not establish the claimed Windows SHA1 RELEASES-only or macOS Developer-ID details.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; historical release behavior is not reverified.",
+    "The app delegates package format and cryptographic verification details to electron-gh-releases/Squirrel-era tooling; exact SHA1 and Developer-ID release settings are not shown in the reviewed implementation.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; historical release behavior is not reverified. The app delegates package format and cryptographic verification details to electron-gh-releases/Squirrel-era tooling; exact SHA1 and Developer-ID release settings are not shown in the reviewed implementation."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/BoostIO/Boostnote",
+      "commit": "789926bc760628ecedbd0051ca96d190a2be234f"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

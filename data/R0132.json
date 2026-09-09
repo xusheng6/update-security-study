@@ -1,0 +1,25 @@
+{
+  "id": "R0132",
+  "name": "Bottles",
+  "category": "Wine prefix mgr",
+  "historical_tier": "C",
+  "project_url": "https://github.com/bottlesdevs/Bottles",
+  "channel": "data",
+  "review_status": "Detailed recheck",
+  "proposed_primary_tier": "C",
+  "description": "Tier C remains appropriate for the observed component and dependency channel: remote catalog data selects downloadable files, a supplied value is compared locally, and the resulting component or installer is used. The source corrects the algorithm from SHA256 to MD5 and shows a checksum bypass, while it does not establish a signed catalog or the Flatpak packaging boundary. Those are claim and scope corrections rather than evidence for a stronger or weaker project wide tier.",
+  "limitations": [
+    "Snapshot is the newly retrieved default branch at commit 29032bf3084f78c900777d188e7286f8f7280aeb, not the original study checkout; released behavior may differ.",
+    "The reviewed source does not authenticate the YAML catalog or establish how Flatpak distributes the application itself.",
+    "This review covers component/dependency downloads and execution paths; it does not establish behavior of every Bottles channel or release artifact."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/bottlesdevs/Bottles",
+      "commit": "29032bf3084f78c900777d188e7286f8f7280aeb"
+    }
+  ],
+  "review_basis": "deep-source-recheck",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

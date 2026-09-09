@@ -1,0 +1,25 @@
+{
+  "id": "R0142",
+  "name": "Antares SQL",
+  "category": "DB client",
+  "historical_tier": "C",
+  "project_url": "https://github.com/antares-sql/antares",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Antares’ updater handles distribution-specific restrictions and has a distinct macOS branch with automatic retrieval disabled. Other eligible branches invoke electron-updater; release signing and full framework enforcement remain unresolved.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+    "Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/antares-sql/antares",
+      "commit": "954b455f612d170742c1a1065276132f2cc115ea"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

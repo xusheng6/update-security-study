@@ -1,0 +1,23 @@
+{
+  "id": "R0540",
+  "name": "Crater",
+  "category": "Invoicing (web)",
+  "historical_tier": "D",
+  "project_url": "https://github.com/crater-invoice/crater",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "D",
+  "description": "Crater’s admin updater uses Guzzle verify=false, downloads the archive, extracts it over the Laravel root, and has no package signature/hash.",
+  "limitations": [
+    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/crater-invoice/crater",
+      "commit": "05d5ce26fdd8d9466009163444e944259bc0cc2a"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

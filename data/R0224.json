@@ -1,0 +1,23 @@
+{
+  "id": "R0224",
+  "name": "Lume",
+  "category": "Static site gen",
+  "historical_tier": "C",
+  "project_url": "https://github.com/lumeland/lume",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Lume's `upgrade` CLI command delegates to the imported upgrade implementation for the current project and awaits it. The reviewed command file does not itself establish the remote CDN, module execution, or signature/checksum behavior of that delegated implementation.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release re-verification; the imported upgrade implementation, CDN transport, and any signature/checksum behavior were not independently connected to this command body."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/lumeland/lume",
+      "commit": "7d5c3f01192a02749be58a36fc569fc44dd398e5"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0516",
+  "name": "Watcher3",
+  "category": "Movie automation",
+  "historical_tier": "C",
+  "project_url": "https://github.com/nosmokingbandit/Watcher3",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The zip updater downloads and extracts the branch archive to overwrite files; verification is absent in this flow.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/nosmokingbandit/Watcher3",
+      "commit": "0217e75158b563bdefc8e01c3be7620008cf3977"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

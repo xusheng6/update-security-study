@@ -1,0 +1,25 @@
+{
+  "id": "R0052",
+  "name": "balenaEtcher",
+  "category": "USB flasher",
+  "historical_tier": "B",
+  "project_url": "https://github.com/balena-io/etcher",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "balenaEtcher periodically checks electron-updater when updates are enabled, compares the returned version and staging percentage, and retrieves a selected newer release; install-on-quit and signature enforcement remain unverified from the reviewed application source.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+    "The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/balena-io/etcher",
+      "commit": "1e2500e4f11cf9855460fa679154b3e6158e8024"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

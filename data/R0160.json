@@ -1,0 +1,25 @@
+{
+  "id": "R0160",
+  "name": "Prowlarr",
+  "category": "Indexer manager",
+  "historical_tier": "C",
+  "project_url": "https://github.com/Prowlarr/Prowlarr",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Prowlarr compares the update package SHA-256 with the hash in its package metadata and rejects a mismatch. This is a source-level integrity observation; independent publisher authentication, automatic-update policy and historical release behavior are not certified here.",
+  "limitations": [
+    "The separately pinned retrieved checkout is not proof of the original study release.",
+    "This review supports the package checksum control, not a complete assessment of metadata authentication or automatic-update settings.",
+    "The separately pinned retrieved checkout is not proof of the original study release. This review supports the package checksum control, not a complete assessment of metadata authentication or automatic-update settings."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Prowlarr/Prowlarr",
+      "commit": "693c7c3b0e8ec6e9dd792c01e5fa1091260b3be1"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

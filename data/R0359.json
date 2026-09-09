@@ -1,0 +1,23 @@
+{
+  "id": "R0359",
+  "name": "Parabolic",
+  "category": "yt-dlp GUI",
+  "historical_tier": "C",
+  "project_url": "https://github.com/NickvisionApps/Parabolic",
+  "channel": "data",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Parabolic delegates yt-dlp component updates to an external UpdaterService. The provider hash source and dependency verification policy remain unestablished.",
+  "limitations": [
+    "The delegated UpdaterService implementation and release metadata path were not present in the inspected source subtree, so SHA-256 provenance and comparison cannot be confirmed; the retained snapshot is newly retrieved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/NickvisionApps/Parabolic",
+      "commit": "1118e6a3abbf5ffc1f764c4c9781f98d4c0482d4"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0519",
+  "name": "SickGear",
+  "category": "TV automation",
+  "historical_tier": "C",
+  "project_url": "https://github.com/SickGear/SickGear",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "SickGear checks tar format before extracting the GitHub tarball; no cryptographic payload verification is performed.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/SickGear/SickGear",
+      "commit": "a4351eae552b90893b5fc44ea3a19dd1ad2ec3b8"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

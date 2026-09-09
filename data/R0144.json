@@ -1,0 +1,23 @@
+{
+  "id": "R0144",
+  "name": "SameBoy",
+  "category": "Game Boy emulator (mac)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/LIJI32/SameBoy",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "SameBoy's macOS updater uses an HTTPS version response and does not show an artifact hash or signature check in the reviewed update path; the broader installation and release-signing boundary remains outside this evidence.",
+  "limitations": [
+    "New default-branch snapshot at the recorded commit, not the original study release; the remote manifest and released ZIP signing state were not independently audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/LIJI32/SameBoy",
+      "commit": "213a12ce93d66b105a113debd9396306066a7cfc"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,25 @@
+{
+  "id": "R0442",
+  "name": "Zigbee2MQTT",
+  "category": "Zigbee gateway",
+  "historical_tier": "C",
+  "project_url": "https://github.com/Koenkk/zigbee2mqtt",
+  "channel": "firmware",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the inspected Zigbee2MQTT OTA extension, update checks and updates can use a supplied URL or locally written hex image and are delegated to zigbee-herdsman; this source snapshot does not establish the dependency's transport or firmware-signature enforcement.",
+  "limitations": [
+    "New default-branch snapshot, not the historical Zigbee2MQTT release.",
+    "zigbee-herdsman implementation, firmware catalogs, transport configuration, and device-side signature checks were not reviewed; no absence of authentication is inferred.",
+    "New default-branch snapshot, not the historical Zigbee2MQTT release. zigbee-herdsman implementation, firmware catalogs, transport configuration, and device-side signature checks were not reviewed; no absence of authentication is inferred."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Koenkk/zigbee2mqtt",
+      "commit": "3c3d8c1a71cabb31f1b97ad268681dd3f747ce19"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

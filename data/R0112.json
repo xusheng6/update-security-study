@@ -1,0 +1,23 @@
+{
+  "id": "R0112",
+  "name": "xemu",
+  "category": "Xbox emulator",
+  "historical_tier": "C",
+  "project_url": "https://github.com/xemu-project/xemu",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "xemu extracts and replaces xemu.exe from the GitHub asset without hash/signature verification.",
+  "limitations": [
+    "Newly retrieved/recovered source snapshot; this is not historical source re-verification. Released artifact behavior and external framework enforcement remain unverified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/xemu-project/xemu",
+      "commit": "f52a0d4e3dcbd63ad18f08b4a6899cd6ce1c878b"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

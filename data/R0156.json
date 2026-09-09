@@ -1,0 +1,24 @@
+{
+  "id": "R0156",
+  "name": "NVDA",
+  "category": "Screen reader",
+  "historical_tier": "C",
+  "project_url": "https://github.com/nvaccess/nvda",
+  "channel": "primary",
+  "review_status": "Detailed recheck",
+  "proposed_primary_tier": "C",
+  "description": "The C tier remains appropriate: the source supports HTTPS retrieval, periodic automatic checking, an optional SHA1 comparison for the launcher, and user confirmation before applying the update. The original JSON wording is concretely wrong because parsing is line-oriented key/value text, and the source does not establish a signature over that metadata. Those are claim corrections and a limitation on authentication conclusions; they do not turn an unsigned or optionally hash-checked manifest into a stronger tier or establish a different tier.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot at commit 4dd8aec18f27b4c583180fda235fd596cef74de0, not the original study checkout; historical release behavior may differ.",
+    "The review does not establish server-side metadata authentication, Windows installer signing, or the provenance of the SHA1 value; the narrow requests verify=False path for Windows root certificate recovery is separate from the real urllib update request."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/nvaccess/nvda",
+      "commit": "4dd8aec18f27b4c583180fda235fd596cef74de0"
+    }
+  ],
+  "review_basis": "deep-source-recheck",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

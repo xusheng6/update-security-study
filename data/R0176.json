@@ -1,0 +1,25 @@
+{
+  "id": "R0176",
+  "name": "Stats",
+  "category": "System monitor (mac)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/exelban/stats",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Stats' custom macOS updater validates the mounted Stats.app with strict code-signature checks and requires its signing Team ID to match the running app before staging installation. A signed manifest or separate artifact digest is not established by this source review.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; historical release behavior is not reverified.",
+    "The reviewed source establishes the application-side Team-ID and OS code-signature boundary, but not a signed manifest or separate payload digest.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; historical release behavior is not reverified. The reviewed source establishes the application-side Team-ID and OS code-signature boundary, but not a signed manifest or separate payload digest."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/exelban/stats",
+      "commit": "60e65d1454c647d9592550447757e509b01d5ebb"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

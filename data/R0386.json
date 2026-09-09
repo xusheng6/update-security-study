@@ -1,0 +1,24 @@
+{
+  "id": "R0386",
+  "name": "Lucas Chess R2",
+  "category": "Chess training",
+  "historical_tier": "C",
+  "project_url": "https://github.com/lukasmonk/lucaschessR2",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports the narrow recorded behavior: Lucas Chess downloads the update archive and checks only its byte size before extraction and execution of the extracted act.py.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "The retained snapshot does not establish current released artifact behavior or independent release signing."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/lukasmonk/lucaschessR2",
+      "commit": "b3ab7678077d6433e45d85f55acac2102e13e82e"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

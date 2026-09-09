@@ -1,0 +1,25 @@
+{
+  "id": "R0616",
+  "name": "PeerBanHelper",
+  "category": "Torrent ban tool",
+  "historical_tier": "C",
+  "project_url": "https://github.com/PBH-BTN/PeerBanHelper",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The retained PeerBanHelper install4j configuration enables updater checks and names an HTTPS update descriptor. The descriptor's artifact-authentication policy and released behavior remain unresolved.",
+  "limitations": [
+    "Newly recovered default-branch snapshot, not historical release re-verification.",
+    "Install4j runtime verification, generated descriptor contents, released artifact signatures/checksums, and current publication behavior were not audited.",
+    "Newly recovered default-branch snapshot, not historical release re-verification. Install4j runtime verification, generated descriptor contents, released artifact signatures/checksums, and current publication behavior were not audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/PBH-BTN/PeerBanHelper",
+      "commit": "f8e9b1bf8c1c7585f2afa7cef2da78d3aa2658d3"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

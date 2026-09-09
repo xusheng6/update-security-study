@@ -1,0 +1,25 @@
+{
+  "id": "R0040",
+  "name": "DBeaver",
+  "category": "DB client",
+  "historical_tier": "C",
+  "project_url": "https://github.com/dbeaver/dbeaver",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The inspected DBeaver source supports a narrow primary C observation: a version-selected installer is downloaded to a temporary file and later executed by platform-specific launch code after user confirmation. No hash or signature verification is present in this control flow; the HTTP/TLS and version descriptor parsing helpers are separate boundaries.",
+  "limitations": [
+    "Newly retrieved snapshot at the recorded commit, not historical release verification.",
+    "WebUtils.downloadRemoteFile and VersionDescriptor source/transport behavior were not used to infer cryptographic guarantees.",
+    "The cited path covers Windows/macOS installer execution; Linux falls back to the download page."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/dbeaver/dbeaver",
+      "commit": "b59edd36ff94abfea48f5151a5ea10b3791137f0"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,24 @@
+{
+  "id": "R0432",
+  "name": "Gephi",
+  "category": "Graph visualization",
+  "historical_tier": "C",
+  "project_url": "https://github.com/gephi/gephi",
+  "channel": "unresolved",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The recovered Gephi source snapshot documents visualization update scheduling; it does not establish the historical binary's module transport, JAR-signature verification, or TOFU trust policy.",
+  "limitations": [
+    "The available source is a newly retrieved default-branch snapshot, but the cited visualization component is the wrong scope for the updater claim; NetBeans updater implementation and released module-signing behavior remain unverified.",
+    "The snapshot is a newly retrieved default branch rather than the original study binary or release source; the historical NetBeans updater and released module-signing behavior remain unverified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/gephi/gephi",
+      "commit": "a4c957bd825a03ac071914185996c700fe76c7e6"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

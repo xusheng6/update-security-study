@@ -1,0 +1,23 @@
+{
+  "id": "R0208",
+  "name": "sqlmap",
+  "category": "Pentest (CLI)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/sqlmapproject/sqlmap",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "sqlmap selects different maintenance paths for pip, Git, and archive installations. These channels should be described separately; the reviewed archive-update implementation does not establish an independently authenticated release manifest.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not historical release re-verification; pip, Git, GitHub archive delivery, and release-side controls were not independently audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/sqlmapproject/sqlmap",
+      "commit": "1ee368f78a73ccc1c193af32d4e70c1244be5865"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

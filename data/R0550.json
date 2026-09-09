@@ -1,0 +1,23 @@
+{
+  "id": "R0550",
+  "name": "Beyond All Reason",
+  "category": "RTS game (Electron lobby)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/beyond-all-reason/bar-lobby",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The Electron updater sets autoInstallOnAppQuit true and delegates artifact checking to electron-updater.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/beyond-all-reason/bar-lobby",
+      "commit": "036118a5ddf72d30a29a56768fa54bba6e78c352"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

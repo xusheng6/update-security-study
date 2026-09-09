@@ -1,0 +1,24 @@
+{
+  "id": "R0475",
+  "name": "gnome-software",
+  "category": "App store (GNOME)",
+  "historical_tier": "B",
+  "project_url": "https://gitlab.gnome.org/GNOME/gnome-software",
+  "channel": "package-manager",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Targeted retained-source read supports the narrow package-manager behavior: Flatpak backend enables GPG verification and installs a configured remote key when present, but explicitly disables GPG verification when the remote has no key; package verification is delegated to backend configuration.",
+  "limitations": [
+    "This application delegates payload verification to PackageKit/Flatpak/snapd/apt backends; the external backend version and active keyring are outside this checkout.",
+    "This evidence does not establish a complete primary self-updater classification."
+  ],
+  "sources": [
+    {
+      "url": "https://gitlab.gnome.org/GNOME/gnome-software",
+      "commit": "1084a855b295f7bfb6636134be658d0a1c3b4f61"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

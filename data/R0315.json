@@ -1,0 +1,25 @@
+{
+  "id": "R0315",
+  "name": "Snapmaker Luban",
+  "category": "3D CAM (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/Snapmaker/Luban",
+  "channel": "primary",
+  "review_status": "Detailed recheck",
+  "proposed_primary_tier": "C",
+  "description": "The original B tier should change to C for this snapshot. The source supports a user-confirmed electron-updater flow with same-channel sha512 metadata, but the Windows release configuration disables update code-signature verification. Therefore the recorded generalized OS signing trust-root statement is materially contradicted. C captures the observed application update channel without asserting that a release-wide signature policy is absent; the metadata checksum remains an integrity value whose trust source is not independently pinned.",
+  "limitations": [
+    "Snapshot is commit db573f5dff3c6db2361e198d120fb3481088196b from a newly retrieved default branch, not the original study checkout.",
+    "The source shows one Windows configuration and framework metadata fields; it does not prove actual signatures, macOS/Linux enforcement, or every published release artifact.",
+    "No framework implementation or release artifact was executed or downloaded in this review."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Snapmaker/Luban",
+      "commit": "db573f5dff3c6db2361e198d120fb3481088196b"
+    }
+  ],
+  "review_basis": "deep-source-recheck",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

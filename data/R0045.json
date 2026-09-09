@@ -1,0 +1,25 @@
+{
+  "id": "R0045",
+  "name": "wire-desktop",
+  "category": "Secure chat",
+  "historical_tier": "B",
+  "project_url": "https://github.com/wireapp/wire-desktop",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The inspected Wire Desktop internal macOS build integrates electron-updater. The Windows Squirrel verification boundary remains outside the reviewed evidence, as the original record already acknowledged.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+    "The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/wireapp/wire-desktop",
+      "commit": "6ca46fdc8bc4afd549fc3e5d73dcd174887b6bfa"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

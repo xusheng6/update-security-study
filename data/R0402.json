@@ -1,0 +1,24 @@
+{
+  "id": "R0402",
+  "name": "Feather Wallet",
+  "category": "Monero wallet",
+  "historical_tier": "A",
+  "project_url": "https://github.com/feather-wallet/feather",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "A",
+  "description": "The retained source shows a configured trust root and update invocation consistent with the recorded narrow A classification.",
+  "limitations": [
+    "This is a recovered snapshot rather than the original study checkout; release/build behavior and historical version may differ.",
+    "The audit observed GPG-signed hash-list verification and archive hash checking; installer/platform signing was outside this path."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/feather-wallet/feather",
+      "commit": "948773cf13c7486ee230eb67b6bac06b2f94c874"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

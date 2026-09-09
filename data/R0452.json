@@ -1,0 +1,26 @@
+{
+  "id": "R0452",
+  "name": "RetroBat",
+  "category": "Retro frontend (Windows)",
+  "historical_tier": "D",
+  "project_url": "https://github.com/RetroBat-Official/RetroBat",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The retained RetroBat source snapshot records an HTTP retrobat_binaries_url in build.ini, but the updater and no-check-certificate logic are not available as readable source here. The claimed cross-script TLS behavior is withheld pending an auditable updater implementation or historical source matching the studied release.",
+  "limitations": [
+    "The checkout contains shipped updater-related binaries but no auditable source body for their network and verification behavior.",
+    "The retained commit may not match the historical release studied.",
+    "The HTTP build URL alone does not establish released updater behavior.",
+    "The checkout contains shipped updater-related binaries but no auditable source body for their network and verification behavior. The retained commit may not match the historical release studied. The HTTP build URL alone does not establish released updater behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/RetroBat-Official/RetroBat",
+      "commit": "9761d47af5902410f020164163a7b27a6facc38b"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

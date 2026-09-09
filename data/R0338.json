@@ -1,0 +1,25 @@
+{
+  "id": "R0338",
+  "name": "v2rayN",
+  "category": "Proxy client (Windows)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/2dust/v2rayN",
+  "channel": "mixed",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "v2rayN manages distinct GUI, core and geographic-data update channels. The inspected component updater does not establish the report’s blanket verification-policy assertion across all three.",
+  "limitations": [
+    "New default-branch snapshot, not the original study checkout or a release artifact.",
+    "Inspected methods do not establish repository-wide absence of verification or external enforcement.",
+    "New default-branch snapshot, not the original study checkout or a release artifact. Inspected methods do not establish repository-wide absence of verification or external enforcement."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/2dust/v2rayN",
+      "commit": "3d50d9f82c993d58dd3eedfcdeaf2af5b98a7146"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

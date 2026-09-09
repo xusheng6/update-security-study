@@ -1,0 +1,26 @@
+{
+  "id": "R0300",
+  "name": "Stremio",
+  "category": "Media center",
+  "historical_tier": "A",
+  "project_url": "https://github.com/Stremio/stremio-shell",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Stremio's reviewed updater verifies the fetched version descriptor with an embedded PEM public key through OpenSSL SHA-256 digest verification, then checks each downloaded file against the descriptor's SHA-256 checksum before marking it prepared. The snapshot does not independently establish released-artifact provenance or the original study version's deployment configuration.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "The source demonstrates the verification implementation but not the provenance of the live endpoint, current release artifacts, or key rotation.",
+    "No build or execution was performed.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout. The source demonstrates the verification implementation but not the provenance of the live endpoint, current release artifacts, or key rotation. No build or execution was performed."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Stremio/stremio-shell",
+      "commit": "c3a8bcbf857d5569b6ae7444ead0dc0a0814888b"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

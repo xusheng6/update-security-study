@@ -1,0 +1,25 @@
+{
+  "id": "R0383",
+  "name": "Cytoscape",
+  "category": "Network analysis",
+  "historical_tier": "C",
+  "project_url": "https://github.com/cytoscape/cytoscape-impl",
+  "channel": "mixed",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Cytoscape’s implementation separates installed-app update discovery from core-application version notifications. The original artifact-checksum and publisher-authentication assertions remain unestablished.",
+  "limitations": [
+    "New default-branch implementation snapshot, not the original study release.",
+    "These channel and notification observations do not certify the artifact verification policy.",
+    "New default-branch implementation snapshot, not the original study release. These channel and notification observations do not certify the artifact verification policy."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/cytoscape/cytoscape-impl",
+      "commit": "208c1015e565ac55f6a78c2a23aa8196a7cf28ae"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

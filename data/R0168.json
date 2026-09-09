@@ -1,0 +1,23 @@
+{
+  "id": "R0168",
+  "name": "Kotatogram",
+  "category": "Messenger (TG fork)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/kotatogram/kotatogram-desktop",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Kotatogram’s updater checks SHA-1 and verifies an RSA signature against its stable/beta public-key configuration. The exact pinned key identity, host policy and historical release mapping remain unresolved.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/kotatogram/kotatogram-desktop",
+      "commit": "7263a1b53c9e6b45a416532644fff7a4c7f90d54"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0417",
+  "name": "Adium",
+  "category": "Multi-IM client (mac)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/adium/adium",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Adium’s application metadata configures an HTTPS Sparkle feed and a bundled DSA key file. The source supports this key configuration; historical releases and framework enforcement remain unverified.",
+  "limitations": [
+    "Recovered default-branch snapshot rather than original study checkout; feed configuration, historical release artifacts, and Sparkle framework verification internals were not independently audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/adium/adium",
+      "commit": "0f7136b34698b09e886f8a41f64d81636c47c567"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

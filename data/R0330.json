@@ -1,0 +1,26 @@
+{
+  "id": "R0330",
+  "name": "Advanced REST Client",
+  "category": "API client (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/advanced-rest-client/arc-electron",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Advanced REST Client integrates electron-updater and code-signing build hooks. Historical CI signing credentials and released-artifact enforcement remain unverified.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the archived ~2022 study checkout.",
+    "The source configuration does not establish that real CI certificate secrets were available or used for a released artifact.",
+    "electron-updater framework enforcement and independent released-artifact signatures were not verified from this source snapshot.",
+    "This is a newly retrieved default-branch snapshot, not the archived ~2022 study checkout. The source configuration does not establish that real CI certificate secrets were available or used for a released artifact. electron-updater framework enforcement and independent released-artifact signatures were not verified from this source snapshot."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/advanced-rest-client/arc-electron",
+      "commit": "4a40ffe7cb044fa1a2f828a5e0ebff3651ee28a9"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

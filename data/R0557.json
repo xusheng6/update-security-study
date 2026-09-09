@@ -1,0 +1,25 @@
+{
+  "id": "R0557",
+  "name": "Forma LMS",
+  "category": "LMS (web)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/formalms/formalms",
+  "channel": "plugin",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Forma LMS’s plugin manager reads a manifest-provided update URL and has no visible digest or signature comparison in the reviewed ZIP update path; this is limited to the plugin manager.",
+  "limitations": [
+    "Source-at-commit snapshot; current released configuration remains unverified.",
+    "The review is limited to the plugin manager and does not classify other update channels.",
+    "Primary classification remains UNRESOLVED under the evidence-review instruction; retained source is commit-scoped and does not establish all released or external framework behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/formalms/formalms",
+      "commit": "446a77a9b9cbb20dacf008a2d53b2658fb5f5634"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

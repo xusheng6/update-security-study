@@ -1,0 +1,25 @@
+{
+  "id": "R0129",
+  "name": "Chatterino2",
+  "category": "Twitch chat",
+  "historical_tier": "C",
+  "project_url": "https://github.com/Chatterino/chatterino2",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Chatterino has an application update channel and its network request settings leave TLS certificate checking enabled by default. These source observations do not certify the complete artifact-authentication policy or the original impact claim.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; installer/server behavior can vary by release.",
+    "The review does not audit Authenticode validation performed by a launched installer.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; installer/server behavior can vary by release.; The review does not audit Authenticode validation performed by a launched installer."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Chatterino/chatterino2",
+      "commit": "b5fcf950387fd4fa19464d07809148c2c831fb8c"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,24 @@
+{
+  "id": "R0421",
+  "name": "Grav",
+  "category": "Flat-file CMS",
+  "historical_tier": "C",
+  "project_url": "https://github.com/getgrav/grav",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The inspected Grav implementation has a GPM application self-upgrade channel with an HTTPS metadata endpoint. The retained evidence does not substantiate the original project-wide assertion of zero integrity or signature controls; withdraw that categorical classification.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study checkout; the remote release metadata contents, downloaded archives, publisher signatures, and any external packaging controls were not independently audited.",
+    "The remote release metadata, downloaded archives, external packaging controls, and historical release behavior were not independently audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/getgrav/grav",
+      "commit": "d3403f2eb984eb7d7701176f95de8951a3802bf1"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0230",
+  "name": "Alby Hub",
+  "category": "Lightning node",
+  "historical_tier": "A",
+  "project_url": "https://github.com/getAlby/hub",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The recovered Alby Hub source does not substantiate its claimed GPG/SHA-256 release updater or `--skip-verify` option; release update verification remains unresolved from this snapshot.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release re-verification; no auditable release updater, GPG key material, manifest path, or skip-verification option was found in the inspected source, and external packaging scripts/artifacts were not independently recovered."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/getAlby/hub",
+      "commit": "6a6d2d89c8acc3e246f24abcf1111d4b331f7493"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

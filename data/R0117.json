@@ -1,0 +1,25 @@
+{
+  "id": "R0117",
+  "name": "Qt Creator",
+  "category": "IDE",
+  "historical_tier": "C",
+  "project_url": "https://code.qt.io/qt-creator/qt-creator",
+  "channel": "package-manager",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Qt Creator’s updateinfo plugin delegates update queries to the configured Maintenance Tool. The original claim about Installer Framework artifact verification remains unresolved because it concerns the external maintenance implementation, not this plugin.",
+  "limitations": [
+    "Newly retrieved source snapshot, not proof of original-release behavior.",
+    "The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified.",
+    "Newly retrieved source snapshot, not proof of original-release behavior.; The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified."
+  ],
+  "sources": [
+    {
+      "url": "https://code.qt.io/qt-creator/qt-creator",
+      "commit": "89a8132235e166168153a32f6c14687864fb494b"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,26 @@
+{
+  "id": "R0050",
+  "name": "Insomnia",
+  "category": "API client",
+  "historical_tier": "B",
+  "project_url": "https://github.com/Kong/insomnia",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Withdraw the original security classification for this record. Insomnia Desktop selects an Electron or NSIS updater by installer type, checks a configured channel/feed, and offers restart after retrieval; this review does not independently verify artifact-signature enforcement. The retained evidence is insufficient to support the original full claim.",
+  "limitations": [
+    "The original signature/certificate assertion remains unsupported by a project-level verifier in the reviewed source; the updater dependency/platform boundary was not independently audited.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+    "The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot.",
+    "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Kong/insomnia",
+      "commit": "e446fef646d5ae67699b3eda49f70ad72e97956d"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

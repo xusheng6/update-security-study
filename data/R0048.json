@@ -1,0 +1,25 @@
+{
+  "id": "R0048",
+  "name": "notesnook",
+  "category": "Notes",
+  "historical_tier": "B",
+  "project_url": "https://github.com/streetwriters/notesnook",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Notesnook Desktop uses a configured release feed and a user-controlled automatic-download setting, with a separate explicit installation action. Publisher authentication remains delegated to the updater/platform boundary.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+    "The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/streetwriters/notesnook",
+      "commit": "4c4ac1c18f11b62047fbe7e45fbe30dbb205edfa"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

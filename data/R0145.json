@@ -1,0 +1,23 @@
+{
+  "id": "R0145",
+  "name": "simple64",
+  "category": "N64 emulator",
+  "historical_tier": "C",
+  "project_url": "https://github.com/simple64/simple64",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The inspected simple64 build includes an optional application updater with a separate helper. Helper authentication and the full artifact-verification policy are not established by the retained review.",
+  "limitations": [
+    "New default-branch snapshot at the recorded commit; the separate simple64-updater repository and its own implementation were not part of this source checkout."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/simple64/simple64",
+      "commit": "d8c969c7b932e3d76e6a25549d76348839dbaefd"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

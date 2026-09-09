@@ -1,0 +1,25 @@
+{
+  "id": "R0081",
+  "name": "Wireshark",
+  "category": "Network analyzer",
+  "historical_tier": "A",
+  "project_url": "https://gitlab.com/wireshark/wireshark",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Withdraw the original security classification for this record. Wireshark’s recovered source does not provide sufficient implementation evidence here to publish the claimed macOS Sparkle key pinning or Windows-key boundary. The retained evidence is insufficient to support the original full claim.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.",
+    "The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module.",
+    "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+  ],
+  "sources": [
+    {
+      "url": "https://gitlab.com/wireshark/wireshark",
+      "commit": "09451d415576c2b4790cbe36cfb2af2f433663a9"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

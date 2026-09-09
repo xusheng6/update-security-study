@@ -1,0 +1,25 @@
+{
+  "id": "R0599",
+  "name": "Singlebox",
+  "category": "Web-app browser (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/atomery/juli",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Singlebox Juli’s reviewed updater module uses electron-updater and routes update events, including update availability, progress, and completion, to the application UI. The source does not establish OS code-signing enforcement or the complete Juli release configuration.",
+  "limitations": [
+    "Newly recovered snapshot; historical release behavior is not reverified.",
+    "Build metadata, released artifacts, and delegated signing enforcement remain unresolved.",
+    "Newly recovered snapshot; historical release behavior is not reverified. Build metadata, released artifacts, and delegated signing enforcement remain unresolved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/atomery/juli",
+      "commit": "9164c922658d86ebf9e2a88d0ff59e8f533bc35a"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

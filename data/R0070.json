@@ -1,0 +1,23 @@
+{
+  "id": "R0070",
+  "name": "Rancher Desktop",
+  "category": "Containers / k8s",
+  "historical_tier": "B",
+  "project_url": "https://github.com/rancher-sandbox/rancher-desktop",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Rancher Desktop’s MSI updater supplies SHA-512 metadata to its updater and conditionally verifies the MSI signature against publisherName from electron-builder configuration. The effective release publisher configuration is required before claiming this check always runs.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not original study checkout; this is limited to the MSI updater path and configured publisher controls."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/rancher-sandbox/rancher-desktop",
+      "commit": "5268253535f1a3acf05787d2a20bafc84be2abcc"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

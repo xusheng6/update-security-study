@@ -1,0 +1,25 @@
+{
+  "id": "R0181",
+  "name": "Maccy",
+  "category": "Clipboard (mac)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/p0deje/Maccy",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Maccy uses Sparkle 2 with an appcast hosted at raw.githubusercontent.com and no SUPublicEDKey in the inspected app configuration. The app source does not establish the external Sparkle runtime verification policy, so payload authenticity remains unresolved from this read.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; the appcast and historical release are not reverified.",
+    "Sparkle's external runtime signature and trust-root behavior was not audited here; app-level absence of SUPublicEDKey cannot establish TLS-only authenticity.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; the appcast and historical release are not reverified. Sparkle's external runtime signature and trust-root behavior was not audited here; app-level absence of SUPublicEDKey cannot establish TLS-only authenticity."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/p0deje/Maccy",
+      "commit": "c376789c5d377b7c520b6f6e91f3f3a1aa28640b"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

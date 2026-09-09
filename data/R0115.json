@@ -1,0 +1,25 @@
+{
+  "id": "R0115",
+  "name": "GitAhead",
+  "category": "Git client",
+  "historical_tier": "C",
+  "project_url": "https://github.com/gitahead/gitahead",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "GitAhead’s updater helper uses Qt’s NoLessSafeRedirectPolicy and reports network errors. The original assertions about persistent TLS exceptions and the complete artifact-verification policy remain unsubstantiated by this bounded source review.",
+  "limitations": [
+    "Newly retrieved source snapshot, not proof of original-release behavior.",
+    "The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified.",
+    "Newly retrieved source snapshot, not proof of original-release behavior.; The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/gitahead/gitahead",
+      "commit": "1cfc416b6d83bf76ecbfd8272d29a880c7868dd0"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

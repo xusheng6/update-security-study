@@ -1,0 +1,25 @@
+{
+  "id": "R0282",
+  "name": "NetBeans",
+  "category": "Java IDE",
+  "historical_tier": "C",
+  "project_url": "https://github.com/apache/netbeans",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The reviewed NetBeans source confirms provider refresh and module update-unit discovery, but does not substantiate the claimed SHA-512 versus JAR-signature behavior or the runtime role of ide.ks; the publication claim remains unresolved pending those implementation and configuration artifacts.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study release.",
+    "The cited flow does not expose catalog parsing, SHA-512 verification, JAR-signature handling, or ide.ks contents.",
+    "Newly retrieved default-branch snapshot, not the original study release. The cited flow does not expose catalog parsing, SHA-512 verification, JAR-signature handling, or ide.ks contents."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/apache/netbeans",
+      "commit": "93b07d6375d98adf0c133ac3b6f4e598a8798fa6"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

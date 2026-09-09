@@ -1,0 +1,26 @@
+{
+  "id": "R0350",
+  "name": "Keybase",
+  "category": "Secure messenger/identity",
+  "historical_tier": "A",
+  "project_url": "https://github.com/keybase/client",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Keybase’s inspected updater includes detached saltpack signature verification with an allowed signing-key list and a required SHA-256 digest. Deployed key values and release provenance remain outside this snapshot review.",
+  "limitations": [
+    "New default-branch snapshot, not historical release re-verification.",
+    "Exact production signing KIDs and CA bytes are not established by these spans.",
+    "Source controls do not certify deployed artifacts.",
+    "New default-branch snapshot, not historical release re-verification. Exact production signing KIDs and CA bytes are not established by these spans. Source controls do not certify deployed artifacts."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/keybase/client",
+      "commit": "0d1eb6015cd73aac93f1cd4534de5b488f77d7c1"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0154",
+  "name": "SuperSlicer",
+  "category": "3D slicer",
+  "historical_tier": "C",
+  "project_url": "https://github.com/supermerill/SuperSlicer",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The inspected SuperSlicer application updater includes a size check. The retained evidence does not establish complete cryptographic artifact authentication.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; release artifact signing and other distribution paths are not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/supermerill/SuperSlicer",
+      "commit": "1f3d287e9be46caa83bc19c16c51c8abd0c211d6"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

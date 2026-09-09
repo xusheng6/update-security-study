@@ -1,0 +1,26 @@
+{
+  "id": "R0347",
+  "name": "VCMI",
+  "category": "Game engine (HoMM3)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/vcmi/vcmi",
+  "channel": "plugin",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "VCMI separates mod management from application update notifications.",
+  "limitations": [
+    "New default-branch snapshot, not historical release re-verification.",
+    "The mod path does not establish a CRC32 implementation elsewhere in the launcher.",
+    "No released artifact or publisher signature was independently verified.",
+    "New default-branch snapshot, not historical release re-verification. The mod path does not establish a CRC32 implementation elsewhere in the launcher. No released artifact or publisher signature was independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/vcmi/vcmi",
+      "commit": "37bbd934bee63ca2d37b69529467e14947442841"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

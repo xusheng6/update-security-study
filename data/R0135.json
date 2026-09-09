@@ -1,0 +1,23 @@
+{
+  "id": "R0135",
+  "name": "itch (app)",
+  "category": "Game launcher",
+  "historical_tier": "C",
+  "project_url": "https://github.com/itchio/itch",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "itch schedules component update checks and delegates upgrades to its package manager. The original CRC32-only self-update classification is not established by this orchestration layer.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/itchio/itch",
+      "commit": "3395cc5f3fd095e9b59268add08ccf1c24020787"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

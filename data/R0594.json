@@ -1,0 +1,24 @@
+{
+  "id": "R0594",
+  "name": "Syncthing Tray",
+  "category": "Syncthing tray client",
+  "historical_tier": "A",
+  "project_url": "https://github.com/Martchus/syncthingtray",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "A",
+  "description": "Targeted retained-source read supports the narrow Tier A behavior: Syncthing Tray installs an updater verifier that rejects an empty signature and verifies update bytes using compile-time selected public signing keys before applying the update.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in key/configuration.",
+    "The final verifier implementation is delegated to Sparkle, tauri-plugin-updater, or self_update where applicable."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Martchus/syncthingtray",
+      "commit": "92d9395f7fb333d70d1a08c12546d2cebc8702d4"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

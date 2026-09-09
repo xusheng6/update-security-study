@@ -1,0 +1,25 @@
+{
+  "id": "R0177",
+  "name": "Element Desktop",
+  "category": "Matrix chat",
+  "historical_tier": "B",
+  "project_url": "https://github.com/element-hq/element-desktop",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Element Desktop enables Electron autoUpdater on macOS and Windows when update_base_url is configured, using a macOS JSON feed or a Windows Squirrel feed. Its source includes Windows signing build configuration; payload authenticity enforcement remains delegated to Electron/Squirrel and is unresolved here.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; historical release behavior is not reverified.",
+    "Electron and Squirrel runtime verification is a delegated framework boundary not established by the cited application files.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; historical release behavior is not reverified. Electron and Squirrel runtime verification is a delegated framework boundary not established by the cited application files."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/element-hq/element-desktop",
+      "commit": "264c591b9cbec73782fc6c95aa94b4dc9ac32754"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

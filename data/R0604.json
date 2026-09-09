@@ -1,0 +1,24 @@
+{
+  "id": "R0604",
+  "name": "feroxbuster",
+  "category": "Content scanner (CLI)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/epi052/feroxbuster",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports this narrow assessment: The explicit update command uses self_update GitHub backend with no checksum or signature feature configured.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/epi052/feroxbuster",
+      "commit": "378d75964c45db9c92826316ff631d34d59396c7"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

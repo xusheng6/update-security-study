@@ -1,0 +1,26 @@
+{
+  "id": "R0332",
+  "name": "sing-box",
+  "category": "Proxy platform",
+  "historical_tier": "B",
+  "project_url": "https://github.com/SagerNet/sing-box",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The inspected sing-box Windows daemon update code includes version eligibility and signer-continuity checks. The complete certificate-trust policy and release coverage require separate evidence; no overall tier is certified.",
+  "limitations": [
+    "The inspected implementation is the experimental Windows boxdd daemon path; it does not by itself establish all sing-box distribution or UI updater paths.",
+    "The retained source does not show how an installer is acquired or prove a historical released artifact used this path.",
+    "The external UI downloader and rule-set updater were not classified from the available contextual source.",
+    "The inspected implementation is the experimental Windows boxdd daemon path; it does not by itself establish all sing-box distribution or UI updater paths. The retained source does not show how an installer is acquired or prove a historical released artifact used this path. The external UI downloader and rule-set updater were not classified from the available contextual source."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/SagerNet/sing-box",
+      "commit": "60b504a1c74a33fe24872c8144c8f0b7d3d61b2a"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0106",
+  "name": "Yaak",
+  "category": "API client",
+  "historical_tier": "A",
+  "project_url": "https://github.com/mountain-loop/yaak",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Yaak's release configuration supplies the Tauri updater with an HTTPS update endpoint and a minisign public key; the application updater checks, retrieves, and installs through the Tauri updater path. The reviewed updater module contains no API-client danger_accept_invalid_certs setting, and signature enforcement is delegated to the Tauri updater dependency.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; cryptographic enforcement is implemented by the Tauri updater dependency and was not independently audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/mountain-loop/yaak",
+      "commit": "d2d4b80a094b23b53c65b83e4ae42df53f51fbd1"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0251",
+  "name": "Listen1-desktop",
+  "category": "Music client",
+  "historical_tier": "C",
+  "project_url": "https://github.com/listen1/listen1_desktop",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the reviewed Listen1-desktop snapshot, the main process imports electron-updater and invokes checkForUpdatesAndNotify at startup. The available source does not substantiate a publication claim that the updater has no code-signing protection.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study release; no auditable platform signing configuration or release artifact was inspected."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/listen1/listen1_desktop",
+      "commit": "bbc38654bd593d4ae70143230ea7814b34d09128"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

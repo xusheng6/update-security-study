@@ -1,0 +1,25 @@
+{
+  "id": "R0022",
+  "name": "RPCS3",
+  "category": "PS3 emulator",
+  "historical_tier": "C",
+  "project_url": "https://github.com/RPCS3/rpcs3",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "RPCS3’s inspected updater accepts JSON metadata only when the retrieval URL has the RPCS3 GitHub prefix, then checks the retrieved update’s expected size and SHA-256 before proceeding. No pinned key is visible in this flow; broader transport and release controls remain outside this review.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
+    "The inspected code does not establish a cryptographic key pin or the trust guarantees of its downloader/metadata service.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; The inspected code does not establish a cryptographic key pin or the trust guarantees of its downloader/metadata service."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/RPCS3/rpcs3",
+      "commit": "065b490eb49ef815b5b6af2a58ae865ecbbab9ab"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

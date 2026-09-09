@@ -1,0 +1,19 @@
+{
+  "id": "R0236",
+  "name": "Witsy",
+  "category": "LLM client",
+  "historical_tier": "B",
+  "project_url": "https://github.com/nbonamy/witsy",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The recovered Witsy candidate does not contain auditable Electron updater or signing implementation; update cadence and code-signing controls remain unresolved.",
+  "limitations": [
+    "The recovered default-branch candidate is a newly retrieved sparse/materialized snapshot rather than the original study checkout; only README.md is present, so the Electron updater, schedule, artifact channel, and signing configuration cannot be reviewed."
+  ],
+  "sources": [],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false,
+  "project_link_basis": "Unambiguous matching retained checkout origin; current upstream availability not rechecked."
+}

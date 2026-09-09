@@ -1,0 +1,23 @@
+{
+  "id": "R0394",
+  "name": "jMonkeyEngine SDK",
+  "category": "Game engine IDE",
+  "historical_tier": "A",
+  "project_url": "https://github.com/jMonkeyEngine/sdk",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the reviewed jMonkeyEngine SDK snapshot, the NetBeans update-center module supplies a bundled trustedcerts.jks through KeyStoreProvider, and its stable and contribution catalog settings use plaintext HTTP while the nightly catalog uses HTTPS. The snapshot does not establish the complete release artifact or publisher-signature policy.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study checkout; release/build configuration and historical study version may differ, and the checkout does not establish complete released plugin provenance."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/jMonkeyEngine/sdk",
+      "commit": "83f2cb493a685c7ef21c8b96acd1f49f62e63c0d"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

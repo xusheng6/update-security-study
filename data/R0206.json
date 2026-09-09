@@ -1,0 +1,23 @@
+{
+  "id": "R0206",
+  "name": "Amethyst",
+  "category": "Window manager (mac)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/ianyh/Amethyst",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the retrieved Amethyst checkout, the application uses Sparkle with stable and canary HTTPS feed URLs from Info.plist and exposes Sparkle's manual check action. The inspected Info.plist has no SUPublicEDKey or SUPublicDSAKeyFile entry; the complete framework and released-bundle trust configuration remains unresolved.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not historical release re-verification; Sparkle framework defaults, dependency configuration, and published bundle controls were not independently audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/ianyh/Amethyst",
+      "commit": "6508ee2cacf8f9b357e1a3249a8f28ba5c94db2a"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

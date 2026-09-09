@@ -1,0 +1,23 @@
+{
+  "id": "R0133",
+  "name": "ProtonUp-Qt",
+  "category": "Proton/Wine mgr",
+  "historical_tier": "C",
+  "project_url": "https://github.com/DavidoTek/ProtonUp-Qt",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "ProtonUp-Qt’s compatibility-tool retrieves use a shared helper with progress and cancellation handling. The original provider-wide checksum assertion remains unresolved; it requires the relevant tool module’s integrity policy.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/DavidoTek/ProtonUp-Qt",
+      "commit": "f9c46b81435350620dc2da3da99a249666fed929"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

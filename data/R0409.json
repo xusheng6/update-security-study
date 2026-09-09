@@ -1,0 +1,25 @@
+{
+  "id": "R0409",
+  "name": "Daedalus",
+  "category": "Cardano wallet",
+  "historical_tier": "C",
+  "project_url": "https://github.com/input-output-hk/daedalus",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Daedalus includes an application-update SHA-256 comparison against selected update metadata. This supports an integrity-control observation; independent publisher authentication and the original impact claim remain unestablished.",
+  "limitations": [
+    "The snapshot is not tied to the original study release.",
+    "News-source provenance, independent authentication of update metadata and security-impact assertions were not established.",
+    "New default-branch snapshot; the specific historical installer/update implementation and release behavior needed to substantiate the original claim are absent from the reviewed source."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/input-output-hk/daedalus",
+      "commit": "adf90b52e02d7ca4cba816572be2a9a66ac1b438"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

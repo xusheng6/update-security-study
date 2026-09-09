@@ -1,0 +1,23 @@
+{
+  "id": "R0210",
+  "name": "Nuclei",
+  "category": "Vuln scanner (CLI)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/projectdiscovery/nuclei",
+  "channel": "mixed",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Nuclei exposes separate engine and template update controls. Its template manager updates an existing template directory only when version state requires it, using a GitHub release downloader; the reviewed source places InsecureSkipVerify in the headless browser client, so that setting should not be attributed to the update channel. The release downloader's end-to-end artifact verification remains unresolved from this snapshot.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release re-verification; the delegated github release downloader and binary updater implementation were not audited here, so artifact verification and version-channel TLS behavior remain unresolved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/projectdiscovery/nuclei",
+      "commit": "f5d0ef81a563c4c5c237d6d978839a57c1e67a2a"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

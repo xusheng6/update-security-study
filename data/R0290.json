@@ -1,0 +1,26 @@
+{
+  "id": "R0290",
+  "name": "Waydroid",
+  "category": "Android container",
+  "historical_tier": "C",
+  "project_url": "https://github.com/waydroid/waydroid",
+  "channel": "data",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Waydroid's reviewed manual upgrade path downloads newer system and vendor images and compares each ZIP's SHA-256 with the corresponding ID supplied by its OTA channel response before extraction. The reviewed code does not establish independently signed channel metadata or the complete provenance of released images.",
+  "limitations": [
+    "The checkout is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "The source shows channel-provided hash comparison but no independent signature or authenticated metadata control in this reviewed path.",
+    "The helper's HTTP transport and deployment configuration were not treated as publisher authentication evidence.",
+    "The checkout is a newly retrieved default-branch snapshot, not the original study checkout. The source shows channel-provided hash comparison but no independent signature or authenticated metadata control in this reviewed path. The helper's HTTP transport and deployment configuration were not treated as publisher authentication evidence."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/waydroid/waydroid",
+      "commit": "5a51271131bfca8b7ee75ed067d09b26460f3a7b"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

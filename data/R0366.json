@@ -1,0 +1,23 @@
+{
+  "id": "R0366",
+  "name": "Emacs",
+  "category": "Text editor",
+  "historical_tier": "C",
+  "project_url": "https://github.com/emacs-mirror/emacs",
+  "channel": "package-manager",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The inspected Emacs evidence concerns package.el content management, with a configurable package-signature policy. It does not establish a core application self-updater or certify the original overall trust classification.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot; MELPA publication practice, historical release configuration, and a complete core update-path audit were not established. The observations concern package-manager content."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/emacs-mirror/emacs",
+      "commit": "0076b8df578099a95900b129b8cbd33390c466db"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

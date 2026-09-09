@@ -1,0 +1,24 @@
+{
+  "id": "R0365",
+  "name": "Threema Desktop",
+  "category": "Secure messenger",
+  "historical_tier": "C",
+  "project_url": "https://github.com/threema-ch/threema-desktop",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Threema downloads an installer and same-server sha256 file; the source does not show an independent signature.",
+  "limitations": [
+    "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/threema-ch/threema-desktop",
+      "commit": "1430c5f558fd4f8838125259028e5694f762bf17"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

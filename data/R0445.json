@@ -1,0 +1,26 @@
+{
+  "id": "R0445",
+  "name": "fre:ac",
+  "category": "Audio converter/ripper",
+  "historical_tier": "C",
+  "project_url": "https://github.com/enzo1982/freac",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The inspected fre:ac Windows integration delegates updates to eUpdate.dll and requests user confirmation. The external updater’s authentication policy and key configuration remain unestablished.",
+  "limitations": [
+    "eUpdate.dll implementation, trust roots, and payload verification are outside this checkout.",
+    "This newly retrieved default-branch snapshot is not the historical study revision.",
+    "The source does not certify current released Windows artifacts.",
+    "eUpdate.dll implementation, trust roots, and payload verification are outside this checkout. This newly retrieved default-branch snapshot is not the historical study revision. The source does not certify current released Windows artifacts."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/enzo1982/freac",
+      "commit": "8b83a5b092aa58e62ede3ff94f87b42bf730b28e"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

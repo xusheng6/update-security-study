@@ -1,0 +1,26 @@
+{
+  "id": "R0297",
+  "name": "Psi+",
+  "category": "XMPP client",
+  "historical_tier": "C",
+  "project_url": "https://github.com/psi-plus/psi-plus-snapshots",
+  "channel": "plugin",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Psi+'s reviewed CMake configuration leaves USE_SPARKLE off by default. When enabled for Apple builds, the project creates a Sparkle SUUpdater, sets its feed URL, and checks in the background; the reviewed integration contains no visible pinned Sparkle public-key setting. Framework and released-artifact verification remain unresolved.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "The reviewed project source does not establish Sparkle framework version, release feed contents, or independent release signing.",
+    "No build or execution was performed.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout. The reviewed project source does not establish Sparkle framework version, release feed contents, or independent release signing. No build or execution was performed."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/psi-plus/psi-plus-snapshots",
+      "commit": "7da714e765456ca76b5952ca678b16270cc5ac31"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

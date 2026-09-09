@@ -1,0 +1,23 @@
+{
+  "id": "R0496",
+  "name": "Athens",
+  "category": "Knowledge graph (Electron)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/athensresearch/athens",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The confirmation handler downloads the update, while update-downloaded immediately calls quitAndInstall.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement remain unverified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/athensresearch/athens",
+      "commit": "b463a97a0d28cbc0a29bec55feebcbe54c20de54"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

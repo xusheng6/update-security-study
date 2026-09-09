@@ -1,0 +1,23 @@
+{
+  "id": "R0241",
+  "name": "Firecamp",
+  "category": "API client",
+  "historical_tier": "C",
+  "project_url": "https://github.com/firecamp-dev/firecamp",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the reviewed Firecamp electron-builder configuration, the Windows target explicitly sets verifyUpdateCodeSignature to false. This records a Windows packaging/update-signature configuration boundary; runtime download policy and other platforms require separate evidence.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study release; this review does not establish auto-download defaults, runtime invocation, or artifact behavior on macOS/Linux."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/firecamp-dev/firecamp",
+      "commit": "00c9eae71e3cb442da878ff6bed458c67e4a2620"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

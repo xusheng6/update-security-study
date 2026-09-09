@@ -1,0 +1,24 @@
+{
+  "id": "R0124",
+  "name": "KeeWeb",
+  "category": "Password mgr",
+  "historical_tier": "A",
+  "project_url": "https://github.com/keeweb/keeweb",
+  "channel": "primary",
+  "review_status": "Detailed recheck",
+  "proposed_primary_tier": "A",
+  "description": "The original A tier is supported by concrete application-side enforcement: the platform asset is accompanied by a detached signature, the asset bytes are checked with RSASSA-PKCS1-v1_5/SHA-256, and verification uses bundled public-key resources before the update is marked ready. The autoUpdate default is install, so the original auto-off detail is false and must be corrected. The unsigned version manifest and the fact that the later installer launches a cached asset limit the broader security conclusion, but they do not contradict the observed payload signature control or warrant changing the tier.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot at commit ad7891de92cf666400a6b4c859eeb731b0f68761, not the original study checkout; historical release behavior may differ.",
+    "This review establishes application-side signature verification and the default setting; release administration, key custody, TLS behavior outside the reviewed code, and platform installer internals are not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/keeweb/keeweb",
+      "commit": "ad7891de92cf666400a6b4c859eeb731b0f68761"
+    }
+  ],
+  "review_basis": "deep-source-recheck",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

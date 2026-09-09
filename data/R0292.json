@@ -1,0 +1,25 @@
+{
+  "id": "R0292",
+  "name": "MarkText",
+  "category": "Markdown editor (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/marktext/marktext",
+  "channel": "plugin",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "MarkText's reviewed desktop code uses electron-updater: it disables automatic download, asks the UI about an available update, downloads after the IPC decision, and calls quitAndInstall after the download event. Artifact hash and OS code-signing enforcement are delegated to updater and platform components not established by this source file.",
+  "limitations": [
+    "The checkout is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "electron-updater internals, generated release metadata, installer behavior, and OS code-signing policy were not independently established here.",
+    "The checkout is a newly retrieved default-branch snapshot, not the original study checkout. electron-updater internals, generated release metadata, installer behavior, and OS code-signing policy were not independently established here."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/marktext/marktext",
+      "commit": "1d3025b2b6306613a6fa0f822ba9bcaf8890b094"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

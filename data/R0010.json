@@ -1,0 +1,25 @@
+{
+  "id": "R0010",
+  "name": "Miranda NG",
+  "category": "Chat",
+  "historical_tier": "D",
+  "project_url": "https://github.com/miranda-ng/miranda-ng",
+  "channel": "mixed",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The inspected Miranda NG update component includes a supplied CRC32 check. The retained review does not establish the full transport policy, affected update scope, or original execution-impact conclusion.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
+    "The inspected source does not by itself prove transport behavior for every request or the historical study release.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; The inspected source does not by itself prove transport behavior for every request or the historical study release."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/miranda-ng/miranda-ng",
+      "commit": "311dd5a57e3c2c77d24d8a28ab61f50cf72e3650"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

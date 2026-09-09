@@ -1,0 +1,25 @@
+{
+  "id": "R0289",
+  "name": "RustDesk",
+  "category": "Remote desktop",
+  "historical_tier": "C",
+  "project_url": "https://github.com/rustdesk/rustdesk",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "RustDesk’s inspected updater constrains its download URLs to an HTTPS GitHub release location for its own repository. This supports the URL-policy observation; complete artifact authentication and the original impact claim remain unresolved.",
+  "limitations": [
+    "The checkout is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "The reviewed file does not establish release asset signing, framework installer checks, or behavior in other platform-specific updater implementations.",
+    "The checkout is a newly retrieved default-branch snapshot, not the original study checkout. The reviewed file does not establish release asset signing, framework installer checks, or behavior in other platform-specific updater implementations."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/rustdesk/rustdesk",
+      "commit": "692113c87e476c2e8a82a7cdb9aa98354abc11fc"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,25 @@
+{
+  "id": "R0623",
+  "name": "OctoFarm",
+  "category": "3D-print farm manager",
+  "historical_tier": "C",
+  "project_url": "https://github.com/OctoFarm/OctoFarm",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The retained OctoFarm source supports GitHub release discovery and version notification. Its self-update implementation and artifact-authentication policy remain unresolved.",
+  "limitations": [
+    "Newly recovered default-branch snapshot, not historical release re-verification.",
+    "The reviewed service does not establish a self-update executor, reset policy, PM2 integration, or release artifact verification; other files/dependencies were not treated as evidence for those claims.",
+    "Newly recovered default-branch snapshot, not historical release re-verification. The reviewed service does not establish a self-update executor, reset policy, PM2 integration, or release artifact verification; other files/dependencies were not treated as evidence for those claims."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/OctoFarm/OctoFarm",
+      "commit": "f22996b739b4c2285e7d342a026e86058d91c519"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0373",
+  "name": "Organizr",
+  "category": "Homelab dashboard",
+  "historical_tier": "D",
+  "project_url": "https://github.com/causefx/Organizr",
+  "channel": "plugin",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The marketplace helper disables verify_peer only when a non-empty GitHub token is configured; the default token is empty. Plugin/theme installs therefore support an opt-in plugin-channel finding, not a default primary updater tier.",
+  "limitations": [
+    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/causefx/Organizr",
+      "commit": "6b27515ff3bc6f4998ed83aca8c08be0998fd118"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

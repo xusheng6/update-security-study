@@ -1,0 +1,25 @@
+{
+  "id": "R0062",
+  "name": "logseq",
+  "category": "Notes",
+  "historical_tier": "B",
+  "project_url": "https://github.com/logseq/logseq",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Logseq selects a platform and architecture update channel, disables downgrade, and enables auto-retrieval only for permitted production configuration; the application source does not establish SHA512 or Windows Authenticode enforcement.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot; not historical release re-verification.",
+    "External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown.",
+    "Newly retrieved default-branch snapshot; not historical release re-verification.; External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/logseq/logseq",
+      "commit": "d2ab7726ab74402c14fdbc33041a89ac55c899ae"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

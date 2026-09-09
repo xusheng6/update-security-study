@@ -1,0 +1,24 @@
+{
+  "id": "R0580",
+  "name": "n",
+  "category": "Node version manager",
+  "historical_tier": "C",
+  "project_url": "https://github.com/tj/n",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports this narrow assessment: Node distribution archives are fetched from the HTTPS mirror and extracted without hash or signature verification; insecure transport is opt-in.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/tj/n",
+      "commit": "f52d2172f12cd76f0efe9524690723f52ab74f40"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

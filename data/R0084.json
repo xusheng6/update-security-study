@@ -1,0 +1,25 @@
+{
+  "id": "R0084",
+  "name": "Dolphin",
+  "category": "GameCube/Wii emu",
+  "historical_tier": "A",
+  "project_url": "https://github.com/dolphin-emu/dolphin",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Withdraw the original security classification for this record. Dolphin has platform-specific updater components in the recovered source, but this review did not establish the claimed Ed25519 manifest and per-file hash enforcement. The retained evidence is insufficient to support the original full claim.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.",
+    "The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module.",
+    "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/dolphin-emu/dolphin",
+      "commit": "a2efdf1197be8132674b90fe9cf4761df39752ed"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0069",
+  "name": "Podman Desktop",
+  "category": "Containers",
+  "historical_tier": "B",
+  "project_url": "https://github.com/containers/podman-desktop",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Podman Desktop integrates electron-updater, explicitly disables automatic retrieval and supports a configured generic update feed. The wrapper does not independently establish the claimed SHA-512 enforcement.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not original study checkout; runtime updater and release metadata remain outside this review."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/containers/podman-desktop",
+      "commit": "1522072a647c8337ba8c2e8225b29acbebe54e11"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

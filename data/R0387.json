@@ -1,0 +1,23 @@
+{
+  "id": "R0387",
+  "name": "OpenCPN",
+  "category": "Marine navigation",
+  "historical_tier": "D",
+  "project_url": "https://github.com/OpenCPN/OpenCPN",
+  "channel": "plugin",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The plugin downloader disables TLS verification, accepts an empty catalog checksum, and passes the archive into native-plugin installation. This supports the plugin channel; primary app update scope is unresolved.",
+  "limitations": [
+    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/OpenCPN/OpenCPN",
+      "commit": "01873e32db4db7f818a7122cfaa07b9bc498456e"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

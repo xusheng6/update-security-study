@@ -1,0 +1,24 @@
+{
+  "id": "R0590",
+  "name": "MQTTX",
+  "category": "MQTT client (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/emqx/MQTTX",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "B",
+  "description": "Targeted retained-source read supports the narrow primary updater classification: MQTTX uses an HTTPS vendor feed, disables automatic installation, downloads after update-available, and waits for an explicit quit-and-install action.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in configuration.",
+    "Where electron-updater/Squirrel/install4j performs final verification, the external framework implementation is not vendored here."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/emqx/MQTTX",
+      "commit": "adac756302a9b75be052d12329a82a64d0a04749"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

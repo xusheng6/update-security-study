@@ -1,0 +1,24 @@
+{
+  "id": "R0020",
+  "name": "FrostWire",
+  "category": "P2P · LimeWire fork",
+  "historical_tier": "C",
+  "project_url": "https://github.com/frostwire/frostwire",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Retained source supports a narrow C classification for the desktop primary updater: HTTPS metadata/download plus an unsigned, server-supplied MD5 comparison before launch. The source does not establish an independent signing trust root.",
+  "limitations": [
+    "MD5 and metadata are server-supplied over the update channel; no independent signature/key was found in the inspected updater files.",
+    "Release artifact behavior and current server configuration are unresolved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/frostwire/frostwire",
+      "commit": "59351d7eab2afd273f0914612571fda886f3db5c"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

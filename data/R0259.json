@@ -1,0 +1,23 @@
+{
+  "id": "R0259",
+  "name": "Scroll Reverser",
+  "category": "Mouse utility (mac)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/pilotmoon/Scroll-Reverser",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the reviewed Scroll Reverser snapshot, macOS Info.plist enables Sparkle automatic checks, disables automatic installation, and contains a SUPublicEDKey. Release-specific enforcement remains unresolved.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study release; built artifacts, feed contents, and historical Sparkle enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/pilotmoon/Scroll-Reverser",
+      "commit": "187bf3945b6107cd8486327c6165f32e523535a4"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

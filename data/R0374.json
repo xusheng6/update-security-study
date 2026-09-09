@@ -1,0 +1,23 @@
+{
+  "id": "R0374",
+  "name": "PlayOnLinux",
+  "category": "Wine front-end",
+  "historical_tier": "D",
+  "project_url": "https://github.com/PlayOnLinux/POL-POM-4",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "D",
+  "description": "The installer fetches scripts from an HTTP repository; its GPG failure path warns but still runs the script. macOS additionally uses wget with certificate checks disabled.",
+  "limitations": [
+    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/PlayOnLinux/POL-POM-4",
+      "commit": "fde00fecf468ac05c54a14a85065a954b284f14d"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

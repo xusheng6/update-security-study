@@ -1,0 +1,23 @@
+{
+  "id": "R0012",
+  "name": "session-desktop",
+  "category": "Chat",
+  "historical_tier": "C",
+  "project_url": "https://github.com/session-foundation/session-desktop",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Session updater uses electron-updater with periodic checks; platform install behavior is gated by canAutoUpdate.",
+  "limitations": [
+    "Newly retrieved/recovered source snapshot; this is not historical source re-verification. Released artifact behavior and external framework enforcement remain unverified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/session-foundation/session-desktop",
+      "commit": "5e7ee416cf0e7e35e0f815a71d2545094df2d3c0"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

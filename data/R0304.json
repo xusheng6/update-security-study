@@ -1,0 +1,25 @@
+{
+  "id": "R0304",
+  "name": "Varia",
+  "category": "Download manager (GTK)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/giantpinkrobots/varia",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports the narrow recorded behavior: Varia's opt-in updater fetches GitHub release metadata over HTTPS and downloads the selected binary without a hash or signature check.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "The retained snapshot does not establish current released artifact behavior or independent release signing.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/giantpinkrobots/varia",
+      "commit": "840cd3bd3a628a17e26a73d681be6ce31bbe4bf6"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

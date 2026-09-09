@@ -1,0 +1,25 @@
+{
+  "id": "R0107",
+  "name": "zotero",
+  "category": "Reference manager",
+  "historical_tier": "A",
+  "project_url": "https://github.com/zotero/zotero",
+  "channel": "primary",
+  "review_status": "Detailed recheck",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The original A-tier explanation depends on a pinned MAR verification boundary. The exact Windows mozconfig instead requests an updater built with MAR signature verification disabled, and the packaging caller installs Zotero's custom updater on Windows, macOS, and Linux because Mozilla's updater requires Mozilla-signed updates. MAR creation is present, but it is not evidence that the updater enforces MAR signatures. This is a concrete contradiction to the claimed protection, while the retained source does not provide enough updater-archive internals, release artifact mapping, or feed configuration to assign a defensible lower tier. The original A classification should therefore change to unresolved pending release-specific updater evidence.",
+  "limitations": [
+    "The checkout is a newly retrieved default-branch snapshot at commit fc17dcd24ad34686cb24e6b3ffb06a6a7a5e0e5d, not the original study checkout.",
+    "The updater binaries are packaged archives referenced by build scripts and were not independently inspected; no shipped release artifact was mapped to this mozconfig.",
+    "The HTTP legacy extension update channel is separate from the primary application updater and is not used here to infer the primary channel's tier."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/zotero/zotero",
+      "commit": "fc17dcd24ad34686cb24e6b3ffb06a6a7a5e0e5d"
+    }
+  ],
+  "review_basis": "deep-source-recheck",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

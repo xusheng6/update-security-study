@@ -1,0 +1,24 @@
+{
+  "id": "R0573",
+  "name": "Buildozer",
+  "category": "Mobile packaging (Python)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/kivy/buildozer",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports this narrow assessment: Build tool downloads write URL response bytes directly and do not perform a hash or signature check before extraction.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/kivy/buildozer",
+      "commit": "105543da41f7a0c866a46ff07d10cb8137df2e7b"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

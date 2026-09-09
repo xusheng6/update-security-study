@@ -1,0 +1,32 @@
+name: Correct a study record
+description: Suggest a correction to a published classification or description.
+title: "Correction: "
+body:
+  - type: input
+    id: record
+    attributes:
+      label: Project and record ID
+      placeholder: Project name, R0123
+    validations:
+      required: true
+  - type: input
+    id: scope
+    attributes:
+      label: Version, platform, and update channel
+      description: Distinguish the primary application updater from plugins, firmware, and other channels.
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: What should change?
+      description: Explain the incorrect statement and suggest replacement wording or a revised assessment.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Supporting evidence
+      description: Link source revisions or documentation supporting your correction. Do not include private credentials or an undisclosed exploit.
+    validations:
+      required: true

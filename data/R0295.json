@@ -1,0 +1,23 @@
+{
+  "id": "R0295",
+  "name": "Signal Desktop",
+  "category": "Messenger (Electron)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/signalapp/Signal-Desktop",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "A",
+  "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/signalapp/Signal-Desktop",
+      "commit": "aee156c662c64dc6cbe5e363325565f5cbd7203a"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

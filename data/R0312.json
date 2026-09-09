@@ -1,0 +1,26 @@
+{
+  "id": "R0312",
+  "name": "OctoPrint",
+  "category": "3D print host",
+  "historical_tier": "C",
+  "project_url": "https://github.com/OctoPrint/OctoPrint",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The reviewed OctoPrint software-update configuration uses pip with a versioned GitHub archive URL for the OctoPrint target; the cited source does not establish an independent publisher signature check or the behavior of plugin updates.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout.",
+    "The cited block does not prove how pip or plugin installation verifies artifacts at runtime.",
+    "Plugin Manager behavior and historical released behavior require separate version-matched evidence.",
+    "Newly retrieved default-branch snapshot, not the original study checkout. The cited block does not prove how pip or plugin installation verifies artifacts at runtime. Plugin Manager behavior and historical released behavior require separate version-matched evidence."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/OctoPrint/OctoPrint",
+      "commit": "70c17d2c66546506e967cb24db187346cc8eb3a6"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

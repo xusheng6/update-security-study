@@ -1,0 +1,23 @@
+{
+  "id": "R0247",
+  "name": "Wave Terminal",
+  "category": "Terminal",
+  "historical_tier": "B",
+  "project_url": "https://github.com/wavetermdev/waveterm",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the reviewed Wave Terminal snapshot, the builder enables update files for all channels and derives Windows signing configuration from a code-signing certificate environment value; the runtime reads app-update.yml for its update channel. Release-specific signing and platform enforcement remain unresolved.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study release; no release artifact, notarization record, or Linux verification implementation was inspected."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/wavetermdev/waveterm",
+      "commit": "a4447c1563b2df285ab89e76c82f91e1a1a49c1e"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

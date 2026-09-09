@@ -1,0 +1,23 @@
+{
+  "id": "R0522",
+  "name": "LazyLibrarian",
+  "category": "Book automation",
+  "historical_tier": "C",
+  "project_url": "https://gitlab.com/LazyLibrarian/LazyLibrarian",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "LazyLibrarian extracts the GitLab tarball over the application; TLS verification is configuration-dependent and no payload signature is checked.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://gitlab.com/LazyLibrarian/LazyLibrarian",
+      "commit": "ac0165828ee490beae20c72dcb2e16417b393ca2"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

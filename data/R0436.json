@@ -1,0 +1,24 @@
+{
+  "id": "R0436",
+  "name": "Home Assistant",
+  "category": "Home automation hub",
+  "historical_tier": "C",
+  "project_url": "https://github.com/home-assistant/supervisor",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The reviewed Supervisor code validates a repository configuration before updating its Git-backed store and pulls selected Docker images with repository, version, platform, and optional registry-credential parameters; it does not establish the historical add-on payload trust classification.",
+  "limitations": [
+    "New default-branch Supervisor snapshot, not the historical add-on release. The complete add-on/OTA path, image provenance policy, and release-specific enforcement remain unverified.",
+    "The snapshot is a new Supervisor default branch, not the historical add-on release; the complete add-on/OTA path, image provenance policy, and release-specific enforcement remain unverified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/home-assistant/supervisor",
+      "commit": "0a7aa2240500ca49b5f35ab283d407967f730f14"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

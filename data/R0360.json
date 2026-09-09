@@ -1,0 +1,24 @@
+{
+  "id": "R0360",
+  "name": "tinyMediaManager",
+  "category": "Media library",
+  "historical_tier": "C",
+  "project_url": "https://gitlab.com/tinyMediaManager/tinyMediaManager",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "tinyMediaManager uses Getdown metadata/resource verification and automatically installs verified resources; the digest source is the same appbase.",
+  "limitations": [
+    "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+  ],
+  "sources": [
+    {
+      "url": "https://gitlab.com/tinyMediaManager/tinyMediaManager",
+      "commit": "39e8d16399159a029bdd0bc6753120cbed3fe57f"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

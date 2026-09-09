@@ -1,0 +1,24 @@
+{
+  "id": "R0509",
+  "name": "Livebook",
+  "category": "Elixir notebook (Tauri)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/livebook-dev/livebook",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "A",
+  "description": "Targeted retained-source read supports the narrow Tier A behavior for this primary application updater: Livebook checks for updates on boot, prompts before download/install, and invokes tauri-plugin-updater download_and_install after user confirmation; the Tauri config supplies the pinned key.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in pinned key/configuration.",
+    "Framework verification depends on the packaged updater implementation where the application delegates to Sparkle or tauri-plugin-updater."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/livebook-dev/livebook",
+      "commit": "bab7c1460dd9be195ddffa6d77093c26be776158"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

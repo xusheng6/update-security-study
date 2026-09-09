@@ -1,0 +1,25 @@
+{
+  "id": "R0622",
+  "name": "moonraker-obico",
+  "category": "3D-print remote-access",
+  "historical_tier": "C",
+  "project_url": "https://github.com/TheSpaghettiDetective/moonraker-obico",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The retained moonraker-obico configuration delegates maintenance to Moonraker's git_repo update-manager with an HTTPS GitHub origin. The dependency's repository-update and commit-authentication policy remains unresolved.",
+  "limitations": [
+    "Newly recovered default-branch snapshot, not historical release re-verification.",
+    "Moonraker's git_repo implementation and any commit-signature controls are external to this checkout; no conclusion is made about their absence.",
+    "Newly recovered default-branch snapshot, not historical release re-verification. Moonraker's git_repo implementation and any commit-signature controls are external to this checkout; no conclusion is made about their absence."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/TheSpaghettiDetective/moonraker-obico",
+      "commit": "343be225c40eedab86a8c0518eefdc809d374800"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

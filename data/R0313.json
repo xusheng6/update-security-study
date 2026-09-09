@@ -1,0 +1,26 @@
+{
+  "id": "R0313",
+  "name": "Moonraker",
+  "category": "Klipper API host",
+  "historical_tier": "C",
+  "project_url": "https://github.com/Arksine/moonraker",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Moonraker has separate Git and archive deployment channels. The retained evidence does not establish their complete publisher-authentication policies or support the original impact and deployment-prevalence conclusions.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout.",
+    "No claim is made here about all deploy classes, release-era behavior, or publisher signing outside the cited paths.",
+    "The source does not substantiate the asserted population size or single-point-of-compromise conclusion.",
+    "Newly retrieved default-branch snapshot, not the original study checkout. No claim is made here about all deploy classes, release-era behavior, or publisher signing outside the cited paths. The source does not substantiate the asserted population size or single-point-of-compromise conclusion."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Arksine/moonraker",
+      "commit": "985c1d0bbeb90bc057d34a232c9dc3b05e0c6c8d"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

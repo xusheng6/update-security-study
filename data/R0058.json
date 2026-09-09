@@ -1,0 +1,25 @@
+{
+  "id": "R0058",
+  "name": "ollama",
+  "category": "LLM runtime",
+  "historical_tier": "B",
+  "project_url": "https://github.com/ollama/ollama",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Withdraw the original security classification for this record. Ollama’s desktop updater signs update-check requests, retrieves the returned installer, and verifies it through a platform hook before marking it ready; the Windows implementation calls WinVerifyTrustEx and reads the signer subject, but this snapshot does not show an explicit Ollama Inc. organization comparison. The retained evidence is insufficient to support the original full claim.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot; not historical release re-verification.",
+    "External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown.",
+    "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/ollama/ollama",
+      "commit": "83ed7d9965b1ee07e0f0b29fd46e47c31f0fcab8"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,24 @@
+{
+  "id": "R0419",
+  "name": "Textual",
+  "category": "IRC client (mac)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/Codeux-Software/Textual",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the reviewed Textual snapshot, Sparkle automatic updates use the HTTPS feed configured in the application plist and the app starts SPUStandardUpdaterController. The retained source does not establish a pinned EdDSA trust root or released artifact signing policy.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study checkout; SUPublicEDKey/key material, generated feeds, released artifacts, and independent release-signing verification remain unverified.",
+    "The snapshot is a newly retrieved default branch rather than the original study checkout; generated feeds, released artifacts, and build-injected key material remain unverified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Codeux-Software/Textual",
+      "commit": "4f093128cef99c5c0478ea548b9f3e5fd2543510"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

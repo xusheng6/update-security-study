@@ -1,0 +1,25 @@
+{
+  "id": "R0178",
+  "name": "Rambox",
+  "category": "Messenger aggregator",
+  "historical_tier": "B",
+  "project_url": "https://github.com/ramboxapp/community-edition",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Rambox uses electron-updater with a GitHub feed and an IPC-triggered quit-and-install path. SHA512 and platform code-signature enforcement are delegated to electron-updater/package tooling and remain unresolved in this application-source review.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; historical release behavior is not reverified.",
+    "The cited app source delegates digest and platform-signature enforcement to electron-updater and its packaging/runtime dependencies.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; historical release behavior is not reverified. The cited app source delegates digest and platform-signature enforcement to electron-updater and its packaging/runtime dependencies."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/ramboxapp/community-edition",
+      "commit": "eaa33fc8f3ce5f9600b032fd9ca7cfba1827b84f"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

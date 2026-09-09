@@ -1,0 +1,26 @@
+{
+  "id": "R0299",
+  "name": "VLC",
+  "category": "Media player",
+  "historical_tier": "A",
+  "project_url": "https://github.com/videolan/vlc",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "VLC's reviewed updater authenticates its status data and downloaded update files with OpenPGP signatures against an embedded VideoLAN public key. It checks the signature issuer and hash and deletes the downloaded file on signature, issuer, hash, or signature-download failure. The reviewed snapshot does not by itself establish the original study release's key lifecycle or artifact provenance.",
+  "limitations": [
+    "The retrieved source is an official VideoLAN GitHub mirror and a newly retrieved filtered snapshot, not the original study checkout.",
+    "The header comments identify a historical release key; current release key rotation and published artifact provenance were not independently established.",
+    "No build or execution was performed.",
+    "The retrieved source is an official VideoLAN GitHub mirror and a newly retrieved filtered snapshot, not the original study checkout. The header comments identify a historical release key; current release key rotation and published artifact provenance were not independently established. No build or execution was performed."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/videolan/vlc",
+      "commit": "2769a335d22528bbd15f1958ac93ca583e4c770b"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

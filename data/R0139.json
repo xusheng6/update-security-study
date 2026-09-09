@@ -1,0 +1,25 @@
+{
+  "id": "R0139",
+  "name": "Decky Loader",
+  "category": "Steam Deck plugins",
+  "historical_tier": "C",
+  "project_url": "https://github.com/SteamDeckHomebrew/decky-loader",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Decky Loader selects a release channel and schedules periodic update checks. The original detailed privilege and verification-bypass claims remain unresolved; the primary and plugin channels require separate evidence.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+    "Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/SteamDeckHomebrew/decky-loader",
+      "commit": "1ea69d315a49376e32f1fba46ffa7d028eed8046"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

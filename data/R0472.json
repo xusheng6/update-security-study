@@ -1,0 +1,24 @@
+{
+  "id": "R0472",
+  "name": "chatd",
+  "category": "Local AI chat (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/BruceMacD/chatd",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "B",
+  "description": "Targeted retained-source read supports the narrow primary updater behavior: The macOS updater sets its feed URL, checks immediately and hourly, and accepts the downloaded update for installation on restart; the Windows path is explicitly disabled by the surrounding condition/comment.",
+  "limitations": [
+    "The retained snapshot does not establish all released artifact signing and deployment details of the current upstream release.",
+    "Framework-delegated verification behavior depends on the packaged updater and release configuration."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/BruceMacD/chatd",
+      "commit": "a2160988a7f08ca682cbe4b07345868f7c1bc2d3"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

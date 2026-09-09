@@ -1,0 +1,25 @@
+{
+  "id": "R0118",
+  "name": "Buttercup",
+  "category": "Password mgr",
+  "historical_tier": "B",
+  "project_url": "https://github.com/buttercup/buttercup-desktop",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Buttercup's desktop updater checks the buttercup-desktop GitHub feed about every 30 minutes, leaves electron-updater auto-retrieval disabled until the user starts a retrieval, and installs a retrieved update through the install action. Release scripts publish SHA-512 metadata and invoke a Windows signing hook; this review does not establish application-pinned runtime verification.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; electron-updater dependency internals and release-specific signing credentials are outside this tree.",
+    "Metadata generation and a signing hook do not establish independent runtime verification of the downloaded artifact.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; electron-updater dependency internals and release-specific signing credentials are outside this tree.; Metadata generation and a signing hook do not establish independent runtime verification of the downloaded artifact."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/buttercup/buttercup-desktop",
+      "commit": "cb98fe711b555fb1b0e3f7ffdc3a85cd844d7307"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0213",
+  "name": "Itsycal",
+  "category": "Calendar (mac)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/sfsam/Itsycal",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The reviewed Itsycal macOS target enables scheduled Sparkle checks, points to its S3 appcast, and embeds SUPublicEDKey. Its preferences bind the automatic-check setting to SUUpdater.sharedUpdater; the source therefore supports a configured Sparkle EdDSA trust key, with framework enforcement and released artifacts outside this snapshot.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release re-verification; Sparkle framework enforcement, appcast contents, and released artifact signatures were not independently audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/sfsam/Itsycal",
+      "commit": "8d7676d2269a37c926ecf79a5095944559beeea3"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

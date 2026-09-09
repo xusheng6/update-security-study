@@ -1,0 +1,23 @@
+{
+  "id": "R0274",
+  "name": "Vorta",
+  "category": "Backup GUI (Borg)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/borgbase/vorta",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the recovered Vorta updater, frozen macOS builds load Sparkle, select a stable or pre-release HTTPS appcast, optionally enable background checks, and disable automatic downloads. The reviewed source does not establish a SUPublicEDKey, Apple Developer ID fallback, or updater implementation for non-macOS builds.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release re-verification; Sparkle framework enforcement, released bundle signing identity, SUPublicEDKey or fallback behavior, and platform packaging were not independently audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/borgbase/vorta",
+      "commit": "ebf7571293a0f34250274c1ab3cb5dc19084a568"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

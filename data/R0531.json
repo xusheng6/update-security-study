@@ -1,0 +1,23 @@
+{
+  "id": "R0531",
+  "name": "Yacht",
+  "category": "Docker manager (web)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/SelfhostedPro/Yacht",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Yacht starts watchtower:latest with the Docker socket to replace the target container, including Yacht itself.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/SelfhostedPro/Yacht",
+      "commit": "7ea29dc97cf0dcc35fb43044fb462284dcf9ae98"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0503",
+  "name": "WonderCMS",
+  "category": "Flat-file CMS (PHP)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/WonderCMS/wondercms",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The update action fetches replacement index.php content and writes it over the live application.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/WonderCMS/wondercms",
+      "commit": "f7501135e4f81502bd99675d0f0c58fde706e49f"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

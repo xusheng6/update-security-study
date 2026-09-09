@@ -1,0 +1,25 @@
+{
+  "id": "R0021",
+  "name": "FileZilla",
+  "category": "FTP client",
+  "historical_tier": "C",
+  "project_url": "https://github.com/botg/FileZilla3",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "FileZilla’s updater uses an embedded root certificate for update metadata, then retrieves the selected installer and verifies its exact size and SHA-512 against parsed update metadata before retaining it. The inspected source does not establish the complete trust behavior of the subsequent HTTP path.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
+    "The external HTTP trust implementation and the authority of the metadata endpoint were not independently audited.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; The external HTTP trust implementation and the authority of the metadata endpoint were not independently audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/botg/FileZilla3",
+      "commit": "ab8ed7a547ecdd6dd3582977621e9215f0855a9d"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

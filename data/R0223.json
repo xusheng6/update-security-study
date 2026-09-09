@@ -1,0 +1,23 @@
+{
+  "id": "R0223",
+  "name": "Chatbox",
+  "category": "LLM client",
+  "historical_tier": "C",
+  "project_url": "https://github.com/chatboxai/chatbox",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Chatbox’s updater constructor enables automatic downloading and installation on quit. This supports those defaults in the inspected source; the asserted Windows code-signature setting remains unresolved.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release re-verification; the updater module's full configuration, packaging metadata, and external electron-updater enforcement were not independently established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/chatboxai/chatbox",
+      "commit": "e97c1dbd4ad02d6e017b6ac4176e103f3175cb64"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

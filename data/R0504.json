@@ -1,0 +1,23 @@
+{
+  "id": "R0504",
+  "name": "Automad",
+  "category": "Flat-file CMS (PHP)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/marcantondahmen/automad",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The update archive is fetched and then unpacked into application files without a signature/hash step.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/marcantondahmen/automad",
+      "commit": "79c05a0a5a1b2a094e93b79f9e08e113c6acb768"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

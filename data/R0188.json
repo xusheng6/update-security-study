@@ -1,0 +1,23 @@
+{
+  "id": "R0188",
+  "name": "Station",
+  "category": "App aggregator",
+  "historical_tier": "C",
+  "project_url": "https://github.com/getstation/desktop-app",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the retrieved Station checkout, packaged builds use electron-updater, poll for updates every 30 minutes, and can quit and install after an update is downloaded; the Windows electron-builder configuration explicitly sets verifyUpdateCodeSignature to false. The effective updater verification behavior remains framework-dependent.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot rather than the original study release; release metadata and the framework's internal verification implementation were not audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/getstation/desktop-app",
+      "commit": "c64d541d2a3eb1ac5e8792888daedff51a215c2f"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

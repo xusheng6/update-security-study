@@ -1,0 +1,23 @@
+{
+  "id": "R0077",
+  "name": "Tailscale",
+  "category": "VPN / mesh",
+  "historical_tier": "A",
+  "project_url": "https://github.com/tailscale/tailscale",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Tailscale distsign validates a fetched signing-key bundle against embedded Ed25519 roots and validates retrieved package signatures before finalization; the Windows path additionally verifies MSI Authenticode with the expected Tailscale Inc. certificate subject.",
+  "limitations": [
+    "Newly retrieved Tailscale default-branch snapshot, not the original study checkout; update scheduling, installer deployment details, and historical release behavior were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/tailscale/tailscale",
+      "commit": "5201273aec737d6372ab7423c31c04ca3ca2a0c2"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

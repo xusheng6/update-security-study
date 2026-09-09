@@ -1,0 +1,23 @@
+{
+  "id": "R0525",
+  "name": "rodeo",
+  "category": "Data-science IDE (Electron)",
+  "historical_tier": "D",
+  "project_url": "https://github.com/yhat/rodeo",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "D",
+  "description": "The Electron updater constructs a plaintext HTTP feed URL and hands it to Squirrel’s download/install flow. The retained source does not show an independent application signature policy in this path.",
+  "limitations": [
+    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/yhat/rodeo",
+      "commit": "aa1929b1596d1161cd81c930603636a929462ea3"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

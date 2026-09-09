@@ -1,0 +1,24 @@
+{
+  "id": "R0470",
+  "name": "Ollamac",
+  "category": "Ollama client (mac)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/kevinhermawan/Ollamac",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "B",
+  "description": "Targeted retained-source read supports the narrow primary updater behavior: Sparkle feed metadata includes a compiled SUPublicEDKey, while the app starts SPUStandardUpdaterController at launch; the primary updater therefore has a pinned EdDSA trust root.",
+  "limitations": [
+    "The retained snapshot does not establish all released artifact signing and deployment details of the current upstream release.",
+    "Framework-delegated verification behavior depends on the packaged updater and release configuration."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/kevinhermawan/Ollamac",
+      "commit": "7c6bc45238838a7b80c785335203efceef95e4f2"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

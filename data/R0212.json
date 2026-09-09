@@ -1,0 +1,23 @@
+{
+  "id": "R0212",
+  "name": "FinalBurn Neo",
+  "category": "Arcade emulator (mac)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/finalburnneo/FBNeo",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The reviewed FinalBurn Neo macOS target configures Sparkle with the akop.org appcast and SUPublicDSAKeyFile=dsa_pub.pem; its main menu wires Check for Updates to SUUpdater, and the referenced dsa_pub.pem is bundled in the project. This supports a configured Sparkle DSA key path, subject to the external framework and released artifact behavior.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release re-verification; Sparkle framework enforcement, appcast contents, and shipped artifact settings were not independently audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/finalburnneo/FBNeo",
+      "commit": "598d84300866d4128be2dcff0c07583258ae951c"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,24 @@
+{
+  "id": "R0481",
+  "name": "gnome-packagekit",
+  "category": "Package manager GUI",
+  "historical_tier": "B",
+  "project_url": "https://gitlab.gnome.org/GNOME/gnome-packagekit",
+  "channel": "package-manager",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Targeted retained-source read supports the narrow package-manager behavior: gnome-packagekit presents a modal warning when PackageKit reports an untrusted package and asks the user whether to continue; verification is performed by the PackageKit backend.",
+  "limitations": [
+    "This application delegates payload verification to PackageKit/Flatpak/snapd/apt backends; the external backend version and active keyring are outside this checkout.",
+    "This evidence does not establish a complete primary self-updater classification."
+  ],
+  "sources": [
+    {
+      "url": "https://gitlab.gnome.org/GNOME/gnome-packagekit",
+      "commit": "c628672988f4df70001ca84d6b6bbf391c4c30b5"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

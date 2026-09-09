@@ -1,0 +1,25 @@
+{
+  "id": "R0044",
+  "name": "Rocket.Chat.Electron",
+  "category": "Team chat",
+  "historical_tier": "B",
+  "project_url": "https://github.com/RocketChat/Rocket.Chat.Electron",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Rocket.Chat Electron enables electron-builder’s Windows update-code-signature verification and uses electron-updater for the check/retrieval/install flow; coverage of other platforms and released artifacts remains outside this source snapshot.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+    "The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/RocketChat/Rocket.Chat.Electron",
+      "commit": "729869a62172012d96700e4228c4ecff4fcb8aaf"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

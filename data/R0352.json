@@ -1,0 +1,26 @@
+{
+  "id": "R0352",
+  "name": "Portfolio Performance",
+  "category": "Investment tracker",
+  "historical_tier": "B",
+  "project_url": "https://github.com/buchen/portfolio",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Portfolio Performance enables an Eclipse p2 in-app update operation against its HTTPS update site. UpdateHelper registers and refreshes p2 metadata and artifact repositories and runs provisioning after confirmation; active bundle-signing trust roots and released signatures remain delegated to external p2/JRE configuration.",
+  "limitations": [
+    "New default-branch snapshot, not historical release re-verification.",
+    "Active p2/JRE certificate trust root and released signed bundles are not independently verified.",
+    "No claim is made about current release signing.",
+    "New default-branch snapshot, not historical release re-verification. Active p2/JRE certificate trust root and released signed bundles are not independently verified. No claim is made about current release signing."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/buchen/portfolio",
+      "commit": "ee9768567617a536d032bd8d308b19253edfe0ae"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

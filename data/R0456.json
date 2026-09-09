@@ -1,0 +1,25 @@
+{
+  "id": "R0456",
+  "name": "Blink",
+  "category": "SIP softphone",
+  "historical_tier": "C",
+  "project_url": "https://github.com/AGProjects/blink-qt",
+  "channel": "plugin",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the inspected Blink Windows source, WinSparkle is initialized with the configurable updater_url, whose default is an HTTPS appcast URL; this checkout contains no application-level DSA/EdDSA key configuration, while WinSparkle DLL verification remains unresolved.",
+  "limitations": [
+    "New default-branch snapshot, not the historical Blink release under study.",
+    "WinSparkle DLL/framework source and its runtime signature policy were not reviewed; absence of a key in Blink's Python wrapper is not evidence that the external library cannot verify signatures.",
+    "New default-branch snapshot, not the historical Blink release under study. WinSparkle DLL/framework source and its runtime signature policy were not reviewed; absence of a key in Blink's Python wrapper is not evidence that the external library cannot verify signatures."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/AGProjects/blink-qt",
+      "commit": "a6485ba79905bbe92ec1acf264dc4b44a5edea4a"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

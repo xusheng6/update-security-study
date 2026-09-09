@@ -1,0 +1,23 @@
+{
+  "id": "R0150",
+  "name": "Gomuks",
+  "category": "Matrix chat",
+  "historical_tier": "B",
+  "project_url": "https://github.com/tulir/gomuks",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Gomuks desktop packaging configures a macOS update manifest and a Squirrel Windows maker with its remote feed commented out; the reviewed bundled updater's complete signature boundary remains outside this source evidence.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; framework-level Electron/Squirrel enforcement and released artifact behavior may differ."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/tulir/gomuks",
+      "commit": "2ea9abdb684a41c7cdde3d11e6021d56c7f1d5b2"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

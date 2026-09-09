@@ -1,0 +1,23 @@
+{
+  "id": "R0541",
+  "name": "FreeScout",
+  "category": "Helpdesk (web)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/freescout-help-desk/freescout",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "FreeScout builds a GitHub zipball URL, downloads it, and unzips it without an application-level signature/checksum.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/freescout-help-desk/freescout",
+      "commit": "ab2772536811d5de6e23121c5d086aeb50f3db2c"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

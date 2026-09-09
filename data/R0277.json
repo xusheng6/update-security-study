@@ -1,0 +1,23 @@
+{
+  "id": "R0277",
+  "name": "Storyboarder",
+  "category": "Storyboard tool (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/wonderunit/storyboarder",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Storyboarder's recovered Electron updater checks for updates with automatic downloading disabled, prompts the user, downloads after confirmation, and schedules quitAndInstall. Its build metadata names a Windows publisher and an afterSign notarization hook; application-source evidence for sha512 enforcement and released artifact signing remains unresolved.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release re-verification; electron-updater internals, generated metadata, platform signing output, and notarization results were not independently audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/wonderunit/storyboarder",
+      "commit": "8b81a25c71d5f7ca46e8d5b8e3d4f7b3968f95c2"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

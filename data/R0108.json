@@ -1,0 +1,25 @@
+{
+  "id": "R0108",
+  "name": "OpenSCAD",
+  "category": "CAD (mac)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/openscad/openscad",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "OpenSCAD’s macOS updater wraps Sparkle and its bundle template names a DSA public-key file and the files.openscad.org appcast. This is a configured trust-key observation for the inspected snapshot.",
+  "limitations": [
+    "Newly retrieved source snapshot, not proof of original-release behavior.",
+    "The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified.",
+    "Newly retrieved source snapshot, not proof of original-release behavior.; The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/openscad/openscad",
+      "commit": "bff981a04e26d5d4722302b59c74759cdfe39d52"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

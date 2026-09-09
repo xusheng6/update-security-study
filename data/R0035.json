@@ -1,0 +1,25 @@
+{
+  "id": "R0035",
+  "name": "uv",
+  "category": "Python packager · CLI",
+  "historical_tier": "C",
+  "project_url": "https://github.com/astral-sh/uv",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The source confirms a primary self-update control flow and an official installer path, but it does not establish payload hash or signature verification. The official path executes the downloaded installer after HTTP status handling; the custom path is delegated to AxoUpdater. This supports a narrow C observation about self-update delivery, with verification unresolved.",
+  "limitations": [
+    "Newly retrieved snapshot at the recorded commit, not historical release verification.",
+    "AxoUpdater implementation and its installer/runtime verification are external dependencies not inspected here.",
+    "The official installer script itself is downloaded as a payload; no in-repo cryptographic verification is visible in the cited functions."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/astral-sh/uv",
+      "commit": "be95707d6e99d2bcb12ec1bd555d24143887ec75"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

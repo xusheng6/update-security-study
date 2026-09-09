@@ -1,0 +1,23 @@
+{
+  "id": "R0111",
+  "name": "nomacs",
+  "category": "Image viewer",
+  "historical_tier": "C",
+  "project_url": "https://github.com/nomacs/nomacs",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "nomacs downloads the installer and writes it without a cryptographic payload check.",
+  "limitations": [
+    "Newly retrieved/recovered source snapshot; this is not historical source re-verification. Released artifact behavior and external framework enforcement remain unverified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/nomacs/nomacs",
+      "commit": "8e3b16ff957c6d569c83f3bab0edee7e5154fb24"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

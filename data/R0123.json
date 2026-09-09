@@ -1,0 +1,25 @@
+{
+  "id": "R0123",
+  "name": "gopass",
+  "category": "Password mgr (CLI)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/gopasspw/gopass",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "gopass's built-in update flow refuses externally managed binaries, retrieves SHA256SUMS and SHA256SUMS.sig from the latest GitHub release, verifies the detached signature against embedded gopass release public keys, and checks the selected archive's SHA-256 before replacing the executable. Its updater HTTP client requires TLS 1.3 or newer.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; embedded key rotation and release behavior may change in later commits.",
+    "Evidence supports the updater source trust flow and does not independently audit GitHub release administration or a built binary.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; embedded key rotation and release behavior may change in later commits.; Evidence supports the updater source trust flow and does not independently audit GitHub release administration or a built binary."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/gopasspw/gopass",
+      "commit": "e2dd748cdbe12829f51f3e79035a11401e939616"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

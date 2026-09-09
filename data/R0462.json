@@ -1,0 +1,25 @@
+{
+  "id": "R0462",
+  "name": "Gradle",
+  "category": "Build tool",
+  "historical_tier": "C",
+  "project_url": "https://github.com/gradle/gradle",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The inspected Gradle wrapper supports SHA-256 checking through distributionSha256Sum configuration. This supports a configurable integrity control, not a complete publisher-authentication classification for all generated wrappers.",
+  "limitations": [
+    "New default-branch snapshot, not the historical Gradle wrapper revision under study.",
+    "The fallback .sha256 value is a checksum, not an independent publisher signature; release-side checksum publication and generated-wrapper defaults beyond this checkout were not independently verified.",
+    "New default-branch snapshot, not the historical Gradle wrapper revision under study. The fallback .sha256 value is a checksum, not an independent publisher signature; release-side checksum publication and generated-wrapper defaults beyond this checkout were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/gradle/gradle",
+      "commit": "9f6a7d3acb61228a9de4aee5b7ee80629b7bf8f4"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,25 @@
+{
+  "id": "R0286",
+  "name": "shadps4-qtlauncher",
+  "category": "Emulator launcher (PS4)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/shadps4-emu/shadps4-qtlauncher",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "shadps4-qtlauncher provides the launcher’s application-update workflow, with platform-specific installation handling. The reviewed source does not certify the original complete artifact-authentication or execution-impact claim.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study release.",
+    "This is a source observation about the launcher path; it does not test released artifacts or downstream shadPS4 updates.",
+    "Newly retrieved default-branch snapshot, not the original study release. This is a source observation about the launcher path; it does not test released artifacts or downstream shadPS4 updates."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/shadps4-emu/shadps4-qtlauncher",
+      "commit": "bf2c711d3e508671fe9b6b417355defff1fb6237"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

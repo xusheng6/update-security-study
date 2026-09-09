@@ -1,0 +1,24 @@
+{
+  "id": "R0392",
+  "name": "PDFCreator",
+  "category": "PDF printer (Windows)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/pdfforge/PDFCreator",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports the narrow recorded behavior: PDFCreator compares the downloaded file with an MD5 supplied by the same HTTPS update manifest before launching it.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "The retained snapshot does not establish current released artifact behavior or independent release signing."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/pdfforge/PDFCreator",
+      "commit": "e4ff3d454f0c431430ee5c084ce1b8dc7ea31e3a"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0381",
+  "name": "N.I.N.A.",
+  "category": "Astrophotography",
+  "historical_tier": "C",
+  "project_url": "https://github.com/isbeorn/nina",
+  "channel": "plugin",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "N.I.N.A.’s plugin installer validates checksums supplied by plugin metadata. The separate application updater and independent publisher authentication remain unestablished.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study checkout; no auditable application Windows-installer update path, endpoint provenance, Authenticode policy, or pinned-key policy was identified in the reviewed source."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/isbeorn/nina",
+      "commit": "cdb0dc4dbbe6ae964ba60636ead542c069155f65"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

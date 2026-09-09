@@ -1,0 +1,25 @@
+{
+  "id": "R0047",
+  "name": "Anytype",
+  "category": "Notes",
+  "historical_tier": "B",
+  "project_url": "https://github.com/anyproto/anytype-ts",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Withdraw the original security classification for this record. Anytype’s Electron client disables electron-updater automatic retrieval and install-on-quit defaults, uses retrieval from its update-available handler, and exposes a separate relaunch path; the reviewed source does not establish the released installation UX or signing/notarization enforcement. The retained evidence is insufficient to support the original full claim.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+    "The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot.",
+    "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/anyproto/anytype-ts",
+      "commit": "e0401c27f7526cfb337f762c52c8dd03a92e5287"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

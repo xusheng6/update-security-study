@@ -1,0 +1,27 @@
+{
+  "id": "R0523",
+  "name": "FOG Project",
+  "category": "Network imaging/deployment",
+  "historical_tier": "D",
+  "project_url": "https://github.com/FOGProject/fogproject",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "D",
+  "description": "The updater script disables certificate checks for version and tarball downloads, extracts the archive, and runs installfog.sh unattended. No independent payload authentication is present.",
+  "limitations": [
+    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/FOGProject/fogproject",
+      "commit": "9f3b5a8960aa840bda9876a2bda3ddb03d71328e"
+    },
+    {
+      "url": "https://github.com/FOGProject/fogproject",
+      "commit": "9f3b5a8960aa840bda9876a2bda3ddb03d71328e"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,24 @@
+{
+  "id": "R0006",
+  "name": "owncloud-client (Win)",
+  "category": "File sync",
+  "historical_tier": "C",
+  "project_url": "https://github.com/owncloud/client",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The recovered ownCloud source confirms a scheduled updater and apply path but no payload-authentication check in the inspected Windows updater hook; this supports the recorded narrow C classification.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; historical release/build behavior may differ.",
+    "Repository origin and commit were checked against the candidate metadata; this source is project-associated but does not establish the original study release checkout."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/owncloud/client",
+      "commit": "303063b691c6a79986364e8c68f428bffd8d944f"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0376",
+  "name": "oh-my-posh",
+  "category": "Shell prompt (CLI)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/JanDeDobbeleer/oh-my-posh",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "A",
+  "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/JanDeDobbeleer/oh-my-posh",
+      "commit": "263fd423421c21be68911c1fb57fbc0e308475e8"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

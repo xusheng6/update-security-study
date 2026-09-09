@@ -1,0 +1,23 @@
+{
+  "id": "R0250",
+  "name": "YesPlayMusic",
+  "category": "Music client",
+  "historical_tier": "C",
+  "project_url": "https://github.com/qier222/YesPlayMusic",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "YesPlayMusic invokes electron-updater outside development mode and configures GitHub publishing. The original claim that releases have no code-signing protection remains unresolved.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study release; no complete runtime updater integration or auditable release-signing decision was established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/qier222/YesPlayMusic",
+      "commit": "df075cca247eab7bf8686155cb8cc9a1f4c7e271"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

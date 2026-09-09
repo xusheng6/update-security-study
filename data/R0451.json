@@ -1,0 +1,23 @@
+{
+  "id": "R0451",
+  "name": "Tasmota",
+  "category": "IoT firmware (ESP)",
+  "historical_tier": "D",
+  "project_url": "https://github.com/arendst/Tasmota",
+  "channel": "firmware",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The OTA branch flashes firmware; ESP8266 uses the plaintext client and the optional ESP32 HTTPS mode is documented insecure. This is firmware scope, not a primary app updater.",
+  "limitations": [
+    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/arendst/Tasmota",
+      "commit": "76a450080ccb0f8e71518a73cc5fbec45d7a1556"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

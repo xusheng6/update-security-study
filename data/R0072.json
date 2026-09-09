@@ -1,0 +1,25 @@
+{
+  "id": "R0072",
+  "name": "Chromium",
+  "category": "Browser",
+  "historical_tier": "A",
+  "project_url": "https://chromium.googlesource.com/chromium/src",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Chromium's updater defaults enable CUP and CRX3 publisher-proof handling; the inspected Chromium source does not independently establish the CUP verification algorithm or an end-to-end compromised-CDN guarantee.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; the inspected tree does not contain the delegated update-client CUP verification implementation or release-specific Chromium build configuration.",
+    "The source shows the Chromium updater framework and defaults, not that every Chromium-based product uses these defaults.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; the inspected tree does not contain the delegated update-client CUP verification implementation or release-specific Chromium build configuration.; The source shows the Chromium updater framework and defaults, not that every Chromium-based product uses these defaults."
+  ],
+  "sources": [
+    {
+      "url": "https://chromium.googlesource.com/chromium/src",
+      "commit": "531b1a2c79bb07f68744d6c99ba8accac1339521"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,24 @@
+{
+  "id": "R0581",
+  "name": "nvm",
+  "category": "Node version manager",
+  "historical_tier": "C",
+  "project_url": "https://github.com/nvm-sh/nvm",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports this narrow assessment: nvm fetches SHASUMS256.txt from the same Node mirror and compares the archive hash, with no GPG signature verification.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/nvm-sh/nvm",
+      "commit": "6798d1dbc99e879f36a7d2eb2231104dc7e78e77"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

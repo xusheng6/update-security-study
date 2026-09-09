@@ -1,0 +1,25 @@
+{
+  "id": "R0483",
+  "name": "octopi",
+  "category": "Package manager GUI (Arch)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/aarnt/octopi",
+  "channel": "package-manager",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Octopi’s inspected yay helper derives a GitHub release asset and uses local archive handling; this source does not establish the pacman signing path or a digest/signature control for that helper.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external package-manager enforcement remain unverified.",
+    "The inspected function does not establish the pacman signing path or whether other AUR helpers use separate controls.",
+    "Primary classification remains UNRESOLVED under the evidence-review instruction; retained source is commit-scoped and does not establish all released or external framework behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/aarnt/octopi",
+      "commit": "0beadbf0f4b19151240657e6350ad9d5fd8b4702"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

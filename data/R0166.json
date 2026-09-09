@@ -1,0 +1,23 @@
+{
+  "id": "R0166",
+  "name": "WSJT-X",
+  "category": "Ham radio (WSJT)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/WSJTX/wsjtx",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "WSJT-X stages the downloaded Hamlib DLL by rename without hash/signature verification; this is a component channel.",
+  "limitations": [
+    "Newly retrieved/recovered source snapshot; this is not historical source re-verification. Released artifact behavior and external framework enforcement remain unverified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/WSJTX/wsjtx",
+      "commit": "ccdfaf3c1c109010d15399674ce278167cfde848"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

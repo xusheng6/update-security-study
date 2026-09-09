@@ -1,0 +1,26 @@
+{
+  "id": "R0053",
+  "name": "WebTorrent Desktop",
+  "category": "Torrent",
+  "historical_tier": "B",
+  "project_url": "https://github.com/webtorrent/webtorrent-desktop",
+  "channel": "mixed",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Withdraw the original security classification for this record. WebTorrent Desktop uses Electron’s updater feed on macOS/Windows and a manual HTTP availability check on Linux; this source review does not substantiate an application-level package-certificate comparison. The retained evidence is insufficient to support the original full claim.",
+  "limitations": [
+    "The original signature/certificate assertion remains unsupported by a project-level verifier in the reviewed source; the updater dependency/platform boundary was not independently audited.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+    "The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot.",
+    "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/webtorrent/webtorrent-desktop",
+      "commit": "6c91af345d4bd62603d7063ea02a50394d64af0d"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

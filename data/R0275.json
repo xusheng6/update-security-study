@@ -1,0 +1,24 @@
+{
+  "id": "R0275",
+  "name": "OpenMPT",
+  "category": "Music tracker",
+  "historical_tier": "C",
+  "project_url": "https://github.com/OpenMPT/openmpt",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "OpenMPT verifies update-info JWS signatures before accepting the update; signing keys are fetched from configured HTTPS anchors.",
+  "limitations": [
+    "Newly retrieved source snapshot at the recorded commit; this is not historical release re-verification. Released artifact behavior and external framework enforcement remain unverified.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/OpenMPT/openmpt",
+      "commit": "f83cedb0cd5446e4dfaa83ac97e3087107e26767"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

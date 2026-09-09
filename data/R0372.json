@@ -1,0 +1,23 @@
+{
+  "id": "R0372",
+  "name": "Akaunting",
+  "category": "Accounting (web)",
+  "historical_tier": "D",
+  "project_url": "https://github.com/akaunting/akaunting",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "D",
+  "description": "The core self-update uses the shared Guzzle client with certificate validation disabled, downloads the core archive, and extracts it. No independent payload signature/hash check is present in this path.",
+  "limitations": [
+    "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/akaunting/akaunting",
+      "commit": "dfc1171cf1e3749b2763cb0ade9f997c434e8f0e"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

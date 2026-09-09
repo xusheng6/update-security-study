@@ -1,0 +1,24 @@
+{
+  "id": "R0362",
+  "name": "youtube-dl-gui",
+  "category": "youtube-dl GUI",
+  "historical_tier": "C",
+  "project_url": "https://github.com/MrS0m30n3/youtube-dl-gui",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "youtube-dl-gui writes raw bytes fetched from yt-dl.org directly to the executable without a hash/signature check.",
+  "limitations": [
+    "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/MrS0m30n3/youtube-dl-gui",
+      "commit": "c5c18e55cb7e04fb6d6d8e64024a7dbac1f6b431"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

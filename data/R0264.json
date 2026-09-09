@@ -1,0 +1,23 @@
+{
+  "id": "R0264",
+  "name": "ImHex",
+  "category": "Hex editor",
+  "historical_tier": "C",
+  "project_url": "https://github.com/WerWolv/ImHex",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "ImHex has platform-specific installer handlers and a separate pattern-store channel. These source observations establish the need to assess those channels separately; this review does not certify the original authentication or elevated-execution impact claim.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study release; no release manifest, artifact signature, or delegated package-manager policy was established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/WerWolv/ImHex",
+      "commit": "1e82724cb9bfc85551f5b22c5b81b740a2ed8da1"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

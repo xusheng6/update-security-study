@@ -1,0 +1,25 @@
+{
+  "id": "R0125",
+  "name": "Ghostty",
+  "category": "Terminal (mac)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/ghostty-org/ghostty",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Ghostty's macOS updater uses Sparkle with an Info.plist SUPublicEDKey and SUEnableAutomaticChecks=false; the delegate disables automatic checks and retrieves while retaining a manual check action. Linux updater behavior and Sparkle internals remain outside this review.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; this is macOS evidence only.",
+    "Released signing, Sparkle internals, and Linux packaging/updater behavior are outside the reviewed source.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; this is macOS evidence only.; Released signing, Sparkle internals, and Linux packaging/updater behavior are outside the reviewed source."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/ghostty-org/ghostty",
+      "commit": "492300cad104195411d12217dd22f1cd05f31376"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

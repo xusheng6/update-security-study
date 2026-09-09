@@ -1,0 +1,26 @@
+{
+  "id": "R0301",
+  "name": "Popcorn Desktop",
+  "category": "Media streaming (Tauri)",
+  "historical_tier": "A",
+  "project_url": "https://gitlab.com/popcorn-official/popcorn-desktop",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The recovered Popcorn Time source uses a different framework and signature format from the original Tauri-based description. Withhold the original classification until the intended project and release are identified.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout.",
+    "Endpoint transport and Settings.updateKey provenance are not established.",
+    "Only this updater path was inspected.",
+    "Newly retrieved default-branch snapshot, not the original study checkout. Endpoint transport and Settings.updateKey provenance are not established. Only this updater path was inspected."
+  ],
+  "sources": [
+    {
+      "url": "https://gitlab.com/popcorn-official/popcorn-desktop",
+      "commit": "be800aa98cb9ef16f7e00737bbc51ba69204ed8f"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

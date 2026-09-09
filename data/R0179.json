@@ -1,0 +1,25 @@
+{
+  "id": "R0179",
+  "name": "Notable",
+  "category": "Notes",
+  "historical_tier": "B",
+  "project_url": "https://github.com/notable/notable",
+  "channel": "unresolved",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The recovered Notable repository documents that newer app versions are unavailable and does not provide the updater implementation needed to substantiate the claimed electron-updater SHA512 and Authenticode controls.",
+  "limitations": [
+    "The recovered default-branch snapshot is newly retrieved and is not the original study checkout.",
+    "The implementation for the claimed historical release, including updater invocation, SHA512 handling, and Authenticode enforcement, is absent; the repository points to older tags but they were not treated as the claimed release without a release-specific audit.",
+    "The recovered default-branch snapshot is newly retrieved and is not the original study checkout. The implementation for the claimed historical release, including updater invocation, SHA512 handling, and Authenticode enforcement, is absent; the repository points to older tags but they were not treated as the claimed release without a release-specific audit."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/notable/notable",
+      "commit": "aee95988f3b0d8d0508b56eada087fcdab30a025"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0104",
+  "name": "0 A.D.",
+  "category": "RTS game",
+  "historical_tier": "A",
+  "project_url": "https://gitea.wildfiregames.com/0ad/0ad",
+  "channel": "plugin",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "0 A.D.'s mod.io path loads a configured public key, retrieves mods to a temporary file, checks the advertised MD5, and verifies a detached Ed25519 signature over the retrieved content before installation. This evidence is limited to the mod.io content channel and does not describe the engine's general update or distribution process.",
+  "limitations": [
+    "Newly retrieved filtered default-branch snapshot; evidence is specific to mod.io packages and does not cover other content or distribution channels."
+  ],
+  "sources": [
+    {
+      "url": "https://gitea.wildfiregames.com/0ad/0ad",
+      "commit": "551071c5a44d431771e0a332bdd0685b04db395f"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,25 @@
+{
+  "id": "R0060",
+  "name": "SumatraPDF",
+  "category": "PDF reader",
+  "historical_tier": "B",
+  "project_url": "https://github.com/sumatrapdfreader/sumatrapdf",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "SumatraPDF reads release metadata from its HTTPS update-check URL and selects installer or portable URLs by architecture; the reviewed flow does not show hash or Authenticode validation before offering the retrieved installer.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot; not historical release re-verification.",
+    "External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown.",
+    "Newly retrieved default-branch snapshot; not historical release re-verification.; External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/sumatrapdfreader/sumatrapdf",
+      "commit": "770d5999a2385b40d6444b043852a6960509e5e9"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

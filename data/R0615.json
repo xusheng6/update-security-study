@@ -1,0 +1,25 @@
+{
+  "id": "R0615",
+  "name": "Pomatez",
+  "category": "Pomodoro timer",
+  "historical_tier": "C",
+  "project_url": "https://github.com/zidoro/pomatez",
+  "channel": "mixed",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Pomatez contains separate Electron and Tauri updater integrations. The Electron helper imports electron-updater and checks for updates, while the Tauri release configuration contains a base64-encoded updater public key and release-preparation code handles signature metadata. This source review does not establish the claimed per-platform shipped-leg tiering or effective runtime enforcement.",
+  "limitations": [
+    "The retained snapshot does not establish current shipped artifacts or generated platform bundles.",
+    "Framework enforcement and platform-specific notarization/signing outcomes remain unresolved.",
+    "The retained snapshot does not establish current shipped artifacts or generated platform bundles. Framework enforcement and platform-specific notarization/signing outcomes remain unresolved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/zidoro/pomatez",
+      "commit": "c2727800c6272573590911e9ee81637b89e55d5f"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

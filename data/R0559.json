@@ -1,0 +1,23 @@
+{
+  "id": "R0559",
+  "name": "Mesquite",
+  "category": "Evolutionary biology (Java)",
+  "historical_tier": "D",
+  "project_url": "https://github.com/MesquiteProject/MesquiteCore",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "D",
+  "description": "Mesquite’s production manifest is HTTP, phone-home is enabled, and install downloads/unzips packages into the app directory without a package signature; the manifest can request scripts.",
+  "limitations": [
+    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/MesquiteProject/MesquiteCore",
+      "commit": "4a01994d5ee21ea48414d3cc42e3265f66c17372"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

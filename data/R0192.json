@@ -1,0 +1,23 @@
+{
+  "id": "R0192",
+  "name": "Electrum-LTC",
+  "category": "LTC wallet",
+  "historical_tier": "A",
+  "project_url": "https://github.com/pooler/electrum-ltc",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Electrum-LTC's Qt updater retrieves a version JSON document, accepts it only when a signature from the hard-coded Litecoin address verifies, and presents the electrum-ltc.org download page for a newer version. The inspected flow does not download or install the package itself.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot rather than the original study release; the claim is limited to the inspected Qt checker and does not establish behavior of other distribution channels."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/pooler/electrum-ltc",
+      "commit": "f9cbfaca5f8b2ab3eef89758bf78b7e4c2c554a0"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

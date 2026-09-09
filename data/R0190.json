@@ -1,0 +1,23 @@
+{
+  "id": "R0190",
+  "name": "Bisq",
+  "category": "Bitcoin exchange",
+  "historical_tier": "A",
+  "project_url": "https://github.com/bisq-network/bisq",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Bisq's retrieved desktop updater downloads a platform installer plus detached OpenPGP signatures and signer material from bisq.network and bundled resources. It matches the signing-key identifier to candidate keys and verifies the installer bytes with Bouncy Castle; the documented flow then leaves installation for the user.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study release; the evidence does not independently establish release-server behavior or full-key fingerprint policy beyond the checked-in identifiers."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/bisq-network/bisq",
+      "commit": "3875ed43a9a6b35982b9042d22501b4fab194e5e"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

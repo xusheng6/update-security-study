@@ -1,0 +1,23 @@
+{
+  "id": "R0488",
+  "name": "Qalculate!",
+  "category": "Calculator",
+  "historical_tier": "C",
+  "project_url": "https://github.com/Qalculate/qalculate-gtk",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The updater downloads the release archive with curl and extracts/copies it without a digest or signature check.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement remain unverified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Qalculate/qalculate-gtk",
+      "commit": "5393c17cc1975b21ed046e5519862df8df757b56"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

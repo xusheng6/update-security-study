@@ -1,0 +1,23 @@
+{
+  "id": "R0195",
+  "name": "DevDocs-desktop",
+  "category": "Docs browser",
+  "historical_tier": "B",
+  "project_url": "https://github.com/egoist/devdocs-desktop",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the retrieved DevDocs-desktop checkout, packaged non-Linux builds invoke electron-updater's checkForUpdatesAndNotify at startup. The checked-in packaging configuration does not establish the claimed sha512 or Squirrel.Mac Team-ID controls; effective framework verification remains unresolved.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not historical release re-verification; released artifacts, electron-updater internals, and any external Squirrel.Mac enforcement remain unverified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/egoist/devdocs-desktop",
+      "commit": "791786035527b7cf8d5e8335cc5ec506fdd20e4d"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0518",
+  "name": "SickChill",
+  "category": "TV automation",
+  "historical_tier": "C",
+  "project_url": "https://github.com/SickChill/SickChill",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "SickChill invokes pip install -U for the application; no application-level hash or signature pin is supplied.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/SickChill/SickChill",
+      "commit": "e1f8475ded8dd77662fad3ba9488740133ca8ce1"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

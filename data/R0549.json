@@ -1,0 +1,23 @@
+{
+  "id": "R0549",
+  "name": "Mindustry",
+  "category": "Tower-defense game",
+  "historical_tier": "C",
+  "project_url": "https://github.com/Anuken/Mindustry",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The bleeding-edge updater downloads and relaunches the jar; no digest check is performed.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Anuken/Mindustry",
+      "commit": "0194398a812dee4a35eae5e6da6726cc224fe302"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

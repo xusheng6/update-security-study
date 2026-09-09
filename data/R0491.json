@@ -1,0 +1,25 @@
+{
+  "id": "R0491",
+  "name": "Cinnamon",
+  "category": "Desktop environment",
+  "historical_tier": "C",
+  "project_url": "https://github.com/linuxmint/cinnamon",
+  "channel": "plugin",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Cinnamon’s Spices harvester uses an HTTPS service for indexes and ZIP assets and processes selected spice packages; the reviewed source does not establish the core DE update policy or a general content-as-code conclusion.",
+  "limitations": [
+    "Newly recovered default-branch snapshot, not the original study checkout.",
+    "The core DE update channel and any server-side or package-signing controls were not established.",
+    "Primary classification remains UNRESOLVED under the evidence-review instruction; retained source is commit-scoped and does not establish all released or external framework behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/linuxmint/cinnamon",
+      "commit": "d29b0006375f13483cecca9d5bbdaf926be3b194"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

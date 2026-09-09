@@ -1,0 +1,19 @@
+{
+  "id": "R0131",
+  "name": "ClipGrab",
+  "category": "Video downloader",
+  "historical_tier": "C",
+  "project_url": "https://github.com/OpenHelios/clipgrab-qt5",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "ClipGrab compares the retrieved installer’s SHA1 digest with the SHA1 value supplied in its XML update manifest before proceeding with installation; the manifest transport and trust root are not independently authenticated in this source review.",
+  "limitations": [
+    "The cited implementation is from the extracted official 3.9.14 source archive; this is archive evidence rather than a pinned Git checkout, and it does not authenticate the XML manifest or establish the original study release context."
+  ],
+  "sources": [],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false,
+  "project_link_basis": "Recorded repository in original batch report; not a new upstream verification."
+}

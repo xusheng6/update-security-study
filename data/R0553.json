@@ -1,0 +1,23 @@
+{
+  "id": "R0553",
+  "name": "Grafana",
+  "category": "Observability dashboards",
+  "historical_tier": "C",
+  "project_url": "https://github.com/grafana/grafana",
+  "channel": "plugin",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The core updater fetches only a version JSON and sets a notification flag; it does not download or execute Grafana binaries.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/grafana/grafana",
+      "commit": "45a80328c0dd976720af0366efcad0787762b142"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

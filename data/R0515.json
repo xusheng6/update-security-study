@@ -1,0 +1,23 @@
+{
+  "id": "R0515",
+  "name": "Notifiarr",
+  "category": "*arr notifier daemon",
+  "historical_tier": "C",
+  "project_url": "https://github.com/Notifiarr/notifiarr",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The updater accepts any URL beginning with http and proceeds to replace the executable; no payload integrity check is performed here.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Notifiarr/notifiarr",
+      "commit": "2ccf39d0e46f30640f5ea1cd77e55ab1323e48c4"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0229",
+  "name": "NZBGet",
+  "category": "Usenet downloader",
+  "historical_tier": "A",
+  "project_url": "https://github.com/nzbget/nzbget",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "NZBGet's source contains an RSA-SHA256 verification utility that hashes an input file, reads a signature record and PEM public key, and calls RSA_verify. Its maintenance update path separately reads an install script from package-info.json; this snapshot does not establish that the web installer path invokes the verifier, uses an embedded key, or obtains its manifest over HTTP.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release re-verification; the web UI's installer/manifest flow, embedded key material, transport URL, and call-site relationship to VerifySignature were not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/nzbget/nzbget",
+      "commit": "5e26d52d706f129769e1d620a595c78498ca8cff"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

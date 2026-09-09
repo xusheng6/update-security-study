@@ -1,0 +1,24 @@
+{
+  "id": "R0502",
+  "name": "SASPlanet",
+  "category": "Map aggregator (Windows)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/sasgis/sas.planet.src",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "N",
+  "description": "Completion UI displays manual-update instructions after saving the archive.",
+  "limitations": [
+    "Imported from completed SOURCE-REVIEW-BATCH-1.md; retained snapshot only.",
+    "Current releases, canonical provenance, and paths outside inspected behavior are not independently established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/sasgis/sas.planet.src",
+      "commit": "98e31caeaa7c28f49e9e105f2e30ae49a232f5e4"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

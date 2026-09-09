@@ -1,0 +1,24 @@
+{
+  "id": "R0340",
+  "name": "flyctl",
+  "category": "Fly.io CLI",
+  "historical_tier": "C",
+  "project_url": "https://github.com/superfly/flyctl",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "flyctl delegates self-update to curl|sh, iwr|iex, or brew; installer verification is outside this checkout.",
+  "limitations": [
+    "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/superfly/flyctl",
+      "commit": "10c9d5335a588f611964931259163c705e528200"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

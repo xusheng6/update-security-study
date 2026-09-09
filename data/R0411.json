@@ -1,0 +1,24 @@
+{
+  "id": "R0411",
+  "name": "termscp",
+  "category": "File transfer (TUI)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/veeso/termscp",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports the narrow recorded behavior: termscp configures self_update without verifying keys or checksum options, so its manual update swaps an HTTPS-fetched artifact without payload authentication.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "The retained snapshot does not establish current released artifact behavior or independent release signing."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/veeso/termscp",
+      "commit": "74c91c747cf3cd556f59ea1b74da700108ee0bf5"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

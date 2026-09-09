@@ -1,0 +1,25 @@
+{
+  "id": "R0036",
+  "name": "rustup",
+  "category": "Rust toolchain · CLI",
+  "historical_tier": "C",
+  "project_url": "https://github.com/rust-lang/rustup",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The inspected rustup self-update body supports a primary C observation, but the prior SHA-256 claim does not apply to this self-update path: it directly uses DownloadOptions::download and then runs the downloaded rustup-init. The repository has a separate checksum helper for distribution downloads, but that is not called by prepare_update in the cited code.",
+  "limitations": [
+    "Newly retrieved snapshot at the recorded commit, not historical release verification.",
+    "No cryptographic verification of the rustup-init payload is established by the self-update body.",
+    "The DownloadOptions transport implementation and release hosting are separate boundaries."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/rust-lang/rustup",
+      "commit": "9a634dac14ad74ce1c8128bb9c9567e7668b0f93"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

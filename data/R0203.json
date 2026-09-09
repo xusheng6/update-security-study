@@ -1,0 +1,23 @@
+{
+  "id": "R0203",
+  "name": "Hedgewars",
+  "category": "Artillery game",
+  "historical_tier": "A",
+  "project_url": "https://github.com/hedgewars/hw",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the retrieved Hedgewars checkout, the macOS Sparkle bundle configuration uses the HTTPS Hedgewars appcast and names the bundled dsa_pub.pem as SUPublicDSAKeyFile. The Qt front end invokes the macOS Sparkle checker only when its auto-update preference is enabled. Other platform packaging and Sparkle framework enforcement remain outside this review.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not historical release re-verification; released artifacts, framework enforcement, and complete Windows/Linux packaging paths were not independently audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/hedgewars/hw",
+      "commit": "85685825d924cf08b2becfdac61bccbaf4dbd9dd"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

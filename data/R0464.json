@@ -1,0 +1,23 @@
+{
+  "id": "R0464",
+  "name": "Yate",
+  "category": "Telephony engine/client",
+  "historical_tier": "D",
+  "project_url": "https://github.com/yatevoip/yate",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "D",
+  "description": "The Qt4 updater requires an HTTP URL, applies only size bounds, sets the downloaded file executable, and starts it with QProcess. The finding is opt-in because update policy and updateurl are configured at runtime.",
+  "limitations": [
+    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/yatevoip/yate",
+      "commit": "7d86cb173a7b19a051cecb63f905919f4b93df01"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

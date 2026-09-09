@@ -1,0 +1,23 @@
+{
+  "id": "R0324",
+  "name": "Clash Verge Rev",
+  "category": "Proxy client (Tauri)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/clash-verge-rev/clash-verge-rev",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "A",
+  "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/clash-verge-rev/clash-verge-rev",
+      "commit": "dd7b032cb107d5cc5cb16eac78936cdbf97bcef2"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

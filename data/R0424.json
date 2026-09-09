@@ -1,0 +1,25 @@
+{
+  "id": "R0424",
+  "name": "FieldWorks",
+  "category": "Linguistics (SIL FLEx)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/sillsdev/FieldWorks",
+  "channel": "primary",
+  "review_status": "Detailed recheck",
+  "proposed_primary_tier": "C",
+  "description": "Tier C remains appropriate for the narrow Windows updater behavior: background metadata checking and installer download occur over configured HTTPS, selected EXE/MSP files are retained, and the local installer is later handed to ProcRunner without an application-level artifact verifier. The word silent is contradicted by the Yes/No installation dialog, so that part requires correction. The lack of a check in this application path cannot establish a release-wide absence of signing or hashing, and it does not justify changing the tier on that basis.",
+  "limitations": [
+    "Snapshot is commit 251843173cac81f20b89261c9802a503ba745620 from a newly retrieved default branch, not the original study checkout.",
+    "The source does not independently verify historical or current release artifact signatures, hashes, or server-side metadata authenticity.",
+    "FLEx Bridge has separate prompting and installer handling; this audit does not generalize the regular FieldWorks path to every product component."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/sillsdev/FieldWorks",
+      "commit": "251843173cac81f20b89261c9802a503ba745620"
+    }
+  ],
+  "review_basis": "deep-source-recheck",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

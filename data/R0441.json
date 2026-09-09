@@ -1,0 +1,25 @@
+{
+  "id": "R0441",
+  "name": "Gladys",
+  "category": "Home assistant (Node)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/GladysAssistant/Gladys",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The inspected Gladys implementation manages specific integrations as Docker containers. This limited component evidence does not establish the original generalized plugin/update trust classification.",
+  "limitations": [
+    "New default-branch snapshot, not the historical Gladys release.",
+    "Only the reviewed Matterbridge container path was assessed; Gladys service update mechanisms, image registry enforcement, and any generic plugin path remain unresolved.",
+    "New default-branch snapshot, not the historical Gladys release. Only the reviewed Matterbridge container path was assessed; Gladys service update mechanisms, image registry enforcement, and any generic plugin path remain unresolved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/GladysAssistant/Gladys",
+      "commit": "33cd0a2548ff1dbc359d0bedb2ce38f4dbc4e59a"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

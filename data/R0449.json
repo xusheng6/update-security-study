@@ -1,0 +1,23 @@
+{
+  "id": "R0449",
+  "name": "Domoticz",
+  "category": "Home automation hub",
+  "historical_tier": "D",
+  "project_url": "https://github.com/domoticz/domoticz",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "D",
+  "description": "The release updater disables certificate validation, performs only tar listing validation, executes the extracted updater script, and is invoked by the web update command.",
+  "limitations": [
+    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/domoticz/domoticz",
+      "commit": "7072588b1ed49b99c81f2e28b1678b5923579eac"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

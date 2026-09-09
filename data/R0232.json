@@ -1,0 +1,23 @@
+{
+  "id": "R0232",
+  "name": "LlamaChat",
+  "category": "LLM client (mac)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/alexrozanski/LlamaChat",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "LlamaChat uses Sparkle's SPUStandardUpdaterController and exposes a manual update check. The recovered source does not substantiate an application-pinned Sparkle EdDSA key; key configuration and released artifact verification remain unresolved.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release re-verification; Sparkle runtime enforcement, application metadata, key configuration outside the cited project file, and released artifacts were not independently audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/alexrozanski/LlamaChat",
+      "commit": "2b1f04bc07ba17a1877ca96ed9f4d767b769e63e"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

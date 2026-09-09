@@ -1,0 +1,23 @@
+{
+  "id": "R0554",
+  "name": "Statping-ng",
+  "category": "Status page/monitor",
+  "historical_tier": "C",
+  "project_url": "https://github.com/statping-ng/statping-ng",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The update command streams install.sh from curl directly into bash without checksum or signature verification.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/statping-ng/statping-ng",
+      "commit": "c02149f0a5f67fec1e60cfa3537478cd50899b15"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

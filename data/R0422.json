@@ -1,0 +1,24 @@
+{
+  "id": "R0422",
+  "name": "Ghost",
+  "category": "Blog platform (CLI)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/TryGhost/Ghost-CLI",
+  "channel": "package-manager",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The inspected Ghost CLI delegates application package updates to npm and documents reliance on npm integrity checking. Independent publisher authentication and the historical npm trust configuration were not established by this review.",
+  "limitations": [
+    "New default-branch snapshot; npm registry metadata and released package provenance were not independently audited, and no independent Ghost publisher signature or key pin was found in the reviewed CLI path.",
+    "npm registry metadata, released package provenance, and any publisher-signing policy outside the CLI checkout were not independently audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/TryGhost/Ghost-CLI",
+      "commit": "fd54dc835a9e4f871509d60186ab8a74bd6ec3ff"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

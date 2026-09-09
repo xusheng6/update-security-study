@@ -1,0 +1,25 @@
+{
+  "id": "R0293",
+  "name": "AFFiNE",
+  "category": "Knowledge base (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/toeverything/AFFiNE",
+  "channel": "plugin",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "AFFiNE's reviewed updater integration configures an update feed, checks for updates, and downloads automatically when its setting permits; it records the update-ready event for installation. The reviewed application code does not independently establish SHA-512 or OS code-signing enforcement, which remain delegated or unresolved.",
+  "limitations": [
+    "The checkout is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "The WindowsUpdater implementation, electron-updater internals, generated manifests, release assets, and OS signing enforcement were not established by this file.",
+    "The checkout is a newly retrieved default-branch snapshot, not the original study checkout. The WindowsUpdater implementation, electron-updater internals, generated manifests, release assets, and OS signing enforcement were not established by this file."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/toeverything/AFFiNE",
+      "commit": "62c38b95bab1dd006e90b1e5e5adda12771245f2"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

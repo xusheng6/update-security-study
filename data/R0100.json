@@ -1,0 +1,25 @@
+{
+  "id": "R0100",
+  "name": "PrismLauncher (macOS)",
+  "category": "Game launcher",
+  "historical_tier": "A",
+  "project_url": "https://github.com/PrismLauncher/PrismLauncher",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "PrismLauncher’s macOS target uses SPUStandardUpdaterController and supplies its Sparkle key and feed through build variables. The runtime framework policy and released key values must be assessed separately from this source configuration.",
+  "limitations": [
+    "Pinned source or archive snapshot, not independent verification of the original release artifact.",
+    "Configuration and integration observations do not certify every framework control or platform.",
+    "Pinned source or archive snapshot, not independent verification of the original release artifact.; Configuration and integration observations do not certify every framework control or platform."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/PrismLauncher/PrismLauncher",
+      "commit": "7b81e7c852a8d36c9b27c255639d5569dcc52204"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

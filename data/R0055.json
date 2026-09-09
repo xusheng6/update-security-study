@@ -1,0 +1,25 @@
+{
+  "id": "R0055",
+  "name": "cryptomator",
+  "category": "Encryption",
+  "historical_tier": "B",
+  "project_url": "https://github.com/cryptomator/cryptomator",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Withdraw the original security classification for this record. Cryptomator schedules checks only when both the environment flag and the user setting allow them; UpdateService hands off supplied update steps, but the reviewed code does not show the claimed DMG codesign or manifest-hash verification. The retained evidence is insufficient to support the original full claim.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot; not historical release re-verification.",
+    "External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown.",
+    "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/cryptomator/cryptomator",
+      "commit": "af99135172ecacf49658db7a4686fc5cf2102817"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

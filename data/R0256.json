@@ -1,0 +1,20 @@
+{
+  "id": "R0256",
+  "name": "Shortcat",
+  "category": "Keyboard nav (mac)",
+  "historical_tier": "A",
+  "project_url": "https://shortcat.app/",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Withdraw the original security classification. Shortcat appcast signatures do not establish the corresponding binary’s key configuration.",
+  "limitations": [
+    "No canonical public source or verified application archive is retained; appcast and cask records do not establish the shipped binary's key configuration.",
+    "Shortcat appcast signatures do not establish the corresponding binary’s key configuration. Reinstating the original classification requires that missing evidence."
+  ],
+  "sources": [],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false,
+  "project_link_basis": "Official product website checked on 2026-09-08."
+}

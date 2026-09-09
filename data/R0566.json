@@ -1,0 +1,24 @@
+{
+  "id": "R0566",
+  "name": "AstroImageJ",
+  "category": "Astro imaging/photometry",
+  "historical_tier": "A",
+  "project_url": "https://github.com/AstroImageJ/astroimagej",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "A",
+  "description": "Targeted retained-source read supports the narrow Tier A behavior for this primary application updater: AstroImageJ computes the downloaded file hash, parses the detached Sigstore bundle, and verifies it with a Fulcio identity constraint pinned to the repository workflow.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in pinned key/configuration.",
+    "Framework verification depends on the packaged updater implementation where the application delegates to Sparkle or tauri-plugin-updater."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/AstroImageJ/astroimagej",
+      "commit": "6b307a63590654113a4ca63956decd2ae240cf84"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

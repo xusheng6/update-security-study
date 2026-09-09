@@ -1,0 +1,24 @@
+{
+  "id": "R0572",
+  "name": "Titanium CLI",
+  "category": "Mobile dev CLI",
+  "historical_tier": "C",
+  "project_url": "https://github.com/appcelerator/titanium",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports this narrow assessment: SDK install begins downloading the selected archive and later extracts it without a checksum or signature verification step; TLS rejection can be configured by the user.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/appcelerator/titanium",
+      "commit": "4c7dbf004e7fe9047852dd6f128620d9d9dfea93"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

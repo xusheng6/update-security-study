@@ -1,0 +1,26 @@
+{
+  "id": "R0323",
+  "name": "NetBird",
+  "category": "WireGuard mesh VPN",
+  "historical_tier": "A",
+  "project_url": "https://github.com/netbirdio/netbird",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The inspected NetBird updater embeds production verification material and validates a signed revocation list, artifact keys, and artifact signature through an Ed25519-based chain. This is limited to the newly retrieved snapshot.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout.",
+    "Source does not prove historical release/build configuration, publication provenance, or other distribution channels.",
+    "Embedded certificates do not prove released binaries were built from this snapshot.",
+    "Newly retrieved default-branch snapshot, not the original study checkout. Source does not prove historical release/build configuration, publication provenance, or other distribution channels. Embedded certificates do not prove released binaries were built from this snapshot."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/netbirdio/netbird",
+      "commit": "76ea72237f3346ff157aa8374b9fa800d6498976"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

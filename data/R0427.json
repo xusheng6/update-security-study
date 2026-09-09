@@ -1,0 +1,25 @@
+{
+  "id": "R0427",
+  "name": "Boxer",
+  "category": "DOS-game frontend (mac)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/alunbestor/boxer",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The inspected Boxer macOS configuration enables Sparkle automatic checks, points to an HTTPS appcast, and includes dsa_pub.pem as a bundled resource. This source snapshot alone does not establish the historical release's complete update verification behavior.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not historical source for the original study release.",
+    "Sparkle framework internals and released bundle contents were not independently reverified.",
+    "Sparkle framework behavior, released bundle contents, and the original release were not independently reverified. The bundled resource and configuration are positive controls, but they do not by themselves prove that every update is verified or that the key is effective at runtime."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/alunbestor/boxer",
+      "commit": "0062fc18e154cde6cef3bf3329be4b0658597e31"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0003",
+  "name": "Shareaza",
+  "category": "Gnutella P2P",
+  "historical_tier": "D",
+  "project_url": "https://github.com/ivan386/Shareaza",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "D",
+  "description": "The version response supplies both the download sources and hashes, and the completed upgrade is offered to ShellExecute. The source supports a Windows, user-gated primary updater with same-channel hash metadata.",
+  "limitations": [
+    "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/ivan386/Shareaza",
+      "commit": "0c2f2f56c8294c930f26463a522057d00ed319fa"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

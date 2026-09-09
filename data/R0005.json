@@ -1,0 +1,23 @@
+{
+  "id": "R0005",
+  "name": "Battle for Wesnoth",
+  "category": "Strategy game",
+  "historical_tier": "D",
+  "project_url": "https://github.com/wesnoth/wesnoth",
+  "channel": "plugin",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The add-on client has a downgrade path to cleartext and the install path has no completed hash check. The downloaded content is add-on WML/Lua executed in Wesnoth’s sandbox, so this supports a plugin/content D classification with a sandbox limitation.",
+  "limitations": [
+    "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/wesnoth/wesnoth",
+      "commit": "480ebce0be117174ea692c69e08f7c315fa6cfba"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,25 @@
+{
+  "id": "R0023",
+  "name": "WinSCP",
+  "category": "FTP / SFTP",
+  "historical_tier": "C",
+  "project_url": "https://github.com/winscp/winscp",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "WinSCP’s inspected updater supplies an embedded root certificate for its update request, obtains URL/size/SHA-256 metadata, and rejects the retrieved installer on size or SHA-256 mismatch before writing it to the automatic-update path. The source does not establish payload signing-key verification.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
+    "The lower HTTP certificate matching implementation and release signing process were not audited.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; The lower HTTP certificate matching implementation and release signing process were not audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/winscp/winscp",
+      "commit": "e9b1860006623907e1eec616309fb40b6b5ce7f0"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

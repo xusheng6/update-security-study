@@ -1,0 +1,25 @@
+{
+  "id": "R0137",
+  "name": "Minigalaxy",
+  "category": "GOG launcher",
+  "historical_tier": "C",
+  "project_url": "https://github.com/sharkwouter/minigalaxy",
+  "channel": "data",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Minigalaxy checks game-installer MD5 values when its installer inventory supplies them and reports mismatches. This is a conditional game-content integrity check; metadata authentication remains unresolved.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+    "Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/sharkwouter/minigalaxy",
+      "commit": "e4884bbf82485a1b4055ae70b2e859cbea7f82a4"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

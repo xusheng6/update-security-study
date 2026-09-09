@@ -1,0 +1,16 @@
+{
+  "id": "N1091",
+  "name": "Docear",
+  "category": "Reference/mind-map",
+  "historical_tier": "N",
+  "project_url": "https://github.com/BeelGroup/Docear-Desktop",
+  "channel": "not established",
+  "review_status": "Historical record",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The initial scan recorded no in-app updater or notification-only behavior. This record has not received the same source recheck as the A–D records; the original label does not establish how every installation channel is secured.",
+  "limitations": [],
+  "sources": [],
+  "review_basis": "initial-scan",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

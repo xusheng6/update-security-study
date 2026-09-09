@@ -1,0 +1,23 @@
+{
+  "id": "R0231",
+  "name": "Hoppscotch Desktop",
+  "category": "API client",
+  "historical_tier": "A",
+  "project_url": "https://github.com/hoppscotch/hoppscotch",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Hoppscotch Desktop configures a Tauri updater key and desktop release endpoint and uses the updater plugin for checks. Live per-artifact signatures and shipped dependency enforcement have not been verified.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release re-verification; Tauri updater internals, release metadata, artifact signatures, and platform packaging were not independently audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/hoppscotch/hoppscotch",
+      "commit": "ac145e7f758151b41fd46d3e5f513886ce9068ba"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

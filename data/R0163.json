@@ -1,0 +1,23 @@
+{
+  "id": "R0163",
+  "name": "Jackett",
+  "category": "Indexer proxy",
+  "historical_tier": "C",
+  "project_url": "https://github.com/Jackett/Jackett",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Jackett’s recovered source does not provide sufficient contextual evidence to publish the claimed zero-verification self-update behavior.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Jackett/Jackett",
+      "commit": "4ffc7bd36a33c5ef7a0e3e2cb12c29f2a6183d97"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

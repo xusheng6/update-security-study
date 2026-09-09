@@ -1,0 +1,26 @@
+{
+  "id": "R0311",
+  "name": "KIAUH",
+  "category": "Klipper installer",
+  "historical_tier": "C",
+  "project_url": "https://github.com/dw-0/kiauh",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "KIAUH manages Klipper updates through Git helpers. This identifies the maintenance channel; the reviewed wrapper does not establish the complete release-authentication policy.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout.",
+    "The cited path does not prove absence of controls in every extension, configured repository, or historical release.",
+    "Git transport and an absence of an additional check in this helper are not evidence of publisher identity or signed commits.",
+    "Newly retrieved default-branch snapshot, not the original study checkout. The cited path does not prove absence of controls in every extension, configured repository, or historical release. Git transport and an absence of an additional check in this helper are not evidence of publisher identity or signed commits."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/dw-0/kiauh",
+      "commit": "d3e538de7b3163abe27fdf8116a60716d4db31ce"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

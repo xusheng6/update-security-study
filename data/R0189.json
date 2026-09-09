@@ -1,0 +1,23 @@
+{
+  "id": "R0189",
+  "name": "ConEmu",
+  "category": "Terminal (Win)",
+  "historical_tier": "D",
+  "project_url": "https://github.com/ConEmu/ConEmu",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "D",
+  "description": "The updater downloads a package, checks manifest-provided size/CRC, and creates a batch file for the update; HTTPS requests explicitly ignore certificate-name and date errors. The control is weakened transport plus same-channel CRC.",
+  "limitations": [
+    "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/ConEmu/ConEmu",
+      "commit": "c8cebb921e69d26fde43ba0a2af79115d1a07977"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

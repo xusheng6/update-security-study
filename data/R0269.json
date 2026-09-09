@@ -1,0 +1,23 @@
+{
+  "id": "R0269",
+  "name": "Clementine",
+  "category": "Music player (Qt)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/clementine-player/Clementine",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Clementine's recovered macOS bundle metadata configures the Sparkle feed at https://clementine-data.appspot.com/sparkle and names sparkle_pub.pem as SUPublicDSAKeyFile. The snapshot does not establish Sparkle runtime enforcement, historical release behavior, or the Windows update-check implementation.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release re-verification; Sparkle framework call sites, released macOS artifacts, key-size interpretation, and Windows update behavior were not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/clementine-player/Clementine",
+      "commit": "a4b3599ecd10662487bf22a1a14c4293467e2485"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

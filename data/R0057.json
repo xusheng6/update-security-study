@@ -1,0 +1,25 @@
+{
+  "id": "R0057",
+  "name": "Heroic",
+  "category": "Game launcher",
+  "historical_tier": "B",
+  "project_url": "https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Heroic’s updater presents an Update/Postpone/Changelog dialog, retrieves only after Update is selected, and asks before restart; the reviewed updater does not establish the claimed hash or OS-signing checks.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot; not historical release re-verification.",
+    "External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown.",
+    "Newly retrieved default-branch snapshot; not historical release re-verification.; External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher",
+      "commit": "5089bdbf42e7624e2e6dd19f709081299e7c0d99"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

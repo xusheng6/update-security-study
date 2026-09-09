@@ -1,0 +1,26 @@
+{
+  "id": "R0425",
+  "name": "SiriKali",
+  "category": "Encrypted-FS GUI",
+  "historical_tier": "C",
+  "project_url": "https://github.com/mhogomchungu/sirikali",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The inspected SiriKali code includes a backend-component update channel using HTTPS GitHub release metadata. This is evidence about backend components; the original categorical zero-verification classification is not established by the retained review.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not historical source for the original study release.",
+    "The inspected path does not establish behavior of external release infrastructure or every backend implementation.",
+    "No released artifact or publisher signature was reviewed.",
+    "The snapshot is a newly retrieved default branch rather than the original study release. External release controls, released artifacts, and every backend implementation were not reviewed. No verification check was identified in the inspected path; that absence does not prove the software is unsafe or that no control exists elsewhere."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/mhogomchungu/sirikali",
+      "commit": "86695986b3e037e1c583d4275ca2cffe2e5801d8"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

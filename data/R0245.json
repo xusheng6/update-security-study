@@ -1,0 +1,23 @@
+{
+  "id": "R0245",
+  "name": "UrBackup",
+  "category": "Backup (client/server)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/uroni/urbackup_backend",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the reviewed UrBackup server client-update path, update files are checked with verifyFile using an ECDSA public-key file and a matching .sig2 sidecar; an administrator-configured public-key path can override the default. Deployment-wide transport and default-push behavior remain outside this evidence.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study release; this source read does not establish the client-push default, transport authentication, or release-specific key distribution."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/uroni/urbackup_backend",
+      "commit": "3d0da5f767a120ee0372e41669a7063da47ac434"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

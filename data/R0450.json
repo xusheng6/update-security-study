@@ -1,0 +1,23 @@
+{
+  "id": "R0450",
+  "name": "FHEM",
+  "category": "Home automation (Perl)",
+  "historical_tier": "D",
+  "project_url": "https://github.com/fhem/fhem-mirror",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "D",
+  "description": "The shared HTTP helper defaults SSL verification off; the update module inherits that default and checks only attacker-channel byte length before writing Perl modules.",
+  "limitations": [
+    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/fhem/fhem-mirror",
+      "commit": "536089979aa79ef092ebebbb5befc34a1e6f845f"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

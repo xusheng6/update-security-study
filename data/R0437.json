@@ -1,0 +1,24 @@
+{
+  "id": "R0437",
+  "name": "Node-RED",
+  "category": "Flow automation",
+  "historical_tier": "C",
+  "project_url": "https://github.com/node-red/node-red",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The inspected Node-RED Palette Manager delegates package installation to npm and applies configured allow/deny controls. This application-level review does not independently establish npm registry integrity or publisher authentication; the original trust classification remains unsubstantiated.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the historical Node-RED release. npm's own registry integrity behavior and release-specific settings were not independently audited; this rewrite is limited to the Node-RED installer path.",
+    "The snapshot is a newly retrieved default branch rather than the historical release; npm's own registry integrity behavior and release-specific settings were not independently audited. The correction is limited to the Node-RED installer path."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/node-red/node-red",
+      "commit": "260402832a64373473009188ac01439534c13b36"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

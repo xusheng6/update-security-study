@@ -1,0 +1,23 @@
+{
+  "id": "R0170",
+  "name": "IINA",
+  "category": "Media player (mac)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/iina/iina",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "IINA configures Sparkle with an HTTPS appcast and a pinned SUPublicEDKey, selecting stable or beta feeds through its updater delegate. Runtime signature enforcement is delegated to Sparkle, and this newly retrieved snapshot does not reverify the historical release.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; Sparkle's dependency-level verifier and historical release artifact signing were not independently reverified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/iina/iina",
+      "commit": "b669dd8917b82f8ef86a3c3b7b5a3c63c473f532"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

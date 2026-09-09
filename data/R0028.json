@@ -1,0 +1,25 @@
+{
+  "id": "R0028",
+  "name": "lutris (runtime)",
+  "category": "Game launcher",
+  "historical_tier": "C",
+  "project_url": "https://github.com/lutris/lutris",
+  "channel": "data",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Lutris has a runtime-component update channel. The inspected component performs a basic non-empty-content check, which is not publisher authentication; the broader verification policy remains unestablished.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
+    "The lower SimpleDownloader/HTTP certificate behavior and the primary Lutris application updater were not audited.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; The lower SimpleDownloader/HTTP certificate behavior and the primary Lutris application updater were not audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/lutris/lutris",
+      "commit": "abcefd06481b36eaed051b669884f389b1eb8e6d"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

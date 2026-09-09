@@ -1,0 +1,23 @@
+{
+  "id": "R0500",
+  "name": "webtrees",
+  "category": "Genealogy (web/PHP)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/fisharebest/webtrees",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The upgrade service downloads the update stream into temporary storage; the flow proceeds to extraction without a cryptographic payload check.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/fisharebest/webtrees",
+      "commit": "f2a4bb693e7b9cdec27bf8714e931a35f04ff47f"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

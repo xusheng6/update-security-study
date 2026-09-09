@@ -1,0 +1,26 @@
+{
+  "id": "R0310",
+  "name": "MatterControl",
+  "category": "3D print host",
+  "historical_tier": "C",
+  "project_url": "https://github.com/MatterHackers/MatterControl",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "MatterControl includes a platform-specific application updater using its MCWS service. The retained evidence does not establish the full transport or artifact-authentication policy.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout.",
+    "MCWSBaseUri's scheme and server-side release controls were not established.",
+    "Other platform installers and external OS validation were not audited.",
+    "Newly retrieved default-branch snapshot, not the original study checkout. MCWSBaseUri's scheme and server-side release controls were not established. Other platform installers and external OS validation were not audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/MatterHackers/MatterControl",
+      "commit": "8b27fad2cdc7b18db2e81b7e1b4fdd15dad21147"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

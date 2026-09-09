@@ -1,0 +1,24 @@
+{
+  "id": "R0337",
+  "name": "nekoray",
+  "category": "Proxy client (Qt)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/MatsuriDayo/nekoray",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Nekoray downloads the GitHub release asset and its updater extracts/moves it over the running files without verification.",
+  "limitations": [
+    "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/MatsuriDayo/nekoray",
+      "commit": "adef6cd4af7dffc77235c524086f3dc4100d8457"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

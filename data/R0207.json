@@ -1,0 +1,23 @@
+{
+  "id": "R0207",
+  "name": "GeoGebra",
+  "category": "Math (desktop)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/geogebra/geogebra",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The retrieved GeoGebra source contains a Windows auto-update compatibility wrapper, but this checkout does not expose the implementation needed to substantiate the claimed silent JAR download/load path or its verification behavior. The specific updater claim remains unresolved.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not historical release re-verification; the external Windows updater, released desktop artifacts, and any separate installer repository were not recovered or audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/geogebra/geogebra",
+      "commit": "28b4a726980c5afd874296e3add0dd776b52d5e3"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

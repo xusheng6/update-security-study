@@ -1,0 +1,24 @@
+{
+  "id": "R0380",
+  "name": "PHD2",
+  "category": "Astro guiding",
+  "historical_tier": "C",
+  "project_url": "https://github.com/OpenPHDGuiding/phd2",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports the narrow recorded behavior: PHD2 parses a same-response version, URL, and SHA-1, compares the downloaded installer, and then runs it after the user action.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "The retained snapshot does not establish current released artifact behavior or independent release signing."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/OpenPHDGuiding/phd2",
+      "commit": "f3f3aed5d0c4c35abc73273673fc6fa2cc3b63b6"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

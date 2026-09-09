@@ -1,0 +1,25 @@
+{
+  "id": "R0049",
+  "name": "GitHub Desktop",
+  "category": "Git client",
+  "historical_tier": "B",
+  "project_url": "https://github.com/desktop/desktop",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "GitHub Desktop integrates Squirrel.Windows lifecycle handling and a main-process update store; the inspected source does not independently establish the signature-verification behavior of the retrieved artifact.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+    "The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/desktop/desktop",
+      "commit": "57d54221902278602d34579d218fea414229ffde"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

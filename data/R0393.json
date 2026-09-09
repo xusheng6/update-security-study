@@ -1,0 +1,24 @@
+{
+  "id": "R0393",
+  "name": "ClipMenu",
+  "category": "Clipboard manager (mac)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/naotaka/ClipMenu",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports the narrow recorded behavior: ClipMenu configures a bundled Sparkle DSA key but uses an HTTP appcast feed, leaving transport/authenticity scope unresolved.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "The retained snapshot does not establish current released artifact behavior or independent release signing."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/naotaka/ClipMenu",
+      "commit": "e98e513cec38af2655fa07eb59bf11cdb9cc8a85"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

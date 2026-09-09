@@ -1,0 +1,25 @@
+{
+  "id": "R0429",
+  "name": "Universal Media Server",
+  "category": "DLNA server (Java)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/UniversalMediaServer/UniversalMediaServer",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The inspected Universal Media Server source includes an application updater using JavaHttpClient. Its complete payload-authentication policy and the original zero-verification classification are not established by the retained review.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not historical source for the original study release.",
+    "JavaHttpClient transport details and released update artifacts were not independently reviewed.",
+    "The snapshot is newly retrieved and JavaHttpClient details, released artifacts, and historical behavior were not independently reviewed. The absence of a check in AutoUpdater does not disprove verification inside another component and does not establish that the update is unsafe."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/UniversalMediaServer/UniversalMediaServer",
+      "commit": "30e5ecca4efe24e25d4c566130a8b91965505f60"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

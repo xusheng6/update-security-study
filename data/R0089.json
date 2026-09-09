@@ -1,0 +1,25 @@
+{
+  "id": "R0089",
+  "name": "Feather",
+  "category": "Monero wallet",
+  "historical_tier": "A",
+  "project_url": "https://github.com/feather-wallet/feather",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Withdraw the original security classification for this record. Feather bundles release PGP key material and OpenPGP support, but this review did not establish updater invocation and signature enforcement before installation. The retained evidence is insufficient to support the original full claim.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.",
+    "The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module.",
+    "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/feather-wallet/feather",
+      "commit": "948773cf13c7486ee230eb67b6bac06b2f94c874"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

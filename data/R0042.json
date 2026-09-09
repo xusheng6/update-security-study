@@ -1,0 +1,25 @@
+{
+  "id": "R0042",
+  "name": "Mailspring",
+  "category": "Email client",
+  "historical_tier": "C",
+  "project_url": "https://github.com/Foundry376/Mailspring",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The source supports a narrow primary C observation for Mailspring: its feed is HTTPS, but the feed response may nominate either HTTP or HTTPS and the in-repo code does not verify the payload. Windows verification/install is delegated to Squirrel Update.exe; macOS delegates to Electron autoUpdater, so the complete artifact-verification boundary is external to this checkout.",
+  "limitations": [
+    "Newly retrieved snapshot at the recorded commit, not historical release verification.",
+    "Squirrel.Windows, Squirrel.Mac/Electron, and the update service are external components; their artifact-signing behavior was not established here.",
+    "The Linux implementation only opens the nominated URL and does not establish automatic replacement."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Foundry376/Mailspring",
+      "commit": "5181e717622cd6d9f0b26f5697cfb6ab3eeec9a8"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

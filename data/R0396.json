@@ -1,0 +1,23 @@
+{
+  "id": "R0396",
+  "name": "MuseScore Studio",
+  "category": "Music notation",
+  "historical_tier": "C",
+  "project_url": "https://github.com/musescore/MuseScore",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "MuseScore Studio invokes an application-update check during startup and configures an HTTPS update feed. The retained review does not establish full manifest or artifact authentication.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study checkout; the retained checkout does not include an auditable app-update scenario/ReleaseInfo implementation or released installer behavior, so the recorded no-verification conclusion is withheld."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/musescore/MuseScore",
+      "commit": "7991526152de746dcdcbbee130d5ab5f360f198e"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

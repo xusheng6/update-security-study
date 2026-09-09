@@ -1,0 +1,23 @@
+{
+  "id": "R0260",
+  "name": "Sloth",
+  "category": "System tool (mac)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/sveinbjornt/Sloth",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the reviewed Sloth snapshot, the macOS Info.plist declares the SlothAppcast.xml HTTPS feed and embeds a SUPublicEDKey. The release-specific update behavior remains unresolved.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study release; appcast history, built artifact signing, and delegated Sparkle verification were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/sveinbjornt/Sloth",
+      "commit": "b3879bb790772e77927b7b363d0611fb504379bc"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0169",
+  "name": "64Gram",
+  "category": "Messenger (TG fork)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/TDesktop-x64/tdesktop",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "64Gram includes Telegram-derived update metadata verification using Ed25519/ES256 controls in this snapshot; its distinct update host and release policy remain unresolved. The presence of this verifier does not by itself disprove an older RSA update path; release and caller mapping remain unresolved.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/TDesktop-x64/tdesktop",
+      "commit": "a17cad8e9846ee2a5679b335581722f9fb203dc1"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

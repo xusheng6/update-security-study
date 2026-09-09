@@ -1,0 +1,25 @@
+{
+  "id": "R0578",
+  "name": "fnm",
+  "category": "Node version manager",
+  "historical_tier": "C",
+  "project_url": "https://github.com/Schniz/fnm",
+  "channel": "package-manager",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the reviewed fnm source, the Node distribution response is passed to the supported archive extractor after an HTTP success check; no checksum or signature check appears in this installation function. This observation is limited to the inspected download path and does not classify other release or package-manager controls.",
+  "limitations": [
+    "The retained snapshot does not establish current release artifacts or controls in external mirrors.",
+    "No self-update command was identified in the reviewed repository, but other distribution channels were not characterized.",
+    "The retained snapshot does not establish current release artifacts or controls in external mirrors. No self-update command was identified in the reviewed repository, but other distribution channels were not characterized."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Schniz/fnm",
+      "commit": "86adc9676ceb2a509b21e75e74048b93c89f097d"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

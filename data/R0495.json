@@ -1,0 +1,27 @@
+{
+  "id": "R0495",
+  "name": "Librum",
+  "category": "eBook reader (Qt)",
+  "historical_tier": "D",
+  "project_url": "https://github.com/Librum-Reader/Librum",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "D",
+  "description": "The updater’s request builder uses QueryPeer, the downloaded archive is handed to an elevated unpack-and-install batch path, and the app restarts. No independent payload signature/hash is shown in the retained update flow.",
+  "limitations": [
+    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Librum-Reader/Librum",
+      "commit": "5fdac3454c3c3fbc4191aa6a4f277368895c9c70"
+    },
+    {
+      "url": "https://github.com/Librum-Reader/Librum",
+      "commit": "5fdac3454c3c3fbc4191aa6a4f277368895c9c70"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

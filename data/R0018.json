@@ -1,0 +1,24 @@
+{
+  "id": "R0018",
+  "name": "DuckStation",
+  "category": "PS1 emulator",
+  "historical_tier": "C",
+  "project_url": "https://github.com/stenzek/duckstation",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The recovered DuckStation updater contains archive extraction and replacement behavior, but the inspected updater helper does not establish an independent manifest signature/hash check; this supports C.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; historical release/build behavior may differ.",
+    "Repository origin and commit were checked against the candidate metadata; this source is project-associated but does not establish the original study release checkout."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/stenzek/duckstation",
+      "commit": "0cb515fe449b8f0215177a77af3255df59a0e141"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

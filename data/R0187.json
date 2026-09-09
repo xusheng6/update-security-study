@@ -1,0 +1,25 @@
+{
+  "id": "R0187",
+  "name": "Caprine",
+  "category": "FB Messenger",
+  "historical_tier": "C",
+  "project_url": "https://github.com/sindresorhus/caprine",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Caprine uses electron-updater for automatic checks when enabled; its Windows electron-builder configuration sets verifyUpdateCodeSignature to false, while this observation does not characterize verification for other targets.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "The explicit verifyUpdateCodeSignature setting is nested under the Windows target; this review does not infer equivalent behavior for macOS or Linux.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout. The explicit verifyUpdateCodeSignature setting is nested under the Windows target; this review does not infer equivalent behavior for macOS or Linux."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/sindresorhus/caprine",
+      "commit": "c3cbcf94e0c2f964fc9a709a8192625e57ce5206"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

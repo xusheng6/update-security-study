@@ -1,0 +1,25 @@
+{
+  "id": "R0051",
+  "name": "atom",
+  "category": "Code editor",
+  "historical_tier": "B",
+  "project_url": "https://github.com/atom/atom",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Atom integrates the Squirrel Windows updater. The reviewed application wrapper does not establish the dependency’s release-signature policy.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+    "The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/atom/atom",
+      "commit": "1c3bd35ce238dc0491def9e1780d04748d8e18af"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,25 @@
+{
+  "id": "R0597",
+  "name": "Wavebox",
+  "category": "Web-app browser (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/wavebox/waveboxapp",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Wavebox’s reviewed updater registers electron’s Squirrel feed URL, checks for updates on supported platforms, and reports signing failures by disabling the updater. The source does not establish the publisher certificate, notarization, or released artifact policy.",
+  "limitations": [
+    "Newly recovered snapshot; historical release behavior is not reverified.",
+    "External Squirrel enforcement and released certificate/notarization state are not established.",
+    "Newly recovered snapshot; historical release behavior is not reverified. External Squirrel enforcement and released certificate/notarization state are not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/wavebox/waveboxapp",
+      "commit": "7ab0ef641b7f23e21baf2350d9d7718abc08392f"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

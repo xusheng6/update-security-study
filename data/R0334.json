@@ -1,0 +1,26 @@
+{
+  "id": "R0334",
+  "name": "PhotoDemon",
+  "category": "Photo editor",
+  "historical_tier": "C",
+  "project_url": "https://github.com/tannerhelland/PhotoDemon",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "PhotoDemon’s package reader includes structural validation and conditional checksum handling. These facts do not establish independent publisher authentication or settle the original default-policy and impact claims.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "Embedded checksum enforcement is conditional on checksums being present; the source does not establish a publisher signature or signer trust root.",
+    "The source demonstrates update extraction and launch behavior but does not establish current released-artifact behavior or exploitability.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout. Embedded checksum enforcement is conditional on checksums being present; the source does not establish a publisher signature or signer trust root. The source demonstrates update extraction and launch behavior but does not establish current released-artifact behavior or exploitability."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/tannerhelland/PhotoDemon",
+      "commit": "8357ce499191bf12b84091b936aa9424ac35022f"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

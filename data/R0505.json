@@ -1,0 +1,23 @@
+{
+  "id": "R0505",
+  "name": "Cockpit CMS",
+  "category": "Headless CMS (PHP)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/agentejo/cockpit",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The updater downloads a zip and extracts/copies it to the application target without cryptographic verification.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/agentejo/cockpit",
+      "commit": "f7cd602bcc6134657ccfeb4e400b0050943dd243"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

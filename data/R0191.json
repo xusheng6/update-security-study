@@ -1,0 +1,23 @@
+{
+  "id": "R0191",
+  "name": "Electron Cash",
+  "category": "BCH wallet",
+  "historical_tier": "A",
+  "project_url": "https://github.com/Electron-Cash/Electron-Cash",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Electron Cash's Qt updater retrieves a JSON version announcement, accepts newer matching variants only when the message verifies under one of three hard-coded Bitcoin Cash addresses, and presents the project download page. The checked-in flow performs notification and manual download rather than automatic installation.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot rather than the original study release; the claim is limited to the inspected Qt checker and does not generalize to other platform front ends."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Electron-Cash/Electron-Cash",
+      "commit": "bb67161b162c1eea2ed2128dc224f7c55532cb8f"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

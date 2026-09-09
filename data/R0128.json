@@ -1,0 +1,25 @@
+{
+  "id": "R0128",
+  "name": "gallery-dl",
+  "category": "Media downloader (CLI)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/mikf/gallery-dl",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "gallery-dl provides a GitHub-release-based self-update channel. The reviewed implementation supports that channel identification; independent publisher authentication and an overall vulnerability classification remain unresolved.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; release behavior may differ.",
+    "This is limited to the reviewed self-update path.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; release behavior may differ.; This is limited to the reviewed self-update path."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/mikf/gallery-dl",
+      "commit": "2adf2a8e0041ec55afdcc2211fd5c7ca239a9352"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

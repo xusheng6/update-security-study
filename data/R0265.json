@@ -1,0 +1,24 @@
+{
+  "id": "R0265",
+  "name": "Gajim",
+  "category": "XMPP client",
+  "historical_tier": "C",
+  "project_url": "https://dev.gajim.org/gajim/gajim",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Gajim's core check fetches a version JSON and opens the external download page; the app does not download or execute an installer.",
+  "limitations": [
+    "Newly retrieved source snapshot at the recorded commit; this is not historical release re-verification. Released artifact behavior and external framework enforcement remain unverified.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+  ],
+  "sources": [
+    {
+      "url": "https://dev.gajim.org/gajim/gajim",
+      "commit": "57baf561746d8ac86a45a0bd55f36db5e04db591"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

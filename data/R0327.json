@@ -1,0 +1,25 @@
+{
+  "id": "R0327",
+  "name": "pnpm",
+  "category": "Package manager (CLI)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/pnpm/pnpm",
+  "channel": "package-manager",
+  "review_status": "Detailed recheck",
+  "proposed_primary_tier": "A",
+  "description": "The retained source substantiates the original A-tier control for pnpm's self-update engine channel: exact lockfile integrity is checked against npm registry signatures using embedded ECDSA keys, and invalid, absent, or canonical-registry-unverifiable signatures fail before execution. The fail-closed claim is too absolute because the explicit isTolerableWithoutSignature branch proceeds for unreachable or uncovered signatures from a noncanonical registry. The adjacent configuration code shows that registry can come from trusted package-manager configuration, and the exception retains lockfile integrity; it does not permit an invalid signature or a project-controlled key to replace npm's trust root. That bounded residual-trust case narrows the claim but does not warrant lowering the channel's A tier.",
+  "limitations": [
+    "The checkout is a newly retrieved default-branch snapshot at commit b71013fa6448b54e0d4b5cfe76eba6210619c206, not the original study checkout or a mapped shipped release.",
+    "Evidence covers pnpm's self-update/package-manager engine channel, not signatures for arbitrary project dependencies.",
+    "This is defensive source review only; no downloads, builds, endpoint checks, or exploitability testing were performed."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/pnpm/pnpm",
+      "commit": "b71013fa6448b54e0d4b5cfe76eba6210619c206"
+    }
+  ],
+  "review_basis": "deep-source-recheck",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

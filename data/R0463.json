@@ -1,0 +1,24 @@
+{
+  "id": "R0463",
+  "name": "MicroSIP",
+  "category": "SIP softphone (Windows)",
+  "historical_tier": "D",
+  "project_url": "https://github.com/nirzaf/MicroSIP-3.19.27-src",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "N",
+  "description": "Inspected update path prompts and hands a URL to the shell handler; it does not establish in-app installer execution.",
+  "limitations": [
+    "Imported from completed SOURCE-REVIEW-BATCH-1.md; retained snapshot only.",
+    "Current releases, canonical provenance, and paths outside inspected behavior are not independently established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/nirzaf/MicroSIP-3.19.27-src",
+      "commit": "f074cedc837eded39d0aba5a344c49f0222929ae"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

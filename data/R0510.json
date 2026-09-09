@@ -1,0 +1,24 @@
+{
+  "id": "R0510",
+  "name": "kube-forwarder",
+  "category": "K8s port-forward GUI (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/pixel-point/kube-forwarder",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "B",
+  "description": "Targeted retained-source read supports the narrow primary updater classification: The updater disables auto-download, asks the user on update-available, then downloads and calls quitAndInstall; it uses the GitHub electron-updater provider.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in configuration.",
+    "Where electron-updater/Squirrel/install4j performs final verification, the external framework implementation is not vendored here."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/pixel-point/kube-forwarder",
+      "commit": "183fbfbe2183c0da4edb5b31fca38de736c9cd3d"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

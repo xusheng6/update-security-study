@@ -1,0 +1,25 @@
+{
+  "id": "R0092",
+  "name": "Monero-GUI",
+  "category": "Monero wallet · notify",
+  "historical_tier": "A",
+  "project_url": "https://github.com/monero-project/monero-gui",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Monero-GUI’s updater requires two distinct maintainer signatures for its signed hash data and compares that hash with the supplied DNS hash. Its binary verifier also checks SHA-256 against the signed value. DNS acquisition and release-specific behavior are not independently certified here.",
+  "limitations": [
+    "Newly retrieved source snapshot, not a recheck of the original study release or a shipped binary.",
+    "Configured controls do not certify all dependency, platform, distribution and release policies.",
+    "Newly retrieved source snapshot, not a recheck of the original study release or a shipped binary.; Configured controls do not certify all dependency, platform, distribution and release policies."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/monero-project/monero-gui",
+      "commit": "7691273c6303de9b128c447fb29c437a814e62e6"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

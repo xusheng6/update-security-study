@@ -1,0 +1,24 @@
+{
+  "id": "R0613",
+  "name": "qsv",
+  "category": "CSV toolkit (CLI)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/dathere/qsv",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "A",
+  "description": "Targeted retained-source read supports the narrow Tier A behavior: qsv configures self_update with an Ed25519 zipsign key included from source; the explicit update flags invoke that verifier-backed path while background checks are notify-only.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in key/configuration.",
+    "The final verifier implementation is delegated to Sparkle, tauri-plugin-updater, or self_update where applicable."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/dathere/qsv",
+      "commit": "02eccc756edcd4ad3fc03232725296327d9cc8a7"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

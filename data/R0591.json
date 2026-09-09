@@ -1,0 +1,24 @@
+{
+  "id": "R0591",
+  "name": "Serial-Studio",
+  "category": "Serial data viz (Qt)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/Serial-Studio/Serial-Studio",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports this narrow assessment: QSimpleUpdater installs the update through its downloader; no hash or signature check is implemented in the updater library.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Serial-Studio/Serial-Studio",
+      "commit": "881775e242c9c5e71505b0745e26080802ffd50d"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

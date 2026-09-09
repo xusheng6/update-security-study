@@ -1,0 +1,25 @@
+{
+  "id": "R0099",
+  "name": "owncloud-client (macOS)",
+  "category": "File sync",
+  "historical_tier": "A",
+  "project_url": "https://github.com/owncloud/client",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "ownCloud’s macOS application template configures an EdDSA public key alongside a legacy DSA key reference. This supports the configured-key observation; signatures on specific enclosures and Windows policy remain unverified.",
+  "limitations": [
+    "Pinned source or archive snapshot, not independent verification of the original release artifact.",
+    "Configuration and integration observations do not certify every framework control or platform.",
+    "Pinned source or archive snapshot, not independent verification of the original release artifact.; Configuration and integration observations do not certify every framework control or platform."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/owncloud/client",
+      "commit": "303063b691c6a79986364e8c68f428bffd8d944f"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

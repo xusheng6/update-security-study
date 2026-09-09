@@ -1,0 +1,23 @@
+{
+  "id": "R0514",
+  "name": "NZBHydra2",
+  "category": "Usenet meta-indexer",
+  "historical_tier": "C",
+  "project_url": "https://github.com/theotherp/nzbhydra2",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The release asset is downloaded to the update directory and the process exits for wrapper installation without a hash/signature check.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/theotherp/nzbhydra2",
+      "commit": "3c174ed4e68ad134b2c174d668bf6dcc3fa06f2c"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

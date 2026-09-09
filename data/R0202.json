@@ -1,0 +1,23 @@
+{
+  "id": "R0202",
+  "name": "Aerial",
+  "category": "Screensaver (mac)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/JohnCoates/Aerial",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the retrieved Aerial checkout, Sparkle is configured with an HTTPS appcast and a bundled SUPublicEDKey. Update preferences expose a check-for-updates setting and a notify/install mode; the checked-in documentation describes an optional silent install path while the screen saver runs. Sparkle framework enforcement and historical release artifacts were not independently reverified.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not historical release re-verification; Sparkle internals, published bundle signatures, and the companion updater are outside this source-only review."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/JohnCoates/Aerial",
+      "commit": "6b4aa82ab3d5e247a198d86c3d645fcf68c98fec"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

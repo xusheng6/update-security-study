@@ -1,0 +1,23 @@
+{
+  "id": "R0171",
+  "name": "Rectangle",
+  "category": "Window mgr (mac)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/rxhanson/Rectangle",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Rectangle configures Sparkle with an HTTPS feed and a pinned SUPublicEDKey, and its app delegate starts the standard updater and exposes manual and automatic checks. Runtime signature enforcement remains delegated to Sparkle; this snapshot does not reverify the historical release.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; Sparkle's dependency-level verifier and historical release artifact signing were not independently reverified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/rxhanson/Rectangle",
+      "commit": "6a1e46c0c3c8ef7b2bfc4b9f98e7ceb33065d27b"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

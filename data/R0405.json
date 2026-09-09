@@ -1,0 +1,24 @@
+{
+  "id": "R0405",
+  "name": "SyncTrayzor",
+  "category": "Syncthing tray (Windows)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/canton7/SyncTrayzor",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "A",
+  "description": "The retained source shows a configured trust root and update invocation consistent with the recorded narrow A classification.",
+  "limitations": [
+    "This is a recovered snapshot rather than the original study checkout; release/build behavior and historical version may differ.",
+    "The shipped App.config uses HTTPS, but the code fallback permits plaintext HTTP if configuration is absent."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/canton7/SyncTrayzor",
+      "commit": "234ff60a160f87e574869dd6d761643f40125dfa"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

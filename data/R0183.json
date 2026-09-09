@@ -1,0 +1,25 @@
+{
+  "id": "R0183",
+  "name": "LinearMouse",
+  "category": "Mouse utility (mac)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/linearmouse/linearmouse",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "LinearMouse uses Sparkle's standard updater with a weekly appcast check and optional beta channel; the checked snapshot does not establish the updater trust key or permit a TLS-only verification conclusion.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "No checked source establishes the production Sparkle signing/trust configuration; the absence of SUPublicEDKey is not treated as proof of TLS-only acceptance.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout. No checked source establishes the production Sparkle signing/trust configuration; the absence of SUPublicEDKey is not treated as proof of TLS-only acceptance."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/linearmouse/linearmouse",
+      "commit": "5525bfd8d920b2214db9bc039824b117af165ae6"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

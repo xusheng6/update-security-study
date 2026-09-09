@@ -1,0 +1,25 @@
+{
+  "id": "R0593",
+  "name": "Goose",
+  "category": "AI coding CLI",
+  "historical_tier": "A",
+  "project_url": "https://github.com/block/goose",
+  "channel": "mixed",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The reviewed Goose CLI computes an archive SHA-256, retrieves GitHub artifact attestations, and verifies them against the embedded Sigstore production trust root, GitHub Actions issuer, and expected workflow before accepting the archive. The desktop fallback is a separate channel and is not covered by this CLI evidence.",
+  "limitations": [
+    "Desktop raw-API fallback behavior has different controls and is not merged into this CLI conclusion.",
+    "Current released desktop artifact behavior is not established.",
+    "Desktop raw-API fallback behavior has different controls and is not merged into this CLI conclusion. Current released desktop artifact behavior is not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/block/goose",
+      "commit": "8d844eecbdfd65626a881c9e8784ae8dc6093f1d"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

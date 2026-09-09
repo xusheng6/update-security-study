@@ -1,0 +1,23 @@
+{
+  "id": "R0537",
+  "name": "Simutrans",
+  "category": "Transport sim game",
+  "historical_tier": "D",
+  "project_url": "https://github.com/simutrans/simutrans",
+  "channel": "plugin",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The pakset installer uses mostly HTTP sources, extracts without an independent signature, and the game loads pakset Squirrel scripts. Binary self-update is not established; this is content-as-code scope.",
+  "limitations": [
+    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/simutrans/simutrans",
+      "commit": "d8c00ef15b8918a2dd749ea0f10a5d22215b3dca"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

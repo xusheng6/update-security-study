@@ -1,0 +1,23 @@
+{
+  "id": "R0147",
+  "name": "Simplenote",
+  "category": "Notes",
+  "historical_tier": "B",
+  "project_url": "https://github.com/Automattic/simplenote-electron",
+  "channel": "mixed",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Simplenote integrates electron-updater: it checks and retrieves updates, reports progress, and calls the install action after user confirmation. The project also declares electron-builder and macOS notarization tooling; the checked application source does not independently establish SHA512 enforcement or signing of Linux release artifacts.",
+  "limitations": [
+    "New default-branch snapshot at the recorded commit, not historical release re-verification; electron-updater internals, generated update manifests, and released artifact signatures were not audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Automattic/simplenote-electron",
+      "commit": "03bd186f11e8131ba8777c202c29f3eaac55ff1e"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

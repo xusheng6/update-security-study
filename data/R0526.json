@@ -1,0 +1,24 @@
+{
+  "id": "R0526",
+  "name": "Cocoa Rest Client",
+  "category": "API client (mac)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/mmattozzi/cocoa-rest-client",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "A",
+  "description": "Targeted retained-source read supports the narrow Tier A behavior for this primary application updater: Sparkle configuration supplies an HTTPS appcast and bundled SUPublicDSAKeyFile; the app delegate exposes Sparkle automatic checking/downloading settings.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in pinned key/configuration.",
+    "Framework verification depends on the packaged updater implementation where the application delegates to Sparkle or tauri-plugin-updater."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/mmattozzi/cocoa-rest-client",
+      "commit": "51e0e7540fa4d0c814799243558b685915a6c5dc"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

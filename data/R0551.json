@@ -1,0 +1,23 @@
+{
+  "id": "R0551",
+  "name": "OpenClonk",
+  "category": "Action game",
+  "historical_tier": "C",
+  "project_url": "https://github.com/openclonk/openclonk",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The update downloads a server-provided package and passes it to ApplyUpdate, which extracts and executes the update program without an integrity verifier.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/openclonk/openclonk",
+      "commit": "36de799544af0459014ea088867fe263779a8bdd"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

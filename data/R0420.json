@@ -1,0 +1,24 @@
+{
+  "id": "R0420",
+  "name": "Keka",
+  "category": "Archiver (mac)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/aonez/Keka",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The retained Keka repository snapshot contains web text stating that the web version uses Sparkle to check for and download updates. It does not contain the macOS application updater implementation or release configuration needed to substantiate Sparkle version, transport, or key-pinning details.",
+  "limitations": [
+    "The newly retrieved default-branch snapshot does not include the macOS application source or a release archive; the claimed Sparkle version, feed, key pinning, and artifact behavior require a matching app checkout or auditable release artifact.",
+    "A matching macOS application checkout or auditable release artifact could establish the claimed version, feed, and trust controls; none is retained here."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/aonez/Keka",
+      "commit": "f6600891ccc6751f5bb2aaef765e7431329e8b1f"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

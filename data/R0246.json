@@ -1,0 +1,23 @@
+{
+  "id": "R0246",
+  "name": "Cog",
+  "category": "Music player (mac)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/losnoco/Cog",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Cog’s application metadata template configures a Sparkle feed and EdDSA public key. This supports the configured-key claim, with built-bundle values and framework enforcement still unverified.",
+  "limitations": [
+    "New default-branch snapshot; no auditable Info.plist or updater key declaration was located in the reviewed source, so the claimed pinned EdDSA control cannot be published from this evidence."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/losnoco/Cog",
+      "commit": "c17be85654a64170c86bb8bbb4b59fd7b6795722"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

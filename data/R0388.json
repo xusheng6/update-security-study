@@ -1,0 +1,23 @@
+{
+  "id": "R0388",
+  "name": "Bioclipse",
+  "category": "Chem/bio workbench",
+  "historical_tier": "D",
+  "project_url": "https://github.com/bioclipse/bioclipse.core",
+  "channel": "plugin",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The retained Eclipse product enables p2 scheduling and embeds HTTP repositories used to install OSGi bundles. This is a plugin/update channel, not a complete primary executable updater.",
+  "limitations": [
+    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/bioclipse/bioclipse.core",
+      "commit": "74232eb6ef9fe3254ab8dad683b205c48703aff0"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

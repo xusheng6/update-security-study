@@ -1,0 +1,23 @@
+{
+  "id": "R0198",
+  "name": "Flow Launcher",
+  "category": "App launcher",
+  "historical_tier": "C",
+  "project_url": "https://github.com/Flow-Launcher/Flow.Launcher",
+  "channel": "mixed",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Flow Launcher delegates primary updates to Squirrel and has a separate plugin update channel. The reviewed application wrapper does not establish the dependency’s complete integrity policy, so the asserted verification classification remains unresolved.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not historical release re-verification; Squirrel's internal verification and release artifact properties were not audited, and no network or exploitability testing was performed."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Flow-Launcher/Flow.Launcher",
+      "commit": "50a86b3777db57f5e1151d54eefe3a394e44de31"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

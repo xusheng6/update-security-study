@@ -1,0 +1,23 @@
+{
+  "id": "R0136",
+  "name": "butler",
+  "category": "itch.io CLI",
+  "historical_tier": "C",
+  "project_url": "https://github.com/itchio/butler",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "butler uses wharf signature files containing per-block weak and strong hashes to validate content for patch operations; this review does not establish a publisher-authentication signature or coverage of every retrieval path.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/itchio/butler",
+      "commit": "cfc3b130d9660519bf3a87678b5f8bc75fef8112"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

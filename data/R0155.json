@@ -1,0 +1,23 @@
+{
+  "id": "R0155",
+  "name": "BambuStudio",
+  "category": "3D slicer",
+  "historical_tier": "C",
+  "project_url": "https://github.com/bambulab/BambuStudio",
+  "channel": "plugin",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "BambuStudio’s retained source loads a separately stored networking module and includes conditional publisher-certificate checks; the claimed automatic plug-in ZIP retrieval and its verification behavior remain unresolved.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; the optional Bambu Network Plug-in implementation and acquisition service may be outside this repository."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/bambulab/BambuStudio",
+      "commit": "66e405477604cf9346ea7aa9e439a7854a01029b"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

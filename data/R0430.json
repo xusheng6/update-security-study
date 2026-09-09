@@ -1,0 +1,26 @@
+{
+  "id": "R0430",
+  "name": "Ampache",
+  "category": "Music server (web)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/ampache/ampache",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The inspected Ampache updater source documents database migration orchestration only. The asserted admin git pull/composer/npm exec update path and its commit-verification behavior remain unsubstantiated by this source snapshot.",
+  "limitations": [
+    "The current source snapshot may differ from the historical release under the original claim.",
+    "Deployment scripts and administrator environment behavior were not treated as evidence of an application exec path.",
+    "No source evidence here establishes commit verification or its absence in an alternate update mechanism.",
+    "The current snapshot may differ from the historical release, and deployment scripts or another administrator update mechanism were not reviewed. The missing asserted path here is an evidence gap, not proof that Ampache is safe, that no such path exists elsewhere, or that commit verification is absent project-wide."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/ampache/ampache",
+      "commit": "58503596dd60238958baf19e62a07baaa703a932"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

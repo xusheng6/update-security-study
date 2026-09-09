@@ -1,0 +1,23 @@
+{
+  "id": "R0278",
+  "name": "Pixelorama",
+  "category": "Pixel-art editor (Godot)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/Orama-Interactive/Pixelorama",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Pixelorama's Extension Explorer obtains extension metadata from its configured raw GitHub HTTPS URL. For an entry, it downloads the supplied link to a local .pck path, compares the file's SHA-256 with the entry's supplied sha256 value, and installs only on a match; the manifest and link are not independently authenticated in this source review.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release re-verification; custom repository links, the remote manifest's provenance, server-side content controls, and released extension behavior remain unverified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Orama-Interactive/Pixelorama",
+      "commit": "269dd858542f6470e54d74822d552b351c4c3923"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

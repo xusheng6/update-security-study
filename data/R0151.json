@@ -1,0 +1,23 @@
+{
+  "id": "R0151",
+  "name": "OpenEmu",
+  "category": "Emulator frontend (mac)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/OpenEmu/OpenEmu",
+  "channel": "mixed",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "OpenEmu configures a Sparkle public key for application updates and has a separate core-component update channel. Authentication for those channels must be assessed separately; the full core-component policy remains unestablished.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; Sparkle dependency runtime behavior and release signing configuration are not fully established here."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/OpenEmu/OpenEmu",
+      "commit": "1d205104640d8410659d321809889cbfd06b99a9"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

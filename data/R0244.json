@@ -1,0 +1,23 @@
+{
+  "id": "R0244",
+  "name": "torrent-file-editor",
+  "category": "Torrent utility",
+  "historical_tier": "C",
+  "project_url": "https://github.com/torrent-file-editor/torrent-file-editor",
+  "channel": "mixed",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "torrent-file-editor integrates Sparkle on macOS. The original claim about release-signing key exposure requires release-specific key provenance and remediation review before publication; this review does not certify forgery or takeover claims.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study release; key use in historical artifacts, pinned-key configuration, installer prompting, and Windows notify-only behavior were not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/torrent-file-editor/torrent-file-editor",
+      "commit": "5248960135c70b7cfcfd25a2c144e820a2d37653"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,25 @@
+{
+  "id": "R0056",
+  "name": "ente-photos-desktop",
+  "category": "Photo backup",
+  "historical_tier": "B",
+  "project_url": "https://github.com/ente-io/ente",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Ente’s desktop updater disables automatic retrieval at setup, checks once per day, filters out non-new and skipped or muted versions, and retrieves a selected update; this file does not establish Azure Trusted Signing or notarization enforcement.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot; not historical release re-verification.",
+    "External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown.",
+    "Newly retrieved default-branch snapshot; not historical release re-verification.; External updater-library behavior and released artifact signing/notarization remain outside the cited source unless directly shown."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/ente-io/ente",
+      "commit": "d28c3462e70bf63f8323700ce77797237a0fd1b4"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,24 @@
+{
+  "id": "R0508",
+  "name": "nteract",
+  "category": "Notebook app (Tauri)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/nteract/nteract",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "A",
+  "description": "Targeted retained-source read supports the narrow Tier A behavior for this primary application updater: The Tauri updater configuration embeds a Minisign public key and endpoint, while the Rust application registers tauri-plugin-updater.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in pinned key/configuration.",
+    "Framework verification depends on the packaged updater implementation where the application delegates to Sparkle or tauri-plugin-updater."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/nteract/nteract",
+      "commit": "0b711d49571cfdc5708372d7d0cf2f18a4285cad"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

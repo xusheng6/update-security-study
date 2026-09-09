@@ -1,0 +1,26 @@
+{
+  "id": "R0339",
+  "name": "Mihomo (Clash-Meta)",
+  "category": "Proxy core",
+  "historical_tier": "C",
+  "project_url": "https://github.com/MetaCubeX/mihomo",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Mihomo’s Clash-Meta update claim remains withheld because the retained and freshly retrieved candidates contain a different Python project. The intended Go implementation and release identity remain unresolved.",
+  "limitations": [
+    "Recorded checkout tracks an unrelated Python API project.",
+    "Canonical Meta branch files for hub/route/upgrade.go, component/updater/update_core.go, and component/ca/config.go are not materialized here.",
+    "No conclusion about signature, checksum, TLS roots, overwrite behavior, or downstream embedding is supported.",
+    "Recorded checkout tracks an unrelated Python API project. Canonical Meta branch files for hub/route/upgrade.go, component/updater/update_core.go, and component/ca/config.go are not materialized here. No conclusion about signature, checksum, TLS roots, overwrite behavior, or downstream embedding is supported."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/MetaCubeX/mihomo",
+      "commit": "008b91bfe8c0e2daca0ab69061efd9ea1ad71bd2"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

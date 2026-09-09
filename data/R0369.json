@@ -1,0 +1,23 @@
+{
+  "id": "R0369",
+  "name": "ProtonPlus",
+  "category": "Compat-tool manager",
+  "historical_tier": "C",
+  "project_url": "https://github.com/Vysp3r/ProtonPlus",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "ProtonPlus’s archive validator checks file type, available size metadata and an available provider-supplied digest. Digest verification is conditional on that metadata being present; independent publisher authentication remains unresolved.",
+  "limitations": [
+    "The release-source, asset transport, and artifact verification implementation was not connected to the reviewed manager/workflow bodies; the new snapshot is not the original study release."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Vysp3r/ProtonPlus",
+      "commit": "78786695e6a4c000452498fa407710ba8a8360e2"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

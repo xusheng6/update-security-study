@@ -1,0 +1,23 @@
+{
+  "id": "R0364",
+  "name": "Quiet",
+  "category": "P2P messenger (Electron)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/TryQuiet/quiet",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Quiet Desktop schedules application-update checks and requires an application action to proceed with installation. Endpoint provenance and independent release signing remain unverified.",
+  "limitations": [
+    "The retained snapshot does not provide auditable endpoint configuration or independent release-signature enforcement; the exact original release behavior is not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/TryQuiet/quiet",
+      "commit": "e0a92300af73c14730a05df394a5bef03351c73f"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

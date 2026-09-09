@@ -1,0 +1,25 @@
+{
+  "id": "R0281",
+  "name": "Brackets",
+  "category": "Code editor",
+  "historical_tier": "C",
+  "project_url": "https://github.com/adobe/brackets",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the reviewed Brackets snapshot, extension registry data is periodically downloaded and the extension download helper writes a successful HTTP response to a temporary file; this source review does not establish an independent payload signature or the complete release channel.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study release.",
+    "The cited implementation does not establish registry URL transport, release artifact signing, or the separate application updater.",
+    "Newly retrieved default-branch snapshot, not the original study release. The cited implementation does not establish registry URL transport, release artifact signing, or the separate application updater."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/adobe/brackets",
+      "commit": "d55ac606ac44e7169dbeaf959c9ed47dac6a6b9a"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

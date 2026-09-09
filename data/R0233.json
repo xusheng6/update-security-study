@@ -1,0 +1,23 @@
+{
+  "id": "R0233",
+  "name": "Hyperspace",
+  "category": "Mastodon client",
+  "historical_tier": "B",
+  "project_url": "https://github.com/hyperspacedev/hyperspace",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Hyperspace's recovered Electron entry point imports electron-updater and calls checkForUpdatesAndNotify during desktop startup. The snapshot does not establish the historical activity date or the delegated framework's artifact-verification behavior.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release re-verification; the source does not establish the dormant-since-2021 date, release provider metadata, or electron-updater's runtime verification details."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/hyperspacedev/hyperspace",
+      "commit": "d2f1f23006f759e915b04662476d0ba941b1e17e"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

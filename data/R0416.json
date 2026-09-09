@@ -1,0 +1,24 @@
+{
+  "id": "R0416",
+  "name": "Subler",
+  "category": "Media muxer (mac)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/SublerApp/Subler",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "A",
+  "description": "The retained source shows a configured trust root and update invocation consistent with the recorded narrow A classification.",
+  "limitations": [
+    "This is a recovered snapshot rather than the original study checkout; release/build behavior and historical version may differ.",
+    "The inspected application configuration delegates cryptographic enforcement to Sparkle/WinSparkle framework code; the external framework implementation was not independently audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/SublerApp/Subler",
+      "commit": "b0d8ee73a89477a3b50b13e59f1ec2f19f1a35ae"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

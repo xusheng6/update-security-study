@@ -1,0 +1,23 @@
+{
+  "id": "R0255",
+  "name": "Lunar",
+  "category": "Display control (mac)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/alin23/Lunar",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the reviewed Lunar snapshot, Info.plist declares the Sparkle feed at files.lunar.fyi/appcast2.xml and includes a SUPublicEDKey value. This is configuration evidence for a public-key update boundary; release-specific enforcement remains unresolved.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study release; the built product, release signing history, and runtime Sparkle enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/alin23/Lunar",
+      "commit": "8a21ffe302a00890d9f5d5101536cdd2a4631be8"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

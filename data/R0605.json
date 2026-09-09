@@ -1,0 +1,24 @@
+{
+  "id": "R0605",
+  "name": "subfinder",
+  "category": "Subdomain scanner (CLI)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/projectdiscovery/subfinder",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports this narrow assessment: The explicit update replaces the binary and matches a checksum file from the same GitHub release; the sibling version-check client has separate TLS behavior.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/projectdiscovery/subfinder",
+      "commit": "51e9b9065e6afb66d3bca3705b21d84bb40354c4"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

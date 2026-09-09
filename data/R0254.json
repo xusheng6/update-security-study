@@ -1,0 +1,23 @@
+{
+  "id": "R0254",
+  "name": "Mylar3",
+  "category": "Comic manager",
+  "historical_tier": "C",
+  "project_url": "https://github.com/mylar3/mylar3",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The recovered updater downloads a GitHub tarball with requests verify=True and extracts it for replacement, but no independent signature/hash check is shown; this supports a narrow C classification rather than D.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot rather than the original study checkout; it does not certify current releases."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/mylar3/mylar3",
+      "commit": "cdc94a44425b6f3f9cdb9b6e5f9d88ae2fee3316"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

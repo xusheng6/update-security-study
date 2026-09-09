@@ -1,0 +1,24 @@
+{
+  "id": "R0426",
+  "name": "youtube-dl",
+  "category": "Media downloader (CLI)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/ytdl-org/youtube-dl",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "A",
+  "description": "The retained source shows a configured trust root and update invocation consistent with the recorded narrow A classification.",
+  "limitations": [
+    "This is a recovered snapshot rather than the original study checkout; release/build behavior and historical version may differ.",
+    "The manual self-update path is the inspected channel; other packaging/distribution paths were not audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/ytdl-org/youtube-dl",
+      "commit": "956b8c585591b401a543e409accb163eeaaa1193"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

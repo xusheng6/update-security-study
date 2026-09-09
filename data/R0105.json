@@ -1,0 +1,23 @@
+{
+  "id": "R0105",
+  "name": "ScummVM",
+  "category": "Game engine",
+  "historical_tier": "A",
+  "project_url": "https://github.com/scummvm/scummvm",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "ScummVM's Windows backend uses WinSparkle with the ScummVM appcast URL and delegates signed-package retrieval and installation to that framework. The reviewed application source does not expose a pinned EdDSA key, and the Linux updater behavior remains outside this evidence.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; WinSparkle/Sparkle dependency internals and platform-specific packaging were not audited, so key pinning remains unsubstantiated in this source review."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/scummvm/scummvm",
+      "commit": "6814ee9ba54582f5b5adcffab49efbbd8f589edd"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

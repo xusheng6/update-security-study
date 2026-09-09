@@ -1,0 +1,26 @@
+{
+  "id": "R0308",
+  "name": "OBS Studio",
+  "category": "Streaming/recording",
+  "historical_tier": "C",
+  "project_url": "https://github.com/obsproject/obs-studio",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "OBS Studio’s inspected Windows updater compares file content with BLAKE2b metadata. This supports an integrity-control observation; metadata authentication and complete platform signing policy remain unestablished.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout.",
+    "Released Windows manifest algorithm, installer/redist validation, and TLS defaults were not audited.",
+    "No conclusion is made about other OBS update paths.",
+    "Newly retrieved default-branch snapshot, not the original study checkout. Released Windows manifest algorithm, installer/redist validation, and TLS defaults were not audited. No conclusion is made about other OBS update paths."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/obsproject/obs-studio",
+      "commit": "6b3e550729f125b6c5b3767df88c08f5aef9d264"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,24 @@
+{
+  "id": "R0576",
+  "name": "houdoku",
+  "category": "Manga reader (Electron)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/xgi/houdoku",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports this narrow assessment: Updater check is registered in the main process; the recorded configuration disables auto-download and relies on electron-updater's generated SHA-512 manifest after user confirmation.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/xgi/houdoku",
+      "commit": "a0c69348d5d3cf018bb6d127de86c63434913d14"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

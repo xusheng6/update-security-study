@@ -1,0 +1,23 @@
+{
+  "id": "R0368",
+  "name": "Gear Lever",
+  "category": "AppImage manager",
+  "historical_tier": "C",
+  "project_url": "https://github.com/mijorus/gearlever",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Gear Lever manages AppImage updates through configured update sources. The inspected source selection accepts HTTP and HTTPS, and uses zsync SHA-1 for update detection; a complete publisher-authentication policy remains unresolved.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release; source review does not establish server metadata authenticity or every updater provider's behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/mijorus/gearlever",
+      "commit": "a2917f2adafc78e0478e47d5843de9ede6c1aa3f"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

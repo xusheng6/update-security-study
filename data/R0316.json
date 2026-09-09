@@ -1,0 +1,27 @@
+{
+  "id": "R0316",
+  "name": "KOReader",
+  "category": "eBook reader",
+  "historical_tier": "D",
+  "project_url": "https://github.com/koreader/koreader-base",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "D",
+  "description": "The retained OTA manager uses plaintext HTTP and compares the archive to a manifest-supplied digest; installation hands the update to the device restart path. The digest is not an independent signature or trust root.",
+  "limitations": [
+    "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/koreader/koreader-base",
+      "commit": "9f9b664083d8cdab967638781096f5b089cb2e36"
+    },
+    {
+      "url": "https://github.com/koreader/koreader",
+      "commit": "8aa7b93d7c0e02bb730060aae1e489e7cbcccc2d"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

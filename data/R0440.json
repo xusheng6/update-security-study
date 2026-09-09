@@ -1,0 +1,25 @@
+{
+  "id": "R0440",
+  "name": "ioBroker",
+  "category": "IoT platform",
+  "historical_tier": "C",
+  "project_url": "https://github.com/ioBroker/ioBroker",
+  "channel": "package-manager",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The retained ioBroker evidence concerns initial installation and package-manager integration. It does not establish the js-controller adapter update policy asserted in the original record.",
+  "limitations": [
+    "New default-branch snapshot, not the historical js-controller or adapter release.",
+    "The script served by iobroker.net, adapter manager, npm registry metadata, and any release-side signature/digest controls were not reviewed.",
+    "New default-branch snapshot, not the historical js-controller or adapter release. The script served by iobroker.net, adapter manager, npm registry metadata, and any release-side signature/digest controls were not reviewed."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/ioBroker/ioBroker",
+      "commit": "7b139e3263642018c10646cf2b283898ad796f7c"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

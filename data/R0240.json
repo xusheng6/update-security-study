@@ -1,0 +1,23 @@
+{
+  "id": "R0240",
+  "name": "Insomnium",
+  "category": "API client",
+  "historical_tier": "C",
+  "project_url": "https://github.com/yokomohoyo/insomnium",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The reviewed Insomnium snapshot configures Electron autoUpdater with platform-specific URLs under archgpt.dev/insomnium. Domain ownership, historical availability, and the original-author-domain assertion remain unresolved.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study release; source URL configuration does not prove domain ownership, current availability, transport controls, or artifact signing."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/yokomohoyo/insomnium",
+      "commit": "708f80c01ca3d31ba833d455c98b306b28a99907"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

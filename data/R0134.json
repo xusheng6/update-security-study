@@ -1,0 +1,23 @@
+{
+  "id": "R0134",
+  "name": "GameHub",
+  "category": "Game launcher",
+  "historical_tier": "C",
+  "project_url": "https://github.com/tkashkin/GameHub",
+  "channel": "data",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "GameHub’s installer compares an available per-part checksum with retrieved game content and reports mismatches. This is a conditional content-integrity control; metadata authentication and the full distribution policy remain unresolved.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/tkashkin/GameHub",
+      "commit": "9327885393f022fd1cccb219a19c0f87ae5e0f5a"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

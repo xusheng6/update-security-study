@@ -1,0 +1,25 @@
+{
+  "id": "R0285",
+  "name": "Mesen2",
+  "category": "Emulator (multi)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/SourMesen/Mesen2",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports the narrow recorded primary behavior: Mesen2 fetches an HTTPS JSON manifest, prompts before download, computes SHA-256 over the installer, and compares it with the manifest value before launching its updater.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "The retained snapshot does not establish current released artifact behavior or independent release signing.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/SourMesen/Mesen2",
+      "commit": "b9fa69ddc6d0a331fb103fdb5eef6904305703c2"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

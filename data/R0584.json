@@ -1,0 +1,24 @@
+{
+  "id": "R0584",
+  "name": "Solar2D",
+  "category": "Game engine (Lua)",
+  "historical_tier": "D",
+  "project_url": "https://github.com/coronalabs/corona",
+  "channel": "mixed",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Generic Linux Lua networking is separate from the plugin/build downloader; the blanket updater consequence is unsupported.",
+  "limitations": [
+    "Imported from completed SOURCE-REVIEW-BATCH-1.md; retained snapshot only.",
+    "Current releases, canonical provenance, and paths outside inspected behavior are not independently established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/coronalabs/corona",
+      "commit": "7dbc7cccdee81b0a900505b419fab6531650194a"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,26 @@
+{
+  "id": "R0333",
+  "name": "Outline Client",
+  "category": "VPN client (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/Jigsaw-Code/outline-client",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Outline Client’s own Electron source schedules application-update checks. Manager build settings are a different component and cannot establish Client’s signature-enforcement policy.",
+  "limitations": [
+    "The retained repository contains multiple Outline applications; the cited evidence is from client/electron/index.ts and supports the Outline Client scope. The separate server_manager application must not be substituted for this client claim.",
+    "The signing plugin delegates to external build infrastructure and does not expose the certificate identity or runtime verification policy here.",
+    "This is a newly retrieved snapshot and does not establish historical released-artifact signing or notarization.",
+    "The retained repository contains multiple Outline applications; the cited updater is the server_manager Electron application, so the original 'Outline Client' label needs this scope boundary. The signing plugin delegates to external build infrastructure and does not expose the certificate identity or runtime verification policy here. This is a newly retrieved snapshot and does not establish historical released-artifact signing or notarization."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Jigsaw-Code/outline-client",
+      "commit": "a8ef172c90ad94dc703bca975f3baf46ed7dbfda"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,25 @@
+{
+  "id": "R0306",
+  "name": "AuthPass",
+  "category": "Password manager",
+  "historical_tier": "C",
+  "project_url": "https://github.com/authpass/authpass",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports the narrow recorded behavior: AuthPass configures its WinSparkle appcast but does not set a DSA public key; the retained updater path therefore has no configured payload signature trust root.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "The retained snapshot does not establish current released artifact behavior or independent release signing.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/authpass/authpass",
+      "commit": "ceb3b3ea22f64ead1eb93b31b1f0657b7844631a"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

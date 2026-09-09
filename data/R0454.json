@@ -1,0 +1,25 @@
+{
+  "id": "R0454",
+  "name": "Bazelisk",
+  "category": "Bazel launcher (CLI)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/bazelbuild/bazelisk",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Bazelisk includes detached-signature verification with an embedded Bazel release key for designated official release channels. Other configured channels differ; the evidence does not support one authentication classification for every source.",
+  "limitations": [
+    "New default-branch snapshot, not the historical Bazelisk revision under study.",
+    "The review establishes the Bazelisk call-site policy and embedded-key check, but not release-server key custody or the authenticity of the remote signature itself.",
+    "New default-branch snapshot, not the historical Bazelisk revision under study. The review establishes the Bazelisk call-site policy and embedded-key check, but not release-server key custody or the authenticity of the remote signature itself."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/bazelbuild/bazelisk",
+      "commit": "5a7ff3892fdbd05672e6b8e60f139e05b2b76940"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,24 @@
+{
+  "id": "R0412",
+  "name": "CPod",
+  "category": "Podcast app (Electron)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/z-------------/CPod",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports the narrow recorded behavior: CPod disables auto-download and prompts before install; its electron-updater SHA-512 manifest is same-channel integrity with no release signing configuration.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "The retained snapshot does not establish current released artifact behavior or independent release signing."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/z-------------/CPod",
+      "commit": "6a2621535a5f5ca51dbaa8fa507b756b21f71c32"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

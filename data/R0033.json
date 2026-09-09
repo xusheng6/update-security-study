@@ -1,0 +1,25 @@
+{
+  "id": "R0033",
+  "name": "deno",
+  "category": "JS/TS runtime · CLI",
+  "historical_tier": "C",
+  "project_url": "https://github.com/denoland/deno",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The retained updater body supports a primary self-update path, but integrity behavior depends on the path: full archive verification is conditional on a supplied checksum, whereas delta updates perform downloaded same-channel SHA-256 comparisons. No signing-key verification appears in the inspected updater body.",
+  "limitations": [
+    "Newly retrieved snapshot at the recorded commit, not historical release verification.",
+    "The inspected body does not establish how an operator controls release-host content or whether all callers supply upgrade_flags.checksum.",
+    "TLS/client behavior is outside these updater functions."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/denoland/deno",
+      "commit": "83bb8d5780505d0b4f30c089680ce98b0e7a4770"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

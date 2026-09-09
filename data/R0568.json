@@ -1,0 +1,25 @@
+{
+  "id": "R0568",
+  "name": "pyenv",
+  "category": "Python version manager",
+  "historical_tier": "A",
+  "project_url": "https://github.com/pyenv/pyenv",
+  "channel": "package-manager",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "pyenv’s python-build helper verifies supplied checksums, including SHA-256 values in versioned python-build definitions, and returns failure on mismatch.",
+  "limitations": [
+    "Source-at-commit evidence only; release signing for toolchain archives is outside this review.",
+    "The claim is limited to checksum enforcement and does not establish a publisher signature.",
+    "Primary classification remains UNRESOLVED under the evidence-review instruction; retained source is commit-scoped and does not establish all released or external framework behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/pyenv/pyenv",
+      "commit": "234a87e400245f6d1a265948e54aa2a84cb4ba84"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

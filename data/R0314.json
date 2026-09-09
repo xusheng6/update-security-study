@@ -1,0 +1,26 @@
+{
+  "id": "R0314",
+  "name": "AstroBox",
+  "category": "3D print host",
+  "historical_tier": "C",
+  "project_url": "https://github.com/AstroPrint/AstroBox",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "AstroBox uses a Git-based software maintenance channel. The retained evidence does not establish a complete publisher-authentication policy or the original impact conclusion.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout.",
+    "The URL value is supplied in release metadata outside this block; HTTPS and publisher signature policy are not established here.",
+    "The source snapshot does not substantiate the historical defunct-since date.",
+    "Newly retrieved default-branch snapshot, not the original study checkout. The URL value is supplied in release metadata outside this block; HTTPS and publisher signature policy are not established here. The source snapshot does not substantiate the historical defunct-since date."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/AstroPrint/AstroBox",
+      "commit": "e7e3b8a7d33ea85fcb6b2696869c0d719ceb8b75"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

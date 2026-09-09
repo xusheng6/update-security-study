@@ -1,0 +1,23 @@
+{
+  "id": "R0194",
+  "name": "Cerebro",
+  "category": "App launcher",
+  "historical_tier": "B",
+  "project_url": "https://github.com/cerebroapp/cerebro",
+  "channel": "mixed",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Cerebro’s inspected primary updater uses electron-updater. Its plugin updater is a separate channel with different transport and artifact-verification controls. Report those channels separately; the source observations here do not certify the original host-execution impact claim.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot rather than the original study release; no network endpoint or exploitability testing was performed, and the evidence does not establish that every plugin update is automatically installed or that any specific content executes under a particular user action."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/cerebroapp/cerebro",
+      "commit": "98f8fb3e2ea33fefc90f30f6e0dfcbdf875ef3f9"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

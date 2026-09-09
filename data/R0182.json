@@ -1,0 +1,25 @@
+{
+  "id": "R0182",
+  "name": "KeepingYouAwake",
+  "category": "Caffeine (mac)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/newmarcel/KeepingYouAwake",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The direct macOS build uses Sparkle's standard updater controller with release and prerelease appcast feeds pointing to GitHub release archives; the checked snapshot does not establish the feed/package trust key or the separate Mac App Store update path.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "The checked source does not document the production Sparkle trust key or prove the MAS build's updater implementation.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout. The checked source does not document the production Sparkle trust key or prove the MAS build's updater implementation."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/newmarcel/KeepingYouAwake",
+      "commit": "2be93dd7f390b23fbca934ff3b1ac03468a80077"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

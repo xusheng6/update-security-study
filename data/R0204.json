@@ -1,0 +1,23 @@
+{
+  "id": "R0204",
+  "name": "caddy",
+  "category": "Web server (CLI)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/caddyserver/caddy",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Caddy exposes explicit commands for updating its executable and package composition through its build service. The reviewed source supports this channel identification; an overall publisher-authentication or vulnerability classification is not established by this review.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not historical release re-verification; caddyserver.com service behavior, artifact signing, and any controls outside this command path were not audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/caddyserver/caddy",
+      "commit": "9dd286c5e49e2173406e7b2828820b29262a754c"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

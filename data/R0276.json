@@ -1,0 +1,24 @@
+{
+  "id": "R0276",
+  "name": "VCV Rack",
+  "category": "Modular synth",
+  "historical_tier": "C",
+  "project_url": "https://github.com/VCVRack/Rack",
+  "channel": "plugin",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "VCV Rack plugin sync downloads the .vcvplugin package without a subsequent hash/signature verification call.",
+  "limitations": [
+    "Newly retrieved source snapshot at the recorded commit; this is not historical release re-verification. Released artifact behavior and external framework enforcement remain unverified.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/VCVRack/Rack",
+      "commit": "061ccf63c1758599396ac1bb10d47345d9d34076"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

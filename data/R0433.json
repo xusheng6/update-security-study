@@ -1,0 +1,24 @@
+{
+  "id": "R0433",
+  "name": "XWiki",
+  "category": "Wiki platform (Java)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/xwiki/xwiki-platform",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the reviewed XWiki distribution flow, an InstallRequest is created for an extension, root-namespace modification is allowed, and an InstallJob is executed; this source does not establish the claimed Maven checksum WARN-not-FAIL policy.",
+  "limitations": [
+    "Snapshot is newly retrieved and not the historical release under study. Maven Resolver checksum configuration and completed Distribution Wizard artifact verification were not established from this review.",
+    "The source is a newly retrieved snapshot, not the historical release; Maven Resolver checksum configuration and completed Distribution Wizard artifact verification were not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/xwiki/xwiki-platform",
+      "commit": "886abee49244ddc9d8d23c531d1eaf9e9afdee54"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

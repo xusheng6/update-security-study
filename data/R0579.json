@@ -1,0 +1,24 @@
+{
+  "id": "R0579",
+  "name": "gvm",
+  "category": "Go version manager",
+  "historical_tier": "C",
+  "project_url": "https://github.com/moovweb/gvm",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports this narrow assessment: Go binary installation downloads the archive from go.dev over HTTPS and writes it without checksum or signature verification.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/moovweb/gvm",
+      "commit": "dd652539fa4b771840846f8319fad303c7d0a8d2"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0239",
+  "name": "Twinkle Tray",
+  "category": "Brightness tool (Win)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/xanderfrangos/twinkle-tray",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Twinkle Tray compares update content size with retained release metadata. This is a completeness check; cryptographic artifact authentication is not established by that evidence.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study release; release metadata authenticity, code signing, and the complete updater configuration were not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/xanderfrangos/twinkle-tray",
+      "commit": "e3d5bb0bde75f7ef1a6ae450b314090c804e0f8e"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

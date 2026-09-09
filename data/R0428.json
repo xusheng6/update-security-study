@@ -1,0 +1,25 @@
+{
+  "id": "R0428",
+  "name": "spotdl",
+  "category": "Music downloader (CLI)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/spotDL/spotify-downloader",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The inspected spotdl code includes an optional FFmpeg component acquisition path using a fixed GitHub release tag. The retained evidence does not substantiate the original security-impact conclusion or a complete artifact-authentication classification.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not historical source for the original study release.",
+    "No released binary, publisher signature, or external GitHub release control was reviewed.",
+    "The checkout is a newly retrieved default branch, not historical source for the original study release. No released binary, publisher signature, or external GitHub release control was reviewed. No check was identified in the inspected download function; that is not proof that no control exists elsewhere or that the binary is unsafe."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/spotDL/spotify-downloader",
+      "commit": "cd4a4203f5b12bd6dbbdf22d7674807858d35e05"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

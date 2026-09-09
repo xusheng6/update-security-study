@@ -1,0 +1,21 @@
+{
+  "id": "R0143",
+  "name": "HTTPie Desktop",
+  "category": "API client",
+  "historical_tier": "C",
+  "project_url": "https://github.com/httpie/desktop",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "HTTPie Desktop documents continuous auto-updates; the claimed sha512-only and unverified-manifest behavior remains unresolved from the available implementation source.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+    "Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; Publication scope is limited to these source observations; no original tier, execution impact or historical release is certified."
+  ],
+  "sources": [],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false,
+  "project_link_basis": "Recorded repository in original batch report; not a new upstream verification."
+}

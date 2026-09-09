@@ -1,0 +1,26 @@
+{
+  "id": "R0294",
+  "name": "Boost Note",
+  "category": "Markdown notes (Electron)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/BoostIO/Boostnote",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The reviewed Boost Note main process uses electron-gh-releases against the BoostIO/boost-releases repository, checks periodically when packaged, downloads after confirmation, and installs after the download event. This snapshot does not substantiate the claimed verifyUpdateCodeSignature:false or a Boost Note-local SHA512 verification policy; dependency and released-artifact verification remain unresolved.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "The dependency's internal verification behavior and released update metadata/artifacts were not treated as primary application evidence.",
+    "No build or execution was performed.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout. The dependency's internal verification behavior and released update metadata/artifacts were not treated as primary application evidence. No build or execution was performed."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/BoostIO/Boostnote",
+      "commit": "789926bc760628ecedbd0051ca96d190a2be234f"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

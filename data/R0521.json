@@ -1,0 +1,23 @@
+{
+  "id": "R0521",
+  "name": "Headphones",
+  "category": "Music automation",
+  "historical_tier": "C",
+  "project_url": "https://github.com/rembo10/headphones",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Headphones downloads and extracts a GitHub tarball over the program directory without a hash/signature check.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/rembo10/headphones",
+      "commit": "62757c0fcf3f679d5779c5589620b46ce550b093"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

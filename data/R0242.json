@@ -1,0 +1,23 @@
+{
+  "id": "R0242",
+  "name": "Veloren (Airshipper)",
+  "category": "Voxel MMO",
+  "historical_tier": "C",
+  "project_url": "https://github.com/veloren/Airshipper",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The reviewed Airshipper snapshot contains a Windows launcher update path, but this source read does not substantiate the original claim about Veloren game-content updates or ZIP checksum handling.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study release; the reviewed Windows launcher path is a different scope from the original game-content assertion, and complete checksum/signature semantics remain unresolved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/veloren/Airshipper",
+      "commit": "82b0666c86b74042e83e151ed834f3fe459df446"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,24 @@
+{
+  "id": "R0336",
+  "name": "Gittyup",
+  "category": "Git client",
+  "historical_tier": "C",
+  "project_url": "https://github.com/Murmele/Gittyup",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Gittyup downloads the release asset and installs it without an integrity check; user-configurable TLS ignore behavior exists.",
+  "limitations": [
+    "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Murmele/Gittyup",
+      "commit": "a52b17a626fcebd815efcb75c98495039853dd57"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

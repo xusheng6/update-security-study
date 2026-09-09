@@ -1,0 +1,25 @@
+{
+  "id": "R0185",
+  "name": "Khoj",
+  "category": "AI notes",
+  "historical_tier": "C",
+  "project_url": "https://github.com/khoj-ai/khoj",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Khoj's desktop entry point initializes @todesktop/runtime, and its desktop CI builds and retrieves platform artifacts through ToDesktop; updater verification behavior is outside the checked repository and remains unresolved.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "The repository contains no ToDesktop runtime implementation or service-side verification evidence, so automatic update semantics and trust controls remain unresolved.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout. The repository contains no ToDesktop runtime implementation or service-side verification evidence, so automatic update semantics and trust controls remain unresolved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/khoj-ai/khoj",
+      "commit": "ae229ca894c0b80ad84664afcfdde523b5e87057"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

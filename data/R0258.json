@@ -1,0 +1,23 @@
+{
+  "id": "R0258",
+  "name": "eul",
+  "category": "System monitor (mac)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/gao-sun/eul",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "eul provides an optional application update workflow using a separate bundled helper. The reviewed wrapper does not establish the helper’s full artifact-authentication or product-signing policy.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study release; helper implementation, package signing, and release-side artifact controls were not independently reviewed."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/gao-sun/eul",
+      "commit": "b5c3bd0a5be2679ca7e22da676be5ac73e300f4a"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

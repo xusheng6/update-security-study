@@ -1,0 +1,26 @@
+{
+  "id": "R0302",
+  "name": "Plex Media Player",
+  "category": "Media player",
+  "historical_tier": "C",
+  "project_url": "https://github.com/plexinc/plex-media-player",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Plex Media Player’s inspected OEUpdateManager manages already-present update archives. It does not establish the acquisition-layer check.xml or SHA-1 behavior asserted in the report; the authentication claim remains unresolved.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout.",
+    "Acquisition, check.xml, release signing, and other platform managers are not shown.",
+    "No conclusion is made that the whole application lacks a hash or signature check.",
+    "Newly retrieved default-branch snapshot, not the original study checkout. Acquisition, check.xml, release signing, and other platform managers are not shown. No conclusion is made that the whole application lacks a hash or signature check."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/plexinc/plex-media-player",
+      "commit": "d9685b274934855a707a37613cae09108ee9db6c"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0167",
+  "name": "Telegram Desktop",
+  "category": "Messenger",
+  "historical_tier": "A",
+  "project_url": "https://github.com/telegramdesktop/tdesktop",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "This Telegram Desktop snapshot verifies update metadata with an embedded root Ed25519 key and manifest-controlled Ed25519/ES256 keys; release-channel coverage and restart installation behavior require separate evidence. The presence of this verifier does not by itself disprove an older RSA update path; release and caller mapping remain unresolved.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/telegramdesktop/tdesktop",
+      "commit": "80158983dba09d3bf5d96701f21473d6c34bf5f5"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

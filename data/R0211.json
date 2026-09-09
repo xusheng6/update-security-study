@@ -1,0 +1,23 @@
+{
+  "id": "R0211",
+  "name": "radare2 (r2pm)",
+  "category": "RE framework",
+  "historical_tier": "C",
+  "project_url": "https://github.com/radareorg/radare2",
+  "channel": "package-manager",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "r2pm is a package-management channel, separate from the primary radare2 updater. Its source supports Git and archive package sources; the review does not establish an independent package-signature policy or certify the original vulnerability classification.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release re-verification; this review is limited to r2pm's package database/source/archive path and does not establish controls in remote repositories or package build dependencies."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/radareorg/radare2",
+      "commit": "ad27058877024389292fddf12e1db6e13824ba34"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

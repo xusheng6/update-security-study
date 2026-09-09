@@ -1,0 +1,23 @@
+{
+  "id": "R0543",
+  "name": "Piwigo",
+  "category": "Photo gallery (web)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/Piwigo/Piwigo",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Core update downloads the zip in chunks and extracts it into the application; the flow only checks transfer/extraction results, not a cryptographic signature.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Piwigo/Piwigo",
+      "commit": "cb1a748553eb286865eeac8cb70bbaf75c376eb0"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

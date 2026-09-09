@@ -1,0 +1,26 @@
+{
+  "id": "R0305",
+  "name": "Proton Pass",
+  "category": "Password manager (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/ProtonMail/WebClients",
+  "channel": "mixed",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The inspected Proton Pass desktop session pins proton.me and subdomains to configured SPKI SHA-256 hashes; Windows updates use a native MSIX path and macOS uses Electron autoUpdater. Artifact-signing enforcement remains unresolved.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout.",
+    "Native MSIX updater, Electron updater internals, artifacts, and signing configuration were not audited.",
+    "Not every update host or trust control is established.",
+    "Newly retrieved default-branch snapshot, not the original study checkout. Native MSIX updater, Electron updater internals, artifacts, and signing configuration were not audited. Not every update host or trust control is established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/ProtonMail/WebClients",
+      "commit": "01ef302942ffbd2baf0c346289d4d790d6b6d28a"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,24 @@
+{
+  "id": "R0486",
+  "name": "Holochain Launcher",
+  "category": "hApp launcher (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/holochain/launcher",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "B",
+  "description": "Targeted retained-source read supports the narrow primary updater classification: Launcher disables auto-download, checks packaged updates at launch with a semver compatibility gate, and separately downloads then quits-and-installs only after the install mutation is invoked.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in configuration.",
+    "Where electron-updater/Squirrel/install4j performs final verification, the external framework implementation is not vendored here."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/holochain/launcher",
+      "commit": "c0fc5cbb2d0a4ef570e79ed9d1704570f3446764"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

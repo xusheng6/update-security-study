@@ -1,0 +1,25 @@
+{
+  "id": "R0120",
+  "name": "Nheko",
+  "category": "Matrix chat",
+  "historical_tier": "B",
+  "project_url": "https://github.com/Nheko-Reborn/nheko",
+  "channel": "mixed",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Nheko's Windows App Installer manifest references the MSIX and requests on-launch update checks every 168 hours with a prompt; directly installed MSIX packages do not check. The AppImage recipe has no update-information value, so this review finds no AppImage self-updater. Windows signing is performed in CI with the configured certificate thumbprint.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; the source supports the documented platform split but not every historical release.",
+    "The classification is mixed across Windows installer channels and Linux AppImage, so no single primary tier is proposed.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; the source supports the documented platform split but not every historical release.; The classification is mixed across Windows installer channels and Linux AppImage, so no single primary tier is proposed."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Nheko-Reborn/nheko",
+      "commit": "f023a602d0eb3ac11c836e7c91afcca01ce26bb6"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0234",
+  "name": "Files",
+  "category": "File manager (Win)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/files-community/Files",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Files supports Store updates and a sideload path using fixed HTTPS .appinstaller URLs. The sideload service compares the manifest package/version and delegates installation to Windows PackageManager; lifecycle code invokes update checks at startup and periodically. Windows Authenticode enforcement is an OS/package-deployment boundary outside this source review.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release re-verification; Windows Store/package deployment signature enforcement, shipped MSIX metadata, and exact startup timing were not independently audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/files-community/Files",
+      "commit": "aee62adcb99c62049381fd5c8112b6ed5fe004a1"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

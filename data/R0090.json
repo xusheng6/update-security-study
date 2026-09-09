@@ -1,0 +1,25 @@
+{
+  "id": "R0090",
+  "name": "Trezor Suite",
+  "category": "Hardware wallet",
+  "historical_tier": "A",
+  "project_url": "https://github.com/trezor/trezor-suite",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Trezor Suite adds an OpenPGP verification step to its desktop updater, using APP_PUBKEY and aborting when verification fails. The source does not establish the claimed vendor motivation; release key injection and platform signing remain separate evidence requirements.",
+  "limitations": [
+    "Newly retrieved source snapshot, not a recheck of the original study release or a shipped binary.",
+    "Configured controls do not certify all dependency, platform, distribution and release policies.",
+    "Newly retrieved source snapshot, not a recheck of the original study release or a shipped binary.; Configured controls do not certify all dependency, platform, distribution and release policies."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/trezor/trezor-suite",
+      "commit": "2d840d157b7a33a11972c21043c8123408b91f78"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

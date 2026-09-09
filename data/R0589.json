@@ -1,0 +1,24 @@
+{
+  "id": "R0589",
+  "name": "MQTT Explorer",
+  "category": "MQTT client (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/thomasnordquist/MQTT-Explorer",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "B",
+  "description": "Targeted retained-source read supports the narrow primary updater classification: MQTT Explorer's updater uses electron-updater and GitHub release artifacts; the framework's manifest SHA-512 and platform publisher checks are delegated controls.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact signing or deployment state beyond the checked-in configuration.",
+    "Where electron-updater/Squirrel/install4j performs final verification, the external framework implementation is not vendored here."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/thomasnordquist/MQTT-Explorer",
+      "commit": "35f31973c456a024a37450f5961e4610dc9a9ce0"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

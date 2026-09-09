@@ -1,0 +1,24 @@
+{
+  "id": "R0460",
+  "name": "LibreNMS",
+  "category": "Network monitoring",
+  "historical_tier": "C",
+  "project_url": "https://github.com/librenms/librenms",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The daily updater pulls or checks out newer LibreNMS code and, in its post-pull path, runs Composer installation for dependencies. The default configuration leaves daily updates enabled, so the source supports an automatic primary code-update path; no signature verification is shown.",
+  "limitations": [
+    "The checked-in path does not establish signed-commit verification or release provenance.",
+    "Snapshot is a newly retrieved default branch, not the historical study revision."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/librenms/librenms",
+      "commit": "7c6107ffb2c345fc16b29915a44ebd12eb370d91"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

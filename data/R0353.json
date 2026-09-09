@@ -1,0 +1,23 @@
+{
+  "id": "R0353",
+  "name": "Frappe Books",
+  "category": "Accounting (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/frappe/books",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Frappe Books integrates electron-updater with explicit download handling and an installation dialog. Signing of released Windows and macOS artifacts remains unverified.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot rather than the original study checkout; released artifact signing and electron-updater framework enforcement are not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/frappe/books",
+      "commit": "a79a1e3b03f424805ad094e2fd8731d04f84d36f"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

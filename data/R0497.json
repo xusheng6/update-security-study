@@ -1,0 +1,23 @@
+{
+  "id": "R0497",
+  "name": "Owncast",
+  "category": "Live-streaming server (Go)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/owncast/owncast",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The admin updater downloads install.sh and executes it with bash without payload integrity verification.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement remain unverified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/owncast/owncast",
+      "commit": "b0de2e462058b34aa3fa2e68e1939ff416b69de5"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

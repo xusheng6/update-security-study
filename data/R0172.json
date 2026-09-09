@@ -1,0 +1,23 @@
+{
+  "id": "R0172",
+  "name": "AltTab",
+  "category": "Window switcher (mac)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/lwouis/alt-tab-macos",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "AltTab configures Sparkle with a pinned SUPublicEDKey and scheduled automatic checks; its delegate supplies the appcast URL and the app starts Sparkle after launch. Runtime signature enforcement is delegated to Sparkle, and this snapshot does not reverify the historical release.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; Sparkle's dependency-level verifier and historical release artifact signing were not independently reverified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/lwouis/alt-tab-macos",
+      "commit": "2f3c67739211f790b8f949f427ccb0575c8684a8"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

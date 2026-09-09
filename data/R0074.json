@@ -1,0 +1,23 @@
+{
+  "id": "R0074",
+  "name": "Firefox",
+  "category": "Browser",
+  "historical_tier": "A",
+  "project_url": "https://github.com/mozilla/gecko-dev",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Firefox's updater verifies the opened MAR against compiled primary/secondary certificate data when MOZ_VERIFY_MAR_SIGNATURE is enabled, then checks MAR channel and version metadata before applying the update.",
+  "limitations": [
+    "Newly retrieved official Mozilla Git mirror default-branch snapshot, not the original study checkout; the claim is bounded to builds with MOZ_VERIFY_MAR_SIGNATURE and the inspected channel-specific certificate configuration."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/mozilla/gecko-dev",
+      "commit": "5836a062726f715fda621338a17b51aff30d0a8c"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

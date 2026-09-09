@@ -1,0 +1,26 @@
+{
+  "id": "R0446",
+  "name": "flacon",
+  "category": "Audio splitter",
+  "historical_tier": "C",
+  "project_url": "https://github.com/flacon/flacon",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In MAC_UPDATER builds, flacon checks for updates in the background through Sparkle's SUUpdater when automatic checks are enabled, using the configured macOS appcast URL. The wrapper does not establish a SUPublicEDKey or DSAKey, and Sparkle framework and packaged release configuration remain outside this review; no Windows/Linux updater conclusion is made.",
+  "limitations": [
+    "Sparkle implementation, release signing, and packaged Info.plist are outside this snapshot.",
+    "The snapshot is newly retrieved and is not the historical study revision.",
+    "The review does not certify current binaries or non-macOS updater behavior.",
+    "Sparkle implementation, release signing, and packaged Info.plist are outside this snapshot. The snapshot is newly retrieved and is not the historical study revision. The review does not certify current binaries or non-macOS updater behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/flacon/flacon",
+      "commit": "2dcc83ecc2528b5769e1629488a6f5a6706362dc"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

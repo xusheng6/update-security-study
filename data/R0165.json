@@ -1,0 +1,23 @@
+{
+  "id": "R0165",
+  "name": "VBA-M",
+  "category": "GBA emulator",
+  "historical_tier": "C",
+  "project_url": "https://github.com/visualboyadvance-m/visualboyadvance-m",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "VBA-M includes platform updater components; the specific EdDSA/appcast verification claim remains unresolved from the reviewed snapshot.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/visualboyadvance-m/visualboyadvance-m",
+      "commit": "c5d79e21e08746569269d45e70d44162ecc5ed74"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

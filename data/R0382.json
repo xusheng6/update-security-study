@@ -1,0 +1,23 @@
+{
+  "id": "R0382",
+  "name": "DataWarrior",
+  "category": "Cheminformatics",
+  "historical_tier": "C",
+  "project_url": "https://github.com/thsa/datawarrior",
+  "channel": "mixed",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "DataWarrior’s updater compares update JARs with MD5 values supplied by its metadata. Its plugin channel is separate; these observations do not establish independent publisher authentication or every automatic-update setting.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study checkout; the server response and release process were not independently verified, and the source does not show an independent signature or pinned-key control in this path."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/thsa/datawarrior",
+      "commit": "772596aa790bcfba867476adf9bd4d4b125f10f5"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

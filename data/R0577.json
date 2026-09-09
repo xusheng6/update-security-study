@@ -1,0 +1,24 @@
+{
+  "id": "R0577",
+  "name": "mangadex-downloader",
+  "category": "Manga downloader (CLI)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/mansuf/mangadex-downloader",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports this narrow assessment: The explicit update command queries GitHub releases and uses a SHA-256 value parsed from release metadata on the same origin.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/mansuf/mangadex-downloader",
+      "commit": "a0c28102bcb3e18c478044cc08bdd82bc3d3a884"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

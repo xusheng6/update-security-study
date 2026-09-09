@@ -1,0 +1,23 @@
+{
+  "id": "R0499",
+  "name": "Ancestris",
+  "category": "Genealogy (Java/NetBeans)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/PQYPLZXHGF/Ancestris",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Core and extension update centers are enabled at HTTP URLs.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement remain unverified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/PQYPLZXHGF/Ancestris",
+      "commit": "36b1436c2b583751631b42a112340eb555ae872b"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

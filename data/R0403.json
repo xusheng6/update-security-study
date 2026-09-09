@@ -1,0 +1,23 @@
+{
+  "id": "R0403",
+  "name": "Ledger Live",
+  "category": "Hardware-wallet app",
+  "historical_tier": "A",
+  "project_url": "https://github.com/LedgerHQ/ledger-live",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Ledger Live’s non-store updater includes SHA-512 integrity checks and signature verification with key rotation chained from a pinned EC key. Store distributions use a separate channel; release and platform coverage remain bounded to the inspected snapshot.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study checkout; this review did not validate released artifacts, endpoint deployment, or platform-specific packaging behavior beyond the checked store-distribution branch."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/LedgerHQ/ledger-live",
+      "commit": "6f9b570de882356b1660e75b7c747ef2887fde13"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "R0214",
+  "name": "Pika",
+  "category": "Color picker (mac)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/superhighfives/pika",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In Pika's Sparkle build, Info.plist enables automatic checks, points to https://superhighfives.com/releases/pika, and embeds SUPublicEDKey. The Sparkle AppDelegate path sets that feed and calls SUUpdater.shared().checkForUpdates; the reviewed source supports a configured EdDSA update trust key for this build variant.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release re-verification; Sparkle framework enforcement, feed contents, and shipped artifact signatures were not independently audited, and the evidence applies to TARGET_SPARKLE rather than the MAS variant."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/superhighfives/pika",
+      "commit": "4edac16a005a8410b7ec1832a8827451269b8d5f"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

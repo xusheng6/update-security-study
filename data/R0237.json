@@ -1,0 +1,23 @@
+{
+  "id": "R0237",
+  "name": "Umbrel (umbrelOS)",
+  "category": "Self-hosted OS",
+  "historical_tier": "C",
+  "project_url": "https://github.com/getumbrel/umbrel",
+  "channel": "firmware",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Umbrel’s inspected update bootstrap delegates device-specific updates to Mender or Rugix, with a legacy compatibility branch. The original direct shell-execution description and a complete bundle-authentication classification remain unsubstantiated by this snapshot.",
+  "limitations": [
+    "New default-branch snapshot rather than historical release re-verification; Mender/Rugix internals, artifact signatures, server-side manifests, and older umbrelOS update scripts were not independently audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/getumbrel/umbrel",
+      "commit": "bfa79ed24031b0065dd2f810411d58b82af1b95e"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

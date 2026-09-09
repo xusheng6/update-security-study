@@ -1,0 +1,23 @@
+{
+  "id": "R0389",
+  "name": "PyChess",
+  "category": "Chess GUI",
+  "historical_tier": "D",
+  "project_url": "https://github.com/pychess/pychess",
+  "channel": "package-manager",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The MSYS2 process-wide TLS override reaches optional scoutfish/chess_db helper downloads; helpers are installed executable and later launched. This is a component channel, not a complete primary updater.",
+  "limitations": [
+    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/pychess/pychess",
+      "commit": "d4d109099d66d9d695c8ac8d61808183556274e1"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

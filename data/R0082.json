@@ -1,0 +1,25 @@
+{
+  "id": "R0082",
+  "name": "restic",
+  "category": "Backup CLI",
+  "historical_tier": "A",
+  "project_url": "https://github.com/restic/restic",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "restic’s self-update verifier embeds an OpenPGP public key, verifies signed checksum data, and compares the selected archive hash before acceptance.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.",
+    "The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.; The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/restic/restic",
+      "commit": "ba802d42b7294c98b62c16d1157ea3e80820c019"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

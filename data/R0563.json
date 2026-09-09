@@ -1,0 +1,24 @@
+{
+  "id": "R0563",
+  "name": "VisualBoyAdvance-M",
+  "category": "Emulator (GBA)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/visualboyadvance-m/visualboyadvance-m",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports this narrow assessment: WinSparkle points to an HTTPS appcast, with an HTTP fallback in the NO_HTTPS build; no public signing key is configured in this wrapper path.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/visualboyadvance-m/visualboyadvance-m",
+      "commit": "830bb0772b0fb1f00667f47bdae513e4148951f3"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

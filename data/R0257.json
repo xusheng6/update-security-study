@@ -1,0 +1,23 @@
+{
+  "id": "R0257",
+  "name": "atuin",
+  "category": "Shell history (CLI)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/atuinsh/atuin",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the reviewed atuin snapshot, the update command uses AxoUpdater, requires a matching standalone-installer receipt, and runs only through the optional self-update feature used by official installer artifacts. Verification performed inside axoupdater remains unresolved.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study release; axoupdater implementation and release artifact verification were not inspected."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/atuinsh/atuin",
+      "commit": "740992f0018c3b668368319d79d08f9274e4ca1a"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

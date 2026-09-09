@@ -1,0 +1,24 @@
+{
+  "id": "R0341",
+  "name": "cloudflared",
+  "category": "Cloudflare Tunnel CLI",
+  "historical_tier": "C",
+  "project_url": "https://github.com/cloudflare/cloudflared",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "cloudflared compares a downloaded file hash with the checksum supplied by the same update response; no signature key is used.",
+  "limitations": [
+    "Newly retrieved source snapshot at the recorded checkout; this is not historical release re-verification. Released artifacts and external framework enforcement remain unverified.",
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; canonical release behavior is not established."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/cloudflare/cloudflared",
+      "commit": "2253eeeb25a44a713a4b60b8ba1e1b3f377d1a0f"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

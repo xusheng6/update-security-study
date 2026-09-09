@@ -1,0 +1,23 @@
+{
+  "id": "R0348",
+  "name": "FlightGear",
+  "category": "Flight simulator",
+  "historical_tier": "D",
+  "project_url": "https://github.com/flightgear/flightgear",
+  "channel": "mixed",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "N",
+  "description": "The primary FlightGear updater is a HTTPS notification/check path and does not establish an in-app self-update-to-executable flow. A separate aircraft package channel uses HTTP catalogs and same-catalog MD5, so the original undifferentiated primary D label should be corrected to N for primary update with a qualified data/content finding.",
+  "limitations": [
+    "Review is limited to the retained commit; it does not certify released artifacts or current upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/flightgear/flightgear",
+      "commit": "807e406dd3bceca816942490a999970e157dbcfa"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

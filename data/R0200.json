@@ -1,0 +1,23 @@
+{
+  "id": "R0200",
+  "name": "Dozer",
+  "category": "Menu-bar tool (mac)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/Mortennn/Dozer",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the retrieved Dozer checkout, Sparkle is configured with an HTTPS appcast URL and a SUPublicEDKey, and the preferences controller exposes SUUpdater's automatic-check setting. The checked-in appcast has one 4.0.0 item dated 20 August 2019 and includes a sparkle:edSignature, so the feed snapshot is stale relative to the checkout's 4.2.0 bundle metadata.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not historical release re-verification; the checked-in feed may be stale or archival, and published bundle/signature validity plus Sparkle's framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Mortennn/Dozer",
+      "commit": "b0540378c01690ce566058b67bc7dc7e01efa4e6"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

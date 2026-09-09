@@ -1,0 +1,25 @@
+{
+  "id": "R0612",
+  "name": "Icy",
+  "category": "Bio-imaging (Java)",
+  "historical_tier": "D",
+  "project_url": "https://github.com/icy-imaging/icy",
+  "channel": "mixed",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Icy has shared network-policy configuration and separate application and plugin update components. The retained review does not establish the complete release-authentication policy or certify the original impact classification.",
+  "limitations": [
+    "The retained commit does not establish released-artifact or current-upstream behavior.",
+    "Plugin-manager implementation and any separate artifact-authentication control require separate review.",
+    "The retained commit does not establish released-artifact or current-upstream behavior. Plugin-manager implementation and any separate artifact-authentication control require separate review."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/icy-imaging/icy",
+      "commit": "04edbe2f7b27579f10933594666e772608b71a0f"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,24 @@
+{
+  "id": "R0354",
+  "name": "BreakTimer",
+  "category": "Break reminder (Electron)",
+  "historical_tier": "B",
+  "project_url": "https://github.com/tom-james-watson/breaktimer-app",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "B",
+  "description": "Targeted source read supports the narrow recorded behavior: BreakTimer auto-checks and installs on macOS/Linux, while Windows is notify-only; Linux integrity relies on same-channel SHA-512 manifest and macOS adds OS signing.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "The retained snapshot does not establish current released artifact behavior or independent release signing; external updater verification remains a gap where noted."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/tom-james-watson/breaktimer-app",
+      "commit": "b8156788e54e5f3f81cb6d232239bfcfb975bfd7"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

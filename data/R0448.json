@@ -1,0 +1,26 @@
+{
+  "id": "R0448",
+  "name": "Batocera EmulationStation",
+  "category": "Retro frontend",
+  "historical_tier": "C",
+  "project_url": "https://github.com/batocera-linux/batocera-emulationstation",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Batocera EmulationStation has platform-specific updater components and a shared networking helper. The retained evidence does not establish the original cross-platform script provenance or full payload-authentication policy.",
+  "limitations": [
+    "The external es-update script and Batocera Linux packaging are outside this repository.",
+    "The snapshot is newly retrieved and is not the historical study revision.",
+    "No released artifact was tested and no exploitability claim is made.",
+    "The external es-update script and Batocera Linux packaging are outside this repository. The snapshot is newly retrieved and is not the historical study revision. No released artifact was tested and no exploitability claim is made."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/batocera-linux/batocera-emulationstation",
+      "commit": "d3a72a65c10079a327d90651c9e884d0ae816461"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

@@ -1,0 +1,25 @@
+{
+  "id": "R0595",
+  "name": "Tuta Desktop",
+  "category": "Encrypted email (Electron)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/tutao/tutanota",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The retained Tuta desktop build tooling documents RSA/SHA-512 verification of installer signatures against the tutao public key and attaches the signature to update metadata. This is build and release-signing evidence; it does not independently establish the electron-updater runtime path or every platform’s fail-closed behavior.",
+  "limitations": [
+    "The candidate source is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "Runtime electron-updater enforcement and released artifact behavior remain outside this build-tool evidence.",
+    "The candidate source is a newly retrieved default-branch snapshot, not the original study checkout. Runtime electron-updater enforcement and released artifact behavior remain outside this build-tool evidence."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/tutao/tutanota",
+      "commit": "0f34397ae95db354b707ab963bec84cdcbd8f5b6"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

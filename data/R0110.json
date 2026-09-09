@@ -1,0 +1,25 @@
+{
+  "id": "R0110",
+  "name": "QMPlay2",
+  "category": "Media player (Win)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/zaps166/QMPlay2",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "QMPlay2 includes an executable-format check and write-error handling in its update component. These structural controls do not establish publisher authentication or the complete verification policy.",
+  "limitations": [
+    "Newly retrieved source snapshot, not proof of original-release behavior.",
+    "The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified.",
+    "Newly retrieved source snapshot, not proof of original-release behavior.; The source observation supports only the described control or scope; remaining framework, trust-policy and shipped-artifact claims are not certified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/zaps166/QMPlay2",
+      "commit": "5749d4b421cb412aed831ad213cb8bc0f29afd0c"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

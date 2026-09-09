@@ -1,0 +1,25 @@
+{
+  "id": "R0095",
+  "name": "AppFlowy",
+  "category": "Notes",
+  "historical_tier": "A",
+  "project_url": "https://github.com/AppFlowy-IO/AppFlowy",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Withdraw the original security classification for this record. AppFlowy selects a platform-specific appcast and enables its auto-updater listener on macOS and Windows. The inspected startup implementation does not substantiate the asserted EdDSA/DSA platform mapping or pinned release keys. The retained evidence is insufficient to support the original full claim.",
+  "limitations": [
+    "Newly retrieved source snapshot, not a recheck of the original study release or a shipped binary.",
+    "Configured controls do not certify all dependency, platform, distribution and release policies.",
+    "The original claim may be revisited only if the specified matching source, dependency, release artifact, or platform configuration is obtained and checked."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/AppFlowy-IO/AppFlowy",
+      "commit": "5cf3a365dec0d59f64bad1ee4bb1050471a39b93"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

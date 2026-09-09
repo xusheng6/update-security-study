@@ -1,0 +1,25 @@
+{
+  "id": "R0011",
+  "name": "Mumble (plugins)",
+  "category": "VoIP",
+  "historical_tier": "C",
+  "project_url": "https://github.com/mumble-voip/mumble",
+  "channel": "plugin",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The reviewed Mumble evidence concerns its plugin update channel. It does not establish the complete plugin authentication policy or verify the separate primary-application updater claim.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.",
+    "No conclusion is made about Qt’s TLS implementation or the separate main-app updater/AuthentiCode path.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; release-specific behavior and external TLS/framework enforcement were not independently audited.; No conclusion is made about Qt’s TLS implementation or the separate main-app updater/AuthentiCode path."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/mumble-voip/mumble",
+      "commit": "6d05b026f27b20ba5c26513fba09e1ccf9905b33"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

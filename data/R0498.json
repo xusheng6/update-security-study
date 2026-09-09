@@ -1,0 +1,27 @@
+{
+  "id": "R0498",
+  "name": "HuMo-gen",
+  "category": "Genealogy (PHP)",
+  "historical_tier": "D",
+  "project_url": "https://github.com/HuubMons/HuMo-genealogy",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "D",
+  "description": "The update check has a disabled-TLS fallback, its response supplies download sources, and the installer unpacks/copies PHP files over the live tree without a package signature.",
+  "limitations": [
+    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/HuubMons/HuMo-genealogy",
+      "commit": "c7f25142d40105fd333636edd421469409277239"
+    },
+    {
+      "url": "https://github.com/HuubMons/HuMo-genealogy",
+      "commit": "c7f25142d40105fd333636edd421469409277239"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

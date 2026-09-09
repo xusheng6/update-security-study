@@ -1,0 +1,23 @@
+{
+  "id": "R0320",
+  "name": "TortoiseGit",
+  "category": "Git client (Windows)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/tortoisegit/tortoisegit",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "A",
+  "description": "The retained source shows a configured trust root and an updater invocation that routes candidate artifacts through the project verifier before installation, consistent with the recorded narrow A classification.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout; release/build configuration and historical study version may differ."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/tortoisegit/tortoisegit",
+      "commit": "acc10fc20afe36aabc4afbc5f1af33f31acae32e"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

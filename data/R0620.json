@@ -1,0 +1,23 @@
+{
+  "id": "R0620",
+  "name": "Miro",
+  "category": "Media player (Democracy Player)",
+  "historical_tier": "D",
+  "project_url": "https://github.com/pculture/miro",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "D",
+  "description": "Miro’s macOS Sparkle driver uses an HTTP appcast and rewrites URLs to fake HTTPS so Sparkle skips its DSA requirement. This confirms the macOS updater bypass.",
+  "limitations": [
+    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/pculture/miro",
+      "commit": "d8e4594441939514dd2ac29812bf37087bb3aea5"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

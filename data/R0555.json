@@ -1,0 +1,25 @@
+{
+  "id": "R0555",
+  "name": "Moodle",
+  "category": "LMS (web)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/moodle/moodle",
+  "channel": "plugin",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Moodle’s plugin helper accepts HTTP or HTTPS URLs and compares the plugin ZIP with a caller-supplied MD5; the core notifier and endpoint provenance are outside this source review.",
+  "limitations": [
+    "Source-at-commit snapshot; current release configuration remains unverified.",
+    "The caller supplying the URL and MD5, the core notifier, and any external package controls were not reviewed.",
+    "Primary classification remains UNRESOLVED under the evidence-review instruction; retained source is commit-scoped and does not establish all released or external framework behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/moodle/moodle",
+      "commit": "6216fe4ed19a5a3c88c0951d1647e9f2d626bcbb"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

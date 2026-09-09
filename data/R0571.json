@@ -1,0 +1,25 @@
+{
+  "id": "R0571",
+  "name": "Flutter",
+  "category": "UI toolkit/CLI",
+  "historical_tier": "C",
+  "project_url": "https://github.com/flutter/flutter",
+  "channel": "mixed",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The reviewed Flutter snapshot contains a Dart SDK update script that selects an HTTPS storage URL and downloads the SDK archive without a visible artifact-integrity check in that script. Engine-cache verification is a separate path and is not established by this excerpt; the source does not substantiate the broader git-pull and zero-verification claim.",
+  "limitations": [
+    "The retained snapshot does not establish the current release configuration or the separate engine-cache path.",
+    "No claim about git history or upstream release policy is established by this script.",
+    "The retained snapshot does not establish the current release configuration or the separate engine-cache path. No claim about git history or upstream release policy is established by this script."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/flutter/flutter",
+      "commit": "4ebf37fe7df0a130ba5bee17315b98f905c10b34"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

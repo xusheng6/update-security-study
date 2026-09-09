@@ -1,0 +1,25 @@
+{
+  "id": "R0455",
+  "name": "Jitsi (SIP Communicator)",
+  "category": "SIP softphone",
+  "historical_tier": "C",
+  "project_url": "https://github.com/jitsi/jitsi",
+  "channel": "mixed",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Jitsi’s macOS update integration uses Sparkle, while Windows uses a separate update service. Framework enforcement and Windows artifact authentication require separate evidence; a single cross-platform trust classification is unsupported.",
+  "limitations": [
+    "New default-branch snapshot, not the historical Jitsi release under study.",
+    "Sparkle framework verification and the Windows setup program's own controls were not audited; the result describes only the Jitsi-side integration and download method.",
+    "New default-branch snapshot, not the historical Jitsi release under study. Sparkle framework verification and the Windows setup program's own controls were not audited; the result describes only the Jitsi-side integration and download method."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/jitsi/jitsi",
+      "commit": "7bde4ffebc9621d558ebb9953370395cba24f83c"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

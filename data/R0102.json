@@ -1,0 +1,23 @@
+{
+  "id": "R0102",
+  "name": "Rufus",
+  "category": "USB tool",
+  "historical_tier": "A",
+  "project_url": "https://github.com/pbatard/rufus",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Rufus's Windows updater fetches a platform-specific .ver file and companion .sig, rejects an invalid RSA signature, and validates the retrieved executable with Windows trust checks, including an allowed signer and a newer signature timestamp. The reviewed source covers the interactive updater path; it does not establish a universal no-execution guarantee for every retrieved content type.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; this review is limited to the Windows updater source and does not inspect every downloaded auxiliary file."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/pbatard/rufus",
+      "commit": "2368e49a82e854d3e702f824648cc723953dbb53"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

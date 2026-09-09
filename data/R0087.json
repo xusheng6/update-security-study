@@ -1,0 +1,25 @@
+{
+  "id": "R0087",
+  "name": "HandBrake",
+  "category": "Video transcoder",
+  "historical_tier": "A",
+  "project_url": "https://github.com/HandBrake/HandBrake",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "HandBrake’s Windows updater restricts the retrieval host to handbrake.fr over HTTPS and verifies the retrieved file with an RSA SHA-256 signature from the appcast.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.",
+    "The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; historical released artifact behavior may differ.; The reviewed source may delegate transport, packaging, or platform enforcement outside the cited module."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/HandBrake/HandBrake",
+      "commit": "ecc742047e1e0d87bbbdd2bcdfabb44bef1829b3"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

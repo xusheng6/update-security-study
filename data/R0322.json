@@ -1,0 +1,26 @@
+{
+  "id": "R0322",
+  "name": "I2P",
+  "category": "Anonymity network (Java)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/i2p/i2p.i2p",
+  "channel": "mixed",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "In the inspected I2P source snapshot, router-signed updates use TrustedUpdate multi-key DSA verification; unsigned router and plugin updates are separate paths. Historical release behavior remains unresolved.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout.",
+    "Source controls do not establish historical release artifacts, publisher provenance, or enabled update mode.",
+    "Plugin evidence is a separate channel and is not generalized to router artifacts.",
+    "Newly retrieved default-branch snapshot, not the original study checkout. Source controls do not establish historical release artifacts, publisher provenance, or enabled update mode. Plugin evidence is a separate channel and is not generalized to router artifacts."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/i2p/i2p.i2p",
+      "commit": "0d801ffc99f509670db03901065789a8361b9724"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

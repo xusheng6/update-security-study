@@ -1,0 +1,24 @@
+{
+  "id": "R0618",
+  "name": "Kebler",
+  "category": "Transmission remote (Electron)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/Sharkboy-j/Kebler",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports this narrow assessment: Updater fetches the latest GitHub release asset and launches it after user confirmation without hash/signature verification.",
+  "limitations": [
+    "The retained snapshot does not establish current released artifact behavior or upstream configuration.",
+    "Where verification is delegated to an external framework/package, that implementation was not vendored and remains unresolved."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/Sharkboy-j/Kebler",
+      "commit": "43486b66ca8b9310b20b147dec9df704ac4498e5"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

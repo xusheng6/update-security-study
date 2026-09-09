@@ -1,0 +1,24 @@
+{
+  "id": "R0384",
+  "name": "Shutter Encoder",
+  "category": "Video transcoder",
+  "historical_tier": "C",
+  "project_url": "https://github.com/paulpacifico/shutter-encoder",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "Targeted source read supports the narrow recorded behavior: Shutter Encoder executes the downloaded installer/archive after user confirmation without hash or signature verification.",
+  "limitations": [
+    "This is a newly retrieved default-branch snapshot, not the original study checkout.",
+    "The retained snapshot does not establish current released artifact behavior or independent release signing."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/paulpacifico/shutter-encoder",
+      "commit": "33880b058664431bdc48811ff604235107adb04d"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

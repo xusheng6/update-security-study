@@ -1,0 +1,23 @@
+{
+  "id": "R0520",
+  "name": "CouchPotato",
+  "category": "Movie automation",
+  "historical_tier": "C",
+  "project_url": "https://github.com/CouchPotato/CouchPotatoServer",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "CouchPotato obtains a server-provided download URL, extracts the archive, and replaces the application without verification.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement were not independently verified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/CouchPotato/CouchPotatoServer",
+      "commit": "7260c12f72447ddb6f062367c6dfbda03ecd4e9c"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

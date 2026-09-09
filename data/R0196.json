@@ -1,0 +1,23 @@
+{
+  "id": "R0196",
+  "name": "Specter Desktop",
+  "category": "Bitcoin wallet",
+  "historical_tier": "C",
+  "project_url": "https://github.com/cryptoadvance/specter-desktop",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Specter Desktop’s wrapper checks its specterd component against an architecture-specific SHA-256 value bundled in version data. This supports a component-integrity observation; the complete release-authentication policy remains unestablished.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not historical release re-verification; the provenance and delivery of version-data.json and external GitHub release controls were not independently audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/cryptoadvance/specter-desktop",
+      "commit": "5d3d5b91e614991c2dedb87c0e0e608e2c6382ae"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

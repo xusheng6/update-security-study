@@ -1,0 +1,23 @@
+{
+  "id": "R0414",
+  "name": "Filen Desktop",
+  "category": "Encrypted sync (Electron)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/FilenCloudDienste/filen-desktop",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The Windows builder configuration sets verifyUpdateCodeSignature to false despite Azure signing settings. Linux verification, generated manifests, and the macOS framework's runtime enforcement remain unresolved.",
+  "limitations": [
+    "New default-branch snapshot; this review did not audit generated latest files, released artifacts, Linux verification, or the external Squirrel/electron-updater implementation."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/FilenCloudDienste/filen-desktop",
+      "commit": "370514d797d5deee0a1d5002f50c3eca87811809"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

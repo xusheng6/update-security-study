@@ -1,0 +1,25 @@
+{
+  "id": "R0443",
+  "name": "Scrypted",
+  "category": "Video/IoT hub",
+  "historical_tier": "C",
+  "project_url": "https://github.com/koush/scrypted",
+  "channel": "plugin",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Scrypted includes a custom registry-based plugin installation channel. The retained review does not establish its complete integrity policy or justify the original project-wide authentication classification.",
+  "limitations": [
+    "New default-branch snapshot, not the historical Scrypted release.",
+    "The registry's own metadata/integrity semantics, external plugin package contents, and alternate installation paths were not reviewed; this does not establish a project-wide absence of verification.",
+    "New default-branch snapshot, not the historical Scrypted release. The registry's own metadata/integrity semantics, external plugin package contents, and alternate installation paths were not reviewed; this does not establish a project-wide absence of verification."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/koush/scrypted",
+      "commit": "d37684666588d922caf79296246ed6f8598de632"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

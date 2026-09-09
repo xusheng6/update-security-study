@@ -1,0 +1,23 @@
+{
+  "id": "R0494",
+  "name": "Koodo Reader",
+  "category": "eBook reader (Electron)",
+  "historical_tier": "C",
+  "project_url": "https://github.com/koodo-reader/koodo-reader",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "C",
+  "description": "The Windows updater checks only executable permission before spawning the downloaded installer.",
+  "limitations": [
+    "Source-at-commit evidence only; released artifacts and external framework enforcement remain unverified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/koodo-reader/koodo-reader",
+      "commit": "9bb3ec647c8390329dbc8a3134875f82a701c168"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

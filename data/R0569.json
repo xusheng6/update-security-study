@@ -1,0 +1,25 @@
+{
+  "id": "R0569",
+  "name": "rvm",
+  "category": "Ruby version manager",
+  "historical_tier": "A",
+  "project_url": "https://github.com/rvm/rvm",
+  "channel": "package-manager",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "RVM uses versioned MD5 and SHA-512 checksum databases for Ruby archive validation. The full original statement also covers URL-check and Rubinius/self-update exceptions that are not established by this bounded evidence.",
+  "limitations": [
+    "The retained source covers installer checksum enforcement, not release signing.",
+    "The Rubinius fallback and separate self-updater key retrieval are outside the pinned-checksum observation.",
+    "The retained source covers installer checksum enforcement, not release signing. The Rubinius fallback and separate self-updater key retrieval are outside the pinned-checksum observation."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/rvm/rvm",
+      "commit": "75462eae90440459c6468897ac7c267eba9d9b68"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

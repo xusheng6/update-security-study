@@ -1,0 +1,23 @@
+{
+  "id": "R0378",
+  "name": "VidCoder",
+  "category": "Video transcoder",
+  "historical_tier": "B",
+  "project_url": "https://github.com/RandomEngy/VidCoder",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "VidCoder delegates application updates to Velopack and exposes immediate and next-launch update modes. The external framework’s artifact-authentication policy remains unestablished by this checkout.",
+  "limitations": [
+    "New default-branch snapshot rather than the original study checkout; released artifact signing and Velopack's external verification implementation were not independently audited."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/RandomEngy/VidCoder",
+      "commit": "18c7c8726dbfba1269acd69d3778a3f41aca59a7"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

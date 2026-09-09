@@ -1,0 +1,23 @@
+{
+  "id": "R0538",
+  "name": "RainLoop",
+  "category": "Webmail (PHP)",
+  "historical_tier": "D",
+  "project_url": "https://github.com/RainLoop/rainloop-webmail",
+  "channel": "primary",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "D",
+  "description": "RainLoop’s HTTP helper disables certificate verification, repository endpoints are HTTP, and core/plugin packages are extracted into the live PHP tree. No package signature/hash is visible in the update path.",
+  "limitations": [
+    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/RainLoop/rainloop-webmail",
+      "commit": "9bf8fa5b63d7e6871ee533126a7e1b1c85ee45b5"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

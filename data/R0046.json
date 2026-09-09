@@ -1,0 +1,25 @@
+{
+  "id": "R0046",
+  "name": "zulip-desktop",
+  "category": "Team chat",
+  "historical_tier": "B",
+  "project_url": "https://github.com/zulip/zulip-desktop",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Zulip Desktop checks for updates with electron-updater, asks the user before applying a retrieved update, and does not expose an independent publisher-signature verifier in the inspected module.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.",
+    "The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot.",
+    "Newly retrieved default-branch snapshot, not the original study checkout; released artifact behavior may differ.; The inspected application code delegates package authenticity/signature enforcement to Electron/Electron Updater or the platform installer; no independent publisher-key verification is shown in this snapshot."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/zulip/zulip-desktop",
+      "commit": "228ac2ba2913e88512dfbcf307a6af7cc9a02b1f"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

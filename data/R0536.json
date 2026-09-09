@@ -1,0 +1,23 @@
+{
+  "id": "R0536",
+  "name": "Zero-K",
+  "category": "RTS game",
+  "historical_tier": "D",
+  "project_url": "https://github.com/ZeroK-RTS/Zero-K-Infrastructure",
+  "channel": "mixed",
+  "review_status": "Source observation",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "The retained lobby downloader disables certificate validation and uses HTTP engine/content sources; the primary app update path is notify-only. This supports a content/engine channel, not a complete primary tier.",
+  "limitations": [
+    "Source review is limited to the retained commit and does not establish released-artifact or current-upstream behavior."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/ZeroK-RTS/Zero-K-Infrastructure",
+      "commit": "48f6f09bc1d0266f204026580671ce867f75d6bd"
+    }
+  ],
+  "review_basis": "source-ledger",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

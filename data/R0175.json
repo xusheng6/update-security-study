@@ -1,0 +1,23 @@
+{
+  "id": "R0175",
+  "name": "Latest",
+  "category": "App updater (mac)",
+  "historical_tier": "A",
+  "project_url": "https://github.com/mangerlahn/Latest",
+  "channel": "mixed",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "Latest configures its own Sparkle feed with a pinned SUPublicEDKey and uses SPUUpdater to check and install updates for discovered Sparkle app bundles, reading each target bundle's SUFeedURL (with a DevMate fallback). Target-app key configuration and Sparkle runtime enforcement remain delegated and were not independently audited in this snapshot.",
+  "limitations": [
+    "Newly retrieved default-branch snapshot, not the original study checkout; external target-app key material, Sparkle's dependency-level verifier, and historical release artifacts were not independently reverified."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/mangerlahn/Latest",
+      "commit": "1301cf6eb23391065691482fb52569fe70f9a3e2"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}

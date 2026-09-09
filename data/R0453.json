@@ -1,0 +1,26 @@
+{
+  "id": "R0453",
+  "name": "D-Fend Reloaded",
+  "category": "DOSBox frontend",
+  "historical_tier": "D",
+  "project_url": "https://github.com/osgamearchive/D-Fend-Reloaded",
+  "channel": "primary",
+  "review_status": "Revised description",
+  "proposed_primary_tier": "UNRESOLVED",
+  "description": "D-Fend Reloaded has a user-confirmed application updater using a configured update-info feed. The retained review does not establish independent publisher authentication or the original impact classification.",
+  "limitations": [
+    "The retained commit does not establish behavior of every released installer or current update server.",
+    "The manifest supplies the installer URL at runtime; source does not independently verify the response provenance.",
+    "This is source-level review only and does not execute the updater or installer.",
+    "The retained commit does not establish behavior of every released installer or current update server. The manifest supplies the installer URL at runtime; source does not independently verify the response provenance. This is source-level review only and does not execute the updater or installer."
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/osgamearchive/D-Fend-Reloaded",
+      "commit": "ab7975a7ecbcd4bfcbb6e349d9f4b8d5bcd9ddf5"
+    }
+  ],
+  "review_basis": "publication-decision",
+  "snapshot_date": "2026-09-08",
+  "classification_certified": false
+}
